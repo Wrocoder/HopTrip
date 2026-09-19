@@ -24,11 +24,11 @@ travel prices are generated locally.
 | 2. First real data source | In progress | Travelpayouts adapter and persistence exist; next: configured-token integration run |
 | 3. Price history | In progress | Route statistics and pipeline recalculation after ingestion exist; next: scheduled production execution |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
-| 5. Public website | In progress | Homepage, live API-backed list and detail routes exist; next: populate them with a configured provider |
+| 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
 | 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program and configured outbound links |
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
-| 9. SEO foundation | In progress | Dynamic airport and destination pages with metadata exist; next: populate pages with real deals and route statistics |
+| 9. SEO foundation | In progress | Dynamic airport/destination pages, metadata, sitemap and seeded route catalog exist; next: populate pages with real deals and route statistics |
 | 10. Analytics | In progress | Anonymous deal-view event, event storage and protected summary endpoint exist; next: outbound click events and conversion import |
 | 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
 | 12. Distribution | Planned | Telegram publication adapter |
@@ -53,6 +53,7 @@ travel prices are generated locally.
 - Next.js Polish homepage, live deal list and deal detail pages;
 - SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
 - Dynamic `sitemap.xml` and `robots.txt` with catalog-backed URLs and safe fallbacks;
+- Seeded destination catalog in migration `0008_seed_destination_catalog` for route resolution;
 - Docker Compose and API migration entrypoint;
 - Repeatable ingestion and deal-generation jobs in `apps/api/app/jobs/`;
 - Freshness guard that hides deals not re-verified within 48 hours;
@@ -66,7 +67,7 @@ Latest local checks:
 
 - Ruff: passed;
 - pytest: 9 passed;
-- Alembic offline SQL generation: passed through migration `0005`;
+- Alembic offline SQL generation: passed through migration `0008`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
 - Docker runtime: PostgreSQL, API and web are up; migrations through `0005` applied; readiness endpoint passed.

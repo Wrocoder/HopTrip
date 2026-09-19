@@ -27,6 +27,15 @@ export default function HomePage() {
           <Link href="/from/GDN">Gdańsk (GDN)</Link>
         </div>
       </section>
+      <section className="route-links">
+        <h2>Popularne kierunki</h2>
+        <div className="route-link-grid">
+          <Link href="/destinations/barcelona">Barcelona</Link>
+          <Link href="/destinations/rome">Rzym</Link>
+          <Link href="/destinations/lisbon">Lizbona</Link>
+          <Link href="/destinations/athens">Ateny</Link>
+        </div>
+      </section>
     </main>
   );
 }
