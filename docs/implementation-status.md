@@ -52,6 +52,7 @@ travel prices are generated locally.
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
 - SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
+- Dynamic `sitemap.xml` and `robots.txt` with catalog-backed URLs and safe fallbacks;
 - Docker Compose and API migration entrypoint;
 - Repeatable ingestion and deal-generation jobs in `apps/api/app/jobs/`;
 - Freshness guard that hides deals not re-verified within 48 hours;
@@ -72,7 +73,8 @@ Latest local checks:
   empty list until real offers are ingested.
 - Web runtime smoke checks: `/` and `/deals` return HTTP 200; `/deals` renders the honest
   empty state while the provider has no configured token.
-- SEO route build checks: Next.js includes `/from/[iata_code]` and `/destinations/[slug]` dynamic routes.
+- SEO route build checks: Next.js includes `/from/[iata_code]`, `/destinations/[slug]`,
+  `/sitemap.xml` and `/robots.txt`.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 
