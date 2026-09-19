@@ -12,6 +12,9 @@
    `PIPELINE_RETRY_DELAY_SECONDS`.
 8. Inspect recent pipeline attempts with the admin token:
    `GET http://localhost:8000/api/v1/admin/jobs` and header `X-Admin-Token`.
+9. Start the optional scheduler only after configuring a provider token:
+   `docker compose --profile worker up worker`.
+   Its interval is controlled by `PIPELINE_INTERVAL_SECONDS`.
 
 No real travel provider is enabled by default. The application must remain explicit about
 missing external configuration.

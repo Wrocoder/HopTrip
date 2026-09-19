@@ -36,6 +36,27 @@ services:
         condition: service_healthy
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
+  worker:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    profiles: ["worker"]
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
+      ADMIN_TOKEN: change-me-in-development
+      TRAVELPAYOUTS_API_TOKEN: ${TRAVELPAYOUTS_API_TOKEN:-}
+      TRAVELPAYOUTS_API_BASE_URL: ${TRAVELPAYOUTS_API_BASE_URL:-https://api.travelpayouts.com}
+      INGESTION_ORIGINS: ${INGESTION_ORIGINS:-WRO,WAW,WMI,KRK,GDN,KTW,POZ}
+      AFFILIATE_ALLOWED_HOSTS: ${AFFILIATE_ALLOWED_HOSTS:-}
+      PIPELINE_MAX_ATTEMPTS: ${PIPELINE_MAX_ATTEMPTS:-1}
+      PIPELINE_RETRY_DELAY_SECONDS: ${PIPELINE_RETRY_DELAY_SECONDS:-5}
+      PIPELINE_INTERVAL_SECONDS: ${PIPELINE_INTERVAL_SECONDS:-3600}
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["python", "-m", "app.jobs.scheduler"]
+
   web:
     build:
       context: apps/web

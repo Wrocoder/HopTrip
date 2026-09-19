@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     affiliate_allowed_hosts: str = ""
     pipeline_max_attempts: int = Field(default=1, ge=1, le=5)
     pipeline_retry_delay_seconds: float = Field(default=5.0, ge=0, le=300)
+    pipeline_interval_seconds: int = Field(default=3600, ge=60, le=86400)
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

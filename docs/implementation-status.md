@@ -22,7 +22,7 @@ travel prices are generated locally.
 | 0. Repository and business discovery | Done | Repository audit, architecture plan, provider matrix in `docs/providers.md` |
 | 1. Product foundation | Done | FastAPI, Next.js, PostgreSQL Compose, Alembic, catalog/admin models and health endpoints; runtime verified in Docker |
 | 2. First real data source | In progress | Travelpayouts adapter, configurable origins and CLI pipeline exist; next: configured-token integration run |
-| 3. Price history | In progress | Route statistics, repeatable runner, persisted job history and bounded retries exist; next: schedule execution |
+| 3. Price history | In progress | Route statistics, repeatable runner, persisted job history, bounded retries and optional worker schedule exist; next: configured-token run |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
 | 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
 | 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program and configured outbound links |
@@ -48,6 +48,8 @@ travel prices are generated locally.
 - `apps/api/app/services/deals.py`: flight-only deal generation without invented accommodation costs;
 - `apps/api/app/jobs/pipeline.py`: configurable provider → history → statistics → deals orchestration;
 - `apps/api/app/jobs/runner.py`: cron/worker-friendly repeatable pipeline command;
+- `apps/api/app/jobs/scheduler.py`: optional interval worker around the tracked pipeline;
+- `docs/operations.md`: one-shot, scheduled-worker and job-history runbook;
 - `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
 - `apps/api/app/api/admin.py`: protected recent job history endpoint;
 - `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
@@ -69,7 +71,7 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 19 passed;
+- pytest: 22 passed;
 - Alembic offline SQL generation: passed through migration `0009`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
@@ -92,6 +94,8 @@ Latest local checks:
 - Job checks: successful and failed pipeline executions persist status, duration, error and result;
   transient failures retry with bounded backoff, configuration failures do not retry, and protected
   `/api/v1/admin/jobs` exposes the latest 50 runs.
+- Scheduler checks: worker profile parses successfully and remains opt-in until a provider token
+  is configured.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 
