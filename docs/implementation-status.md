@@ -25,7 +25,7 @@ travel prices are generated locally.
 | 3. Price history | In progress | Route statistics and pipeline recalculation after ingestion exist; next: scheduled production execution |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
 | 5. Public website | In progress | Homepage, live API-backed list and detail routes exist; next: populate them with a configured provider |
-| 6. Affiliate bootstrap | Pending approval | Provider adapter, safe redirect, click tracking and approved program |
+| 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program and configured outbound links |
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
 | 9. SEO foundation | In progress | Dynamic airport and destination pages with metadata exist; next: populate pages with real deals and route statistics |
@@ -57,6 +57,7 @@ travel prices are generated locally.
 - Repeatable ingestion and deal-generation jobs in `apps/api/app/jobs/`;
 - Freshness guard that hides deals not re-verified within 48 hours;
 - Anonymous `DEAL_VIEW` tracking with event storage and admin summary endpoint;
+- Safe outbound click endpoint with HTTPS host allowlist and rejected/unconfigured click audit;
 - tests and Ruff configuration.
 
 ## Verification history
@@ -78,6 +79,8 @@ Latest local checks:
   `/sitemap.xml` and `/robots.txt`.
 - Analytics checks: `DEAL_VIEW` event accepted with HTTP 202 and migration `0006_analytics_events`
   generated successfully.
+- Affiliate checks: migration `0007_affiliate_clicks` applied; unknown deal returns HTTP 404;
+  unconfigured components never redirect.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 

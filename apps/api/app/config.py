@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     admin_token: str = "change-me-in-development"
     travelpayouts_api_token: str | None = None
     travelpayouts_api_base_url: str = "https://api.travelpayouts.com"
+    affiliate_allowed_hosts: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

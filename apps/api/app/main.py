@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import admin, analytics, catalog, health
+from app.api import admin, affiliate, analytics, catalog, health
 from app.config import get_settings
 
 settings = get_settings()
@@ -17,3 +17,4 @@ app.include_router(health.router)
 app.include_router(catalog.router)
 app.include_router(admin.router)
 app.include_router(analytics.router)
+app.include_router(affiliate.router)
