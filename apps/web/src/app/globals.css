@@ -1,0 +1,40 @@
+:root {
+  color-scheme: light;
+  --ink: #17212b;
+  --muted: #607080;
+  --surface: #ffffff;
+  --background: #f3f6f8;
+  --accent: #0f766e;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); color: var(--ink); font-family: Arial, sans-serif; }
+.page-shell { margin: 0 auto; max-width: 1100px; padding: 24px; }
+.hero { border-radius: 28px; background: var(--surface); padding: clamp(32px, 7vw, 88px); }
+.eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+h1 { font-size: clamp(2.2rem, 6vw, 4.8rem); line-height: 1.02; margin: 20px 0; max-width: 760px; }
+.lead { color: var(--muted); font-size: 1.2rem; line-height: 1.6; max-width: 620px; }
+.selector { display: grid; gap: 8px; margin-top: 40px; max-width: 340px; padding: 18px; border: 1px solid #d8e0e6; border-radius: 16px; }
+.selector { color: inherit; text-decoration: none; transition: border-color .2s, transform .2s; }
+.selector:hover { border-color: var(--accent); transform: translateY(-2px); }
+.selector span { color: var(--muted); font-size: .9rem; }
+.empty-state { padding: 54px 8px; }
+.empty-state p { color: var(--muted); }
+.back-link { color: var(--accent); display: inline-block; margin: 8px 0 28px; text-decoration: none; }
+.page-heading { margin-bottom: 30px; }
+.page-heading h1 { font-size: clamp(2.2rem, 5vw, 4rem); margin: 12px 0; }
+.deal-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.deal-card, .deal-detail { background: var(--surface); border-radius: 20px; padding: 24px; }
+.deal-card { color: inherit; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.deal-card:hover { box-shadow: 0 12px 30px #17212b18; transform: translateY(-3px); }
+.deal-card-top, .deal-facts { color: var(--muted); display: flex; justify-content: space-between; }
+.deal-card-top strong { color: var(--accent); }
+.deal-card h2 { margin: 36px 0 18px; }
+.deal-price { font-size: 1.8rem; font-weight: 700; margin: 0; }
+.deal-price span { color: var(--muted); font-size: .9rem; font-weight: 400; }
+.deal-price.large { font-size: 2.7rem; margin: 24px 0; }
+.deal-meta, .muted { color: var(--muted); }
+.deal-detail { max-width: 700px; }
+.deal-detail h1 { margin-bottom: 0; }
+.deal-detail h2 { margin-top: 42px; }
+.deal-detail li { margin: 10px 0; }
