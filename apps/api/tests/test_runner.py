@@ -14,7 +14,7 @@ def test_runner_prints_pipeline_result(monkeypatch, capsys) -> None:
             generated_deals=4,
         )
 
-    monkeypatch.setattr(runner, "run_travelpayouts_pipeline", fake_pipeline)
+    monkeypatch.setattr(runner, "run_tracked_pipeline", fake_pipeline)
 
     assert runner.main() == 0
     payload = json.loads(capsys.readouterr().out)
@@ -29,7 +29,7 @@ def test_runner_returns_configuration_error(monkeypatch, capsys) -> None:
     async def failing_pipeline() -> PipelineResult:
         raise ProviderNotConfigured("Travelpayouts API token is not configured")
 
-    monkeypatch.setattr(runner, "run_travelpayouts_pipeline", failing_pipeline)
+    monkeypatch.setattr(runner, "run_tracked_pipeline", failing_pipeline)
 
     assert runner.main() == 2
     assert "token is not configured" in capsys.readouterr().err

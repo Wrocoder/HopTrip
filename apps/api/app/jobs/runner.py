@@ -3,13 +3,13 @@ import json
 import sys
 from dataclasses import asdict
 
-from app.jobs.pipeline import run_travelpayouts_pipeline
 from app.providers.base import ProviderError
+from app.services.jobs import run_tracked_pipeline
 
 
 def main() -> int:
     try:
-        result = asyncio.run(run_travelpayouts_pipeline())
+        result = asyncio.run(run_tracked_pipeline())
     except ProviderError as exc:
         print(f"Travel data pipeline failed: {exc}", file=sys.stderr)
         return 2

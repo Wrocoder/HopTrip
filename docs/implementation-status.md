@@ -22,7 +22,7 @@ travel prices are generated locally.
 | 0. Repository and business discovery | Done | Repository audit, architecture plan, provider matrix in `docs/providers.md` |
 | 1. Product foundation | Done | FastAPI, Next.js, PostgreSQL Compose, Alembic, catalog/admin models and health endpoints; runtime verified in Docker |
 | 2. First real data source | In progress | Travelpayouts adapter, configurable origins and CLI pipeline exist; next: configured-token integration run |
-| 3. Price history | In progress | Route statistics and pipeline recalculation after ingestion exist; next: scheduled production execution |
+| 3. Price history | In progress | Route statistics, repeatable runner and persisted job history exist; next: schedule and retry policy |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
 | 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
 | 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program and configured outbound links |
@@ -48,8 +48,10 @@ travel prices are generated locally.
 - `apps/api/app/services/deals.py`: flight-only deal generation without invented accommodation costs;
 - `apps/api/app/jobs/pipeline.py`: configurable provider → history → statistics → deals orchestration;
 - `apps/api/app/jobs/runner.py`: cron/worker-friendly repeatable pipeline command;
+- `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
+- `apps/api/app/api/admin.py`: protected recent job history endpoint;
 - `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
-- Alembic migrations `0001` through `0008`;
+- Alembic migrations `0001` through `0009`;
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
 - SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
@@ -67,11 +69,11 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 14 passed;
-- Alembic offline SQL generation: passed through migration `0008`;
+- pytest: 17 passed;
+- Alembic offline SQL generation: passed through migration `0009`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
-- Docker runtime: PostgreSQL, API and web are up; migrations through `0008` applied; readiness endpoint passed.
+- Docker runtime: PostgreSQL, API and web are up; migrations through `0009` applied; readiness endpoint passed.
 - Web security audit: `npm audit --omit=dev --audit-level=high` reports zero vulnerabilities; Next.js is `16.3.5`.
 - Docker runtime smoke checks: `/health/ready` returns `ready`; `/api/v1/deals` returns an
   empty list until real offers are ingested.
@@ -87,6 +89,8 @@ Latest local checks:
   10 catalog destinations and destination pages return HTTP 200.
 - Pipeline checks: missing provider credentials exit cleanly with code `2`; configured origins
   default to all seven seeded Polish airports.
+- Job checks: successful and failed pipeline executions persist status, duration, error and result;
+  protected `/api/v1/admin/jobs` exposes the latest 50 runs.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 
@@ -106,7 +110,7 @@ resolved against the catalog, stored as a fresh `TravelOffer`, and represented b
 `PriceObservation` without duplicate offers or fabricated currency conversions.
 
 Phase 3 is complete when the ingestion job recalculates route statistics after each successful
-batch and the deal engine can consume median and confidence without recomputing raw history.
+batch, persists execution status, and a scheduler can retry failed runs without duplicate offers.
 
 ## Runtime verification
 

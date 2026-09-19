@@ -15,6 +15,7 @@ The Phase 6 affiliate and analytics foundation is in place:
 - Next.js web pages in Polish with API-backed deal list, detail page and route filters;
 - SEO-ready airport and destination pages with dynamic metadata;
 - Anonymous deal-view analytics and safe affiliate click tracking;
+- Persistent pipeline job history with protected admin diagnostics;
 - Docker Compose configuration.
 
 No production travel prices are fabricated. External data providers remain disabled until

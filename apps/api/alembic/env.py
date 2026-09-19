@@ -3,7 +3,7 @@ from logging.config import fileConfig
 from alembic import context
 from app.config import get_settings
 from app.db.base import Base
-from app.models import affiliate, location  # noqa: F401
+from app.models import affiliate, job, location  # noqa: F401
 from sqlalchemy import engine_from_config, pool
 
 config = context.config
