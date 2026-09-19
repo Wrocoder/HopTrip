@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
@@ -21,3 +22,5 @@ class AnalyticsEventAccepted(BaseModel):
 class AnalyticsSummary(BaseModel):
     total_events: int
     by_event: dict[str, int]
+    total_conversions: int = 0
+    confirmed_commission_pln: Decimal = Decimal("0.00")

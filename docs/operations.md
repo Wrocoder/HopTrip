@@ -31,6 +31,9 @@ docker compose --profile worker stop worker
 
 - Readiness: `GET /health/ready`.
 - Recent job attempts: `GET /api/v1/admin/jobs` with `X-Admin-Token`.
+- Conversion import: `POST /api/v1/admin/conversions` with `X-Admin-Token`; repeat the same
+  provider conversion ID safely to update its status.
+- Revenue summary: `GET /api/v1/admin/analytics/summary` with `X-Admin-Token`.
 - The job response includes status, attempt number, duration, error and pipeline result.
 
 Provider configuration errors are recorded as failed runs without retries. Transient failures

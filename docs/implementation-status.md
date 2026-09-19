@@ -29,7 +29,7 @@ travel prices are generated locally.
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
 | 9. SEO foundation | In progress | Dynamic airport/destination pages, metadata, sitemap and seeded route catalog exist; next: populate pages with real deals and route statistics |
-| 10. Analytics | In progress | Anonymous deal-view event, event storage and protected summary endpoint exist; next: outbound click events and conversion import |
+| 10. Analytics | In progress | Anonymous events, outbound clicks, idempotent conversion import and protected revenue summary exist; next: provider conversion feed |
 | 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
 | 12. Distribution | Planned | Telegram publication adapter |
 | 13. Oracle VM deployment | Planned | Caddy, Compose deployment, backups and restore test |
@@ -52,8 +52,10 @@ travel prices are generated locally.
 - `docs/operations.md`: one-shot, scheduled-worker and job-history runbook;
 - `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
 - `apps/api/app/api/admin.py`: protected recent job history endpoint;
+- `apps/api/app/models/conversion.py`: idempotent affiliate conversion and commission records;
+- `apps/api/app/schemas/conversion.py`: validated admin conversion import contract;
 - `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
-- Alembic migrations `0001` through `0009`;
+- Alembic migrations `0001` through `0010`;
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
 - SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
@@ -71,11 +73,11 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 22 passed;
-- Alembic offline SQL generation: passed through migration `0009`;
+- pytest: 23 passed;
+- Alembic offline SQL generation: passed through migration `0010`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
-- Docker runtime: PostgreSQL, API and web are up; migrations through `0009` applied; readiness endpoint passed.
+- Docker runtime: PostgreSQL, API and web are up; migrations through `0010` applied; readiness endpoint passed.
 - Web security audit: `npm audit --omit=dev --audit-level=high` reports zero vulnerabilities; Next.js is `16.3.5`.
 - Docker runtime smoke checks: `/health/ready` returns `ready`; `/api/v1/deals` returns an
   empty list until real offers are ingested.
@@ -96,6 +98,8 @@ Latest local checks:
   `/api/v1/admin/jobs` exposes the latest 50 runs.
 - Scheduler checks: worker profile parses successfully and remains opt-in until a provider token
   is configured.
+- Conversion checks: protected admin upsert is idempotent by provider conversion ID; analytics
+  summary reports confirmed PLN commission without pretending to convert other currencies.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 

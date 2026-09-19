@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.api.admin import require_admin
 from app.db.session import get_db
 from app.models.analytics import AnalyticsEvent
+from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
 from app.schemas.analytics import AnalyticsEventAccepted, AnalyticsEventCreate, AnalyticsSummary
 
@@ -40,7 +41,22 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)) -
 @router.get("/admin/analytics/summary", response_model=AnalyticsSummary, dependencies=[Depends(require_admin)])
 def analytics_summary(db: Session = Depends(get_db)) -> AnalyticsSummary:
     total_events = db.scalar(select(func.count(AnalyticsEvent.id))) or 0
+    total_conversions = db.scalar(select(func.count(AffiliateConversion.id))) or 0
+    confirmed_commission_pln = (
+        db.scalar(
+            select(func.coalesce(func.sum(AffiliateConversion.commission), 0)).where(
+                AffiliateConversion.status == "CONFIRMED",
+                AffiliateConversion.currency == "PLN",
+            )
+        )
+        or 0
+    )
     rows = db.execute(
         select(AnalyticsEvent.event_name, func.count(AnalyticsEvent.id)).group_by(AnalyticsEvent.event_name)
     )
-    return AnalyticsSummary(total_events=total_events, by_event={name: count for name, count in rows})
+    return AnalyticsSummary(
+        total_events=total_events,
+        by_event={name: count for name, count in rows},
+        total_conversions=total_conversions,
+        confirmed_commission_pln=confirmed_commission_pln,
+    )
