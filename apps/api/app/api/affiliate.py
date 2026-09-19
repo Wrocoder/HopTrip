@@ -1,4 +1,4 @@
-from urllib.parse import urlparse
+from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import RedirectResponse
@@ -44,9 +44,10 @@ def outbound_click(
 
     outbound_url = (deal_component.metadata_json or {}).get("outbound_url")
     parsed = urlparse(outbound_url) if isinstance(outbound_url, str) else None
+    settings = get_settings()
     allowed_hosts = {
         host.strip().lower()
-        for host in get_settings().affiliate_allowed_hosts.split(",")
+        for host in settings.affiliate_allowed_hosts.split(",")
         if host.strip()
     }
     host = parsed.hostname.lower() if parsed and parsed.hostname else None
@@ -62,16 +63,25 @@ def outbound_click(
     else:
         click_status = "REDIRECTED"
 
-    db.add(
-        AffiliateClick(
-            deal_id=deal.id,
-            component_type=normalized_component,
-            anonymous_session_id=session_id,
-            source=source,
-            status=click_status,
-            outbound_host=host,
-        )
+    click = AffiliateClick(
+        deal_id=deal.id,
+        component_type=normalized_component,
+        anonymous_session_id=session_id,
+        source=source,
+        status=click_status,
+        outbound_host=host,
     )
+    db.add(click)
+    db.flush()
+    redirect_url = outbound_url
+    tracking_id = None
+    tracking_param = settings.affiliate_tracking_query_param.strip()
+    if click_status == "REDIRECTED" and tracking_param:
+        tracking_id = f"hoptrip-{click.id}"
+        click.tracking_id = tracking_id
+        query = [(key, value) for key, value in parse_qsl(parsed.query, keep_blank_values=True) if key != tracking_param]
+        query.append((tracking_param, tracking_id))
+        redirect_url = urlunparse(parsed._replace(query=urlencode(query)))
     db.add(
         AnalyticsEvent(
             event_name="AFFILIATE_CLICK",
@@ -79,7 +89,7 @@ def outbound_click(
             deal_id=deal.id,
             component=normalized_component,
             source=source,
-            metadata_json={"status": click_status},
+            metadata_json={"status": click_status, "tracking_id": tracking_id},
         )
     )
     db.commit()
@@ -89,4 +99,4 @@ def outbound_click(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Affiliate link is not configured for this component",
         )
-    return RedirectResponse(url=outbound_url, status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+    return RedirectResponse(url=redirect_url, status_code=status.HTTP_307_TEMPORARY_REDIRECT)

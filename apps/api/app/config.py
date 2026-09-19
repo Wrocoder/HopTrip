@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     travelpayouts_api_base_url: str = "https://api.travelpayouts.com"
     ingestion_origins: str = "WRO,WAW,WMI,KRK,GDN,KTW,POZ"
     affiliate_allowed_hosts: str = ""
+    affiliate_tracking_query_param: str = ""
     pipeline_max_attempts: int = Field(default=1, ge=1, le=5)
     pipeline_retry_delay_seconds: float = Field(default=5.0, ge=0, le=300)
     pipeline_interval_seconds: int = Field(default=3600, ge=60, le=86400)

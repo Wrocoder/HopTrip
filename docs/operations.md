@@ -38,3 +38,9 @@ docker compose --profile worker stop worker
 
 Provider configuration errors are recorded as failed runs without retries. Transient failures
 use the configured bounded exponential backoff. No credentials belong in source control.
+
+For an approved affiliate program that supports a provider sub-ID, set
+`AFFILIATE_ALLOWED_HOSTS` to its HTTPS host and `AFFILIATE_TRACKING_QUERY_PARAM` to the exact
+query parameter name expected by the provider (for example, `sub_id`). HopTrip then appends a
+stable `hoptrip-{click_id}` value to each allowed redirect and stores it with the click. Leave
+the tracking parameter empty until the program documents its supported format.

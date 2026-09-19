@@ -16,6 +16,7 @@ The Phase 6 affiliate and analytics foundation is in place:
 - SEO-ready airport and destination pages with dynamic metadata;
 - Anonymous deal-view analytics and safe affiliate click tracking;
 - Idempotent affiliate conversion intake and confirmed PLN revenue summary;
+- Optional provider sub-ID tracking on allowlisted affiliate redirects;
 - Persistent pipeline job history with protected admin diagnostics;
 - Docker Compose configuration.
 

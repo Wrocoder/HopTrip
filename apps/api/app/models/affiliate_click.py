@@ -20,4 +20,5 @@ class AffiliateClick(Base):
     source: Mapped[str | None] = mapped_column(String(80))
     status: Mapped[str] = mapped_column(String(32), nullable=False)
     outbound_host: Mapped[str | None] = mapped_column(String(255))
+    tracking_id: Mapped[str | None] = mapped_column(String(120), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
