@@ -6,7 +6,7 @@ providers.
 
 ## Current status
 
-The Phase 5 public deal surface is in place:
+The Phase 6 affiliate and analytics foundation is in place:
 
 - FastAPI API with health, catalog, and protected provider/program admin endpoints;
 - PostgreSQL 16 and Alembic migration;
@@ -14,6 +14,7 @@ The Phase 5 public deal surface is in place:
 - provider/program onboarding model;
 - Next.js web pages in Polish with API-backed deal list, detail page and route filters;
 - SEO-ready airport and destination pages with dynamic metadata;
+- Anonymous deal-view analytics and safe affiliate click tracking;
 - Docker Compose configuration.
 
 No production travel prices are fabricated. External data providers remain disabled until

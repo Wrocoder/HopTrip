@@ -4,11 +4,11 @@ This file is the working progress ledger for the roadmap in `doc/MasterPrompt.md
 It records what is implemented in the repository, what is intentionally pending, and
 which external configuration is required before a phase can be called complete.
 
-Last updated: 2026-09-19
+Last updated: 2026-09-20
 
 ## Current milestone
 
-**Phase 5 — public deal surface**
+**Phase 6 — affiliate and analytics foundation**
 
 The repository has the interfaces and storage needed to ingest real provider responses,
 calculates route price distributions from stored observations, and exposes generated deals
@@ -21,7 +21,7 @@ travel prices are generated locally.
 | --- | --- | --- |
 | 0. Repository and business discovery | Done | Repository audit, architecture plan, provider matrix in `docs/providers.md` |
 | 1. Product foundation | Done | FastAPI, Next.js, PostgreSQL Compose, Alembic, catalog/admin models and health endpoints; runtime verified in Docker |
-| 2. First real data source | In progress | Travelpayouts adapter and persistence exist; next: configured-token integration run |
+| 2. First real data source | In progress | Travelpayouts adapter, configurable origins and CLI pipeline exist; next: configured-token integration run |
 | 3. Price history | In progress | Route statistics and pipeline recalculation after ingestion exist; next: scheduled production execution |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
 | 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
@@ -46,9 +46,10 @@ travel prices are generated locally.
 - `apps/api/app/services/statistics.py`: route price distributions and confidence;
 - `apps/api/app/services/scoring.py`: configurable explainable Deal Score;
 - `apps/api/app/services/deals.py`: flight-only deal generation without invented accommodation costs;
-- `apps/api/app/jobs/pipeline.py`: repeatable provider → history → statistics → deals orchestration;
+- `apps/api/app/jobs/pipeline.py`: configurable provider → history → statistics → deals orchestration;
+- `apps/api/app/jobs/runner.py`: cron/worker-friendly repeatable pipeline command;
 - `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
-- Alembic migrations `0001` through `0005`;
+- Alembic migrations `0001` through `0008`;
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
 - SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
@@ -66,11 +67,11 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 9 passed;
+- pytest: 12 passed;
 - Alembic offline SQL generation: passed through migration `0008`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
-- Docker runtime: PostgreSQL, API and web are up; migrations through `0005` applied; readiness endpoint passed.
+- Docker runtime: PostgreSQL, API and web are up; migrations through `0008` applied; readiness endpoint passed.
 - Web security audit: `npm audit --omit=dev --audit-level=high` reports zero vulnerabilities; Next.js is `16.3.5`.
 - Docker runtime smoke checks: `/health/ready` returns `ready`; `/api/v1/deals` returns an
   empty list until real offers are ingested.
@@ -82,6 +83,10 @@ Latest local checks:
   generated successfully.
 - Affiliate checks: migration `0007_affiliate_clicks` applied; unknown deal returns HTTP 404;
   unconfigured components never redirect.
+- Destination catalog checks: migration `0008_seed_destination_catalog` applied; API returns
+  10 catalog destinations and destination pages return HTTP 200.
+- Pipeline checks: missing provider credentials exit cleanly with code `2`; configured origins
+  default to all seven seeded Polish airports.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 
@@ -91,7 +96,8 @@ Latest local checks:
    implemented adapter; Amadeus remains a separate candidate.
 2. Add an exchange-rate provider before accepting non-PLN observations into PLN history.
 3. Confirm provider terms and coverage for Polish low-cost routes.
-4. Obtain approval and generated links for the first affiliate program before enabling redirects.
+4. Obtain approval and generated links for the first affiliate program before enabling redirects;
+   configure its HTTPS host in `AFFILIATE_ALLOWED_HOSTS`.
 
 ## Definition of next milestone
 

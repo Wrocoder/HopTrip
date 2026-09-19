@@ -23,6 +23,10 @@ services:
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development
+      TRAVELPAYOUTS_API_TOKEN: ${TRAVELPAYOUTS_API_TOKEN:-}
+      TRAVELPAYOUTS_API_BASE_URL: ${TRAVELPAYOUTS_API_BASE_URL:-https://api.travelpayouts.com}
+      INGESTION_ORIGINS: ${INGESTION_ORIGINS:-WRO,WAW,WMI,KRK,GDN,KTW,POZ}
+      AFFILIATE_ALLOWED_HOSTS: ${AFFILIATE_ALLOWED_HOSTS:-}
     ports:
       - "8000:8000"
     depends_on:

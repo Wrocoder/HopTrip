@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from app.config import get_settings
 from app.db.session import SessionLocal
 from app.jobs.ingest import fetch_travelpayouts_offers
 from app.providers.base import SearchQuery
@@ -19,7 +20,14 @@ class PipelineResult:
 
 async def run_travelpayouts_pipeline() -> PipelineResult:
     provider = TravelpayoutsDataProvider()
-    offers = await fetch_travelpayouts_offers(provider, SearchQuery(origin="WRO"))
+    origins = tuple(
+        origin.strip().upper()
+        for origin in get_settings().ingestion_origins.split(",")
+        if origin.strip()
+    ) or ("WRO",)
+    offers = []
+    for origin in origins:
+        offers.extend(await fetch_travelpayouts_offers(provider, SearchQuery(origin=origin)))
     with SessionLocal() as db:
         ingestion = ingest_offers(
             db,

@@ -6,7 +6,8 @@
 4. Apply migrations from `apps/api`: `alembic upgrade head`.
 5. Start the API from `apps/api`: `uvicorn app.main:app --reload`.
 6. Install web dependencies in `apps/web` with `npm install` and run `npm run dev`.
+7. Run the repeatable provider pipeline from `apps/api` when credentials are configured:
+   `python -m app.jobs.runner`.
 
 No real travel provider is enabled by default. The application must remain explicit about
 missing external configuration.
-
