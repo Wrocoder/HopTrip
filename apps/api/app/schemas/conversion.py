@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 ConversionStatus = Literal["PENDING", "CONFIRMED", "REJECTED", "CANCELLED"]
 
@@ -44,6 +44,8 @@ class ConversionUpsertResponse(BaseModel):
 
 
 class ConversionRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     provider_code: str
     program_code: str | None
