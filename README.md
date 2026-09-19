@@ -6,13 +6,13 @@ providers.
 
 ## Current status
 
-Phase 1 foundation is in place:
+The Phase 5 public deal surface is in place:
 
 - FastAPI API with health, catalog, and protected provider/program admin endpoints;
 - PostgreSQL 16 and Alembic migration;
 - initial Polish departure-airport catalog;
 - provider/program onboarding model;
-- Next.js web foundation in Polish;
+- Next.js web pages in Polish with API-backed deal list, detail page and route filters;
 - Docker Compose configuration.
 
 No production travel prices are fabricated. External data providers remain disabled until

@@ -1,3 +1,5 @@
+from datetime import date
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -15,15 +17,19 @@ router = APIRouter(prefix="/api/v1", tags=["catalog"])
 def list_deals(
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0),
+    origin: str | None = Query(None, min_length=3, max_length=3, description="Departure airport IATA code"),
+    destination: str | None = Query(None, description="Destination slug"),
+    departure_from: date | None = Query(None),
+    departure_to: date | None = Query(None),
     db: Session = Depends(get_db),
 ) -> list[Deal]:
-    query = (
-        select(Deal)
-        .where(Deal.is_visible.is_(True), Deal.status == "ACTIVE")
-        .order_by(Deal.deal_score.desc(), Deal.trip_start)
-        .offset(offset)
-        .limit(limit)
-    )
+    query = _filtered_deals_query(
+        db,
+        origin=origin,
+        destination=destination,
+        departure_from=departure_from,
+        departure_to=departure_to,
+    ).offset(offset).limit(limit)
     return list(db.scalars(query).all())
 
 
@@ -77,6 +83,34 @@ def list_destination_deals(
         .limit(limit)
     )
     return list(db.scalars(query).all())
+
+
+def _filtered_deals_query(
+    db: Session,
+    *,
+    origin: str | None,
+    destination: str | None,
+    departure_from: date | None,
+    departure_to: date | None,
+):
+    query = select(Deal).where(Deal.is_visible.is_(True), Deal.status == "ACTIVE")
+    if origin:
+        airport = db.scalar(select(Airport).where(Airport.iata_code == origin.upper()))
+        if airport is None:
+            raise HTTPException(status_code=404, detail="Airport not found")
+        query = query.where(Deal.origin_airport_id == airport.id)
+    if destination:
+        destination_record = db.scalar(select(Destination).where(Destination.slug == destination))
+        if destination_record is None:
+            raise HTTPException(status_code=404, detail="Destination not found")
+        query = query.where(Deal.destination_id == destination_record.id)
+    if departure_from:
+        query = query.where(Deal.trip_start >= departure_from)
+    if departure_to:
+        query = query.where(Deal.trip_start <= departure_to)
+    if departure_from and departure_to and departure_from > departure_to:
+        raise HTTPException(status_code=422, detail="departure_from must be before departure_to")
+    return query.order_by(Deal.deal_score.desc(), Deal.trip_start)
 
 
 @router.get("/airports", response_model=list[AirportRead])

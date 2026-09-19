@@ -47,7 +47,7 @@ travel prices are generated locally.
 - `apps/api/app/services/scoring.py`: configurable explainable Deal Score;
 - `apps/api/app/services/deals.py`: flight-only deal generation without invented accommodation costs;
 - `apps/api/app/jobs/pipeline.py`: repeatable provider → history → statistics → deals orchestration;
-- `apps/api/app/api/catalog.py`: read-only deal list and detail endpoints;
+- `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
 - Alembic migrations `0001` through `0005`;
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
@@ -61,7 +61,7 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 8 passed;
+- pytest: 9 passed;
 - Alembic offline SQL generation: passed through migration `0005`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
@@ -71,6 +71,8 @@ Latest local checks:
   empty list until real offers are ingested.
 - Web runtime smoke checks: `/` and `/deals` return HTTP 200; `/deals` renders the honest
   empty state while the provider has no configured token.
+- API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
+  validation error `422`.
 
 ## Open decisions and blockers
 

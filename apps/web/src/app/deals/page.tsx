@@ -7,11 +7,16 @@ function formatPrice(value: number): string {
   return new Intl.NumberFormat("pl-PL", { style: "currency", currency: "PLN" }).format(value);
 }
 
-export default async function DealsPage() {
+export default async function DealsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ origin?: string; destination?: string }>;
+}) {
+  const filters = await searchParams;
   let deals: Awaited<ReturnType<typeof getDeals>> = [];
   let apiUnavailable = false;
   try {
-    deals = await getDeals();
+    deals = await getDeals(filters);
   } catch {
     apiUnavailable = true;
   }
@@ -24,6 +29,11 @@ export default async function DealsPage() {
         <h1>Najlepsze okazje teraz</h1>
         <p className="lead">Loty ocenione na podstawie aktualnej ceny, historii trasy i świeżości danych.</p>
       </section>
+      <form className="filters" method="get">
+        <label>Skąd <input name="origin" placeholder="WRO" defaultValue={filters.origin ?? ""} maxLength={3} /></label>
+        <label>Dokąd <input name="destination" placeholder="barcelona" defaultValue={filters.destination ?? ""} /></label>
+        <button type="submit">Filtruj</button>
+      </form>
       {apiUnavailable ? (
         <section className="empty-state"><h2>Źródło okazji chwilowo niedostępne</h2><p>Spróbuj ponownie za chwilę.</p></section>
       ) : deals.length === 0 ? (

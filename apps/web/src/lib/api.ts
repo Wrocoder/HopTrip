@@ -22,8 +22,12 @@ function apiUrl(path: string): string {
   return `${baseUrl.replace(/\/$/, "")}${path}`;
 }
 
-export async function getDeals(): Promise<Deal[]> {
-  const response = await fetch(apiUrl("/api/v1/deals"), { cache: "no-store" });
+export async function getDeals(filters: { origin?: string; destination?: string } = {}): Promise<Deal[]> {
+  const params = new URLSearchParams();
+  if (filters.origin) params.set("origin", filters.origin.toUpperCase());
+  if (filters.destination) params.set("destination", filters.destination);
+  const query = params.toString();
+  const response = await fetch(apiUrl(`/api/v1/deals${query ? `?${query}` : ""}`), { cache: "no-store" });
   if (!response.ok) throw new Error(`HopTrip API returned ${response.status}`);
   return response.json() as Promise<Deal[]>;
 }
