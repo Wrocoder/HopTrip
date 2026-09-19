@@ -28,7 +28,7 @@ travel prices are generated locally.
 | 6. Affiliate bootstrap | Pending approval | Provider adapter, safe redirect, click tracking and approved program |
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
-| 9. SEO foundation | Foundation only | Metadata shell exists; next: useful origin/destination pages |
+| 9. SEO foundation | In progress | Dynamic airport and destination pages with metadata exist; next: populate pages with real deals and route statistics |
 | 10. Analytics | Planned | Funnel events, outbound clicks, conversion import and revenue |
 | 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
 | 12. Distribution | Planned | Telegram publication adapter |
@@ -51,6 +51,7 @@ travel prices are generated locally.
 - Alembic migrations `0001` through `0005`;
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
+- SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
 - Docker Compose and API migration entrypoint;
 - Repeatable ingestion and deal-generation jobs in `apps/api/app/jobs/`;
 - Freshness guard that hides deals not re-verified within 48 hours;
@@ -71,6 +72,7 @@ Latest local checks:
   empty list until real offers are ingested.
 - Web runtime smoke checks: `/` and `/deals` return HTTP 200; `/deals` renders the honest
   empty state while the provider has no configured token.
+- SEO route build checks: Next.js includes `/from/[iata_code]` and `/destinations/[slug]` dynamic routes.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 

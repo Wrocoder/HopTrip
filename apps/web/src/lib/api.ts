@@ -17,6 +17,24 @@ export type Deal = {
   expires_at: string | null;
 };
 
+export type Airport = {
+  id: number;
+  iata_code: string;
+  name: string;
+  city: string;
+  country_code: string;
+  is_active: boolean;
+};
+
+export type Destination = {
+  id: number;
+  city: string;
+  country: string;
+  country_code: string;
+  slug: string;
+  is_active: boolean;
+};
+
 function apiUrl(path: string): string {
   const baseUrl = process.env.HOPTRIP_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
   return `${baseUrl.replace(/\/$/, "")}${path}`;
@@ -37,4 +55,26 @@ export async function getDeal(slug: string): Promise<Deal | null> {
   if (response.status === 404) return null;
   if (!response.ok) throw new Error(`HopTrip API returned ${response.status}`);
   return response.json() as Promise<Deal>;
+}
+
+async function getJson<T>(path: string): Promise<T> {
+  const response = await fetch(apiUrl(path), { cache: "no-store" });
+  if (!response.ok) throw new Error(`HopTrip API returned ${response.status}`);
+  return response.json() as Promise<T>;
+}
+
+export async function getAirports(): Promise<Airport[]> {
+  return getJson<Airport[]>("/api/v1/airports");
+}
+
+export async function getDestinations(): Promise<Destination[]> {
+  return getJson<Destination[]>("/api/v1/destinations");
+}
+
+export async function getDepartureDeals(iataCode: string): Promise<Deal[]> {
+  return getJson<Deal[]>(`/api/v1/departures/${encodeURIComponent(iataCode)}/deals`);
+}
+
+export async function getDestinationDeals(slug: string): Promise<Deal[]> {
+  return getJson<Deal[]>(`/api/v1/destinations/${encodeURIComponent(slug)}/deals`);
 }

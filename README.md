@@ -13,6 +13,7 @@ The Phase 5 public deal surface is in place:
 - initial Polish departure-airport catalog;
 - provider/program onboarding model;
 - Next.js web pages in Polish with API-backed deal list, detail page and route filters;
+- SEO-ready airport and destination pages with dynamic metadata;
 - Docker Compose configuration.
 
 No production travel prices are fabricated. External data providers remain disabled until

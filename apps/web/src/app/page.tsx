@@ -18,6 +18,15 @@ export default function HomePage() {
         <h2>Najlepsze okazje pojawią się tutaj</h2>
         <p>Źródła danych są właśnie konfigurowane. Nie pokazujemy zmyślonych cen.</p>
       </section>
+      <section className="route-links">
+        <h2>Popularne lotniska w Polsce</h2>
+        <div className="route-link-grid">
+          <Link href="/from/WRO">Wrocław (WRO)</Link>
+          <Link href="/from/WAW">Warszawa (WAW)</Link>
+          <Link href="/from/KRK">Kraków (KRK)</Link>
+          <Link href="/from/GDN">Gdańsk (GDN)</Link>
+        </div>
+      </section>
     </main>
   );
 }
