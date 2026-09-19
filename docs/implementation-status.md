@@ -67,7 +67,7 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 12 passed;
+- pytest: 14 passed;
 - Alembic offline SQL generation: passed through migration `0008`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
