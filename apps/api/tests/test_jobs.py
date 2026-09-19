@@ -7,6 +7,7 @@ from app.db.session import get_db
 from app.jobs.pipeline import PipelineResult
 from app.main import app
 from app.models.job import JobRun, JobStatus
+from app.providers.base import ProviderNotConfigured
 from app.services.ingestion import IngestionResult
 from app.services.jobs import run_tracked_pipeline
 from fastapi.testclient import TestClient
@@ -61,6 +62,52 @@ def test_tracked_pipeline_persists_failure() -> None:
         assert job.status == JobStatus.FAILED
         assert job.error == "provider unavailable"
         assert job.finished_at is not None
+
+
+def test_tracked_pipeline_retries_transient_failure() -> None:
+    session_factory = make_session_factory()
+    calls = 0
+
+    async def flaky_pipeline() -> PipelineResult:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise RuntimeError("temporary provider failure")
+        return PipelineResult(ingestion=IngestionResult(), statistics_routes=0, generated_deals=0)
+
+    asyncio.run(
+        run_tracked_pipeline(
+            flaky_pipeline,
+            session_factory,
+            max_attempts=2,
+            retry_delay_seconds=0,
+        )
+    )
+
+    with session_factory() as db:
+        jobs = db.scalars(select(JobRun).order_by(JobRun.attempt)).all()
+        assert [job.attempt for job in jobs] == [1, 2]
+        assert [job.status for job in jobs] == [JobStatus.FAILED, JobStatus.SUCCEEDED]
+
+
+def test_tracked_pipeline_does_not_retry_missing_configuration() -> None:
+    session_factory = make_session_factory()
+
+    async def missing_configuration() -> PipelineResult:
+        raise ProviderNotConfigured("token missing")
+
+    with pytest.raises(ProviderNotConfigured, match="token missing"):
+        asyncio.run(
+            run_tracked_pipeline(
+                missing_configuration,
+                session_factory,
+                max_attempts=3,
+                retry_delay_seconds=0,
+            )
+        )
+
+    with session_factory() as db:
+        assert db.query(JobRun).count() == 1
 
 
 def test_admin_jobs_endpoint_is_protected_and_lists_runs() -> None:

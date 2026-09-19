@@ -22,7 +22,7 @@ travel prices are generated locally.
 | 0. Repository and business discovery | Done | Repository audit, architecture plan, provider matrix in `docs/providers.md` |
 | 1. Product foundation | Done | FastAPI, Next.js, PostgreSQL Compose, Alembic, catalog/admin models and health endpoints; runtime verified in Docker |
 | 2. First real data source | In progress | Travelpayouts adapter, configurable origins and CLI pipeline exist; next: configured-token integration run |
-| 3. Price history | In progress | Route statistics, repeatable runner and persisted job history exist; next: schedule and retry policy |
+| 3. Price history | In progress | Route statistics, repeatable runner, persisted job history and bounded retries exist; next: schedule execution |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
 | 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
 | 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program and configured outbound links |
@@ -69,7 +69,7 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 17 passed;
+- pytest: 19 passed;
 - Alembic offline SQL generation: passed through migration `0009`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
@@ -90,7 +90,8 @@ Latest local checks:
 - Pipeline checks: missing provider credentials exit cleanly with code `2`; configured origins
   default to all seven seeded Polish airports.
 - Job checks: successful and failed pipeline executions persist status, duration, error and result;
-  protected `/api/v1/admin/jobs` exposes the latest 50 runs.
+  transient failures retry with bounded backoff, configuration failures do not retry, and protected
+  `/api/v1/admin/jobs` exposes the latest 50 runs.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 
@@ -110,7 +111,8 @@ resolved against the catalog, stored as a fresh `TravelOffer`, and represented b
 `PriceObservation` without duplicate offers or fabricated currency conversions.
 
 Phase 3 is complete when the ingestion job recalculates route statistics after each successful
-batch, persists execution status, and a scheduler can retry failed runs without duplicate offers.
+batch, persists execution status, retries transient failures without duplicate offers, and runs
+from a production scheduler.
 
 ## Runtime verification
 

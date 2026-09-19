@@ -8,6 +8,8 @@
 6. Install web dependencies in `apps/web` with `npm install` and run `npm run dev`.
 7. Run the repeatable provider pipeline from `apps/api` when credentials are configured:
    `python -m app.jobs.runner`.
+   Retry behavior is controlled by `PIPELINE_MAX_ATTEMPTS` and
+   `PIPELINE_RETRY_DELAY_SECONDS`.
 8. Inspect recent pipeline attempts with the admin token:
    `GET http://localhost:8000/api/v1/admin/jobs` and header `X-Admin-Token`.
 

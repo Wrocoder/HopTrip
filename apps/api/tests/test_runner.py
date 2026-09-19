@@ -7,7 +7,7 @@ from app.services.ingestion import IngestionResult
 
 
 def test_runner_prints_pipeline_result(monkeypatch, capsys) -> None:
-    async def fake_pipeline() -> PipelineResult:
+    async def fake_pipeline(**_kwargs) -> PipelineResult:
         return PipelineResult(
             ingestion=IngestionResult(saved_offers=2, updated_offers=1, saved_observations=2),
             statistics_routes=3,
@@ -26,7 +26,7 @@ def test_runner_prints_pipeline_result(monkeypatch, capsys) -> None:
 
 
 def test_runner_returns_configuration_error(monkeypatch, capsys) -> None:
-    async def failing_pipeline() -> PipelineResult:
+    async def failing_pipeline(**_kwargs) -> PipelineResult:
         raise ProviderNotConfigured("Travelpayouts API token is not configured")
 
     monkeypatch.setattr(runner, "run_tracked_pipeline", failing_pipeline)
