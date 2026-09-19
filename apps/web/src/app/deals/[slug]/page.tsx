@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DealViewTracker } from "../../components/deal-view-tracker";
 import { getDeal } from "../../../lib/api";
 
 export const dynamic = "force-dynamic";
@@ -17,6 +18,7 @@ export default async function DealPage({ params }: { params: Promise<{ slug: str
     <main className="page-shell">
       <Link className="back-link" href="/deals">← Wszystkie okazje</Link>
       <article className="deal-detail">
+        <DealViewTracker dealSlug={deal.slug} />
         <p className="eyebrow">Lotnicza okazja</p>
         <h1>Wyjazd {deal.trip_start}</h1>
         <p className="deal-price large">{formatPrice(deal.price_per_person_pln)} <span>za osobę</span></p>

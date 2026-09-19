@@ -29,7 +29,7 @@ travel prices are generated locally.
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
 | 9. SEO foundation | In progress | Dynamic airport and destination pages with metadata exist; next: populate pages with real deals and route statistics |
-| 10. Analytics | Planned | Funnel events, outbound clicks, conversion import and revenue |
+| 10. Analytics | In progress | Anonymous deal-view event, event storage and protected summary endpoint exist; next: outbound click events and conversion import |
 | 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
 | 12. Distribution | Planned | Telegram publication adapter |
 | 13. Oracle VM deployment | Planned | Caddy, Compose deployment, backups and restore test |
@@ -56,6 +56,7 @@ travel prices are generated locally.
 - Docker Compose and API migration entrypoint;
 - Repeatable ingestion and deal-generation jobs in `apps/api/app/jobs/`;
 - Freshness guard that hides deals not re-verified within 48 hours;
+- Anonymous `DEAL_VIEW` tracking with event storage and admin summary endpoint;
 - tests and Ruff configuration.
 
 ## Verification history
@@ -75,6 +76,8 @@ Latest local checks:
   empty state while the provider has no configured token.
 - SEO route build checks: Next.js includes `/from/[iata_code]`, `/destinations/[slug]`,
   `/sitemap.xml` and `/robots.txt`.
+- Analytics checks: `DEAL_VIEW` event accepted with HTTP 202 and migration `0006_analytics_events`
+  generated successfully.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
 
