@@ -103,7 +103,17 @@ If another application already owns host ports 80 and 443, use the shared-proxy 
 removes HopTrip's public Caddy bindings, attaches the internal HopTrip Caddy to an external Docker
 network, and lets the existing Caddy terminate HTTPS.
 
-First create the network and connect the existing Caddy container to it. Replace
+When the existing proxy already has a Docker network, reuse that network instead of creating a
+new one. On the current Oracle VM this network is domarion_edge. Add this line to
+.env.production:
+
+~~~env
+HOPTRIP_EDGE_NETWORK=domarion_edge
+~~~
+
+If the existing proxy is not already on the selected network, create it and connect the existing
+Caddy container. For this VM, domarion_edge is already present, so skip these two commands.
+Replace
 `<existing-caddy-container>` with the container identified by `sudo docker ps`:
 
 ```bash
