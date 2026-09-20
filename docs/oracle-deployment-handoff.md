@@ -10,7 +10,7 @@ VM public IPv4:
 VM public hostname/FQDN:
 SSH username:
 Operating system and version:
-CPU architecture: amd64 / arm64
+CPU architecture: amd64 / arm64 (the images build natively for either architecture)
 Deployment directory: /opt/hoptrip (or another path)
 Production domain:
 ACME email:

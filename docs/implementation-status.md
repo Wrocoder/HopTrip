@@ -72,6 +72,7 @@ travel prices are generated locally.
 - Anonymous `DEAL_VIEW` tracking with event storage and admin summary endpoint;
 - Safe outbound click endpoint with HTTPS host allowlist and rejected/unconfigured click audit;
 - `docker-compose.production.yml` with internal-only app services and Caddy HTTPS ingress;
+- ARM64-compatible web image stages for the Oracle Ampere VM shape;
 - `infrastructure/Caddyfile` plus `.env.production.example` for domain/TLS deployment;
 - `scripts/backup-db.sh` and `scripts/restore-db.sh` for custom-format database backup/restore;
 - tests and Ruff configuration.
@@ -124,6 +125,8 @@ Latest local checks:
   validation error `422`.
 - Production scaffold checks: merged Compose configuration validates with required placeholder
   secrets; backup and restore scripts pass POSIX shell syntax checks.
+- ARM64 build check: the web image builds successfully for `linux/arm64`, matching the Oracle
+  VM architecture.
 
 ## Open decisions and blockers
 
