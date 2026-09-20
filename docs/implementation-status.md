@@ -50,6 +50,7 @@ travel prices are generated locally.
 - `apps/api/app/jobs/runner.py`: cron/worker-friendly repeatable pipeline command;
 - `apps/api/app/jobs/scheduler.py`: optional interval worker around the tracked pipeline;
 - `docs/operations.md`: one-shot, scheduled-worker and job-history runbook;
+- `docs/blocker-resolution.md`: step-by-step external unblock checklist and support template;
 - `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
 - `apps/api/app/api/admin.py`: protected provider/program onboarding, configuration blocker report
   and recent job history endpoint;
