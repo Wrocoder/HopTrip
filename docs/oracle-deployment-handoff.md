@@ -53,6 +53,19 @@ dig +short A <production-domain>
 dig +short AAAA <production-domain>
 ```
 
+If the current user receives `permission denied while trying to connect to the Docker API`,
+use `sudo docker ps` for the inventory. To allow the `ubuntu` user to run Docker without
+`sudo`, an administrator can run:
+
+```bash
+sudo usermod -aG docker ubuntu
+newgrp docker
+docker ps
+```
+
+The group change grants root-equivalent control of the VM through Docker. Keep it limited to
+trusted administrators.
+
 ## Required network state
 
 - SSH `22/tcp` is allowed only from the administrator's fixed IP where possible.
