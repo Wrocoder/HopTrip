@@ -56,3 +56,43 @@ For an approved affiliate program that supports a provider sub-ID, set
 query parameter name expected by the provider (for example, `sub_id`). HopTrip then appends a
 stable `hoptrip-{click_id}` value to each allowed redirect and stores it with the click. Leave
 the tracking parameter empty until the program documents its supported format.
+
+## Production deployment scaffold
+
+The production override keeps PostgreSQL, the API, the worker and Next.js on the internal
+Compose network. Caddy is the only service that publishes ports, and terminates HTTPS for the
+configured domain.
+
+1. Copy .env.production.example to .env.production.
+2. Set the domain and ACME email, URL-safe database password, admin token, provider token and
+   approved affiliate host. Keep this file out of source control.
+3. Validate the merged Compose configuration:
+
+   ```bash
+   docker compose --env-file .env.production \
+     -f docker-compose.yml -f docker-compose.production.yml config --quiet
+   ```
+
+4. Start the production stack and the scheduled worker:
+
+   ```bash
+   docker compose --env-file .env.production \
+     -f docker-compose.yml -f docker-compose.production.yml \
+     --profile worker up -d --build
+   ```
+
+5. Verify https://<domain>/health/ready and the protected system-status endpoint.
+6. Create a database backup and retain it according to the chosen retention policy:
+
+   ```bash
+   COMPOSE_ENV_FILE=.env.production sh scripts/backup-db.sh
+   ```
+
+7. Test a restore during a maintenance window with a selected dump file:
+
+   ```bash
+   COMPOSE_ENV_FILE=.env.production sh scripts/restore-db.sh backups/<file>.dump
+   ```
+
+After restore, rerun the readiness check and one authenticated admin check. The restore command
+is destructive for the configured database and must only run against the intended deployment.

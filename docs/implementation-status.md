@@ -32,7 +32,7 @@ travel prices are generated locally.
 | 10. Analytics | In progress | Anonymous events, outbound clicks, funnel metrics, idempotent conversion import, tracking-ID resolution and protected revenue summary exist; next: provider conversion feed |
 | 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
 | 12. Distribution | Planned | Telegram publication adapter |
-| 13. Oracle VM deployment | Planned | Caddy, Compose deployment, backups and restore test |
+| 13. Oracle VM deployment | In progress | Production Compose override, Caddy routing and backup/restore scripts exist; next: deploy on the VM and complete a restore drill |
 
 ## Implemented repository pieces
 
@@ -69,6 +69,9 @@ travel prices are generated locally.
 - Freshness guard that hides deals not re-verified within 48 hours;
 - Anonymous `DEAL_VIEW` tracking with event storage and admin summary endpoint;
 - Safe outbound click endpoint with HTTPS host allowlist and rejected/unconfigured click audit;
+- `docker-compose.production.yml` with internal-only app services and Caddy HTTPS ingress;
+- `infrastructure/Caddyfile` plus `.env.production.example` for domain/TLS deployment;
+- `scripts/backup-db.sh` and `scripts/restore-db.sh` for custom-format database backup/restore;
 - tests and Ruff configuration.
 
 ## Verification history
@@ -117,6 +120,8 @@ Latest local checks:
   HTTPS redirects and stored with the click record; tracking is disabled by default.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
   validation error `422`.
+- Production scaffold checks: merged Compose configuration validates with required placeholder
+  secrets; backup and restore scripts pass POSIX shell syntax checks.
 
 ## Open decisions and blockers
 
@@ -141,8 +146,8 @@ Latest local checks:
    exist, but a provider-specific pull/webhook adapter is still needed after approval.
 2. **Real-data acceptance run** — run ingestion, statistics, deal generation, public pages and
    the worker against configured credentials, then verify freshness and duplicate protection.
-3. **Production deployment** — add Caddy, external-only 80/443 exposure, backups and a restore
-   drill once the VM and domain are available.
+3. **Production deployment** — deploy the scaffold to the VM, point DNS at it, issue TLS and
+   complete a restore drill once the VM and domain are available.
 
 ## Definition of next milestone
 
