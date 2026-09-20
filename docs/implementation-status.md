@@ -29,7 +29,7 @@ travel prices are generated locally.
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
 | 9. SEO foundation | In progress | Dynamic airport/destination pages, metadata, sitemap and seeded route catalog exist; next: populate pages with real deals and route statistics |
-| 10. Analytics | In progress | Anonymous events, outbound clicks, idempotent conversion import, tracking-ID resolution and protected revenue summary exist; next: provider conversion feed |
+| 10. Analytics | In progress | Anonymous events, outbound clicks, funnel metrics, idempotent conversion import, tracking-ID resolution and protected revenue summary exist; next: provider conversion feed |
 | 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
 | 12. Distribution | Planned | Telegram publication adapter |
 | 13. Oracle VM deployment | Planned | Caddy, Compose deployment, backups and restore test |
@@ -55,6 +55,7 @@ travel prices are generated locally.
 - `apps/api/app/models/conversion.py`: idempotent affiliate conversion and commission records;
 - `apps/api/app/schemas/conversion.py`: validated admin conversion import contract with click and provider tracking-ID resolution;
 - `apps/api/app/api/affiliate.py`: safe redirect with optional provider sub-ID tracking;
+- `apps/api/app/api/analytics.py`: protected funnel, rate and PLN revenue metrics by provider, category and deal;
 - `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
 - Alembic migrations `0001` through `0011`;
 - FastAPI health, catalog and protected admin endpoints;
@@ -102,6 +103,8 @@ Latest local checks:
 - Conversion checks: protected admin upsert is idempotent by provider conversion ID; analytics
   summary reports confirmed PLN commission without pretending to convert other currencies;
   provider tracking IDs resolve to the originating affiliate click.
+- Funnel checks: protected analytics summary reports distinct sessions, deal views, redirected
+  clicks, confirmed bookings, CTR, booking conversion and revenue per session/click.
 - Tracking checks: configured affiliate tracking query parameter is appended only to allowlisted
   HTTPS redirects and stored with the click record; tracking is disabled by default.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return

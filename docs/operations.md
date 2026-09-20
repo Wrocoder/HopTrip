@@ -35,6 +35,8 @@ docker compose --profile worker stop worker
   provider conversion ID safely to update its status. A provider sub-ID can be submitted as
   `tracking_id` (for example, `hoptrip-42`) to resolve the original affiliate click.
 - Revenue summary: `GET /api/v1/admin/analytics/summary` with `X-Admin-Token`.
+- The revenue summary includes distinct sessions, deal views, redirected clicks, confirmed
+  bookings, funnel rates and PLN revenue breakdowns by provider, booking category and deal.
 - The job response includes status, attempt number, duration, error and pipeline result.
 
 Provider configuration errors are recorded as failed runs without retries. Transient failures

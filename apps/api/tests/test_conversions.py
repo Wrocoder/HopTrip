@@ -5,6 +5,7 @@ from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
 from app.models.affiliate_click import AffiliateClick
+from app.models.analytics import AnalyticsEvent
 from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
 from app.models.location import Airport, Destination
@@ -32,21 +33,43 @@ def test_admin_conversion_upsert_and_summary() -> None:
         )
         db.add_all([airport, destination])
         db.flush()
-        db.add(
-            Deal(
-                slug="conversion-test-deal",
-                origin_airport_id=airport.id,
-                destination_id=destination.id,
-                trip_start=date(2026, 10, 1),
-                trip_end=date(2026, 10, 3),
-                travelers=1,
-                flight_price_pln=Decimal("200.00"),
-                total_estimated_pln=Decimal("200.00"),
-                price_per_person_pln=Decimal("200.00"),
-                deal_score=80,
-                confidence=Decimal("0.5000"),
-                explanation=["Test deal"],
-            )
+        deal = Deal(
+            slug="conversion-test-deal",
+            origin_airport_id=airport.id,
+            destination_id=destination.id,
+            trip_start=date(2026, 10, 1),
+            trip_end=date(2026, 10, 3),
+            travelers=1,
+            flight_price_pln=Decimal("200.00"),
+            total_estimated_pln=Decimal("200.00"),
+            price_per_person_pln=Decimal("200.00"),
+            deal_score=80,
+            confidence=Decimal("0.5000"),
+            explanation=["Test deal"],
+        )
+        db.add(deal)
+        db.flush()
+        db.add_all(
+            [
+                AnalyticsEvent(
+                    event_name="DEAL_VIEW",
+                    anonymous_session_id="analytics-session-1",
+                    source="homepage",
+                ),
+                AnalyticsEvent(
+                    event_name="DEAL_VIEW",
+                    anonymous_session_id="analytics-session-2",
+                    source="homepage",
+                ),
+                AffiliateClick(
+                    deal_id=deal.id,
+                    component_type="FLIGHT",
+                    anonymous_session_id="analytics-session-1",
+                    source="deal-page",
+                    status="REDIRECTED",
+                    outbound_host="partner.example",
+                ),
+            ]
         )
         db.commit()
 
@@ -88,8 +111,21 @@ def test_admin_conversion_upsert_and_summary() -> None:
 
         summary = client.get("/api/v1/admin/analytics/summary", headers=headers)
         assert summary.status_code == 200
-        assert summary.json()["total_conversions"] == 1
-        assert summary.json()["confirmed_commission_pln"] == "30.00"
+        summary_json = summary.json()
+        assert summary_json["total_sessions"] == 2
+        assert summary_json["total_deal_views"] == 2
+        assert summary_json["total_affiliate_clicks"] == 1
+        assert summary_json["confirmed_bookings"] == 1
+        assert summary_json["affiliate_ctr_percent"] == "50.00"
+        assert summary_json["booking_conversion_percent"] == "100.00"
+        assert summary_json["revenue_per_session_pln"] == "15.00"
+        assert summary_json["revenue_per_affiliate_click_pln"] == "30.00"
+        assert summary_json["revenue_per_1000_sessions_pln"] == "15000.00"
+        assert summary_json["total_conversions"] == 1
+        assert summary_json["confirmed_commission_pln"] == "30.00"
+        assert summary_json["revenue_by_provider_pln"] == {"travelpayouts": "30.00"}
+        assert summary_json["revenue_by_category_pln"] == {"FLIGHT": "30.00"}
+        assert summary_json["revenue_by_deal_pln"] == {"conversion-test-deal": "30.00"}
 
         with Session(engine) as db:
             conversion = db.scalar(select(AffiliateConversion))

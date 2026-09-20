@@ -22,5 +22,17 @@ class AnalyticsEventAccepted(BaseModel):
 class AnalyticsSummary(BaseModel):
     total_events: int
     by_event: dict[str, int]
+    total_sessions: int = 0
+    total_deal_views: int = 0
+    total_affiliate_clicks: int = 0
+    confirmed_bookings: int = 0
+    affiliate_ctr_percent: Decimal = Decimal("0.00")
+    booking_conversion_percent: Decimal = Decimal("0.00")
+    revenue_per_session_pln: Decimal = Decimal("0.00")
+    revenue_per_affiliate_click_pln: Decimal = Decimal("0.00")
+    revenue_per_1000_sessions_pln: Decimal = Decimal("0.00")
     total_conversions: int = 0
     confirmed_commission_pln: Decimal = Decimal("0.00")
+    revenue_by_provider_pln: dict[str, Decimal] = Field(default_factory=dict)
+    revenue_by_category_pln: dict[str, Decimal] = Field(default_factory=dict)
+    revenue_by_deal_pln: dict[str, Decimal] = Field(default_factory=dict)
