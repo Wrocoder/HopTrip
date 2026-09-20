@@ -1,0 +1,16 @@
+services:
+  caddy:
+    ports: !override []
+    volumes: !override
+      - ./infrastructure/Caddyfile.internal:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      edge:
+        aliases:
+          - hoptrip-caddy
+
+networks:
+  edge:
+    name: ${HOPTRIP_EDGE_NETWORK:-hoptrip-edge}
+    external: true

@@ -96,3 +96,42 @@ configured domain.
 
 After restore, rerun the readiness check and one authenticated admin check. The restore command
 is destructive for the configured database and must only run against the intended deployment.
+
+## Coexisting with an existing HTTPS proxy
+
+If another application already owns host ports 80 and 443, use the shared-proxy override. It
+removes HopTrip's public Caddy bindings, attaches the internal HopTrip Caddy to an external Docker
+network, and lets the existing Caddy terminate HTTPS.
+
+First create the network and connect the existing Caddy container to it. Replace
+`<existing-caddy-container>` with the container identified by `sudo docker ps`:
+
+```bash
+sudo docker network create hoptrip-edge
+sudo docker network connect hoptrip-edge <existing-caddy-container>
+```
+
+Add this site to the existing Caddy configuration, using a hostname that resolves to the VM:
+
+```caddyfile
+hoptrip.example.com {
+    reverse_proxy hoptrip-caddy:80
+}
+```
+
+Then validate and start HopTrip with all three Compose files:
+
+```bash
+docker compose --env-file .env.production \
+  -f docker-compose.yml -f docker-compose.production.yml \
+  -f docker-compose.shared-proxy.yml config --quiet
+
+docker compose --env-file .env.production \
+  -f docker-compose.yml -f docker-compose.production.yml \
+  -f docker-compose.shared-proxy.yml \
+  --profile worker up -d --build
+```
+
+Reload the existing Caddy after its configuration is updated and verify
+`https://hoptrip.example.com/health/ready`. Do not start the default production stack without
+the shared-proxy override on a VM where another service already publishes 80 or 443.

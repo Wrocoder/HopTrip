@@ -72,6 +72,8 @@ travel prices are generated locally.
 - Anonymous `DEAL_VIEW` tracking with event storage and admin summary endpoint;
 - Safe outbound click endpoint with HTTPS host allowlist and rejected/unconfigured click audit;
 - `docker-compose.production.yml` with internal-only app services and Caddy HTTPS ingress;
+- `docker-compose.shared-proxy.yml` and `infrastructure/Caddyfile.internal` for coexistence with
+  an existing HTTPS proxy on the Oracle VM;
 - ARM64-compatible web image stages for the Oracle Ampere VM shape;
 - `infrastructure/Caddyfile` plus `.env.production.example` for domain/TLS deployment;
 - `scripts/backup-db.sh` and `scripts/restore-db.sh` for custom-format database backup/restore;
