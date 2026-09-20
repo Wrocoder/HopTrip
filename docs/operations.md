@@ -32,7 +32,8 @@ docker compose --profile worker stop worker
 - Readiness: `GET /health/ready`.
 - Recent job attempts: `GET /api/v1/admin/jobs` with `X-Admin-Token`.
 - Conversion import: `POST /api/v1/admin/conversions` with `X-Admin-Token`; repeat the same
-  provider conversion ID safely to update its status.
+  provider conversion ID safely to update its status. A provider sub-ID can be submitted as
+  `tracking_id` (for example, `hoptrip-42`) to resolve the original affiliate click.
 - Revenue summary: `GET /api/v1/admin/analytics/summary` with `X-Admin-Token`.
 - The job response includes status, attempt number, duration, error and pipeline result.
 

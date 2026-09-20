@@ -4,6 +4,7 @@ from decimal import Decimal
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
+from app.models.affiliate_click import AffiliateClick
 from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
 from app.models.location import Airport, Destination
@@ -93,6 +94,84 @@ def test_admin_conversion_upsert_and_summary() -> None:
         with Session(engine) as db:
             conversion = db.scalar(select(AffiliateConversion))
             assert conversion is not None
+            assert conversion.deal_id is not None
+    finally:
+        app.dependency_overrides.clear()
+
+
+def test_admin_conversion_can_resolve_provider_tracking_id() -> None:
+    engine = create_engine(
+        "sqlite://",
+        connect_args={"check_same_thread": False},
+        poolclass=StaticPool,
+    )
+    Base.metadata.create_all(engine)
+    with Session(engine) as db:
+        airport = Airport(iata_code="WRO", name="Wroclaw Airport", city="Wroclaw", country_code="PL")
+        destination = Destination(
+            iata_code="BCN",
+            city="Barcelona",
+            country="Spain",
+            country_code="ES",
+            slug="barcelona",
+        )
+        db.add_all([airport, destination])
+        db.flush()
+        deal = Deal(
+            slug="tracking-conversion-deal",
+            origin_airport_id=airport.id,
+            destination_id=destination.id,
+            trip_start=date(2026, 10, 1),
+            trip_end=date(2026, 10, 3),
+            travelers=1,
+            flight_price_pln=Decimal("200.00"),
+            total_estimated_pln=Decimal("200.00"),
+            price_per_person_pln=Decimal("200.00"),
+            deal_score=80,
+            confidence=Decimal("0.5000"),
+            explanation=["Test deal"],
+        )
+        db.add(deal)
+        db.flush()
+        db.add(
+            AffiliateClick(
+                deal_id=deal.id,
+                component_type="FLIGHT",
+                anonymous_session_id="tracking-session",
+                source="deal-page",
+                status="REDIRECTED",
+                outbound_host="partner.example",
+                tracking_id="hoptrip-42",
+            )
+        )
+        db.commit()
+
+    def override_get_db():
+        with Session(engine) as db:
+            yield db
+
+    app.dependency_overrides[get_db] = override_get_db
+    headers = {"X-Admin-Token": "change-me-in-development"}
+    try:
+        response = TestClient(app).post(
+            "/api/v1/admin/conversions",
+            headers=headers,
+            json={
+                "provider_code": "travelpayouts",
+                "provider_conversion_id": "tracking-conversion-1",
+                "tracking_id": "hoptrip-42",
+                "booking_category": "flight",
+                "commission": "12.50",
+                "currency": "pln",
+                "status": "CONFIRMED",
+            },
+        )
+        assert response.status_code == 201
+
+        with Session(engine) as db:
+            conversion = db.scalar(select(AffiliateConversion))
+            assert conversion is not None
+            assert conversion.click_id is not None
             assert conversion.deal_id is not None
     finally:
         app.dependency_overrides.clear()

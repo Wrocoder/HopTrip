@@ -49,8 +49,19 @@ def record_conversion(payload: ConversionCreate, db: Session = Depends(get_db)) 
         if deal_id is None:
             raise HTTPException(status_code=404, detail="Deal not found")
 
-    if payload.click_id is not None:
-        click = db.get(AffiliateClick, payload.click_id)
+    click_id = payload.click_id
+    if payload.tracking_id is not None:
+        tracked_click = db.scalar(
+            select(AffiliateClick).where(AffiliateClick.tracking_id == payload.tracking_id)
+        )
+        if tracked_click is None:
+            raise HTTPException(status_code=404, detail="Affiliate tracking ID not found")
+        if click_id is not None and click_id != tracked_click.id:
+            raise HTTPException(status_code=400, detail="Tracking ID does not match click")
+        click_id = tracked_click.id
+
+    if click_id is not None:
+        click = db.get(AffiliateClick, click_id)
         if click is None:
             raise HTTPException(status_code=404, detail="Affiliate click not found")
         if deal_id is not None and click.deal_id != deal_id:
@@ -69,7 +80,7 @@ def record_conversion(payload: ConversionCreate, db: Session = Depends(get_db)) 
         provider_conversion_id=payload.provider_conversion_id,
     )
     conversion.program_code = payload.program_code
-    conversion.click_id = payload.click_id
+    conversion.click_id = click_id
     conversion.deal_id = deal_id
     conversion.booking_category = payload.booking_category
     conversion.booking_value = payload.booking_value

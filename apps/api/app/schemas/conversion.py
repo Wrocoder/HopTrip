@@ -12,6 +12,7 @@ class ConversionCreate(BaseModel):
     program_code: str | None = Field(default=None, max_length=80)
     provider_conversion_id: str = Field(min_length=1, max_length=160)
     click_id: int | None = Field(default=None, ge=1)
+    tracking_id: str | None = Field(default=None, min_length=1, max_length=120)
     deal_slug: str | None = Field(default=None, max_length=220)
     booking_category: str = Field(min_length=1, max_length=40)
     booking_value: Decimal | None = Field(default=None, ge=0)
