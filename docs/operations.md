@@ -30,6 +30,8 @@ docker compose --profile worker stop worker
 ## Health and job history
 
 - Readiness: `GET /health/ready`.
+- Configuration blocker report: `GET /api/v1/admin/system/status` with
+  `X-Admin-Token`; it returns missing external prerequisites without exposing credentials.
 - Recent job attempts: `GET /api/v1/admin/jobs` with `X-Admin-Token`.
 - Provider/program onboarding: `PATCH /api/v1/admin/providers/{id}` and
   `PATCH /api/v1/admin/programs/{id}` with `X-Admin-Token`; only approved records can be

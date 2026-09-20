@@ -1,3 +1,5 @@
+from app.api import admin as admin_api
+from app.config import Settings
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
@@ -113,3 +115,39 @@ def test_admin_can_update_affiliate_onboarding_state() -> None:
         assert suspended.json()["is_active"] is False
     finally:
         app.dependency_overrides.clear()
+
+
+def test_admin_system_status_reports_external_blockers(monkeypatch) -> None:
+    blocked_settings = Settings(
+        app_env="development",
+        admin_token="change-me-in-development",
+        travelpayouts_api_token=None,
+        affiliate_allowed_hosts="",
+    )
+    monkeypatch.setattr(admin_api, "get_settings", lambda: blocked_settings)
+    client = TestClient(app)
+    blocked = client.get(
+        "/api/v1/admin/system/status",
+        headers={"X-Admin-Token": "change-me-in-development"},
+    )
+    assert blocked.status_code == 200
+    assert blocked.json()["status"] == "BLOCKED"
+    assert "TRAVELPAYOUTS_API_TOKEN is not configured" in blocked.json()["blockers"]
+    assert "AFFILIATE_ALLOWED_HOSTS has no approved HTTPS host" in blocked.json()["blockers"]
+
+    ready_settings = Settings(
+        app_env="development",
+        admin_token="change-me-in-development",
+        travelpayouts_api_token="provider-token",
+        affiliate_allowed_hosts="partner.example",
+        affiliate_tracking_query_param="sub_id",
+    )
+    monkeypatch.setattr(admin_api, "get_settings", lambda: ready_settings)
+    ready = client.get(
+        "/api/v1/admin/system/status",
+        headers={"X-Admin-Token": "change-me-in-development"},
+    )
+    assert ready.status_code == 200
+    assert ready.json()["status"] == "READY"
+    assert ready.json()["blockers"] == []
+    assert ready.json()["warnings"] == []

@@ -17,6 +17,7 @@ from app.schemas.affiliate import (
     ProviderHealthUpdate,
     ProviderRead,
     ProviderUpdate,
+    SystemStatusRead,
 )
 from app.schemas.conversion import ConversionCreate, ConversionRead, ConversionUpsertResponse
 from app.schemas.job import JobRunRead
@@ -27,6 +28,41 @@ router = APIRouter(prefix="/api/v1/admin", tags=["admin"])
 def require_admin(x_admin_token: str | None = Header(default=None)) -> None:
     if x_admin_token != get_settings().admin_token:
         raise HTTPException(status_code=401, detail="Invalid admin token")
+
+
+@router.get(
+    "/system/status",
+    response_model=SystemStatusRead,
+    dependencies=[Depends(require_admin)],
+)
+def system_status() -> SystemStatusRead:
+    settings = get_settings()
+    blockers: list[str] = []
+    warnings: list[str] = []
+    affiliate_hosts_configured = bool(
+        {host.strip() for host in settings.affiliate_allowed_hosts.split(",") if host.strip()}
+    )
+    affiliate_tracking_configured = bool(settings.affiliate_tracking_query_param.strip())
+    provider_token_configured = bool(settings.travelpayouts_api_token)
+
+    if not provider_token_configured:
+        blockers.append("TRAVELPAYOUTS_API_TOKEN is not configured")
+    if not affiliate_hosts_configured:
+        blockers.append("AFFILIATE_ALLOWED_HOSTS has no approved HTTPS host")
+    if settings.app_env.lower() == "production" and settings.admin_token == "change-me-in-development":
+        blockers.append("ADMIN_TOKEN still uses the development default in production")
+    if not affiliate_tracking_configured:
+        warnings.append("AFFILIATE_TRACKING_QUERY_PARAM is empty; provider sub-ID tracking is disabled")
+
+    return SystemStatusRead(
+        status="BLOCKED" if blockers else "READY",
+        app_env=settings.app_env,
+        provider_token_configured=provider_token_configured,
+        affiliate_hosts_configured=affiliate_hosts_configured,
+        affiliate_tracking_configured=affiliate_tracking_configured,
+        blockers=blockers,
+        warnings=warnings,
+    )
 
 
 @router.get("/providers", response_model=list[ProviderRead], dependencies=[Depends(require_admin)])

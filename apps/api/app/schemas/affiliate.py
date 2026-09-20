@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Literal
 
 from app.models.affiliate import OnboardingStatus, ProviderCapability
 from pydantic import BaseModel, ConfigDict, Field
@@ -48,3 +49,13 @@ class ProviderHealthUpdate(BaseModel):
     success: bool
     error: str | None = Field(default=None, max_length=4000)
     checked_at: datetime | None = None
+
+
+class SystemStatusRead(BaseModel):
+    status: Literal["READY", "BLOCKED"]
+    app_env: str
+    provider_token_configured: bool
+    affiliate_hosts_configured: bool
+    affiliate_tracking_configured: bool
+    blockers: list[str]
+    warnings: list[str]

@@ -51,7 +51,8 @@ travel prices are generated locally.
 - `apps/api/app/jobs/scheduler.py`: optional interval worker around the tracked pipeline;
 - `docs/operations.md`: one-shot, scheduled-worker and job-history runbook;
 - `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
-- `apps/api/app/api/admin.py`: protected provider/program onboarding updates and recent job history endpoint;
+- `apps/api/app/api/admin.py`: protected provider/program onboarding, configuration blocker report
+  and recent job history endpoint;
 - `apps/api/app/models/conversion.py`: idempotent affiliate conversion and commission records;
 - `apps/api/app/schemas/conversion.py`: validated admin conversion import contract with click and provider tracking-ID resolution;
 - `apps/api/app/api/affiliate.py`: safe redirect with optional provider sub-ID tracking;
@@ -75,7 +76,7 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 26 passed;
+- pytest: 27 passed;
 - Alembic offline SQL generation: passed through migration `0012`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
@@ -110,6 +111,8 @@ Latest local checks:
 - Provider registry checks: capabilities are validated against the provider capability enum;
   protected health-result recording stores the last check time and clears or records the latest
   integration error.
+- Configuration checks: protected system status reports missing provider token, affiliate host
+  allowlist and production admin-secret prerequisites, with sub-ID tracking as a warning.
 - Tracking checks: configured affiliate tracking query parameter is appended only to allowlisted
   HTTPS redirects and stored with the click record; tracking is disabled by default.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
@@ -117,12 +120,29 @@ Latest local checks:
 
 ## Open decisions and blockers
 
-1. Choose and configure the first real data provider token. Travelpayouts is currently the
-   implemented adapter; Amadeus remains a separate candidate.
-2. Add an exchange-rate provider before accepting non-PLN observations into PLN history.
-3. Confirm provider terms and coverage for Polish low-cost routes.
-4. Obtain approval and generated links for the first affiliate program before enabling redirects;
-   configure its HTTPS host in `AFFILIATE_ALLOWED_HOSTS`.
+### External blockers
+
+1. **Travel data credentials** — configure `TRAVELPAYOUTS_API_TOKEN` or choose and implement
+   another approved data source. Until this exists, Phase 2 cannot fetch real offers, Phases 3–5
+   cannot produce real history/deals/pages, and the worker must remain stopped.
+2. **Currency coverage** — choose an exchange-rate source and conversion policy before accepting
+   EUR/USD/GBP observations into PLN history. The current converter deliberately accepts PLN only.
+3. **Affiliate approval and links** — obtain approval for a concrete program, its generated
+   outbound URL format, supported sub-ID parameter and HTTPS host. Until then
+   `AFFILIATE_ALLOWED_HOSTS` stays empty and redirects remain rejected.
+4. **Provider terms and market coverage** — confirm Polish low-cost route coverage, rate limits,
+   attribution rules and permitted promotion channels against current official terms.
+5. **Production infrastructure access** — provide the Oracle VM/domain/TLS/DNS and backup
+   retention decisions before Phase 13 can be deployed and restore-tested.
+
+### Internal work still open
+
+1. **Provider conversion feed adapter** — the admin import contract and tracking-ID resolution
+   exist, but a provider-specific pull/webhook adapter is still needed after approval.
+2. **Real-data acceptance run** — run ingestion, statistics, deal generation, public pages and
+   the worker against configured credentials, then verify freshness and duplicate protection.
+3. **Production deployment** — add Caddy, external-only 80/443 exposure, backups and a restore
+   drill once the VM and domain are available.
 
 ## Definition of next milestone
 
