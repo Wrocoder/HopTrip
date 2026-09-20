@@ -129,6 +129,21 @@ hoptrip.example.com {
 }
 ```
 
+For the current VM, if you keep the existing sslip.io hostname pattern, append this block to
+/srv/domarion/app/deploy/oracle/Caddyfile:
+
+~~~caddyfile
+hoptrip.141-144-246-78.sslip.io {
+    encode zstd gzip
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+    reverse_proxy hoptrip-caddy:80
+}
+~~~
+
 Then validate and start HopTrip with all three Compose files:
 
 ```bash
