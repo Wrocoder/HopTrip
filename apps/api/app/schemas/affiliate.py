@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict
+from app.models.affiliate import OnboardingStatus
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ProviderRead(BaseModel):
@@ -30,3 +31,8 @@ class ProgramRead(BaseModel):
     approved_at: datetime | None = None
     notes: str | None = None
 
+
+class OnboardingUpdate(BaseModel):
+    onboarding_status: OnboardingStatus | None = None
+    is_active: bool | None = None
+    notes: str | None = Field(default=None, max_length=4000)

@@ -31,6 +31,9 @@ docker compose --profile worker stop worker
 
 - Readiness: `GET /health/ready`.
 - Recent job attempts: `GET /api/v1/admin/jobs` with `X-Admin-Token`.
+- Provider/program onboarding: `PATCH /api/v1/admin/providers/{id}` and
+  `PATCH /api/v1/admin/programs/{id}` with `X-Admin-Token`; only approved records can be
+  enabled, and any non-approved status automatically disables the record.
 - Conversion import: `POST /api/v1/admin/conversions` with `X-Admin-Token`; repeat the same
   provider conversion ID safely to update its status. A provider sub-ID can be submitted as
   `tracking_id` (for example, `hoptrip-42`) to resolve the original affiliate click.

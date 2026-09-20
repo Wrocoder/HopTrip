@@ -51,7 +51,7 @@ travel prices are generated locally.
 - `apps/api/app/jobs/scheduler.py`: optional interval worker around the tracked pipeline;
 - `docs/operations.md`: one-shot, scheduled-worker and job-history runbook;
 - `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
-- `apps/api/app/api/admin.py`: protected recent job history endpoint;
+- `apps/api/app/api/admin.py`: protected provider/program onboarding updates and recent job history endpoint;
 - `apps/api/app/models/conversion.py`: idempotent affiliate conversion and commission records;
 - `apps/api/app/schemas/conversion.py`: validated admin conversion import contract with click and provider tracking-ID resolution;
 - `apps/api/app/api/affiliate.py`: safe redirect with optional provider sub-ID tracking;
@@ -75,7 +75,7 @@ travel prices are generated locally.
 Latest local checks:
 
 - Ruff: passed;
-- pytest: 25 passed;
+- pytest: 26 passed;
 - Alembic offline SQL generation: passed through migration `0011`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
@@ -105,6 +105,8 @@ Latest local checks:
   provider tracking IDs resolve to the originating affiliate click.
 - Funnel checks: protected analytics summary reports distinct sessions, deal views, redirected
   clicks, confirmed bookings, CTR, booking conversion and revenue per session/click.
+- Affiliate admin checks: provider and program onboarding updates require admin access, only
+  approved records can be enabled, and non-approved records are disabled.
 - Tracking checks: configured affiliate tracking query parameter is appended only to allowlisted
   HTTPS redirects and stored with the click record; tracking is disabled by default.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return

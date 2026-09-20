@@ -1,15 +1,17 @@
+from datetime import UTC, datetime
+
 from fastapi import APIRouter, Depends, Header, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.db.session import get_db
-from app.models.affiliate import AffiliateProgram, AffiliateProvider
+from app.models.affiliate import AffiliateProgram, AffiliateProvider, OnboardingStatus
 from app.models.affiliate_click import AffiliateClick
 from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
 from app.models.job import JobRun
-from app.schemas.affiliate import ProgramRead, ProviderRead
+from app.schemas.affiliate import OnboardingUpdate, ProgramRead, ProviderRead
 from app.schemas.conversion import ConversionCreate, ConversionRead, ConversionUpsertResponse
 from app.schemas.job import JobRunRead
 
@@ -29,6 +31,69 @@ def list_providers(db: Session = Depends(get_db)) -> list[AffiliateProvider]:
 @router.get("/programs", response_model=list[ProgramRead], dependencies=[Depends(require_admin)])
 def list_programs(db: Session = Depends(get_db)) -> list[AffiliateProgram]:
     return list(db.scalars(select(AffiliateProgram).order_by(AffiliateProgram.provider_id)).all())
+
+
+def _apply_onboarding_update(
+    entity: AffiliateProvider | AffiliateProgram,
+    payload: OnboardingUpdate,
+) -> None:
+    if payload.onboarding_status is not None:
+        entity.onboarding_status = payload.onboarding_status
+        now = datetime.now(UTC)
+        if isinstance(entity, AffiliateProgram):
+            if (
+                payload.onboarding_status == OnboardingStatus.APPLICATION_SUBMITTED
+                and entity.applied_at is None
+            ):
+                entity.applied_at = now
+            if payload.onboarding_status == OnboardingStatus.APPROVED:
+                entity.approved_at = now
+        if payload.onboarding_status != OnboardingStatus.APPROVED:
+            entity.is_active = False
+    if payload.is_active is not None:
+        if payload.is_active and entity.onboarding_status != OnboardingStatus.APPROVED:
+            raise HTTPException(status_code=400, detail="Only approved affiliates can be enabled")
+        entity.is_active = payload.is_active
+    if "notes" in payload.model_fields_set:
+        entity.notes = payload.notes
+
+
+@router.patch(
+    "/providers/{provider_id}",
+    response_model=ProviderRead,
+    dependencies=[Depends(require_admin)],
+)
+def update_provider(
+    provider_id: int,
+    payload: OnboardingUpdate,
+    db: Session = Depends(get_db),
+) -> AffiliateProvider:
+    provider = db.get(AffiliateProvider, provider_id)
+    if provider is None:
+        raise HTTPException(status_code=404, detail="Affiliate provider not found")
+    _apply_onboarding_update(provider, payload)
+    db.commit()
+    db.refresh(provider)
+    return provider
+
+
+@router.patch(
+    "/programs/{program_id}",
+    response_model=ProgramRead,
+    dependencies=[Depends(require_admin)],
+)
+def update_program(
+    program_id: int,
+    payload: OnboardingUpdate,
+    db: Session = Depends(get_db),
+) -> AffiliateProgram:
+    program = db.get(AffiliateProgram, program_id)
+    if program is None:
+        raise HTTPException(status_code=404, detail="Affiliate program not found")
+    _apply_onboarding_update(program, payload)
+    db.commit()
+    db.refresh(program)
+    return program
 
 
 @router.get("/jobs", response_model=list[JobRunRead], dependencies=[Depends(require_admin)])
