@@ -25,7 +25,7 @@ travel prices are generated locally.
 | 3. Price history | In progress | Route statistics, repeatable runner, persisted job history, bounded retries and optional worker schedule exist; next: configured-token run |
 | 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
 | 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
-| 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program and configured outbound links |
+| 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program, provider link mapping and configured outbound links |
 | 7. Second monetization source | Planned | Add an actually approved second program |
 | 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
 | 9. SEO foundation | In progress | Dynamic airport/destination pages, metadata, sitemap and seeded route catalog exist; next: populate pages with real deals and route statistics |
@@ -142,11 +142,14 @@ Latest local checks:
 
 ### Internal work still open
 
-1. **Provider conversion feed adapter** — the admin import contract and tracking-ID resolution
+1. **Affiliate link mapping** — the redirect and click audit are safe, but a provider-specific
+   link builder still needs the approved URL format and sub-ID contract to populate each deal
+   component's `outbound_url`.
+2. **Provider conversion feed adapter** — the admin import contract and tracking-ID resolution
    exist, but a provider-specific pull/webhook adapter is still needed after approval.
-2. **Real-data acceptance run** — run ingestion, statistics, deal generation, public pages and
+3. **Real-data acceptance run** — run ingestion, statistics, deal generation, public pages and
    the worker against configured credentials, then verify freshness and duplicate protection.
-3. **Production deployment** — deploy the scaffold to the VM, point DNS at it, issue TLS and
+4. **Production deployment** — deploy the scaffold to the VM, point DNS at it, issue TLS and
    complete a restore drill once the VM and domain are available.
 
 ## Definition of next milestone
