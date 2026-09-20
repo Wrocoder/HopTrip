@@ -37,7 +37,7 @@ travel prices are generated locally.
 ## Implemented repository pieces
 
 - `apps/api/app/models/location.py`: Airport, Destination;
-- `apps/api/app/models/affiliate.py`: AffiliateProvider, AffiliateProgram, capabilities and onboarding states;
+- `apps/api/app/models/affiliate.py`: AffiliateProvider, AffiliateProgram, capability registry, health state and onboarding states;
 - `apps/api/app/models/data_provider.py`: independent travel-data provider registry;
 - `apps/api/app/models/offer.py`: TravelOffer and PriceObservation;
 - `apps/api/app/providers/`: provider-neutral contracts and Travelpayouts adapter;
@@ -57,7 +57,7 @@ travel prices are generated locally.
 - `apps/api/app/api/affiliate.py`: safe redirect with optional provider sub-ID tracking;
 - `apps/api/app/api/analytics.py`: protected funnel, rate and PLN revenue metrics by provider, category and deal;
 - `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
-- Alembic migrations `0001` through `0011`;
+- Alembic migrations `0001` through `0012`;
 - FastAPI health, catalog and protected admin endpoints;
 - Next.js Polish homepage, live deal list and deal detail pages;
 - SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
@@ -76,10 +76,10 @@ Latest local checks:
 
 - Ruff: passed;
 - pytest: 26 passed;
-- Alembic offline SQL generation: passed through migration `0011`;
+- Alembic offline SQL generation: passed through migration `0012`;
 - Next.js production build: passed;
 - Docker Compose config parsing: passed.
-- Docker runtime: PostgreSQL, API and web are up; migrations through `0011` applied; readiness endpoint passed.
+- Docker runtime: PostgreSQL, API and web are up; migrations through `0012` applied; readiness endpoint passed.
 - Web security audit: `npm audit --omit=dev --audit-level=high` reports zero vulnerabilities; Next.js is `16.3.5`.
 - Docker runtime smoke checks: `/health/ready` returns `ready`; `/api/v1/deals` returns an
   empty list until real offers are ingested.
@@ -107,6 +107,9 @@ Latest local checks:
   clicks, confirmed bookings, CTR, booking conversion and revenue per session/click.
 - Affiliate admin checks: provider and program onboarding updates require admin access, only
   approved records can be enabled, and non-approved records are disabled.
+- Provider registry checks: capabilities are validated against the provider capability enum;
+  protected health-result recording stores the last check time and clears or records the latest
+  integration error.
 - Tracking checks: configured affiliate tracking query parameter is appended only to allowlisted
   HTTPS redirects and stored with the click record; tracking is disabled by default.
 - API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return

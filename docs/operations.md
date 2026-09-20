@@ -34,6 +34,10 @@ docker compose --profile worker stop worker
 - Provider/program onboarding: `PATCH /api/v1/admin/providers/{id}` and
   `PATCH /api/v1/admin/programs/{id}` with `X-Admin-Token`; only approved records can be
   enabled, and any non-approved status automatically disables the record.
+- Provider capabilities: include `capabilities` in the provider PATCH using values such as
+  `DEEP_LINK` or `CONVERSION_API`. Record an externally executed check with
+  `POST /api/v1/admin/providers/{id}/health`; this endpoint stores the result and does not call
+  a provider by itself.
 - Conversion import: `POST /api/v1/admin/conversions` with `X-Admin-Token`; repeat the same
   provider conversion ID safely to update its status. A provider sub-ID can be submitted as
   `tracking_id` (for example, `hoptrip-42`) to resolve the original affiliate click.

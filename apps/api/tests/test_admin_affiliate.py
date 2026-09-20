@@ -66,11 +66,33 @@ def test_admin_can_update_affiliate_onboarding_state() -> None:
         approved = client.patch(
             f"/api/v1/admin/providers/{provider_id}",
             headers=headers,
-            json={"onboarding_status": "APPROVED", "is_active": True},
+            json={
+                "onboarding_status": "APPROVED",
+                "is_active": True,
+                "capabilities": ["DEEP_LINK", "CONVERSION_API"],
+            },
         )
         assert approved.status_code == 200
         assert approved.json()["onboarding_status"] == "APPROVED"
         assert approved.json()["is_active"] is True
+        assert approved.json()["capabilities"] == ["DEEP_LINK", "CONVERSION_API"]
+
+        failed_health = client.post(
+            f"/api/v1/admin/providers/{provider_id}/health",
+            headers=headers,
+            json={"success": False, "error": "Provider timeout"},
+        )
+        assert failed_health.status_code == 200
+        assert failed_health.json()["last_health_check"] is not None
+        assert failed_health.json()["last_health_check_error"] == "Provider timeout"
+
+        healthy = client.post(
+            f"/api/v1/admin/providers/{provider_id}/health",
+            headers=headers,
+            json={"success": True},
+        )
+        assert healthy.status_code == 200
+        assert healthy.json()["last_health_check_error"] is None
 
         program_approved = client.patch(
             f"/api/v1/admin/programs/{program_id}",

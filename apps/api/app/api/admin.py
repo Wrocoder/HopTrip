@@ -11,7 +11,13 @@ from app.models.affiliate_click import AffiliateClick
 from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
 from app.models.job import JobRun
-from app.schemas.affiliate import OnboardingUpdate, ProgramRead, ProviderRead
+from app.schemas.affiliate import (
+    OnboardingUpdate,
+    ProgramRead,
+    ProviderHealthUpdate,
+    ProviderRead,
+    ProviderUpdate,
+)
 from app.schemas.conversion import ConversionCreate, ConversionRead, ConversionUpsertResponse
 from app.schemas.job import JobRunRead
 
@@ -65,13 +71,40 @@ def _apply_onboarding_update(
 )
 def update_provider(
     provider_id: int,
-    payload: OnboardingUpdate,
+    payload: ProviderUpdate,
     db: Session = Depends(get_db),
 ) -> AffiliateProvider:
     provider = db.get(AffiliateProvider, provider_id)
     if provider is None:
         raise HTTPException(status_code=404, detail="Affiliate provider not found")
     _apply_onboarding_update(provider, payload)
+    if payload.capabilities is not None:
+        provider.capabilities_json = [capability.value for capability in payload.capabilities]
+    db.commit()
+    db.refresh(provider)
+    return provider
+
+
+@router.post(
+    "/providers/{provider_id}/health",
+    response_model=ProviderRead,
+    dependencies=[Depends(require_admin)],
+)
+def record_provider_health(
+    provider_id: int,
+    payload: ProviderHealthUpdate,
+    db: Session = Depends(get_db),
+) -> AffiliateProvider:
+    provider = db.get(AffiliateProvider, provider_id)
+    if provider is None:
+        raise HTTPException(status_code=404, detail="Affiliate provider not found")
+    if not payload.success and not payload.error:
+        raise HTTPException(status_code=422, detail="A failed health check requires an error")
+    checked_at = payload.checked_at or datetime.now(UTC)
+    if checked_at.tzinfo is None:
+        checked_at = checked_at.replace(tzinfo=UTC)
+    provider.last_health_check = checked_at
+    provider.last_health_check_error = None if payload.success else payload.error
     db.commit()
     db.refresh(provider)
     return provider
