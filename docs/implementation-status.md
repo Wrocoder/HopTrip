@@ -51,7 +51,7 @@ I13 включает редакционный план и 5 из 25 страни
 
 | Проверка | Результат |
 | --- | --- |
-| Backend pytest с TEST_DATABASE_URL | 79 passed; PostgreSQL concurrency, process lock, migrations и rollback входят в набор |
+| Backend pytest с TEST_DATABASE_URL | 93 passed; PostgreSQL concurrency, process lock, migrations и rollback входят в набор |
 | Ruff | Passed |
 | mypy | Passed |
 | Frontend lint / typecheck / production build | Passed |
@@ -65,7 +65,12 @@ I13 включает редакционный план и 5 из 25 страни
 | Отказы backup/restore | Повреждённый dump и непустая БД отвергнуты; failed backup не публикует .dump/.partial |
 
 Браузерные проверки 2026-09-20 и 2026-09-21 выполнены через установленный Edge (Chromium):
-скачивание отдельного Chromium с CDN завершалось timeout. CI на GitHub ещё не запускался.
+скачивание отдельного Chromium с CDN завершалось timeout.
+Первый [CI на GitHub](https://github.com/Wrocoder/HopTrip/actions/runs/35653548610)
+прошёл backend, миграции, lint/typecheck/build; 16/18 browser-тестов прошли.
+Два сбоя касались перехвата вымышленного partner.example после редиректа в Chromium.
+Тест исправлен: проверяет настоящий 307/URL/SubID и перенаправляет на локальную fixture.
+При ошибке CI теперь сохраняет browser traces/screenshots на 7 дней.
 Тестовые API/web останавливаются Playwright после прогона.
 Есть deprecation warnings зависимостей Starlette/httpx и ESLint 9; текущие проверки проходят.
 При прогоне 2026-09-21 устаревший локальный `.next` возвращал 404 для существующих
@@ -82,7 +87,7 @@ backend-код в дополнении со статьями не менялся
 3. Реальный отчёт о commission/status и сопоставление с кликом.
 4. Реквизиты оператора и окончательные контактные/privacy/terms тексты.
 5. Домен, DNS/TLS, Oracle VM, при необходимости ARM64 build, offsite backup и alerts.
-6. CI после push; редакционные статьи до открытия индексации маршрутов.
+6. Редакционные статьи до открытия индексации маршрутов; зелёный CI для выпускаемой ревизии.
 
 Отели, второй партнёр, Telegram и полноценная сборка стоимости всей поездки —
 последующие этапы MasterPrompt, не входят в выполненные 18 задач flight-only.

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from email.utils import parsedate_to_datetime
+from math import isfinite
 from typing import Any
 
 import httpx
@@ -198,11 +199,12 @@ def _retry_after(value: str | None) -> float:
     if not value:
         return 0
     try:
-        return min(300, max(0, float(value)))
+        seconds = float(value)
+        return min(300, max(0, seconds)) if isfinite(seconds) else 0
     except ValueError:
         try:
             return min(
                 300, max(0, (parsedate_to_datetime(value) - datetime.now(UTC)).total_seconds())
             )
-        except (ValueError, TypeError):
+        except (ValueError, TypeError, OverflowError):
             return 0

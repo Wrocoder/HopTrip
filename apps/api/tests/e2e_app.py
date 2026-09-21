@@ -16,6 +16,7 @@ from app.models.deal import Deal, DealComponent
 from helpers import approved_program, catalog_fixture
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
+from starlette.responses import HTMLResponse
 
 fixture_dir = tempfile.TemporaryDirectory(prefix="hoptrip-browser-")
 engine = create_engine(
@@ -63,12 +64,21 @@ def override():
 app.dependency_overrides[get_db] = override
 
 
+@app.get("/__test__/partner", response_class=HTMLResponse)
+def partner():
+    return "<h1>Local partner fixture</h1>"
+
+
 @app.get("/__test__/tracking")
 def tracking():
     with Session(engine) as db:
         return {
             "clicks": [
-                {"session": c.anonymous_session_id, "program": c.program_id}
+                {
+                    "tracking_id": c.tracking_id,
+                    "session": c.anonymous_session_id,
+                    "program": c.program_id,
+                }
                 for c in db.scalars(select(AffiliateClick))
             ],
             "events": [

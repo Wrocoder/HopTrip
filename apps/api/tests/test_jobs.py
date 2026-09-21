@@ -137,6 +137,40 @@ def test_tracked_pipeline_retries_transient_failure() -> None:
         assert [job.status for job in jobs] == [JobStatus.FAILED, JobStatus.SUCCEEDED]
 
 
+def test_pipeline_recovers_after_provider_sends_overflowing_retry_after() -> None:
+    import httpx
+    from app.providers.base import SearchQuery
+    from app.providers.travelpayouts import TravelpayoutsDataProvider
+
+    calls = 0
+
+    def handle(request):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return httpx.Response(
+                503,
+                headers={"Retry-After": "Wed, 21 Oct 9999999999999 07:28:00 GMT"},
+                text="private provider payload",
+            )
+        return httpx.Response(200, json={"success": True, "data": []})
+
+    provider = TravelpayoutsDataProvider(token="mock-secret", transport=httpx.MockTransport(handle))
+
+    async def pipeline():
+        await provider.search(SearchQuery(origin="WRO"))
+        return PipelineResult(ingestion=IngestionResult(), statistics_routes=0, generated_deals=0)
+
+    session_factory = make_session_factory()
+    asyncio.run(run_tracked_pipeline(pipeline, session_factory, max_attempts=2))
+    assert calls == 2
+    with session_factory() as db:
+        jobs = db.scalars(select(JobRun).order_by(JobRun.attempt)).all()
+        assert [job.status for job in jobs] == [JobStatus.FAILED, JobStatus.SUCCEEDED]
+        assert jobs[0].run_id == jobs[1].run_id
+        assert jobs[0].error == "ProviderTransientError"
+
+
 def test_tracked_pipeline_does_not_retry_missing_configuration() -> None:
     session_factory = make_session_factory()
 

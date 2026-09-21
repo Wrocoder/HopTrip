@@ -1,5 +1,5 @@
 import asyncio
-from datetime import date
+from datetime import UTC, date, datetime
 
 import httpx
 import pytest
@@ -20,6 +20,50 @@ ITEM = {
     "airline": "XX",
     "flight_number": "1",
 }
+
+
+@pytest.mark.parametrize(
+    "header,expected_delay",
+    [
+        (None, 0),
+        ("", 0),
+        ("12", 12),
+        ("999", 300),
+        ("-1", 0),
+        ("1e309", 0),
+        ("NaN", 0),
+        ("Infinity", 0),
+        ("invalid", 0),
+        ("Wed, 21 Oct 9999999999999 07:28:00 GMT", 0),
+        ("Tue, 01 Jan 2030 00:00:20 GMT", 20),
+        ("Tue, 01 Jan 2030 01:00:00 GMT", 300),
+        ("Mon, 31 Dec 2029 23:59:59 GMT", 0),
+    ],
+)
+def test_retry_after_cannot_break_transient_error_classification(
+    monkeypatch, header, expected_delay
+):
+    from app.providers import travelpayouts
+
+    class FixedDateTime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime(2030, 1, 1, tzinfo=UTC)
+
+    monkeypatch.setattr(travelpayouts, "datetime", FixedDateTime)
+    provider = TravelpayoutsDataProvider(
+        token="mock-secret",
+        transport=httpx.MockTransport(
+            lambda r: httpx.Response(
+                429, headers={} if header is None else {"Retry-After": header}
+            )
+        ),
+    )
+    with pytest.raises(ProviderTransientError) as caught:
+        asyncio.run(provider.search(SearchQuery(origin="WRO")))
+    assert caught.value.retry_after == expected_delay
+    assert provider.diagnostics.stop_reason == "error"
+    assert "mock-secret" not in str(caught.value)
 
 
 def test_v3_pagination_headers_and_unknown_timestamp():

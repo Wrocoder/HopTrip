@@ -38,3 +38,10 @@ jobs:
         working-directory: apps/web
       - run: npm run test:e2e
         working-directory: apps/web
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-failure-details
+          path: apps/web/test-results/
+          if-no-files-found: ignore
+          retention-days: 7

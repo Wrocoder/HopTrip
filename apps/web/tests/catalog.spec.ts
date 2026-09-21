@@ -1,7 +1,21 @@
 import {test,expect} from "@playwright/test";
 
 test("airport to deal to partner keeps one session and records click",async({page,request})=>{
- await page.route("https://partner.example/**",route=>route.fulfill({status:200,body:"Local partner fixture"}));
+ let trackingId:string|null=null;
+ // Redirect hops cannot reliably be routed in Chromium. Check the real API
+ // response, then change only its destination to the local fixture server.
+ await page.route("http://127.0.0.1:8100/go/**",async route=>{
+  const response=await route.fetch({maxRedirects:0});
+  expect(response.status()).toBe(307);
+  const destination=new URL(response.headers().location);
+  expect(destination.origin).toBe("https://partner.example");
+  expect(destination.pathname).toBe("/book");
+  expect(destination.searchParams.get("foo")).toBe("bar");
+  trackingId=destination.searchParams.get("sub_id");
+  expect(trackingId).toMatch(/^ht-[0-9a-f]{32}$/);
+  await route.fulfill({response,headers:{...response.headers(),
+   location:`http://127.0.0.1:8100/__test__/partner${destination.search}`}});
+ });
  await page.goto("/");
  await page.getByRole("link",{name:"Wrocław (WRO)",exact:true}).click();
  await expect(page.locator(".deal-card")).toHaveCount(14);
@@ -11,10 +25,12 @@ test("airport to deal to partner keeps one session and records click",async({pag
  const sid=await page.evaluate(()=>JSON.parse(localStorage.getItem("hoptrip.session.v2")!).id);
  await page.getByRole("link",{name:"Sprawdź ofertę u partnera"}).focus();
  await page.keyboard.press("Enter");
- await expect(page).toHaveURL(/partner.example/);
+ await expect(page).toHaveURL(/127\.0\.0\.1:8100\/__test__\/partner\?/);
  await expect(page.getByText("Local partner fixture")).toBeVisible();
+ expect(new URL(page.url()).searchParams.get("sub_id")).toBe(trackingId);
  const data=await (await request.get("http://127.0.0.1:8100/__test__/tracking")).json();
- expect(data.clicks.some((c:{session:string;program:number})=>c.session===sid && c.program>0)).toBeTruthy();
+ expect(data.clicks.filter((c:{session:string;program:number;tracking_id:string})=>
+  c.session===sid && c.program>0 && c.tracking_id===trackingId)).toHaveLength(1);
  expect(data.events.some((e:{session:string;name:string})=>e.session===sid && e.name==="DEAL_VIEW")).toBeTruthy();
 });
 
