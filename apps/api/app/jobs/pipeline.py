@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, field
 
 from app.config import get_settings
 from app.db.session import SessionLocal
@@ -16,6 +16,7 @@ class PipelineResult:
     ingestion: IngestionResult
     statistics_routes: int
     generated_deals: int
+    provider_searches: list[dict[str, str | int]] = field(default_factory=list)
 
 
 async def run_travelpayouts_pipeline() -> PipelineResult:
@@ -26,8 +27,17 @@ async def run_travelpayouts_pipeline() -> PipelineResult:
         if origin.strip()
     ) or ("WRO",)
     offers = []
+    provider_searches = []
     for origin in origins:
-        offers.extend(await fetch_travelpayouts_offers(provider, SearchQuery(origin=origin)))
+        origin_offers = await fetch_travelpayouts_offers(provider, SearchQuery(origin=origin))
+        offers.extend(origin_offers)
+        provider_searches.append(
+            {
+                "origin": origin,
+                "offers_returned": len(origin_offers),
+                **asdict(provider.diagnostics),
+            }
+        )
     with SessionLocal() as db:
         ingestion = ingest_offers(
             db,
@@ -37,4 +47,4 @@ async def run_travelpayouts_pipeline() -> PipelineResult:
         )
         statistics_routes = recalculate_route_statistics(db)
         generated_deals = generate_fresh_deals(db)
-    return PipelineResult(ingestion, statistics_routes, generated_deals)
+    return PipelineResult(ingestion, statistics_routes, generated_deals, provider_searches)

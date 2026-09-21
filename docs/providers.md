@@ -1,16 +1,107 @@
-# Provider registry
+# Источники данных и партнёрские программы
 
-Provider capabilities are tracked in the database and must not be inferred from the
-existence of an affiliate account.
+Проверено 2026-09-21 по коду и официальному описанию Aviasales Data API.
+Реальная выдача для токена, рынка PL и PLN по-прежнему требует внешней приёмки.
 
-| Candidate | Role | Link/deep link | Data/search API | Current state |
-| --- | --- | --- | --- | --- |
-| Trip.com | Affiliate provider | Affiliate links and platform tools | No assumed search API | Onboarding pending |
-| Travelpayouts | Affiliate network and data candidate | Program-dependent | Data API requires partner token and is cache-based | Evaluate per program |
-| DiscoverCars | Car-rental affiliate provider | Links, deep links, widgets, XML API | Car inventory API available under its terms | Later phase |
-| Amadeus | Travel data provider | Not an affiliate source in Self-Service | Flight, hotel and destination APIs | Technical data candidate |
+TravelpayoutsDataProvider использует cached Data API; AffiliateProgram и
+StoredLinkAdapter отвечают за отдельную возможность перехода. Наличие токена не
+означает одобренную программу, наличие цены не означает live availability.
 
-Trip.com generated links must be treated as trusted provider output and not modified unless
-the provider explicitly permits the change. Travelpayouts programs are approved independently.
-Amadeus Self-Service is a data source and does not replace affiliate onboarding.
+## Data API v3
 
+Endpoint: GET /aviasales/v3/prices_for_dates; token только в X-Access-Token.
+Контракт: [официальная документация Aviasales Data API](https://support.travelpayouts.com/hc/en-us/articles/203956163-Aviasales-Data-API).
+
+| Внутреннее поле | Запрос / ответ |
+| --- | --- |
+| origin / destination | IATA query, origin_airport ответа предпочтительнее city origin |
+| beginning_of_period | departure_at=YYYY-MM |
+| currency / market | pln / pl по умолчанию; реальная поддержка требует внешней приёмки |
+| one_way | false для round-trip; ответ без return_at в таком запросе отклоняется |
+| limit / page | limit до 1000, ограниченные provider_max_pages, остановка на короткой или повторной странице |
+| trip_duration | фильтр ответа по разнице календарных дат после нормализации в UTC; не расчёт ночей в отеле |
+| price | конечное положительное Decimal, flight price for one passenger |
+| found_at / expires_at | сохраняются только если действительно присутствуют |
+| departure_at / return_at | ISO с offset; date-only имеет консервативную семантику UTC |
+
+period_type — legacy поле; v3 ограничивается month фильтром beginning_of_period.
+trip_class сейчас поддерживает только economy (0); расширение не заявлено.
+Никакой URL из raw price payload автоматически не становится партнёрской ссылкой.
+Невалидные items учитываются в rejected_items; 401/403/ошибка контракта permanent,
+429/5xx/timeout transient. Retry-After ограничен 300 секундами. Сообщения ошибок не
+содержат token, response body или полного request URL. Тесты используют httpx.MockTransport.
+Переполнение даты при переводе в UTC отклоняет только соответствующую запись.
+Коды маршрутов и валют допускают только три ASCII-буквы. Явный max_pages вне 1–100
+отвергается: нулевой/отрицательный лимит больше не маскируется пустой выдачей.
+
+## Диагностика загрузки
+
+После успешного pipeline защищённый `GET /api/v1/admin/jobs` возвращает
+`result_json.provider_searches`: отдельный снимок результата для каждого origin.
+В CLI те же данные входят в итоговый JSON. Новые миграции для этого не нужны.
+
+| Поле | Значение |
+| --- | --- |
+| `origin` | Аэропорт запроса |
+| `offers_returned` | Число уникальных нормализованных предложений после фильтра длительности |
+| `pages_fetched` | Число полученных страниц с корректной структурой ответа |
+| `received_items` | Число элементов этих страниц, включая страницу-повтор |
+| `rejected_items` | Невалидные элементы; проверяется цена, даты, маршрут, валюта |
+| `filtered_items` | Корректные элементы, не прошедшие фильтр длительности |
+| `duplicate_offers` | Повторный external_id среди обработанных и принятых элементов |
+| `stop_reason` | Почему остановилась пагинация |
+
+Причины остановки:
+
+- `empty_page`: сервер вернул пустую страницу.
+- `short_page`: элементов меньше запрошенного limit.
+- `repeated_page`: содержимое страницы полностью повторилось; повтор не обрабатывается второй раз.
+- `page_limit`: достигнут настроенный предел; полнота выдачи не подтверждена.
+
+`not_started` и `error` — состояния адаптера до запроса/при неуспешном поиске;
+при исключении pipeline остаётся FAILED/RETRYING по существующим правилам,
+успешный агрегированный отчёт для частично завершившегося запуска не публикуется.
+
+Счётчики сбрасываются перед каждым поиском; pipeline сохраняет копии, поэтому
+результат второго аэропорта не перезаписывает первый. Из-за пропуска целой повторной
+страницы сумма счётчиков обработки не обязана совпадать с `received_items`.
+Дубли external_id сохраняют прежнюю политику: последнее обработанное предложение
+заменяет предыдущее в результате поиска. Отчёт содержит только коды и числа,
+без токена, request URL, payload или партнёрской ссылки.
+
+При приёмке сравните `offers_returned` с `ingestion.saved_offers/updated_offers` и
+счётчиками пропущенных маршрутов/валют. Нулевой каталог может означать пустой cache,
+ошибки записей, неизвестный alias или неподдерживаемую валюту — это разные причины.
+`page_limit` не следует трактовать как полное покрытие; сначала проверьте согласованные
+лимиты API, затем настройте запросы и `PROVIDER_MAX_PAGES` в пределах 1–100.
+
+Airport/city aliases задаются явно в destination_aliases. Provider-specific и wildcard
+конфликтуют — код считается ambiguous; неизвестные направления не создаются автоматически.
+Счётчики unresolved/ambiguous и до 100 уникальных проблемных маршрутов каждого типа
+возвращаются ingestion и сохраняются в job result.
+
+## Одобренная ссылка
+
+Поддерживается adapter_code=stored_link: администратор получает действительную ссылку
+из кабинета и задаёт allowed_hosts + подтверждённое имя tracking_param у программы.
+Adapter сохраняет остальные query-параметры и заменяет только разрешённый SubID.
+Без подтверждения допустимости модификации tracking_param оставляют NULL.
+Имена доменов точные, HTTPS, без userinfo, необычных портов, backslash и control chars.
+
+Provider и Program должны одновременно быть APPROVED/active и иметь AFFILIATE_LINK.
+Component связан через affiliate_program_id. Click сохраняет program_id/provider_id.
+Availability возвращает reason и внутренний redirect_path; полный внешний URL публичный
+каталог не раскрывает. Смена статуса блокирует следующий запрос без перезапуска.
+
+HTTP API генерации ссылок не подключён: этот этап реализован как контракт готовой
+одобренной ссылки, без выдуманного provider API. Реальный sample link, правила SubID,
+attribution и conversion report принимаются отдельно по owner-action-guide.md.
+
+Trip.com, DiscoverCars, Amadeus и hotel integration остаются последующими этапами.
+
+## Локальная проверка дополнения
+
+79 backend-тестов проходят с отдельной PostgreSQL. Новые сценарии покрывают все
+четыре причины остановки, ограничения max_pages, переполнение даты, не-ASCII коды,
+смешанный ответ и сохранение независимых отчётов двух аэропортов в JobRun.
+Используется MockTransport; результат не подтверждает действующий внешний доступ.

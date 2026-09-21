@@ -14,6 +14,7 @@ class AnalyticsEvent(Base):
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    event_id: Mapped[str | None] = mapped_column(String(36), unique=True)
     event_name: Mapped[str] = mapped_column(String(40), index=True)
     anonymous_session_id: Mapped[str] = mapped_column(String(120), index=True)
     deal_id: Mapped[int | None] = mapped_column(ForeignKey("deals.id"), index=True)

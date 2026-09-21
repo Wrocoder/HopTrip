@@ -16,7 +16,9 @@ def upgrade() -> None:
         sa.Column("job_type", sa.String(80), nullable=False),
         sa.Column("status", sa.String(20), nullable=False),
         sa.Column("attempt", sa.Integer(), nullable=False, server_default="1"),
-        sa.Column("started_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()),
+        sa.Column(
+            "started_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.func.now()
+        ),
         sa.Column("finished_at", sa.DateTime(timezone=True)),
         sa.Column("duration_ms", sa.Integer()),
         sa.Column("error", sa.Text()),

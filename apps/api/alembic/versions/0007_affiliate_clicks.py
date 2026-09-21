@@ -22,9 +22,15 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now()),
     )
     op.create_index("ix_affiliate_clicks_deal_id", "affiliate_clicks", ["deal_id"])
-    op.create_index("ix_affiliate_clicks_anonymous_session_id", "affiliate_clicks", ["anonymous_session_id"])
-    op.create_index("ix_affiliate_clicks_deal_created", "affiliate_clicks", ["deal_id", "created_at"])
-    op.create_index("ix_affiliate_clicks_status_created", "affiliate_clicks", ["status", "created_at"])
+    op.create_index(
+        "ix_affiliate_clicks_anonymous_session_id", "affiliate_clicks", ["anonymous_session_id"]
+    )
+    op.create_index(
+        "ix_affiliate_clicks_deal_created", "affiliate_clicks", ["deal_id", "created_at"]
+    )
+    op.create_index(
+        "ix_affiliate_clicks_status_created", "affiliate_clicks", ["status", "created_at"]
+    )
 
 
 def downgrade() -> None:

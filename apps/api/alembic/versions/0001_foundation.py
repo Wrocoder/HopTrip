@@ -1,4 +1,5 @@
 """Create foundation catalog and affiliate tables."""
+
 import sqlalchemy as sa
 from alembic import op
 
@@ -53,7 +54,9 @@ def upgrade() -> None:
         sa.Column("id", sa.Integer(), primary_key=True),
         sa.Column("code", sa.String(80), nullable=False),
         sa.Column("name", sa.String(160), nullable=False),
-        sa.Column("onboarding_status", sa.String(32), nullable=False, server_default="NOT_CONFIGURED"),
+        sa.Column(
+            "onboarding_status", sa.String(32), nullable=False, server_default="NOT_CONFIGURED"
+        ),
         sa.Column("is_active", sa.Boolean(), nullable=False, server_default=sa.false()),
         sa.Column("priority", sa.Integer(), nullable=False, server_default="100"),
         sa.Column("website_url", sa.String(500)),
@@ -69,10 +72,14 @@ def upgrade() -> None:
     op.create_table(
         "affiliate_programs",
         sa.Column("id", sa.Integer(), primary_key=True),
-        sa.Column("provider_id", sa.Integer(), sa.ForeignKey("affiliate_providers.id"), nullable=False),
+        sa.Column(
+            "provider_id", sa.Integer(), sa.ForeignKey("affiliate_providers.id"), nullable=False
+        ),
         sa.Column("code", sa.String(80), nullable=False),
         sa.Column("name", sa.String(160), nullable=False),
-        sa.Column("onboarding_status", sa.String(32), nullable=False, server_default="NOT_CONFIGURED"),
+        sa.Column(
+            "onboarding_status", sa.String(32), nullable=False, server_default="NOT_CONFIGURED"
+        ),
         sa.Column("is_active", sa.Boolean(), nullable=False, server_default=sa.false()),
         sa.Column("notes", sa.Text()),
         sa.Column("applied_at", sa.DateTime(timezone=True)),
@@ -94,13 +101,55 @@ def upgrade() -> None:
     op.bulk_insert(
         airports,
         [
-            {"iata_code": "WRO", "name": "Wroclaw Airport", "city": "Wroclaw", "country_code": "PL", "timezone": "Europe/Warsaw"},
-            {"iata_code": "WAW", "name": "Warsaw Chopin Airport", "city": "Warsaw", "country_code": "PL", "timezone": "Europe/Warsaw"},
-            {"iata_code": "WMI", "name": "Warsaw Modlin Airport", "city": "Warsaw", "country_code": "PL", "timezone": "Europe/Warsaw"},
-            {"iata_code": "KRK", "name": "John Paul II Krakow Airport", "city": "Krakow", "country_code": "PL", "timezone": "Europe/Warsaw"},
-            {"iata_code": "KTW", "name": "Katowice Airport", "city": "Katowice", "country_code": "PL", "timezone": "Europe/Warsaw"},
-            {"iata_code": "GDN", "name": "Gdansk Lech Walesa Airport", "city": "Gdansk", "country_code": "PL", "timezone": "Europe/Warsaw"},
-            {"iata_code": "POZ", "name": "Poznan-Lawica Airport", "city": "Poznan", "country_code": "PL", "timezone": "Europe/Warsaw"},
+            {
+                "iata_code": "WRO",
+                "name": "Wroclaw Airport",
+                "city": "Wroclaw",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
+            {
+                "iata_code": "WAW",
+                "name": "Warsaw Chopin Airport",
+                "city": "Warsaw",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
+            {
+                "iata_code": "WMI",
+                "name": "Warsaw Modlin Airport",
+                "city": "Warsaw",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
+            {
+                "iata_code": "KRK",
+                "name": "John Paul II Krakow Airport",
+                "city": "Krakow",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
+            {
+                "iata_code": "KTW",
+                "name": "Katowice Airport",
+                "city": "Katowice",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
+            {
+                "iata_code": "GDN",
+                "name": "Gdansk Lech Walesa Airport",
+                "city": "Gdansk",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
+            {
+                "iata_code": "POZ",
+                "name": "Poznan-Lawica Airport",
+                "city": "Poznan",
+                "country_code": "PL",
+                "timezone": "Europe/Warsaw",
+            },
         ],
     )
 
@@ -114,9 +163,24 @@ def upgrade() -> None:
     op.bulk_insert(
         providers,
         [
-            {"code": "trip_com", "name": "Trip.com", "website_url": "https://www.trip.com/", "notes": "Affiliate onboarding pending; link capabilities must follow provider terms."},
-            {"code": "travelpayouts", "name": "Travelpayouts", "website_url": "https://www.travelpayouts.com/", "notes": "Network/program status is tracked separately; no credentials in source."},
-            {"code": "discovercars", "name": "DiscoverCars", "website_url": "https://www.discovercars.com/", "notes": "Car rental affiliate candidate; onboarding pending."},
+            {
+                "code": "trip_com",
+                "name": "Trip.com",
+                "website_url": "https://www.trip.com/",
+                "notes": "Affiliate onboarding pending; link capabilities must follow provider terms.",
+            },
+            {
+                "code": "travelpayouts",
+                "name": "Travelpayouts",
+                "website_url": "https://www.travelpayouts.com/",
+                "notes": "Network/program status is tracked separately; no credentials in source.",
+            },
+            {
+                "code": "discovercars",
+                "name": "DiscoverCars",
+                "website_url": "https://www.discovercars.com/",
+                "notes": "Car rental affiliate candidate; onboarding pending.",
+            },
         ],
     )
 

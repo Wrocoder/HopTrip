@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import UTC, date, datetime, timedelta
 from decimal import Decimal
 
 from app.db.base import Base
@@ -29,13 +29,22 @@ def test_deal_catalog_filters_by_route() -> None:
             country_code="ES",
             slug="barcelona",
         )
-        rome = Destination(iata_code="ROM", city="Rome", country="Italy", country_code="IT", slug="rome")
+        rome = Destination(
+            iata_code="ROM", city="Rome", country="Italy", country_code="IT", slug="rome"
+        )
         db.add_all([wro, waw, barcelona, rome])
         db.flush()
-        db.add_all([
-            _deal("wro-barcelona", wro.id, barcelona.id, date(2026, 10, 1)),
-            _deal("waw-rome", waw.id, rome.id, date(2026, 11, 1)),
-        ])
+        db.add_all(
+            [
+                _deal(
+                    "wro-barcelona",
+                    wro.id,
+                    barcelona.id,
+                    (datetime.now(UTC) + timedelta(days=30)).date(),
+                ),
+                _deal("waw-rome", waw.id, rome.id, (datetime.now(UTC) + timedelta(days=60)).date()),
+            ]
+        )
         db.commit()
 
     def override_get_db():
@@ -53,7 +62,9 @@ def test_deal_catalog_filters_by_route() -> None:
         assert by_destination.status_code == 200
         assert [item["slug"] for item in by_destination.json()] == ["waw-rome"]
 
-        invalid_range = client.get("/api/v1/deals?departure_from=2026-12-01&departure_to=2026-11-01")
+        invalid_range = client.get(
+            "/api/v1/deals?departure_from=2026-12-01&departure_to=2026-11-01"
+        )
         assert invalid_range.status_code == 422
     finally:
         app.dependency_overrides.clear()

@@ -14,6 +14,9 @@ class AffiliateClick(Base):
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    provider_id: Mapped[int | None] = mapped_column(ForeignKey("affiliate_providers.id"))
+    program_id: Mapped[int | None] = mapped_column(ForeignKey("affiliate_programs.id"))
+    campaign: Mapped[str | None] = mapped_column(String(80))
     deal_id: Mapped[int] = mapped_column(ForeignKey("deals.id"), index=True)
     component_type: Mapped[str] = mapped_column(String(40))
     anonymous_session_id: Mapped[str] = mapped_column(String(120), index=True)

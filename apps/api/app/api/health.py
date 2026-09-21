@@ -16,4 +16,3 @@ def health() -> dict[str, str]:
 def readiness(db: Session = Depends(get_db)) -> dict[str, str]:
     db.execute(text("SELECT 1"))
     return {"status": "ready"}
-

@@ -46,7 +46,9 @@ def test_ingestion_persists_offer_and_observation() -> None:
         payload={"fixture": True},
     )
 
-    result = ingest_offers(db, provider_code="test_data", offers=[raw], converter=PlnOnlyConverter())
+    result = ingest_offers(
+        db, provider_code="test_data", offers=[raw], converter=PlnOnlyConverter()
+    )
 
     assert result.saved_offers == 1
     assert result.saved_observations == 1
@@ -71,6 +73,8 @@ def test_ingestion_updates_same_external_offer() -> None:
         payload={},
     )
     ingest_offers(db, provider_code="test_data", offers=[raw], converter=PlnOnlyConverter())
-    result = ingest_offers(db, provider_code="test_data", offers=[raw], converter=PlnOnlyConverter())
+    result = ingest_offers(
+        db, provider_code="test_data", offers=[raw], converter=PlnOnlyConverter()
+    )
     assert result.updated_offers == 1
     assert db.query(TravelOffer).count() == 1

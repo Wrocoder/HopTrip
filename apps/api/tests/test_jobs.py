@@ -7,7 +7,7 @@ from app.db.session import get_db
 from app.jobs.pipeline import PipelineResult
 from app.main import app
 from app.models.job import JobRun, JobStatus
-from app.providers.base import ProviderNotConfigured
+from app.providers.base import ProviderNotConfigured, ProviderTransientError
 from app.services.ingestion import IngestionResult
 from app.services.jobs import run_tracked_pipeline
 from fastapi.testclient import TestClient
@@ -47,6 +47,53 @@ def test_tracked_pipeline_persists_success() -> None:
         assert job.result_json["generated_deals"] == result.generated_deals
 
 
+def test_pipeline_keeps_each_origin_diagnostics_in_job_result(monkeypatch):
+    from types import SimpleNamespace
+
+    import httpx
+    from app.jobs import pipeline
+    from app.models.data_provider import DataProvider
+    from app.providers.travelpayouts import TravelpayoutsDataProvider
+
+    session_factory = make_session_factory()
+    with session_factory() as db:
+        db.add(DataProvider(code="travelpayouts_data", name="Test"))
+        db.commit()
+
+    def handle(request):
+        data = (
+            [
+                None,
+                {
+                    "origin": "WRO",
+                    "destination": "BCN",
+                    "price": 200,
+                    "departure_at": "2030-10-01",
+                    "return_at": "2030-10-04",
+                },
+            ]
+            if request.url.params["origin"] == "WRO"
+            else []
+        )
+        return httpx.Response(200, json={"success": True, "data": data})
+
+    provider = TravelpayoutsDataProvider(token="mock-secret", transport=httpx.MockTransport(handle))
+    monkeypatch.setattr(pipeline, "TravelpayoutsDataProvider", lambda: provider)
+    monkeypatch.setattr(pipeline, "SessionLocal", session_factory)
+    monkeypatch.setattr(
+        pipeline, "get_settings", lambda: SimpleNamespace(ingestion_origins="WRO,WAW")
+    )
+    result = asyncio.run(run_tracked_pipeline(pipeline.run_travelpayouts_pipeline, session_factory))
+    with session_factory() as db:
+        stored = db.scalar(select(JobRun)).result_json["provider_searches"]
+        assert stored == result.provider_searches
+        assert [r["origin"] for r in stored] == ["WRO", "WAW"]
+        assert [r["rejected_items"] for r in stored] == [1, 0]
+        assert [r["offers_returned"] for r in stored] == [1, 0]
+        assert [r["stop_reason"] for r in stored] == ["short_page", "empty_page"]
+        assert "mock-secret" not in str(stored)
+
+
 def test_tracked_pipeline_persists_failure() -> None:
     session_factory = make_session_factory()
 
@@ -60,7 +107,7 @@ def test_tracked_pipeline_persists_failure() -> None:
         job = db.scalar(select(JobRun))
         assert job is not None
         assert job.status == JobStatus.FAILED
-        assert job.error == "provider unavailable"
+        assert job.error == "RuntimeError"
         assert job.finished_at is not None
 
 
@@ -72,7 +119,7 @@ def test_tracked_pipeline_retries_transient_failure() -> None:
         nonlocal calls
         calls += 1
         if calls == 1:
-            raise RuntimeError("temporary provider failure")
+            raise ProviderTransientError("temporary provider failure")
         return PipelineResult(ingestion=IngestionResult(), statistics_routes=0, generated_deals=0)
 
     asyncio.run(

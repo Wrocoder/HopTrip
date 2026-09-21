@@ -10,6 +10,7 @@ from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
 from app.models.location import Airport, Destination
 from fastapi.testclient import TestClient
+from helpers import approved_program
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 from sqlalchemy.pool import StaticPool
@@ -23,7 +24,10 @@ def test_admin_conversion_upsert_and_summary() -> None:
     )
     Base.metadata.create_all(engine)
     with Session(engine) as db:
-        airport = Airport(iata_code="WRO", name="Wroclaw Airport", city="Wroclaw", country_code="PL")
+        program = approved_program(db)
+        airport = Airport(
+            iata_code="WRO", name="Wroclaw Airport", city="Wroclaw", country_code="PL"
+        )
         destination = Destination(
             iata_code="BCN",
             city="Barcelona",
@@ -62,6 +66,8 @@ def test_admin_conversion_upsert_and_summary() -> None:
                     source="homepage",
                 ),
                 AffiliateClick(
+                    provider_id=program.provider_id,
+                    program_id=program.id,
                     deal_id=deal.id,
                     component_type="FLIGHT",
                     anonymous_session_id="analytics-session-1",
@@ -117,7 +123,8 @@ def test_admin_conversion_upsert_and_summary() -> None:
         assert summary_json["total_affiliate_clicks"] == 1
         assert summary_json["confirmed_bookings"] == 1
         assert summary_json["affiliate_ctr_percent"] == "50.00"
-        assert summary_json["booking_conversion_percent"] == "100.00"
+        assert summary_json["booking_conversion_percent"] == "0.00"
+        assert summary_json["unattributed_conversions"] == 1
         assert summary_json["revenue_per_session_pln"] == "15.00"
         assert summary_json["revenue_per_affiliate_click_pln"] == "30.00"
         assert summary_json["revenue_per_1000_sessions_pln"] == "15000.00"
@@ -143,7 +150,10 @@ def test_admin_conversion_can_resolve_provider_tracking_id() -> None:
     )
     Base.metadata.create_all(engine)
     with Session(engine) as db:
-        airport = Airport(iata_code="WRO", name="Wroclaw Airport", city="Wroclaw", country_code="PL")
+        program = approved_program(db)
+        airport = Airport(
+            iata_code="WRO", name="Wroclaw Airport", city="Wroclaw", country_code="PL"
+        )
         destination = Destination(
             iata_code="BCN",
             city="Barcelona",
@@ -171,6 +181,8 @@ def test_admin_conversion_can_resolve_provider_tracking_id() -> None:
         db.flush()
         db.add(
             AffiliateClick(
+                provider_id=program.provider_id,
+                program_id=program.id,
                 deal_id=deal.id,
                 component_type="FLIGHT",
                 anonymous_session_id="tracking-session",

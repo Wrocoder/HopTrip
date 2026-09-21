@@ -3,7 +3,7 @@ import logging
 
 from app.config import get_settings
 from app.providers.base import ProviderError
-from app.services.jobs import run_tracked_pipeline
+from app.services.jobs import PipelineBusy, run_tracked_pipeline
 
 logger = logging.getLogger(__name__)
 
@@ -15,11 +15,14 @@ async def run_pipeline_once() -> int:
             max_attempts=settings.pipeline_max_attempts,
             retry_delay_seconds=settings.pipeline_retry_delay_seconds,
         )
+    except PipelineBusy:
+        logger.info("Travel pipeline skipped: another run owns the lock")
+        return 0
     except ProviderError as exc:
         logger.error("Travel data pipeline failed: %s", exc)
         return 2
     except Exception:
-        logger.exception("Travel data pipeline crashed")
+        logger.error("Travel data pipeline crashed; inspect admin job history")
         return 1
 
     logger.info(

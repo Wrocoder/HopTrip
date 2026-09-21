@@ -1,4 +1,5 @@
 """Add explainable route price statistics."""
+
 import sqlalchemy as sa
 from alembic import op
 
@@ -12,7 +13,9 @@ def upgrade() -> None:
     op.create_table(
         "route_statistics",
         sa.Column("id", sa.Integer(), primary_key=True),
-        sa.Column("data_provider_id", sa.Integer(), sa.ForeignKey("data_providers.id"), nullable=False),
+        sa.Column(
+            "data_provider_id", sa.Integer(), sa.ForeignKey("data_providers.id"), nullable=False
+        ),
         sa.Column("origin_airport_id", sa.Integer(), sa.ForeignKey("airports.id"), nullable=False),
         sa.Column("destination_id", sa.Integer(), sa.ForeignKey("destinations.id"), nullable=False),
         sa.Column("product_type", sa.String(32), nullable=False, server_default="FLIGHT"),
@@ -36,13 +39,20 @@ def upgrade() -> None:
             name="uq_route_statistics_bucket",
         ),
     )
-    op.create_index("ix_route_statistics_data_provider_id", "route_statistics", ["data_provider_id"])
-    op.create_index("ix_route_statistics_origin_airport_id", "route_statistics", ["origin_airport_id"])
+    op.create_index(
+        "ix_route_statistics_data_provider_id", "route_statistics", ["data_provider_id"]
+    )
+    op.create_index(
+        "ix_route_statistics_origin_airport_id", "route_statistics", ["origin_airport_id"]
+    )
     op.create_index("ix_route_statistics_destination_id", "route_statistics", ["destination_id"])
     op.create_index("ix_route_statistics_departure_month", "route_statistics", ["departure_month"])
-    op.create_index("ix_route_statistics_route", "route_statistics", ["origin_airport_id", "destination_id", "departure_month"])
+    op.create_index(
+        "ix_route_statistics_route",
+        "route_statistics",
+        ["origin_airport_id", "destination_id", "departure_month"],
+    )
 
 
 def downgrade() -> None:
     op.drop_table("route_statistics")
-

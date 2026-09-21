@@ -36,7 +36,7 @@ def score_flight_deal(
     confidence: Decimal,
     expires_at: datetime | None,
     now: datetime | None = None,
-    convenience_score: int = 100,
+    convenience_score: int = 50,
     weights: ScoringWeights = DEFAULT_WEIGHTS,
 ) -> DealScore:
     checked_at = now or datetime.now(UTC)
@@ -56,13 +56,14 @@ def score_flight_deal(
     )
     explanation = []
     if discount > 0:
-        explanation.append(f"Lot jest o {discount.quantize(Decimal(1), rounding=ROUND_HALF_UP)}% tańszy niż mediana.")
+        explanation.append("BELOW_MEDIAN")
     if confidence_score >= 67:
-        explanation.append("Porównanie opiera się na wystarczającej liczbie obserwacji.")
+        explanation.append("HISTORY_AVAILABLE")
     elif confidence_score > 0:
-        explanation.append("Historia ceny jest jeszcze krótka — traktuj porównanie jako orientacyjne.")
+        explanation.append("LIMITED_HISTORY")
     if expires_at and expires_at > checked_at:
-        explanation.append("Cena ma aktywny termin ważności u źródła danych.")
+        explanation.append("CACHED_PRICE")
+    explanation.append("CONVENIENCE_UNKNOWN")
     return DealScore(
         flight_price_score=flight_score,
         historical_discount_score=discount_score,

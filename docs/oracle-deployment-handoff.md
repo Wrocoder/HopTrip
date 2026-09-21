@@ -10,7 +10,7 @@ VM public IPv4:
 VM public hostname/FQDN:
 SSH username:
 Operating system and version:
-CPU architecture: amd64 / arm64 (the images build natively for either architecture)
+CPU architecture: amd64 / arm64 (amd64 checked locally; ARM64 requires target build verification)
 Deployment directory: /opt/hoptrip (or another path)
 Production domain:
 ACME email:
@@ -78,4 +78,5 @@ trusted administrators.
 Once these values are available, the remaining deployment input is the production environment
 file. Keep its contents on the VM; only report whether the required variables are filled:
 `HOPTRIP_DOMAIN`, `ACME_EMAIL`, `POSTGRES_PASSWORD`, `ADMIN_TOKEN`,
-`TRAVELPAYOUTS_API_TOKEN` and `AFFILIATE_ALLOWED_HOSTS`.
+`TRAVELPAYOUTS_API_TOKEN` (optional for website bootstrap).
+Approved hosts, SubID and links are configured per program/component using the admin API.

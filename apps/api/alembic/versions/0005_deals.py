@@ -1,4 +1,5 @@
 """Add consumer-facing flight deals and components."""
+
 import sqlalchemy as sa
 from alembic import op
 
@@ -41,13 +42,19 @@ def upgrade() -> None:
     op.create_index("ix_deals_origin_airport_id", "deals", ["origin_airport_id"])
     op.create_index("ix_deals_destination_id", "deals", ["destination_id"])
     op.create_index("ix_deals_trip_start", "deals", ["trip_start"])
-    op.create_index("ix_deals_discovery", "deals", ["origin_airport_id", "trip_start", "is_visible", "deal_score"])
+    op.create_index(
+        "ix_deals_discovery",
+        "deals",
+        ["origin_airport_id", "trip_start", "is_visible", "deal_score"],
+    )
     op.create_index("ix_deals_freshness", "deals", ["expires_at", "is_visible"])
 
     op.create_table(
         "deal_components",
         sa.Column("id", sa.Integer(), primary_key=True),
-        sa.Column("deal_id", sa.Integer(), sa.ForeignKey("deals.id", ondelete="CASCADE"), nullable=False),
+        sa.Column(
+            "deal_id", sa.Integer(), sa.ForeignKey("deals.id", ondelete="CASCADE"), nullable=False
+        ),
         sa.Column("travel_offer_id", sa.Integer(), sa.ForeignKey("travel_offers.id")),
         sa.Column("component_type", sa.String(32), nullable=False),
         sa.Column("price_pln", sa.Numeric(12, 2)),
@@ -63,4 +70,3 @@ def upgrade() -> None:
 def downgrade() -> None:
     op.drop_table("deal_components")
     op.drop_table("deals")
-

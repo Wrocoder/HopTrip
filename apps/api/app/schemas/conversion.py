@@ -15,8 +15,8 @@ class ConversionCreate(BaseModel):
     tracking_id: str | None = Field(default=None, min_length=1, max_length=120)
     deal_slug: str | None = Field(default=None, max_length=220)
     booking_category: str = Field(min_length=1, max_length=40)
-    booking_value: Decimal | None = Field(default=None, ge=0)
-    commission: Decimal | None = None
+    booking_value: Decimal | None = Field(default=None, ge=0, max_digits=12, decimal_places=2)
+    commission: Decimal | None = Field(default=None, max_digits=12, decimal_places=2)
     currency: str = Field(default="PLN", min_length=3, max_length=3)
     status: ConversionStatus = "PENDING"
     occurred_at: datetime | None = None

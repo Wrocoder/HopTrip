@@ -3,10 +3,11 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-EventName = Literal["DEAL_VIEW", "AFFILIATE_CLICK", "SEARCH", "FILTER_USE"]
+EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE"]
 
 
 class AnalyticsEventCreate(BaseModel):
+    event_id: str | None = Field(None, pattern=r"^[a-fA-F0-9-]{36}$")
     event_name: EventName
     anonymous_session_id: str = Field(min_length=8, max_length=120)
     deal_slug: str | None = Field(default=None, max_length=220)
@@ -20,6 +21,9 @@ class AnalyticsEventAccepted(BaseModel):
 
 
 class AnalyticsSummary(BaseModel):
+    session_ctr_percent: Decimal = Decimal("0.00")
+    attributed_conversions: int = 0
+    unattributed_conversions: int = 0
     total_events: int
     by_event: dict[str, int]
     total_sessions: int = 0

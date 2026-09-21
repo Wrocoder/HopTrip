@@ -28,4 +28,3 @@ class DestinationRead(BaseModel):
     timezone: str | None = None
     destination_type: str
     is_active: bool
-

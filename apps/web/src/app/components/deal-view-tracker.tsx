@@ -1,35 +1,22 @@
 "use client";
-
-import { useEffect } from "react";
-
-const sessionStorageKey = "hoptrip_anonymous_session";
-
-function apiUrl(): string {
-  return process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import {useEffect,useRef} from "react";
+import {usePathname,useSearchParams} from "next/navigation";
+import {track} from "../../lib/session";
+export function DealViewTracker({dealSlug}:{dealSlug:string}) {
+ useEffect(()=>{track("DEAL_VIEW",dealSlug);},[dealSlug]);return null;
 }
-
-function sessionId(): string {
-  const current = window.localStorage.getItem(sessionStorageKey);
-  if (current) return current;
-  const created = window.crypto.randomUUID();
-  window.localStorage.setItem(sessionStorageKey, created);
-  return created;
+export function PageTracker() {
+ const path=usePathname(),query=useSearchParams().toString();
+ useEffect(()=>{track("PAGE_VIEW");},[path,query]);return null;
 }
-
-export function DealViewTracker({ dealSlug }: { dealSlug: string }) {
-  useEffect(() => {
-    void fetch(`${apiUrl().replace(/\/$/, "")}/api/v1/analytics/events`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        event_name: "DEAL_VIEW",
-        anonymous_session_id: sessionId(),
-        deal_slug: dealSlug,
-        source: "deal_page",
-      }),
-      keepalive: true,
-    });
-  }, [dealSlug]);
-
-  return null;
+export function Impression({slug}:{slug:string}) {
+ const marker=useRef<HTMLSpanElement>(null);
+ useEffect(()=>{
+   const observer=new IntersectionObserver(entries=>{
+     if(entries.some(e=>e.isIntersecting)){track("DEAL_IMPRESSION",slug);observer.disconnect();}
+   });
+   if(marker.current)observer.observe(marker.current);
+   return ()=>observer.disconnect();
+ },[slug]);
+ return <span aria-hidden="true" ref={marker} style={{display:"inline-block",width:1,height:1}}/>;
 }

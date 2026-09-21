@@ -19,7 +19,9 @@ class RouteStatistics(Base):
             "trip_duration_days",
             name="uq_route_statistics_bucket",
         ),
-        Index("ix_route_statistics_route", "origin_airport_id", "destination_id", "departure_month"),
+        Index(
+            "ix_route_statistics_route", "origin_airport_id", "destination_id", "departure_month"
+        ),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -36,5 +38,18 @@ class RouteStatistics(Base):
     p75_price_pln: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     max_price_pln: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     confidence: Mapped[Decimal] = mapped_column(Numeric(5, 4), nullable=False)
-    calculated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    calculated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
 
+
+Index(
+    "uq_route_statistics_duration",
+    RouteStatistics.data_provider_id,
+    RouteStatistics.origin_airport_id,
+    RouteStatistics.destination_id,
+    RouteStatistics.product_type,
+    RouteStatistics.departure_month,
+    func.coalesce(RouteStatistics.trip_duration_days, -1),
+    unique=True,
+)

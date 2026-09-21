@@ -1,27 +1,18 @@
 # HopTrip
 
-HopTrip is a Poland-first travel deal discovery platform. It compares real travel offers,
-keeps price history, explains deal quality, and redirects users through approved affiliate
-providers.
+Poland-first flight deal discovery with real cached prices, history, transparent scoring
+and approved affiliate redirects. No fabricated production travel prices.
 
-## Current status
+The local implementation now includes the data-driven public journey, per-program affiliate
+policy, idempotent ingestion, PostgreSQL pipeline locking, sessions/conversion analytics,
+protected moderation, CI and isolated browser/backup checks. Real data access, program
+approval, domain/Oracle deployment and actual commission attribution remain external acceptance.
 
-The Phase 6 affiliate and analytics foundation is in place:
-
-- FastAPI API with health, catalog, and protected provider/program admin endpoints;
-- PostgreSQL 16 and Alembic migration;
-- initial Polish departure-airport catalog;
-- provider/program onboarding model;
-- Next.js web pages in Polish with API-backed deal list, detail page and route filters;
-- SEO-ready airport and destination pages with dynamic metadata;
-- Anonymous deal-view analytics and safe affiliate click tracking;
-- Idempotent affiliate conversion intake and confirmed PLN revenue summary;
-- Optional provider sub-ID tracking on allowlisted affiliate redirects;
-- Persistent pipeline job history with protected admin diagnostics;
-- Docker Compose configuration.
-
-No production travel prices are fabricated. External data providers remain disabled until
-credentials and terms are configured.
+- [Current implementation and verification](docs/implementation-status.md)
+- [18 internal tasks and completion log](docs/independent-development-tasks.md)
+- [Пошаговые действия владельца: домен, аккаунты, ссылки](docs/owner-action-guide.md)
+- [Operations and safe migration/backup procedures](docs/operations.md)
+- [Original audit](docs/project-audit-and-plan.md)
 
 ## Run locally
 
@@ -30,9 +21,12 @@ copy .env.example .env
 docker compose up --build
 ```
 
-The API is available at `http://localhost:8000`, the web app at `http://localhost:3000`,
-and API documentation at `http://localhost:8000/docs`.
+Web http://localhost:3000; API http://localhost:8000; API docs /docs.
+The migrate service runs once before API/worker. Worker is opt-in.
+Before upgrading an existing database, follow the preflight and backup procedure in operations.
 
-For development without Docker, see [docs/local-development.md](docs/local-development.md).
+For an isolated production-like rehearsal with no external token:
+`docker compose -f docker-compose.rehearsal.yml up -d --build --wait`.
+Web http://localhost:58080; temporary databases are separate from the normal project.
 
-Current implementation progress is tracked in [docs/implementation-status.md](docs/implementation-status.md).
+Development setup: [local-development.md](docs/local-development.md).

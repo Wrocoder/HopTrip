@@ -15,7 +15,7 @@ def test_scoring_explains_price_advantage() -> None:
     )
     assert score.deal_score >= 70
     assert score.discount_percent == Decimal("55.00")
-    assert any("tańszy" in item for item in score.explanation)
+    assert "BELOW_MEDIAN" in score.explanation
 
 
 def test_expired_offer_has_zero_freshness() -> None:
@@ -30,4 +30,3 @@ def test_expired_offer_has_zero_freshness() -> None:
         now=now,
     )
     assert score.freshness_score == 0
-

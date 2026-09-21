@@ -1,162 +1,112 @@
-# Operations
+# Эксплуатация и локальная приёмка
 
-## One-shot ingestion
+## Изолированные проверки
 
-Run the provider pipeline from the API image when a single refresh is needed:
+Рабочая БД и её volume не используются для тестов.
 
-```bash
-docker compose run --rm api python -m app.jobs.runner
-```
+- docker compose -f docker-compose.test.yml up -d --wait — PostgreSQL на 127.0.0.1:55432.
+- DATABASE_URL и TEST_DATABASE_URL для проверок:
+  postgresql+psycopg://hoptrip_test:local-test-only@127.0.0.1:55432/hoptrip_test.
+- Из apps/api: python -m alembic upgrade head.
+- Из корня: python -m ruff check apps/api; python -m mypy; python -m pytest -q.
+- В apps/web: npm ci; npm run lint; npm run typecheck; npm run build.
+- Browser: npx playwright install chromium; npm run test:e2e.
+  На Windows HOPTRIP_TEST_PYTHON задаёт путь SDK Python; PLAYWRIGHT_CHANNEL=msedge
+  использует установленный Edge, если CDN Chromium недоступен.
+- Backend browser fixture запускается только с HOPTRIP_E2E=1, в tests/e2e_app.py.
+  Серверы 127.0.0.1:8100/3100, отдельная временная SQLite БД; production импортирует app.main.
 
-The command exits with code `2` when provider credentials are missing or the provider rejects
-the request. Every attempt is stored in `job_runs`.
+CI workflow подготовлен, но проверка в GitHub требует push.
 
-## Scheduled ingestion
+## Bootstrap и миграции
 
-The scheduler is opt-in so a development stack does not repeatedly call a provider by accident:
+Base Compose имеет одноразовый migrate; API и opt-in worker ждут его успешного завершения.
+entrypoint.sh только запускает команду. Для существующего развёртывания:
+сделать backup; выполнить python -m app.jobs.preflight; остановить старые writers;
+запустить migrate из нового image; затем обновить API/web/worker.
+0013 ничего не удаляет: при существующих дублях уникальные ограничения откатывают миграцию.
+Downgrade — через проверенный backup, а не silent drop новых данных.
 
-```bash
-docker compose --profile worker up -d worker
-docker compose --profile worker logs -f worker
-```
+В production обязательны нестандартный DB password и ADMIN_TOKEN не короче 32 символов;
+значения replace-with-* из примера отвергаются. Для URL используйте URL-safe секреты
+либо percent-encoding. Provider token для сайта не обязателен.
+Worker включается --profile worker после внешней приёмки источника.
 
-Set `TRAVELPAYOUTS_API_TOKEN`, `PIPELINE_INTERVAL_SECONDS`, `PIPELINE_MAX_ATTEMPTS` and
-`PIPELINE_RETRY_DELAY_SECONDS` in `.env` before starting it. Stop it with:
+GET /health — процесс; /health/ready — соединение с БД.
+GET /api/v1/admin/system/status с X-Admin-Token показывает отдельные website/data/monetization
+состояния; CONFIGURED_UNVERIFIED не означает успешную внешнюю приёмку.
 
-```bash
-docker compose --profile worker stop worker
-```
+## Одобрение и управление
 
-## Health and job history
+GET /api/v1/admin/providers и /programs возвращают ID.
+PATCH /providers/{id}: onboarding_status, is_active, capabilities.
+POST /programs: provider_id, code, name; PATCH /programs/{id}: onboarding_status,
+is_active, capabilities_json, allowed_hosts, tracking_param, adapter_code=stored_link.
+Capabilities для перехода — AFFILIATE_LINK на обеих сущностях.
+PATCH /components/{id}: affiliate_program_id, outbound_url.
+ID компонентов доступны в /api/v1/deals/{slug}; для скрытых сделок —
+protected GET /api/v1/admin/deals.
+Нельзя отмечать реальные программы APPROVED без подтверждения кабинета.
+Старые AFFILIATE_ALLOWED_HOSTS и AFFILIATE_TRACKING_QUERY_PARAM не разрешают переходы:
+политика перенесена в записи конкретных программ.
 
-- Readiness: `GET /health/ready`.
-- Configuration blocker report: `GET /api/v1/admin/system/status` with
-  `X-Admin-Token`; it returns missing external prerequisites without exposing credentials.
-- Recent job attempts: `GET /api/v1/admin/jobs` with `X-Admin-Token`.
-- Provider/program onboarding: `PATCH /api/v1/admin/providers/{id}` and
-  `PATCH /api/v1/admin/programs/{id}` with `X-Admin-Token`; only approved records can be
-  enabled, and any non-approved status automatically disables the record.
-- Provider capabilities: include `capabilities` in the provider PATCH using values such as
-  `DEEP_LINK` or `CONVERSION_API`. Record an externally executed check with
-  `POST /api/v1/admin/providers/{id}/health`; this endpoint stores the result and does not call
-  a provider by itself.
-- Conversion import: `POST /api/v1/admin/conversions` with `X-Admin-Token`; repeat the same
-  provider conversion ID safely to update its status. A provider sub-ID can be submitted as
-  `tracking_id` (for example, `hoptrip-42`) to resolve the original affiliate click.
-- Revenue summary: `GET /api/v1/admin/analytics/summary` with `X-Admin-Token`.
-- The revenue summary includes distinct sessions, deal views, redirected clicks, confirmed
-  bookings, funnel rates and PLN revenue breakdowns by provider, booking category and deal.
-- The job response includes status, attempt number, duration, error and pipeline result.
+Модерация: PATCH /admin/deals/{id}, is_visible/is_featured.
+Jobs: GET /admin/jobs — run_id, attempt, next_retry_at, итог/счётчики.
+Один PostgreSQL advisory lock на logical pipeline, отдельная connection переживает commits.
+В SQLite fallback lock только в одном процессе — production требует PostgreSQL.
 
-Provider configuration errors are recorded as failed runs without retries. Transient failures
-use the configured bounded exponential backoff. No credentials belong in source control.
+## Расписание и диагностика
 
-For an approved affiliate program that supports a provider sub-ID, set
-`AFFILIATE_ALLOWED_HOSTS` to its HTTPS host and `AFFILIATE_TRACKING_QUERY_PARAM` to the exact
-query parameter name expected by the provider (for example, `sub_id`). HopTrip then appends a
-stable `hoptrip-{click_id}` value to each allowed redirect and stores it with the click. Leave
-the tracking parameter empty until the program documents its supported format.
+Worker использует PIPELINE_INTERVAL_SECONDS; retries только transient, delay/Retry-After до 300 с.
+При успешном захвате lock старый RUNNING/RETRYING считается прерванным.
+Команда без внешнего токена: python -m app.jobs.maintenance — lifecycle + analytics retention.
+Запускать ежедневно, включая этап bootstrap; не ждать успешного ingestion.
+Пример cron в каталоге проекта:
+0 3 * * * cd /srv/hoptrip && docker compose --env-file .env.production -f docker-compose.yml -f docker-compose.production.yml run --rm --no-deps api python -m app.jobs.maintenance
 
-## Production deployment scaffold
+API пишет request_id/method/status, без query и body. /admin/jobs хранит тип ошибки
+без provider payload. Caddy access logs выключены, чтобы не записывать SubID/admin headers.
+Не включайте необработанные access logs перед проверкой redaction.
 
-The production override keeps PostgreSQL, the API, the worker and Next.js on the internal
-Compose network. Caddy is the only service that publishes ports, and terminates HTTPS for the
-configured domain.
+SecurityMiddleware: max body 64 KiB, public/admin writes и redirects ограничены
+PUBLIC_RATE_LIMIT (120/мин по умолчанию), ограничен размер памяти buckets.
+Один API process. Proxy headers отключены; нельзя доверять произвольному X-Forwarded-For.
+За Caddy квота применяется к его socket peer (общая на ingress).
+Перед масштабированием перенести лимиты на доверенный edge/shared store.
+CORS_ORIGINS задаётся явно; production Compose использует HTTPS домен.
 
-1. Copy .env.production.example to .env.production.
-2. Set the domain and ACME email, URL-safe database password, admin token, provider token and
-   approved affiliate host. Keep this file out of source control.
-3. Validate the merged Compose configuration:
+## Backup и восстановление
 
-   ```bash
-   docker compose --env-file .env.production \
-     -f docker-compose.yml -f docker-compose.production.yml config --quiet
-   ```
+Скрипты используют стандартные COMPOSE_FILE / COMPOSE_PROJECT_NAME и COMPOSE_ENV_FILE.
+Для production:
+COMPOSE_FILE=docker-compose.yml:docker-compose.production.yml COMPOSE_ENV_FILE=.env.production sh scripts/backup-db.sh
 
-4. Start the production stack and the scheduled worker:
+Backup создаётся как .partial с umask 077, проверяется pg_restore --list и атомарно
+переименовывается. При ошибке .partial удаляется. Автоматическое удаление старых копий
+не включено. План: ежедневный dump, 14 ежедневных + 4 еженедельных проверенных копии;
+offsite место, ключи и финальный retention выбирает владелец.
+Пример cron аналогичен maintenance с запуском backup-db.sh.
 
-   ```bash
-   docker compose --env-file .env.production \
-     -f docker-compose.yml -f docker-compose.production.yml \
-     --profile worker up -d --build
-   ```
+Создать новую пустую БД отдельно и выполнить:
+COMPOSE_FILE=docker-compose.yml:docker-compose.production.yml COMPOSE_ENV_FILE=.env.production sh scripts/restore-db.sh backups/<file>.dump EMPTY_TARGET_DATABASE
 
-5. Verify https://<domain>/health/ready and the protected system-status endpoint.
-6. Create a database backup and retain it according to the chosen retention policy:
+Restore отклоняет непустую БД, проверяет dump, использует --exit-on-error --single-transaction.
+Сравнить alembic_version, counts и содержимое важных таблиц. Только после проверки
+переключать приложение на восстановленную БД. Скрипт не выполняет --clean по рабочей БД.
 
-   ```bash
-   COMPOSE_ENV_FILE=.env.production sh scripts/backup-db.sh
-   ```
+## Локальная репетиция
 
-7. Test a restore during a maintenance window with a selected dump file:
+docker compose -f docker-compose.rehearsal.yml up -d --build --wait
+создаёт hoptrip-rehearsal, tmpfs PostgreSQL, один migrate, API production без travel token,
+web и внутренний Caddy. HTTP: localhost:58080; отдельный API localhost:58000.
+Это локальные тестовые секреты, не настройки настоящего сервера.
+Для backup/restore этой среды COMPOSE_FILE=docker-compose.rehearsal.yml,
+COMPOSE_PROJECT_NAME=hoptrip-rehearsal.
+Восстановление выполнялось в hoptrip_restore_test, а не поверх источника.
+После остановки tmpfs БД исчезает — нужны локальные dumps для повторного исследования.
 
-   ```bash
-   COMPOSE_ENV_FILE=.env.production sh scripts/restore-db.sh backups/<file>.dump
-   ```
+## Существующий внешний proxy
 
-After restore, rerun the readiness check and one authenticated admin check. The restore command
-is destructive for the configured database and must only run against the intended deployment.
-
-## Coexisting with an existing HTTPS proxy
-
-If another application already owns host ports 80 and 443, use the shared-proxy override. It
-removes HopTrip's public Caddy bindings, attaches the internal HopTrip Caddy to an external Docker
-network, and lets the existing Caddy terminate HTTPS.
-
-When the existing proxy already has a Docker network, reuse that network instead of creating a
-new one. On the current Oracle VM this network is domarion_edge. Add this line to
-.env.production:
-
-~~~env
-HOPTRIP_EDGE_NETWORK=domarion_edge
-~~~
-
-If the existing proxy is not already on the selected network, create it and connect the existing
-Caddy container. For this VM, domarion_edge is already present, so skip these two commands.
-Replace
-`<existing-caddy-container>` with the container identified by `sudo docker ps`:
-
-```bash
-sudo docker network create hoptrip-edge
-sudo docker network connect hoptrip-edge <existing-caddy-container>
-```
-
-Add this site to the existing Caddy configuration, using a hostname that resolves to the VM:
-
-```caddyfile
-hoptrip.example.com {
-    reverse_proxy hoptrip-caddy:80
-}
-```
-
-For the current VM, if you keep the existing sslip.io hostname pattern, append this block to
-/srv/domarion/app/deploy/oracle/Caddyfile:
-
-~~~caddyfile
-hoptrip.141-144-246-78.sslip.io {
-    encode zstd gzip
-    header {
-        Strict-Transport-Security "max-age=31536000; includeSubDomains"
-        X-Content-Type-Options "nosniff"
-        Referrer-Policy "strict-origin-when-cross-origin"
-    }
-    reverse_proxy hoptrip-caddy:80
-}
-~~~
-
-Then validate and start HopTrip with all three Compose files:
-
-```bash
-docker compose --env-file .env.production \
-  -f docker-compose.yml -f docker-compose.production.yml \
-  -f docker-compose.shared-proxy.yml config --quiet
-
-docker compose --env-file .env.production \
-  -f docker-compose.yml -f docker-compose.production.yml \
-  -f docker-compose.shared-proxy.yml \
-  --profile worker up -d --build
-```
-
-Reload the existing Caddy after its configuration is updated and verify
-`https://hoptrip.example.com/health/ready`. Do not start the default production stack without
-the shared-proxy override on a VM where another service already publishes 80 or 443.
+production + shared-proxy подключает Caddy к default и external HOPTRIP_EDGE_NETWORK.
+Upstream внешнего proxy: hoptrip-caddy:80. Реальные DNS/TLS/Oracle/ARM64, offsite и alerting
+проверяются после handoff владельца; локальная репетиция их не заменяет.

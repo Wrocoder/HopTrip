@@ -1,10 +1,13 @@
+from datetime import UTC, datetime, timedelta
 from decimal import ROUND_HALF_UP, Decimal
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.api.admin import require_admin
+from app.config import get_settings
 from app.db.session import get_db
 from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
@@ -15,120 +18,130 @@ from app.schemas.analytics import AnalyticsEventAccepted, AnalyticsEventCreate, 
 router = APIRouter(prefix="/api/v1", tags=["analytics"])
 
 
-def _money(value: Decimal | int | None) -> Decimal:
+def _money(value) -> Decimal:
     return Decimal(str(value or 0)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
 
 
-def _per_unit(value: Decimal, units: int) -> Decimal:
-    if units <= 0:
-        return Decimal("0.00")
-    return _money(value / Decimal(units))
+def _per_unit(value, units: int) -> Decimal:
+    return _money(Decimal(str(value)) / units) if units else Decimal("0.00")
 
 
 def _percent(numerator: int, denominator: int) -> Decimal:
-    if denominator <= 0:
-        return Decimal("0.00")
-    return _money(Decimal(numerator) * Decimal(100) / Decimal(denominator))
+    return _per_unit(numerator * 100, denominator)
 
 
-@router.post(
-    "/analytics/events",
-    response_model=AnalyticsEventAccepted,
-    status_code=status.HTTP_202_ACCEPTED,
-)
-def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)) -> AnalyticsEventAccepted:
+@router.post("/analytics/events", response_model=AnalyticsEventAccepted, status_code=202)
+def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     deal_id = None
     if payload.deal_slug:
-        deal = db.scalar(select(Deal.id).where(Deal.slug == payload.deal_slug))
-        if deal is None:
-            raise HTTPException(status_code=404, detail="Deal not found")
-        deal_id = deal
-    db.add(
-        AnalyticsEvent(
-            event_name=payload.event_name,
-            anonymous_session_id=payload.anonymous_session_id,
-            deal_id=deal_id,
-            component=payload.component,
-            source=payload.source,
-            metadata_json=payload.metadata,
-        )
+        deal_id = db.scalar(select(Deal.id).where(Deal.slug == payload.deal_slug))
+        if deal_id is None:
+            raise HTTPException(404, "Deal not found")
+    # Arbitrary client metadata is discarded; keep only bounded campaign context.
+    metadata = {k: str(v)[:80] for k, v in payload.metadata.items() if k in {"campaign"}}
+    event = AnalyticsEvent(
+        event_id=payload.event_id,
+        event_name=payload.event_name,
+        anonymous_session_id=payload.anonymous_session_id,
+        deal_id=deal_id,
+        component=payload.component,
+        source=payload.source,
+        metadata_json=metadata,
     )
-    db.commit()
+    try:
+        with db.begin_nested():
+            db.add(event)
+            db.flush()
+        db.commit()
+    except IntegrityError:
+        if not payload.event_id or not db.scalar(
+            select(AnalyticsEvent.id).where(AnalyticsEvent.event_id == payload.event_id)
+        ):
+            raise
     return AnalyticsEventAccepted()
 
 
-@router.get("/admin/analytics/summary", response_model=AnalyticsSummary, dependencies=[Depends(require_admin)])
-def analytics_summary(db: Session = Depends(get_db)) -> AnalyticsSummary:
-    total_events = db.scalar(select(func.count(AnalyticsEvent.id))) or 0
-    total_sessions = (
-        db.scalar(select(func.count(func.distinct(AnalyticsEvent.anonymous_session_id)))) or 0
-    )
-    total_deal_views = db.scalar(
-        select(func.count(AnalyticsEvent.id)).where(AnalyticsEvent.event_name == "DEAL_VIEW")
-    ) or 0
-    total_affiliate_clicks = db.scalar(
-        select(func.count(AffiliateClick.id)).where(AffiliateClick.status == "REDIRECTED")
-    ) or 0
-    total_conversions = db.scalar(select(func.count(AffiliateConversion.id))) or 0
-    confirmed_bookings = db.scalar(
-        select(func.count(AffiliateConversion.id)).where(AffiliateConversion.status == "CONFIRMED")
-    ) or 0
-    confirmed_commission_pln = (
-        db.scalar(
-            select(func.coalesce(func.sum(AffiliateConversion.commission), 0)).where(
-                AffiliateConversion.status == "CONFIRMED",
-                AffiliateConversion.currency == "PLN",
+@router.get(
+    "/admin/analytics/summary",
+    response_model=AnalyticsSummary,
+    dependencies=[Depends(require_admin)],
+)
+def analytics_summary(
+    start: datetime | None = None, end: datetime | None = None, db: Session = Depends(get_db)
+):
+    for bound in (start, end):
+        if bound and bound.tzinfo is None:
+            raise HTTPException(422, "Use timezone-aware period bounds")
+    end = end or datetime.now(UTC)
+    start = start or end - timedelta(days=get_settings().analytics_retention_days)
+    if start and start >= end:
+        raise HTTPException(422, "start must precede end")
+
+    def window(column):
+        return [column < end] + ([column >= start] if start else [])
+
+    events = list(db.scalars(select(AnalyticsEvent).where(*window(AnalyticsEvent.created_at))))
+    clicks = list(
+        db.scalars(
+            select(AffiliateClick).where(
+                AffiliateClick.status == "REDIRECTED", *window(AffiliateClick.created_at)
             )
         )
-        or 0
     )
-    confirmed_commission_pln = _money(confirmed_commission_pln)
-    rows = db.execute(
-        select(AnalyticsEvent.event_name, func.count(AnalyticsEvent.id)).group_by(AnalyticsEvent.event_name)
-    )
-    revenue_filters = (
-        AffiliateConversion.status == "CONFIRMED",
-        AffiliateConversion.currency == "PLN",
-    )
-    provider_rows = db.execute(
-        select(
-            AffiliateConversion.provider_code,
-            func.coalesce(func.sum(AffiliateConversion.commission), 0),
+    conversions = list(
+        db.scalars(
+            select(AffiliateConversion).where(
+                *window(
+                    func.coalesce(AffiliateConversion.occurred_at, AffiliateConversion.created_at)
+                )
+            )
         )
-        .where(*revenue_filters)
-        .group_by(AffiliateConversion.provider_code)
     )
-    category_rows = db.execute(
-        select(
-            AffiliateConversion.booking_category,
-            func.coalesce(func.sum(AffiliateConversion.commission), 0),
+    sessions = {e.anonymous_session_id for e in events}
+    views = [e for e in events if e.event_name == "DEAL_VIEW"]
+    view_sessions = {e.anonymous_session_id for e in views}
+    click_sessions = {c.anonymous_session_id for c in clicks}
+    confirmed = [c for c in conversions if c.status == "CONFIRMED"]
+    pln = [c for c in confirmed if c.currency == "PLN"]
+    revenue = sum((c.commission or Decimal(0) for c in pln), Decimal(0))
+    by_event: dict[str, int] = {}
+    by_provider: dict[str, Decimal] = {}
+    by_category: dict[str, Decimal] = {}
+    by_deal: dict[str, Decimal] = {}
+    for event in events:
+        by_event[event.event_name] = by_event.get(event.event_name, 0) + 1
+    for conversion in pln:
+        value = conversion.commission or Decimal(0)
+        by_provider[conversion.provider_code] = (
+            by_provider.get(conversion.provider_code, Decimal(0)) + value
         )
-        .where(*revenue_filters)
-        .group_by(AffiliateConversion.booking_category)
-    )
-    deal_rows = db.execute(
-        select(Deal.slug, func.coalesce(func.sum(AffiliateConversion.commission), 0))
-        .join(AffiliateConversion, AffiliateConversion.deal_id == Deal.id)
-        .where(*revenue_filters)
-        .group_by(Deal.slug)
-    )
+        by_category[conversion.booking_category] = (
+            by_category.get(conversion.booking_category, Decimal(0)) + value
+        )
+        deal = db.get(Deal, conversion.deal_id) if conversion.deal_id else None
+        if deal:
+            by_deal[deal.slug] = by_deal.get(deal.slug, Decimal(0)) + value
+    attributed = sum(c.click_id is not None for c in conversions)
     return AnalyticsSummary(
-        total_events=total_events,
-        by_event={name: count for name, count in rows},
-        total_sessions=total_sessions,
-        total_deal_views=total_deal_views,
-        total_affiliate_clicks=total_affiliate_clicks,
-        confirmed_bookings=confirmed_bookings,
-        affiliate_ctr_percent=_percent(total_affiliate_clicks, total_deal_views),
-        booking_conversion_percent=_percent(confirmed_bookings, total_affiliate_clicks),
-        revenue_per_session_pln=_per_unit(confirmed_commission_pln, total_sessions),
-        revenue_per_affiliate_click_pln=_per_unit(confirmed_commission_pln, total_affiliate_clicks),
-        revenue_per_1000_sessions_pln=_money(
-            _per_unit(confirmed_commission_pln, total_sessions) * Decimal(1000)
+        total_events=len(events),
+        by_event=by_event,
+        total_sessions=len(sessions),
+        total_deal_views=len(views),
+        total_affiliate_clicks=len(clicks),
+        total_conversions=len(conversions),
+        confirmed_bookings=len(confirmed),
+        confirmed_commission_pln=_money(revenue),
+        affiliate_ctr_percent=_percent(len(clicks), len(views)),
+        session_ctr_percent=_percent(len(view_sessions & click_sessions), len(view_sessions)),
+        booking_conversion_percent=_percent(
+            sum(c.click_id is not None for c in confirmed), len(clicks)
         ),
-        total_conversions=total_conversions,
-        confirmed_commission_pln=confirmed_commission_pln,
-        revenue_by_provider_pln={name: _money(value) for name, value in provider_rows},
-        revenue_by_category_pln={name: _money(value) for name, value in category_rows},
-        revenue_by_deal_pln={slug: _money(value) for slug, value in deal_rows},
+        attributed_conversions=attributed,
+        unattributed_conversions=len(conversions) - attributed,
+        revenue_per_session_pln=_per_unit(revenue, len(sessions)),
+        revenue_per_affiliate_click_pln=_per_unit(revenue, len(clicks)),
+        revenue_per_1000_sessions_pln=_per_unit(revenue * 1000, len(sessions)),
+        revenue_by_provider_pln=by_provider,
+        revenue_by_category_pln=by_category,
+        revenue_by_deal_pln=by_deal,
     )

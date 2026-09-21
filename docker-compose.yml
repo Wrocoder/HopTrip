@@ -15,6 +15,17 @@ services:
       timeout: 5s
       retries: 10
 
+  migrate:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["alembic", "upgrade", "head"]
+
   api:
     build:
       context: .
@@ -23,6 +34,9 @@ services:
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development
+      PUBLIC_RATE_LIMIT: ${PUBLIC_RATE_LIMIT:-120}
+      PROVIDER_MAX_PAGES: ${PROVIDER_MAX_PAGES:-5}
+      ANALYTICS_RETENTION_DAYS: ${ANALYTICS_RETENTION_DAYS:-90}
       TRAVELPAYOUTS_API_TOKEN: ${TRAVELPAYOUTS_API_TOKEN:-}
       TRAVELPAYOUTS_API_BASE_URL: ${TRAVELPAYOUTS_API_BASE_URL:-https://api.travelpayouts.com}
       INGESTION_ORIGINS: ${INGESTION_ORIGINS:-WRO,WAW,WMI,KRK,GDN,KTW,POZ}
@@ -33,9 +47,14 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      db:
-        condition: service_healthy
-    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log", "--no-proxy-headers"]
 
   worker:
     build:
@@ -46,6 +65,9 @@ services:
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development
+      PUBLIC_RATE_LIMIT: ${PUBLIC_RATE_LIMIT:-120}
+      PROVIDER_MAX_PAGES: ${PROVIDER_MAX_PAGES:-5}
+      ANALYTICS_RETENTION_DAYS: ${ANALYTICS_RETENTION_DAYS:-90}
       TRAVELPAYOUTS_API_TOKEN: ${TRAVELPAYOUTS_API_TOKEN:-}
       TRAVELPAYOUTS_API_BASE_URL: ${TRAVELPAYOUTS_API_BASE_URL:-https://api.travelpayouts.com}
       INGESTION_ORIGINS: ${INGESTION_ORIGINS:-WRO,WAW,WMI,KRK,GDN,KTW,POZ}
@@ -55,8 +77,8 @@ services:
       PIPELINE_RETRY_DELAY_SECONDS: ${PIPELINE_RETRY_DELAY_SECONDS:-5}
       PIPELINE_INTERVAL_SECONDS: ${PIPELINE_INTERVAL_SECONDS:-3600}
     depends_on:
-      db:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     command: ["python", "-m", "app.jobs.scheduler"]
 
   web:

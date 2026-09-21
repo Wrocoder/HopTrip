@@ -1,7 +1,7 @@
 from datetime import datetime
 from decimal import Decimal
 
-from sqlalchemy import Boolean, DateTime, Numeric, String, UniqueConstraint, func
+from sqlalchemy import Boolean, DateTime, ForeignKey, Numeric, String, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -45,3 +45,15 @@ class Destination(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+
+
+class DestinationAlias(Base):
+    __tablename__ = "destination_aliases"
+    __table_args__ = (
+        UniqueConstraint("provider_code", "code", "kind", name="uq_destination_alias"),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    provider_code: Mapped[str] = mapped_column(String(80))
+    code: Mapped[str] = mapped_column(String(3))
+    kind: Mapped[str] = mapped_column(String(8))
+    destination_id: Mapped[int] = mapped_column(ForeignKey("destinations.id"))

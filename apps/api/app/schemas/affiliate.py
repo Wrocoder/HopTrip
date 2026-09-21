@@ -26,6 +26,10 @@ class ProgramRead(BaseModel):
 
     id: int
     provider_id: int
+    capabilities_json: list[str] = Field(default_factory=list)
+    allowed_hosts: list[str] = Field(default_factory=list)
+    tracking_param: str | None = None
+    adapter_code: str = "stored_link"
     code: str
     name: str
     onboarding_status: str
@@ -52,6 +56,9 @@ class ProviderHealthUpdate(BaseModel):
 
 
 class SystemStatusRead(BaseModel):
+    website_status: str = "READY"
+    data_status: str = "NOT_CONFIGURED"
+    monetization_status: str = "NOT_CONFIGURED"
     status: Literal["READY", "BLOCKED"]
     app_env: str
     provider_token_configured: bool

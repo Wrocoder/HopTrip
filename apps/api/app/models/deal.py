@@ -26,6 +26,10 @@ class Deal(Base):
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    depart_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    score_version: Mapped[str] = mapped_column(String(32), default="flight-v2", nullable=False)
+    score_components: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)
+    explanation_codes: Mapped[list] = mapped_column(JSON, default=list, nullable=False)
     slug: Mapped[str] = mapped_column(String(220), unique=True, index=True)
     origin_airport_id: Mapped[int] = mapped_column(ForeignKey("airports.id"), index=True)
     destination_id: Mapped[int] = mapped_column(ForeignKey("destinations.id"), index=True)
@@ -44,8 +48,12 @@ class Deal(Base):
     confidence: Mapped[Decimal] = mapped_column(Numeric(5, 4), nullable=False)
     status: Mapped[str] = mapped_column(String(32), default="ACTIVE", nullable=False)
     explanation: Mapped[list] = mapped_column(JSON, default=list, nullable=False)
-    generated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    last_verified_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    generated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    last_verified_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     is_featured: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     is_visible: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
@@ -56,6 +64,7 @@ class DealComponent(Base):
     __table_args__ = (Index("ix_deal_components_deal", "deal_id", "component_type"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    affiliate_program_id: Mapped[int | None] = mapped_column(ForeignKey("affiliate_programs.id"))
     deal_id: Mapped[int] = mapped_column(ForeignKey("deals.id", ondelete="CASCADE"), index=True)
     travel_offer_id: Mapped[int | None] = mapped_column(ForeignKey("travel_offers.id"), index=True)
     component_type: Mapped[str] = mapped_column(String(32), nullable=False)

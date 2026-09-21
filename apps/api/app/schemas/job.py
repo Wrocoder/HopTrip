@@ -8,6 +8,8 @@ class JobRunRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+    run_id: str | None = None
+    next_retry_at: datetime | None = None
     job_type: str
     status: str
     attempt: int

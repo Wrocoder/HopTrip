@@ -8,6 +8,7 @@ from app.providers.travelpayouts import TravelpayoutsDataProvider
 
 def test_travelpayouts_requires_token() -> None:
     provider = TravelpayoutsDataProvider(token=None)
+
     async def run() -> None:
         try:
             await provider.search(SearchQuery(origin="WRO"))

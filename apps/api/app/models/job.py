@@ -12,12 +12,17 @@ class JobStatus(StrEnum):
     RUNNING = "RUNNING"
     SUCCEEDED = "SUCCEEDED"
     FAILED = "FAILED"
+    SKIPPED = "SKIPPED"
+    RETRYING = "RETRYING"
+    INTERRUPTED = "INTERRUPTED"
 
 
 class JobRun(Base):
     __tablename__ = "job_runs"
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    run_id: Mapped[str | None] = mapped_column(String(36), index=True)
+    next_retry_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     job_type: Mapped[str] = mapped_column(String(80), index=True)
     status: Mapped[JobStatus] = mapped_column(String(20), index=True, nullable=False)
     attempt: Mapped[int] = mapped_column(Integer, default=1, nullable=False)

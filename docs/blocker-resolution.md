@@ -1,7 +1,38 @@
 # Blocker resolution checklist
 
+## Start here
+
+- **For the owner, in Russian:** [step-by-step action guide](owner-action-guide.md) —
+  domain purchase, DNS, existing/new Oracle VM, Travelpayouts account/token/program/link,
+  support request and a non-secret handoff template.
+- **While waiting for access, in Russian:** [independent development tasks](independent-development-tasks.md) —
+  18 scoped tasks with internal dependencies, affected modules and acceptance checks.
+
+Use those two files for execution. This checklist remains the short external reference;
+the detailed audit remains the record of code findings.
+
 This checklist turns the open external decisions into concrete actions. Do not commit
 `.env`, `.env.production`, API tokens, private keys or payment details.
+
+## Audit status: 2026-09-20
+
+This is an **external-input checklist**, not the complete implementation plan. The repository
+audit identified internal blockers; the local implementation and tests now address them. See
+[project-audit-and-plan.md](project-audit-and-plan.md) for priorities, implementation scope
+and acceptance criteria, and [implementation-status.md](implementation-status.md) for progress.
+
+- [ ] Confirm permitted data access and capture one real provider response securely.
+- [ ] Confirm one actual program's approval, link format, market/channel rules and attribution.
+- [x] Bind components and clicks to that program; enforce approval on every redirect.
+- [x] Complete the public homepage → route → deal → booking CTA path.
+- [x] Resolve observation deduplication, job concurrency and source-price freshness.
+- [x] Complete release checks, production configuration and backup/restore verification.
+
+Account creation, data API access and affiliate approval are separate milestones. The
+locally tested adapter and per-program policy are not evidence of a working commercial integration.
+The original code audit did not revalidate provider-console instructions. The separate
+owner guide now incorporates official documentation checked on 2026-09-20; account-specific
+availability still needs confirmation in the owner's dashboard.
 
 ## 1. Travelpayouts data access and affiliate account
 
@@ -9,8 +40,11 @@ This checklist turns the open external decisions into concrete actions. Do not c
 2. Verify the email address.
 3. Create a Project for the HopTrip website. Use the production domain when it exists;
    add Telegram as a separate Project later if it will be a separate traffic source.
-4. Open **My Programs** and select a flight program that permits Polish traffic and the
-   channels you intend to use. Save the program code/ID and its current status.
+4. Open **My Programs**, select your Project and inspect **Available** programs. Travelpayouts
+   now connects eligible programs automatically, while others require Project review.
+   Select a flight program whose rules allow the intended market/channels; save its ID/status.
+   Follow the current [program access guide](https://support.travelpayouts.com/hc/en-us/articles/360021216060-How-to-start-working-with-affiliate-programs)
+   for additional access or review.
 5. Open **Profile → API token** and copy the token into the local `.env` or production
    `.env.production` as `TRAVELPAYOUTS_API_TOKEN`. Do not regenerate the token after
    deployment unless every environment is updated: the old token becomes invalid.
@@ -55,8 +89,11 @@ References:
 
 ## 2. Currency policy
 
-Until a policy is accepted, the application intentionally accepts PLN only. The lowest
-friction option is the ECB daily reference-rate API, which does not require an API key:
+Until a policy is accepted, the application intentionally normalizes PLN only. Other
+currencies can be stored as raw offers, but are excluded from PLN history and deal generation.
+FX is **not a blocker for a PLN-only flight launch**. If non-PLN coverage is required,
+evaluate an exchange-rate source such as the ECB reference-rate API and verify its current
+contract before implementation:
 
 1. Decide that non-PLN observations are converted to PLN using the latest available ECB
    daily reference rate for the observation date.
@@ -107,6 +144,8 @@ Send only non-secret values:
 - VM public IP and SSH username, if deployment assistance is needed.
 
 Keep API tokens, passwords, private keys and payment details on the machine where they are
-used. Once the values above are available, the remaining work is to implement the provider
-link builder, run the real-data acceptance pipeline, connect the conversion feed, deploy the
-stack and complete the restore drill.
+used. These values unblock the provider-specific work; they do not close the internal tasks
+listed in the audit. Complete data integrity, program approval enforcement, the public CTA,
+measurement and release checks before the real-data acceptance pipeline and deployment.
+A provider conversion feed can follow when available; the existing protected JSON import
+can support an initial verified manual reconciliation. Finish with a documented restore drill.

@@ -75,6 +75,10 @@ class AffiliateProgram(Base):
     provider_id: Mapped[int] = mapped_column(ForeignKey("affiliate_providers.id"), index=True)
     code: Mapped[str] = mapped_column(String(80))
     name: Mapped[str] = mapped_column(String(160))
+    capabilities_json: Mapped[list[str]] = mapped_column(JSON, default=list, nullable=False)
+    allowed_hosts: Mapped[list[str]] = mapped_column(JSON, default=list, nullable=False)
+    tracking_param: Mapped[str | None] = mapped_column(String(40))
+    adapter_code: Mapped[str] = mapped_column(String(40), default="stored_link", nullable=False)
     onboarding_status: Mapped[OnboardingStatus] = mapped_column(
         String(32), default=OnboardingStatus.NOT_CONFIGURED, nullable=False
     )

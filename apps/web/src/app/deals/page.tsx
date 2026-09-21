@@ -1,55 +1,29 @@
 import Link from "next/link";
-import { getDeals } from "../../lib/api";
-
-export const dynamic = "force-dynamic";
-
-function formatPrice(value: number): string {
-  return new Intl.NumberFormat("pl-PL", { style: "currency", currency: "PLN" }).format(value);
-}
-
-export default async function DealsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ origin?: string; destination?: string }>;
-}) {
-  const filters = await searchParams;
-  let deals: Awaited<ReturnType<typeof getDeals>> = [];
-  let apiUnavailable = false;
-  try {
-    deals = await getDeals(filters);
-  } catch {
-    apiUnavailable = true;
+import {getDeals,Filters,Deal,ApiError} from "../../lib/api";
+import {pl} from "../../lib/pl";
+import {DealGrid} from "../components/catalog";
+import {FilterForm} from "../components/filters";
+export const dynamic="force-dynamic";
+export const metadata={title:pl.deals,alternates:{canonical:"/deals"},robots:{index:false,follow:true}};
+export default async function DealsPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}) {
+  const raw=await searchParams;
+  const filters:Filters={};
+  for (const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","offset"] as const) {
+    if (typeof raw[key] === "string") filters[key]=raw[key];
   }
-
-  return (
-    <main className="page-shell">
-      <Link className="back-link" href="/">← Strona główna</Link>
-      <section className="page-heading">
-        <p className="eyebrow">HopTrip</p>
-        <h1>Najlepsze okazje teraz</h1>
-        <p className="lead">Loty ocenione na podstawie aktualnej ceny, historii trasy i świeżości danych.</p>
-      </section>
-      <form className="filters" method="get">
-        <label>Skąd <input name="origin" placeholder="WRO" defaultValue={filters.origin ?? ""} maxLength={3} /></label>
-        <label>Dokąd <input name="destination" placeholder="barcelona" defaultValue={filters.destination ?? ""} /></label>
-        <button type="submit">Filtruj</button>
-      </form>
-      {apiUnavailable ? (
-        <section className="empty-state"><h2>Źródło okazji chwilowo niedostępne</h2><p>Spróbuj ponownie za chwilę.</p></section>
-      ) : deals.length === 0 ? (
-        <section className="empty-state"><h2>Jeszcze nie ma opublikowanych okazji</h2><p>Nie pokazujemy zmyślonych cen. Lista pojawi się po załadowaniu pierwszych ofert.</p></section>
-      ) : (
-        <section className="deal-grid" aria-label="Lista okazji">
-          {deals.map((deal) => (
-            <Link className="deal-card" href={`/deals/${deal.slug}`} key={deal.slug}>
-              <div className="deal-card-top"><span>{deal.trip_start}</span><strong>{deal.deal_score}/100</strong></div>
-              <h2>Lot z Polski</h2>
-              <p className="deal-price">{formatPrice(deal.price_per_person_pln)} <span>za osobę</span></p>
-              <p className="deal-meta">{deal.discount_percent ? `${deal.discount_percent}% taniej niż zwykle` : "Nowa obserwacja ceny"}</p>
-            </Link>
-          ))}
-        </section>
-      )}
-    </main>
-  );
+  let deals:Deal[]=[],error="";
+  try {deals=await getDeals({...filters,limit:"12"});}
+  catch(e) {error=e instanceof ApiError && [404,422].includes(e.status) ? pl.invalid : pl.error;}
+  const offset=Number(filters.offset ?? 0);
+  function pageLink(next:number) {
+    const query=new URLSearchParams({...filters,offset:String(next)});
+    return "/deals?"+query;
+  }
+  return <main className="page-shell catalog-page"><header className="page-heading"><p className="eyebrow">Loty z Polski</p><h1>{pl.deals}</h1><p className="lead">{pl.flightOnly}</p></header>
+    <FilterForm key={new URLSearchParams(filters).toString()} filters={filters}/>
+    {error ? <p className="notice" role="alert">{error}</p> : <><DealGrid deals={deals}/><nav className="pagination" aria-label="Strony ofert">
+      {offset > 0 && <Link href={pageLink(Math.max(0,offset-12))}>{pl.previous}</Link>}
+      {deals.length === 12 && offset < 9996 && <Link href={pageLink(offset+12)}>{pl.next}</Link>}
+    </nav></>}
+  </main>;
 }

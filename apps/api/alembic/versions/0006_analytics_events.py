@@ -22,9 +22,13 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now()),
     )
     op.create_index("ix_analytics_events_event_name", "analytics_events", ["event_name"])
-    op.create_index("ix_analytics_events_anonymous_session_id", "analytics_events", ["anonymous_session_id"])
+    op.create_index(
+        "ix_analytics_events_anonymous_session_id", "analytics_events", ["anonymous_session_id"]
+    )
     op.create_index("ix_analytics_events_deal_id", "analytics_events", ["deal_id"])
-    op.create_index("ix_analytics_events_name_created", "analytics_events", ["event_name", "created_at"])
+    op.create_index(
+        "ix_analytics_events_name_created", "analytics_events", ["event_name", "created_at"]
+    )
     op.create_index(
         "ix_analytics_events_session_created",
         "analytics_events",

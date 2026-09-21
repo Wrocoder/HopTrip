@@ -1,4 +1,5 @@
 """Add optional IATA city code for destination resolution."""
+
 import sqlalchemy as sa
 from alembic import op
 
@@ -16,4 +17,3 @@ def upgrade() -> None:
 def downgrade() -> None:
     op.drop_index("ix_destinations_iata_code", table_name="destinations")
     op.drop_column("destinations", "iata_code")
-

@@ -117,37 +117,19 @@ def test_admin_can_update_affiliate_onboarding_state() -> None:
         app.dependency_overrides.clear()
 
 
-def test_admin_system_status_reports_external_blockers(monkeypatch) -> None:
-    blocked_settings = Settings(
-        app_env="development",
-        admin_token="change-me-in-development",
-        travelpayouts_api_token=None,
-        affiliate_allowed_hosts="",
-    )
-    monkeypatch.setattr(admin_api, "get_settings", lambda: blocked_settings)
-    client = TestClient(app)
-    blocked = client.get(
-        "/api/v1/admin/system/status",
-        headers={"X-Admin-Token": "change-me-in-development"},
-    )
-    assert blocked.status_code == 200
-    assert blocked.json()["status"] == "BLOCKED"
-    assert "TRAVELPAYOUTS_API_TOKEN is not configured" in blocked.json()["blockers"]
-    assert "AFFILIATE_ALLOWED_HOSTS has no approved HTTPS host" in blocked.json()["blockers"]
+def test_admin_system_status_reports_external_blockers(monkeypatch, isolated_db, api_client):
+    from helpers import approved_program, catalog_fixture
 
-    ready_settings = Settings(
-        app_env="development",
-        admin_token="change-me-in-development",
-        travelpayouts_api_token="provider-token",
-        affiliate_allowed_hosts="partner.example",
-        affiliate_tracking_query_param="sub_id",
-    )
-    monkeypatch.setattr(admin_api, "get_settings", lambda: ready_settings)
-    ready = client.get(
-        "/api/v1/admin/system/status",
-        headers={"X-Admin-Token": "change-me-in-development"},
-    )
-    assert ready.status_code == 200
-    assert ready.json()["status"] == "READY"
-    assert ready.json()["blockers"] == []
-    assert ready.json()["warnings"] == []
+    settings = Settings(travelpayouts_api_token=None)
+    monkeypatch.setattr(admin_api, "get_settings", lambda: settings)
+    headers = {"X-Admin-Token": "change-me-in-development"}
+    blocked = api_client.get("/api/v1/admin/system/status", headers=headers).json()
+    assert blocked["status"] == "BLOCKED" and blocked["website_status"] == "READY"
+    assert blocked["data_status"] == "NOT_CONFIGURED"
+    program = approved_program(isolated_db)
+    catalog_fixture(isolated_db, program=program)
+    settings.travelpayouts_api_token = "mock-only"
+    ready = api_client.get("/api/v1/admin/system/status", headers=headers).json()
+    assert ready["status"] == "READY"
+    assert ready["monetization_status"] == "CONFIGURED_UNVERIFIED"
+    assert ready["blockers"] == []

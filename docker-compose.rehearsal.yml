@@ -1,0 +1,65 @@
+name: hoptrip-rehearsal
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: hoptrip_test
+      POSTGRES_USER: hoptrip_test
+      POSTGRES_PASSWORD: local-rehearsal-only
+    tmpfs: [/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hoptrip_test -d hoptrip_test"]
+      interval: 2s
+      timeout: 2s
+      retries: 20
+  migrate:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment: &api-env
+      APP_ENV: production
+      DATABASE_URL: postgresql+psycopg://hoptrip_test:local-rehearsal-only@db:5432/hoptrip_test
+      ADMIN_TOKEN: local-rehearsal-admin-secret-never-production
+      TRAVELPAYOUTS_API_TOKEN: ""
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      db: {condition: service_healthy}
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment: *api-env
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    ports: ["127.0.0.1:58000:8000"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=3)"]
+      interval: 3s
+      timeout: 5s
+      retries: 15
+  web:
+    build:
+      context: apps/web
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://localhost:58080
+        NEXT_PUBLIC_SITE_URL: http://localhost:58080
+    environment:
+      HOPTRIP_API_URL: http://api:8000
+      NEXT_PUBLIC_API_URL: http://localhost:58080
+      NEXT_PUBLIC_SITE_URL: http://localhost:58080
+    depends_on:
+      api: {condition: service_healthy}
+  caddy:
+    image: caddy:2-alpine
+    ports: ["127.0.0.1:58080:80"]
+    volumes:
+      - ./infrastructure/Caddyfile.internal:/etc/caddy/Caddyfile:ro
+    depends_on: [web, api]
+    networks:
+      default: {}
+      edge:
+        aliases: [hoptrip-caddy]
+networks:
+  edge:
+    name: hoptrip-rehearsal-edge

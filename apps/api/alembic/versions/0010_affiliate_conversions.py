@@ -33,8 +33,12 @@ def upgrade() -> None:
             name="uq_affiliate_conversions_provider_id",
         ),
     )
-    op.create_index("ix_affiliate_conversions_provider_code", "affiliate_conversions", ["provider_code"])
-    op.create_index("ix_affiliate_conversions_program_code", "affiliate_conversions", ["program_code"])
+    op.create_index(
+        "ix_affiliate_conversions_provider_code", "affiliate_conversions", ["provider_code"]
+    )
+    op.create_index(
+        "ix_affiliate_conversions_program_code", "affiliate_conversions", ["program_code"]
+    )
     op.create_index("ix_affiliate_conversions_click_id", "affiliate_conversions", ["click_id"])
     op.create_index("ix_affiliate_conversions_deal_id", "affiliate_conversions", ["deal_id"])
     op.create_index("ix_affiliate_conversions_status", "affiliate_conversions", ["status"])

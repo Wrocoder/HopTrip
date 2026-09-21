@@ -1,180 +1,100 @@
-# HopTrip implementation status
+# Состояние реализации HopTrip
 
-This file is the working progress ledger for the roadmap in `doc/MasterPrompt.md`.
-It records what is implemented in the repository, what is intentionally pending, and
-which external configuration is required before a phase can be called complete.
+Проверено 2026-09-21. Основание: [MasterPrompt](../doc/MasterPrompt.md),
+[исходный аудит](project-audit-and-plan.md) и [18 внутренних задач](independent-development-tasks.md).
 
-Last updated: 2026-09-20
+## Результат
 
-## Current milestone
+Дополнение UI от 2026-09-21: выполнен редизайн по [UI.md](UI.md).
+Главная, каталог, детали, статьи и системные состояния используют общие токены,
+локальные Fraunces/DM Sans и адаптивные компоненты. Переходы и бизнес-логика сохранены.
+Сопоставление требований и реализации — [ui-implementation.md](ui-implementation.md).
+Дополнительно: компактные раскрываемые фильтры, метки применённых условий,
+снятие/сброс и активный пункт меню; проверена синхронизация формы с URL и возврат назад.
+У провайдера добавлены сохраняемые по каждому origin счётчики обработки и причины
+остановки пагинации, изоляция переполнения даты и проверка ASCII-кодов/лимита страниц.
+Описание отчёта — [providers.md](providers.md).
 
-**Phase 6 — affiliate and analytics foundation**
+Реализован локальный flight-only путь: загрузка cached цен → история → оценка →
+главная/маршрут/сделка → разрешённый партнёрский переход → клик/отчёт.
+Фикстуры используются только в тестах. Наличие работающих тестов не подтверждает
+доступ к настоящему Data API, одобрение программы или получение комиссии.
 
-The repository has the interfaces and storage needed to ingest real provider responses,
-calculates route price distributions from stored observations, and exposes generated deals
-through the public API. No external provider credentials are configured, so no production
-travel prices are generated locally.
+| Задачи | Реализация |
+| --- | --- |
+| I01 | ESLint вместо next lint, TS, Ruff/mypy, Python/npm lockfiles, CI, отдельная PostgreSQL и Playwright |
+| I02 | Bootstrap API/web без travel token, отдельные website/data/monetization состояния, opt-in worker |
+| I03–I04 | Data API v3, bounded pagination, проверка payload/dates/money, typed errors, unique offer/observation keys |
+| I05–I07 | PostgreSQL advisory lock, общий run ID, retry/recovery; TTL/departure lifecycle; airport/city aliases |
+| I08–I09 | Program/component/click связи, active+APPROVED policy, точный host, stored-link/SubID adapter |
+| I10–I12 | Главная и route cards, detail/CTA, PLN string DTO, польские тексты, совместные фильтры и pagination |
+| I13 | Canonical/OG/noindex/sitemap/404, страницы о сервисе и партнёрах, trust drafts, план 25 содержательных страниц |
+| I14–I15 | Сессии 30 минут, видимые impressions, единый view/click ID, storage fallback, retention, точные метрики и upsert |
+| I16–I17 | Production secrets, constant-time auth, headers/CORS/body/rate limits, score components и модерация |
+| I18 | Одноразовый migrate, изолированный Docker rehearsal, атомарный backup и restore в пустую БД |
 
-## Roadmap checklist
+I04 выполнена с безопасным уточнением: миграция 0013 **не удаляет старые дубли**.
+Read-only preflight перечисляет их; при конфликте unique constraints миграция
+откатывается. Проверка на legacy fixture подтвердила сохранение обеих записей и
+ревизии 0012. Конкретные дубли существующей БД требуют отдельного разбора после backup.
+Первоначальный вариант автоматического удаления был отклонён автоматической проверкой.
 
-| Phase | Status | Evidence / next exit criterion |
-| --- | --- | --- |
-| 0. Repository and business discovery | Done | Repository audit, architecture plan, provider matrix in `docs/providers.md` |
-| 1. Product foundation | Done | FastAPI, Next.js, PostgreSQL Compose, Alembic, catalog/admin models and health endpoints; runtime verified in Docker |
-| 2. First real data source | In progress | Travelpayouts adapter, configurable origins and CLI pipeline exist; next: configured-token integration run |
-| 3. Price history | In progress | Route statistics, repeatable runner, persisted job history, bounded retries and optional worker schedule exist; next: configured-token run |
-| 4. Deal engine | In progress | Flight-only Deal, components, score, explanations, freshness and repeatable generation job exist; next: populated real offers |
-| 5. Public website | In progress | Homepage, live API-backed list/detail routes and destination catalog exist; next: populate them with a configured provider |
-| 6. Affiliate bootstrap | In progress | Safe `/go/{deal}/{component}` validation and click tracking exist; next: approved program, provider link mapping and configured outbound links |
-| 7. Second monetization source | Planned | Add an actually approved second program |
-| 8. Accommodation | Planned | Real hotel source; no invented hotel costs |
-| 9. SEO foundation | In progress | Dynamic airport/destination pages, metadata, sitemap and seeded route catalog exist; next: populate pages with real deals and route statistics |
-| 10. Analytics | In progress | Anonymous events, outbound clicks, funnel metrics, idempotent conversion import, tracking-ID resolution and protected revenue summary exist; next: provider conversion feed |
-| 11. Affiliate expansion | Planned | Apply after useful site and initial traffic |
-| 12. Distribution | Planned | Telegram publication adapter |
-| 13. Oracle VM deployment | In progress | Production Compose override, Caddy routing and backup/restore scripts exist; next: deploy on the VM and complete a restore drill |
+I09 использует готовую одобренную ссылку; HTTP API генерации ссылок не заявлено реализованным.
+I13 включает редакционный план и 5 из 25 страниц в локальном приложении: about/partners
+и три статьи о сравнении, свежести и истории цен. Добавлены `/info`, связанные статьи,
+отдельные метаданные и sitemap из реестра опубликованных текстов. Исправлен сбой
+при slug `constructor`/`toString`/`__proto__`: теперь используется проверка собственных ключей.
+Это не 25 опубликованных на внешнем домене статей. Контакты/privacy/terms
+остаются явно помеченными черновиками без реквизитов оператора.
 
-## Implemented repository pieces
+## Проверки
 
-- `apps/api/app/models/location.py`: Airport, Destination;
-- `apps/api/app/models/affiliate.py`: AffiliateProvider, AffiliateProgram, capability registry, health state and onboarding states;
-- `apps/api/app/models/data_provider.py`: independent travel-data provider registry;
-- `apps/api/app/models/offer.py`: TravelOffer and PriceObservation;
-- `apps/api/app/providers/`: provider-neutral contracts and Travelpayouts adapter;
-- `apps/api/app/services/ingestion.py`: idempotent offer persistence and observation creation;
-- `apps/api/app/services/currency.py`: PLN-only safe converter until an exchange-rate source is configured;
-- `apps/api/app/services/statistics.py`: route price distributions and confidence;
-- `apps/api/app/services/scoring.py`: configurable explainable Deal Score;
-- `apps/api/app/services/deals.py`: flight-only deal generation without invented accommodation costs;
-- `apps/api/app/jobs/pipeline.py`: configurable provider → history → statistics → deals orchestration;
-- `apps/api/app/jobs/runner.py`: cron/worker-friendly repeatable pipeline command;
-- `apps/api/app/jobs/scheduler.py`: optional interval worker around the tracked pipeline;
-- `docs/operations.md`: one-shot, scheduled-worker and job-history runbook;
-- `docs/blocker-resolution.md`: step-by-step external unblock checklist and support template;
-- `docs/oracle-deployment-handoff.md`: safe VM data checklist and diagnostic commands;
-- `apps/api/app/services/jobs.py`: durable success/failure tracking for pipeline executions;
-- `apps/api/app/api/admin.py`: protected provider/program onboarding, configuration blocker report
-  and recent job history endpoint;
-- `apps/api/app/models/conversion.py`: idempotent affiliate conversion and commission records;
-- `apps/api/app/schemas/conversion.py`: validated admin conversion import contract with click and provider tracking-ID resolution;
-- `apps/api/app/api/affiliate.py`: safe redirect with optional provider sub-ID tracking;
-- `apps/api/app/api/analytics.py`: protected funnel, rate and PLN revenue metrics by provider, category and deal;
-- `apps/api/app/api/catalog.py`: read-only deal list/detail endpoints with route and date filters;
-- Alembic migrations `0001` through `0012`;
-- FastAPI health, catalog and protected admin endpoints;
-- Next.js Polish homepage, live deal list and deal detail pages;
-- SEO-friendly `/from/{iata_code}` and `/destinations/{slug}` pages with dynamic metadata;
-- Dynamic `sitemap.xml` and `robots.txt` with catalog-backed URLs and safe fallbacks;
-- Seeded destination catalog in migration `0008_seed_destination_catalog` for route resolution;
-- Docker Compose and API migration entrypoint;
-- Repeatable ingestion and deal-generation jobs in `apps/api/app/jobs/`;
-- Freshness guard that hides deals not re-verified within 48 hours;
-- Anonymous `DEAL_VIEW` tracking with event storage and admin summary endpoint;
-- Safe outbound click endpoint with HTTPS host allowlist and rejected/unconfigured click audit;
-- `docker-compose.production.yml` with internal-only app services and Caddy HTTPS ingress;
-- `docker-compose.shared-proxy.yml` and `infrastructure/Caddyfile.internal` for coexistence with
-  an existing HTTPS proxy on the Oracle VM;
-- ARM64-compatible web image stages for the Oracle Ampere VM shape;
-- `infrastructure/Caddyfile` plus `.env.production.example` for domain/TLS deployment;
-- `scripts/backup-db.sh` and `scripts/restore-db.sh` for custom-format database backup/restore;
-- tests and Ruff configuration.
+| Проверка | Результат |
+| --- | --- |
+| Backend pytest с TEST_DATABASE_URL | 79 passed; PostgreSQL concurrency, process lock, migrations и rollback входят в набор |
+| Ruff | Passed |
+| mypy | Passed |
+| Frontend lint / typecheck / production build | Passed |
+| Playwright | 18 passed (2026-09-21): desktop/mobile, путь WRO → deal → local partner, click/session, filters, no-link, expired/404, storage, статьи/SEO, неизвестные info slug, UI на 320 px, снятие условий/возврат назад и меню |
+| Чистая Docker сборка Linux amd64 | API из requirements.lock; web через npm ci и Next production build |
+| Миграции новой БД | 0001 → 0013_integrity_and_affiliates |
+| Bootstrap без внешнего токена | Website READY, data/monetization NOT_CONFIGURED, публичный каталог пуст |
+| Compose base / production / shared-proxy | Конфигурации валидны |
+| Сеть proxy | Отдельный контейнер в rehearsal edge достиг API через hoptrip-caddy; web и readiness HTTP 200 |
+| Backup/restore | Отдельная целевая БД: 7 airports, 10 destinations, 0 deals; одинаковый checksum каталога и revision |
+| Отказы backup/restore | Повреждённый dump и непустая БД отвергнуты; failed backup не публикует .dump/.partial |
 
-## Verification history
+Браузерные проверки 2026-09-20 и 2026-09-21 выполнены через установленный Edge (Chromium):
+скачивание отдельного Chromium с CDN завершалось timeout. CI на GitHub ещё не запускался.
+Тестовые API/web останавливаются Playwright после прогона.
+Есть deprecation warnings зависимостей Starlette/httpx и ESLint 9; текущие проверки проходят.
+При прогоне 2026-09-21 устаревший локальный `.next` возвращал 404 для существующих
+маршрутов. После остановки тестового сервера и очистки только build cache повторный
+полный прогон прошёл: 12/12. Порядок восстановления описан в local-development.md.
+Дополнение со статьями проверено lint/typecheck и production build Linux Docker;
+backend-код в дополнении со статьями не менялся. Последующее дополнение провайдера
+проверено отдельным полным прогоном: 79 passed после миграции перезапущенной тестовой БД.
 
-Latest local checks:
+## Что проверить с настоящими доступами
 
-- Ruff: passed;
-- pytest: 27 passed;
-- Alembic offline SQL generation: passed through migration `0012`;
-- Next.js production build: passed;
-- Docker Compose config parsing: passed.
-- Docker runtime: PostgreSQL, API and web are up; migrations through `0012` applied; readiness endpoint passed.
-- Web security audit: `npm audit --omit=dev --audit-level=high` reports zero vulnerabilities; Next.js is `16.3.5`.
-- Docker runtime smoke checks: `/health/ready` returns `ready`; `/api/v1/deals` returns an
-  empty list until real offers are ingested.
-- Web runtime smoke checks: `/` and `/deals` return HTTP 200; `/deals` renders the honest
-  empty state while the provider has no configured token.
-- SEO route build checks: Next.js includes `/from/[iata_code]`, `/destinations/[slug]`,
-  `/sitemap.xml` and `/robots.txt`.
-- Analytics checks: `DEAL_VIEW` event accepted with HTTP 202 and migration `0006_analytics_events`
-  generated successfully.
-- Affiliate checks: migration `0007_affiliate_clicks` applied; unknown deal returns HTTP 404;
-  unconfigured components never redirect.
-- Destination catalog checks: migration `0008_seed_destination_catalog` applied; API returns
-  10 catalog destinations and destination pages return HTTP 200.
-- Pipeline checks: missing provider credentials exit cleanly with code `2`; configured origins
-  default to all seven seeded Polish airports.
-- Job checks: successful and failed pipeline executions persist status, duration, error and result;
-  transient failures retry with bounded backoff, configuration failures do not retry, and protected
-  `/api/v1/admin/jobs` exposes the latest 50 runs.
-- Scheduler checks: worker profile parses successfully and remains opt-in until a provider token
-  is configured.
-- Conversion checks: protected admin upsert is idempotent by provider conversion ID; analytics
-  summary reports confirmed PLN commission without pretending to convert other currencies;
-  provider tracking IDs resolve to the originating affiliate click.
-- Funnel checks: protected analytics summary reports distinct sessions, deal views, redirected
-  clicks, confirmed bookings, CTR, booking conversion and revenue per session/click.
-- Affiliate admin checks: provider and program onboarding updates require admin access, only
-  approved records can be enabled, and non-approved records are disabled.
-- Provider registry checks: capabilities are validated against the provider capability enum;
-  protected health-result recording stores the last check time and clears or records the latest
-  integration error.
-- Configuration checks: protected system status reports missing provider token, affiliate host
-  allowlist and production admin-secret prerequisites, with sub-ID tracking as a warning.
-- Tracking checks: configured affiliate tracking query parameter is appended only to allowlisted
-  HTTPS redirects and stored with the click record; tracking is disabled by default.
-- API filter smoke checks: `/api/v1/deals?origin=WRO` returns `[]`; invalid date ranges return
-  validation error `422`.
-- Production scaffold checks: merged Compose configuration validates with required placeholder
-  secrets; backup and restore scripts pass POSIX shell syntax checks.
-- ARM64 build check: the web image builds successfully for `linux/arm64`, matching the Oracle
-  VM architecture.
+1. Право использовать и хранить cached цены, реальные PLN/market/coverage и sample response.
+2. Одобрение конкретной программы/Project, sample link, допустимый SubID и реальный click attribution.
+3. Реальный отчёт о commission/status и сопоставление с кликом.
+4. Реквизиты оператора и окончательные контактные/privacy/terms тексты.
+5. Домен, DNS/TLS, Oracle VM, при необходимости ARM64 build, offsite backup и alerts.
+6. CI после push; редакционные статьи до открытия индексации маршрутов.
 
-## Open decisions and blockers
+Отели, второй партнёр, Telegram и полноценная сборка стоимости всей поездки —
+последующие этапы MasterPrompt, не входят в выполненные 18 задач flight-only.
 
-### External blockers
+## Где смотреть и как продолжать
 
-1. **Travel data credentials** — configure `TRAVELPAYOUTS_API_TOKEN` or choose and implement
-   another approved data source. Until this exists, Phase 2 cannot fetch real offers, Phases 3–5
-   cannot produce real history/deals/pages, and the worker must remain stopped.
-2. **Currency coverage** — choose an exchange-rate source and conversion policy before accepting
-   EUR/USD/GBP observations into PLN history. The current converter deliberately accepts PLN only.
-3. **Affiliate approval and links** — obtain approval for a concrete program, its generated
-   outbound URL format, supported sub-ID parameter and HTTPS host. Until then
-   `AFFILIATE_ALLOWED_HOSTS` stays empty and redirects remain rejected.
-4. **Provider terms and market coverage** — confirm Polish low-cost route coverage, rate limits,
-   attribution rules and permitted promotion channels against current official terms.
-5. **Production infrastructure access** — provide the Oracle VM/domain/TLS/DNS and backup
-   retention decisions before Phase 13 can be deployed and restore-tested.
+- [Действия владельца по шагам](owner-action-guide.md): домен, VM, аккаунт, токен, ссылка, handoff.
+- [Задачи и журнал I01–I18](independent-development-tasks.md).
+- [Запуск, миграция, admin API, backup/restore](operations.md).
+- [Контракт provider](providers.md), [история цен](price-history.md), [оценка](deal-scoring.md),
+  [аналитика](tracking.md), [редакционный план](seo.md).
 
-### Internal work still open
-
-1. **Affiliate link mapping** — the redirect and click audit are safe, but a provider-specific
-   link builder still needs the approved URL format and sub-ID contract to populate each deal
-   component's `outbound_url`.
-2. **Provider conversion feed adapter** — the admin import contract and tracking-ID resolution
-   exist, but a provider-specific pull/webhook adapter is still needed after approval.
-3. **Real-data acceptance run** — run ingestion, statistics, deal generation, public pages and
-   the worker against configured credentials, then verify freshness and duplicate protection.
-4. **Production deployment** — deploy the scaffold to the VM, point DNS at it, issue TLS and
-   complete a restore drill once the VM and domain are available.
-
-## Definition of next milestone
-
-Phase 2 is complete when a configured provider response can be fetched by a repeatable job,
-resolved against the catalog, stored as a fresh `TravelOffer`, and represented by a durable
-`PriceObservation` without duplicate offers or fabricated currency conversions.
-
-Phase 3 is complete when the ingestion job recalculates route statistics after each successful
-batch, persists execution status, retries transient failures without duplicate offers, and runs
-from a production scheduler.
-
-## Runtime verification
-
-The local Docker stack is currently running:
-
-```text
-hoptrip-db-1   healthy
-hoptrip-api-1  up on :8000
-hoptrip-web-1  up on :3000
-```
+Отдельный локальный rehearsal: http://localhost:58080, API http://localhost:58000.
+Он использует собственную временную БД. Исходные контейнеры проекта и их данные
+не обновлялись; перед обновлением нужен preflight/backup по runbook.
