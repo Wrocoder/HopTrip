@@ -110,3 +110,27 @@ COMPOSE_PROJECT_NAME=hoptrip-rehearsal.
 production + shared-proxy подключает Caddy к default и external HOPTRIP_EDGE_NETWORK.
 Upstream внешнего proxy: hoptrip-caddy:80. Реальные DNS/TLS/Oracle/ARM64, offsite и alerting
 проверяются после handoff владельца; локальная репетиция их не заменяет.
+
+## CI на GitHub
+
+[Workflow checks](https://github.com/Wrocoder/HopTrip/actions/workflows/ci.yml)
+запускается при push и pull request. Определение: `.github/workflows/ci.yml`.
+Ubuntu runner использует Python 3.12, Node 22, lockfiles, отдельную PostgreSQL 16,
+миграцию до head, pytest/Ruff/mypy, frontend lint/typecheck/build и Playwright Chromium.
+Сверять результат нужно с SHA выпускаемой версии. Deployment в workflow отсутствует.
+
+E2E API запускает только `tests/e2e_app.py` с `HOPTRIP_E2E=1`, отдельной SQLite
+и локальной страницей партнёра. Тест читает настоящий 307 от `/go`, проверяет
+HTTPS destination и SubID, затем подменяет только Location на localhost для
+браузерного перехода. SubID должен соответствовать ровно одному клику той же сессии.
+Реальный партнёр, DNS и внешняя атрибуция этим тестом не проверяются.
+
+При сбое скачайте artifact `playwright-failure-details` со страницы запуска
+(retention 7 дней), распакуйте его и из `apps/web` откройте нужный trace:
+
+```text
+npx playwright show-trace <путь-к-распакованному-тесту>/trace.zip
+```
+
+Trace содержит тестовые URL и DOM. Workflow использует фикстуры без настоящих
+доступов; не подключать эти сценарии к production-БД или реальным партнёрским токенам.

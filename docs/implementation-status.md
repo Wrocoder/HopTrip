@@ -71,6 +71,10 @@ I13 включает редакционный план и 5 из 25 страни
 Два сбоя касались перехвата вымышленного partner.example после редиректа в Chromium.
 Тест исправлен: проверяет настоящий 307/URL/SubID и перенаправляет на локальную fixture.
 При ошибке CI теперь сохраняет browser traces/screenshots на 7 дней.
+Повторный [CI для a371e6b](https://github.com/Wrocoder/HopTrip/actions/runs/35654309550)
+завершился **Success**: 93 backend-теста, 18 browser-тестов desktop/mobile на Linux Chromium,
+Ruff/mypy, миграции и frontend lint/typecheck/build прошли. Это подтверждение
+проверенной ревизии кода, не развёртывание на VM и не проверка реальных партнёров.
 Тестовые API/web останавливаются Playwright после прогона.
 Есть deprecation warnings зависимостей Starlette/httpx и ESLint 9; текущие проверки проходят.
 При прогоне 2026-09-21 устаревший локальный `.next` возвращал 404 для существующих
