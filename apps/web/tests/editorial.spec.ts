@@ -20,10 +20,20 @@ const guides=[
  ["london-airports","Londyn: sześć lotnisk i różne drogi do miasta"],
  ["milan-airports","Mediolan: Linate, Malpensa czy Bergamo"],
  ["budapest-airport","Budapeszt: 100E czy 200E z lotniska BUD"],
+ ["madrid-airport","Madryt: terminal MAD, metro i dalsza podróż"],
+ ["valencia-airport","Walencja: z VLC do centrum i nad morze"],
+ ["alicante-airport","Alicante: autobus C6 i dalsza droga po Costa Blanca"],
+ ["malaga-airport","Malaga: kolej C1, centrum i Costa del Sol"],
+ ["porto-airport","Porto: metro E, Andante i ostatni odcinek do noclegu"],
+ ["vienna-airport","Wiedeń: dojazd z VIE podczas zmian na kolei"],
+ ["prague-airport","Praga: trolejbus 59 czy Airport Express"],
+ ["amsterdam-airport","Amsterdam: Schiphol, pociąg i autobus 397"],
+ ["copenhagen-airport","Kopenhaga: metro czy pociąg z CPH"],
+ ["stockholm-airports","Sztokholm: Arlanda i Skavsta to różne transfery"],
 ] as const;
 
 test("editorial registry has complete references and no links to drafts",()=>{
- expect(publishedInfoPages()).toHaveLength(25);
+ expect(publishedInfoPages()).toHaveLength(35);
  for(const [slug,page] of publishedInfoPages()) {
   const links=relatedInfoPages(slug).map(item=>item.slug);
   expect(new Set(links).size).toBe(links.length);
@@ -49,16 +59,16 @@ test("editorial registry has complete references and no links to drafts",()=>{
  }
 });
 
-test("editorial index groups all 25 pages and sitemap excludes trust drafts",async({page,request})=>{
+test("editorial index groups all 35 pages and sitemap excludes trust drafts",async({page,request})=>{
  await page.goto("/info");
- await expect(page.locator("main .deal-card")).toHaveCount(25);
- for(const [id,count] of [["method",5],["planning",5],["airports",7],["destinations",8]] as const) {
+ await expect(page.locator("main .deal-card")).toHaveCount(35);
+ for(const [id,count] of [["method",5],["planning",5],["airports",7],["destinations",18]] as const) {
   await expect(page.locator(`#${id} .deal-card`)).toHaveCount(count);
  }
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(27);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(37);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);
@@ -78,7 +88,7 @@ for(const [slug,title] of guides) {
   const response=await page.goto(`/info/${slug}`);
   expect(response?.status()).toBe(200);
   await expect(page.getByRole("heading",{level:1})).toHaveText(title);
-  await expect(page.locator("article time")).toHaveAttribute("datetime","2026-09-23");
+  await expect(page.locator("article time")).toHaveAttribute("datetime",content[slug].reviewedAt!);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/info/${slug}`);
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content",title);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");

@@ -2,10 +2,11 @@ import type {InfoContent} from "./info-types";
 import {travelGuides} from "./travel-guides";
 import {airportGuides} from "./airport-guides";
 import {destinationGuides} from "./destination-guides";
+import {moreDestinationGuides} from "./more-destination-guides";
 export type {InfoContent} from "./info-types";
 
 export const content:Record<string,InfoContent> = {
- ...travelGuides,...airportGuides,...destinationGuides,
+ ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,
  "trip-budget":{
   title:"Jak policzyć budżet całej podróży",
   description:"Cena lotu na osobę a koszt wyjazdu: wspólne noclegi, dojazdy, dodatki i niewiadome.",
@@ -152,12 +153,19 @@ const planningReasons:Record<string,string>={
  connections:"Zaplanuj czas między lotami i rozróżnij jedną rezerwację od osobnych biletów.",
  "trip-budget":"Dolicz dojazd, nocleg i opłaty do budżetu całej podróży.",
 };
+const destinationConnections:Record<string,string[]>={
+ "barcelona-airports":["madrid-airport","valencia-airport"],
+ "lisbon-airport":["porto-airport"],
+ "budapest-airport":["vienna-airport","prague-airport"],
+ "paris-airports":["amsterdam-airport"],
+ "london-airports":["copenhagen-airport","stockholm-airports"],
+};
 export function relatedInfoPages(slug:string) {
  const page=getInfoContent(slug);
  if(!page || page.draft) return [];
  const suggestions=page.category==="airports" ? Object.keys(planningReasons) :
   page.category==="destinations" ? ["trip-budget","connections"] : [];
- return [...new Set([...suggestions,...(page.related ?? [])])].filter(key=>key!==slug).flatMap(key=>{
+ return [...new Set([...suggestions,...(page.related ?? []),...(destinationConnections[slug] ?? [])])].filter(key=>key!==slug).flatMap(key=>{
   const related=getInfoContent(key);
   return related && !related.draft ? [{slug:key,page:related,reason:planningReasons[key] ?? related.description}] : [];
  });

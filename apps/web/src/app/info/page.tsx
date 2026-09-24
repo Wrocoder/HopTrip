@@ -3,7 +3,7 @@ import Link from "next/link";
 import {publishedInfoPages} from "../../lib/content";
 
 const title="Jak działa HopTrip";
-const description="Porównywanie cen, bagaż i przesiadki, lotniska w Polsce oraz dojazd do ośmiu europejskich miast.";
+const description="Porównywanie cen, bagaż i przesiadki, lotniska w Polsce oraz dojazd do 18 europejskich miast.";
 export const metadata:Metadata={
  title,description,alternates:{canonical:"/info"},robots:{index:true,follow:true},
  openGraph:{title,description,url:"/info",locale:"pl_PL",type:"website"},

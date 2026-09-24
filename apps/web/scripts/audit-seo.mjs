@@ -23,7 +23,7 @@ try {
   if(doc.querySelector("parsererror")) throw new Error("Invalid sitemap XML");
   return [...doc.querySelectorAll("url > loc")].map(node=>node.textContent);
  },await sitemap.text());
- check(urls.length===27,`sitemap: expected 27 URLs, got ${urls.length}`);
+ check(urls.length===37,`sitemap: expected 37 URLs, got ${urls.length}`);
  check(new Set(urls).size===urls.length,"sitemap: duplicate URLs");
  const paths=[];
  const titles=new Set(), descriptions=new Set();
