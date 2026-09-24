@@ -14,7 +14,25 @@ the detailed audit remains the record of code findings.
 This checklist turns the open external decisions into concrete actions. Do not commit
 `.env`, `.env.production`, API tokens, private keys or payment details.
 
-## Audit status: 2026-09-23
+## Audit status: 2026-09-24
+
+Current priority: connect real flight offers and verified booking links, followed by
+package holidays (owner confirmed both product types). hoptrip.pl is deployed with
+HTTPS; indexing remains disabled. Travelpayouts account created, Drive installed
+and its script loading verified. Drive dashboard confirmation remains owner-side.
+Read-only check of the running API on 2026-09-24: data API token is absent.
+No real ingestion or affiliate attribution has been verified yet.
+
+Next owner step: Profile → API token; keep the token only in the server's protected
+`/opt/hoptrip/.env.production` as `TRAVELPAYOUTS_API_TOKEN`. Do not send it in chat.
+In My Programs select hoptrip.pl and report the available flight program and status,
+then supply a sample affiliate link and its documented permitted tracking parameter.
+Do not infer program approval from Drive installation or the existence of a token.
+After handoff: take a DB backup, validate a bounded real request for Polish departures,
+check PLN/market coverage and dates, run one controlled ingestion, configure the
+approved link and verify the click path. Enable periodic ingestion only after acceptance.
+Package holidays need a separate TravelLead application and confirmed feed/link access;
+there is no implemented package feed adapter yet. See [seo.md](seo.md).
 
 This is an **external-input checklist**, not the complete implementation plan. The repository
 audit identified internal blockers; the local implementation and tests now address them. See
@@ -28,12 +46,14 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 - [x] Resolve observation deduplication, job concurrency and source-price freshness.
 - [x] Prepare production configuration and verify backup/restore in an isolated local rehearsal.
 - [x] Add token-free website/API/backup-age probes and tests of failure conditions.
-- [x] Complete all 25 planned content pages locally, including the remaining 18 guides with official sources.
+- [x] Publish 35 content pages, including 18 city guides with official sources.
 - [ ] Verify green CI for the exact release revision.
 - [ ] Configure actual program/component links and verify attribution with a real partner.
 - [ ] Finalize operator/contact/privacy/terms information.
-- [ ] Verify the 25 pages on the production hostname after deployment; review date-sensitive facts before release.
-- [ ] Deploy to the VM and verify public DNS/TLS and real-data ingestion.
+- [x] Verify 37 sitemap URLs and 35 previews on hoptrip.pl after deployment.
+- [ ] Review date-sensitive facts before opening indexing.
+- [x] Deploy to Oracle VM and verify public DNS/TLS, redirects and API readiness.
+- [ ] Verify real-data ingestion on the VM.
 - [ ] Configure offsite backups, retention and monitoring delivery; verify a production restore drill.
 
 The probe implementation is ready; no monitoring schedule or notification destination has
