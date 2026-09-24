@@ -1,0 +1,7 @@
+# Apply after base + production. HTTPS preview with indexing and public admin disabled.
+services:
+  caddy:
+    volumes: !override
+      - ./infrastructure/Caddyfile.staging:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config

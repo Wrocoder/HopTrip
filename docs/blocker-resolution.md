@@ -14,7 +14,7 @@ the detailed audit remains the record of code findings.
 This checklist turns the open external decisions into concrete actions. Do not commit
 `.env`, `.env.production`, API tokens, private keys or payment details.
 
-## Audit status: 2026-09-20
+## Audit status: 2026-09-23
 
 This is an **external-input checklist**, not the complete implementation plan. The repository
 audit identified internal blockers; the local implementation and tests now address them. See
@@ -23,10 +23,22 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 
 - [ ] Confirm permitted data access and capture one real provider response securely.
 - [ ] Confirm one actual program's approval, link format, market/channel rules and attribution.
-- [x] Bind components and clicks to that program; enforce approval on every redirect.
-- [x] Complete the public homepage → route → deal → booking CTA path.
+- [x] Implement program/component/click binding and approval checks; verify locally with fixtures.
+- [x] Complete the public homepage → route → deal → booking CTA path with local E2E coverage.
 - [x] Resolve observation deduplication, job concurrency and source-price freshness.
-- [x] Complete release checks, production configuration and backup/restore verification.
+- [x] Prepare production configuration and verify backup/restore in an isolated local rehearsal.
+- [x] Add token-free website/API/backup-age probes and tests of failure conditions.
+- [x] Complete all 25 planned content pages locally, including the remaining 18 guides with official sources.
+- [ ] Verify green CI for the exact release revision.
+- [ ] Configure actual program/component links and verify attribution with a real partner.
+- [ ] Finalize operator/contact/privacy/terms information.
+- [ ] Verify the 25 pages on the production hostname after deployment; review date-sensitive facts before release.
+- [ ] Deploy to the VM and verify public DNS/TLS and real-data ingestion.
+- [ ] Configure offsite backups, retention and monitoring delivery; verify a production restore drill.
+
+The probe implementation is ready; no monitoring schedule or notification destination has
+been installed on a server. See [operations.md](operations.md#проверка-доступности-и-возраста-backup)
+for invocation and limits, and [release-acceptance.md](release-acceptance.md) for the release record.
 
 Account creation, data API access and affiliate approval are separate milestones. The
 locally tested adapter and per-program policy are not evidence of a working commercial integration.
@@ -120,8 +132,10 @@ the exchange-rate dataflow is `EXR`.
    at the registrar.
 5. SSH into the VM, install Docker Engine and the Compose plugin, clone the repository, and
    copy `.env.production.example` to `.env.production`.
-6. Fill the production file with the domain, ACME email, a URL-safe database password, a
-   long admin token, the Travelpayouts token and the approved affiliate host.
+6. Fill the production file with the domain, ACME email, a URL-safe database password and
+   a long admin token. Add the Travelpayouts token after data access is confirmed; the website
+   can bootstrap without it. Configure the approved host, SubID and component links through
+   the per-program admin API described in `docs/operations.md`.
 7. Run the validation and deployment commands from `docs/operations.md`.
 8. After HTTPS is issued, run one backup and a restore drill during a maintenance window.
 
@@ -144,8 +158,9 @@ Send only non-secret values:
 - VM public IP and SSH username, if deployment assistance is needed.
 
 Keep API tokens, passwords, private keys and payment details on the machine where they are
-used. These values unblock the provider-specific work; they do not close the internal tasks
-listed in the audit. Complete data integrity, program approval enforcement, the public CTA,
-measurement and release checks before the real-data acceptance pipeline and deployment.
+used. These values unblock the provider-specific acceptance work. Internal tasks I01–I18
+have local implementations and recorded checks; their completion does not verify external
+accounts or infrastructure. Recheck CI for the release revision, then record real-data
+acceptance and deployment evidence separately in `docs/release-acceptance.md`.
 A provider conversion feed can follow when available; the existing protected JSON import
 can support an initial verified manual reconciliation. Finish with a documented restore drill.

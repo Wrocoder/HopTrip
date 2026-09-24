@@ -150,6 +150,7 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .deal-detail h2 { margin-top: 38px; font-size: clamp(1.55rem, 3vw, 2rem); }
 .deal-detail p { color: var(--secondary); line-height: 1.8; }
 .deal-detail li { margin-block: 12px; }
+.deal-detail .related-reason { font-size: .9375rem; margin: 4px 0 18px; }
 .deal-detail nav { margin-top: 36px; border-top: 1px solid var(--border); }
 .state-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(28px, 6vw, 64px); max-width: 820px; margin: 28px auto; }
 .state-panel h1 { font-size: clamp(2rem, 4vw, 3rem); }
@@ -211,6 +212,11 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
   .site-nav { gap: 8px; }
   .deal-card, .route-links { padding: 20px; }
 }
+.breadcrumbs { margin-block: 24px; font-size: .875rem; }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.breadcrumbs li { min-width: 0; overflow-wrap: anywhere; }
+.breadcrumbs li + li::before { content: "/"; margin-right: 8px; }
+.breadcrumbs [aria-current="page"] { font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

@@ -79,7 +79,7 @@ test("canonical, sitemap and draft noindex",async({page,request})=>{
  expect(sitemap).not.toContain("/privacy");
  expect(sitemap).not.toContain("/deals?");
  expect(sitemap).toContain("/info/about");
- for(const slug of ["price-comparison","price-freshness","price-history"]) {
+ for(const slug of ["price-comparison","price-freshness","price-history","trip-budget","one-way-round-trip"]) {
   expect(sitemap).toContain(`/info/${slug}`);
  }
  await page.goto("/info");
@@ -92,6 +92,12 @@ test("canonical, sitemap and draft noindex",async({page,request})=>{
  await expect(page.getByRole("heading",{level:1})).toHaveText("Co oznacza świeżość oferty");
  await page.getByRole("link",{name:"Co mówi, a czego nie mówi historia cen",exact:true}).click();
  await expect(page.getByRole("heading",{level:1})).toHaveText("Co mówi, a czego nie mówi historia cen");
+ await page.goto("/info/trip-budget");
+ await expect(page.getByRole("heading",{name:"Nie zamieniaj brakującej ceny w zero"})).toBeVisible();
+ await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href","http://127.0.0.1:3100/info/trip-budget");
+ await page.getByRole("link",{name:"Lot w jedną stronę czy w obie strony",exact:true}).click();
+ await expect(page.getByRole("heading",{level:1})).toHaveText("Lot w jedną stronę czy w obie strony");
+ await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
 });
 
 test("unknown information slugs including object properties show not found",async({page})=>{

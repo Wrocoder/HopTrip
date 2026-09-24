@@ -38,6 +38,22 @@ jobs:
         working-directory: apps/web
       - run: npm run test:e2e
         working-directory: apps/web
+      - name: Start production build for SEO audit
+        run: docker compose -f docker-compose.rehearsal.yml up -d --build --wait
+      - name: Audit production SEO
+        run: |
+          curl --fail --silent --show-error --retry 20 --retry-all-errors --retry-delay 2 --max-time 5 http://127.0.0.1:58080/info --output /dev/null
+          npm run audit:seo -- http://127.0.0.1:58080 http://localhost:58080
+        working-directory: apps/web
+      - name: Audit accessibility and keyboard navigation
+        run: npm run audit:experience -- http://127.0.0.1:58080 --accessibility-only
+        working-directory: apps/web
+      - name: Show rehearsal logs on failure
+        if: failure()
+        run: docker compose -f docker-compose.rehearsal.yml logs --no-color --tail 100
+      - name: Stop SEO rehearsal
+        if: always()
+        run: docker compose -f docker-compose.rehearsal.yml down
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

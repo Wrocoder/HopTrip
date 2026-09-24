@@ -1,0 +1,31 @@
+{$HOPTRIP_DOMAIN} {
+    encode gzip
+    header X-Robots-Tag "noindex, nofollow"
+
+    @admin path /api/v1/admin /api/v1/admin/*
+    handle @admin {
+        respond 404
+    }
+    handle /robots.txt {
+        respond <<ROBOTS
+User-agent: Twitterbot
+User-agent: facebookexternalhit
+User-agent: LinkedInBot
+User-agent: TelegramBot
+User-agent: WhatsApp
+User-agent: Slackbot-LinkExpanding
+User-agent: Discordbot
+Allow: /
+
+User-agent: *
+Disallow: /
+ROBOTS 200
+    }
+    @api path /api/* /health /health/* /go/*
+    handle @api {
+        reverse_proxy api:8000
+    }
+    handle {
+        reverse_proxy web:3000
+    }
+}

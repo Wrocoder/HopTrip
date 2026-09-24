@@ -1,0 +1,9 @@
+# Optional local trust for HTTPS inspection; certificate is mounted only during npm ci.
+services:
+  web:
+    build:
+      secrets:
+        - npm_ca
+secrets:
+  npm_ca:
+    file: ${HOPTRIP_BUILD_CA_FILE:?Set HOPTRIP_BUILD_CA_FILE to a trusted PEM CA certificate}

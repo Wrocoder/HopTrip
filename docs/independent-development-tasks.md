@@ -1,13 +1,14 @@
 # Задачи HopTrip без ожидания внешних доступов
 
-Обновлено: 2026-09-21. Основание: [аудит](project-audit-and-plan.md) и
+Обновлено: 2026-09-23. Основание: [аудит](project-audit-and-plan.md) и
 [MasterPrompt](../doc/MasterPrompt.md). Действия владельца по аккаунтам, домену и
 партнёрским ссылкам — в [отдельной инструкции](owner-action-guide.md).
 
 **Текущий результат:** реализованы локальные изменения I01–I18 и подготовлена внешняя
 приёмка. Проверки и ограничения приведены в [отчёте реализации](implementation-status.md).
 Для I04 применён безопасный вариант миграции: диагностика дублей и остановка вместо
-автоматического удаления существующих записей. I13 включает план 25 страниц, не 25 опубликованных статей.
+автоматического удаления существующих записей. I13 теперь включает все 25 страниц локально;
+это не подтверждение публикации на внешнем домене.
 
 Все задачи ниже можно реализовать и проверить локально без affiliate approval,
 production domain, Oracle-доступа и настоящего provider token. Обычная установка
@@ -343,6 +344,20 @@ backup восстанавливается в другую БД, совпадаю
 
 ## Журнал выполнения
 
+Редакционное дополнение 2026-09-23: завершены 18 оставшихся материалов, итого 25 из 25.
+Добавлены официальные источники по разделам, дата проверки, переходы к каталогу
+и группировка `/info`. Реестр и правила дальнейшей актуализации — docs/seo.md.
+Фактические аккаунты/одобрения, домен, реквизиты оператора и production остаются внешними шагами.
+Проверки: lint/typecheck/production build passed, полный Playwright desktop/mobile —
+58 passed (Edge), включая существующий путь от аэропорта до партнёрского перехода.
+
+Дополнение от 2026-09-23: ещё две статьи (бюджет и one-way/round-trip), итого 7 из 25.
+Token-free команда проверки HTTP-доступности сайта/API и возраста backup готова
+для подключения к мониторингу; 22 теста прошли. Инструкции — operations.md;
+расписание, доставка уведомлений и offsite остаются внешними шагами.
+Обновлены blocker-resolution.md и шаблон release-acceptance.md.
+Новые страницы проверены frontend lint/typecheck/production build и целевым Playwright на desktop/mobile.
+
 Дополнение I13 от 2026-09-21: три польские статьи о сравнении, свежести и истории цен,
 раздел `/info`, связанные ссылки, metadata/sitemap и исправление неизвестных slug
 с именами свойств Object. Готовы 5 из 25 страниц SEO-плана в локальном приложении;
@@ -362,7 +377,7 @@ backup восстанавливается в другую БД, совпадаю
 | I10 | 2026-09-20 | Главная, route cards, detail, CTA | Desktop/mobile browser E2E | Настоящий provider/program/report |
 | I11 | 2026-09-20 | Decimal string DTO, pl catalog, shared components | TS, дробная цена в API/браузере | — |
 | I12 | 2026-09-20 | Budget/date/duration/route + bounded pagination | API boundaries + browser next/empty/invalid | — |
-| I13 | 2026-09-20 | Metadata/noindex/sitemap/trust drafts, 25-page plan | Browser metadata/sitemap/unknown routes | Реквизиты, редакционные тексты, hostname |
+| I13 | 2026-09-23 | Metadata/noindex/sitemap/trust drafts, все 25 страниц локально | Browser metadata/sitemap/unknown routes; реестр editorial | Реквизиты, публикация, hostname, актуализация источников |
 | I14 | 2026-09-20 | 30 min sessions, impressions/events, fallback, retention | Browser session path/rotation/storage; retention unit | — |
 | I15 | 2026-09-20 | Окна, precise revenue, attribution-safe upsert | 1/3000 → 0.33, currencies/status/updates | Настоящий provider/program/report |
 | I16 | 2026-09-20 | Prod secrets/auth/CORS/headers/body/rate/redacted logs | Auth/input/headers, production bootstrap | — |

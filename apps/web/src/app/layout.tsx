@@ -6,8 +6,8 @@ import {pl} from "../lib/pl";
 import {PageTracker} from "./components/deal-view-tracker";
 import {SiteNav} from "./components/site-nav";
 import "./globals.css";
-const bodyFont=localFont({src:"./fonts/DMSans.ttf",variable:"--font-body",display:"swap",weight:"100 1000"});
-const headingFont=localFont({src:"./fonts/Fraunces.ttf",variable:"--font-heading",display:"swap",weight:"100 900"});
+const bodyFont=localFont({src:"./fonts/DMSans.woff2",variable:"--font-body",display:"swap",weight:"100 1000"});
+const headingFont=localFont({src:"./fonts/Fraunces.woff2",variable:"--font-heading",display:"swap",weight:"100 900"});
 export const metadata:Metadata = {
   metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title:pl.title,description:pl.description,alternates:{canonical:"/"},

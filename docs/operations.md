@@ -1,5 +1,30 @@
 # Эксплуатация и локальная приёмка
 
+## Oracle staging — 2026-09-24
+
+Адрес: https://app.141-144-246-78.sslip.io, VM `141.144.246.78`, Ubuntu 24.04 ARM64.
+Каталог `/opt/hoptrip`, env `.env.production` (600), project `hoptrip`.
+Текущие исходники переданы из рабочего дерева, а не из опубликованного Git commit.
+
+```sh
+cd /opt/hoptrip
+sudo docker compose --env-file .env.production -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.staging.yml ps
+sudo docker compose --env-file .env.production -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.staging.yml up -d --build --wait
+sudo env COMPOSE_FILE=docker-compose.yml:docker-compose.production.yml:docker-compose.staging.yml COMPOSE_ENV_FILE=.env.production sh scripts/backup-db.sh
+```
+
+Staging Caddy получает сертификат без контактного email; `ACME_EMAIL` в env содержит
+`unused-by-staging-caddyfile` только для интерполяции базового production Compose.
+В staging Caddyfile это значение не используется и в ACME не передаётся.
+Перед переходом на production Caddyfile задать реальный ACME email и постоянный домен.
+Для staging всегда применять третий Compose-файл: он запрещает индексацию и закрывает
+публичный административный API. Не удалять volumes при обновлении.
+
+Проверены HTTPS, HTTP→HTTPS 308, API readiness и расширенный SEO-аудит: 27 URL,
+ошибок нет. Первая локальная копия БД создана и прочитана через `pg_restore --list`;
+это не restore drill. Backup schedule, offsite и alerting ещё не настроены.
+Worker выключен, действующих provider/affiliate credentials нет.
+
 ## Изолированные проверки
 
 Рабочая БД и её volume не используются для тестов.
@@ -16,9 +41,42 @@
 - Backend browser fixture запускается только с HOPTRIP_E2E=1, в tests/e2e_app.py.
   Серверы 127.0.0.1:8100/3100, отдельная временная SQLite БД; production импортирует app.main.
 
-CI workflow подготовлен, но проверка в GitHub требует push.
+Предыдущий успешный CI записан в implementation-status.md. Для нового выпуска
+нужен успешный запуск именно его ревизии; локальные изменения ещё не проверены GitHub.
 
 ## Bootstrap и миграции
+
+### Локальная сборка web за HTTPS-проверкой Avast
+
+На Windows 2026-09-24 `npm ci` в `node:22-alpine` завершался сообщением
+`Exit handler never called!`. Диагностика с `--loglevel verbose --fetch-retries=0`
+показала первопричину: `UNABLE_TO_VERIFY_LEAF_SIGNATURE` при загрузке с npm registry.
+Windows успешно проверила цепочку `npmjs.org → Avast Web/Mail Shield Root`;
+контейнер не имел доверия к этому локальному корневому сертификату.
+
+Для такой среды предусмотрен необязательный `docker-compose.build-ca.yml`:
+
+```powershell
+$env:HOPTRIP_BUILD_CA_FILE = Join-Path $env:TEMP 'hoptrip-npm-build-ca.pem'
+docker compose -f docker-compose.rehearsal.yml -f docker-compose.build-ca.yml up -d --build --wait
+```
+
+PEM-файл должен содержать доверенный корневой CA вашей среды. При диагностике он
+экспортирован из цепочки, успешно проверенной Windows, в указанный временный файл.
+Если файл удалён или сертификат Avast заменён, повторно экспортировать актуальный
+доверенный CA в PEM (без приватного ключа) и указать его путь.
+Не брать сертификат из непроверенного соединения. Сертификат не хранится в репозитории.
+
+Docker передаёт файл как BuildKit secret `npm_ca` только в шаг `npm ci`.
+`NODE_EXTRA_CA_CERTS` добавляет доверие в этом процессе; файл и настройка не копируются
+в итоговый image. TLS-проверка не отключается. Без override сборка и GitHub CI
+используют обычное хранилище доверия Node. Этот override относится только к web/npm.
+
+API image устанавливает зависимости из `requirements.lock` и запускает скопированные
+исходники через `PYTHONPATH=/app/apps/api`. Дополнительная установка локального пакета
+не нужна: она запрашивала незакреплённый build backend из PyPI и блокировала сборку
+при ошибке проверки сертификата. Проверка TLS остаётся включённой. Сборка image,
+миграции и readiness проверены в Docker rehearsal 2026-09-23.
 
 Base Compose имеет одноразовый migrate; API и opt-in worker ждут его успешного завершения.
 entrypoint.sh только запускает команду. Для существующего развёртывания:
@@ -104,6 +162,51 @@ web и внутренний Caddy. HTTP: localhost:58080; отдельный API
 COMPOSE_PROJECT_NAME=hoptrip-rehearsal.
 Восстановление выполнялось в hoptrip_restore_test, а не поверх источника.
 После остановки tmpfs БД исчезает — нужны локальные dumps для повторного исследования.
+
+## Проверка доступности и возраста backup
+
+`app.jobs.check_operations` не обращается к Travelpayouts, не требует admin token,
+не меняет БД и не отправляет уведомления. Команда возвращает одну строку JSON:
+`ok` и состояния `website`, `api_readiness`, `backup_freshness`.
+Код завершения: 0 — запрошенные проверки прошли, 1 — отказ, 2 — неверные аргументы.
+Без `--backup-dir` backup явно имеет статус `SKIPPED`, даже при `ok:true`.
+
+Из установленного Python-окружения проекта (URL локального rehearsal):
+
+```sh
+python -m app.jobs.check_operations --site-url http://localhost:58080 --api-url http://localhost:58000 --backup-dir ./backups --max-backup-age-hours 30
+```
+
+Для сервера можно использовать Python из API image, без отдельной установки на VM.
+Из каталога проекта, с уже заполненным production env:
+
+```sh
+docker compose --env-file .env.production -f docker-compose.yml -f docker-compose.production.yml run --rm --no-deps -v /srv/hoptrip/backups:/backups:ro api python -m app.jobs.check_operations --site-url https://YOUR_HOST --api-url https://YOUR_HOST --backup-dir /backups
+```
+
+Подставить реальный hostname и каталог backup; для shared-proxy добавить третий Compose-файл.
+Сначала пересобрать API image с новой командой. Origin содержит схему и host/port,
+без пути, query или credentials. Проверяется `/` сайта и `/health/ready` API.
+Редиректы считаются отказом, HTTPS проверяет сертификат; env proxy не используется.
+`--timeout-seconds` (по умолчанию 10) ограничивает ожидание сетевой операции.
+
+Проверка сайта требует HTTP 200 и `text/html`; это проверка HTTP-доступности,
+не полноценный браузерный сценарий. API должен вернуть 200 и `{"status":"ready"}`.
+В stdout не попадают URL, тело ответа, исключения, содержимое backup или секреты.
+
+Backup: учитываются только непустые обычные файлы формата
+`hoptrip-YYYYMMDDTHHMMSSZ-PID.dump`, который создаёт backup-db.sh.
+Symlink, `.partial` и чужие имена не учитываются. Возраст считается по mtime;
+mtime из будущего даёт `FUTURE_TIMESTAMP`. Не обновлять mtime старых dump-файлов.
+Свежий файл не доказывает валидность dump, наличие offsite-копии или успешное восстановление.
+Для этого остаётся отдельный restore drill.
+
+Рекомендуемый шаблон подключения после получения VM: запуск каждые 5 минут,
+backup ежедневно, допустимый возраст 30 часов. Выбранный мониторинг должен обрабатывать
+ненулевой exit code **и отсутствие очередного запуска**; cron сам по себе не гарантирует
+доставку уведомления. Внешняя проверка с другой машины нужна для обнаружения падения всей VM.
+Расписание, получатель уведомлений и offsite-хранилище ещё не настроены.
+После подключения проверить намеренный отказ на тестовом URL и доставку сообщения.
 
 ## Существующий внешний proxy
 

@@ -1,14 +1,59 @@
-export type InfoContent = {
- title:string;
- description?:string;
- draft:boolean;
- reviewedAt?:string;
- paragraphs:string[];
- sections?:{title:string;paragraphs:string[]}[];
- related?:string[];
-};
+import type {InfoContent} from "./info-types";
+import {travelGuides} from "./travel-guides";
+import {airportGuides} from "./airport-guides";
+import {destinationGuides} from "./destination-guides";
+export type {InfoContent} from "./info-types";
 
 export const content:Record<string,InfoContent> = {
+ ...travelGuides,...airportGuides,...destinationGuides,
+ "trip-budget":{
+  title:"Jak policzyć budżet całej podróży",
+  description:"Cena lotu na osobę a koszt wyjazdu: wspólne noclegi, dojazdy, dodatki i niewiadome.",
+  draft:false,reviewedAt:"2026-09-23",category:"planning",
+  paragraphs:["Filtr budżetu w HopTrip dotyczy ceny lotu na osobę. Nie jest limitem kosztu całego wyjazdu. Przed wyborem porównaj pełne koszty obu wariantów dla tej samej liczby podróżnych i tych samych dat."],
+  sections:[
+   {title:"Oddziel koszty na osobę od wspólnych",paragraphs:[
+    "Zapisz osobno bilety lotnicze dla wszystkich pasażerów, potrzebny bagaż i wybrane dodatki. Jeśli sprawdzasz cenę tylko dla jednej osoby, potwierdź u sprzedawcy kwotę dla całej grupy — nie zakładaj, że każde kolejne miejsce kosztuje tyle samo.",
+    "Nocleg rozlicz według ceny całej rezerwacji i liczby nocy. Pokoju dla dwóch osób nie mnożysz ponownie przez dwie osoby. Dopisz dojazd do lotniska wylotu, transport po przylocie w obie strony i wydatki na miejscu. Każdą pozycję oznacz jako koszt wspólny albo na osobę.",
+   ]},
+   {title:"Przykład rachunku, nie oferta",paragraphs:[
+    "Wyłącznie przykład obliczeniowy: bilety dla dwóch osób łącznie 600 PLN, nocleg łącznie 900 PLN, dojazdy łącznie 200 PLN i pozostałe wydatki 300 PLN dają 2000 PLN za wyjazd, czyli 1000 PLN na osobę przy równym podziale. Wszystkie liczby są umowne; nie opisują dostępnej podróży.",
+    "Jeśli cena biletu obejmuje tylko wylot, dodaj osobno powrót. Jeśli obejmuje podróż w obie strony, nie dodawaj powrotu drugi raz. Sprawdź też, które dodatki są już zawarte w podsumowaniu sprzedawcy.",
+   ]},
+   {title:"Nie zamieniaj brakującej ceny w zero",paragraphs:[
+    "Przy każdej pozycji zapisz źródło, datę sprawdzenia i walutę. Nieznany koszt oznacz jako do sprawdzenia. Suma znanych pozycji jest wtedy tylko częścią budżetu, a nie gotową ceną wyjazdu.",
+    "Nie dodawaj bezpośrednio kwot w różnych walutach. Przed porównaniem potrzebujesz wspólnej waluty i jawnego sposobu przeliczenia. HopTrip obecnie porównuje loty w PLN i nie wylicza kosztu noclegów ani wymiany walut.",
+   ]},
+   {title:"Porównaj czas i koszty razem",paragraphs:[
+    "Dla każdego wariantu sprawdź, czy godziny lotów pasują do dojazdu i noclegu. Jeśli potrzebujesz dodatkowej nocy, parkingu lub innego transferu, dopisz je do tego wariantu. Niższa cena samego lotu nie przesądza o niższym koszcie wyjazdu.",
+    "Przed płatnością ponownie sprawdź wszystkie rezerwacje, końcowe kwoty i wybrane dodatki. Zapisana obserwacja ceny w HopTrip nie blokuje ceny u sprzedawcy.",
+   ]},
+  ],related:["one-way-round-trip","price-comparison","price-freshness"],
+ },
+ "one-way-round-trip":{
+  title:"Lot w jedną stronę czy w obie strony",
+  description:"Jak porównać zakres podróży, daty i lotniska bez podwójnego liczenia powrotu.",
+  draft:false,reviewedAt:"2026-09-23",category:"planning",
+  paragraphs:["Przed porównaniem kwot ustal, co obejmuje każda z nich. Cena wylotu i cena podróży z powrotem opisują inny zakres. Sam niski wynik w katalogu nie mówi, ile zapłacisz za całą zaplanowaną trasę."],
+  sections:[
+   {title:"Najpierw daty i zakres ceny",paragraphs:[
+    "W HopTrip oferty bez daty powrotu są porównywane w osobnej grupie historii. Przy podróży z powrotem sprawdź obie daty i długość pobytu. Nie traktuj ceny za jeden kierunek jako ceny wyjazdu w obie strony.",
+    "Po przejściu do partnera upewnij się, że formularz pokazuje te same daty, liczbę osób i zakres podróży. Potwierdź cenę końcową całego wybranego wariantu; sam opis na karcie HopTrip nie zastępuje podsumowania rezerwacji.",
+   ]},
+   {title:"Dwa osobne bilety policz tylko raz",paragraphs:[
+    "Jeśli porównujesz dwa oddzielne bilety w jedną stronę z jednym wariantem obejmującym powrót, zsumuj oba osobne bilety i potrzebne dodatki. Zestaw tę sumę z końcową kwotą wariantu w obie strony dla tych samych osób.",
+    "Przykład wyłącznie obliczeniowy: wylot 180 PLN i powrót 220 PLN dają 400 PLN przed dodatkami. Wariant w obie strony za umowne 390 PLN wymaga jeszcze porównania bagażu, godzin i warunków. Te kwoty nie są ofertami i nie dowodzą, który sposób zakupu jest zwykle tańszy.",
+   ]},
+   {title:"Sprawdź konkretne lotniska",paragraphs:[
+    "Porównaj kody lotnisk każdego odcinka, a nie tylko nazwę miasta. Zapisz, skąd wylatujesz i dokąd wracasz. Jeżeli lotniska się różnią, uwzględnij sposób dotarcia do domu lub odbioru samochodu.",
+    "Daty podróży zestaw z liczbą potrzebnych noclegów i czasem dojazdu. Długość pobytu używana w porównaniu cen nie jest gwarancją określonej liczby pełnych dni na miejscu.",
+   ]},
+   {title:"Warunki sprawdzaj dla wybranego biletu",paragraphs:[
+    "Sprawdź bagaż, zasady zmian i anulowania dla każdego kupowanego odcinka oraz sprzedawcę i zakres rezerwacji. Nie zakładaj wspólnych warunków tylko dlatego, że oba loty znalazły się w tym samym wyszukiwaniu.",
+    "Ten poradnik wyjaśnia sposób porównania kosztów. Nie określa warunków konkretnej taryfy ani ochrony przy zakłóceniu podróży; te informacje trzeba sprawdzić w dokumentach wybranej rezerwacji.",
+   ]},
+  ],related:["trip-budget","price-comparison","partners"],
+ },
  "price-comparison":{
   title:"Jak porównujemy ceny lotów",
   description:"Co oznacza porównanie z medianą w HopTrip i co sprawdzić, zanim wybierzesz lot.",
@@ -27,7 +72,7 @@ export const content:Record<string,InfoContent> = {
     "Wynik 0–100 łączy pozycję ceny w historii, różnicę wobec mediany, świeżość i liczebność próby. Nie jest prawdopodobieństwem udanego zakupu. Nieznane parametry wygody otrzymują neutralną ocenę, a nie potwierdzenie dogodnego lotu.",
     "Zacznij od swojego lotniska, terminu i długości pobytu. Potem sprawdź cenę na osobę, czas obserwacji i cenę końcową po przejściu do partnera. Osobno uwzględnij nocleg, dojazdy oraz potrzebne dodatki — obecny katalog dotyczy lotów.",
    ]},
-  ],related:["price-freshness","price-history"],
+  ],related:["price-freshness","price-history","trip-budget","one-way-round-trip"],
  },
  "price-freshness":{
   title:"Co oznacza świeżość oferty",
@@ -100,4 +145,20 @@ export function getInfoContent(slug:string):InfoContent | undefined {
 
 export function publishedInfoPages() {
  return Object.entries(content).filter(([,page])=>!page.draft);
+}
+
+const planningReasons:Record<string,string>={
+ baggage:"Sprawdź bagaż przed odprawą i porównaj pełną cenę biletu.",
+ connections:"Zaplanuj czas między lotami i rozróżnij jedną rezerwację od osobnych biletów.",
+ "trip-budget":"Dolicz dojazd, nocleg i opłaty do budżetu całej podróży.",
+};
+export function relatedInfoPages(slug:string) {
+ const page=getInfoContent(slug);
+ if(!page || page.draft) return [];
+ const suggestions=page.category==="airports" ? Object.keys(planningReasons) :
+  page.category==="destinations" ? ["trip-budget","connections"] : [];
+ return [...new Set([...suggestions,...(page.related ?? [])])].filter(key=>key!==slug).flatMap(key=>{
+  const related=getInfoContent(key);
+  return related && !related.draft ? [{slug:key,page:related,reason:planningReasons[key] ?? related.description}] : [];
+ });
 }
