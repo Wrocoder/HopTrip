@@ -5,6 +5,26 @@
 (статьи + главная + `/info`), для статей генерируются 35 PNG-превью.
 На временном HTTPS staging действует общий запрет индексации на Caddy.
 
+## Подключение hoptrip.pl
+
+2026-09-24 домен зарегистрирован в OVHcloud. Авторитетный DNS `dns111.ovh.net`
+подтвердил A-записи `hoptrip.pl` и `www.hoptrip.pl` → `141.144.246.78`.
+На момент проверки публичные резолверы 1.1.1.1/8.8.8.8 возвращают NXDOMAIN,
+Oracle VM также ещё не разрешает имя. Переключение пока не выполнено.
+
+Подготовлены `docker-compose.domain.yml` и `infrastructure/Caddyfile.domain`:
+основной адрес `https://hoptrip.pl`, перенаправления 308 с `www` и прежнего sslip.io
+с сохранением пути и query string. Используется существующий Caddyfile.staging:
+запрет индексации и закрытие публичных admin endpoints остаются до отдельного запуска.
+Конфигурация прошла `caddy validate` на Oracle VM с HOPTRIP_DOMAIN=hoptrip.pl.
+
+После распространения DNS: сохранить текущие env и образ web для отката;
+установить HOPTRIP_DOMAIN=hoptrip.pl в серверном env, пересобрать web (canonical,
+sitemap и OG URL задаются во время сборки), обновить API CORS и запустить Caddy
+с compose-файлами base + production + domain вместо staging. Проверить выдачу
+сертификатов для обоих новых имён, HTTPS, перенаправления, API readiness и SEO-аудит
+37 URL в режиме `--staging`. До этих проверок миграция не считается завершённой.
+
 ## Расширение направлений: ещё 10 городов
 
 Новый реестр: `apps/web/src/lib/more-destination-guides.ts`, дата проверки 2026-09-24.

@@ -1,0 +1,9 @@
+# Apply after base + production; set HOPTRIP_DOMAIN=hoptrip.pl before building web.
+# Preserves preview restrictions until the separate indexing launch.
+services:
+  caddy:
+    volumes: !override
+      - ./infrastructure/Caddyfile.domain:/etc/caddy/Caddyfile:ro
+      - ./infrastructure/Caddyfile.staging:/etc/caddy/Caddyfile.staging:ro
+      - caddy_data:/data
+      - caddy_config:/config

@@ -1,0 +1,7 @@
+# Custom-domain preview: keep the existing indexing and admin restrictions.
+# HOPTRIP_DOMAIN must be hoptrip.pl for this deployment.
+import Caddyfile.staging
+
+www.hoptrip.pl, app.141-144-246-78.sslip.io {
+    redir https://{$HOPTRIP_DOMAIN}{uri} 308
+}
