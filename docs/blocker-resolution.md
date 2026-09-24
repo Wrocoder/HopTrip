@@ -25,8 +25,16 @@ No real ingestion or affiliate attribution has been verified yet.
 
 Next owner step: Profile → API token; keep the token only in the server's protected
 `/opt/hoptrip/.env.production` as `TRAVELPAYOUTS_API_TOKEN`. Do not send it in chat.
-In My Programs select hoptrip.pl and report the available flight program and status,
-then supply a sample affiliate link and its documented permitted tracking parameter.
+Owner supplied Aviasales link https://aviasales.tpx.gr/8mYVweU5 and a program overview
+screenshot. A HEAD request returned 302 to the Aviasales.com homepage with marker.
+Public referral identifiers from the response: marker=779959, trs=577569,
+campaign_id=100, p=4114. These are not API credentials. The link contains no route
+or dates and must not be attached to a specific priced flight as its booking link.
+The screenshot lists Worldwide targeting, English/Russian languages, permitted
+content creation, and restrictions on paid search/media buying. This does not
+verify Polish-language service, PLN data coverage, API access or attributed bookings.
+Still confirm the documented permitted tracking parameter and obtain a route/date
+deep link after fetching a real offer; do not invent SubID syntax for the short URL.
 Do not infer program approval from Drive installation or the existence of a token.
 After handoff: take a DB backup, validate a bounded real request for Polish departures,
 check PLN/market coverage and dates, run one controlled ingestion, configure the
