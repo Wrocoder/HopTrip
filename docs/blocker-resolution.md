@@ -20,10 +20,11 @@ Current priority: connect real flight offers and verified booking links, followe
 package holidays (owner confirmed both product types). hoptrip.pl is deployed with
 HTTPS; indexing remains disabled. Travelpayouts account created, Drive installed
 and its script loading verified. Drive dashboard confirmation remains owner-side.
-Read-only check of the running API on 2026-09-24: data API token is absent.
-No real ingestion or affiliate attribution has been verified yet.
+Owner saved the API token on the server; API container recreated on 2026-09-24.
+Real ingestion and route-specific affiliate link generation now verified below.
+Partner-side attribution and conversion reporting remain unverified.
 
-Next owner step: Profile → API token; keep the token only in the server's protected
+Keep the token only in the server's protected
 `/opt/hoptrip/.env.production` as `TRAVELPAYOUTS_API_TOKEN`. Do not send it in chat.
 Owner supplied Aviasales link https://aviasales.tpx.gr/8mYVweU5 and a program overview
 screenshot. A HEAD request returned 302 to the Aviasales.com homepage with marker.
@@ -32,13 +33,35 @@ campaign_id=100, p=4114. These are not API credentials. The link contains no rou
 or dates and must not be attached to a specific priced flight as its booking link.
 The screenshot lists Worldwide targeting, English/Russian languages, permitted
 content creation, and restrictions on paid search/media buying. This does not
-verify Polish-language service, PLN data coverage, API access or attributed bookings.
-Still confirm the documented permitted tracking parameter and obtain a route/date
-deep link after fetching a real offer; do not invent SubID syntax for the short URL.
+verify Polish-language service or attributed bookings.
+Do not invent SubID syntax for the short URL.
 Do not infer program approval from Drive installation or the existence of a token.
-After handoff: take a DB backup, validate a bounded real request for Polish departures,
-check PLN/market coverage and dates, run one controlled ingestion, configure the
-approved link and verify the click path. Enable periodic ingestion only after acceptance.
+Completed first real-data run on 2026-09-24:
+
+- Backup: `/opt/hoptrip/backups/hoptrip-20260924T204502Z-2287576.dump`.
+- Read-only probes for WRO/WAW: HTTP 200, success=true, 10 offers each,
+  currency=pln and market=pl requested. Currency is inferred from the request when
+  omitted per item; links also carry expected_price_currency=pln.
+- Tracked pipeline: PROVIDER_MAX_PAGES=1 and PIPELINE_MAX_ATTEMPTS=1;
+  seven origins, 700 normalized offers, 74 saved offers/observations and 74 deals.
+  626 unresolved routes skipped; no invalid/ambiguous/unconvertible offers.
+  Each origin reached page_limit: this is a bounded sample, not complete coverage.
+- All 74 components received route/date-specific links from the official
+  `POST /links/v1/create` (batches up to 10, shorten=false, project/marker above).
+  API returned success. Validated HTTPS tp.media, project/marker and semantic
+  equality of the embedded target URL; the API reorders query parameters.
+  Aviasales program configured APPROVED/active based on the supplied Available
+  program and successful link API. Allowed host tp.media; tracking_param=NULL.
+- Browser: catalog displays 12 cards on page one; a real detail page loads;
+  available booking CTA returns 307 to tp.media with the matching route and IDs.
+  No pageerror observed. This verifies our redirect, not a purchase or commission.
+
+No periodic worker enabled. Link generation was a one-off operational backfill,
+not a new automatic pipeline stage. Next: implement tested recurring link generation,
+expand explicit destination aliases, then enable bounded scheduled ingestion.
+No per-click SubID modification; verify attribution in the partner dashboard separately.
+The source omits found_at/expires_at; observed freshness is first-seen, not a live quote.
+The existing 48-hour freshness filter stops displaying stale records without a worker.
 Package holidays need a separate TravelLead application and confirmed feed/link access;
 there is no implemented package feed adapter yet. See [seo.md](seo.md).
 
@@ -56,12 +79,13 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 - [x] Add token-free website/API/backup-age probes and tests of failure conditions.
 - [x] Publish 35 content pages, including 18 city guides with official sources.
 - [ ] Verify green CI for the exact release revision.
-- [ ] Configure actual program/component links and verify attribution with a real partner.
+- [x] Configure real Aviasales links on 74 flight components; verify internal redirect.
+- [ ] Verify attribution with a real partner.
 - [ ] Finalize operator/contact/privacy/terms information.
 - [x] Verify 37 sitemap URLs and 35 previews on hoptrip.pl after deployment.
 - [ ] Review date-sensitive facts before opening indexing.
 - [x] Deploy to Oracle VM and verify public DNS/TLS, redirects and API readiness.
-- [ ] Verify real-data ingestion on the VM.
+- [x] Verify one bounded real-data ingestion on the VM.
 - [ ] Configure offsite backups, retention and monitoring delivery; verify a production restore drill.
 
 The probe implementation is ready; no monitoring schedule or notification destination has
