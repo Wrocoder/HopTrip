@@ -1,6 +1,26 @@
-# Custom-domain preview: keep the existing indexing and admin restrictions.
-# HOPTRIP_DOMAIN must be hoptrip.pl for this deployment.
-import Caddyfile.staging
+# Public launch. Keep private endpoints closed and legal pages out of search.
+{
+    email {$ACME_EMAIL}
+}
+
+{$HOPTRIP_DOMAIN} {
+    encode gzip
+    @private path /api/* /go/* /health /health/* /info/contact /info/contact/* /info/privacy /info/privacy/* /info/terms /info/terms/*
+    header @private X-Robots-Tag "noindex, follow"
+    @legal path /info/contact /info/contact/* /info/privacy /info/privacy/* /info/terms /info/terms/*
+    header @legal Cache-Control "private, no-store"
+    @admin path /api/v1/admin /api/v1/admin/*
+    handle @admin {
+        respond 404
+    }
+    @api path /api/* /health /health/* /go/*
+    handle @api {
+        reverse_proxy api:8000
+    }
+    handle {
+        reverse_proxy web:3000
+    }
+}
 
 www.hoptrip.pl, app.141-144-246-78.sslip.io {
     redir https://{$HOPTRIP_DOMAIN}{uri} 308

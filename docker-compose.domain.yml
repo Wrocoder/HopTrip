@@ -1,6 +1,11 @@
 # Apply after base + production; set HOPTRIP_DOMAIN=hoptrip.pl before building web.
-# Preserves preview restrictions until the separate indexing launch.
+# Public launch; operator details are mounted at runtime, outside the repository/image.
 services:
+  web:
+    environment:
+      HOPTRIP_OPERATOR_FILE: /run/hoptrip/operator.json
+    volumes:
+      - /etc/hoptrip/operator.json:/run/hoptrip/operator.json:ro
   caddy:
     volumes: !override
       - ./infrastructure/Caddyfile.domain:/etc/caddy/Caddyfile:ro

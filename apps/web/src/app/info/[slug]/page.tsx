@@ -3,21 +3,25 @@ import Link from "next/link";
 import type {Metadata} from "next";
 import {getInfoContent,relatedInfoPages} from "../../../lib/content";
 import {pl} from "../../../lib/pl";
+import {isLegalPage} from "../../../lib/legal-content";
+import {readOperator} from "../../../lib/operator";
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
  if(!page) notFound();
  const description=page.description ?? page.paragraphs[0];
  return {title:page.title,description,alternates:{canonical:`/info/${slug}`},
-  robots:{index:!page.draft,follow:true},
+  robots:{index:!page.draft && !page.noindex,follow:true},
   openGraph:{title:page.title,description,url:`/info/${slug}`,locale:"pl_PL",type:"website",
-   ...(!page.draft ? {images:[{url:`/share/${slug}`,width:1200,height:630,alt:page.title}]} : {})},
-  ...(!page.draft ? {twitter:{card:"summary_large_image",title:page.title,description,
+   ...(!page.draft && !page.noindex ? {images:[{url:`/share/${slug}`,width:1200,height:630,alt:page.title}]} : {})},
+  ...(!page.draft && !page.noindex ? {twitter:{card:"summary_large_image",title:page.title,description,
    images:[{url:`/share/${slug}`,alt:page.title}]}} : {})};
 }
 export default async function InfoPage({params}:Props) {
  const {slug}=await params;
  const page=getInfoContent(slug); if(!page) notFound();
+ const legal=isLegalPage(slug);
+ const operator=legal ? await readOperator() : null;
  const related=relatedInfoPages(slug);
  const base=process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
  const crumbs=[{name:"Strona główna",href:"/"},{name:"Jak działa HopTrip",href:"/info"},
@@ -26,13 +30,28 @@ export default async function InfoPage({params}:Props) {
   itemListElement:crumbs.map((crumb,index)=>({"@type":"ListItem",position:index+1,
    name:crumb.name,item:new URL(crumb.href,base).href}))};
  return <main className="page-shell">
- {!page.draft && <script type="application/ld+json" dangerouslySetInnerHTML={{
+ {!page.draft && !page.noindex && <script type="application/ld+json" dangerouslySetInnerHTML={{
   __html:JSON.stringify(breadcrumbs).replace(/</g,"\\u003c"),
  }}/>}
  <nav className="breadcrumbs" aria-label="Ścieżka nawigacji"><ol>{crumbs.map((crumb,index)=>
   <li key={crumb.href}>{index===crumbs.length-1 ? <span aria-current="page">{crumb.name}</span> :
    <Link href={crumb.href}>{crumb.name}</Link>}</li>)}</ol></nav>
  <article className="deal-detail"><h1>{page.title}</h1>
+ {legal && <section aria-label="Dane operatora" data-nosnippet>
+  <h2>Operator i kontakt</h2>
+  {operator ? <address style={{fontStyle:"normal"}}>
+   <strong>{operator.name}</strong><br/>{operator.address}<br/>{operator.country}<br/>
+   <a href={`mailto:${operator.email}`}>{operator.email}</a>
+  </address> : <p role="alert">Dane kontaktowe są chwilowo niedostępne. Spróbuj ponownie później.</p>}
+ </section>}
+ {slug==="privacy" && <section><h2>Informacje dostawców i organ nadzorczy</h2><ul>
+  <li><a href="https://www.oracle.com/legal/privacy/services-privacy-policy.html">Oracle — prywatność usług</a></li>
+  <li><a href="https://www.ovhcloud.com/pl/personal-data-protection/">OVHcloud — ochrona danych</a></li>
+  <li><a href="https://support.travelpayouts.com/hc/en-us/articles/360004121052-Privacy-Policy">Travelpayouts — prywatność</a></li>
+  <li><a href="https://www.aviasales.com/privacy">Aviasales — prywatność</a></li>
+  <li><a href="https://telegram.org/privacy">Telegram — prywatność</a></li>
+  <li><a href="https://uodo.gov.pl/">Urząd Ochrony Danych Osobowych</a></li>
+ </ul></section>}
  {page.reviewedAt && <p className="muted">HopTrip · Sprawdzono <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
  {page.draft && <p role="note">{pl.draft}</p>}{page.paragraphs.map(p=><p key={p}>{p}</p>)}
  {page.sections?.map(section=><section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map(p=><p key={p}>{p}</p>)}

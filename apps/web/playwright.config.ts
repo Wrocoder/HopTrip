@@ -13,6 +13,7 @@ export default defineConfig({
     env:{HOPTRIP_E2E:"1",PYTHONPATH:path.resolve("../api"),CORS_ORIGINS:"http://127.0.0.1:3100",PUBLIC_RATE_LIMIT:"10000"}},
    {command:"npm run dev -- --hostname 127.0.0.1 --port 3100",
     url:"http://127.0.0.1:3100",reuseExistingServer:false,timeout:120000,
-    env:{HOPTRIP_API_URL:"http://127.0.0.1:8100",NEXT_PUBLIC_API_URL:"http://127.0.0.1:8100",NEXT_PUBLIC_SITE_URL:"http://127.0.0.1:3100"}},
+    env:{HOPTRIP_API_URL:"http://127.0.0.1:8100",NEXT_PUBLIC_API_URL:"http://127.0.0.1:8100",NEXT_PUBLIC_SITE_URL:"http://127.0.0.1:3100",
+      HOPTRIP_OPERATOR_FILE:path.resolve("tests/fixtures/operator.json")}},
  ],
 });

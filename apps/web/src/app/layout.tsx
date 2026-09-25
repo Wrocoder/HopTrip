@@ -24,6 +24,8 @@ export default function RootLayout({children}:Readonly<{children:React.ReactNode
     <SiteNav/></header>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{pl.disclosure}</p></div><nav className="footer-nav" aria-label="Informacje o serwisie">
-      {(["about","contact","privacy","terms","partners"] as const).map(key=><Link key={key} href={`/info/${key}`}>{pl[key]}</Link>)}
+      {(["about","contact","privacy","terms","partners"] as const).map(key=>
+        ["contact","privacy","terms"].includes(key) ? <a key={key} href={`/info/${key}`}>{pl[key]}</a> :
+        <Link key={key} href={`/info/${key}`}>{pl[key]}</Link>)}
     </nav><ConsentControls driveEnabled={driveEnabled}/></footer></body></html>;
 }

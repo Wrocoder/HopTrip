@@ -1,4 +1,5 @@
 import type {InfoContent} from "./info-types";
+import {legalContent} from "./legal-content";
 import {travelGuides} from "./travel-guides";
 import {airportGuides} from "./airport-guides";
 import {destinationGuides} from "./destination-guides";
@@ -127,20 +128,7 @@ export const content:Record<string,InfoContent> = {
    "HopTrip nie przyjmuje płatności i nie wystawia biletów. Ostateczną cenę, sprzedawcę i warunki umowy sprawdzasz na stronie, na którą przechodzisz.",
    "Dane cenowe i program partnerski to oddzielne integracje. Obecność ceny w katalogu nie oznacza, że link do zakupu jest dostępny. Nieaktywna współpraca wyłącza przycisk.",
  ]},
- contact:{title:"Kontakt",draft:true,paragraphs:["Przed publikacją operator musi podać swoją nazwę, adres do kontaktu i kanał zgłaszania błędnych ofert. Obecnie nie udostępniamy formularza zbierającego wiadomości."]},
- privacy:{title:"Prywatność",draft:true,paragraphs:[
-   "Analityka HopTrip i Travelpayouts Drive są domyślnie wyłączone. Możesz osobno włączyć je w ustawieniach prywatności, odrzucić oba cele albo później wycofać zgodę. Odmowa nie blokuje dostępu do ofert. Wybór zapisujemy w localStorage pod kluczem hoptrip.consent.v1 na 180 dni.",
-   "Po zgodzie na analitykę zapisujemy losowy identyfikator sesji w localStorage (hoptrip.session.v2), czas aktywności i oznaczenia źródła/kampanii. Po 30 minutach bezczynności przy kolejnym użyciu powstaje nowy identyfikator; sam wpis nie znika automatycznie po tym czasie. Zdarzenia obejmują odsłony, oferty, wyszukiwania, filtry i przejścia do partnerów. Wycofanie zgody usuwa identyfikator z tej przeglądarki i zatrzymuje nowe zdarzenia.",
-   "Zdarzenia analityczne starsze niż 90 dni usuwamy podczas zadań utrzymaniowych. Ze starszych zapisów przejść partnerskich usuwamy kontekst sesji i kampanii; same zapisy rozliczeniowe mogą pozostać. Bez zgody na analitykę przejście nie jest łączone z sesją przeglądarki, ale zachowujemy techniczny zapis przekierowania.",
-   "Po osobnej zgodzie marketingowej ładujemy Travelpayouts Drive z emrld.ltd. Skrypt może odczytywać stronę i zmieniać linki na partnerskie; połączenie przekazuje dostawcy dane techniczne, w tym adres IP. Wycofanie zgody odświeża stronę i blokuje kolejne załadowanie Drive. Wcześniej zapisane dane stron trzecich można usunąć w ustawieniach przeglądarki.",
-   "Nie zbieramy płatności ani danych rezerwacji. Po przejściu do partnera obowiązują jego zasady. Nie dodajemy adresu email ani danych rezerwacji do linków partnerskich.",
-   "Przed publikacją należy uzupełnić administratora danych, podstawy przetwarzania, kontakt, odbiorców i okresy przechowywania oraz zweryfikować konfigurację analityki.",
- ]},
- terms:{title:"Zasady korzystania",draft:true,paragraphs:[
-   "Ceny mogą ulec zmianie od chwili obserwacji. Rezerwacji dokonuje się poza HopTrip, na warunkach wybranego sprzedawcy.",
-   "Przed zakupem sprawdź kierunek, lotnisko, daty, liczbę pasażerów, bagaż oraz warunki zwrotu. Porównanie historyczne nie gwarantuje najniższej ceny.",
-   "Przed publikacją należy uzupełnić dane operatora, procedurę kontaktu i właściwe postanowienia regulaminu.",
- ]},
+ ...legalContent,
 };
 
 export function getInfoContent(slug:string):InfoContent | undefined {
@@ -148,7 +136,7 @@ export function getInfoContent(slug:string):InfoContent | undefined {
 }
 
 export function publishedInfoPages() {
- return Object.entries(content).filter(([,page])=>!page.draft);
+ return Object.entries(content).filter(([,page])=>!page.draft && !page.noindex);
 }
 
 const planningReasons:Record<string,string>={

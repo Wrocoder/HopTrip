@@ -1,10 +1,13 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- Full navigation unloads Drive before rendering personal operator details. */
 import {useEffect,useRef,useState,useSyncExternalStore} from "react";
-import Link from "next/link";
+import {usePathname} from "next/navigation";
 import {consentSnapshot,readConsent,saveConsent,subscribeConsent} from "../../lib/consent";
 import {clearSession,track} from "../../lib/session";
 
 export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
+  const pathname=usePathname();
+  const legal=/^\/info\/(contact|privacy|terms)\/?$/.test(pathname);
   // The expiry flag changes even when the stored value itself has not changed.
   const snapshot=useSyncExternalStore(subscribeConsent,()=>readConsent()?consentSnapshot():"",()=>"");
   const consent=snapshot ? JSON.parse(snapshot) : null;
@@ -20,8 +23,8 @@ export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
   },[analytics]);
   useEffect(()=>{
     const previous=document.getElementById("travelpayouts-drive");
-    if(!marketing && previous) {window.location.reload();return;}
-    if(!driveEnabled || !marketing || previous) return;
+    if((!marketing || legal) && previous) {window.location.reload();return;}
+    if(!driveEnabled || !marketing || legal || previous) return;
     const script=document.createElement("script");
     script.id="travelpayouts-drive";
     script.async=true;
@@ -30,7 +33,7 @@ export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
     document.head.appendChild(script);
     // A loaded third-party script cannot be undone by removing its element.
     // Withdrawal reloads the document with the saved opt-out instead.
-  },[marketing,driveEnabled]);
+  },[marketing,driveEnabled,legal]);
   function choose(a:boolean,m:boolean) {
     saveConsent(a,m);setEditing(false);settings.current?.focus();
   }
@@ -49,7 +52,7 @@ export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
       <label><input type="checkbox" checked={selectedMarketing} onChange={e=>setMarketing(e.target.checked)}/>
         Travelpayouts Drive — zewnętrzny skrypt marketingowy z emrld.ltd, który odczytuje stronę i zmienia linki na partnerskie.</label>
       <p>Wycofanie zgody na Drive odświeży stronę. Przejścia do partnerów odbywają się na ich zasadach.
-        {" "}<Link href="/info/privacy">Prywatność</Link>{" · "}
+        {" "}<a href="/info/privacy">Prywatność</a>{" · "}
         <a href="https://support.travelpayouts.com/hc/en-us/articles/360004121052-Privacy-Policy" rel="noopener noreferrer" target="_blank">Zasady Travelpayouts</a></p>
       <div className="consent-actions">
         <button type="button" onClick={()=>choose(false,false)}>Odrzuć opcjonalne</button>

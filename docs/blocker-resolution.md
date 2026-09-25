@@ -16,21 +16,40 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
+### Индексация открыта — 2026-09-25
+
+- Contact/privacy/terms опубликованы без draft-заглушек. Данные владельца читаются
+  во время запроса из `/etc/hoptrip/operator.json` на VM (root, 600, read-only mount).
+  Почтового адреса нет в репозитории или образе приложения.
+- Главная, `/info` и 35 опубликованных материалов открыты для индексации; sitemap
+  содержит 37 URL. Общий `noindex` и запрет обхода в robots.txt сняты.
+- Contact/privacy/terms сохраняют `noindex`, отсутствуют в sitemap, не имеют share-image.
+  Данные владельца отсутствуют в SEO-описаниях и структурированных данных.
+  Эти страницы публично доступны посетителям: noindex не является ограничением доступа.
+- Drive не загружается на юридических страницах; переход к ним из footer выполняет
+  полную навигацию для выгрузки уже запущенного стороннего скрипта.
+- `/api/v1/admin/*` по-прежнему возвращает 404. Редиректы www и старого sslip.io — 308.
+- Search Console подтверждён владельцем. **Осталось владельцу:** отправить
+  `https://hoptrip.pl/sitemap.xml` в разделе Sitemaps и через проверку URL запросить
+  индексирование главной и ключевых статей. Доступ к аккаунту Google агенту не предоставлен.
+- Разрешение индексации проверяется технически; фактическое включение в индекс и
+  поисковый трафик пока не подтверждены. Подробности: [indexing-launch.md](indexing-launch.md).
+
 Владелец — физическое лицо: **Dmitriy Kysyelyev** (написание предоставлено владельцем
 для подготовки публичных страниц). Страна: **Poland / Polska**.
 Email: **kontakt@hoptrip.pl**, получение писем подтверждено.
 Адрес предоставлен владельцем в переписке; по его прямому указанию не сохранять
 его в репозитории, документации, тестах или истории Git. Для сайта использовать
-отдельную конфигурацию на сервере вне Git. На сайте адрес ещё не опубликован.
-Все запрошенные данные владельца получены; следующий этап — внести их в
-contact/privacy/terms и завершить содержание этих страниц. Не подставлять другое
+отдельную конфигурацию на сервере вне Git. Адрес опубликован только на юридических страницах.
+Все запрошенные данные владельца получены и подключены к contact/privacy/terms.
+Не подставлять другое
 написание имени или адрес из локальных путей либо профилей.
 Название HopTrip само по себе не идентифицирует физическое лицо — оператора.
 При подготовке публичных текстов учитывать идентификацию администратора по ст. 13 RODO
 и применимость [ст. 5 закона об электронных услугах](https://eli.gov.pl/api/acts/DU/2024/1513/text.html).
 Это вопрос публичных обязанностей оператора, а не самостоятельное техническое
-требование Google к имени владельца. Индексация остаётся закрытой по ранее выбранному
-порядку запуска до завершения публичных страниц.
+требование Google к имени владельца. После завершения публичных страниц общая
+блокировка индексации снята; юридические страницы сохраняют noindex.
 
 ### Telegram: уведомления о письмах подтверждены владельцем
 
@@ -96,7 +115,7 @@ sudo systemctl start hoptrip-activity.service
 не подключён. Доставка уведомлений о письмах подтверждена; сводки и тестовый алерт
 остаются отдельными пунктами приёмки.
 
-### Ближайшие шаги для Google — проверка 2026-09-25
+### Предыдущая проверка Google до открытия индексации — 2026-09-25
 
 - Главная и sitemap отвечают HTTP 200, но сервер возвращает `X-Robots-Tag: noindex, nofollow`.
   В robots.txt для `User-agent: *` стоит `Disallow: /`: индексация намеренно закрыта.
@@ -130,8 +149,9 @@ Website consent controls deployed: analytics and Drive off by default, separate 
 reject/save/accept, expiry and withdrawal. 134 backend tests + 82 browser tests passed;
 real Drive consent/withdrawal checked on hoptrip.pl. Full evidence: operations.md.
 Operator Dmitriy Kysyelyev, country Poland and working inbox kontakt@hoptrip.pl confirmed;
-Operator address supplied privately; owner prohibits storing it in the repository. Contact/privacy/terms
-remain draft, indexing remains blocked. Search Console steps: [indexing-launch.md](indexing-launch.md).
+Operator address supplied privately; owner prohibits storing it in the repository.
+Contact/privacy/terms now published with runtime operator data and noindex; public editorial
+indexing is open. Search Console steps: [indexing-launch.md](indexing-launch.md).
 
 Latest completed step: reviewed destination catalog expanded from 10 to 68 entries,
 155 explicit provider aliases applied with conflict checks and a shared pipeline lock.

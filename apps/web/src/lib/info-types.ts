@@ -3,6 +3,7 @@ export type InfoContent = {
  title:string;
  description?:string;
  draft:boolean;
+ noindex?:boolean;
  reviewedAt?:string;
  category?:"planning"|"airports"|"destinations";
  paragraphs:string[];
