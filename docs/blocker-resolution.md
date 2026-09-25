@@ -16,6 +16,16 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
+Страна владельца подтверждена: **Poland / Polska**. Владелец — физическое лицо;
+спрашивает о возможности не публиковать имя и фамилию. Публикация имени/адреса
+не согласована, эти данные не подставлять из локальных путей или профилей.
+Название HopTrip само по себе не идентифицирует физическое лицо — оператора.
+При подготовке публичных текстов учитывать идентификацию администратора по ст. 13 RODO
+и применимость [ст. 5 закона об электронных услугах](https://eli.gov.pl/api/acts/DU/2024/1513/text.html).
+Это вопрос публичных обязанностей оператора, а не самостоятельное техническое
+требование Google к имени владельца. Индексация остаётся закрытой по ранее выбранному
+порядку запуска до завершения публичных страниц.
+
 ### Telegram: уведомления о письмах подтверждены владельцем
 
 Реализация `2acd993` запушена в `master` и установлена на Oracle VM 2026-09-25.
@@ -109,7 +119,7 @@ copy is verified yet.
 Website consent controls deployed: analytics and Drive off by default, separate choices,
 reject/save/accept, expiry and withdrawal. 134 backend tests + 82 browser tests passed;
 real Drive consent/withdrawal checked on hoptrip.pl. Full evidence: operations.md.
-Still waiting for confirmed operator name/address/country/public email. Contact/privacy/terms
+Country Poland and working inbox kontakt@hoptrip.pl confirmed; operator name/address remain pending. Contact/privacy/terms
 remain draft, indexing remains blocked. Search Console steps: [indexing-launch.md](indexing-launch.md).
 
 Latest completed step: reviewed destination catalog expanded from 10 to 68 entries,
