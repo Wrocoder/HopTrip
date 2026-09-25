@@ -16,9 +16,11 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
-Страна владельца подтверждена: **Poland / Polska**. Владелец — физическое лицо;
-спрашивает о возможности не публиковать имя и фамилию. Публикация имени/адреса
-не согласована, эти данные не подставлять из локальных путей или профилей.
+Владелец — физическое лицо: **Dmitriy Kysyelyev** (написание предоставлено владельцем
+для подготовки публичных страниц). Страна: **Poland / Polska**.
+Email: **kontakt@hoptrip.pl**, получение писем подтверждено.
+Адрес для публичных юридических страниц ещё не предоставлен. Не подставлять адрес
+или другое написание имени из локальных путей либо профилей.
 Название HopTrip само по себе не идентифицирует физическое лицо — оператора.
 При подготовке публичных текстов учитывать идентификацию администратора по ст. 13 RODO
 и применимость [ст. 5 закона об электронных услугах](https://eli.gov.pl/api/acts/DU/2024/1513/text.html).
@@ -94,8 +96,8 @@ sudo systemctl start hoptrip-activity.service
 
 - Главная и sitemap отвечают HTTP 200, но сервер возвращает `X-Robots-Tag: noindex, nofollow`.
   В robots.txt для `User-agent: *` стоит `Disallow: /`: индексация намеренно закрыта.
-- Сначала завершить contact/privacy/terms: получить имя владельца, страну и адрес для
-  публикации/обращений; рабочий `kontakt@hoptrip.pl` подтверждён входящим письмом.
+- Сначала завершить contact/privacy/terms: имя Dmitriy Kysyelyev и страна Poland получены;
+  осталось получить адрес для публикации/обращений. Рабочий `kontakt@hoptrip.pl` подтверждён входящим письмом.
   Доставка ответа из ящика отдельно не подтверждена. Учесть реальную обработку почты,
   Telegram, аналитику и партнёрские инструменты в публичных текстах.
 - Затем снять общий запрет индексации, проверить canonical, sitemap, публичные страницы
@@ -119,7 +121,8 @@ copy is verified yet.
 Website consent controls deployed: analytics and Drive off by default, separate choices,
 reject/save/accept, expiry and withdrawal. 134 backend tests + 82 browser tests passed;
 real Drive consent/withdrawal checked on hoptrip.pl. Full evidence: operations.md.
-Country Poland and working inbox kontakt@hoptrip.pl confirmed; operator name/address remain pending. Contact/privacy/terms
+Operator Dmitriy Kysyelyev, country Poland and working inbox kontakt@hoptrip.pl confirmed;
+operator address remains pending. Contact/privacy/terms
 remain draft, indexing remains blocked. Search Console steps: [indexing-launch.md](indexing-launch.md).
 
 Latest completed step: reviewed destination catalog expanded from 10 to 68 entries,
