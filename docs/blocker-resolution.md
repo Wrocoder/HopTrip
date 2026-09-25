@@ -16,10 +16,12 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
-### Telegram: установлено, ожидает подключения секретов
+### Telegram: уведомления о письмах подтверждены владельцем
 
 Реализация `2acd993` запушена в `master` и установлена на Oracle VM 2026-09-25.
-Бот создан владельцем; ввод токена на сервере и реальная доставка пока не подтверждены.
+Владелец подтвердил 2026-09-25: при поступлении письма приходит уведомление в бота.
+Доставка почтовых уведомлений проверена; получение сводок и тестового алерта отдельно
+пока не подтверждено.
 
 - [x] Сбои сайта/API, backup и загрузки предложений, уведомление о восстановлении:
   `hoptrip-monitor.timer`, каждые 5 минут.
@@ -32,8 +34,8 @@ This checklist turns the open external decisions into concrete actions. Do not c
 - [x] 8 целевых тестов прошли. На VM проверки сайта/API/backup/pipeline/worker/диска
   успешны; все три таймера включены. Запрос реальной сводки проверен: job #9,
   добавлено 14, обновлено 670, новых наблюдений цены 20, пропущено маршрутов 16.
-- [ ] Ввести токен и привязать приватный Telegram-чат.
-- [ ] Ввести пароль ящика Zimbra и проверить уведомление о новом письме.
+- [x] Ввести токен и привязать приватный Telegram-чат (подтверждено работающей доставкой).
+- [x] Подключить ящик Zimbra и проверить уведомление о новом письме (подтверждение владельца).
 - [ ] Подтвердить получение тестового сообщения и сводки в Telegram.
 
 **Команды владельцу.** Сначала в Windows PowerShell:
@@ -75,15 +77,35 @@ sudo systemctl start hoptrip-activity.service
 их в чат и не коммитить. Подробности и диагностика: [Telegram setup](telegram-notifications.md).
 
 Ограничения: полное падение VM требует внешнего мониторинга; offsite backup пока
-не подключён. Реальная доставка остаётся непроверенной до выполнения шагов выше.
+не подключён. Доставка уведомлений о письмах подтверждена; сводки и тестовый алерт
+остаются отдельными пунктами приёмки.
+
+### Ближайшие шаги для Google — проверка 2026-09-25
+
+- Главная и sitemap отвечают HTTP 200, но сервер возвращает `X-Robots-Tag: noindex, nofollow`.
+  В robots.txt для `User-agent: *` стоит `Disallow: /`: индексация намеренно закрыта.
+- Сначала завершить contact/privacy/terms: получить имя владельца, страну и адрес для
+  публикации/обращений; рабочий `kontakt@hoptrip.pl` подтверждён входящим письмом.
+  Доставка ответа из ящика отдельно не подтверждена. Учесть реальную обработку почты,
+  Telegram, аналитику и партнёрские инструменты в публичных текстах.
+- Затем снять общий запрет индексации, проверить canonical, sitemap, публичные страницы
+  и сохранение ограничений технических маршрутов. Порядок согласован владельцем ранее.
+- Владелец может уже сейчас подтвердить `hoptrip.pl` в Google Search Console через DNS TXT.
+  После открытия отправить sitemap и запросить индексацию основных страниц.
+- Для роста трафика: полезные страницы под конкретные запросы, актуальные предложения,
+  внутренние ссылки и отслеживание показов/кликов/индексации в Search Console.
+  Индексация и отправка sitemap не гарантируют позиции или трафик.
+- Дополнительные партнёрки, offsite backup и внешний мониторинг не являются техническими
+  условиями Google для индексации. Инструкция: [indexing-launch.md](indexing-launch.md).
 
 ### Остальные результаты аудита
 
 Latest operations/privacy step: daily verified backups and five-minute host monitoring
 are installed on Oracle VM. Restore drill of the scheduled backup succeeded in an isolated
 PostgreSQL container (667 offers, 667 deals, 155 aliases). Retention is enabled only for
-scheduled backups. Notification transport is implemented (Telegram/SMTP), but recipient
-credentials are not supplied: no real alert delivery or offsite copy is verified yet.
+scheduled backups. Telegram inbox notification delivery is confirmed by the owner;
+incident/recovery and pipeline-summary delivery still need separate acceptance. No offsite
+copy is verified yet.
 Website consent controls deployed: analytics and Drive off by default, separate choices,
 reject/save/accept, expiry and withdrawal. 134 backend tests + 82 browser tests passed;
 real Drive consent/withdrawal checked on hoptrip.pl. Full evidence: operations.md.
