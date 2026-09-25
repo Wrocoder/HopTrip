@@ -16,11 +16,68 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
-Telegram selected by owner. Minute-based pipeline summaries and read-only Zimbra INBOX
-notifications implemented alongside existing failure/recovery monitoring. Messages contain
-counts, never mail bodies/subjects/senders. Interactive secret setup and private-chat pairing:
-[Telegram setup](telegram-notifications.md). Eight focused tests passed. Owner must enter
-bot token and mailbox password on VM, then verify actual delivery; SMTP is not required.
+### Telegram: установлено, ожидает подключения секретов
+
+Реализация `2acd993` запушена в `master` и установлена на Oracle VM 2026-09-25.
+Бот создан владельцем; ввод токена на сервере и реальная доставка пока не подтверждены.
+
+- [x] Сбои сайта/API, backup и загрузки предложений, уведомление о восстановлении:
+  `hoptrip-monitor.timer`, каждые 5 минут.
+- [x] Результаты успешных обновлений: добавлено/обновлено предложений, новые наблюдения
+  цены и пропущенные неизвестные маршруты. «Обновлено» — обработанные существующие
+  записи, не обязательно изменившаяся цена.
+- [x] Новые письма на `kontakt@hoptrip.pl`: IMAP через TLS, INBOX только для чтения.
+  В Telegram передаётся количество, без тела, темы и адреса отправителя.
+  `hoptrip-activity.timer` проверяет сводки и почту каждую минуту.
+- [x] 8 целевых тестов прошли. На VM проверки сайта/API/backup/pipeline/worker/диска
+  успешны; все три таймера включены. Запрос реальной сводки проверен: job #9,
+  добавлено 14, обновлено 670, новых наблюдений цены 20, пропущено маршрутов 16.
+- [ ] Ввести токен и привязать приватный Telegram-чат.
+- [ ] Ввести пароль ящика Zimbra и проверить уведомление о новом письме.
+- [ ] Подтвердить получение тестового сообщения и сводки в Telegram.
+
+**Команды владельцу.** Сначала в Windows PowerShell:
+
+```powershell
+ssh -i "$env:USERPROFILE\.ssh\domarion_oci_staging_ed25519" ubuntu@141.144.246.78
+```
+
+Затем на сервере подключить бота:
+
+```sh
+sudo /usr/bin/python3 /opt/hoptrip/scripts/setup-notifications.py
+```
+
+Вставить токен (ввод скрыт), открыть указанного бота в личном чате, нажать Start,
+отправить показанный код `hoptrip-…`, затем нажать Enter в терминале.
+Chat ID определяется автоматически.
+
+Подключить почту:
+
+```sh
+sudo /usr/bin/python3 /opt/hoptrip/scripts/setup-notifications.py --mail
+```
+
+Enter выбирает `kontakt@hoptrip.pl`; далее нужен пароль самого ящика Zimbra,
+не аккаунта OVH. SMTP не нужен: используется `imap.mail.ovh.net:993` с TLS.
+
+Проверить доставку и запустить первую проверку почты:
+
+```sh
+sudo systemd-run --wait --pipe --collect --property=EnvironmentFile=/etc/hoptrip/monitor.env /usr/bin/python3 /opt/hoptrip/scripts/monitor.py --test-alert
+sudo systemctl start hoptrip-activity.service
+```
+
+Ожидаются тестовое сообщение и сводка последнего успешного обновления.
+После этого отправить новое письмо на `kontakt@hoptrip.pl`: уведомление ожидается
+примерно в течение минуты. Старые письма при первом подключении не рассылаются.
+Секреты сохраняются в `/etc/hoptrip/monitor.env` с доступом root, 600; не отправлять
+их в чат и не коммитить. Подробности и диагностика: [Telegram setup](telegram-notifications.md).
+
+Ограничения: полное падение VM требует внешнего мониторинга; offsite backup пока
+не подключён. Реальная доставка остаётся непроверенной до выполнения шагов выше.
+
+### Остальные результаты аудита
 
 Latest operations/privacy step: daily verified backups and five-minute host monitoring
 are installed on Oracle VM. Restore drill of the scheduled backup succeeded in an isolated
