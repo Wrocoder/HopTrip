@@ -162,6 +162,10 @@ def main() -> int:
             ["docker", "inspect", "--format", "{{.State.Running}}", "hoptrip-worker-1"], "true"
         ),
     }
+    if os.environ.get("TELEGRAM_BOT_TOKEN") and os.environ.get("TELEGRAM_CHAT_ID"):
+        checks["activity_service"] = command_equals(
+            ["systemctl", "show", "hoptrip-activity.service", "-p", "Result", "--value"], "success"
+        )
     try:
         disk = shutil.disk_usage(ROOT)
         checks["disk_space"] = disk.free >= max(1024**3, disk.total * 0.1)

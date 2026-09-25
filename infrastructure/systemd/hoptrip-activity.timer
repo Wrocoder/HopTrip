@@ -1,0 +1,10 @@
+[Unit]
+Description=Check HopTrip completed updates and inbox every minute
+
+[Timer]
+OnBootSec=90s
+OnUnitActiveSec=1min
+Unit=hoptrip-activity.service
+
+[Install]
+WantedBy=timers.target

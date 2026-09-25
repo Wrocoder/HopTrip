@@ -16,6 +16,12 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
+Telegram selected by owner. Minute-based pipeline summaries and read-only Zimbra INBOX
+notifications implemented alongside existing failure/recovery monitoring. Messages contain
+counts, never mail bodies/subjects/senders. Interactive secret setup and private-chat pairing:
+[Telegram setup](telegram-notifications.md). Eight focused tests passed. Owner must enter
+bot token and mailbox password on VM, then verify actual delivery; SMTP is not required.
+
 Latest operations/privacy step: daily verified backups and five-minute host monitoring
 are installed on Oracle VM. Restore drill of the scheduled backup succeeded in an isolated
 PostgreSQL container (667 offers, 667 deals, 155 aliases). Retention is enabled only for

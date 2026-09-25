@@ -1,0 +1,14 @@
+[Unit]
+Description=HopTrip completed data updates and new inbox notifications
+After=network-online.target docker.service
+Wants=network-online.target
+OnFailure=hoptrip-monitor.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hoptrip
+EnvironmentFile=-/etc/hoptrip/monitor.env
+StateDirectory=hoptrip
+UMask=0077
+ExecStart=/usr/bin/python3 /opt/hoptrip/scripts/notify-activity.py
+TimeoutStartSec=180
