@@ -1,6 +1,12 @@
 # Контакты и privacy: подготовка к публикации
 
 Проверено по коду 2026-09-25. Это рабочий документ, не опубликованная политика.
+Реализовано управление согласием: аналитика и Drive выключены до отдельного выбора,
+есть отказ и сохранение выбранных целей. Выбор хранится 180 дней; настройки доступны
+в footer. Отзыв очищает session localStorage, прекращает аналитику; для Drive выполняется
+перезагрузка, чтобы остановить уже исполняемый скрипт. Без analytics consent переход
+не создаёт AnalyticsEvent и сохраняет техническую запись с session=not-provided.
+82 браузерных проверки desktop/mobile прошли, включая axe для панели согласия.
 Страницы contact/privacy остаются draft до заполнения и проверки сведений ниже.
 
 ## Что нужно от владельца
@@ -55,7 +61,12 @@ W starszych zapisach przejść partnerskich usuwamy powiązanie z sesją i oznac
 
 ### Partnerzy i Travelpayouts Drive
 
-Na stronach hoptrip.pl działa Travelpayouts Drive, pobierany z domeny emrld.ltd.
+Po osobnej zgodzie marketingowej na stronach hoptrip.pl działa Travelpayouts Drive,
+pobierany z domeny emrld.ltd. Analityka HopTrip wymaga osobnego wyboru.
+Możesz odmówić obu celów bez utraty dostępu do ofert; wybór zapisujemy na 180 dni
+w localStorage pod kluczem hoptrip.consent.v1. Zgodę można wycofać w ustawieniach
+prywatności w stopce. Wycofanie zgody na Drive odświeża stronę i blokuje ponowne
+ładowanie skryptu. Wcześniejsze dane stron trzecich można usunąć w przeglądarce.
 Skrypt ma dostęp do zawartości strony i może zmieniać linki na partnerskie.
 Połączenie z usługą zewnętrzną przekazuje jej dane techniczne żądania,
 w tym adres IP. Nie deklarujemy, że Drive nie korzysta z cookies lub innych
@@ -76,7 +87,8 @@ Jeżeli napiszesz do nas, wykorzystamy dane zawarte w wiadomości do obsługi ko
   порядок обращения и жалобы по применимым требованиям. Не копировать основания
   обработки или обещания из чужой политики без проверки собственной реализации.
 - Проверить фактические cookies/запросы Drive и настроить согласие/отзыв там, где
-  требуется. Сейчас Drive и собственная аналитика загружаются без интерфейса согласия.
+  требуется. Механизм согласия реализован; полный перечень сторонних cookies,
+  получателей и условий обработки ещё требует проверки до завершения политики.
 - Сверить технические журналы и их сроки; не обещать отсутствие обработки IP.
 - Заполнить текст без плейсхолдеров, обновить draft-страницы в content.ts,
   добавить ссылки в навигацию, проверить sitemap/превью и контакты на мобильном.

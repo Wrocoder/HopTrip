@@ -1,5 +1,74 @@
 # Эксплуатация и локальная приёмка
 
+## Backup и мониторинг на VM — выполнено 2026-09-25
+
+Текущее состояние (разделы о staging ниже — историческая запись):
+
+- `hoptrip-backup.timer`: ежедневно 02:15 UTC + случайная задержка до 5 минут,
+  Persistent=true догоняет пропущенный запуск после включения VM.
+- Dump в `/opt/hoptrip/backups/scheduled`, umask 077, проверка pg_restore --list,
+  атомарное переименование. Только после успеха — retention: последняя копия за
+  каждый из 14 дней с копиями и за каждую из 4 ISO-недель с копиями. Это не обещает
+  14 календарных дней покрытия при пропущенных заданиях. Старые ручные backup вне
+  scheduled не удаляются. Копии с будущей датой останавливают очистку.
+- `hoptrip-monitor.timer`: каждые 5 минут, host Python stdlib независимо от API image.
+  Проверяются HTTP сайта, API readiness, backup не старше 30 часов, последний результат
+  backup service, работа worker, успешный pipeline не старше 2 ч 15 мин и отсутствие
+  последней FAILED/INTERRUPTED попытки, свободный диск не менее 10% и 1 GiB.
+- В `/var/lib/hoptrip/monitor.json` сохраняется состояние (600). После успешной
+  доставки повтор одинаковой ошибки через 6 часов, восстановление отдельным сообщением.
+  Неудачная доставка повторяется при следующем запуске. Секреты/ответы сервиса не логируются.
+- **Получатель не настроен**: `/etc/hoptrip/monitor.env` создан как root:root 600
+  с пустыми полями. Поддерживаются Telegram или SMTP с обязательным TLS.
+  `notification_delivered=null` при здоровом сайте не подтверждает настройку доставки.
+  Нужно выбрать канал, заполнить env на сервере и проверить реальное тестовое сообщение.
+- **Offsite пока нет**, как и внешнего мониторинга: падение всей VM не может быть
+  доставлено монитором на самой VM. Для этого требуется отдельный сервис/heartbeat.
+
+Проверенная копия: `scheduled/hoptrip-20260925T113324Z-2606437.dump`.
+`scripts/restore-drill.sh` восстановил её в одноразовый PostgreSQL 16 container с
+`--network none`, без опубликованных портов и без подключения production volume.
+Восстановлены 667 offers, 667 deals, 155 aliases, миграция 0013. Контейнер и его
+одноразовый volume удалены; рабочая БД не изменялась. Скрипт не принимает имя рабочей БД.
+
+Команды проверки:
+
+```sh
+sudo systemctl list-timers 'hoptrip-*'
+sudo systemctl start hoptrip-backup.service
+sudo systemctl start hoptrip-monitor.service
+sudo journalctl -u hoptrip-backup.service -u hoptrip-monitor.service --since today
+```
+
+После заполнения канала в защищённом env проверить доставку (секреты не в аргументах):
+
+```sh
+sudo systemd-run --wait --pipe --collect --property=EnvironmentFile=/etc/hoptrip/monitor.env /usr/bin/python3 /opt/hoptrip/scripts/monitor.py --test-alert
+```
+
+SMTP_FROM и ALERT_TO должны быть действующими согласованными адресами.
+При Telegram нужны token бота и chat_id получателя; бот должен иметь доступ к чату.
+Нельзя считать доставку завершённой до появления сообщения у получателя.
+
+## Согласие на сайте — 2026-09-25
+
+В production аналитика и Drive по умолчанию выключены, независимые переключатели,
+равнозначные отказ/принятие, сохранение выбора на 180 дней, повторное открытие из footer.
+Без согласия не создаётся browser session, не отправляются analytics events; redirect
+сохраняет технический click с session=not-provided без source/campaign и AnalyticsEvent.
+Отзыв analytics очищает session; отзыв marketing перезагружает документ, чтобы
+прекратить исполнение Drive. Изменение в другой вкладке также учитывается.
+Cookies третьей стороны, записанные ранее, не объявляются автоматически удалёнными.
+
+134 backend tests passed, 5 PostgreSQL tests deselected; Ruff/mypy, lint/typecheck,
+82 desktop/mobile E2E (включая axe панели) и production build прошли.
+Live Edge/mobile: нет initial Drive/analytics, marketing-only загрузил реальный
+Drive HTTP 200, отзыв заблокировал загрузку на текущей и следующей странице;
+analytics requests=0. Монитор после deployment: все 7 checks=true.
+Rollback images: hoptrip-api:before-consent-20260925 и hoptrip-web:before-consent-20260925.
+Контакты/privacy/terms всё ещё draft до получения данных владельца и завершения политики;
+индексация остаётся закрытой. Дальнейшие шаги — indexing-launch.md.
+
 ## Автоматические предложения — 2026-09-25
 
 Дополнение: справочник направлений расширен с 10 до 68, добавлены 155 aliases.

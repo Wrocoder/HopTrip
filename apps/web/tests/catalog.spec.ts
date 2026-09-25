@@ -17,6 +17,7 @@ test("airport to deal to partner keeps one session and records click",async({pag
    location:`http://127.0.0.1:8100/__test__/partner${destination.search}`}});
  });
  await page.goto("/");
+ await page.getByRole("button",{name:"Akceptuj wszystkie",exact:true}).click();
  await page.getByRole("link",{name:"Wrocław (WRO)",exact:true}).click();
  await expect(page.locator(".deal-card")).toHaveCount(14);
  await page.locator('a[href="/deals/browser-deal"]').click();
@@ -36,6 +37,7 @@ test("airport to deal to partner keeps one session and records click",async({pag
 
 test("combined filters, pagination, empty and invalid states",async({page})=>{
  await page.goto("/deals?origin=WRO&budget=220&duration_min=3&duration_max=3");
+ await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
  await expect(page.locator(".deal-card")).toHaveCount(12);
  await page.getByRole("link",{name:"Następna strona"}).click();
  await expect(page).toHaveURL(/budget=220/);
@@ -58,6 +60,7 @@ test("no link, expired and unknown route",async({page})=>{
 
 test("storage failure does not break UI and session rotates after inactivity",async({page})=>{
  await page.goto("/deals/browser-deal");
+ await page.getByRole("button",{name:"Akceptuj wszystkie",exact:true}).click();
  await expect.poll(()=>page.evaluate(()=>localStorage.getItem("hoptrip.session.v2"))).not.toBeNull();
  const old=await page.evaluate(()=>{
    const value=JSON.parse(localStorage.getItem("hoptrip.session.v2")!);
@@ -73,6 +76,7 @@ test("storage failure does not break UI and session rotates after inactivity",as
 
 test("canonical, sitemap and draft noindex",async({page,request})=>{
  await page.goto("/info/privacy");
+ await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content",/noindex/);
  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href","http://127.0.0.1:3100/info/privacy");
  const sitemap=await (await request.get("/sitemap.xml")).text();

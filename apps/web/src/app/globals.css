@@ -213,6 +213,15 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
   .deal-card, .route-links { padding: 20px; }
 }
 .breadcrumbs { margin-block: 24px; font-size: .875rem; }
+.consent-controls { flex-basis: 100%; }
+.privacy-settings { padding: 10px 14px; background: #fff; color: #153b35; border: 1px solid #526d66; border-radius: 8px; cursor: pointer; }
+.consent-panel { position: fixed; z-index: 100; bottom: 16px; right: 16px; width: min(620px, calc(100vw - 32px)); max-height: 75vh; overflow-y: auto; padding: 20px; background: #fff; color: #183b34; border: 2px solid #526d66; border-radius: 14px; box-shadow: 0 6px 28px #0003; }
+.consent-panel h2 { font-size: 22px; margin: 0 0 10px; }
+.consent-panel p { font-size: 14px; line-height: 1.5; margin: 10px 0; }
+.consent-panel label { display: flex; align-items: flex-start; gap: 10px; margin: 12px 0; font-size: 14px; }
+.consent-panel input { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 1px; }
+.consent-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.consent-actions button { flex: 1 1 160px; min-height: 44px; padding: 10px; background: #fff; color: #183b34; border: 1px solid #526d66; border-radius: 8px; cursor: pointer; font-weight: 600; }
 .breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
 .breadcrumbs li { min-width: 0; overflow-wrap: anywhere; }
 .breadcrumbs li + li::before { content: "/"; margin-right: 8px; }

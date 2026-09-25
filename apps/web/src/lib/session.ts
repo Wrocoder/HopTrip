@@ -1,8 +1,14 @@
+import {analyticsAllowed} from "./consent";
 const KEY = "hoptrip.session.v2";
 const TIMEOUT = 30 * 60 * 1000;
 type Session = {id:string;touched:number;source?:string;campaign?:string};
 let memory:Session|null=null;
+export function clearSession() {
+ memory=null;sent.clear();
+ try {localStorage.removeItem(KEY);} catch {}
+}
 export function sessionContext(now=Date.now()):Session {
+ if(!analyticsAllowed()) {clearSession();return {id:"anonymous",touched:now};}
  let previous=memory;
  try {
    const stored=JSON.parse(localStorage.getItem(KEY) ?? "null");
@@ -22,6 +28,7 @@ export function publicApi(path:string):string {
 }
 const sent=new Map<string,number>();
 export function track(event_name:string,deal_slug?:string) {
+ if(!analyticsAllowed()) return;
  const session=sessionContext();
  const key=[event_name,deal_slug,location.pathname,location.search,session.id].join("|");
  const now=Date.now();

@@ -39,7 +39,10 @@ def outbound_click(
     policy = component_policy(db, part)
     if not policy.available:
         raise HTTPException(503, policy.reason)
-    session_id = session_id or str(uuid4())
+    analytics_consent = session_id is not None
+    session_id = session_id or "not-provided"
+    if not analytics_consent:
+        source = campaign = None
     tracking_id = "ht-" + uuid4().hex
     policy = component_policy(db, part, tracking_id)
     if not policy.url or not policy.program or not policy.provider:
@@ -58,16 +61,17 @@ def outbound_click(
             tracking_id=tracking_id if policy.program.tracking_param else None,
         )
     )
-    db.add(
-        AnalyticsEvent(
-            event_id=str(uuid4()),
-            event_name="AFFILIATE_CLICK",
-            anonymous_session_id=session_id,
-            deal_id=deal.id,
-            component=component.upper(),
-            source=source,
-            metadata_json={"campaign": campaign},
+    if analytics_consent:
+        db.add(
+            AnalyticsEvent(
+                event_id=str(uuid4()),
+                event_name="AFFILIATE_CLICK",
+                anonymous_session_id=session_id,
+                deal_id=deal.id,
+                component=component.upper(),
+                source=source,
+                metadata_json={"campaign": campaign},
+            )
         )
-    )
     db.commit()
     return RedirectResponse(policy.url, status_code=307, headers={"Cache-Control": "no-store"})

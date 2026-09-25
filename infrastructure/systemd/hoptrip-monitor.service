@@ -1,0 +1,13 @@
+[Unit]
+Description=HopTrip website, database, ingestion and backup monitor
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hoptrip
+EnvironmentFile=-/etc/hoptrip/monitor.env
+StateDirectory=hoptrip
+UMask=0077
+ExecStart=/usr/bin/python3 /opt/hoptrip/scripts/monitor.py
+TimeoutStartSec=120

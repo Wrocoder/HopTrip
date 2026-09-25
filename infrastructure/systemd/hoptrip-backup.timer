@@ -1,0 +1,11 @@
+[Unit]
+Description=Run HopTrip backup daily at 02:15 UTC
+
+[Timer]
+OnCalendar=*-*-* 02:15:00 UTC
+Persistent=true
+RandomizedDelaySec=300
+Unit=hoptrip-backup.service
+
+[Install]
+WantedBy=timers.target

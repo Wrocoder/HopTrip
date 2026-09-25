@@ -1,0 +1,10 @@
+[Unit]
+Description=Check HopTrip every five minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Unit=hoptrip-monitor.service
+
+[Install]
+WantedBy=timers.target

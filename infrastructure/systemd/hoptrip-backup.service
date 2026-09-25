@@ -1,0 +1,19 @@
+[Unit]
+Description=HopTrip daily verified PostgreSQL backup
+Requires=docker.service
+After=docker.service
+OnFailure=hoptrip-monitor.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hoptrip
+Environment=COMPOSE_FILE=docker-compose.yml:docker-compose.production.yml:docker-compose.domain.yml
+Environment=COMPOSE_ENV_FILE=.env.production
+Environment=BACKUP_DIR=/opt/hoptrip/backups/scheduled
+UMask=0077
+ExecStart=/usr/bin/flock -n /run/lock/hoptrip-backup.lock /bin/sh /opt/hoptrip/scripts/backup-db.sh
+ExecStartPost=/usr/bin/python3 /opt/hoptrip/scripts/retain-scheduled-backups.py
+TimeoutStartSec=15min
+
+[Install]
+WantedBy=multi-user.target

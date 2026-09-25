@@ -1,5 +1,8 @@
 import {test,expect} from "@playwright/test";
 import {content,publishedInfoPages,relatedInfoPages} from "../src/lib/content";
+test.beforeEach(async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+});
 
 const guides=[
  ["baggage","Bagaż: co naprawdę obejmuje cena biletu"],

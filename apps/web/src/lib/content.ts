@@ -129,8 +129,11 @@ export const content:Record<string,InfoContent> = {
  ]},
  contact:{title:"Kontakt",draft:true,paragraphs:["Przed publikacją operator musi podać swoją nazwę, adres do kontaktu i kanał zgłaszania błędnych ofert. Obecnie nie udostępniamy formularza zbierającego wiadomości."]},
  privacy:{title:"Prywatność",draft:true,paragraphs:[
-   "Projekt mechanizmu analityki: losowy identyfikator sesji w pamięci przeglądarki, odświeżany po 30 minutach bezczynności. Zdarzenia obejmują odsłony, oferty, filtry i przejścia do partnerów.",
-   "Do identyfikatora przekazywanego partnerowi nie dodajemy adresu e-mail ani danych rezerwacji. Po przejściu obowiązują zasady partnera.",
+   "Analityka HopTrip i Travelpayouts Drive są domyślnie wyłączone. Możesz osobno włączyć je w ustawieniach prywatności, odrzucić oba cele albo później wycofać zgodę. Odmowa nie blokuje dostępu do ofert. Wybór zapisujemy w localStorage pod kluczem hoptrip.consent.v1 na 180 dni.",
+   "Po zgodzie na analitykę zapisujemy losowy identyfikator sesji w localStorage (hoptrip.session.v2), czas aktywności i oznaczenia źródła/kampanii. Po 30 minutach bezczynności przy kolejnym użyciu powstaje nowy identyfikator; sam wpis nie znika automatycznie po tym czasie. Zdarzenia obejmują odsłony, oferty, wyszukiwania, filtry i przejścia do partnerów. Wycofanie zgody usuwa identyfikator z tej przeglądarki i zatrzymuje nowe zdarzenia.",
+   "Zdarzenia analityczne starsze niż 90 dni usuwamy podczas zadań utrzymaniowych. Ze starszych zapisów przejść partnerskich usuwamy kontekst sesji i kampanii; same zapisy rozliczeniowe mogą pozostać. Bez zgody na analitykę przejście nie jest łączone z sesją przeglądarki, ale zachowujemy techniczny zapis przekierowania.",
+   "Po osobnej zgodzie marketingowej ładujemy Travelpayouts Drive z emrld.ltd. Skrypt może odczytywać stronę i zmieniać linki na partnerskie; połączenie przekazuje dostawcy dane techniczne, w tym adres IP. Wycofanie zgody odświeża stronę i blokuje kolejne załadowanie Drive. Wcześniej zapisane dane stron trzecich można usunąć w ustawieniach przeglądarki.",
+   "Nie zbieramy płatności ani danych rezerwacji. Po przejściu do partnera obowiązują jego zasady. Nie dodajemy adresu email ani danych rezerwacji do linków partnerskich.",
    "Przed publikacją należy uzupełnić administratora danych, podstawy przetwarzania, kontakt, odbiorców i okresy przechowywania oraz zweryfikować konfigurację analityki.",
  ]},
  terms:{title:"Zasady korzystania",draft:true,paragraphs:[

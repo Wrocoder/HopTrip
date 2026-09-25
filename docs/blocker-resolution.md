@@ -16,6 +16,17 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
+Latest operations/privacy step: daily verified backups and five-minute host monitoring
+are installed on Oracle VM. Restore drill of the scheduled backup succeeded in an isolated
+PostgreSQL container (667 offers, 667 deals, 155 aliases). Retention is enabled only for
+scheduled backups. Notification transport is implemented (Telegram/SMTP), but recipient
+credentials are not supplied: no real alert delivery or offsite copy is verified yet.
+Website consent controls deployed: analytics and Drive off by default, separate choices,
+reject/save/accept, expiry and withdrawal. 134 backend tests + 82 browser tests passed;
+real Drive consent/withdrawal checked on hoptrip.pl. Full evidence: operations.md.
+Still waiting for confirmed operator name/address/country/public email. Contact/privacy/terms
+remain draft, indexing remains blocked. Search Console steps: [indexing-launch.md](indexing-launch.md).
+
 Latest completed step: reviewed destination catalog expanded from 10 to 68 entries,
 155 explicit provider aliases applied with conflict checks and a shared pipeline lock.
 2026-09-25 live run: 700 input records, 547 saved offers, 143 updates, 10 unresolved,
@@ -26,7 +37,11 @@ Pre-change backup: `backups/hoptrip-20260925T065335Z-2505650.dump`.
 actual PostgreSQL catalog import and pipeline succeeded on the VM.
 
 Owner wants multiple flight partners and best-value selection. Only Aviasales data
-access is currently verified; other account programs/API access remain unconfirmed.
+access is currently verified. Owner screenshot of My Programs / Available / Flights
+shows Kiwi.com, AirHelp, Aviasales, Compensair and KKday with Generate links.
+Kiwi program availability is confirmed visually, but its price API access is not.
+AirHelp/Compensair are compensation services; KKday is activities/ancillary travel,
+so these cards do not establish five comparable sources of flight prices.
 See [multi-partner-flights.md](multi-partner-flights.md) for checked access requirements,
 comparison criteria and next integration steps. No cross-provider comparison is live yet.
 
@@ -108,16 +123,21 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 - [x] Deploy to Oracle VM and verify public DNS/TLS, redirects and API readiness.
 - [x] Verify one bounded real-data ingestion on the VM.
 - [ ] Configure offsite backups, retention and monitoring delivery; verify a production restore drill.
+- [x] Install daily local backup schedule and retention; verify isolated restore of a production dump.
+- [x] Install five-minute host monitoring of website/API/worker/pipeline/backup/disk.
+- [ ] Configure recipient, verify delivered failure/recovery messages and external VM monitoring.
+- [ ] Configure independent offsite backup storage.
+- [x] Deploy optional analytics/Drive consent, refusal and withdrawal controls.
 
-The probe implementation is ready; no monitoring schedule or notification destination has
-been installed on a server. See [operations.md](operations.md#проверка-доступности-и-возраста-backup)
-for invocation and limits, and [release-acceptance.md](release-acceptance.md) for the release record.
+Monitoring and backup schedules are installed; notification destination and offsite storage
+are still missing. See [operations.md](operations.md) for invocation, checks and limitations.
 
 Contact/privacy technical inventory and Polish text are prepared in
 [privacy-publication-draft.md](privacy-publication-draft.md). Publication still needs
 confirmed operator details, working contact email and remaining processing/consent details.
 The public pages remain draft; indexing remains blocked. Owner installation permission for
-Drive does not establish visitor consent. No consent interface is currently implemented.
+Drive does not establish visitor consent. The visitor consent interface is now implemented;
+the complete privacy disclosure still needs owner/processing details.
 
 Account creation, data API access and affiliate approval are separate milestones. The
 locally tested adapter and per-program policy are not evidence of a working commercial integration.

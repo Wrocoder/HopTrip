@@ -1,4 +1,7 @@
 import {test,expect} from "@playwright/test";
+test.beforeEach(async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+});
 
 test("UI keeps navigation, fonts and controls usable across viewport sizes",async({page},testInfo)=>{
  for(const [name,path] of [["home","/"],["catalog","/deals"],["deal","/deals/browser-deal"],["article","/info/price-comparison"],["empty","/deals?budget=1"]]) {
