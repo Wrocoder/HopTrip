@@ -1,13 +1,15 @@
 import {test,expect} from "@playwright/test";
 
-test("legal pages render runtime operator, remain noindex, and exclude Drive",async({page,request})=>{
+test("legal pages expose only email even with legacy identity configuration",async({page,request})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:true,at:Date.now()})));
  for(const slug of ["contact","privacy","terms"]) {
   const response=await page.goto(`/info/${slug}`);
   expect(response?.status()).toBe(200);
-  const operator=page.getByRole("region",{name:"Dane operatora"});
-  await expect(operator).toContainText("Example Test Operator");
-  await expect(operator).toContainText("Example Street 1");
+  const operator=page.getByRole("region",{name:"Kontakt z HopTrip"});
+  const html=await response!.text();
+  expect(html).not.toContain("Example Test Operator");
+  expect(html).not.toContain("Example Street 1");
+  expect(html).not.toContain("Test Country");
   await expect(operator.getByRole("link")).toHaveAttribute("href","mailto:contact@example.test");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content",/noindex/);
   await expect(page.locator('meta[name="description"]')).not.toHaveAttribute("content",/Example/);

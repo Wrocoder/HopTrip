@@ -3,12 +3,12 @@ import type {InfoContent} from "./info-types";
 // Personal operator details are deliberately absent. Render them from server configuration.
 export const legalContent:Record<string,InfoContent>={
  contact:{title:"Kontakt",description:"Kontakt z operatorem HopTrip i zgłaszanie problemów.",draft:false,noindex:true,paragraphs:[
-  "Napisz do nas w sprawie błędnej oferty, działania serwisu lub swoich danych osobowych. Dane operatora i adres kontaktowy znajdują się poniżej.",
+  "Napisz do nas w sprawie błędnej oferty, działania serwisu lub swoich danych osobowych. Adres email do kontaktu znajduje się poniżej.",
   "Przy zgłoszeniu błędu podaj adres strony, datę i opis problemu. Nie przesyłaj numerów kart, dokumentów tożsamości ani danych pasażerów, których nie potrzebujemy do odpowiedzi.",
   "HopTrip nie sprzedaje biletów, nie przyjmuje płatności i nie obsługuje rezerwacji. Zmiany biletu, zwroty i reklamacje zakupu zgłaszaj sprzedawcy wskazanemu w potwierdzeniu rezerwacji.",
  ]},
  privacy:{title:"Prywatność",description:"Zasady przetwarzania danych i ustawienia prywatności HopTrip.",draft:false,noindex:true,paragraphs:[
-  "Administratorem danych jest operator HopTrip wskazany poniżej. W sprawach prywatności możesz napisać na podany adres email lub adres pocztowy. Informacja obowiązuje od 25 września 2026 r.",
+  "W sprawach przetwarzania danych przez HopTrip możesz napisać na podany poniżej adres email. Informacja obowiązuje od 25 września 2026 r.",
  ],sections:[
   {title:"Dane, cele i podstawy przetwarzania",paragraphs:[
    "Przy połączeniu z serwisem infrastruktura przetwarza adres IP i dane techniczne żądania. Służą dostarczeniu strony, ograniczaniu nadużyć i diagnozowaniu błędów. Podstawą jest prawnie uzasadniony interes administratora — utrzymanie bezpiecznego serwisu (art. 6 ust. 1 lit. f RODO). Nie prowadzimy kont użytkowników ani formularza płatności.",
@@ -34,15 +34,15 @@ export const legalContent:Record<string,InfoContent>={
   ]},
   {title:"Twoje prawa",paragraphs:[
    "Możesz żądać dostępu, sprostowania, usunięcia lub ograniczenia przetwarzania danych. W przypadkach przewidzianych przez RODO przysługuje Ci przenoszenie danych, sprzeciw wobec przetwarzania opartego na uzasadnionym interesie oraz wycofanie zgody. Zakres praw zależy od podstawy i okoliczności przetwarzania.",
-   "Wyślij żądanie na adres operatora podany poniżej. Odpowiadamy co do zasady w ciągu miesiąca; gdy przepisy pozwalają przedłużyć termin, informujemy o tym i podajemy przyczynę. Możesz złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (uodo.gov.pl).",
+   "Wyślij żądanie na adres email podany poniżej. Odpowiadamy co do zasady w ciągu miesiąca; gdy przepisy pozwalają przedłużyć termin, informujemy o tym i podajemy przyczynę. Możesz złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych (uodo.gov.pl).",
   ]},
  ]},
  terms:{title:"Zasady korzystania",description:"Zasady korzystania z HopTrip i zgłaszania problemów.",draft:false,noindex:true,paragraphs:[
-  "Operatorem serwisu jest osoba wskazana poniżej. Korzystanie z katalogu i poradników HopTrip jest bezpłatne, nie wymaga konta ani subskrypcji. Do korzystania potrzebne są połączenie z internetem i aktualna przeglądarka; interaktywne funkcje wymagają JavaScript. Korzystanie można zakończyć, zamykając stronę.",
+  "Korzystanie z katalogu i poradników HopTrip jest bezpłatne, nie wymaga konta ani subskrypcji. Do korzystania potrzebne są połączenie z internetem i aktualna przeglądarka; interaktywne funkcje wymagają JavaScript. Korzystanie można zakończyć, zamykając stronę.",
   "HopTrip publikuje obserwacje cen lotów i materiały informacyjne. Nie jest sprzedawcą biletów ani organizatorem imprez turystycznych, nie pobiera płatności i nie zawiera w Twoim imieniu umów podróży. Umowę zakupu zawierasz z wybranym sprzedawcą na jego zasadach.",
   "Ceny, dostępność i warunki mogą się zmienić po zapisaniu obserwacji. Przed zakupem sprawdź daty, lotniska, liczbę podróżnych, bagaż, opłaty i zasady zmiany lub zwrotu. Ocena i historia ceny nie gwarantują najniższej ceny na rynku. Linki partnerskie mogą przynieść operatorowi prowizję.",
   "Nie wolno wykorzystywać serwisu do działań bezprawnych, zakłócać jego działania ani obchodzić zabezpieczeń. Zgłoszenia nie powinny zawierać treści bezprawnych ani zbędnych danych innych osób.",
-  "Problemy z HopTrip i reklamacje dotyczące działania serwisu zgłaszaj na email lub adres operatora, podając opis, adres strony, datę zdarzenia i sposób odpowiedzi. Odpowiemy w ciągu 14 dni od otrzymania zgłoszenia. Reklamację biletu lub płatności kieruj do właściwego sprzedawcy.",
+  "Problemy z HopTrip i reklamacje dotyczące działania serwisu zgłaszaj na podany adres email, podając opis, adres strony, datę zdarzenia i sposób odpowiedzi. Odpowiemy w ciągu 14 dni od otrzymania zgłoszenia. Reklamację biletu lub płatności kieruj do właściwego sprzedawcy.",
   "Niniejsze zasady nie ograniczają uprawnień przysługujących konsumentowi na mocy bezwzględnie obowiązujących przepisów. Zmiany zasad publikujemy na tej stronie z datą obowiązywania. Wersja obowiązuje od 25 września 2026 r.",
  ]},
 };

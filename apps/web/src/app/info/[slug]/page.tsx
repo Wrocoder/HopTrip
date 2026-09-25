@@ -37,12 +37,11 @@ export default async function InfoPage({params}:Props) {
   <li key={crumb.href}>{index===crumbs.length-1 ? <span aria-current="page">{crumb.name}</span> :
    <Link href={crumb.href}>{crumb.name}</Link>}</li>)}</ol></nav>
  <article className="deal-detail"><h1>{page.title}</h1>
- {legal && <section aria-label="Dane operatora" data-nosnippet>
-  <h2>Operator i kontakt</h2>
-  {operator ? <address style={{fontStyle:"normal"}}>
-   <strong>{operator.name}</strong><br/>{operator.address}<br/>{operator.country}<br/>
+ {legal && <section aria-label="Kontakt z HopTrip" data-nosnippet>
+  <h2>Kontakt z HopTrip</h2>
+  {operator ? <p>
    <a href={`mailto:${operator.email}`}>{operator.email}</a>
-  </address> : <p role="alert">Dane kontaktowe są chwilowo niedostępne. Spróbuj ponownie później.</p>}
+  </p> : <p role="alert">Dane kontaktowe są chwilowo niedostępne. Spróbuj ponownie później.</p>}
  </section>}
  {slug==="privacy" && <section><h2>Informacje dostawców i organ nadzorczy</h2><ul>
   <li><a href="https://www.oracle.com/legal/privacy/services-privacy-policy.html">Oracle — prywatność usług</a></li>
