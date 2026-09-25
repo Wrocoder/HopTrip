@@ -1,7 +1,9 @@
 # Источники данных и партнёрские программы
 
-Проверено 2026-09-21 по коду и официальному описанию Aviasales Data API.
-Реальная выдача для токена, рынка PL и PLN по-прежнему требует внешней приёмки.
+Обновлено 2026-09-25. Реальная выдача PLN/market=pl, генерация партнёрских ссылок
+и регулярный pipeline проверены на VM; подробные результаты в blocker-resolution.md.
+Мультипартнёрское сравнение пока не реализовано; доступ к другим источникам цен
+нужно подтвердить отдельно. План и ограничения — multi-partner-flights.md.
 
 TravelpayoutsDataProvider использует cached Data API; AffiliateProgram и
 StoredLinkAdapter отвечают за отдельную возможность перехода. Наличие токена не
@@ -93,9 +95,10 @@ Component связан через affiliate_program_id. Click сохраняет
 Availability возвращает reason и внутренний redirect_path; полный внешний URL публичный
 каталог не раскрывает. Смена статуса блокирует следующий запрос без перезапуска.
 
-HTTP API генерации ссылок не подключён: этот этап реализован как контракт готовой
-одобренной ссылки, без выдуманного provider API. Реальный sample link, правила SubID,
-attribution и conversion report принимаются отдельно по owner-action-guide.md.
+Для одобренной Aviasales подключён официальный API генерации ссылок в pipeline:
+пакеты до 10, проверка host/marker/project и исходного URL, повтор без пересоздания
+неизменённых ссылок. tracking_param=NULL: per-click SubID не добавляем.
+Attribution и conversion report принимаются отдельно по owner-action-guide.md.
 
 Trip.com, DiscoverCars, Amadeus и hotel integration остаются последующими этапами.
 

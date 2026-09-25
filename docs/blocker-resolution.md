@@ -16,6 +16,20 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-25
 
+Latest completed step: reviewed destination catalog expanded from 10 to 68 entries,
+155 explicit provider aliases applied with conflict checks and a shared pipeline lock.
+2026-09-25 live run: 700 input records, 547 saved offers, 143 updates, 10 unresolved,
+no ambiguous/invalid records. 547 links generated, 75 unchanged; 622 available deals.
+Catalog dry-run after apply adds zero rows. Milan public API has available booking CTAs.
+Pre-change backup: `backups/hoptrip-20260925T065335Z-2505650.dump`.
+130 backend tests passed (5 PostgreSQL tests deselected), Ruff/mypy passed;
+actual PostgreSQL catalog import and pipeline succeeded on the VM.
+
+Owner wants multiple flight partners and best-value selection. Only Aviasales data
+access is currently verified; other account programs/API access remain unconfirmed.
+See [multi-partner-flights.md](multi-partner-flights.md) for checked access requirements,
+comparison criteria and next integration steps. No cross-provider comparison is live yet.
+
 Current priority: connect real flight offers and verified booking links, followed by
 package holidays (owner confirmed both product types). hoptrip.pl is deployed with
 HTTPS; indexing remains disabled. Travelpayouts account created, Drive installed
