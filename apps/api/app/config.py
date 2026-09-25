@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     admin_token: str = "change-me-in-development"
     travelpayouts_api_token: str | None = None
     travelpayouts_api_base_url: str = "https://api.travelpayouts.com"
+    travelpayouts_links_enabled: bool = False
+    travelpayouts_marker: int = Field(default=0, ge=0)
+    travelpayouts_project_id: int = Field(default=0, ge=0)
     ingestion_origins: str = "WRO,WAW,WMI,KRK,GDN,KTW,POZ"
     affiliate_allowed_hosts: str = ""
     affiliate_tracking_query_param: str = ""

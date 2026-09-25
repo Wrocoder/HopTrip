@@ -1,5 +1,42 @@
 # Эксплуатация и локальная приёмка
 
+## Автоматические предложения — 2026-09-25
+
+На hoptrip.pl включён worker: первый запуск немедленный, следующий через 3600 секунд
+после завершения предыдущего. `restart: unless-stopped` восстанавливает процесс после
+сбоя/перезагрузки Docker; вручную остановленный контейнер сам не запускается.
+Семь вылетов, `PROVIDER_MAX_PAGES=1`, до 700 входных строк за попытку.
+`TRAVELPAYOUTS_LINKS_ENABLED=true`, публичные `TRAVELPAYOUTS_MARKER=779959` и
+`TRAVELPAYOUTS_PROJECT_ID=577569`; токен только в защищённом `.env.production`.
+Сначала в БД должен быть настроен APPROVED/active Aviasales с разрешённым tp.media,
+адаптером stored_link, capability AFFILIATE_LINK и tracking_param=NULL.
+Pipeline не одобряет программу автоматически и не меняет ручную привязку к иной программе.
+
+Получение данных, обновление ссылок и повторы защищены общей блокировкой PostgreSQL.
+API ссылок вызывается пакетами до 10 с паузой; завершённые пакеты сохраняются.
+При изменении исходной ссылки старая удаляется до обращения к партнёру, поэтому
+сбой конвертации не оставляет CTA на предыдущие даты/цену. Неизменённые ссылки не пересоздаются.
+Логи worker содержат счётчики, история job_runs — результаты/статус попыток.
+Повтор неизменённой кешированной цены не продлевает свежесть; предел показа 48 часов.
+Удаление старой аналитики выполняется перед запросом к поставщику даже при его отказе.
+
+Команды на VM из `/opt/hoptrip`:
+
+```sh
+sudo docker compose --env-file .env.production -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.domain.yml --profile worker up -d --no-deps api worker
+sudo docker compose --env-file .env.production -f docker-compose.yml -f docker-compose.production.yml -f docker-compose.domain.yml --profile worker logs --tail 30 worker
+```
+
+Приёмка: первый запуск 75 deals, links_updated=9/unchanged=66; повтор — 0 новых
+наблюдений, 75 unchanged links. Оба SUCCEEDED, API ready. Это проверка двух запусков,
+не длительное наблюдение расписания. Отдельной доставки уведомлений о сбоях пока нет.
+Backup: `backups/hoptrip-20260925T063829Z-2499178.dump`.
+Перед обновлением сохранены image `hoptrip-api:before-auto-20260925`, env
+`.env.before-auto-20260925` (600) и исходные backend/Compose файлы
+`/tmp/hoptrip-before-auto.tar.gz` (временный архив, не долговременный backup).
+Для отката сначала остановить worker, восстановить env/исходники и прежний API image,
+пересоздать API. Миграций в этом изменении нет, откат БД не требуется.
+
 ## Oracle staging — 2026-09-24
 
 Адрес: https://app.141-144-246-78.sslip.io, VM `141.144.246.78`, Ubuntu 24.04 ARM64.

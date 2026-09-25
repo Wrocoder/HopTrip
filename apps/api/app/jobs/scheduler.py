@@ -26,10 +26,14 @@ async def run_pipeline_once() -> int:
         return 1
 
     logger.info(
-        "Travel data pipeline succeeded: offers=%s observations=%s deals=%s",
+        "Travel data pipeline succeeded: offers=%s observations=%s deals=%s "
+        "links_updated=%s links_unchanged=%s links_invalid=%s",
         result.ingestion.saved_offers + result.ingestion.updated_offers,
         result.ingestion.saved_observations,
         result.generated_deals,
+        result.partner_links.updated,
+        result.partner_links.unchanged,
+        result.partner_links.invalid_sources,
     )
     return 0
 

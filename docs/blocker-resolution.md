@@ -14,7 +14,7 @@ the detailed audit remains the record of code findings.
 This checklist turns the open external decisions into concrete actions. Do not commit
 `.env`, `.env.production`, API tokens, private keys or payment details.
 
-## Audit status: 2026-09-24
+## Audit status: 2026-09-25
 
 Current priority: connect real flight offers and verified booking links, followed by
 package holidays (owner confirmed both product types). hoptrip.pl is deployed with
@@ -56,9 +56,15 @@ Completed first real-data run on 2026-09-24:
   available booking CTA returns 307 to tp.media with the matching route and IDs.
   No pageerror observed. This verifies our redirect, not a purchase or commission.
 
-No periodic worker enabled. Link generation was a one-off operational backfill,
-not a new automatic pipeline stage. Next: implement tested recurring link generation,
-expand explicit destination aliases, then enable bounded scheduled ingestion.
+Recurring ingestion and link generation deployed on 2026-09-25. Worker starts a run
+immediately and waits 3600 seconds after completion before the next run; restart policy
+unless-stopped. Seven origins, PROVIDER_MAX_PAGES=1 (up to 700 input rows per attempt).
+First scheduled run succeeded: 75 deals, 9 links updated, 66 unchanged, no invalid links.
+Immediate manual repeat succeeded: 0 new observations, 72 duplicate observations,
+75 unchanged links. Latest sample skipped 628 unresolved routes; expand explicit aliases next.
+Backup before deployment: `/opt/hoptrip/backups/hoptrip-20260925T063829Z-2499178.dump`.
+API ready after deployment. Backend tests: 127 passed, 5 PostgreSQL tests deselected;
+Ruff/mypy passed. Two real PostgreSQL pipeline runs succeeded on the VM.
 No per-click SubID modification; verify attribution in the partner dashboard separately.
 The source omits found_at/expires_at; observed freshness is first-seen, not a live quote.
 The existing 48-hour freshness filter stops displaying stale records without a worker.
@@ -82,6 +88,7 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 - [x] Configure real Aviasales links on 74 flight components; verify internal redirect.
 - [ ] Verify attribution with a real partner.
 - [ ] Finalize operator/contact/privacy/terms information.
+- [x] Enable bounded recurring ingestion and automatic approved partner-link refresh.
 - [x] Verify 37 sitemap URLs and 35 previews on hoptrip.pl after deployment.
 - [ ] Review date-sensitive facts before opening indexing.
 - [x] Deploy to Oracle VM and verify public DNS/TLS, redirects and API readiness.
@@ -91,6 +98,12 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 The probe implementation is ready; no monitoring schedule or notification destination has
 been installed on a server. See [operations.md](operations.md#проверка-доступности-и-возраста-backup)
 for invocation and limits, and [release-acceptance.md](release-acceptance.md) for the release record.
+
+Contact/privacy technical inventory and Polish text are prepared in
+[privacy-publication-draft.md](privacy-publication-draft.md). Publication still needs
+confirmed operator details, working contact email and remaining processing/consent details.
+The public pages remain draft; indexing remains blocked. Owner installation permission for
+Drive does not establish visitor consent. No consent interface is currently implemented.
 
 Account creation, data API access and affiliate approval are separate milestones. The
 locally tested adapter and per-program policy are not evidence of a working commercial integration.

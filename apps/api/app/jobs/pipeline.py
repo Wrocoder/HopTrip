@@ -8,6 +8,7 @@ from app.providers.travelpayouts import TravelpayoutsDataProvider
 from app.services.currency import PlnOnlyConverter
 from app.services.deals import generate_fresh_deals
 from app.services.ingestion import IngestionResult, ingest_offers
+from app.services.partner_links import LinkSyncResult, sync_partner_links
 from app.services.statistics import recalculate_route_statistics
 
 
@@ -17,6 +18,7 @@ class PipelineResult:
     statistics_routes: int
     generated_deals: int
     provider_searches: list[dict[str, str | int]] = field(default_factory=list)
+    partner_links: LinkSyncResult = field(default_factory=LinkSyncResult)
 
 
 async def run_travelpayouts_pipeline() -> PipelineResult:
@@ -47,4 +49,7 @@ async def run_travelpayouts_pipeline() -> PipelineResult:
         )
         statistics_routes = recalculate_route_statistics(db)
         generated_deals = generate_fresh_deals(db)
-    return PipelineResult(ingestion, statistics_routes, generated_deals, provider_searches)
+        partner_links = await sync_partner_links(db)
+    return PipelineResult(
+        ingestion, statistics_routes, generated_deals, provider_searches, partner_links
+    )
