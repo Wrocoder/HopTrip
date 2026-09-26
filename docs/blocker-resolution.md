@@ -16,6 +16,14 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-26
 
+### Favicon из логотипа владельца — выполнено 2026-09-26
+
+Предоставленное изображение подключено через файловые metadata-конвенции Next.js:
+`favicon.ico` (16/32/48 px), `icon.png` (192 px), `apple-icon.png` (180 px).
+Изменение опубликовано на hoptrip.pl. Typecheck и production build прошли.
+Проверка браузером: главная, статья о багаже и privacy содержат ссылки на иконки;
+все три файла возвращают HTTP 200 и совпадают с файлами в репозитории.
+
 ### Перенос Telegram в группу — выполнен 2026-09-26
 
 Владелец создал группу и добавил бота и участников. Добавлена команда
