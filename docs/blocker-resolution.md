@@ -14,7 +14,16 @@ the detailed audit remains the record of code findings.
 This checklist turns the open external decisions into concrete actions. Do not commit
 `.env`, `.env.production`, API tokens, private keys or payment details.
 
-## Audit status: 2026-09-25
+## Audit status: 2026-09-26
+
+### Запрос индексации главной принят Google
+
+На последнем скриншоте владельца для `https://hoptrip.pl/` показано подтверждение
+«Отправлен запрос на индексирование»: URL добавлен в приоритетную очередь сканирования.
+В отчёте на момент скриншота остаётся «URL нет в индексе Google / URL неизвестен Google».
+Запрос принят, но включение главной в индекс ещё не подтверждено. Повторять запрос
+для того же URL не нужно. Следующий шаг — проверить статус позже через «Проверка URL»
+и следить за отчётами об индексировании и эффективности. Запись обновлена 2026-09-26.
 
 ### Sitemap принят Google — подтверждение 2026-09-25
 
