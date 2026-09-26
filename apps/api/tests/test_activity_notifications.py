@@ -108,3 +108,78 @@ def test_setup_preserves_other_settings_and_hides_secrets(tmp_path, monkeypatch)
     assert 'IMAP_PASSWORD="a\\"b\\\\c$123"' in data
     with pytest.raises(ValueError):
         setup.quote("password\nINJECT=value")
+
+
+def test_group_pairing_requires_exact_command_and_unique_group_topic():
+    setup = module("setup-notifications")
+    command = "/hoptrip_nonce@bot"
+
+    def update(chat, kind, text=command, topic=None):
+        message = {"chat": {"id": chat, "type": kind}, "text": text}
+        if topic is not None:
+            message["message_thread_id"] = topic
+        return {"message": message}
+
+    matching = update(-100123, "supergroup", topic=42)
+    assert setup.group_target(
+        [
+            update(123, "private"),
+            update(-5, "group", "old"),
+            matching,
+            matching,
+        ],
+        command,
+    ) == ("-100123", "42")
+    with pytest.raises(ValueError):
+        setup.group_target([matching, update(-9, "group")], command)
+    with pytest.raises(ValueError):
+        setup.group_target([update(123, "private")], command)
+
+
+def test_group_switch_saves_only_after_success_and_keeps_mail_settings(tmp_path, monkeypatch):
+    setup = module("setup-notifications")
+    env = tmp_path / "monitor.env"
+    original = 'TELEGRAM_BOT_TOKEN="123:abc"\nTELEGRAM_CHAT_ID="12"\nIMAP_PASSWORD="keep"\n'
+    env.write_text(original)
+    monkeypatch.setattr(setup, "ENV", env)
+    assert setup.saved_bot_token() == "123:abc"
+
+    def fail(*args):
+        raise RuntimeError
+
+    monkeypatch.setattr(setup, "telegram", fail)
+    with pytest.raises(RuntimeError):
+        setup.connect_group("123:abc", "-100123", "42")
+    assert env.read_text() == original
+    sent = []
+    monkeypatch.setattr(setup, "telegram", lambda *args: sent.append(args))
+    setup.connect_group("123:abc", "-100123", "42")
+    assert sent[0][2]["message_thread_id"] == 42
+    assert 'TELEGRAM_CHAT_ID="-100123"' in env.read_text()
+    assert 'IMAP_PASSWORD="keep"' in env.read_text()
+
+
+def test_monitor_routes_all_notifications_to_selected_topic(monkeypatch):
+    monitor = module("monitor")
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "123:test")
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "-100123")
+    monkeypatch.setenv("TELEGRAM_MESSAGE_THREAD_ID", "42")
+    sent = []
+
+    class Reply:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self, limit):
+            return b'{"ok": true}'
+
+    def send(request, **kwargs):
+        sent.append(monitor.json.loads(request.data))
+        return Reply()
+
+    monkeypatch.setattr(monitor.urllib.request, "urlopen", send)
+    assert monitor.deliver("summary")
+    assert sent == [{"chat_id": "-100123", "text": "summary", "message_thread_id": 42}]

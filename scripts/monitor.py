@@ -96,11 +96,12 @@ def command_equals(command: list[str], expected: str) -> bool:
 def deliver(message: str) -> bool:
     try:
         if os.environ.get("TELEGRAM_BOT_TOKEN") and os.environ.get("TELEGRAM_CHAT_ID"):
+            payload = {"chat_id": os.environ["TELEGRAM_CHAT_ID"], "text": message}
+            if os.environ.get("TELEGRAM_MESSAGE_THREAD_ID"):
+                payload["message_thread_id"] = int(os.environ["TELEGRAM_MESSAGE_THREAD_ID"])
             request = urllib.request.Request(
                 "https://api.telegram.org/bot" + os.environ["TELEGRAM_BOT_TOKEN"] + "/sendMessage",
-                data=json.dumps(
-                    {"chat_id": os.environ["TELEGRAM_CHAT_ID"], "text": message}
-                ).encode(),
+                data=json.dumps(payload).encode(),
                 headers={"Content-Type": "application/json"},
                 method="POST",
             )
