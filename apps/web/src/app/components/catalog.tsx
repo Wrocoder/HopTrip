@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {Deal} from "../../lib/api";
-import {pl,money,date} from "../../lib/pl";
+import {pl,date} from "../../lib/pl";
+import {Price} from "./price";
 import {Impression} from "./deal-view-tracker";
 export function DealCard({deal}:{deal:Deal}) {
   return <Link className="deal-card" href={`/deals/${deal.slug}`}>
@@ -10,7 +11,7 @@ export function DealCard({deal}:{deal:Deal}) {
     <h2>{deal.destination_city}</h2>
     <p className="deal-dates">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>
     <div className="deal-card-bottom">
-    <p className="deal-price">{money(deal.price_per_person_pln)} <span>{pl.perPerson}</span></p>
+    <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{pl.perPerson}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
     <p className="deal-note">{pl.flightOnly}</p>
   </Link>;

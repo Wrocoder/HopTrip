@@ -9,6 +9,7 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "next typegen && tsc --noEmit",
     "test:e2e": "playwright test",
+    "test:unit": "node --experimental-strip-types --test tests/*.test.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "audit:experience": "node scripts/audit-experience.mjs"
   },

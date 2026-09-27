@@ -90,6 +90,8 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .deal-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid var(--border); padding-top: 20px; margin-top: auto; }
 .deal-price { min-width: 0; overflow-wrap: anywhere; font-family: var(--font-heading), Fraunces, Georgia, serif; font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.2; font-weight: 500; letter-spacing: -.035em; margin: 0; }
 .deal-price span { display: block; font-family: var(--font-body), "DM Sans", system-ui, sans-serif; color: var(--secondary); font-size: 14px; font-weight: 400; letter-spacing: 0; margin-top: 5px; }
+.price-eur { display: inline-block; vertical-align: baseline; font-family: var(--font-body), "DM Sans", system-ui, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0; line-height: 1.5; color: var(--secondary); white-space: nowrap; }
+.featured-card .price-eur { color: var(--sage-light); }
 .card-arrow { flex: 0 0 40px; width: 40px; height: 40px; display: grid; place-items: center; background: var(--sage-light); border-radius: 50%; font-size: 22px; color: var(--green-dark); }
 .deal-note { font-size: 14px; color: var(--secondary); line-height: 1.5; margin: 18px 0 0; }
 .empty-state { text-align: center; border: 1px dashed var(--sage); border-radius: var(--radius); background: rgba(217,232,215,.22); padding: 32px 24px; }
