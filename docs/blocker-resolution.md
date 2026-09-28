@@ -16,23 +16,36 @@ This checklist turns the open external decisions into concrete actions. Do not c
 
 ## Audit status: 2026-09-28
 
-### Ближайший выпуск — flight-v3, подготовка 2026-09-28
+### Flight-v3 — выпуск и приёмка завершены 2026-09-28
 
-1. Зафиксировать изменения flight-v3 и отправить в GitHub; проверить успешный CI
-   именно для SHA релиза. Затем сохранить backup БД и прежние образы на VM.
-2. Собрать и установить API/web/worker, дождаться успешного pipeline, проверить
-   flight-v3 у активных предложений и пояснения в браузере на desktop/mobile.
-3. После выпуска: проверить атрибуцию в Travelpayouts, подключить offsite backup
+Коммит `0e750b28cb9eed497c39d89c0ca2efe09c5c458c` отправлен в master.
+[CI релиза](https://github.com/Wrocoder/HopTrip/actions/runs/36471956933) полностью
+успешен, включая PostgreSQL, браузерные тесты, production SEO и accessibility.
+После CI API/web/worker пересобраны из архива этого коммита и установлены на Oracle VM.
+Миграций БД в релизе нет. HTTPS readiness успешен; новый pipeline #89 завершился
+SUCCEEDED 2026-09-28 19:31:58 UTC. Все 256 активных предложений используют flight-v3.
+
+На hoptrip.pl повторно проверены диалог и страница предложения при 1280 и 390 px:
+три слагаемых, одинаковый расчёт, Escape/возврат фокуса, отсутствие горизонтального
+переполнения и ошибок JavaScript; axe диалога — без нарушений. В выборке 12 предложений
+API версия, статус пояснения и арифметика оценки корректны.
+
+Прямая проверка до установки выявила, что flight-v3 уже работал в контейнерах
+от 2026-09-27; прежняя запись «не опубликовано» была устаревшей. Выпуск 2026-09-28
+фиксирует код в GitHub, успешный CI и повторное развёртывание проверенной версии.
+Backup и порядок отката: [запись приёмки flight-v3](releases/2026-09-28-flight-v3.md).
+
+**Далее:**
+
+1. Проверить атрибуцию в Travelpayouts, подключить offsite backup
    и внешний мониторинг, подтвердить доставку уведомлений о сбое/восстановлении.
-4. Проверить ключевые статьи в Search Console и наблюдать показы/клики;
+2. Проверить ключевые статьи в Search Console и наблюдать показы/клики;
    далее подтвердить второй источник авиабилетов и доступ TravelLead для туров.
+3. Решить с владельцем окончательную форму публичных сведений об операторе.
 
 При подготовке повторно прошли 162 backend-теста (5 PostgreSQL-тестов пропущены),
-Ruff, mypy, 5 frontend unit-тестов, lint, typecheck и production build. SSH доступен; API и БД
-healthy, web и worker работают. Это проверка перед выпуском, не приёмка flight-v3.
-Изменения пока не закоммичены и не установлены: автоматическая проверка разрешений
-отклонила commit/push в master и требует явного согласия владельца на публикацию
-изменений в GitHub. CI для flight-v3 ещё не запускался.
+Ruff, mypy, 5 frontend unit-тестов, lint, typecheck и production build.
+Пропущенные локально PostgreSQL-проверки выполнены в успешном CI релиза.
 
 Записи ниже датированы: более позднее подтверждение заменяет прежний статус.
 
@@ -56,8 +69,8 @@ Ruff и mypy успешны. Frontend: lint, typecheck, production build и 5 un
 оценки, клавиатура/Escape/возврат фокуса, отдельная вкладка, axe и ширина окна.
 Скриншоты окна просмотрены. Полная работа сайта без JavaScript не заявляется:
 экспериментальная проверка выявила существующее ограничение Next.js loading/streaming.
-**На hoptrip.pl пока не опубликовано.** После установки новой версии нужен успешный
-цикл pipeline и проверка перехода активных предложений на flight-v3.
+**Опубликовано и проверено 2026-09-28:** успешный pipeline и flight-v3 у всех
+активных предложений подтверждены в записи выпуска выше.
 Методика и ограничения: [deal-scoring.md](deal-scoring.md).
 
 ### Приблизительная цена в евро рядом с PLN — выполнено 2026-09-27
@@ -298,8 +311,8 @@ so these cards do not establish five comparable sources of flight prices.
 See [multi-partner-flights.md](multi-partner-flights.md) for checked access requirements,
 comparison criteria and next integration steps. No cross-provider comparison is live yet.
 
-Real flight offers and route-specific booking links are connected. The next release is
-flight-v3, followed by the remaining acceptance work listed above; package holidays remain
+Real flight offers and route-specific booking links are connected. Flight-v3 is released;
+the remaining acceptance work is listed above. Package holidays remain
 planned (owner confirmed both product types). hoptrip.pl is deployed with HTTPS and public
 editorial indexing is open. Travelpayouts account created, Drive installed
 and its script loading verified. Drive dashboard confirmation remains owner-side.
@@ -368,7 +381,7 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 - [x] Prepare production configuration and verify backup/restore in an isolated local rehearsal.
 - [x] Add token-free website/API/backup-age probes and tests of failure conditions.
 - [x] Publish 35 content pages, including 18 city guides with official sources.
-- [ ] Verify green CI for the exact release revision.
+- [x] Verify green CI for flight-v3 revision 0e750b28cb9eed497c39d89c0ca2efe09c5c458c.
 - [x] Configure real Aviasales links on 74 flight components; verify internal redirect.
 - [ ] Verify attribution with a real partner.
 - [ ] Finalize operator/contact/privacy/terms information.
