@@ -5,6 +5,7 @@ import {pl,date} from "../../../lib/pl";
 import {Price} from "../../components/price";
 import {DealViewTracker} from "../../components/deal-view-tracker";
 import {Outbound} from "../../components/outbound";
+import {ScoreDetails} from "../../components/score-details";
 export const dynamic="force-dynamic";
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props) {
@@ -28,8 +29,7 @@ export default async function DealPage({params}:Props) {
     </section><section className="booking-card" aria-label="Przejście do partnera"><span className="badge">{pl.partners}</span>
     {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln}/></p><Outbound component={c}/></section>) : <p>{pl.noLink}</p>}
     <p className="muted">{pl.disclosure}</p></section></div>
-    <section className="rationale"><div className="section-heading"><h2>{pl.why}</h2><span className="score-badge">{pl.score}: {deal.deal_score}/100</span></div>
-    <ul>{deal.explanation_codes.map(code=><li key={code}>{pl.explanations[code] ?? pl.explanations.LIMITED_HISTORY}</li>)}</ul>
-    <Link className="text-link" href="/info/price-comparison">Jak porównujemy ceny lotów →</Link></section>
+    <section className="rationale" id="score"><div className="section-heading"><h2>Skąd {deal.deal_score}/100?</h2><span className="score-badge">Ocena oferty</span></div>
+    <ScoreDetails deal={deal}/></section>
   </article></main>;
 }

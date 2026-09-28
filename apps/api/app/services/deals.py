@@ -5,7 +5,7 @@ from app.models.deal import Deal, DealComponent
 from app.models.offer import TravelOffer
 from app.models.statistics import RouteStatistics
 from app.services.availability import DEAL_FRESHNESS
-from app.services.scoring import score_flight_deal
+from app.services.scoring import SCORE_VERSION, score_flight_deal
 from app.services.time import utc
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -38,9 +38,9 @@ def generate_flight_deal(
     score = score_flight_deal(
         current_price=Decimal(offer.price_pln),
         baseline_price=stats.median_price_pln if stats else None,
-        p25_price=stats.p25_price_pln if stats else None,
-        p75_price=stats.p75_price_pln if stats else None,
-        confidence=stats.confidence if stats else Decimal(0),
+        sample_count=stats.sample_count if stats else 0,
+        observed_at=offer.last_verified_at,
+        source_observed_at=offer.source_observed_at,
         expires_at=utc(offer.expires_at) if offer.expires_at else None,
         now=checked_at,
     )
@@ -50,14 +50,10 @@ def generate_flight_deal(
     values = {
         "origin_airport_id": offer.origin_airport_id,
         "depart_at": offer.depart_at,
-        "score_version": "flight-v2",
+        "score_version": SCORE_VERSION,
         "score_components": {
             "sample_count": stats.sample_count if stats else 0,
-            "flight_price": score.flight_price_score,
-            "historical_discount": score.historical_discount_score,
-            "convenience": score.convenience_score,
-            "freshness": score.freshness_score,
-            "confidence": score.confidence_score,
+            "breakdown": score.breakdown.model_dump(mode="json"),
         },
         "explanation_codes": score.explanation,
         "destination_id": offer.destination_id,

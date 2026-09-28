@@ -12,6 +12,7 @@ from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
 from app.models.statistics import RouteStatistics
 from app.providers.base import RawTravelOffer
+from app.services.catalog import serialize_deal
 from app.services.currency import PlnOnlyConverter
 from app.services.deals import generate_flight_deal
 from app.services.ingestion import ingest_offers
@@ -154,6 +155,13 @@ def test_baseline_matches_duration_and_component_price_is_refreshed(db, duration
     db.commit()
     deal = generate_flight_deal(db, offer)
     assert deal.historical_baseline_pln == Decimal(200 if duration is None else 300)
+    explanation = serialize_deal(db, deal).score_explanation
+    assert deal.score_version == "flight-v3"
+    assert explanation.status == "CURRENT"
+    assert explanation.sample_count == 10
+    assert explanation.current_price_pln == 100
+    assert explanation.median_price_pln == deal.historical_baseline_pln
+    assert explanation.observation_basis == "FIRST_SEEN"
     component = db.scalar(select(DealComponent))
     component.metadata_json = {"outbound_url": "https://partner.example/approved"}
     offer.price_pln = Decimal(150)
@@ -164,6 +172,7 @@ def test_baseline_matches_duration_and_component_price_is_refreshed(db, duration
     assert db.scalars(select(DealComponent)).all() == [component]
     assert component.price_pln == Decimal(150)
     assert component.metadata_json["outbound_url"] == "https://partner.example/approved"
+    assert serialize_deal(db, updated).score_explanation.current_price_pln == 150
 
 
 def test_missing_duration_baseline_is_not_borrowed_from_another_trip(db):

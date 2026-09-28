@@ -1,11 +1,19 @@
 export type Component = {id:number; component_type:string; price_pln:string|null; available:boolean; reason:string; redirect_path:string|null};
+export type ScoreExplanation = {
+  status:"CURRENT"|"PROVISIONAL"|"LEGACY"|"UNAVAILABLE";
+  parts:{key:string;points:string;max_points:number}[];
+  total_before_rounding:string|null; sample_count:number|null;
+  current_price_pln:string|null; median_price_pln:string|null; price_difference_percent:string|null;
+  observed_at:string|null; calculated_at:string|null; observation_basis:"SOURCE"|"FIRST_SEEN"|null;
+};
 export type Deal = {
   id:number; slug:string; trip_start:string; trip_end:string; origin_airport_id:number; destination_id:number;
   origin_code:string; origin_city:string; destination_city:string; destination_slug:string;
   trip_type:"ONE_WAY"|"ROUND_TRIP"; price_basis:string; components:Component[];
   flight_price_pln:string|null; hotel_price_pln:string|null; total_estimated_pln:string; price_per_person_pln:string;
   historical_baseline_pln:string|null; discount_percent:string|null; deal_score:number; confidence:string;
-  explanation_codes:string[]; score_version:string; score_components:Record<string,number>;
+  explanation_codes:string[]; score_version:string; score_components:Record<string,unknown>;
+  score_explanation?:ScoreExplanation;
   last_verified_at:string; expires_at:string|null;
 };
 export type Airport = {id:number; iata_code:string; name:string; city:string; country_code:string; is_active:boolean};

@@ -3,10 +3,14 @@ import {Deal} from "../../lib/api";
 import {pl,date} from "../../lib/pl";
 import {Price} from "./price";
 import {Impression} from "./deal-view-tracker";
+import {ScoreDetails} from "./score-details";
+import {ScoreTrigger} from "./score-trigger";
 export function DealCard({deal}:{deal:Deal}) {
-  return <Link className="deal-card" href={`/deals/${deal.slug}`}>
+  return <article className="deal-card">
     <Impression slug={deal.slug}/>
-    <div className="deal-card-top"><span className="badge">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</span><span className="score-badge">{pl.score}: {deal.deal_score}/100</span></div>
+    <div className="deal-card-top"><span className="badge">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</span>
+    <ScoreTrigger score={deal.deal_score} slug={deal.slug} destination={deal.destination_city} provisional={deal.score_explanation?.status === "PROVISIONAL"}><ScoreDetails deal={deal}/></ScoreTrigger></div>
+    <Link className="deal-card-link" href={`/deals/${deal.slug}`}>
     <p className="deal-origin">{deal.origin_city} ({deal.origin_code}) <span aria-hidden="true">→</span></p>
     <h2>{deal.destination_city}</h2>
     <p className="deal-dates">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>
@@ -14,7 +18,8 @@ export function DealCard({deal}:{deal:Deal}) {
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{pl.perPerson}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
     <p className="deal-note">{pl.flightOnly}</p>
-  </Link>;
+    </Link>
+  </article>;
 }
 export function DealGrid({deals}:{deals:Deal[]}) {
   return deals.length ? <section className="deal-grid">{deals.map(d=><DealCard key={d.slug} deal={d}/>)}</section>

@@ -1,6 +1,7 @@
 from datetime import date, datetime
 from decimal import Decimal
 
+from app.schemas.score import ScoreExplanation
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -27,6 +28,7 @@ class DealRead(BaseModel):
     explanation_codes: list[str] = Field(default_factory=list)
     score_version: str = "legacy"
     score_components: dict = Field(default_factory=dict)
+    score_explanation: ScoreExplanation = Field(default_factory=ScoreExplanation)
     slug: str
     origin_airport_id: int
     destination_id: int

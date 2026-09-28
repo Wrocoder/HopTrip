@@ -6,6 +6,7 @@ import tempfile
 if os.getenv("HOPTRIP_E2E") != "1":
     raise RuntimeError("Fixture server requires HOPTRIP_E2E=1")
 from datetime import UTC, datetime, timedelta
+from decimal import Decimal
 
 from app.db.base import Base
 from app.db.session import get_db
@@ -13,6 +14,7 @@ from app.main import app
 from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
 from app.models.deal import Deal, DealComponent
+from app.services.scoring import SCORE_VERSION, score_flight_deal
 from helpers import approved_program, catalog_fixture
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
@@ -27,6 +29,15 @@ Base.metadata.create_all(engine)
 with Session(engine) as db:
     program = approved_program(db)
     deal, component = catalog_fixture(db, program=program, slug="browser-deal")
+    score_now = datetime.now(UTC)
+    score = score_flight_deal(
+        current_price=deal.flight_price_pln, baseline_price=Decimal("250"), sample_count=24,
+        observed_at=score_now - timedelta(hours=24), expires_at=None, now=score_now,
+    )
+    deal.score_version = SCORE_VERSION
+    deal.score_components = {"breakdown": score.breakdown.model_dump(mode="json")}
+    deal.deal_score = score.deal_score
+    deal.historical_baseline_pln = Decimal("250")
     for index in range(1, 15):
         now = datetime.now(UTC)
         other = Deal(
@@ -47,6 +58,21 @@ with Session(engine) as db:
             expires_at=now - timedelta(hours=1) if index == 14 else now + timedelta(hours=2),
         )
         db.add(other)
+        if index == 2:
+            provisional = score_flight_deal(
+                current_price=Decimal(202), baseline_price=None, sample_count=0,
+                observed_at=now, expires_at=None, now=now,
+            )
+            other.score_version = SCORE_VERSION
+            other.score_components = {"breakdown": provisional.breakdown.model_dump(mode="json")}
+            other.deal_score = provisional.deal_score
+        elif index == 3:
+            other.score_version = "flight-v2"
+            other.deal_score = 68
+            other.score_components = {
+                "flight_price": 100, "historical_discount": 40, "convenience": 50,
+                "freshness": 50, "confidence": 67, "sample_count": 20,
+            }
         db.flush()
         db.add(
             DealComponent(

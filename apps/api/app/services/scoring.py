@@ -1,103 +1,93 @@
+"""A reproducible opportunity index; it does not rate airlines or booking probability."""
+
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from decimal import ROUND_HALF_UP, Decimal
 
+from app.schemas.score import ScoreExplanation, ScorePart
+from app.services.availability import DEAL_FRESHNESS
+from app.services.time import utc
 
-@dataclass(frozen=True)
-class ScoringWeights:
-    flight_price: Decimal = Decimal("0.35")
-    historical_discount: Decimal = Decimal("0.20")
-    convenience: Decimal = Decimal("0.15")
-    freshness: Decimal = Decimal("0.15")
-    confidence: Decimal = Decimal("0.15")
-
-
-DEFAULT_WEIGHTS = ScoringWeights()
+SCORE_VERSION = "flight-v3"
+MIN_PRICE_SAMPLES = 5
+FULL_HISTORY_SAMPLES = 30
+MAX_POINTS = {"price": 60, "history": 25, "freshness": 15}
 
 
 @dataclass(frozen=True)
 class DealScore:
-    flight_price_score: int
-    historical_discount_score: int
-    convenience_score: int
-    freshness_score: int
-    confidence_score: int
     deal_score: int
     discount_percent: Decimal
     explanation: list[str]
+    breakdown: ScoreExplanation
 
 
 def score_flight_deal(
     *,
     current_price: Decimal,
     baseline_price: Decimal | None,
-    p25_price: Decimal | None,
-    p75_price: Decimal | None,
-    confidence: Decimal,
+    sample_count: int,
+    observed_at: datetime | None,
     expires_at: datetime | None,
+    source_observed_at: datetime | None = None,
     now: datetime | None = None,
-    convenience_score: int = 50,
-    weights: ScoringWeights = DEFAULT_WEIGHTS,
 ) -> DealScore:
-    checked_at = now or datetime.now(UTC)
-    discount = _discount(current_price, baseline_price)
-    flight_score = _range_score(current_price, p25_price, p75_price)
-    discount_score = _clamp_int(discount)
-    freshness_score = _freshness(expires_at, checked_at)
-    confidence_score = _clamp_int(confidence * 100)
-    final = round(
-        float(
-            Decimal(flight_score) * weights.flight_price
-            + Decimal(discount_score) * weights.historical_discount
-            + Decimal(convenience_score) * weights.convenience
-            + Decimal(freshness_score) * weights.freshness
-            + Decimal(confidence_score) * weights.confidence
+    checked_at = utc(now or datetime.now(UTC))
+    if not current_price.is_finite() or current_price <= 0:
+        raise ValueError("Scoring requires a positive finite price")
+    baseline_valid = (
+        baseline_price is not None and baseline_price.is_finite() and baseline_price > 0
+    )
+    sample_count = max(0, sample_count) if baseline_valid else 0
+    sufficient = baseline_valid and sample_count >= MIN_PRICE_SAMPLES
+    # Signed difference: above-median prices must score lower, not the same.
+    difference = (
+        (baseline_price - current_price) / baseline_price * 100
+        if baseline_valid and baseline_price is not None
+        else None
+    )
+    price_score = (
+        _clamp(Decimal(50) + difference)
+        if sufficient and difference is not None else Decimal(50)
+    )
+    history_score = Decimal(min(sample_count, FULL_HISTORY_SAMPLES)) / FULL_HISTORY_SAMPLES * 100
+    observed = utc(observed_at) if observed_at else None
+    age = Decimal(str((checked_at - observed).total_seconds())) if observed else None
+    freshness_score = Decimal(0)
+    if age is not None and age >= 0 and (not expires_at or utc(expires_at) > checked_at):
+        freshness_score = _clamp((1 - age / Decimal(str(DEAL_FRESHNESS.total_seconds()))) * 100)
+    scores = {"price": price_score, "history": history_score, "freshness": freshness_score}
+    parts = [
+        ScorePart(
+            key=key,
+            points=(value * MAX_POINTS[key] / 100).quantize(Decimal("0.1"), rounding=ROUND_HALF_UP),
+            max_points=MAX_POINTS[key],
         )
+        for key, value in scores.items()
+    ]
+    total = sum((part.points for part in parts), Decimal(0))
+    codes = ["CACHED_PRICE", "HISTORY_AVAILABLE" if sufficient else "LIMITED_HISTORY"]
+    if sufficient and difference is not None and difference > 0:
+        codes.append("BELOW_MEDIAN")
+    breakdown = ScoreExplanation(
+        status="CURRENT" if sufficient else "PROVISIONAL",
+        parts=parts,
+        total_before_rounding=total,
+        sample_count=sample_count,
+        current_price_pln=current_price,
+        median_price_pln=baseline_price if baseline_valid else None,
+        price_difference_percent=difference.quantize(Decimal("0.01")) if difference is not None else None,
+        observed_at=observed,
+        calculated_at=checked_at,
+        observation_basis="SOURCE" if source_observed_at else "FIRST_SEEN",
     )
-    explanation = []
-    if discount > 0:
-        explanation.append("BELOW_MEDIAN")
-    if confidence_score >= 67:
-        explanation.append("HISTORY_AVAILABLE")
-    elif confidence_score > 0:
-        explanation.append("LIMITED_HISTORY")
-    if expires_at and expires_at > checked_at:
-        explanation.append("CACHED_PRICE")
-    explanation.append("CONVENIENCE_UNKNOWN")
     return DealScore(
-        flight_price_score=flight_score,
-        historical_discount_score=discount_score,
-        convenience_score=_clamp_int(convenience_score),
-        freshness_score=freshness_score,
-        confidence_score=confidence_score,
-        deal_score=_clamp_int(final),
-        discount_percent=discount,
-        explanation=explanation,
+        deal_score=int(total.quantize(Decimal(1), rounding=ROUND_HALF_UP)),
+        discount_percent=max(Decimal(0), difference or Decimal(0)).quantize(Decimal("0.01")),
+        explanation=codes,
+        breakdown=breakdown,
     )
 
 
-def _discount(current: Decimal, baseline: Decimal | None) -> Decimal:
-    if not baseline or baseline <= 0:
-        return Decimal(0)
-    return max(Decimal(0), (baseline - current) / baseline * 100).quantize(Decimal("0.01"))
-
-
-def _range_score(current: Decimal, p25: Decimal | None, p75: Decimal | None) -> int:
-    if p25 is None or p75 is None or p75 <= p25:
-        return 50
-    return _clamp_int((p75 - current) / (p75 - p25) * 100)
-
-
-def _freshness(expires_at: datetime | None, now: datetime) -> int:
-    if expires_at is None:
-        return 50
-    seconds = (expires_at - now).total_seconds()
-    if seconds <= 0:
-        return 0
-    if seconds >= 24 * 3600:
-        return 100
-    return _clamp_int(Decimal(str(seconds / 86400)) * 100)
-
-
-def _clamp_int(value: Decimal | float) -> int:
-    return max(0, min(100, int(Decimal(str(value)).quantize(Decimal(1), rounding=ROUND_HALF_UP))))
+def _clamp(value: Decimal) -> Decimal:
+    return max(Decimal(0), min(Decimal(100), value))

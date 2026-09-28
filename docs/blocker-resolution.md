@@ -14,7 +14,51 @@ the detailed audit remains the record of code findings.
 This checklist turns the open external decisions into concrete actions. Do not commit
 `.env`, `.env.production`, API tokens, private keys or payment details.
 
-## Audit status: 2026-09-27
+## Audit status: 2026-09-28
+
+### Ближайший выпуск — flight-v3, подготовка 2026-09-28
+
+1. Зафиксировать изменения flight-v3 и отправить в GitHub; проверить успешный CI
+   именно для SHA релиза. Затем сохранить backup БД и прежние образы на VM.
+2. Собрать и установить API/web/worker, дождаться успешного pipeline, проверить
+   flight-v3 у активных предложений и пояснения в браузере на desktop/mobile.
+3. После выпуска: проверить атрибуцию в Travelpayouts, подключить offsite backup
+   и внешний мониторинг, подтвердить доставку уведомлений о сбое/восстановлении.
+4. Проверить ключевые статьи в Search Console и наблюдать показы/клики;
+   далее подтвердить второй источник авиабилетов и доступ TravelLead для туров.
+
+При подготовке повторно прошли 162 backend-теста (5 PostgreSQL-тестов пропущены),
+Ruff, mypy, 5 frontend unit-тестов, lint, typecheck и production build. SSH доступен; API и БД
+healthy, web и worker работают. Это проверка перед выпуском, не приёмка flight-v3.
+Изменения пока не закоммичены и не установлены: автоматическая проверка разрешений
+отклонила commit/push в master и требует явного согласия владельца на публикацию
+изменений в GitHub. CI для flight-v3 ещё не запускался.
+
+Записи ниже датированы: более позднее подтверждение заменяет прежний статус.
+
+### Понятная оценка предложения — локальная реализация 2026-09-27
+
+Добавлена методика flight-v3: цена относительно медианы до 60 баллов, объём истории
+до 25, возраст наблюдения до 15. Убраны повторный учёт цены и условный бонус за
+неизвестное удобство рейса. При менее 5 наблюдениях/отсутствии медианы оценка явно
+предварительная; нейтральные 30 баллов за цену не выдаются за подтверждённую выгоду.
+
+Нажатие на оценку в карточке открывает пояснение с точным вкладом каждого критерия,
+суммой, исходной ценой/медианой и ограничениями. Полный расчёт также находится на
+странице предложения; ссылку на этот раздел можно открыть отдельно. Для старых v2 показывается
+прежняя методика, если сохранённые компоненты воспроизводят число; иначе сообщается
+об отсутствии достоверной расшифровки. Версия и снимок расчёта сохраняются вместе.
+
+Серверные проверки: 162 теста прошли, 5 PostgreSQL-тестов не запускались;
+Ruff и mypy успешны. Frontend: lint, typecheck, production build и 5 unit-тестов
+успешны. В Edge прошли 18 существующих сценариев каталога/UI и итоговый запуск
+6 новых сценариев оценки (desktop/mobile): арифметика, предварительные/старые
+оценки, клавиатура/Escape/возврат фокуса, отдельная вкладка, axe и ширина окна.
+Скриншоты окна просмотрены. Полная работа сайта без JavaScript не заявляется:
+экспериментальная проверка выявила существующее ограничение Next.js loading/streaming.
+**На hoptrip.pl пока не опубликовано.** После установки новой версии нужен успешный
+цикл pipeline и проверка перехода активных предложений на flight-v3.
+Методика и ограничения: [deal-scoring.md](deal-scoring.md).
 
 ### Приблизительная цена в евро рядом с PLN — выполнено 2026-09-27
 
@@ -111,11 +155,11 @@ Telegram API подтвердил успешную отправку тестов
 - Drive не загружается на юридических страницах; переход к ним из footer выполняет
   полную навигацию для выгрузки уже запущенного стороннего скрипта.
 - `/api/v1/admin/*` по-прежнему возвращает 404. Редиректы www и старого sslip.io — 308.
-- Search Console подтверждён владельцем. **Осталось владельцу:** отправить
-  `https://hoptrip.pl/sitemap.xml` в разделе Sitemaps и через проверку URL запросить
-  индексирование главной и ключевых статей. Доступ к аккаунту Google агенту не предоставлен.
-- Разрешение индексации проверяется технически; фактическое включение в индекс и
-  поисковый трафик пока не подтверждены. Подробности: [indexing-launch.md](indexing-launch.md).
+- Search Console подтверждён владельцем; sitemap принят 2026-09-25. Индексация одной
+  проверенной страницы подтверждена 2026-09-26 (см. выше). **Осталось владельцу:**
+  проверить ключевые статьи и отчёт эффективности. Доступ к аккаунту Google агенту не предоставлен.
+- Индексация всех URL и поисковый трафик пока не подтверждены.
+  Подробности: [indexing-launch.md](indexing-launch.md).
 
 Владелец — физическое лицо: **Dmitriy Kysyelyev** (написание предоставлено владельцем
 для подготовки публичных страниц). Страна: **Poland / Polska**.
@@ -224,16 +268,17 @@ sudo systemctl start hoptrip-activity.service
 Latest operations/privacy step: daily verified backups and five-minute host monitoring
 are installed on Oracle VM. Restore drill of the scheduled backup succeeded in an isolated
 PostgreSQL container (667 offers, 667 deals, 155 aliases). Retention is enabled only for
-scheduled backups. Telegram inbox notification delivery is confirmed by the owner;
-incident/recovery and pipeline-summary delivery still need separate acceptance. No offsite
-copy is verified yet.
+scheduled backups. Telegram inbox, test-message and pipeline-summary delivery are confirmed
+by the owner; the recipient was switched to a group on 2026-09-26. Incident/recovery
+delivery still needs separate acceptance. No offsite copy is verified yet.
 Website consent controls deployed: analytics and Drive off by default, separate choices,
 reject/save/accept, expiry and withdrawal. 134 backend tests + 82 browser tests passed;
 real Drive consent/withdrawal checked on hoptrip.pl. Full evidence: operations.md.
 Operator Dmitriy Kysyelyev, country Poland and working inbox kontakt@hoptrip.pl confirmed;
 Operator address supplied privately; owner prohibits storing it in the repository.
-Contact/privacy/terms now published with runtime operator data and noindex; public editorial
-indexing is open. Search Console steps: [indexing-launch.md](indexing-launch.md).
+Contact/privacy/terms are published with noindex; only contact email remains after the owner's
+removal request. The operator-identification decision remains open. Public editorial indexing
+is open. Search Console steps: [indexing-launch.md](indexing-launch.md).
 
 Latest completed step: reviewed destination catalog expanded from 10 to 68 entries,
 155 explicit provider aliases applied with conflict checks and a shared pipeline lock.
@@ -253,9 +298,10 @@ so these cards do not establish five comparable sources of flight prices.
 See [multi-partner-flights.md](multi-partner-flights.md) for checked access requirements,
 comparison criteria and next integration steps. No cross-provider comparison is live yet.
 
-Current priority: connect real flight offers and verified booking links, followed by
-package holidays (owner confirmed both product types). hoptrip.pl is deployed with
-HTTPS; indexing remains disabled. Travelpayouts account created, Drive installed
+Real flight offers and route-specific booking links are connected. The next release is
+flight-v3, followed by the remaining acceptance work listed above; package holidays remain
+planned (owner confirmed both product types). hoptrip.pl is deployed with HTTPS and public
+editorial indexing is open. Travelpayouts account created, Drive installed
 and its script loading verified. Drive dashboard confirmation remains owner-side.
 Owner saved the API token on the server; API container recreated on 2026-09-24.
 Real ingestion and route-specific affiliate link generation now verified below.
@@ -298,7 +344,8 @@ immediately and waits 3600 seconds after completion before the next run; restart
 unless-stopped. Seven origins, PROVIDER_MAX_PAGES=1 (up to 700 input rows per attempt).
 First scheduled run succeeded: 75 deals, 9 links updated, 66 unchanged, no invalid links.
 Immediate manual repeat succeeded: 0 new observations, 72 duplicate observations,
-75 unchanged links. Latest sample skipped 628 unresolved routes; expand explicit aliases next.
+75 unchanged links. That initial sample skipped 628 unresolved routes; the catalog expansion
+on 2026-09-25 reduced unresolved routes to 10 in its recorded run (see above).
 Backup before deployment: `/opt/hoptrip/backups/hoptrip-20260925T063829Z-2499178.dump`.
 API ready after deployment. Backend tests: 127 passed, 5 PostgreSQL tests deselected;
 Ruff/mypy passed. Two real PostgreSQL pipeline runs succeeded on the VM.
@@ -327,25 +374,27 @@ and acceptance criteria, and [implementation-status.md](implementation-status.md
 - [ ] Finalize operator/contact/privacy/terms information.
 - [x] Enable bounded recurring ingestion and automatic approved partner-link refresh.
 - [x] Verify 37 sitemap URLs and 35 previews on hoptrip.pl after deployment.
-- [ ] Review date-sensitive facts before opening indexing.
+- [ ] Continue reviewing date-sensitive facts in published content; indexing is already open.
 - [x] Deploy to Oracle VM and verify public DNS/TLS, redirects and API readiness.
 - [x] Verify one bounded real-data ingestion on the VM.
 - [ ] Configure offsite backups, retention and monitoring delivery; verify a production restore drill.
 - [x] Install daily local backup schedule and retention; verify isolated restore of a production dump.
 - [x] Install five-minute host monitoring of website/API/worker/pipeline/backup/disk.
-- [ ] Configure recipient, verify delivered failure/recovery messages and external VM monitoring.
+- [x] Configure Telegram recipient; confirm test-message, inbox and pipeline-summary delivery.
+- [ ] Verify delivered failure/recovery messages and configure external VM monitoring.
 - [ ] Configure independent offsite backup storage.
 - [x] Deploy optional analytics/Drive consent, refusal and withdrawal controls.
 
-Monitoring and backup schedules are installed; notification destination and offsite storage
-are still missing. See [operations.md](operations.md) for invocation, checks and limitations.
+Monitoring and backup schedules and the Telegram group recipient are configured. Offsite
+storage, external VM monitoring and incident/recovery delivery acceptance remain open.
+See [operations.md](operations.md) for invocation, checks and limitations.
 
 Contact/privacy technical inventory and Polish text are prepared in
-[privacy-publication-draft.md](privacy-publication-draft.md). Publication still needs
-confirmed operator details, working contact email and remaining processing/consent details.
-The public pages remain draft; indexing remains blocked. Owner installation permission for
-Drive does not establish visitor consent. The visitor consent interface is now implemented;
-the complete privacy disclosure still needs owner/processing details.
+[privacy-publication-draft.md](privacy-publication-draft.md). Contact/privacy/terms are published,
+the contact inbox works and public editorial indexing is open. Following the owner's request,
+name and address were removed; the final form of operator identification remains an owner
+decision. Owner installation permission for Drive does not establish visitor consent.
+The visitor consent interface is implemented and deployed.
 
 Account creation, data API access and affiliate approval are separate milestones. The
 locally tested adapter and per-program policy are not evidence of a working commercial integration.

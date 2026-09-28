@@ -3,12 +3,14 @@ from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
 from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
+from app.services.score_explanation import explain_score
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 
 def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result = DealRead.model_validate(deal)
+    result.score_explanation = explain_score(deal)
     origin = db.get(Airport, deal.origin_airport_id)
     destination = db.get(Destination, deal.destination_id)
     result.origin_code = origin.iata_code if origin else ""

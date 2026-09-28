@@ -59,7 +59,7 @@ export const content:Record<string,InfoContent> = {
  "price-comparison":{
   title:"Jak porównujemy ceny lotów",
   description:"Co oznacza porównanie z medianą w HopTrip i co sprawdzić, zanim wybierzesz lot.",
-  draft:false,reviewedAt:"2026-09-21",
+  draft:false,reviewedAt:"2026-09-27",
   paragraphs:["Niska cena i dobry wybór podróży nie zawsze oznaczają to samo. HopTrip porównuje zapisane ceny lotów, ale decyzja wymaga też sprawdzenia dat, lotnisk i warunków biletu. Oto jak czytać nasze porównanie."],
   sections:[
    {title:"Co trafia do porównania",paragraphs:[
@@ -71,7 +71,11 @@ export const content:Record<string,InfoContent> = {
     "Przykład wyłącznie obliczeniowy: przy medianie 400 PLN i obserwacji 300 PLN różnica wynosi 25%. Te kwoty nie są ofertą podróży. Gdy brakuje porównania historycznego, nie mamy podstaw do wskazania oszczędności; zero w tym polu nie dowodzi, że cena jest typowa.",
    ]},
    {title:"Ocena pomaga uporządkować oferty",paragraphs:[
-    "Wynik 0–100 łączy pozycję ceny w historii, różnicę wobec mediany, świeżość i liczebność próby. Nie jest prawdopodobieństwem udanego zakupu. Nieznane parametry wygody otrzymują neutralną ocenę, a nie potwierdzenie dogodnego lotu.",
+    "Ocena oferty 0–100 łączy cenę na tle historii (do 60 pkt), liczbę obserwacji (do 25 pkt) i świeżość danych (do 15 pkt). To pomocniczy indeks według przyjętych przez HopTrip wag, a nie ocena linii lotniczej ani prawdopodobieństwo zakupu. Kliknij ocenę na karcie, aby zobaczyć dokładny podział punktów. Na stronie oferty ten sam rachunek jest widoczny pod ceną i linkiem do partnera.",
+    "Przy co najmniej 5 obserwacjach i poprawnej medianie cena równa medianie daje 30 z 60 pkt. Każdy 1% poniżej mediany dodaje 0,6 pkt; każdy 1% powyżej odejmuje 0,6 pkt. Wynik tej części ograniczamy do 0–60. Gdy historii jest mniej lub mediana jest nieznana, przyjmujemy neutralne 30 pkt i oznaczamy ocenę jako wstępną. To założenie, nie potwierdzenie okazji.",
+    "Za historię przyznajemy 25 × min(liczba obserwacji / 30, 1) pkt. Są to zapisane obserwacje, a nie liczba niezależnych sprzedawców. Próba może zawierać obecną cenę i nie musi reprezentować całego rynku. Świeżość daje do 15 pkt: punkty maleją liniowo z wiekiem obserwacji do 0 po 48 godzinach. Brak poprawnego czasu lub wygaśnięcie oferty oznacza 0 pkt za świeżość. Jeśli źródło nie podaje czasu znalezienia ceny, używamy pierwszego zapisania tej obserwacji w HopTrip, bez obietnicy ceny na żywo.",
+    "Każdy składnik zaokrąglamy do 0,1 pkt, sumujemy widoczne wartości i zaokrąglamy wynik do liczby całkowitej, z połówkami w górę. Przykład wyłącznie obliczeniowy: cena 330 PLN przy medianie 400 PLN daje 40,5 pkt, 24 obserwacje dają 20 pkt, a wiek 24 godziny daje 7,5 pkt. Suma: 68/100. Przykład nie jest ofertą podróży. Wynik opisuje chwilę przeliczenia, której datę pokazujemy w wyjaśnieniu.",
+    "Nie dodajemy punktów za nieznane godziny, bagaż, przesiadki, opóźnienia ani warunki zwrotu. Prowizja partnerska nie wpływa na wynik. Starsze oceny mogą jeszcze używać poprzednich wag: ich wyjaśnienie pokazuje dawny rachunek i oznaczenie poprzedniej metody do czasu przeliczenia. Jeśli pełnego rachunku nie zapisano, informujemy o braku wyjaśnienia zamiast dopasowywać punkty do wyniku.",
     "Zacznij od swojego lotniska, terminu i długości pobytu. Potem sprawdź cenę na osobę, czas obserwacji i cenę końcową po przejściu do partnera. Osobno uwzględnij nocleg, dojazdy oraz potrzebne dodatki — obecny katalog dotyczy lotów.",
    ]},
   ],related:["price-freshness","price-history","trip-budget","one-way-round-trip"],
