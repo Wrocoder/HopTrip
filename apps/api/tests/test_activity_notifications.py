@@ -53,6 +53,57 @@ def test_mail_baseline_and_uid_filter(activity):
     assert activity.inbox_snapshot({"validity": 10, "uid": 9000}, factory=Inbox)[2]
 
 
+def test_transient_imap_failure_reconnects_before_single_delivery(activity, monkeypatch, capsys):
+    old = {"validity": 11, "uid": 99}
+    state = {"mail": old, "mailbox": "kontakt@hoptrip.pl"}
+    calls, messages = [], []
+    def snapshot(cursor):
+        calls.append(cursor)
+        if len(calls) == 1:
+            raise TimeoutError("private-password")
+        return {"validity": 11, "uid": 101}, 2, False
+    monkeypatch.setattr(activity, "inbox_snapshot", snapshot)
+    monkeypatch.setattr(activity.time, "sleep", lambda _: None)
+    monkeypatch.setattr(activity, "deliver", lambda text: messages.append(text) or True)
+    assert activity.notify_mail(state) == "OK"
+    assert calls == [old, old] and len(messages) == 1
+    assert state["mail"]["uid"] == 101
+    assert "private-password" not in capsys.readouterr().out
+
+
+def test_persistent_imap_failure_keeps_cursor_and_fails_service(activity, monkeypatch, capsys):
+    old = {"mail": {"validity": 11, "uid": 99}, "mailbox": "kontakt@hoptrip.pl"}
+    activity.save(old)
+    monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "test")
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "test")
+    monkeypatch.setattr(activity, "notify_jobs", lambda _: None)
+    monkeypatch.setattr(activity.time, "sleep", lambda _: None)
+    calls = []
+    def fail(cursor):
+        calls.append(cursor)
+        raise TimeoutError("private-password")
+    monkeypatch.setattr(activity, "inbox_snapshot", fail)
+    assert activity.main() == 1
+    assert len(calls) == 2
+    assert activity.json.loads(activity.STATE.read_text()) == old
+    output = capsys.readouterr().out
+    assert '"inbox_error": "TIMEOUT"' in output and "private-password" not in output
+
+
+def test_imap_auth_and_tls_errors_are_not_retried(activity, monkeypatch):
+    calls = []
+    for error in [activity.imaplib.IMAP4.error("private-password"),
+                  activity.ssl.SSLCertVerificationError("private-password")]:
+        calls.clear()
+        def fail(cursor):
+            calls.append(cursor)
+            raise error
+        monkeypatch.setattr(activity, "inbox_snapshot", fail)
+        with pytest.raises(type(error)):
+            activity.inbox_snapshot_with_retry(None)
+        assert len(calls) == 1
+
+
 def test_failed_mail_delivery_is_retried_without_exposing_contents(activity, monkeypatch):
     old = {"validity": 11, "uid": 99}
     state = {"mail": old, "mailbox": "kontakt@hoptrip.pl"}

@@ -5,6 +5,7 @@ import json
 import os
 import ssl
 import subprocess
+import time
 from pathlib import Path
 
 from monitor import COMPOSE, ROOT, deliver
@@ -92,12 +93,38 @@ def inbox_snapshot(cursor, *, factory=imaplib.IMAP4_SSL):
         return {"validity": validity, "uid": next_uid - 1}, len(ids), False
 
 
+def inbox_snapshot_with_retry(cursor):
+    # Retry only the read-only IMAP phase, never notification delivery/checkpointing.
+    for attempt in range(2):
+        try:
+            return inbox_snapshot(cursor)
+        except ssl.SSLCertVerificationError:
+            raise
+        except (OSError, imaplib.IMAP4.abort):
+            if attempt:
+                raise
+            print('{"inbox_retry": "TRANSIENT_CONNECTION_ERROR"}')
+            time.sleep(2)
+
+
+def error_code(error):
+    if isinstance(error, ssl.SSLCertVerificationError):
+        return "TLS_VERIFICATION_FAILED"
+    if isinstance(error, TimeoutError):
+        return "TIMEOUT"
+    if isinstance(error, (OSError, imaplib.IMAP4.abort)):
+        return "CONNECTION_ERROR"
+    if isinstance(error, imaplib.IMAP4.error):
+        return "IMAP_ERROR"
+    return "CHECK_FAILED"
+
+
 def notify_mail(state):
     if not all(os.environ.get(k) for k in ("IMAP_USER", "IMAP_PASSWORD")):
         return "NOT_CONFIGURED"
     mailbox = os.environ["IMAP_USER"]
     previous = state.get("mail") if state.get("mailbox") == mailbox else None
-    cursor, count, baseline = inbox_snapshot(previous)
+    cursor, count, baseline = inbox_snapshot_with_retry(previous)
     if count and not deliver(
         f"HopTrip: поступило новое обращение на {mailbox}.\nНовых писем: {count}. "
         "Откройте Zimbra Webmail, чтобы прочитать и ответить."
@@ -134,8 +161,9 @@ def main():
     for name, function in (("pipeline_summaries", notify_jobs), ("inbox", notify_mail)):
         try:
             checks[name] = function(state) or "OK"
-        except Exception:
+        except Exception as error:
             checks[name] = "FAILED"  # Never log credentials, headers or email bodies.
+            checks[name + "_error"] = error_code(error)
     print(json.dumps(checks))
     return int("FAILED" in checks.values())
 
