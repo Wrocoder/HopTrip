@@ -52,9 +52,12 @@ def success(request):
     assert len(body["links"]) <= 10
     items = []
     for item in body["links"]:
+        assert item["sub_id"] == "hoptrip_web_deal"
         url = urlsplit(item["url"])
         reordered = urlunsplit(url._replace(query=urlencode(sorted(parse_qsl(url.query)))))
-        partner = "https://tp.media/r?" + urlencode({"marker": 123, "trs": 456, "u": reordered})
+        partner = "https://tp.media/r?" + urlencode(
+            {"marker": 123, "trs": 456, "u": reordered, "sub_id": item["sub_id"]}
+        )
         items.append({"url": item["url"], "partner_url": partner, "code": "success"})
     return httpx.Response(200, json={"code": "success", "result": {"links": items}})
 
@@ -71,6 +74,45 @@ def test_sync_is_idempotent_and_refreshes_changed_target(isolated_db, link_fixtu
     isolated_db.commit()
     third = asyncio.run(service.sync_partner_links(isolated_db, transport=transport))
     assert third.updated == 1 and component.metadata_json["outbound_url"] != old
+
+
+@pytest.mark.parametrize("suffix", ["", "&sub_id=old", "&sub_id=",
+                                  "&sub_id=hoptrip_web_deal&sub_id="])
+def test_old_or_ambiguous_subid_is_regenerated(isolated_db, link_fixture, suffix):
+    _, _, component, offer, _ = link_fixture
+    direct = service.source_url(offer.raw_payload["link"])
+    component.metadata_json = {"outbound_url": "https://tp.media/r?" + urlencode(
+        {"marker": 123, "trs": 456, "u": direct}
+    ) + suffix}
+    isolated_db.commit()
+    result = asyncio.run(service.sync_partner_links(
+        isolated_db, transport=httpx.MockTransport(success),
+    ))
+    assert result.updated == 1 and result.unchanged == 0
+    assert service.valid_partner(component.metadata_json["outbound_url"], direct, 123, 456)
+
+
+@pytest.mark.parametrize("field,value", [
+    ("sub_id", None), ("sub_id", "wrong"), ("marker", "999"),
+    ("trs", "999"), ("u", "https://www.aviasales.com/search/other"),
+])
+def test_response_must_preserve_subid_route_and_ids(isolated_db, link_fixture, field, value):
+    def altered(request):
+        body = success(request).json()
+        item = body["result"]["links"][0]
+        parsed = urlsplit(item["partner_url"])
+        query = dict(parse_qsl(parsed.query))
+        if value is None:
+            query.pop(field)
+        else:
+            query[field] = value
+        item["partner_url"] = urlunsplit(parsed._replace(query=urlencode(query)))
+        return httpx.Response(200, json=body)
+    with pytest.raises(ProviderPermanentError):
+        asyncio.run(service.sync_partner_links(
+            isolated_db, transport=httpx.MockTransport(altered),
+        ))
+    assert "outbound_url" not in link_fixture[2].metadata_json
 
 
 @pytest.mark.parametrize(

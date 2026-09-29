@@ -15,6 +15,8 @@ from app.services.availability import available_deals_query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+PLACEMENT_SUB_ID = "hoptrip_web_deal"
+
 
 def source_url(link: object) -> str:
     if not isinstance(link, str) or not link.startswith("/search/"):
@@ -43,7 +45,7 @@ def valid_partner(url: object, direct: str, marker: int, project: int) -> bool:
         return False
     try:
         parsed = urlsplit(url)
-        query = parse_qs(parsed.query)
+        query = parse_qs(parsed.query, keep_blank_values=True)
         return (
             parsed.scheme == "https"
             and parsed.netloc == "tp.media"
@@ -51,6 +53,7 @@ def valid_partner(url: object, direct: str, marker: int, project: int) -> bool:
             and not parsed.fragment
             and query.get("marker") == [str(marker)]
             and query.get("trs") == [str(project)]
+            and query.get("sub_id") == [PLACEMENT_SUB_ID]
             and len(query.get("u", [])) == 1
             and same_url(query["u"][0], direct)
         )
@@ -148,7 +151,10 @@ async def sync_partner_links(
                         "trs": project,
                         "marker": marker,
                         "shorten": False,
-                        "links": [{"url": direct} for direct in sorted(requested)],
+                        "links": [
+                            {"url": direct, "sub_id": PLACEMENT_SUB_ID}
+                            for direct in sorted(requested)
+                        ],
                     },
                 )
             except httpx.TransportError:
