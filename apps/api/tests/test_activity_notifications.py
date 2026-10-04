@@ -57,11 +57,13 @@ def test_transient_imap_failure_reconnects_before_single_delivery(activity, monk
     old = {"validity": 11, "uid": 99}
     state = {"mail": old, "mailbox": "kontakt@hoptrip.pl"}
     calls, messages = [], []
+
     def snapshot(cursor):
         calls.append(cursor)
         if len(calls) == 1:
             raise TimeoutError("private-password")
         return {"validity": 11, "uid": 101}, 2, False
+
     monkeypatch.setattr(activity, "inbox_snapshot", snapshot)
     monkeypatch.setattr(activity.time, "sleep", lambda _: None)
     monkeypatch.setattr(activity, "deliver", lambda text: messages.append(text) or True)
@@ -79,9 +81,11 @@ def test_persistent_imap_failure_keeps_cursor_and_fails_service(activity, monkey
     monkeypatch.setattr(activity, "notify_jobs", lambda _: None)
     monkeypatch.setattr(activity.time, "sleep", lambda _: None)
     calls = []
+
     def fail(cursor):
         calls.append(cursor)
         raise TimeoutError("private-password")
+
     monkeypatch.setattr(activity, "inbox_snapshot", fail)
     assert activity.main() == 1
     assert len(calls) == 2
@@ -92,12 +96,16 @@ def test_persistent_imap_failure_keeps_cursor_and_fails_service(activity, monkey
 
 def test_imap_auth_and_tls_errors_are_not_retried(activity, monkeypatch):
     calls = []
-    for error in [activity.imaplib.IMAP4.error("private-password"),
-                  activity.ssl.SSLCertVerificationError("private-password")]:
+    for error in [
+        activity.imaplib.IMAP4.error("private-password"),
+        activity.ssl.SSLCertVerificationError("private-password"),
+    ]:
         calls.clear()
+
         def fail(cursor):
             calls.append(cursor)
             raise error
+
         monkeypatch.setattr(activity, "inbox_snapshot", fail)
         with pytest.raises(type(error)):
             activity.inbox_snapshot_with_retry(None)
@@ -131,6 +139,8 @@ def test_summary_checkpoint_only_after_delivery(activity, monkeypatch):
             "observations": 4,
             "skipped": 1,
             "finished": "2026-09-25",
+            "started": "2026-09-25T10:00:00+00:00",
+            "duration_ms": 8906,
         }
     ]
     monkeypatch.setattr(activity, "completed_jobs", lambda cursor: rows if cursor is None else [])
@@ -145,6 +155,41 @@ def test_summary_checkpoint_only_after_delivery(activity, monkeypatch):
     activity.notify_jobs(state)
     assert state["job_id"] == 7 and len(messages) == 1
     assert "Добавлено: 3" in messages[0] and "Обновлено записей: 20" in messages[0]
+    assert "Длительность: 9 сек" in messages[0]
+    assert "Начало UTC: 2026-09-25T10:00:00+00:00" in messages[0]
+
+
+@pytest.mark.parametrize(
+    ("milliseconds", "expected"),
+    [
+        (None, "нет данных"),
+        (-1, "нет данных"),
+        (0, "0 сек"),
+        (59999, "1 мин 00 сек"),
+        (125000, "2 мин 05 сек"),
+        (3601000, "1 ч 00 мин 01 сек"),
+        (float("nan"), "нет данных"),
+    ],
+)
+def test_duration_format(activity, milliseconds, expected):
+    assert activity.format_duration(milliseconds) == expected
+
+
+def test_summary_includes_retry_wait_in_total(activity, monkeypatch):
+    job = {
+        "id": 9,
+        "finished": "2026-10-02T10:02:05Z",
+        "attempt": 2,
+        "started": "2026-10-02T10:00:00Z",
+        "duration_ms": 9000,
+        "elapsed_ms": 125000,
+    }
+    monkeypatch.setattr(activity, "completed_jobs", lambda _: [job])
+    messages = []
+    monkeypatch.setattr(activity, "deliver", lambda text: messages.append(text) or True)
+    activity.notify_jobs({})
+    assert "Длительность: 2 мин 05 сек (с ожиданием повторов; попыток: 2)" in messages[0]
+    assert "Успешная попытка: 9 сек" in messages[0]
 
 
 def test_setup_preserves_other_settings_and_hides_secrets(tmp_path, monkeypatch):

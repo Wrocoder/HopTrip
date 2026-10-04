@@ -1,5 +1,6 @@
 from datetime import UTC, datetime, timedelta
 from decimal import ROUND_HALF_UP, Decimal
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func, select
@@ -13,7 +14,12 @@ from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
 from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
-from app.schemas.analytics import AnalyticsEventAccepted, AnalyticsEventCreate, AnalyticsSummary
+from app.schemas.analytics import (
+    ActivityClickSummary,
+    AnalyticsEventAccepted,
+    AnalyticsEventCreate,
+    AnalyticsSummary,
+)
 
 router = APIRouter(prefix="/api/v1", tags=["analytics"])
 
@@ -37,8 +43,12 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
         deal_id = db.scalar(select(Deal.id).where(Deal.slug == payload.deal_slug))
         if deal_id is None:
             raise HTTPException(404, "Deal not found")
-    # Arbitrary client metadata is discarded; keep only bounded campaign context.
-    metadata = {k: str(v)[:80] for k, v in payload.metadata.items() if k in {"campaign"}}
+    # Keep bounded campaign context and separately validated activity fields only.
+    metadata: dict[str, Any] = {
+        k: str(v)[:80] for k, v in payload.metadata.items() if k in {"campaign"}
+    }
+    if payload.activity:
+        metadata["activity"] = payload.activity.model_dump()
     event = AnalyticsEvent(
         event_id=payload.event_id,
         event_name=payload.event_name,
@@ -108,8 +118,14 @@ def analytics_summary(
     by_provider: dict[str, Decimal] = {}
     by_category: dict[str, Decimal] = {}
     by_deal: dict[str, Decimal] = {}
+    activity_groups: dict[tuple, dict] = {}
     for event in events:
         by_event[event.event_name] = by_event.get(event.event_name, 0) + 1
+        if event.event_name == "ACTIVITY_CLICK" and (activity := event.metadata_json.get("activity")):
+            key = tuple(activity[field] for field in ("city", "activity_id", "page", "link_kind"))
+            group = activity_groups.setdefault(key, {**activity, "clicks": 0, "sessions": set()})
+            group["clicks"] += 1
+            group["sessions"].add(event.anonymous_session_id)
     for conversion in pln:
         value = conversion.commission or Decimal(0)
         by_provider[conversion.provider_code] = (
@@ -123,6 +139,11 @@ def analytics_summary(
             by_deal[deal.slug] = by_deal.get(deal.slug, Decimal(0)) + value
     attributed = sum(c.click_id is not None for c in conversions)
     return AnalyticsSummary(
+        total_activity_clicks=by_event.get("ACTIVITY_CLICK", 0),
+        activity_clicks=[
+            ActivityClickSummary.model_validate({**group, "sessions": len(group["sessions"])})
+            for _, group in sorted(activity_groups.items(), key=lambda item: (-item[1]["clicks"], item[0]))
+        ],
         total_events=len(events),
         by_event=by_event,
         total_sessions=len(sessions),

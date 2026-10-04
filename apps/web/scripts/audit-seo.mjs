@@ -23,7 +23,7 @@ try {
   if(doc.querySelector("parsererror")) throw new Error("Invalid sitemap XML");
   return [...doc.querySelectorAll("url > loc")].map(node=>node.textContent);
  },await sitemap.text());
- check(urls.length===37,`sitemap: expected 37 URLs, got ${urls.length}`);
+ check(urls.length===43,`sitemap: expected 43 URLs, got ${urls.length}`);
  check(new Set(urls).size===urls.length,"sitemap: duplicate URLs");
  const paths=[];
  const titles=new Set(), descriptions=new Set();
@@ -68,7 +68,7 @@ try {
    const breadcrumb=await page.locator('script[type="application/ld+json"]').evaluateAll(nodes=>
     nodes.map(node=>JSON.parse(node.textContent)).find(item=>item["@type"]==="BreadcrumbList"));
    const expected=["/","/info",path].map((href,index)=>({"@type":"ListItem",position:index+1,
-    name:index===0 ? "Strona główna" : index===1 ? "Jak działa HopTrip" : data.title,item:new URL(href,canonical).href}));
+    name:index===0 ? "Strona główna" : index===1 ? "Poradniki podróżnicze" : data.title,item:new URL(href,canonical).href}));
    check(breadcrumb?.["@context"]==="https://schema.org" &&
     JSON.stringify(breadcrumb.itemListElement)===JSON.stringify(expected),`${path}: incorrect breadcrumb structured data`);
    const nav=page.getByRole("navigation",{name:"Ścieżka nawigacji"});

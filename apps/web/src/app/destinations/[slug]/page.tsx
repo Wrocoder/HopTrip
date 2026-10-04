@@ -2,6 +2,7 @@ import {notFound} from "next/navigation";
 import {getDestinations,getDeals} from "../../../lib/api";
 import {pl} from "../../../lib/pl";
 import {DealGrid} from "../../components/catalog";
+import {DestinationGuides} from "../../components/destination-guides";
 export const dynamic="force-dynamic";
 type Props={params:Promise<{slug:string}>};
 async function load(params:Props["params"]) {
@@ -20,5 +21,5 @@ export default async function RoutePage({params}:Props) {
   if (!record) notFound();
   const deals=await getDeals({destination:value});
   return <main className="page-shell"><header className="page-heading"><p className="eyebrow">{pl.destinations}</p><h1>{record.city}</h1>
-    <p className="lead">{pl.routeIntro}</p></header><DealGrid deals={deals}/></main>;
+    <p className="lead">{pl.routeIntro}</p></header><DestinationGuides slug={value}/><DealGrid deals={deals}/></main>;
 }

@@ -27,17 +27,18 @@ export function publicApi(path:string):string {
  return (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/,"")+path;
 }
 const sent=new Map<string,number>();
-export function track(event_name:string,deal_slug?:string) {
+export type ActivityContext={city:string;activity_id:string;page:string;link_kind:"affiliate"|"official"};
+export function track(event_name:string,deal_slug?:string,activity?:ActivityContext) {
  if(!analyticsAllowed()) return;
  const session=sessionContext();
- const key=[event_name,deal_slug,location.pathname,location.search,session.id].join("|");
+ const key=[event_name,deal_slug,activity?.activity_id,location.pathname,location.search,session.id].join("|");
  const now=Date.now();
  if(now-(sent.get(key)??0)<1000)return;
  for(const [k,time] of sent)if(now-time>60000)sent.delete(k);
  sent.set(key,now);
  void fetch(publicApi("/api/v1/analytics/events"),{
    method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,
-   body:JSON.stringify({event_id:crypto.randomUUID(),event_name,deal_slug,
+   body:JSON.stringify({event_id:crypto.randomUUID(),event_name,deal_slug,activity,
      anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign}}),
  }).catch(()=>undefined);
 }

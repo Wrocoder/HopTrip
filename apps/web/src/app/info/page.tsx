@@ -2,8 +2,8 @@ import type {Metadata} from "next";
 import Link from "next/link";
 import {publishedInfoPages} from "../../lib/content";
 
-const title="Jak działa HopTrip";
-const description="Porównywanie cen, bagaż i przesiadki, lotniska w Polsce oraz dojazd do 18 europejskich miast.";
+const title="Poradniki podróżnicze i planowanie wyjazdu";
+const description="Trasy na weekend w Europie, wyjazdy na koncerty, budżet podróży, bagaż i dojazdy z lotnisk. Zaplanuj wyjazd z HopTrip.";
 export const metadata:Metadata={
  title,description,alternates:{canonical:"/info"},robots:{index:true,follow:true},
  openGraph:{title,description,url:"/info",locale:"pl_PL",type:"website"},

@@ -2,6 +2,7 @@
 
 import imaplib
 import json
+import math
 import os
 import ssl
 import subprocess
@@ -26,6 +27,12 @@ def completed_jobs(cursor):
     where = "" if cursor is None else f"AND id > {int(cursor)}"
     order = "DESC LIMIT 1" if cursor is None else "ASC LIMIT 5"
     sql = """SELECT json_build_object('id', id, 'finished', finished_at,
+      'started', (SELECT min(first.started_at) FROM job_runs first
+        WHERE first.run_id = job_runs.run_id OR first.id = job_runs.id),
+      'duration_ms', duration_ms, 'attempt', attempt,
+      'elapsed_ms', extract(epoch FROM (finished_at -
+        (SELECT min(first.started_at) FROM job_runs first
+         WHERE first.run_id = job_runs.run_id OR first.id = job_runs.id))) * 1000,
       'added', result_json->'ingestion'->'saved_offers',
       'updated', result_json->'ingestion'->'updated_offers',
       'observations', result_json->'ingestion'->'saved_observations',
@@ -52,15 +59,41 @@ def completed_jobs(cursor):
     return [json.loads(line) for line in result.stdout.splitlines() if line.strip()]
 
 
+def format_duration(milliseconds):
+    if milliseconds is None:
+        return "нет данных"
+    value = float(milliseconds)
+    if not math.isfinite(value) or value < 0:
+        return "нет данных"
+    seconds = int(value / 1000 + 0.5)
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    if hours:
+        return f"{hours} ч {minutes:02d} мин {seconds:02d} сек"
+    if minutes:
+        return f"{minutes} мин {seconds:02d} сек"
+    return f"{seconds} сек"
+
+
 def notify_jobs(state):
     for job in completed_jobs(state.get("job_id")):
+        attempt = int(job.get("attempt") or 1)
+        duration = job.get("elapsed_ms") if attempt > 1 else job.get("duration_ms")
+        timing = f"Длительность: {format_duration(duration)}"
+        if attempt > 1:
+            timing += (
+                f" (с ожиданием повторов; попыток: {attempt})\n"
+                f"Успешная попытка: {format_duration(job.get('duration_ms'))}"
+            )
         text = (
             f"HopTrip: обновление предложений завершено (#{int(job['id'])}).\n"
+            f"{timing}\n"
             f"Добавлено: {int(job.get('added') or 0)}\n"
             f"Обновлено записей: {int(job.get('updated') or 0)}\n"
             f"Новых наблюдений цены: {int(job.get('observations') or 0)}\n"
             f"Неизвестных маршрутов пропущено: {int(job.get('skipped') or 0)}\n"
-            f"Время UTC: {job['finished']}"
+            f"Начало UTC: {job.get('started') or 'нет данных'}\n"
+            f"Завершение UTC: {job['finished']}"
         )
         if not deliver(text):
             raise RuntimeError("Summary delivery failed")

@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from time import monotonic
 
 from app.config import get_settings
 from app.providers.base import ProviderError
@@ -40,9 +41,17 @@ async def run_pipeline_once() -> int:
 
 async def run_scheduler() -> None:
     interval = get_settings().pipeline_interval_seconds
+    next_start = monotonic()
     while True:
         await run_pipeline_once()
-        await asyncio.sleep(interval)
+        next_start += interval
+        now = monotonic()
+        if next_start < now:
+            # Skip missed slots: never overlap runs or burst to catch up.
+            skipped = int((now - next_start) // interval) + 1
+            next_start += skipped * interval
+            logger.warning("Travel pipeline schedule skipped %s elapsed slots", skipped)
+        await asyncio.sleep(max(0.0, next_start - now))
 
 
 if __name__ == "__main__":

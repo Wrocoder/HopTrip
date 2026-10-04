@@ -1,9 +1,21 @@
 from decimal import Decimal
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE"]
+EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK"]
+
+
+class ActivityContext(BaseModel):
+    city: str = Field(max_length=80, pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+    activity_id: str = Field(max_length=100, pattern=r"^(?:tiqets-[0-9]+|official-[a-z0-9-]+)$")
+    page: str = Field(max_length=240, pattern=r"^/(?:info|deals)/[a-z0-9-]+$")
+    link_kind: Literal["affiliate", "official"]
+
+
+class ActivityClickSummary(ActivityContext):
+    clicks: int
+    sessions: int
 
 
 class AnalyticsEventCreate(BaseModel):
@@ -14,6 +26,13 @@ class AnalyticsEventCreate(BaseModel):
     component: str | None = Field(default=None, max_length=40)
     source: str | None = Field(default=None, max_length=80)
     metadata: dict[str, Any] = Field(default_factory=dict)
+    activity: ActivityContext | None = None
+
+    @model_validator(mode="after")
+    def activity_matches_event(self):
+        if (self.event_name == "ACTIVITY_CLICK") != (self.activity is not None):
+            raise ValueError("Activity context is required only for ACTIVITY_CLICK")
+        return self
 
 
 class AnalyticsEventAccepted(BaseModel):
@@ -21,6 +40,8 @@ class AnalyticsEventAccepted(BaseModel):
 
 
 class AnalyticsSummary(BaseModel):
+    total_activity_clicks: int = 0
+    activity_clicks: list[ActivityClickSummary] = Field(default_factory=list)
     session_ctr_percent: Decimal = Decimal("0.00")
     attributed_conversions: int = 0
     unattributed_conversions: int = 0

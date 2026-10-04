@@ -4,14 +4,15 @@ import {travelGuides} from "./travel-guides";
 import {airportGuides} from "./airport-guides";
 import {destinationGuides} from "./destination-guides";
 import {moreDestinationGuides} from "./more-destination-guides";
+import {cityBreakGuides} from "./city-break-guides";
 export type {InfoContent} from "./info-types";
 
 export const content:Record<string,InfoContent> = {
- ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,
+ ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,
  "trip-budget":{
   title:"Jak policzyć budżet całej podróży",
-  description:"Cena lotu na osobę a koszt wyjazdu: wspólne noclegi, dojazdy, dodatki i niewiadome.",
-  draft:false,reviewedAt:"2026-09-23",category:"planning",
+  description:"Kalkulator budżetu podróży w PLN: policz loty, bagaż, noclegi, dojazdy i wydatki na miejscu dla całej grupy oraz na osobę.",
+  draft:false,reviewedAt:"2026-10-03",category:"planning",
   paragraphs:["Filtr budżetu w HopTrip dotyczy ceny lotu na osobę. Nie jest limitem kosztu całego wyjazdu. Przed wyborem porównaj pełne koszty obu wariantów dla tej samej liczby podróżnych i tych samych dat."],
   sections:[
    {title:"Oddziel koszty na osobę od wspólnych",paragraphs:[
@@ -149,10 +150,13 @@ const planningReasons:Record<string,string>={
  "trip-budget":"Dolicz dojazd, nocleg i opłaty do budżetu całej podróży.",
 };
 const destinationConnections:Record<string,string[]>={
+ "milan-airports":["milan-weekend"],
+ "stockholm-airports":["stockholm-weekend"],
+ "trip-budget":["city-break-planning","concert-trip"],
  "barcelona-airports":["madrid-airport","valencia-airport"],
  "lisbon-airport":["porto-airport"],
  "budapest-airport":["vienna-airport","prague-airport"],
- "paris-airports":["amsterdam-airport"],
+ "paris-airports":["amsterdam-airport","paris-weekend"],
  "london-airports":["copenhagen-airport","stockholm-airports"],
 };
 export function relatedInfoPages(slug:string) {

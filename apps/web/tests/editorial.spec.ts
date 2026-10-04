@@ -1,10 +1,17 @@
 import {test,expect} from "@playwright/test";
 import {content,publishedInfoPages,relatedInfoPages} from "../src/lib/content";
+import {destinationForGuide,guidesForDestination} from "../src/lib/guide-destinations";
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
 
 const guides=[
+ ["milan-weekend","Mediolan na weekend: co zobaczyć w 2 dni"],
+ ["paris-weekend","Paryż na weekend: plan zwiedzania na 2 dni"],
+ ["stockholm-weekend","Sztokholm w 2 dni: Gamla Stan i Djurgården"],
+ ["oslo-weekend","Oslo na weekend: fiord, opera i muzea w 2 dni"],
+ ["concert-trip","Wyjazd na koncert za granicę: lot, nocleg i bilety"],
+ ["city-break-planning","Jak zaplanować city break na 2–3 dni"],
  ["baggage","Bagaż: co naprawdę obejmuje cena biletu"],
  ["connections","Przesiadki: jedna rezerwacja czy osobne bilety"],
  ["booking-with-agents","Zakup biletu u pośrednika: co sprawdzić"],
@@ -36,7 +43,12 @@ const guides=[
 ] as const;
 
 test("editorial registry has complete references and no links to drafts",()=>{
- expect(publishedInfoPages()).toHaveLength(35);
+ for(const slug of ["milan-weekend","paris-weekend","stockholm-weekend","oslo-weekend"]) {
+  const destination=destinationForGuide(slug);
+  expect(destination).toBeDefined();
+  expect(guidesForDestination(destination!.slug).map(guide=>guide.slug)).toContain(slug);
+ }
+ expect(publishedInfoPages()).toHaveLength(41);
  for(const [slug,page] of publishedInfoPages()) {
   const links=relatedInfoPages(slug).map(item=>item.slug);
   expect(new Set(links).size).toBe(links.length);
@@ -62,16 +74,37 @@ test("editorial registry has complete references and no links to drafts",()=>{
  }
 });
 
-test("editorial index groups all 35 pages and sitemap excludes trust drafts",async({page,request})=>{
+test("reader can move from a guide to a matching flight and back",async({page})=>{
+ await page.goto("/info/barcelona-airports");
+ const flights=page.getByRole("region",{name:"Loty do opisanego miasta"});
+ await expect(flights.locator(".deal-card")).toHaveCount(3);
+ await expect(flights.getByRole("link",{name:"Zobacz wszystkie loty: Barcelona"})).toHaveAttribute("href","/destinations/barcelona");
+ await flights.locator(".deal-card-link").first().click();
+ const guide=page.getByRole("navigation",{name:"Zaplanuj pobyt"}).getByRole("link");
+ await expect(guide).toHaveAttribute("href","/info/barcelona-airports");
+ await guide.click();
+ await expect(page).toHaveURL(/\/info\/barcelona-airports$/);
+});
+
+test("guide remains readable when the destination API is unavailable",async({page})=>{
+ await page.goto("/info/milan-weekend");
+ await expect(page.getByRole("heading",{level:1})).toHaveText("Mediolan na weekend: co zobaczyć w 2 dni");
+ const flights=page.getByRole("region",{name:"Loty do opisanego miasta"});
+ await expect(flights.getByText("Nie udało się teraz pobrać lotów.",{exact:false})).toBeVisible();
+ await expect(flights.getByRole("link",{name:"Sprawdź loty ponownie"})).toHaveAttribute("href","/destinations/milan");
+ await expect(flights.locator(".deal-card")).toHaveCount(0);
+});
+
+test("editorial index groups all 41 pages and sitemap excludes trust drafts",async({page,request})=>{
  await page.goto("/info");
- await expect(page.locator("main .deal-card")).toHaveCount(35);
- for(const [id,count] of [["method",5],["planning",5],["airports",7],["destinations",18]] as const) {
+ await expect(page.locator("main .deal-card")).toHaveCount(41);
+ for(const [id,count] of [["method",5],["planning",7],["airports",7],["destinations",22]] as const) {
   await expect(page.locator(`#${id} .deal-card`)).toHaveCount(count);
  }
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(37);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(43);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);
