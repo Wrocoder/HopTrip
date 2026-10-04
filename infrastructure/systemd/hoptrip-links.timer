@@ -1,0 +1,11 @@
+[Unit]
+Description=Check HopTrip activity links every morning
+
+[Timer]
+OnCalendar=*-*-* 07:00:00 Europe/Warsaw
+RandomizedDelaySec=10min
+Persistent=true
+Unit=hoptrip-links.service
+
+[Install]
+WantedBy=timers.target
