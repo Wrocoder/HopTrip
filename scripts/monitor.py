@@ -139,6 +139,14 @@ def notification_due(state: dict, incident: str, now: float) -> bool:
     return bool(state.get("delivered_incident"))
 
 
+def link_report_fresh(path: Path, now: float) -> bool:
+    try:
+        report = json.loads(path.read_text())
+        return 0 <= now - report["checked_at"] <= 36 * 3600
+    except (OSError, ValueError, KeyError, TypeError):
+        return False
+
+
 def main() -> int:
     import argparse
 
@@ -166,6 +174,13 @@ def main() -> int:
     if os.environ.get("TELEGRAM_BOT_TOKEN") and os.environ.get("TELEGRAM_CHAT_ID"):
         checks["activity_service"] = command_equals(
             ["systemctl", "show", "hoptrip-activity.service", "-p", "Result", "--value"], "success"
+        )
+    if command_equals(["systemctl", "is-enabled", "hoptrip-links.timer"], "enabled"):
+        checks["link_check_report"] = link_report_fresh(
+            Path("/var/lib/hoptrip/link-check/latest.json"), now
+        )
+        checks["link_check_service"] = command_equals(
+            ["systemctl", "show", "hoptrip-links.service", "-p", "Result", "--value"], "success"
         )
     try:
         disk = shutil.disk_usage(ROOT)

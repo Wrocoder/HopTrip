@@ -6,13 +6,13 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 WorkingDirectory=/opt/hoptrip
+EnvironmentFile=/etc/hoptrip/monitor.env
 StateDirectory=hoptrip
 UMask=0077
-ExecStart=/usr/bin/python3 /opt/hoptrip/scripts/check-activity-links.py
+ExecStart=/usr/bin/python3 /opt/hoptrip/scripts/check-activity-links.py --notify
 TimeoutStartSec=30min
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ReadWritePaths=/var/lib/hoptrip
 ProtectHome=true
-

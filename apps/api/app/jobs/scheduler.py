@@ -1,6 +1,9 @@
 import asyncio
 import logging
+import os
+from datetime import UTC, datetime, timedelta
 from time import monotonic
+from zoneinfo import ZoneInfo
 
 from app.config import get_settings
 from app.providers.base import ProviderError
@@ -39,8 +42,35 @@ async def run_pipeline_once() -> int:
     return 0
 
 
+def next_calendar_start(now: datetime, interval: int, timezone: ZoneInfo) -> datetime:
+    if interval % 3600 or 86400 % interval:
+        raise ValueError("Calendar interval must be whole hours and divide 24 hours")
+    # Iterate real UTC hours: handles missing/repeated local hours at DST changes.
+    candidate = now.astimezone(UTC).replace(minute=0, second=0, microsecond=0)
+    candidate += timedelta(hours=1)
+    while candidate.astimezone(timezone).hour % (interval // 3600):
+        candidate += timedelta(hours=1)
+    return candidate
+
+
+async def run_calendar_scheduler(interval: int, timezone: ZoneInfo) -> None:
+    while True:
+        target = next_calendar_start(datetime.now(UTC), interval, timezone)
+        logger.info("Next travel pipeline start: %s", target.astimezone(timezone).isoformat())
+        while (delay := (target - datetime.now(UTC)).total_seconds()) > 0:
+            # Recheck the wall clock to tolerate host clock corrections.
+            await asyncio.sleep(min(delay, 30))
+        if (datetime.now(UTC) - target).total_seconds() >= 60:
+            logger.warning("Travel pipeline skipped a missed calendar slot")
+            continue
+        await run_pipeline_once()
+
+
 async def run_scheduler() -> None:
     interval = get_settings().pipeline_interval_seconds
+    if timezone := os.environ.get("PIPELINE_SCHEDULE_TIMEZONE"):
+        await run_calendar_scheduler(interval, ZoneInfo(timezone))
+        return
     next_start = monotonic()
     while True:
         await run_pipeline_once()

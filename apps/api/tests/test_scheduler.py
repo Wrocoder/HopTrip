@@ -1,5 +1,7 @@
 import asyncio
+from datetime import UTC, datetime
 from types import SimpleNamespace
+from zoneinfo import ZoneInfo
 
 import pytest
 from app.jobs import scheduler
@@ -49,6 +51,7 @@ def test_scheduler_keeps_cadence_and_skips_overruns(
     monkeypatch, durations, oversleep, expected_starts
 ) -> None:
     now = 0
+    monkeypatch.delenv("PIPELINE_SCHEDULE_TIMEZONE", raising=False)
     starts = []
 
     async def run():
@@ -73,3 +76,44 @@ def test_scheduler_keeps_cadence_and_skips_overruns(
     with pytest.raises(asyncio.CancelledError):
         asyncio.run(scheduler.run_scheduler())
     assert starts == expected_starts
+
+
+@pytest.mark.parametrize("now,expected", [
+    ("2026-10-04T13:43:00+00:00", "2026-10-04T14:00:00+00:00"),
+    ("2026-10-04T14:00:01+00:00", "2026-10-04T16:00:00+00:00"),
+    ("2026-10-04T22:01:00+00:00", "2026-10-05T00:00:00+00:00"),
+    ("2026-03-29T00:59:00+00:00", "2026-03-29T02:00:00+00:00"),
+    ("2026-10-25T00:01:00+00:00", "2026-10-25T01:00:00+00:00"),
+])
+def test_calendar_slots_include_dst(now, expected):
+    assert scheduler.next_calendar_start(
+        datetime.fromisoformat(now), 7200, ZoneInfo("Europe/Warsaw")
+    ) == datetime.fromisoformat(expected)
+
+
+def test_calendar_waits_at_start_and_skips_overrun(monkeypatch):
+    now = datetime(2026, 10, 4, 13, 43, tzinfo=UTC).timestamp()
+    starts = []
+
+    class Clock:
+        @staticmethod
+        def now(tz):
+            return datetime.fromtimestamp(now, tz)
+
+    async def sleep(delay):
+        nonlocal now
+        now += delay
+
+    async def run():
+        nonlocal now
+        starts.append(datetime.fromtimestamp(now, UTC).isoformat())
+        if len(starts) == 2:
+            raise asyncio.CancelledError
+        now += 7300
+
+    monkeypatch.setattr(scheduler, "datetime", Clock)
+    monkeypatch.setattr(scheduler.asyncio, "sleep", sleep)
+    monkeypatch.setattr(scheduler, "run_pipeline_once", run)
+    with pytest.raises(asyncio.CancelledError):
+        asyncio.run(scheduler.run_calendar_scheduler(7200, ZoneInfo("Europe/Warsaw")))
+    assert starts == ["2026-10-04T14:00:00+00:00", "2026-10-04T18:00:00+00:00"]

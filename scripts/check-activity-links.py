@@ -3,6 +3,7 @@
 import argparse
 import ipaddress
 import json
+import os
 import re
 import socket
 import time
@@ -146,11 +147,53 @@ def save(path, data):
     temporary.replace(path)
 
 
+def telegram(message):
+    # Reuse the existing transport, but never fall back to email for this checker.
+    if not os.environ.get("TELEGRAM_BOT_TOKEN") or not os.environ.get("TELEGRAM_CHAT_ID"):
+        return False
+    from monitor import deliver
+    return deliver(message)
+
+
+def notify(rows, path, send=telegram):
+    previous = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    active = {}
+    for row in rows:
+        key = row["city"] + ":" + row["id"]
+        if row["confirmed"]:
+            active[key] = {k: row[k] for k in ("city", "id", "url", "status")}
+        elif key in previous and row["status"] != "OK":
+            # A changed failure classification is not a recovery.
+            active[key] = previous[key]
+    if active == previous:
+        return True
+    changed = [v for k, v in active.items() if previous.get(k) != v]
+    recovered = [v for k, v in previous.items() if k not in active]
+    parts = ["HopTrip: проверка ссылок музеев и развлечений."]
+    if changed:
+        parts.append(f"Повторяющиеся проблемы: {len(changed)}. Требуют проверки:")
+        for row in changed[:8]:
+            parts.append(f"{row['city']} / {row['id']}: {row['status']}\n{row['url']}")
+        if len(changed) > 8:
+            parts.append(f"Ещё {len(changed) - 8} — в отчёте на сервере.")
+    if recovered:
+        parts.append(f"Проблемы устранены или ссылки удалены из каталога: {len(recovered)}.")
+        parts.extend(f"{row['city']} / {row['id']}" for row in recovered[:8])
+    parts.append("BLOCKED/REVIEW/TEMPORARY не означают, что билет недоступен.\n"
+                 "Отчёт: /var/lib/hoptrip/link-check/latest.json")
+    # Telegram accepts 4096 characters. Keep the bounded summary within that limit.
+    if not send("\n".join(parts)[:3900]):
+        return False
+    save(path, active)
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--catalog", type=Path,
                         default=ROOT / "apps/web/src/lib/activity-expansion.json")
     parser.add_argument("--output", type=Path, default=Path("/var/lib/hoptrip/link-check"))
+    parser.add_argument("--notify", action="store_true")
     args = parser.parse_args()
     try:
         items = load_catalog(args.catalog)
@@ -170,6 +213,9 @@ def main():
         save(args.output / "latest.json", report)
         save(state_path, state)
         print(json.dumps({k: v for k, v in report.items() if k != "links"}))
+        if args.notify and not notify(rows, args.output / "notifications.json"):
+            print('{"notification_delivered":false}')
+            return 1
         # Individual provider errors are report data, not a failed execution of the checker.
         return 0
     except (OSError, ValueError, KeyError, TypeError):

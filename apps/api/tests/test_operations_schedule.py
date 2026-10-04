@@ -56,6 +56,7 @@ def test_monitor_retries_delivery_and_sends_recovery(tmp_path, monkeypatch):
     monkeypatch.setattr(monitor, "http_check", lambda *a: True)
     monkeypatch.setattr(monitor, "newest_backup_ok", lambda *a: True)
     monkeypatch.setattr(monitor, "pipeline_ok", lambda: False)
+    monkeypatch.setattr(monitor, "link_report_fresh", lambda *a: True)
     monkeypatch.setattr(monitor, "command_equals", lambda *a: True)
     monkeypatch.setattr("sys.argv", ["monitor"])
     monkeypatch.setattr(monitor, "deliver", lambda message: False)

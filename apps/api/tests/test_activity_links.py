@@ -80,3 +80,40 @@ def test_confirmation_needs_separate_days_and_resets_on_recovery_or_new_url():
     assert not row["confirmed"]
     _, row = run(state, now + 432000, status="TEMPORARY")
     assert row["confirmed"]
+
+
+def test_notifications_confirm_deduplicate_retry_and_recover(tmp_path):
+    path = tmp_path / "notifications.json"
+    row = {**ITEM, "status": "BROKEN", "confirmed": False}
+    messages = []
+
+    def send(message):
+        messages.append(message)
+        return True
+
+    assert links.notify([row], path, send)
+    assert not messages
+    row["confirmed"] = True
+    assert not links.notify([row], path, lambda message: False)
+    assert not path.exists()
+    assert links.notify([row], path, send)
+    assert "BROKEN" in messages[0] and ITEM["url"] in messages[0]
+    assert links.notify([row], path, send)
+    assert len(messages) == 1
+    # New unconfirmed errors must not falsely signal recovery.
+    assert links.notify([{**row, "status": "TEMPORARY", "confirmed": False}], path, send)
+    assert len(messages) == 1
+    assert links.notify([{**row, "status": "OK", "confirmed": False}], path, send)
+    assert len(messages) == 2
+    assert json.loads(path.read_text()) == {}
+
+
+def test_monitor_detects_missing_stale_and_invalid_link_report(tmp_path):
+    monitor = module("monitor")
+    path = tmp_path / "latest.json"
+    assert not monitor.link_report_fresh(path, 200000)
+    path.write_text(json.dumps({"checked_at": 100000}))
+    assert monitor.link_report_fresh(path, 200000)
+    assert not monitor.link_report_fresh(path, 250000)
+    path.write_text("{}")
+    assert not monitor.link_report_fresh(path, 200000)
