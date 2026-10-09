@@ -42,11 +42,11 @@ test("applied filter chips preserve other values and reset pagination",async({pa
  await expect(page.locator(".deal-card")).toHaveCount(2);
  const budget=page.getByRole("spinbutton",{name:"Budżet na lot / osobę (PLN)",exact:true});
  await budget.fill("999");
- await page.getByRole("link",{name:"Usuń filtr: Pobyt od (dni): 3",exact:true}).click();
+  await page.getByRole("link",{name:"Usuń filtr: Pobyt od (nocy): 3",exact:true}).click();
  await expect(page).not.toHaveURL(/offset=|duration_min=/);
  await expect(page).toHaveURL(/duration_max=3/);
  await expect(budget).toHaveValue("220");
- await expect(page.getByRole("textbox",{name:"Skąd",exact:true})).toHaveValue("WRO");
+  await expect(page.getByRole("combobox",{name:"Skąd",exact:true})).toHaveValue("Wrocław — WRO");
  await expect(page.locator(".deal-card")).toHaveCount(12);
  await page.getByRole("link",{name:"Wyczyść wszystkie filtry",exact:true}).click();
  await expect(page).toHaveURL("http://127.0.0.1:3100/deals");
@@ -66,7 +66,7 @@ test("advanced fields remain keyboard accessible and navigation shows current se
  const summary=page.locator(".advanced-filters summary");
  await summary.focus();
  await page.keyboard.press("Enter");
- const duration=page.getByRole("spinbutton",{name:"Pobyt od (dni)",exact:true});
+  const duration=page.getByRole("spinbutton",{name:"Pobyt od (nocy)",exact:true});
  await expect(duration).toBeVisible();
  await duration.fill("-1");
  await summary.click();

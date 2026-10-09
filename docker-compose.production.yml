@@ -21,6 +21,7 @@ services:
 
   api:
     environment:
+      ALERTS_SITE_URL: https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}
       CORS_ORIGINS: https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}
       APP_ENV: production
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}
@@ -39,6 +40,7 @@ services:
 
   worker:
     environment:
+      ALERTS_SITE_URL: https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}
       APP_ENV: production
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}
       ADMIN_TOKEN: ${ADMIN_TOKEN:?ADMIN_TOKEN is required}

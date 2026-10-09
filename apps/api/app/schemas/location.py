@@ -1,6 +1,7 @@
 from decimal import Decimal
 
-from pydantic import BaseModel, ConfigDict
+from app.services.airports import AIRPORT_ALIASES
+from pydantic import BaseModel, ConfigDict, computed_field
 
 
 class AirportRead(BaseModel):
@@ -15,6 +16,11 @@ class AirportRead(BaseModel):
     longitude: Decimal | None = None
     timezone: str | None = None
     is_active: bool
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def aliases(self) -> list[str]:
+        return list(AIRPORT_ALIASES.get(self.iata_code, ()))
 
 
 class DestinationRead(BaseModel):

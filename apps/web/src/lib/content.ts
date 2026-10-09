@@ -5,19 +5,20 @@ import {airportGuides} from "./airport-guides";
 import {destinationGuides} from "./destination-guides";
 import {moreDestinationGuides} from "./more-destination-guides";
 import {cityBreakGuides} from "./city-break-guides";
+import {weekendPilotGuides} from "./weekend-pilot-guides";
 export type {InfoContent} from "./info-types";
 
 export const content:Record<string,InfoContent> = {
- ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,
+ ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,...weekendPilotGuides,
  "trip-budget":{
   title:"Jak policzyć budżet całej podróży",
   description:"Kalkulator budżetu podróży w PLN: policz loty, bagaż, noclegi, dojazdy i wydatki na miejscu dla całej grupy oraz na osobę.",
-  draft:false,reviewedAt:"2026-10-03",category:"planning",
+  draft:false,reviewedAt:"2026-10-08",category:"planning",
   paragraphs:["Filtr budżetu w HopTrip dotyczy ceny lotu na osobę. Nie jest limitem kosztu całego wyjazdu. Przed wyborem porównaj pełne koszty obu wariantów dla tej samej liczby podróżnych i tych samych dat."],
   sections:[
    {title:"Oddziel koszty na osobę od wspólnych",paragraphs:[
     "Zapisz osobno bilety lotnicze dla wszystkich pasażerów, potrzebny bagaż i wybrane dodatki. Jeśli sprawdzasz cenę tylko dla jednej osoby, potwierdź u sprzedawcy kwotę dla całej grupy — nie zakładaj, że każde kolejne miejsce kosztuje tyle samo.",
-    "Nocleg rozlicz według ceny całej rezerwacji i liczby nocy. Pokoju dla dwóch osób nie mnożysz ponownie przez dwie osoby. Dopisz dojazd do lotniska wylotu, transport po przylocie w obie strony i wydatki na miejscu. Każdą pozycję oznacz jako koszt wspólny albo na osobę.",
+    "W kalkulatorze wybierz cenę noclegu za jedną noc albo za cały pobyt. W obu przypadkach wpisz kwotę dla wszystkich gości i pokoi, z podatkami oraz opłatami. Ceny za cały pobyt nie dzielisz na noce i nie mnożysz ponownie przez osoby. Po zmianie dat lub liczby gości sprawdź ofertę ponownie. Dopisz dojazdy i wydatki na miejscu jako koszt wspólny albo na osobę.",
    ]},
    {title:"Przykład rachunku, nie oferta",paragraphs:[
     "Wyłącznie przykład obliczeniowy: bilety dla dwóch osób łącznie 600 PLN, nocleg łącznie 900 PLN, dojazdy łącznie 200 PLN i pozostałe wydatki 300 PLN dają 2000 PLN za wyjazd, czyli 1000 PLN na osobę przy równym podziale. Wszystkie liczby są umowne; nie opisują dostępnej podróży.",
@@ -25,7 +26,7 @@ export const content:Record<string,InfoContent> = {
    ]},
    {title:"Nie zamieniaj brakującej ceny w zero",paragraphs:[
     "Przy każdej pozycji zapisz źródło, datę sprawdzenia i walutę. Nieznany koszt oznacz jako do sprawdzenia. Suma znanych pozycji jest wtedy tylko częścią budżetu, a nie gotową ceną wyjazdu.",
-    "Nie dodawaj bezpośrednio kwot w różnych walutach. Przed porównaniem potrzebujesz wspólnej waluty i jawnego sposobu przeliczenia. HopTrip obecnie porównuje loty w PLN i nie wylicza kosztu noclegów ani wymiany walut.",
+    "Nie dodawaj bezpośrednio kwot w różnych walutach. Kalkulator przyjmuje PLN. Wybrane taryfy transportu miejskiego możesz przeliczyć po wskazanym kursie NBP; to orientacyjne przeliczenie, nie kurs rozliczenia płatności. Cenę noclegu sprawdź u sprzedawcy i wpisz w PLN, uwzględniając ewentualny koszt przewalutowania.",
    ]},
    {title:"Porównaj czas i koszty razem",paragraphs:[
     "Dla każdego wariantu sprawdź, czy godziny lotów pasują do dojazdu i noclegu. Jeśli potrzebujesz dodatkowej nocy, parkingu lub innego transferu, dopisz je do tego wariantu. Niższa cena samego lotu nie przesądza o niższym koszcie wyjazdu.",
@@ -150,6 +151,10 @@ const planningReasons:Record<string,string>={
  "trip-budget":"Dolicz dojazd, nocleg i opłaty do budżetu całej podróży.",
 };
 const destinationConnections:Record<string,string[]>={
+ "malaga-airport":["malaga-weekend"],
+ "alicante-airport":["alicante-weekend"],
+ "prague-airport":["prague-weekend"],
+ "city-break-planning":["malaga-weekend","alicante-weekend","prague-weekend"],
  "milan-airports":["milan-weekend"],
  "stockholm-airports":["stockholm-weekend"],
  "trip-budget":["city-break-planning","concert-trip"],

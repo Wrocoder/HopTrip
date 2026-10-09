@@ -3,7 +3,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import admin, affiliate, analytics, catalog, health
+from app.api import admin, affiliate, alerts, analytics, catalog, events, health
 from app.config import get_settings
 from app.security import SecurityMiddleware
 
@@ -19,7 +19,9 @@ app.add_middleware(
     allow_headers=["Content-Type", "X-Admin-Token"],
 )
 app.include_router(health.router)
+app.include_router(alerts.router)
 app.include_router(catalog.router)
+app.include_router(events.router)
 app.include_router(admin.router)
 app.include_router(analytics.router)
 app.include_router(affiliate.router)

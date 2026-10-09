@@ -23,14 +23,14 @@ try {
   if(doc.querySelector("parsererror")) throw new Error("Invalid sitemap XML");
   return [...doc.querySelectorAll("url > loc")].map(node=>node.textContent);
  },await sitemap.text());
- check(urls.length===43,`sitemap: expected 43 URLs, got ${urls.length}`);
+ check(urls.length===49,`sitemap: expected 49 URLs, got ${urls.length}`);
  check(new Set(urls).size===urls.length,"sitemap: duplicate URLs");
  const paths=[];
  const titles=new Set(), descriptions=new Set();
  for(const loc of urls) {
   const url=new URL(loc), path=url.pathname;
   check(url.origin===canonical && !url.search && !url.hash,`${path}: incorrect sitemap URL`);
-  check(path==="/" || path==="/info" || /^\/info\/[a-z-]+$/.test(path),`${path}: unexpected sitemap path`);
+   check(["/","/info","/deals","/from/WRO","/destinations/milan"].includes(path) || /^\/info\/[a-z-]+$/.test(path),`${path}: unexpected sitemap path`);
   paths.push(path);
   // Fetch only the server explicitly selected by the operator, never sitemap hosts.
   const response=await page.goto(`${base}${path}`);
@@ -55,6 +55,16 @@ try {
   else check(!/noindex|none/i.test(data.robots+","+headerRobots),`${path}: unexpected noindex`);
   check(Boolean(data.ogTitle) && Boolean(data.ogDescription),`${path}: missing Open Graph metadata`);
   if(path!=="/") check(data.ogUrl===`${canonical}${path}`,`${path}: incorrect Open Graph URL`);
+  if(["/","/deals","/from/WRO","/destinations/milan"].includes(path)) {
+   const image=await page.locator('meta[property="og:image"]').getAttribute("content");
+   check(Boolean(image) && image.startsWith(`${canonical}/preview/`),`${path}: missing catalog preview`);
+   if(image?.startsWith(`${canonical}/preview/`)) {
+    const preview=await context.request.get(base+new URL(image).pathname);
+    const png=await preview.body();
+    check(preview.status()===200 && preview.headers()["content-type"]?.startsWith("image/png") &&
+     png.length>24 && png.readUInt32BE(16)===1200 && png.readUInt32BE(20)===630,`${path}: invalid preview PNG`);
+   }
+  }
   if(path.startsWith("/info/")) {
    const image=await page.locator('meta[property="og:image"]').getAttribute("content");
    check(image===`${canonical}/share/${path.split("/").pop()}`,`${path}: incorrect share image URL`);
@@ -80,7 +90,7 @@ try {
   }
  }
  check(paths.includes("/") && paths.includes("/info"),"sitemap: missing home or editorial index");
- for(const path of ["/info/contact","/info/privacy","/info/terms","/deals","/deals?origin=WRO","/from/WRO","/destinations/barcelona"]) {
+ for(const path of ["/info/contact","/info/privacy","/info/terms","/deals?origin=WRO","/destinations/barcelona"]) {
   check(!paths.includes(path),`${path}: must not appear in sitemap`);
   const response=await page.goto(`${base}${path}`);
   check(response?.status()===200,`${path}: expected HTTP 200`);

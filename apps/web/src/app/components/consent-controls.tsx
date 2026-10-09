@@ -7,7 +7,7 @@ import {clearSession,track} from "../../lib/session";
 
 export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
   const pathname=usePathname();
-  const legal=/^\/info\/(contact|privacy|terms)\/?$/.test(pathname);
+  const legal=/^\/info\/(contact|privacy|terms)\/?$/.test(pathname) || pathname.startsWith("/alerts");
   // The expiry flag changes even when the stored value itself has not changed.
   const snapshot=useSyncExternalStore(subscribeConsent,()=>readConsent()?consentSnapshot():"",()=>"");
   const consent=snapshot ? JSON.parse(snapshot) : null;

@@ -5,7 +5,7 @@ export const pl = {
   error: "Nie udało się pobrać ofert. Spróbuj ponownie za chwilę.",
   invalid: "Sprawdź lotnisko, kierunek oraz zakres dat, budżetu i długości pobytu.",
   heading: "Dokąd polecisz z Polski?", from: "Skąd", to: "Dokąd", budget: "Budżet na lot / osobę (PLN)",
-  departure_from: "Wylot od", departure_to: "Wylot do", duration_min: "Pobyt od (dni)", duration_max: "Pobyt do (dni)",
+  departure_from: "Wylot od", departure_to: "Wylot do", duration_min: "Pobyt od (nocy)", duration_max: "Pobyt do (nocy)",
   filter: "Filtruj", next: "Następna strona", previous: "Poprzednia strona",
   perPerson: "za osobę", roundTrip: "W obie strony", oneWay: "W jedną stronę",
   flightOnly: "Cena obejmuje lot. Nocleg, bagaż dodatkowy i dojazdy nie są uwzględnione.",

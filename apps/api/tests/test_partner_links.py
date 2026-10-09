@@ -193,6 +193,16 @@ def test_disabled_sync_does_not_require_program_or_token(isolated_db, monkeypatc
     assert not asyncio.run(service.sync_partner_links(isolated_db)).enabled
 
 
+def test_pln_preserves_route_ticket_and_expected_currency():
+    source = "/search/WRO1511MIL18111?t=a%2Bb&currency=usd&currency=eur&expected_price_currency=usd&empty="
+    result = urlsplit(service.source_url(source))
+    assert result.path == "/search/WRO1511MIL18111"
+    assert dict(parse_qsl(result.query, keep_blank_values=True)) == {
+        "t": "a+b", "currency": "pln", "expected_price_currency": "usd", "empty": "",
+    }
+    assert result.query.count("currency=pln") == 1
+
+
 def test_retry_preserves_completed_batches(isolated_db, link_fixture, monkeypatch):
     component = link_fixture[2]
     for _ in range(10):

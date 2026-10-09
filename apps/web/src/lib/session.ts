@@ -29,6 +29,7 @@ export function publicApi(path:string):string {
 const sent=new Map<string,number>();
 export type ActivityContext={city:string;activity_id:string;page:string;link_kind:"affiliate"|"official"};
 export function track(event_name:string,deal_slug?:string,activity?:ActivityContext) {
+ if(location.pathname.startsWith("/alerts"))return;
  if(!analyticsAllowed()) return;
  const session=sessionContext();
  const key=[event_name,deal_slug,activity?.activity_id,location.pathname,location.search,session.id].join("|");

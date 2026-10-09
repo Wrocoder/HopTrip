@@ -7,7 +7,7 @@ export type InfoContent = {
  reviewedAt?:string;
  category?:"planning"|"airports"|"destinations";
  paragraphs:string[];
- sections?:{title:string;paragraphs:string[];sourceIds?:number[]}[];
+ sections?:{title:string;paragraphs:string[];sourceIds?:number[];links?:InfoLink[]}[];
  sources?:InfoLink[];
  routes?:InfoLink[];
  related?:string[];

@@ -13,11 +13,11 @@ const destinations:Record<string,{name:string;guides:string[]}>= {
  budapest:{name:"Budapeszt",guides:["budapest-airport"]},
  madrid:{name:"Madryt",guides:["madrid-airport"]},
  valencia:{name:"Walencja",guides:["valencia-airport"]},
- alicante:{name:"Alicante",guides:["alicante-airport"]},
- malaga:{name:"Malaga",guides:["malaga-airport"]},
+ alicante:{name:"Alicante",guides:["alicante-weekend","alicante-airport"]},
+ malaga:{name:"Malaga",guides:["malaga-weekend","malaga-airport"]},
  porto:{name:"Porto",guides:["porto-airport"]},
  vienna:{name:"Wiedeń",guides:["vienna-airport"]},
- prague:{name:"Praga",guides:["prague-airport"]},
+ prague:{name:"Praga",guides:["prague-weekend","prague-airport"]},
  copenhagen:{name:"Kopenhaga",guides:["copenhagen-airport"]},
 };
 

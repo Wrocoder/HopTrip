@@ -6,6 +6,9 @@ test.beforeEach(async({page})=>{
 });
 
 const guides=[
+ ["malaga-weekend","Malaga w 48 godzin: stare miasto, Alcazaba i morze"],
+ ["alicante-weekend","Alicante w 48 godzin: zamek, stare miasto i plaża"],
+ ["prague-weekend","Praga w 48 godzin: Stare Miasto, most Karola i zamek"],
  ["milan-weekend","Mediolan na weekend: co zobaczyć w 2 dni"],
  ["paris-weekend","Paryż na weekend: plan zwiedzania na 2 dni"],
  ["stockholm-weekend","Sztokholm w 2 dni: Gamla Stan i Djurgården"],
@@ -48,7 +51,7 @@ test("editorial registry has complete references and no links to drafts",()=>{
   expect(destination).toBeDefined();
   expect(guidesForDestination(destination!.slug).map(guide=>guide.slug)).toContain(slug);
  }
- expect(publishedInfoPages()).toHaveLength(41);
+ expect(publishedInfoPages()).toHaveLength(44);
  for(const [slug,page] of publishedInfoPages()) {
   const links=relatedInfoPages(slug).map(item=>item.slug);
   expect(new Set(links).size).toBe(links.length);
@@ -87,24 +90,24 @@ test("reader can move from a guide to a matching flight and back",async({page})=
 });
 
 test("guide remains readable when the destination API is unavailable",async({page})=>{
- await page.goto("/info/milan-weekend");
- await expect(page.getByRole("heading",{level:1})).toHaveText("Mediolan na weekend: co zobaczyć w 2 dni");
+ await page.goto("/info/paris-weekend");
+ await expect(page.getByRole("heading",{level:1})).toHaveText("Paryż na weekend: plan zwiedzania na 2 dni");
  const flights=page.getByRole("region",{name:"Loty do opisanego miasta"});
  await expect(flights.getByText("Nie udało się teraz pobrać lotów.",{exact:false})).toBeVisible();
- await expect(flights.getByRole("link",{name:"Sprawdź loty ponownie"})).toHaveAttribute("href","/destinations/milan");
+ await expect(flights.getByRole("link",{name:"Sprawdź loty ponownie"})).toHaveAttribute("href","/destinations/paris");
  await expect(flights.locator(".deal-card")).toHaveCount(0);
 });
 
-test("editorial index groups all 41 pages and sitemap excludes trust drafts",async({page,request})=>{
+test("editorial index groups all 44 pages and sitemap excludes trust drafts",async({page,request})=>{
  await page.goto("/info");
- await expect(page.locator("main .deal-card")).toHaveCount(41);
- for(const [id,count] of [["method",5],["planning",7],["airports",7],["destinations",22]] as const) {
+ await expect(page.locator("main .deal-card")).toHaveCount(44);
+ for(const [id,count] of [["method",5],["planning",7],["airports",7],["destinations",25]] as const) {
   await expect(page.locator(`#${id} .deal-card`)).toHaveCount(count);
  }
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(43);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(49);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);

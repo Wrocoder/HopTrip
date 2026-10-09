@@ -6,10 +6,21 @@ from time import monotonic
 from zoneinfo import ZoneInfo
 
 from app.config import get_settings
+from app.jobs.alerts import run_alerts_once
 from app.providers.base import ProviderError
 from app.services.jobs import PipelineBusy, run_tracked_pipeline
 
 logger = logging.getLogger(__name__)
+
+
+async def run_scheduled_cycle() -> None:
+    await run_pipeline_once()
+    try:
+        # Retention must run even while outbound email is disabled.
+        counts = await asyncio.to_thread(run_alerts_once)
+        logger.info("Alert batch: %s", counts)
+    except Exception:
+        logger.error("Alert batch failed; no automatic SMTP retry")
 
 
 async def run_pipeline_once() -> int:
@@ -63,7 +74,7 @@ async def run_calendar_scheduler(interval: int, timezone: ZoneInfo) -> None:
         if (datetime.now(UTC) - target).total_seconds() >= 60:
             logger.warning("Travel pipeline skipped a missed calendar slot")
             continue
-        await run_pipeline_once()
+        await run_scheduled_cycle()
 
 
 async def run_scheduler() -> None:
@@ -73,7 +84,7 @@ async def run_scheduler() -> None:
         return
     next_start = monotonic()
     while True:
-        await run_pipeline_once()
+        await run_scheduled_cycle()
         next_start += interval
         now = monotonic()
         if next_start < now:

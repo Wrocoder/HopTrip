@@ -1,3 +1,14 @@
+x-alert-environment: &alert-environment
+  ALERTS_ENABLED: ${ALERTS_ENABLED:-false}
+  ALERTS_SITE_URL: ${ALERTS_SITE_URL:-http://localhost:3000}
+  ALERTS_SIGNING_KEY: ${ALERTS_SIGNING_KEY:-}
+  ALERTS_DAILY_SIGNUP_LIMIT: ${ALERTS_DAILY_SIGNUP_LIMIT:-200}
+  SMTP_HOST: ${SMTP_HOST:-}
+  SMTP_PORT: ${SMTP_PORT:-465}
+  SMTP_SECURITY: ${SMTP_SECURITY:-ssl}
+  SMTP_USER: ${SMTP_USER:-}
+  SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+  SMTP_SENDER: ${SMTP_SENDER:-}
 services:
   db:
     image: postgres:16-alpine
@@ -31,6 +42,7 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     environment:
+      <<: *alert-environment
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development
@@ -38,6 +50,10 @@ services:
       PROVIDER_MAX_PAGES: ${PROVIDER_MAX_PAGES:-5}
       ANALYTICS_RETENTION_DAYS: ${ANALYTICS_RETENTION_DAYS:-90}
       TRAVELPAYOUTS_API_TOKEN: ${TRAVELPAYOUTS_API_TOKEN:-}
+      EVENTS_ENABLED: ${EVENTS_ENABLED:-false}
+      TICKETMASTER_API_KEY: ${TICKETMASTER_API_KEY:-}
+      EVENTS_CACHE_SECONDS: ${EVENTS_CACHE_SECONDS:-900}
+      EVENTS_DAILY_REQUEST_LIMIT: ${EVENTS_DAILY_REQUEST_LIMIT:-500}
       TRAVELPAYOUTS_LINKS_ENABLED: ${TRAVELPAYOUTS_LINKS_ENABLED:-false}
       TRAVELPAYOUTS_MARKER: ${TRAVELPAYOUTS_MARKER:-0}
       TRAVELPAYOUTS_PROJECT_ID: ${TRAVELPAYOUTS_PROJECT_ID:-0}
@@ -65,6 +81,7 @@ services:
       dockerfile: apps/api/Dockerfile
     profiles: ["worker"]
     environment:
+      <<: *alert-environment
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development

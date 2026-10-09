@@ -71,7 +71,7 @@ def test_scheduler_keeps_cadence_and_skips_overruns(
     monkeypatch.setattr(
         scheduler, "get_settings", lambda: SimpleNamespace(pipeline_interval_seconds=3600)
     )
-    monkeypatch.setattr(scheduler, "run_pipeline_once", run)
+    monkeypatch.setattr(scheduler, "run_scheduled_cycle", run)
     monkeypatch.setattr(scheduler.asyncio, "sleep", sleep)
     with pytest.raises(asyncio.CancelledError):
         asyncio.run(scheduler.run_scheduler())
@@ -113,7 +113,17 @@ def test_calendar_waits_at_start_and_skips_overrun(monkeypatch):
 
     monkeypatch.setattr(scheduler, "datetime", Clock)
     monkeypatch.setattr(scheduler.asyncio, "sleep", sleep)
-    monkeypatch.setattr(scheduler, "run_pipeline_once", run)
+    monkeypatch.setattr(scheduler, "run_scheduled_cycle", run)
     with pytest.raises(asyncio.CancelledError):
         asyncio.run(scheduler.run_calendar_scheduler(7200, ZoneInfo("Europe/Warsaw")))
     assert starts == ["2026-10-04T14:00:00+00:00", "2026-10-04T18:00:00+00:00"]
+def test_alert_retention_runs_after_pipeline_failure_even_when_disabled(monkeypatch):
+    calls = []
+
+    async def failing_pipeline():
+        return 2
+
+    monkeypatch.setattr(scheduler, "run_pipeline_once", failing_pipeline)
+    monkeypatch.setattr(scheduler, "run_alerts_once", lambda: calls.append("alerts"))
+    asyncio.run(scheduler.run_scheduled_cycle())
+    assert calls == ["alerts"]

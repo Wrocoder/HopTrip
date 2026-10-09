@@ -23,6 +23,7 @@ class DealRead(BaseModel):
     destination_city: str = ""
     destination_slug: str = ""
     trip_type: str = "ONE_WAY"
+    events_supported: bool = False
     price_basis: str = "FLIGHT_PER_PERSON"
     components: list[ComponentRead] = Field(default_factory=list)
     explanation_codes: list[str] = Field(default_factory=list)

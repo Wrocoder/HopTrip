@@ -10,6 +10,7 @@ from app.models.deal import Deal
 from app.models.location import Airport, Destination
 from app.schemas.deal import DealRead
 from app.schemas.location import AirportRead, DestinationRead
+from app.services.airports import matching_airports
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 
@@ -21,7 +22,7 @@ def list_deals(
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0, le=10000),
     origin: str | None = Query(
-        None, min_length=3, max_length=3, description="Departure airport IATA code"
+        None, min_length=1, max_length=240, description="Departure airport IATA code or city name"
     ),
     destination: str | None = Query(None, description="Destination slug"),
     departure_from: date | None = Query(None),
@@ -108,10 +109,12 @@ def _filtered_deals_query(
 ):
     query = available_deals_query()
     if origin:
-        airport = db.scalar(select(Airport).where(Airport.iata_code == origin.upper()))
-        if airport is None:
-            raise HTTPException(status_code=404, detail="Airport not found")
-        query = query.where(Deal.origin_airport_id == airport.id)
+        airports = matching_airports(db, origin)
+        if not airports:
+            raise HTTPException(status_code=404, detail={"code": "UNKNOWN_ORIGIN"})
+        if len(airports) > 1:
+            raise HTTPException(status_code=422, detail={"code": "AMBIGUOUS_ORIGIN"})
+        query = query.where(Deal.origin_airport_id == airports[0].id)
     if destination:
         destination_record = db.scalar(select(Destination).where(Destination.slug == destination))
         if destination_record is None:
