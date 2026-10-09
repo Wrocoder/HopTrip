@@ -8,7 +8,6 @@ if os.getenv("HOPTRIP_E2E") != "1":
 from datetime import UTC, datetime, timedelta
 from decimal import Decimal
 
-from app.config import get_settings
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
@@ -16,10 +15,8 @@ from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
 from app.models.deal import Deal, DealComponent
 from app.models.location import Destination
-from app.services import alerts
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from helpers import approved_program, catalog_fixture
-from pydantic import SecretStr
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse
@@ -93,26 +90,6 @@ def override():
 
 
 app.dependency_overrides[get_db] = override
-
-# Fixture mailbox: no SMTP connection and no external emails.
-get_settings().alerts_enabled = True
-get_settings().alerts_signing_key = SecretStr("local-browser-fixture-key-not-for-production")
-get_settings().alerts_site_url = "http://127.0.0.1:3100"
-alert_messages = []
-
-
-def fixture_mail(settings, recipient, subject, body):
-    alert_messages.append({"email": recipient, "body": body})
-
-
-alerts.send_alert_mail = fixture_mail
-
-
-@app.get("/__test__/mail")
-def mailbox(email: str):
-    return [message for message in alert_messages if message["email"] == email]
-
-
 
 @app.get("/__test__/partner", response_class=HTMLResponse)
 def partner():

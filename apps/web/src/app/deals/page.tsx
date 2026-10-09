@@ -5,7 +5,6 @@ import {DealGrid} from "../components/catalog";
 import {FilterForm} from "../components/filters";
 import {catalogPage,socialMetadata} from "../../lib/catalog-pages";
 import {CatalogIntro} from "../components/catalog-intro";
-import {AlertInvite} from "../components/alert-invite";
 export const dynamic="force-dynamic";
 type Props={searchParams:Promise<Record<string,string|string[]|undefined>>};
 export async function generateMetadata({searchParams}:Props) {
@@ -45,6 +44,5 @@ export default async function DealsPage({searchParams}:{searchParams:Promise<Rec
       {deals.length === 12 && offset < 9996 && <Link href={pageLink(offset+12)}>{pl.next}</Link>}
     </nav></>}
     {!Object.values(filters).some(Boolean) && <CatalogIntro page={catalogPage("/deals")!}/>}
-    <AlertInvite filters={filters}/>
   </main>;
 }

@@ -1,9 +1,6 @@
-import re
 from functools import lru_cache
-from typing import Literal
-from urllib.parse import urlsplit
 
-from pydantic import Field, SecretStr, model_validator
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -28,30 +25,6 @@ class Settings(BaseSettings):
     public_rate_limit: int = Field(default=120, ge=1, le=10000)
     provider_max_pages: int = Field(default=5, ge=1, le=100)
     analytics_retention_days: int = Field(default=90, ge=1, le=730)
-    alerts_enabled: bool = False
-    alerts_site_url: str = "http://localhost:3000"
-    alerts_signing_key: SecretStr = SecretStr("")
-    alerts_daily_signup_limit: int = Field(default=200, ge=1, le=10000)
-    smtp_host: str = ""
-    smtp_port: int = Field(default=465, ge=1, le=65535)
-    smtp_security: Literal["ssl", "starttls"] = "ssl"
-    smtp_user: str = ""
-    smtp_password: SecretStr = SecretStr("")
-    smtp_sender: str = ""
-
-    @model_validator(mode="after")
-    def alert_configuration(self):
-        if self.alerts_enabled:
-            url = urlsplit(self.alerts_site_url)
-            if (url.scheme not in {"https", "http"} or not url.hostname or url.username
-                    or url.password or url.query or url.fragment or url.path not in {"", "/"}
-                    or (url.scheme != "https" and url.hostname not in {"localhost", "127.0.0.1"})):
-                raise ValueError("ALERTS_SITE_URL must be an HTTPS origin (HTTP only on localhost)")
-            if (len(self.alerts_signing_key.get_secret_value()) < 32 or not self.smtp_host
-                    or not self.smtp_user or not self.smtp_password.get_secret_value()
-                    or not re.fullmatch(r"[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+", self.smtp_sender)):
-                raise ValueError("Enabled alerts require SMTP credentials, sender and a signing key")
-        return self
 
     @model_validator(mode="after")
     def production_secrets(self):

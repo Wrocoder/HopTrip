@@ -3,7 +3,6 @@ import {getDeals,getAirports,getDestinations,Deal,Airport,Destination} from "../
 import {pl} from "../lib/pl";
 import {DealGrid} from "./components/catalog";
 import {FilterForm} from "./components/filters";
-import {AlertInvite} from "./components/alert-invite";
 export const dynamic="force-dynamic";
 export default async function HomePage() {
   let deals:Deal[]=[], airports:Airport[]=[], destinations:Destination[]=[], failed=false;
@@ -21,6 +20,5 @@ export default async function HomePage() {
     <div className="browse-layout"><section className="route-links"><p className="eyebrow">02 / Skąd wyruszasz</p><h2>{pl.airports}</h2><div className="route-link-grid">{airports.map(a=><Link key={a.id} href={`/from/${a.iata_code}`}>{a.city} ({a.iata_code})</Link>)}</div></section>
     <section className="route-links destination-links"><p className="eyebrow">03 / Dokąd chcesz polecieć</p><h2>{pl.destinations}</h2><div className="route-link-grid">{destinations.map(d=><Link key={d.id} href={`/destinations/${d.slug}`}>{d.city}</Link>)}</div></section></div>
     <aside className="travel-note"><span className="note-mark" aria-hidden="true">↗</span><p>{pl.flightOnly}</p><Link href="/info/partners">{pl.partners} →</Link></aside>
-    <AlertInvite/>
   </main>;
 }
