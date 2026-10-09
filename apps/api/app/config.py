@@ -14,10 +14,6 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+psycopg://hoptrip:hoptrip@localhost:5432/hoptrip"
     admin_token: str = "change-me-in-development"
     travelpayouts_api_token: str | None = None
-    events_enabled: bool = False
-    ticketmaster_api_key: SecretStr = SecretStr("")
-    events_cache_seconds: int = Field(default=900, ge=30, le=3600)
-    events_daily_request_limit: int = Field(default=500, ge=1, le=4000)
     travelpayouts_api_base_url: str = "https://api.travelpayouts.com"
     travelpayouts_links_enabled: bool = False
     travelpayouts_marker: int = Field(default=0, ge=0)

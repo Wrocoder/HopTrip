@@ -16,10 +16,7 @@ from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
 from app.models.deal import Deal, DealComponent
 from app.models.location import Destination
-from app.providers.ticketmaster import EVENT_CITIES, EventCity
-from app.schemas.event import EventRead, EventResults
 from app.services import alerts
-from app.services.events import event_service
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from helpers import approved_program, catalog_fixture
 from pydantic import SecretStr
@@ -115,36 +112,6 @@ alerts.send_alert_mail = fixture_mail
 def mailbox(email: str):
     return [message for message in alert_messages if message["email"] == email]
 
-# Local-only events preview. Neither a real key nor provider traffic is used by browser tests.
-get_settings().events_enabled = True
-get_settings().ticketmaster_api_key = SecretStr("browser-fixture-only")
-EVENT_CITIES["barcelona"] = EventCity(("Barcelona",), "ES", "Europe/Madrid")
-
-
-def fixture_events(settings, slug, start, end, category):
-    items = [
-        EventRead(
-            id="fixture-concert", name="Koncert nad morzem", category="MUSIC",
-            venue="Sala koncertowa", city="Barcelona", start_date=start,
-            timezone="Europe/Madrid", status="onsale",
-            url="https://www.ticketmaster.fr/event/fixture-concert",
-        ),
-        EventRead(
-            id="fixture-exhibition", name="Wystawa fotografii", category="CULTURE",
-            venue="Muzeum fotografii", city="Barcelona", start_date=start, end_date=end,
-            timezone="Europe/Madrid", status="rescheduled",
-            url="https://www.ticketmaster.fr/event/fixture-exhibition",
-            price_from=Decimal("12.50"), currency="EUR",
-        ),
-    ]
-    items = [item for item in items if category == "ALL" or item.category == category]
-    return EventResults(
-        status="READY" if items else "EMPTY", events=items,
-        start_date=start, end_date=end, checked_at=datetime.now(UTC),
-    )
-
-
-event_service.search = fixture_events
 
 
 @app.get("/__test__/partner", response_class=HTMLResponse)

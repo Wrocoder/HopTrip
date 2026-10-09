@@ -6,7 +6,6 @@ import {Price} from "../../components/price";
 import {DealViewTracker} from "../../components/deal-view-tracker";
 import {Outbound} from "../../components/outbound";
 import {ScoreDetails} from "../../components/score-details";
-import {TripEvents} from "../../components/trip-events";
 import {DestinationGuides} from "../../components/destination-guides";
 import {DestinationActivities} from "../../components/destination-activities";
 import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
@@ -40,7 +39,6 @@ export default async function DealPage({params}:Props) {
     <TripAccommodation deal={deal}/>
     <section className="rationale" id="score"><div className="section-heading"><h2>Skąd {deal.deal_score}/100?</h2><span className="score-badge">Ocena oferty</span></div>
     <ScoreDetails deal={deal}/></section>
-    {deal.events_supported && <TripEvents deal={deal}/>}
     <DestinationActivities slug={deal.destination_slug}/>
     <DestinationGuides slug={deal.destination_slug}/>
     <TripBudgetCalculator key={deal.slug} destinationSlug={deal.destination_slug} initialInput={budgetForTrip(deal)} note={deal.trip_type==="ONE_WAY"

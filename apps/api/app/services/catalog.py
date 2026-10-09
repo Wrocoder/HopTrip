@@ -1,8 +1,6 @@
-from app.config import get_settings
 from app.models.deal import Deal, DealComponent
 from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
-from app.providers.ticketmaster import EVENT_CITIES
 from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
 from app.services.score_explanation import explain_score
@@ -19,12 +17,6 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result.origin_city = origin.city if origin else ""
     result.destination_city = destination.city if destination else ""
     result.destination_slug = destination.slug if destination else ""
-    settings = get_settings()
-    event_city = EVENT_CITIES.get(result.destination_slug)
-    result.events_supported = bool(
-        settings.events_enabled and settings.ticketmaster_api_key.get_secret_value()
-        and destination and event_city and event_city.country == destination.country_code
-    )
     for component in db.scalars(select(DealComponent).where(DealComponent.deal_id == deal.id)):
         policy = component_policy(db, component)
         result.components.append(
