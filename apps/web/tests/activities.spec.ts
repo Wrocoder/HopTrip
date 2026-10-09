@@ -6,7 +6,7 @@ import {publishedInfoPages} from "../src/lib/content";
 
 test("published city guides have matching activity selections",()=>{
   const matched=publishedInfoPages().filter(([slug])=>destinationForGuide(slug));
-  expect(matched).toHaveLength(21);
+  expect(matched).toHaveLength(24);
   for(const [slug] of matched) expect(activitiesForDestination(destinationForGuide(slug)!.slug)).toBeDefined();
   for(const slug of ["privacy","trip-budget","wro-airport","amsterdam-airport"]) expect(destinationForGuide(slug)).toBeUndefined();
 });
