@@ -10,7 +10,6 @@ import {DestinationGuides} from "../../components/destination-guides";
 import {DestinationActivities} from "../../components/destination-activities";
 import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
 import {budgetForTrip} from "../../../lib/trip-budget";
-import {TripAccommodation} from "../../components/trip-accommodation";
 import {socialMetadata} from "../../../lib/catalog-pages";
 export const dynamic="force-dynamic";
 type Props={params:Promise<{slug:string}>};
@@ -36,7 +35,6 @@ export default async function DealPage({params}:Props) {
     </section><section className="booking-card" aria-label="Przejście do partnera"><span className="badge">{pl.partners}</span>
     {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln}/></p><Outbound component={c}/></section>) : <p>{pl.noLink}</p>}
     <p className="muted">{pl.disclosure}</p></section></div>
-    <TripAccommodation deal={deal}/>
     <section className="rationale" id="score"><div className="section-heading"><h2>Skąd {deal.deal_score}/100?</h2><span className="score-badge">Ocena oferty</span></div>
     <ScoreDetails deal={deal}/></section>
     <DestinationActivities slug={deal.destination_slug}/>
