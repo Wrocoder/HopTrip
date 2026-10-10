@@ -8,6 +8,7 @@ import {Outbound} from "../../components/outbound";
 import {ScoreDetails} from "../../components/score-details";
 import {DestinationGuides} from "../../components/destination-guides";
 import {DestinationActivities} from "../../components/destination-activities";
+import {TripAccommodation} from "../../components/trip-accommodation";
 import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
 import {budgetForTrip} from "../../../lib/trip-budget";
 import {socialMetadata} from "../../../lib/catalog-pages";
@@ -35,6 +36,7 @@ export default async function DealPage({params}:Props) {
     </section><section className="booking-card" aria-label="Przejście do partnera"><span className="badge">{pl.partners}</span>
     {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln}/></p><Outbound component={c}/></section>) : <p>{pl.noLink}</p>}
     <p className="muted">{pl.disclosure}</p></section></div>
+    <TripAccommodation key={deal.slug} deal={deal}/>
     <section className="rationale" id="score"><div className="section-heading"><h2>Skąd {deal.deal_score}/100?</h2><span className="score-badge">Ocena oferty</span></div>
     <ScoreDetails deal={deal}/></section>
     <DestinationActivities slug={deal.destination_slug}/>
