@@ -24,8 +24,9 @@ stamp=$(date -u +%Y%m%dT%H%M%SZ)
 release="$root/releases/$sha-$stamp"
 backup="$root/backups/deploy-$stamp-$sha"
 mkdir -p "$release" "$backup"
-previous=$(readlink -f "$root/current" || true)
-[[ -n $previous ]] || previous=$root
+previous=$root
+if [[ -L $root/current ]]; then previous=$(readlink -f "$root/current"); fi
+test -f "$previous/docker-compose.yml"
 compose_at() {
   local directory=$1; shift
   docker compose -p hoptrip --env-file "$root/.env.production" \
