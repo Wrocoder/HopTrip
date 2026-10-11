@@ -16,6 +16,7 @@ test("home airport suggestions support keyboard and preserve search filters",asy
   await expect(origin).toHaveValue("Wrocław — WRO");
   await expect(origin).toHaveAttribute("aria-expanded","false");
   await page.getByRole("spinbutton",{name:"Budżet na lot / osobę (PLN)",exact:true}).fill("220");
+  await page.getByText("Daty i długość pobytu",{exact:true}).click();
   await page.getByLabel("Wylot od",{exact:true}).fill("2026-01-01");
   await page.getByLabel("Wylot do",{exact:true}).fill("2099-12-31");
   await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
@@ -58,6 +59,7 @@ test("editing a selected airport never submits a stale code",async({page})=>{
 
 test("home validates dates and remains accessible on a narrow screen",async({page},testInfo)=>{
   await page.goto("/");
+  await page.getByText("Daty i długość pobytu",{exact:true}).click();
   await page.getByLabel("Wylot od",{exact:true}).fill("2027-05-20");
   await page.getByLabel("Wylot do",{exact:true}).fill("2027-05-10");
   await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();

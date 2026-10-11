@@ -1,4 +1,4 @@
-// Public affiliate ID confirmed by the owner on 2026-10-10 (stay22.md).
+// Public affiliate ID confirmed by the owner on 2026-10-10 ().
 export const stay22Aid = "hoptrip";
 
 type Stay = {city:string;checkin:string;checkout:string;adults:string};

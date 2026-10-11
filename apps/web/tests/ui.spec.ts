@@ -12,7 +12,11 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
   expect(await page.evaluate(()=>Array.from(document.fonts).filter(font=>font.status==="loaded").length)).toBeGreaterThanOrEqual(2);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   if(name==="deal" && testInfo.project.name==="mobile") {
-   await expect(page.getByRole("link",{name:"Sprawdź ofertę u partnera"})).toBeInViewport();
+   const facts=await page.locator(".detail-summary").boundingBox();
+   const booking=await page.locator(".booking-card").boundingBox();
+   expect(facts!.y).toBeLessThan(booking!.y);
+   await page.getByRole("link",{name:"Sprawdź lot — Fixture program"}).scrollIntoViewIfNeeded();
+   await expect(page.getByRole("link",{name:"Sprawdź lot — Fixture program"})).toBeInViewport();
   }
   await page.screenshot({path:testInfo.outputPath(`${name}.png`),fullPage:true});
  }
@@ -25,7 +29,7 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
  await page.getByRole("link",{name:"Aktualne okazje",exact:true}).last().hover();
  expect(await page.getByRole("link",{name:"Aktualne okazje",exact:true}).last().evaluate(el=>getComputedStyle(el).transform)).toBe("none");
  await page.setViewportSize({width:320,height:740});
- for(const path of ["/deals","/deals/browser-deal","/info/price-comparison"]) {
+ for(const path of ["/","/deals","/deals/browser-deal","/info/price-comparison"]) {
   await page.goto(path);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
  }

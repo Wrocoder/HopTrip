@@ -112,7 +112,7 @@ test("trip shows only local attractions without provider requests or changing fl
     await expect(link).toHaveAttribute("rel",item.affiliateHref ? "sponsored noopener noreferrer" : "noopener noreferrer");
   }
   await expect(page.locator(".detail-summary .deal-price")).toContainText("200,25");
-  await expect(page.getByRole("link",{name:"Sprawdź ofertę u partnera"})).toBeVisible();
+  await expect(page.getByRole("link",{name:"Sprawdź lot — Fixture program"})).toBeVisible();
   expect(externalRequests).toEqual([]);
   expect((await new AxeBuilder({page}).include('[aria-labelledby="destination-activities-title"]').analyze()).violations).toEqual([]);
   await page.setViewportSize({width:320,height:800});

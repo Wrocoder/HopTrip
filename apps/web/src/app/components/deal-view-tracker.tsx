@@ -1,9 +1,11 @@
 "use client";
-import {useEffect,useRef} from "react";
+import {useEffect,useRef,useSyncExternalStore} from "react";
 import {usePathname,useSearchParams} from "next/navigation";
+import {analyticsAllowed,subscribeConsent} from "../../lib/consent";
 import {track} from "../../lib/session";
 export function DealViewTracker({dealSlug}:{dealSlug:string}) {
- useEffect(()=>{track("DEAL_VIEW",dealSlug);},[dealSlug]);return null;
+ const allowed=useSyncExternalStore(subscribeConsent,analyticsAllowed,()=>false);
+ useEffect(()=>{if(allowed)track("DEAL_VIEW",dealSlug);},[dealSlug,allowed]);return null;
 }
 export function PageTracker() {
  const path=usePathname(),query=useSearchParams().toString();

@@ -31,7 +31,7 @@ test("optional analytics are off until consent and withdrawal clears the session
    query=new URL(route.request().url()).search;
    await route.fulfill({status:200,body:"Partner transition"});
  });
- await page.getByRole("link",{name:"Sprawdź ofertę u partnera"}).click();
+ await page.getByRole("link",{name:"Sprawdź lot — Fixture program"}).click();
  expect(query).toBe("");
 });
 
@@ -48,4 +48,12 @@ test("expired or inaccessible consent storage fails closed",async({page})=>{
  await expect(page.locator(".consent-panel")).toBeVisible();
  await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
  await expect(page.locator(".consent-panel")).toHaveCount(0);
+});
+
+test("managed partner pages do not load Drive even with marketing consent",async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:true,at:Date.now()})));
+ for(const path of ["/deals/browser-deal","/info/barcelona-airports"]) {
+  await page.goto(path);
+  await expect(page.locator('script[src*="emrld.ltd"]')).toHaveCount(0);
+ }
 });

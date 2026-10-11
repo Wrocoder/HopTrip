@@ -9,6 +9,7 @@ export function ActivityLink({city,activityId,affiliate,...props}:ComponentProps
   function record() {
     // Analytics failure must never prevent the native link from opening.
     try {
+      if(affiliate)track("PARTNER_CLICK",location.pathname.startsWith("/deals/") ? location.pathname.split("/")[2] : undefined,undefined,{partner:{category:"activity",provider:"tiqets"}});
       track("ACTIVITY_CLICK",undefined,{
         city,activity_id:activityId,page:location.pathname,
         link_kind:affiliate ? "affiliate" : "official",

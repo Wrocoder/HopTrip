@@ -12,6 +12,9 @@ test("Stay22 preserves destination, edited dates and guests with HopTrip attribu
  assert.equal(url.searchParams.get("checkout"),stay.checkout);
  assert.equal(url.searchParams.get("adults"),"2");
  assert.equal(url.searchParams.get("campaign"),"hoptrip_accommodation");
+ assert.equal(url.searchParams.get("lang"),"pl");
+ assert.equal(url.searchParams.get("currency"),"PLN");
+ assert.equal(url.searchParams.has("u"),false);
 });
 test("no outbound link for missing checkout, same-day or reversed stay and invalid guests",()=>{
  for(const checkout of ["","2026-11-10","2026-11-09","2026-02-30","invalid"])

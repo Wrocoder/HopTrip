@@ -1,11 +1,9 @@
 import Link from "next/link";
 import type {Deal, ScoreExplanation} from "../../lib/api";
-import {money} from "../../lib/pl";
+import {money,dateTime} from "../../lib/pl";
 
 const number = (value:string|number) => new Intl.NumberFormat("pl-PL", {maximumFractionDigits:2}).format(Number(value));
-const timestamp = (value:string) => new Intl.DateTimeFormat("pl-PL", {
-  dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Warsaw",
-}).format(new Date(value));
+const timestamp = dateTime;
 
 const labels:Record<string,string> = {
   price:"Cena na tle historii", history:"Liczba obserwacji", freshness:"Świeżość danych",

@@ -1,4 +1,4 @@
-export type Component = {id:number; component_type:string; price_pln:string|null; available:boolean; reason:string; redirect_path:string|null};
+export type Component = {id:number; component_type:string; price_pln:string|null; available:boolean; reason:string; redirect_path:string|null; partner_name?:string|null};
 export type ScoreExplanation = {
   status:"CURRENT"|"PROVISIONAL"|"LEGACY"|"UNAVAILABLE";
   parts:{key:string;points:string;max_points:number}[];
@@ -6,7 +6,15 @@ export type ScoreExplanation = {
   current_price_pln:string|null; median_price_pln:string|null; price_difference_percent:string|null;
   observed_at:string|null; calculated_at:string|null; observation_basis:"SOURCE"|"FIRST_SEEN"|null;
 };
+export type FlightFacts = {
+  origin_airport:string|null; destination_airport:string|null; destination_code:string|null;
+  airline_code:string|null; outbound_stops:number|null; return_stops:number|null;
+  outbound_departure:string|null; outbound_arrival:string|null;
+  return_departure:string|null; return_arrival:string|null;
+  destination_interval_minutes:number|null;
+};
 export type Deal = {
+  flight_facts?:FlightFacts;
   id:number; slug:string; trip_start:string; trip_end:string; origin_airport_id:number; destination_id:number;
   origin_code:string; origin_city:string; destination_city:string; destination_slug:string;
   trip_type:"ONE_WAY"|"ROUND_TRIP"; price_basis:string; components:Component[];
@@ -17,8 +25,8 @@ export type Deal = {
   last_verified_at:string; expires_at:string|null;
 };
 export type Airport = {id:number; iata_code:string; name:string; city:string; country_code:string; is_active:boolean;aliases?:string[]};
-export type Destination = {id:number; city:string; country:string; country_code:string; slug:string; is_active:boolean};
-export type Filters = Partial<Record<"origin"|"destination"|"departure_from"|"departure_to"|"budget"|"duration_min"|"duration_max"|"offset"|"limit",string>>;
+export type Destination = {display_name?:string;aliases?:string[];iata_codes?:string[];id:number; city:string; country:string; country_code:string; slug:string; is_active:boolean};
+export type Filters = Partial<Record<"origin"|"destination"|"departure_from"|"departure_to"|"budget"|"duration_min"|"duration_max"|"weekend"|"offset"|"limit"|"sort",string>>;
 export class ApiError extends Error { constructor(public status:number,public code?:string) {super("Catalog unavailable");} }
 function apiUrl(path:string) {
   return (process.env.HOPTRIP_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/,"") + path;
@@ -31,12 +39,21 @@ async function getJson<T>(path:string):Promise<T> {
   }
   return response.json() as Promise<T>;
 }
-export async function getDeals(filters:Filters = {}):Promise<Deal[]> {
+function dealParams(filters:Filters):URLSearchParams {
   const params = new URLSearchParams();
-  for (const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","offset","limit"] as const) {
+  for (const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","offset","limit","sort"] as const) {
     const value=filters[key];
     if (value) params.set(key, key === "origin" ? value.toUpperCase() : value);
   }
+  return params;
+}
+export async function getDeals(filters:Filters = {}):Promise<Deal[]> {
+  return getJson("/api/v1/deals?" + dealParams(filters));
+}
+export type DealResults = {items:Deal[];total:number;offset:number;limit:number};
+export async function getDealResults(filters:Filters = {}):Promise<DealResults> {
+  const params=dealParams(filters);
+  params.set("include_total","true");
   return getJson("/api/v1/deals?" + params);
 }
 export async function getDeal(slug:string):Promise<Deal|null> {

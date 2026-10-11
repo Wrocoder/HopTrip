@@ -1,3 +1,4 @@
+import {originLabel} from "./cities.ts";
 import type {Airport} from "./api";
 
 export function normalizeAirport(value:string):string {
@@ -6,9 +7,7 @@ export function normalizeAirport(value:string):string {
 }
 
 export function airportLabel(airport:Airport):string {
-  // The API's first Polish airport alias is the reviewed Polish city name.
-  const city=airport.country_code==="PL" ? airport.aliases?.[0] ?? airport.city : airport.city;
-  return `${city} — ${airport.iata_code}`;
+  return `${originLabel(airport.city,airport.iata_code)} — ${airport.iata_code}`;
 }
 
 function terms(airport:Airport):string[] {

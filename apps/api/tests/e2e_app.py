@@ -1,5 +1,6 @@
 """Explicit local-only browser fixture app, never imported by production entrypoint."""
 
+import asyncio
 import os
 import tempfile
 
@@ -13,13 +14,15 @@ from app.db.session import get_db
 from app.main import app
 from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
+from app.models.data_provider import DataProvider
 from app.models.deal import Deal, DealComponent
 from app.models.location import Destination
+from app.models.offer import TravelOffer
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from helpers import approved_program, catalog_fixture
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
-from starlette.responses import HTMLResponse
+from starlette.responses import HTMLResponse, JSONResponse
 
 fixture_dir = tempfile.TemporaryDirectory(prefix="hoptrip-browser-")
 engine = create_engine(
@@ -81,6 +84,32 @@ with Session(engine) as db:
                 deal_id=other.id, component_type="FLIGHT", price_pln=other.price_per_person_pln
             )
         )
+    # A complete cached-price flight exercises real API serialization in the browser.
+    provider = DataProvider(code="flight-facts-fixture", name="Local schedule fixture")
+    db.add(provider)
+    db.flush()
+    scheduled_deal = db.scalar(select(Deal).where(Deal.slug == "browser-13"))
+    scheduled_component = db.scalar(
+        select(DealComponent).where(DealComponent.deal_id == scheduled_deal.id)
+    )
+    scheduled_departure = scheduled_deal.depart_at.replace(tzinfo=UTC)
+    scheduled_offer = TravelOffer(
+        data_provider_id=provider.id, external_id="schedule", source="travelpayouts_data",
+        product_type="FLIGHT", departure_precision="TIME",
+        depart_at=scheduled_departure,
+        return_at=scheduled_departure + timedelta(days=3),
+        original_price=213, original_currency="PLN",
+        raw_payload={
+            "origin_airport": "WRO", "destination": "BCN", "destination_airport": "BCN",
+            "airline": "FR", "transfers": 0, "return_transfers": 1,
+            "departure_at": scheduled_departure.isoformat(),
+            "return_at": (scheduled_departure + timedelta(days=3)).isoformat(),
+            "duration_to": 120, "duration_back": 180,
+        },
+    )
+    db.add(scheduled_offer)
+    db.flush()
+    scheduled_component.travel_offer_id = scheduled_offer.id
     db.commit()
 
 
@@ -113,3 +142,14 @@ def tracking():
                 for e in db.scalars(select(AnalyticsEvent))
             ],
         }
+
+
+@app.middleware("http")
+async def catalog_state_fixture(request, call_next):
+    # Isolated E2E app only: deterministic transport delay/failure for SSR fetches.
+    if request.url.path == "/api/v1/deals":
+        if request.query_params.get("budget") == "987654":
+            await asyncio.sleep(2)
+        if request.query_params.get("budget") == "987653":
+            return JSONResponse({"detail": "Fixture unavailable"}, status_code=503)
+    return await call_next(request)

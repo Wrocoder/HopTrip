@@ -1,7 +1,10 @@
+import {FlightFacts} from "../../components/flight-facts";
+import {flightPriceBasis} from "../../../lib/flight-facts";
+import {cityLabel,originLabel} from "../../../lib/cities";
 import {notFound} from "next/navigation";
 import Link from "next/link";
 import {getDeal} from "../../../lib/api";
-import {pl,date} from "../../../lib/pl";
+import {pl,date,dateTime,tripNights} from "../../../lib/pl";
 import {Price} from "../../components/price";
 import {DealViewTracker} from "../../components/deal-view-tracker";
 import {Outbound} from "../../components/outbound";
@@ -17,8 +20,8 @@ type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props) {
   const {slug}=await params;
   const deal=await getDeal(slug);
-  return socialMetadata({title:deal ? `${deal.origin_city} → ${deal.destination_city} | HopTrip` : pl.notFound,
-    description:deal ? `${deal.origin_city} → ${deal.destination_city}. ${date(deal.trip_start)}${deal.trip_type==="ROUND_TRIP" ? ` – ${date(deal.trip_end)}` : ""}. ${deal.trip_type==="ROUND_TRIP" ? pl.roundTrip : pl.oneWay}. Sprawdź cenę lotu i zaplanuj budżet podróży.` : pl.notFound,
+  return socialMetadata({title:deal ? `${originLabel(deal.origin_city,deal.origin_code)} → ${cityLabel(deal.destination_city,deal.destination_slug)} | HopTrip` : pl.notFound,
+    description:deal ? `${originLabel(deal.origin_city,deal.origin_code)} → ${cityLabel(deal.destination_city,deal.destination_slug)}. ${date(deal.trip_start)}${deal.trip_type==="ROUND_TRIP" ? ` – ${date(deal.trip_end)}` : ""}. ${deal.trip_type==="ROUND_TRIP" ? pl.roundTrip : pl.oneWay}. Sprawdź cenę lotu i zaplanuj budżet podróży.` : pl.notFound,
     path:`/deals/${encodeURIComponent(slug)}`,image:`/preview/deal/${encodeURIComponent(slug)}`});
 }
 export default async function DealPage({params}:Props) {
@@ -26,15 +29,15 @@ export default async function DealPage({params}:Props) {
   if (!deal) notFound();
   return <main className="page-shell"><Link className="back-link" href="/deals">← {pl.deals}</Link><article className="offer-detail">
     <DealViewTracker dealSlug={deal.slug}/>
-    <header className="page-heading"><p className="eyebrow">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</p><h1>{deal.origin_city} ({deal.origin_code}) → {deal.destination_city}</h1>
-    <p className="lead">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p></header>
+    <header className="page-heading"><p className="eyebrow">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</p><h1>{originLabel(deal.origin_city,deal.origin_code)} ({deal.origin_code}) → {cityLabel(deal.destination_city,deal.destination_slug)}</h1>
+    <p className="lead">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>{tripNights(deal) && <p>{tripNights(deal)}</p>}</header>
     <div className="detail-layout"><section className="featured-card detail-summary" aria-label="Cena lotu"><p className="eyebrow">{pl.perPerson} · PLN</p>
-    <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{pl.perPerson}</span></p>
-    <p>{pl.flightOnly}</p><p>{pl.cached}</p>
+    <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
+    <p>{pl.flightOnly}</p><FlightFacts deal={deal}/><p>{pl.cached}</p>
     <p><a className="button button-secondary" href="#calculator">Policz budżet całej podróży</a></p>
-    <p>{pl.checked}: <time dateTime={deal.last_verified_at}>{date(deal.last_verified_at)}</time></p>
+    <p>{pl.checked}: <time dateTime={deal.last_verified_at}>{dateTime(deal.last_verified_at)}</time></p>
     </section><section className="booking-card" aria-label="Przejście do partnera"><span className="badge">{pl.partners}</span>
-    {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln}/></p><Outbound component={c}/></section>) : <p>{pl.noLink}</p>}
+    {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln}/>{c.component_type==="FLIGHT" && <span className="flight-price-basis">{flightPriceBasis(deal)}</span>}</p><Outbound component={c} dealSlug={deal.slug}/></section>) : <p>{pl.noLink}</p>}
     <p className="muted">{pl.disclosure}</p></section></div>
     <TripAccommodation key={deal.slug} deal={deal}/>
     <section className="rationale" id="score"><div className="section-heading"><h2>Skąd {deal.deal_score}/100?</h2><span className="score-badge">Ocena oferty</span></div>

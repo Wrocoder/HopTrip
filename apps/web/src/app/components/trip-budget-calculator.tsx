@@ -1,10 +1,11 @@
 "use client";
+import {money} from "../../lib/pl";
 import {useState} from "react";
 import {calculateBudget,costFields,emptyBudget,type BudgetInput} from "../../lib/trip-budget";
 import styles from "./trip-budget-calculator.module.css";
 import {ReferenceCosts} from "./reference-costs";
 
-const format=(grosz:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN"}).format(grosz/100);
+const format=(grosz:number)=>money(String(grosz/100));
 
 export function TripBudgetCalculator({initialInput={},note,destinationSlug}:{initialInput?:Partial<BudgetInput>;note?:string;destinationSlug?:string}) {
  const [input,setInput]=useState<BudgetInput>(()=>({...emptyBudget,...initialInput}));

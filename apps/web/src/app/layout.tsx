@@ -23,6 +23,7 @@ export default function RootLayout({children}:Readonly<{children:React.ReactNode
     <a className="skip-link" href="#content">Przejdź do treści</a>
     <header className="page-shell site-header"><Link className="brand" href="/" aria-label="HopTrip — strona główna"><span className="brand-mark" aria-hidden="true">↗</span>HopTrip<span className="brand-dot" aria-hidden="true">.</span></Link>
     <SiteNav/></header>
+    <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{pl.disclosure}</p></div><nav className="footer-nav" aria-label="Informacje o serwisie">
       {(["about","contact","privacy","terms","partners"] as const).map(key=>

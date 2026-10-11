@@ -1,3 +1,4 @@
+import {cityLabel,originLabel,departureHeading} from "../../../../lib/cities";
 import {getAirports,getDeal,getDestinations} from "../../../../lib/api";
 import {catalogPage} from "../../../../lib/catalog-pages";
 import {travelPreview} from "../../../../lib/travel-preview";
@@ -12,18 +13,18 @@ export async function GET(_request:Request,{params}:{params:Promise<{kind:string
     if(kind==="catalog" && key==="deals")return await travelPreview("Okazje lotnicze z Polski","Wybierz lotnisko, daty i budżet na osobę.");
     if(kind==="deal") {
       const deal=await getDeal(key);if(!deal)return missing();
-      return await travelPreview(`${deal.origin_city} → ${deal.destination_city}`,
+      return await travelPreview(`${originLabel(deal.origin_city,deal.origin_code)} → ${cityLabel(deal.destination_city,deal.destination_slug)}`,
         `${date(deal.trip_start)}${deal.trip_type==="ROUND_TRIP" ? ` – ${date(deal.trip_end)}` : ""} · ${deal.trip_type==="ROUND_TRIP" ? pl.roundTrip : pl.oneWay}`);
     }
     if(kind==="airport") {
       const airport=(await getAirports()).find(a=>a.iata_code===key);
       if(!airport)return missing();
-      return await travelPreview(`Loty z ${airport.city} (${key})`,"Aktualne oferty · zaplanuj podróż z HopTrip");
+      return await travelPreview(departureHeading(airport.city,key),"Aktualne oferty · zaplanuj podróż z HopTrip");
     }
     if(kind==="destination") {
       const destination=(await getDestinations()).find(d=>d.slug===key);
       if(!destination)return missing();
-      return await travelPreview(key==="milan" ? "Mediolan na twój wyjazd" : destination.city,
+      return await travelPreview(cityLabel(destination.city,destination.slug),
         catalogPage(`/destinations/${key}`)?.description ?? "Loty z Polski · znajdź swój kierunek");
     }
     return missing();
