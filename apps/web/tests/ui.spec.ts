@@ -9,7 +9,7 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
   await expect(page.locator("main[role='status']")).toHaveCount(0);
   await expect(page.getByRole("main")).toBeVisible();
   await page.evaluate(()=>document.fonts.ready);
-  expect(await page.evaluate(()=>Array.from(document.fonts).filter(font=>font.status==="loaded").length)).toBeGreaterThanOrEqual(2);
+  await expect.poll(()=>page.evaluate(()=>Array.from(document.fonts).filter(font=>font.status==="loaded").length)).toBeGreaterThanOrEqual(2);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   if(name==="deal" && testInfo.project.name==="mobile") {
    const facts=await page.locator(".detail-summary").boundingBox();
