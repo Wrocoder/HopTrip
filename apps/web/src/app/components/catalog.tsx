@@ -1,3 +1,4 @@
+import {PriceAssessment} from "./price-assessment";
 import {FlightFacts} from "./flight-facts";
 import {flightPriceBasis} from "../../lib/flight-facts";
 import {cityLabel,originLabel} from "../../lib/cities";
@@ -12,7 +13,7 @@ export function DealCard({deal}:{deal:Deal}) {
   return <article className="deal-card">
     <Impression slug={deal.slug}/>
     <div className="deal-card-top"><span className="badge">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</span>
-    <ScoreTrigger score={deal.deal_score} slug={deal.slug} destination={cityLabel(deal.destination_city,deal.destination_slug)} provisional={deal.score_explanation?.status === "PROVISIONAL"}><ScoreDetails deal={deal}/></ScoreTrigger></div>
+    </div>
     <Link className="deal-card-link" href={`/deals/${deal.slug}`}>
     <p className="deal-origin">{originLabel(deal.origin_city,deal.origin_code)} ({deal.origin_code}) <span aria-hidden="true">→</span></p>
     <h2>{cityLabel(deal.destination_city,deal.destination_slug)}</h2>
@@ -21,9 +22,11 @@ export function DealCard({deal}:{deal:Deal}) {
     <div className="deal-card-bottom">
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
+    <PriceAssessment deal={deal}/>
     <p className="deal-note">{pl.flightOnly}</p>
     <FlightFacts deal={deal}/>
     </Link>
+    <ScoreTrigger score={deal.deal_score} slug={deal.slug} destination={cityLabel(deal.destination_city,deal.destination_slug)} provisional={deal.score_explanation?.status === "PROVISIONAL"}><ScoreDetails deal={deal}/></ScoreTrigger>
   </article>;
 }
 export function DealGrid({deals}:{deals:Deal[]}) {

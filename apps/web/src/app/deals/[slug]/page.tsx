@@ -1,10 +1,11 @@
+import {PriceAssessment} from "../../components/price-assessment";
 import {FlightFacts} from "../../components/flight-facts";
 import {flightPriceBasis} from "../../../lib/flight-facts";
 import {cityLabel,originLabel} from "../../../lib/cities";
 import {notFound} from "next/navigation";
 import Link from "next/link";
 import {getDeal} from "../../../lib/api";
-import {pl,date,dateTime,tripNights} from "../../../lib/pl";
+import {pl,date,tripNights} from "../../../lib/pl";
 import {Price} from "../../components/price";
 import {DealViewTracker} from "../../components/deal-view-tracker";
 import {Outbound} from "../../components/outbound";
@@ -33,14 +34,14 @@ export default async function DealPage({params}:Props) {
     <p className="lead">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>{tripNights(deal) && <p>{tripNights(deal)}</p>}</header>
     <div className="detail-layout"><section className="featured-card detail-summary" aria-label="Cena lotu"><p className="eyebrow">{pl.perPerson} · PLN</p>
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
-    <p>{pl.flightOnly}</p><FlightFacts deal={deal}/><p>{pl.cached}</p>
+    <p>{pl.flightOnly}</p><PriceAssessment deal={deal}/><FlightFacts deal={deal}/>
     <p><a className="button button-secondary" href="#calculator">Policz budżet całej podróży</a></p>
-    <p>{pl.checked}: <time dateTime={deal.last_verified_at}>{dateTime(deal.last_verified_at)}</time></p>
+
     </section><section className="booking-card" aria-label="Przejście do partnera"><span className="badge">{pl.partners}</span>
     {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln}/>{c.component_type==="FLIGHT" && <span className="flight-price-basis">{flightPriceBasis(deal)}</span>}</p><Outbound component={c} dealSlug={deal.slug}/></section>) : <p>{pl.noLink}</p>}
     <p className="muted">{pl.disclosure}</p></section></div>
     <TripAccommodation key={deal.slug} deal={deal}/>
-    <section className="rationale" id="score"><div className="section-heading"><h2>Skąd {deal.deal_score}/100?</h2><span className="score-badge">Ocena oferty</span></div>
+    <section className="rationale" id="score"><div className="section-heading"><h2>Cena na tle historii</h2><span className="score-badge">Ocena oferty cenowej: {deal.deal_score}/100</span></div>
     <ScoreDetails deal={deal}/></section>
     <DestinationActivities slug={deal.destination_slug}/>
     <DestinationGuides slug={deal.destination_slug}/>
