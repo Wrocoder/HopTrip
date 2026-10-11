@@ -7,7 +7,7 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
  for(const [name,path] of [["home","/"],["catalog","/deals"],["deal","/deals/browser-deal"],["article","/info/price-comparison"],["empty","/deals?budget=1"]]) {
   await page.goto(path);
   await expect(page.locator("main[role='status']")).toHaveCount(0);
-  await expect(page.locator("main")).toBeVisible();
+  await expect(page.getByRole("main")).toBeVisible();
   await page.evaluate(()=>document.fonts.ready);
   expect(await page.evaluate(()=>Array.from(document.fonts).filter(font=>font.status==="loaded").length)).toBeGreaterThanOrEqual(2);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
