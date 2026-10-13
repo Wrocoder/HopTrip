@@ -1,5 +1,5 @@
-import {PriceAssessment} from "./price-assessment";
-import {FlightFacts} from "./flight-facts";
+import {TripDetails} from "./trip-details";
+import {CountryFlag} from "./country-flag";
 import {flightPriceBasis} from "../../lib/flight-facts";
 import {cityLabel,originLabel} from "../../lib/cities";
 import Link from "next/link";
@@ -16,16 +16,14 @@ export function DealCard({deal}:{deal:Deal}) {
     </div>
     <Link className="deal-card-link" href={`/deals/${deal.slug}`}>
     <p className="deal-origin">{originLabel(deal.origin_city,deal.origin_code)} ({deal.origin_code}) <span aria-hidden="true">→</span></p>
-    <h2>{cityLabel(deal.destination_city,deal.destination_slug)}</h2>
+    <h2>{cityLabel(deal.destination_city,deal.destination_slug)}<CountryFlag code={deal.destination_country_code}/></h2>
     <p className="deal-dates">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>
     {tripNights(deal) && <p className="deal-note">{tripNights(deal)}</p>}
     <div className="deal-card-bottom">
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
-    <PriceAssessment deal={deal}/>
-    <p className="deal-note">{pl.flightOnly}</p>
-    <FlightFacts deal={deal}/>
     </Link>
+    <TripDetails deal={deal}/>
     <ScoreTrigger score={deal.deal_score} slug={deal.slug} destination={cityLabel(deal.destination_city,deal.destination_slug)} provisional={deal.score_explanation?.status === "PROVISIONAL"}><ScoreDetails deal={deal}/></ScoreTrigger>
   </article>;
 }

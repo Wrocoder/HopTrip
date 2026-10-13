@@ -18,6 +18,7 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result.origin_city = origin.city if origin else ""
     result.destination_city = destination.city if destination else ""
     result.destination_slug = destination.slug if destination else ""
+    result.destination_country_code = destination.country_code if destination else ""
     for component in db.scalars(select(DealComponent).where(DealComponent.deal_id == deal.id)):
         policy = component_policy(db, component)
         result.components.append(

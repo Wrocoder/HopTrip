@@ -4,10 +4,19 @@ test("unknown flight details remain explicit before the partner click",async({pa
   await page.goto("/deals");
   await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
   const card=page.locator(".deal-card").first();
+  const flag=card.locator("h2 .country-flag");
+  await expect(flag).toHaveAttribute("title","Hiszpania");
+  await expect(flag).toBeVisible();
+  await expect.poll(()=>flag.evaluate((image:HTMLImageElement)=>image.naturalWidth)).toBeGreaterThan(0);
+  await expect(card.locator(".flight-facts")).not.toBeVisible();
+  await card.locator(".trip-details > summary").click();
+  await expect(card.locator(".flight-facts")).toBeVisible();
   await expect(card.locator(".deal-price")).toContainText("za osobę · w jedną stronę");
   await expect(card.locator(".flight-facts")).toContainText("Lotnisko wylotu: WRO");
   await expect(card.locator(".flight-facts")).toContainText("Godziny do sprawdzenia u partnera");
   await card.locator(".deal-card-link").click();
+  await expect(page.locator("h1 .country-flag")).toHaveAttribute("title","Hiszpania");
+  await page.locator(".detail-summary .trip-details > summary").click();
   await expect(page.locator(".detail-summary .flight-facts")).toContainText("Bagaż do sprawdzenia u partnera");
   await expect(page.locator(".detail-summary .flight-facts")).toContainText("Przewoźnik do sprawdzenia u partnera");
   await expect(page.locator(".booking-price")).toContainText("za osobę · w jedną stronę");
@@ -17,6 +26,7 @@ test("round trip facts agree between card and detail without mobile overflow",as
   await page.goto("/deals");
   await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
   const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"]')});
+  await card.locator(".trip-details > summary").click();
   await expect(card.locator(".deal-price")).toContainText("za osobę · w obie strony");
   await expect(card.locator(".flight-facts")).toContainText("Wylot: Bez przesiadek · Powrót: Liczba przesiadek: 1");
   await expect(card.locator(".flight-facts")).toContainText("IATA): FR");
@@ -24,6 +34,7 @@ test("round trip facts agree between card and detail without mobile overflow",as
   await card.screenshot({path:testInfo.outputPath("flight-card.png")});
   await card.locator(".deal-card-link").click();
   const facts=page.locator(".detail-summary .flight-facts");
+  await page.locator(".detail-summary .trip-details > summary").click();
   await expect(facts).toContainText("Lotnisko docelowe: BCN");
   await expect(facts).toContainText("Godziny w UTC");
   await expect(facts).toContainText("Przyloty obliczone");

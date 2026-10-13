@@ -392,3 +392,14 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .deal-card > .score-trigger { align-self: flex-start; background: transparent; font-weight: 400; padding-inline: 0; }
 .deal-card-link { flex: initial; }
 .deal-card .deal-card-bottom { margin-top: 0; }
+.deal-grid { align-items: start; }
+.trip-details { margin-top: 16px; border-top: 1px solid var(--border); }
+.trip-details > summary { min-height: 48px; padding-block: 12px; cursor: pointer; color: var(--ink); font-weight: 600; font-size: 15px; }
+.trip-details > summary::marker { color: var(--secondary); }
+.trip-details > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.trip-details > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+.trip-details-content { padding-block: 12px 8px; overflow-wrap: anywhere; }
+.trip-details-content section + section { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+.trip-details-content h3 { margin: 0 0 12px; font-size: 16px; }
+.trip-details-content .price-assessment { margin-top: 0; }
+.country-flag { display: inline-block; width: 24px; height: 18px; margin-left: 10px; vertical-align: middle; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.12); object-fit: cover; }

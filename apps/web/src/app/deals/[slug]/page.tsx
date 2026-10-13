@@ -1,5 +1,5 @@
-import {PriceAssessment} from "../../components/price-assessment";
-import {FlightFacts} from "../../components/flight-facts";
+import {TripDetails} from "../../components/trip-details";
+import {CountryFlag} from "../../components/country-flag";
 import {flightPriceBasis} from "../../../lib/flight-facts";
 import {cityLabel,originLabel} from "../../../lib/cities";
 import {notFound} from "next/navigation";
@@ -31,11 +31,11 @@ export default async function DealPage({params}:Props) {
   if (!deal) notFound();
   return <main className="page-shell"><Link className="back-link" href="/deals">← {pl.deals}</Link><article className="offer-detail">
     <DealViewTracker dealSlug={deal.slug}/>
-    <header className="page-heading"><p className="eyebrow">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</p><h1>{originLabel(deal.origin_city,deal.origin_code)} ({deal.origin_code}) → {cityLabel(deal.destination_city,deal.destination_slug)}</h1>
+    <header className="page-heading"><p className="eyebrow">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</p><h1>{originLabel(deal.origin_city,deal.origin_code)} ({deal.origin_code}) → {cityLabel(deal.destination_city,deal.destination_slug)}<CountryFlag code={deal.destination_country_code}/></h1>
     <p className="lead">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>{tripNights(deal) && <p>{tripNights(deal)}</p>}</header>
     <div className="detail-layout"><section className="featured-card detail-summary" aria-label="Cena lotu"><p className="eyebrow">{pl.perPerson} · PLN</p>
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
-    <p>{pl.flightOnly}</p><PriceAssessment deal={deal}/><FlightFacts deal={deal}/>
+    <TripDetails deal={deal}/>
     <p><a className="button button-secondary" href="#calculator">Policz budżet całej podróży</a></p>
 
     </section><section className="booking-card" aria-label="Przejście do partnera"><span className="badge">{pl.partners}</span>
