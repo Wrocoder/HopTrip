@@ -5,7 +5,7 @@ import type {Destination} from "../../lib/api";
 import {destinationLabel,destinationSuggestions,matchingDestinations} from "../../lib/destinations";
 import {pl} from "../../lib/pl";
 
-export function DestinationSelect({destinations,value=""}:{destinations:Destination[];value?:string}) {
+export function DestinationSelect({destinations,value="",errorId}:{destinations:Destination[];value?:string;errorId?:string}) {
   const id=useId();
   const input=useRef<HTMLInputElement>(null);
   const [text,setText]=useState(()=>{
@@ -27,7 +27,8 @@ export function DestinationSelect({destinations,value=""}:{destinations:Destinat
       placeholder="Mediolan lub MIL" autoComplete="off" role="combobox"
       aria-autocomplete="list" aria-expanded={expanded} aria-controls={`${id}-options`}
       aria-activedescendant={expanded && active>=0 ? `${id}-option-${active}` : undefined}
-      aria-describedby={`${id}-hint`}
+      aria-invalid={Boolean(errorId)}
+      aria-describedby={`${id}-hint${errorId ? ` ${errorId}` : ""}`}
       onFocus={()=>{setOpen(true);setActive(-1);}}
       onBlur={()=>{if(selectedSlug){setOpen(false);return;}const matches=matchingDestinations(destinations,text);if(matches.length===1)choose(matches[0]);else setOpen(false);}}
       onChange={event=>{setSelectedSlug("");setText(event.target.value);setOpen(true);setActive(-1);event.target.setCustomValidity("");}}

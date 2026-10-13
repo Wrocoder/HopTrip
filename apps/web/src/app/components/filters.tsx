@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
-import {useState} from "react";
+import {useId,useState} from "react";
 import {Airport,Destination,Filters} from "../../lib/api";
 import {matchingAirports,airportLabel} from "../../lib/airports";
 import {pl,date,money} from "../../lib/pl";
@@ -21,6 +21,9 @@ const advancedKeys=["departure_from","departure_to","duration_min","duration_max
 export function FilterForm({filters,airports=[],destinations=[],hero=false}:{filters:Filters;airports?:Airport[];destinations?:Destination[];hero?:boolean}) {
   const router=useRouter();
   const [validation,setValidation]=useState("");
+  const [invalidField,setInvalidField]=useState("");
+  const errorId=useId();
+  const fieldError=(name:string)=>validation && invalidField===name ? errorId : undefined;
   const active=filterKeys.filter(key=>key==="weekend" ? presetActive(filters,"weekend") : !!filters[key]);
   const advancedCount=advancedKeys.filter(key=>!!filters[key]).length;
   function submit(form:HTMLFormElement,preset?:TripPreset) {
@@ -34,6 +37,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     if(sort!=="score" || filters.sort)query.set("sort",sort);
     function invalid(name:string,message:string) {
       setValidation(message);
+      setInvalidField(name);
       const field=form.elements.namedItem(name) as HTMLInputElement;
       const details=field.closest("details");if(details)details.open=true;
       field.focus();
@@ -84,15 +88,15 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     for(const key of active) if(key!==removed) query.set(key,filters[key]!);
     return query.size ? `/deals?${query}` : "/deals";
   }
-  const dateFields=(["departure_from","departure_to"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="date" defaultValue={filters[k]}/></label>);
+  const dateFields=(["departure_from","departure_to"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="date" defaultValue={filters[k]} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>);
   return <section className={`filter-panel${hero ? " hero-search" : ""}`} aria-label="Wybór ofert">
    <form className="filters" action="/deals" method="get" aria-label="Filtry ofert" onSubmit={event=>{event.preventDefault();submit(event.currentTarget);}}
     onChange={()=>setValidation("")}
     onInvalidCapture={event=>{const details=(event.target as HTMLInputElement).closest("details");if(details)details.open=true;}}>
     <input type="hidden" name="weekend" value={presetActive(filters,"weekend") ? "true" : ""}/>
     <div className="filter-primary">
-    <AirportSelect airports={airports} value={filters.origin}/>
-    <DestinationSelect destinations={destinations} value={filters.destination}/>
+    <AirportSelect airports={airports} value={filters.origin} errorId={fieldError("origin")}/>
+    <DestinationSelect destinations={destinations} value={filters.destination} errorId={fieldError("destination")}/>
     <label>{pl.budget}<input name="budget" type="number" min="0" max="1000000" step="0.01" defaultValue={filters.budget}/></label>
 
     <button type="submit">{hero ? "Szukaj lotów" : pl.filter}</button>
@@ -111,7 +115,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
      {hero && <p className="field-hint">Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy. Długość pobytu podaj osobno w nocach.</p>}
      <div className="filter-secondary">
     {dateFields}
-    {(["duration_min","duration_max"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="number" min="0" max="365" defaultValue={filters[k]}/></label>)}
+    {(["duration_min","duration_max"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="number" min="0" max="365" defaultValue={filters[k]} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>)}
      </div>
     </details>
     {!hero && <label className="sort-control">Sortuj oferty
@@ -125,7 +129,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
         <option value="departure">Wylot — najbliższy</option>
       </select>
     </label>}
-    {validation && <p className="notice" role="alert">{validation}</p>}
+    {validation && <p id={errorId} className="notice" role="alert">{validation}</p>}
 
    </form>
    {!hero && active.length>0 && <div className="active-filters"><p>Zastosowane filtry</p>

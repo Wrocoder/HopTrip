@@ -52,7 +52,7 @@ test("expired or inaccessible consent storage fails closed",async({page})=>{
 
 test("managed partner pages do not load Drive even with marketing consent",async({page})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:true,at:Date.now()})));
- for(const path of ["/deals/browser-deal","/info/barcelona-airports"]) {
+ for(const path of ["/deals/browser-deal","/info/barcelona-airports","/trip?plan=broken","/saved"]) {
   await page.goto(path);
   await expect(page.locator('script[src*="emrld.ltd"]')).toHaveCount(0);
  }

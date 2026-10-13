@@ -21,6 +21,7 @@ type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props) {
   const {slug}=await params;
   const deal=await getDeal(slug);
+  if(!deal)notFound();
   return socialMetadata({title:deal ? `${originLabel(deal.origin_city,deal.origin_code)} → ${cityLabel(deal.destination_city,deal.destination_slug)} | HopTrip` : pl.notFound,
     description:deal ? `${originLabel(deal.origin_city,deal.origin_code)} → ${cityLabel(deal.destination_city,deal.destination_slug)}. ${date(deal.trip_start)}${deal.trip_type==="ROUND_TRIP" ? ` – ${date(deal.trip_end)}` : ""}. ${deal.trip_type==="ROUND_TRIP" ? pl.roundTrip : pl.oneWay}. Sprawdź cenę lotu i zaplanuj budżet podróży.` : pl.notFound,
     path:`/deals/${encodeURIComponent(slug)}`,image:`/preview/deal/${encodeURIComponent(slug)}`});
@@ -43,9 +44,9 @@ export default async function DealPage({params}:Props) {
     <TripAccommodation key={deal.slug} deal={deal}/>
     <section className="rationale" id="score"><div className="section-heading"><h2>Cena na tle historii</h2><span className="score-badge">Ocena oferty cenowej: {deal.deal_score}/100</span></div>
     <ScoreDetails deal={deal}/></section>
-    <DestinationActivities slug={deal.destination_slug}/>
+    <DestinationActivities slug={deal.destination_slug} inTrip/>
     <DestinationGuides slug={deal.destination_slug}/>
-    <TripBudgetCalculator key={deal.slug} destinationSlug={deal.destination_slug} initialInput={budgetForTrip(deal)} note={deal.trip_type==="ONE_WAY"
+    <TripBudgetCalculator key={deal.slug} tripId={deal.slug} shareOffer={{slug:deal.slug,origin:originLabel(deal.origin_city,deal.origin_code),destination:cityLabel(deal.destination_city,deal.destination_slug),start:deal.trip_start,end:deal.trip_type==="ROUND_TRIP" ? deal.trip_end : "",price:deal.flight_price_pln ?? "",observedAt:deal.last_verified_at ?? ""}} start={deal.trip_start} end={deal.trip_type==="ROUND_TRIP" ? deal.trip_end : ""} destinationSlug={deal.destination_slug} initialInput={budgetForTrip(deal)} note={deal.trip_type==="ONE_WAY"
       ? "To lot w jedną stronę. Uzupełnij koszt powrotu, jeśli go planujesz. Liczba nocy i dni to wartości przykładowe — dopasuj je do swojego pobytu."
       : "Cena lotu pochodzi z tej oferty, a liczba nocy i dni z dat podróży. Sprawdź ceny u sprzedawcy i dopasuj liczbę osób oraz pozostałe koszty."}/>
   </article></main>;

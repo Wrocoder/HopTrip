@@ -13,7 +13,7 @@ const headingFont=localFont({src:"./fonts/Fraunces.woff2",variable:"--font-headi
 const driveEnabled=process.env.NEXT_PUBLIC_SITE_URL==="https://hoptrip.pl";
 export const metadata:Metadata = {
   metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title:pl.title,description:pl.description,alternates:{canonical:"/"},
+  title:pl.title,description:pl.description,
   openGraph:{title:pl.title,description:pl.description,url:"/",locale:"pl_PL",type:"website",images:[{url:"/preview/site/home",width:1200,height:630,alt:pl.title}]},
   twitter:{card:"summary_large_image",title:pl.title,description:pl.description,images:["/preview/site/home"]},
 };
@@ -26,6 +26,8 @@ export default function RootLayout({children}:Readonly<{children:React.ReactNode
     <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{pl.disclosure}</p></div><nav className="footer-nav" aria-label="Informacje o serwisie">
+      <Link href="/saved">Zapisane wyjazdy</Link>
+      <Link href="/alerts">Subskrypcja lotów</Link>
       {(["about","contact","privacy","terms","partners"] as const).map(key=>
         ["contact","privacy","terms"].includes(key) ? <a key={key} href={`/info/${key}`}>{pl[key]}</a> :
         <Link key={key} href={`/info/${key}`}>{pl[key]}</Link>)}

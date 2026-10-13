@@ -1,4 +1,19 @@
 import {test,expect} from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+
+test("known flight schedule is labelled UTC and stay dates remain editable",async({page})=>{
+ await page.goto("/deals/browser-13");
+ await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
+ const schedule=page.locator("#stay-schedule");
+ await expect(schedule).toContainText(/Zapisany przylot: .* UTC/);
+ await expect(schedule).toContainText(/Zapisany wylot powrotny: .* UTC/);
+ await expect(schedule).toContainText("nie w czasie lokalnym hotelu");
+ await page.locator("#stay-checkin").fill("2027-01-16");
+ await page.locator("#stay-checkout").fill("2027-01-18");
+ const href=await page.getByRole("link",{name:/przez Stay22/}).getAttribute("href");
+ expect(new URL(href!).searchParams.get("checkin")).toBe("2027-01-16");
+ expect(new URL(href!).searchParams.get("checkout")).toBe("2027-01-18");
+});
 
 test("Stay22 lets travellers edit their stay before an attributed outbound click",async({page,context})=>{
  await page.goto("/deals/browser-deal");
@@ -25,5 +40,35 @@ test("Stay22 lets travellers edit their stay before an attributed outbound click
  const destination=await opened;
  await expect(destination.getByRole("heading")).toHaveText("Stay22 test destination");
  await destination.close();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
+});
+
+test("stay summary, accessible errors and manual budget cost survive the journey",async({page},testInfo)=>{
+ await page.goto("/deals/browser-deal");
+ await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
+ const stay=page.locator('section[aria-labelledby="accommodation-title"]');
+ await expect(stay).toContainText("Nie znamy godziny przylotu");
+ await page.locator("#stay-checkin").fill("2027-01-15");
+ await page.locator("#stay-checkout").fill("2027-01-17");
+ await page.locator("#stay-adults").fill("0");
+ await expect(page.locator("#stay-adults")).toHaveAttribute("aria-invalid","true");
+ await expect(stay.getByRole("link",{name:/przez Stay22/})).toHaveCount(0);
+ await page.locator("#stay-adults").fill("2");
+ await expect(page.locator("#stay-summary")).toContainText("2 noce · dorośli: 2");
+ await expect(page.locator("#stay-summary")).toContainText("Barcelona");
+ expect((await new AxeBuilder({page}).include('section[aria-labelledby="accommodation-title"]').analyze()).violations).toEqual([]);
+ await stay.screenshot({path:testInfo.outputPath("stay.png")});
+ await stay.getByRole("link",{name:"Dodaj koszt noclegu do budżetu podróży"}).click();
+ await expect(page.locator("#budget-hotel-basis")).toBeFocused();
+ await page.locator("#budget-hotel-basis").selectOption("stay");
+ await page.locator("#budget-hotel_total").fill("900");
+ await page.locator("#budget-people").fill("2");
+ await page.locator("#budget-start").fill("2027-01-15");
+ await page.locator("#budget-end").fill("2027-01-17");
+ await expect(page.locator("#budget-nights")).toHaveValue("2");
+ await page.reload();
+ await expect(page.locator("#budget-hotel-basis")).toHaveValue("stay");
+ await expect(page.locator("#budget-hotel_total")).toHaveValue("900");
+ await expect(page.locator("#budget-people")).toHaveValue("2");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
 });

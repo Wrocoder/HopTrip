@@ -34,6 +34,16 @@ services:
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development
+      ALERTS_ENABLED: ${ALERTS_ENABLED:-false}
+      ALERTS_SITE_URL: ${ALERTS_SITE_URL:-http://localhost:3000}
+      ALERTS_SIGNING_KEY: ${ALERTS_SIGNING_KEY:-}
+      ALERTS_DAILY_SIGNUP_LIMIT: ${ALERTS_DAILY_SIGNUP_LIMIT:-200}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_SECURITY: ${SMTP_SECURITY:-ssl}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_SENDER: ${SMTP_SENDER:-}
       PUBLIC_RATE_LIMIT: ${PUBLIC_RATE_LIMIT:-120}
       PROVIDER_MAX_PAGES: ${PROVIDER_MAX_PAGES:-5}
       ANALYTICS_RETENTION_DAYS: ${ANALYTICS_RETENTION_DAYS:-90}
@@ -86,6 +96,33 @@ services:
       migrate:
         condition: service_completed_successfully
     command: ["python", "-m", "app.jobs.scheduler"]
+
+  alerts-worker:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    profiles: ["alerts"]
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
+      ADMIN_TOKEN: change-me-in-development
+      ALERTS_ENABLED: ${ALERTS_ENABLED:-false}
+      ALERTS_DIGEST_ENABLED: ${ALERTS_DIGEST_ENABLED:-false}
+      ALERTS_DIGEST_HOUR: ${ALERTS_DIGEST_HOUR:-9}
+      ALERTS_DIGEST_MINUTE: ${ALERTS_DIGEST_MINUTE:-0}
+      ALERTS_DIGEST_WEEKDAY: ${ALERTS_DIGEST_WEEKDAY:-0}
+      ALERTS_SITE_URL: ${ALERTS_SITE_URL:-http://localhost:3000}
+      ALERTS_SIGNING_KEY: ${ALERTS_SIGNING_KEY:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_SECURITY: ${SMTP_SECURITY:-ssl}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_SENDER: ${SMTP_SENDER:-}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    command: ["python", "-m", "app.jobs.alert_scheduler"]
 
   web:
     build:

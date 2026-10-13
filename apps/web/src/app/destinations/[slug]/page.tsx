@@ -15,6 +15,7 @@ async function load(params:Props["params"]) {
 }
 export async function generateMetadata({params}:Props) {
   const {value,record}=await load(params);
+  if(!record)notFound();
   const path=`/destinations/${encodeURIComponent(value)}`,page=catalogPage(path);
   return socialMetadata({title:record ? page?.title ?? `${destinationLabel(record)} — loty z Polski | HopTrip` : pl.notFound,
     description:page?.description ?? pl.routeIntro,path,image:`/preview/destination/${encodeURIComponent(value)}`,index:Boolean(record && page)});

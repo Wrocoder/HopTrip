@@ -7,6 +7,7 @@ test("budget calculates shared costs, validates input and resets accessibly",asy
  await page.goto("/info/trip-budget#calculator");
  const calculator=page.getByRole("region",{name:"Kalkulator budżetu podróży"});
  await expect(calculator.getByRole("status")).toContainText("Budżet niepełny");
+ await calculator.getByText("Dodatkowe koszty: bagaż, transport miejski, atrakcje i rezerwa",{exact:true}).click();
  for(const [id,value] of Object.entries({flight:"300",baggage:"50",hotel:"200",transfers:"100",local_transport:"0",food:"40",activities:"30",other:"100"}))
   await page.locator(`#budget-${id}`).fill(value);
  await expect(page.getByTestId("budget-total")).toHaveText(/1\s*600,00\s*zł/);
@@ -22,6 +23,82 @@ test("budget calculates shared costs, validates input and resets accessibly",asy
  await page.getByRole("button",{name:"Wyczyść kalkulator"}).click();
  await expect(page.locator("#budget-flight")).toHaveValue("");
  await expect(calculator.getByRole("status")).toContainText("Budżet niepełny");
+});
+
+test("draft survives reload, stays separate per offer and reset persists",async({page})=>{
+ await page.goto("/deals/browser-deal#calculator");
+ await page.locator("#budget-hotel").fill("210,50");
+ await page.locator("#budget-people").fill("3");
+ await page.reload();
+ await expect(page.locator("#budget-hotel")).toHaveValue("210,50");
+ await expect(page.locator("#budget-people")).toHaveValue("3");
+ await expect(page.getByTestId("budget-review")).toBeVisible();
+ await page.goto("/deals/browser-2#calculator");
+ await expect(page.locator("#budget-hotel")).toHaveValue("");
+ await page.locator("#budget-hotel").fill("99");
+ await page.goto("/info/trip-budget#calculator");
+ await expect(page.locator("#budget-hotel")).toHaveValue("");
+ await page.goto("/deals/browser-deal#calculator");
+ await expect(page.locator("#budget-hotel")).toHaveValue("210,50");
+ await page.getByRole("button",{name:"Wyczyść kalkulator"}).click();
+ await page.reload();
+ await expect(page.locator("#budget-hotel")).toHaveValue("");
+ await expect(page.locator("#budget-flight")).toHaveValue("");
+ await expect(page.getByTestId("budget-review")).toHaveCount(0);
+ await page.goto("/deals/browser-2#calculator");
+ await expect(page.locator("#budget-hotel")).toHaveValue("99");
+});
+
+test("date and party edits flag prices and keep whole-stay costs unchanged",async({page},testInfo)=>{
+ await page.goto("/info/trip-budget#calculator");
+ await page.locator("#budget-hotel-basis").selectOption("stay");
+ await page.locator("#budget-hotel_total").fill("900,01");
+ await page.locator("#budget-start").fill("2027-01-15");
+ await expect(page.getByTestId("budget-total")).toHaveCount(0);
+ await page.locator("#budget-end").fill("2027-01-17");
+ await expect(page.locator("#budget-nights")).toHaveValue("2");
+ await expect(page.locator("#budget-days")).toHaveValue("3");
+ await page.locator("#budget-people").fill("3");
+ await expect(page.getByTestId("budget-total")).toHaveText(/900,01/);
+ await expect(page.getByTestId("budget-person")).toHaveText(/300,00/);
+ await expect(page.getByTestId("budget-review")).toBeVisible();
+ await page.getByRole("button",{name:"Kwoty sprawdzone dla tego planu"}).click();
+ await page.reload();
+ await expect(page.locator("#budget-end")).toHaveValue("2027-01-17");
+ await expect(page.locator("#budget-hotel_total")).toHaveValue("900,01");
+ await expect(page.getByTestId("budget-review")).toHaveCount(0);
+ await page.locator("#budget-end").fill("2027-01-14");
+ await expect(page.getByTestId("budget-total")).toHaveCount(0);
+ await page.locator("#budget-end").fill("2027-01-18");
+ await expect(page.locator("#budget-nights")).toHaveValue("3");
+ await expect(page.getByTestId("budget-review")).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.locator("#calculator").screenshot({path:testInfo.outputPath("budget-draft.png")});
+});
+
+test("unavailable or corrupt storage never prevents calculation",async({page})=>{
+ await page.addInitScript(()=>Object.defineProperty(window,"localStorage",{get(){throw new Error("storage blocked");}}));
+ await page.goto("/info/trip-budget#calculator");
+ await page.locator("#budget-flight").fill("100");
+ await expect(page.getByTestId("budget-total")).toHaveText(/200,00/);
+ await expect(page.locator("#calculator")).toContainText("Nie udało się zapisać zmian");
+});
+
+test("invalid draft and changed offer metadata are handled explicitly",async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem("hoptrip.budget.v1:standalone","{broken"));
+ await page.goto("/info/trip-budget#calculator");
+ await expect(page.locator("#calculator")).toContainText("Nie udało się odczytać szkicu");
+ await page.goto("/deals/browser-deal#calculator");
+ await page.locator("#budget-flight").fill("321");
+ await page.evaluate(()=>{
+  const key="hoptrip.budget.v1:deal:browser-deal";
+  const draft=JSON.parse(localStorage.getItem(key)!);
+  draft.context="older offer dates or price";
+  localStorage.setItem(key,JSON.stringify(draft));
+ });
+ await page.reload();
+ await expect(page.locator("#budget-flight")).toHaveValue("321");
+ await expect(page.getByTestId("budget-review")).toBeVisible();
 });
 
 test("flight links to the budget calculator",async({page})=>{

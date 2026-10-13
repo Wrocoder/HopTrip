@@ -93,6 +93,8 @@ test("catalog keeps distinct city-specific sources and verified affiliate destin
 });
 
 test("trip shows only local attractions without provider requests or changing flight price",async({page},testInfo)=>{
+  const hydrationErrors:string[]=[];
+  page.on("console",message=>{if(/hydrat/i.test(message.text()))hydrationErrors.push(message.text());});
   const externalRequests:string[]=[];
   page.on("request",request=>{
     if(/tiqets|ticketmaster/.test(request.url())) externalRequests.push(request.url());
@@ -102,7 +104,10 @@ test("trip shows only local attractions without provider requests or changing fl
   const panel=page.getByRole("region",{name:"Muzea i atrakcje"});
   await expect(panel.getByRole("heading",{name:"Casa Batlló — bilet Blue"})).toBeVisible();
   await expect(panel.getByRole("heading",{name:"Aquarium Barcelona — bilet wstępu"})).toBeVisible();
-  await expect(panel.getByRole("listitem")).toHaveCount(2);
+  await expect(panel.getByRole("listitem")).toHaveCount(3);
+  await expect(panel).toContainText("Około 1 godziny dla wariantu Blue");
+  await expect(panel).toContainText("1,5–2 godziny");
+  await expect(panel).toContainText("Samodzielna wizyta: bezpłatny wstęp");
   await expect(panel).not.toContainText("Duomo");
   await expect(panel).toContainText("Dostępność na daty Twojej podróży sprawdzisz u sprzedawcy");
   await expect(panel).toContainText("Wariant Blue nie obejmuje tarasu na dachu");
@@ -118,4 +123,34 @@ test("trip shows only local attractions without provider requests or changing fl
   await page.setViewportSize({width:320,height:800});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
   await panel.screenshot({path:testInfo.outputPath("activities.png")});
+  await panel.getByRole("link",{name:"Uwzględnij atrakcje w budżecie"}).click();
+  await expect(page.locator("#budget-activities")).toBeVisible();
+  await expect(page.locator("#budget-activities")).toBeFocused();
+  await page.locator("#budget-activities").fill("150");
+  await page.reload();
+  await page.getByRole("link",{name:"Uwzględnij atrakcje w budżecie"}).click();
+  await expect(page.locator("#budget-activities")).toHaveValue("150");
+  expect(hydrationErrors).toEqual([]);
+});
+
+test("free Barcelona visit records an official click without affiliate event",async({page,context})=>{
+ await context.route("https://museuciencies.cat/**",route=>route.fulfill({body:"Local museum fixture"}));
+ const events:{event_name:string;activity?:{activity_id:string;link_kind:string}}[]=[];
+ page.on("request",request=>{
+  if(request.url().endsWith("/analytics/events") && request.method()==="POST")events.push(request.postDataJSON());
+ });
+ await page.goto("/deals/browser-deal");
+ await page.getByRole("button",{name:"Ustawienia prywatności",exact:true}).click();
+ await page.getByRole("checkbox",{name:/Analityka HopTrip/}).check();
+ await page.getByRole("button",{name:"Zapisz wybór",exact:true}).click();
+ const popupPromise=page.waitForEvent("popup");
+ const response=page.waitForResponse(r=>r.url().endsWith("/analytics/events") && r.request().postDataJSON()?.event_name==="ACTIVITY_CLICK");
+ await page.getByRole("link",{name:/Sprawdź zasady wizyty: Hivernacle/}).click();
+ const popup=await popupPromise;
+ await popup.waitForLoadState();await popup.close();
+ expect((await response).status()).toBe(202);
+ expect(events.filter(e=>e.event_name==="ACTIVITY_CLICK").map(e=>e.activity)).toEqual([
+  expect.objectContaining({activity_id:"official-hivernacle",link_kind:"official"}),
+ ]);
+ expect(events.filter(e=>e.event_name==="PARTNER_CLICK")).toEqual([]);
 });

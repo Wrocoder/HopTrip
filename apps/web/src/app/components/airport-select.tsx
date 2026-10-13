@@ -5,7 +5,7 @@ import type {Airport} from "../../lib/api";
 import {airportLabel,airportSuggestions,matchingAirports} from "../../lib/airports";
 import {pl} from "../../lib/pl";
 
-export function AirportSelect({airports,value=""}:{airports:Airport[];value?:string}) {
+export function AirportSelect({airports,value="",errorId}:{airports:Airport[];value?:string;errorId?:string}) {
   const id=useId();
   const input=useRef<HTMLInputElement>(null);
   const [text,setText]=useState(()=>{
@@ -26,7 +26,8 @@ export function AirportSelect({airports,value=""}:{airports:Airport[];value?:str
       placeholder="Wrocław lub WRO" autoComplete="off" role="combobox"
       aria-autocomplete="list" aria-expanded={expanded} aria-controls={`${id}-options`}
       aria-activedescendant={expanded && active>=0 ? `${id}-option-${active}` : undefined}
-      aria-describedby={`${id}-hint`}
+      aria-invalid={Boolean(errorId)}
+      aria-describedby={`${id}-hint${errorId ? ` ${errorId}` : ""}`}
       onFocus={()=>{setOpen(true);setActive(-1);}}
       onBlur={()=>setOpen(false)}
       onChange={event=>{setText(event.target.value);setOpen(true);setActive(-1);event.target.setCustomValidity("");}}

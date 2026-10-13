@@ -61,6 +61,10 @@ export async function getDeal(slug:string):Promise<Deal|null> {
   catch(error) {if (error instanceof ApiError && error.status === 404) return null; throw error;}
 }
 export const getAirports = () => getJson<Airport[]>("/api/v1/airports");
+export const alertsEnabled = async () => {
+  try {return (await getJson<{enabled:boolean}>("/api/v1/alerts/status")).enabled;}
+  catch {return false;}
+};
 export const getDestinations = () => getJson<Destination[]>("/api/v1/destinations");
 export const getDepartureDeals = (code:string) => getDeals({origin:code});
 export const getDestinationDeals = (slug:string) => getDeals({destination:slug});

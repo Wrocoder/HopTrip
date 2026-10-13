@@ -53,6 +53,13 @@ services:
       PIPELINE_SCHEDULE_TIMEZONE: Europe/Warsaw
     restart: unless-stopped
 
+  alerts-worker:
+    environment:
+      APP_ENV: production
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?ADMIN_TOKEN is required}
+    restart: on-failure
+
   web:
     build:
       args:

@@ -28,6 +28,35 @@ from sqlalchemy.orm import sessionmaker
 pytestmark = pytest.mark.postgres
 
 
+def test_concurrent_digest_workers_send_one_message(pg_factory, monkeypatch):
+    from threading import Barrier
+
+    from app.models.alert import AlertDelivery
+    from app.services import alert_digests
+    from test_alert_digests import NOW, offer, settings, subscription
+
+    factory, _ = pg_factory
+    with factory() as db:
+        subscription(db)
+        offer(db)
+    messages = []
+    monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+    barrier = Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            return alert_digests.deliver_digests(db, settings(), NOW)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(run) for _ in range(2)]
+        results = [future.result(timeout=20) for future in futures]
+    assert sum(result['sent'] for result in results) == 1
+    assert len(messages) == 1
+    with factory() as db:
+        assert len(list(db.scalars(select(AlertDelivery)))) == 1
+
+
 @pytest.fixture
 def pg_factory():
     url = os.getenv("TEST_DATABASE_URL")

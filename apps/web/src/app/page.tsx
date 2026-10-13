@@ -6,6 +6,7 @@ import {pl} from "../lib/pl";
 import {DealGrid} from "./components/catalog";
 import {FilterForm} from "./components/filters";
 export const dynamic="force-dynamic";
+export const metadata={alternates:{canonical:"/"}};
 export default async function HomePage() {
   let deals:Deal[]=[], airports:Airport[]=[], destinations:Destination[]=[], failed=false;
   const [offers,origins,places]=await Promise.allSettled([getDeals({origin:"WRO",limit:"6"}),getAirports(),getDestinations()]);
