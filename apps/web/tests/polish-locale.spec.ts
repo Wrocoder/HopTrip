@@ -18,6 +18,9 @@ test("Polish city labels, landing links, dates and calculator remain consistent"
  await expect(page.getByRole("heading",{level:1})).toContainText("Wrocław (WRO) → Barcelona");
  await expect(page.getByRole("heading",{name:"Znajdź nocleg — Barcelona"})).toBeVisible();
  await page.locator('#budget-flight').fill("123,45");
+ // One-way offers have no return date: complete the optional stay before calculating.
+ await expect(page.getByTestId('budget-total')).toHaveCount(0);
+ await page.locator('#budget-end').fill(await page.locator('#budget-start').inputValue());
  await expect(page.getByTestId('budget-total')).toContainText(/123,45\s*zł/);
  await page.locator("#calculator").screenshot({path:testInfo.outputPath("polish-calculator.png")});
  await page.evaluate(()=>scrollTo(0,0));
