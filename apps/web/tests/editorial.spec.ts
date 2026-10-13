@@ -127,7 +127,7 @@ for(const [slug,title] of guides) {
   const response=await page.goto(`/info/${slug}`);
   expect(response?.status()).toBe(200);
   await expect(page.getByRole("heading",{level:1})).toHaveText(title);
-  await expect(page.locator("article time")).toHaveAttribute("datetime",content[slug].reviewedAt!);
+  await expect(page.locator("article.deal-detail > p > time")).toHaveAttribute("datetime",content[slug].reviewedAt!);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/info/${slug}`);
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content",title);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
