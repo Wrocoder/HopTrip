@@ -30,7 +30,7 @@ try {
  for(const loc of urls) {
   const url=new URL(loc), path=url.pathname;
   check(url.origin===canonical && !url.search && !url.hash,`${path}: incorrect sitemap URL`);
-   check(["/","/info","/deals","/from/WRO","/destinations/milan"].includes(path) || /^\/info\/[a-z-]+$/.test(path),`${path}: unexpected sitemap path`);
+   check(["/","/info","/deals","/from/WRO","/destinations/milan"].includes(path) || /^\/info\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path),`${path}: unexpected sitemap path`);
   paths.push(path);
   // Fetch only the server explicitly selected by the operator, never sitemap hosts.
   const response=await page.goto(`${base}${path}`);
