@@ -14,6 +14,7 @@ from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
 from app.models.conversion import AffiliateConversion
 from app.models.deal import Deal
+from app.models.location import Airport, Destination
 from app.schemas.analytics import (
     ActivityClickSummary,
     AnalyticsEventAccepted,
@@ -45,10 +46,20 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
             raise HTTPException(404, "Deal not found")
     # Keep bounded campaign context and separately validated activity fields only.
     metadata: dict[str, Any] = {
-        k: str(v)[:80] for k, v in payload.metadata.items() if k in {"campaign"}
+        k: str(v)[:80] for k, v in payload.metadata.items() if k == "campaign" and v in ("hoptrip-launch", "wro-weekend", "test")
     }
     if payload.activity:
         metadata["activity"] = payload.activity.model_dump()
+    if payload.search:
+        search = payload.search.model_dump(mode="json", exclude_none=True)
+        filters = search["filters"]
+        if "origin" in filters and not db.scalar(select(Airport.id).where(Airport.iata_code == filters["origin"])):
+            filters.pop("origin")
+        if "destination" in filters and not db.scalar(select(Destination.id).where(Destination.slug == filters["destination"])):
+            filters.pop("destination")
+        metadata["search"] = search
+    if payload.partner:
+        metadata["partner"] = payload.partner.model_dump()
     event = AnalyticsEvent(
         event_id=payload.event_id,
         event_name=payload.event_name,

@@ -3,6 +3,8 @@ from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
 from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
+from app.services.flight_facts import flight_facts
+from app.services.flight_reference import airport_timezone
 from app.services.score_explanation import explain_score
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -17,6 +19,7 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result.origin_city = origin.city if origin else ""
     result.destination_city = destination.city if destination else ""
     result.destination_slug = destination.slug if destination else ""
+    result.destination_country_code = destination.country_code if destination else ""
     for component in db.scalars(select(DealComponent).where(DealComponent.deal_id == deal.id)):
         policy = component_policy(db, component)
         result.components.append(
@@ -26,13 +29,19 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
                 price_pln=component.price_pln,
                 available=policy.available,
                 reason=policy.reason,
+                partner_name=policy.program.name if policy.program else None,
                 redirect_path=f"/go/{deal.slug}/{component.component_type.lower()}"
                 if policy.available
                 else None,
             )
         )
-        if component.travel_offer_id:
+        if component.component_type == "FLIGHT" and component.travel_offer_id:
             offer = db.get(TravelOffer, component.travel_offer_id)
+            if offer:
+                result.flight_facts = flight_facts(offer)
             if offer and offer.return_at:
                 result.trip_type = "ROUND_TRIP"
+    if origin and not result.flight_facts.origin_airport:
+        result.flight_facts.origin_airport = origin.iata_code
+        result.flight_facts.origin_timezone = airport_timezone(origin.iata_code)
     return result

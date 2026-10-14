@@ -10,6 +10,7 @@ import {destinationForGuide} from "../../../lib/guide-destinations";
 import {GuideFlights} from "../../components/guide-flights";
 import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
 import {DestinationActivities} from "../../components/destination-activities";
+import {AirportTransfer} from "../../components/airport-transfer";
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
@@ -61,11 +62,13 @@ export default async function InfoPage({params}:Props) {
  {page.draft && <p role="note">{pl.draft}</p>}{page.paragraphs.map(p=><p key={p}>{p}</p>)}
  {slug==="trip-budget" && <TripBudgetCalculator/>}
  {page.sections?.map(section=><section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map(p=><p key={p}>{p}</p>)}
+  {section.links && <ul>{section.links.map(link=><li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}</ul>}
   {section.sourceIds && <ul aria-label={`Źródła: ${section.title}`}>{section.sourceIds.map(id=>{
    const source=page.sources?.[id];
    return source ? <li key={source.href}><a href={source.href}>{source.label}</a></li> : null;
   })}</ul>}
  </section>)}
+ {!page.draft && !page.noindex && <AirportTransfer slug={slug}/>}
  {page.sources && <section aria-label="Aktualność informacji"><h2>Przed podróżą sprawdź aktualizacje</h2>
   <p>Informacje sprawdzono {page.reviewedAt}. Rozkłady, ceny, godziny otwarcia i zasady wstępu mogą się zmienić.
   Linki do oficjalnych źródeł znajdują się przy odpowiednich częściach poradnika. Sprawdź je dla daty swojej podróży.</p>

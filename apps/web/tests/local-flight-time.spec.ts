@@ -1,0 +1,30 @@
+import {test,expect} from "@playwright/test";
+
+test("audit midnight arrival is visible while seven hotel nights and manual money survive sharing",async({page},testInfo)=>{
+ await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+ await page.goto("/deals/htr01-fixture");
+ const home=page.locator(".detail-summary .home-arrival");
+ await expect(home).toBeVisible();
+ await expect(home).toContainText(/25\.10\.2026.*00:40/);
+ await expect(home).toContainText("+1 dzień");
+ await expect(home).toContainText("obliczony z czasu lotu");
+ await expect(page.locator(".detail-summary .trip-details")).not.toHaveAttribute("open","");
+ await expect(page.locator("#stay-checkout")).toHaveValue("2026-10-24");
+ await expect(page.locator("#budget-nights")).toHaveValue("7");
+ await expect(page.locator("#budget-days")).toHaveValue("8");
+ await page.locator("#budget-hotel").fill("200");
+ await page.locator("#budget-food").fill("50");
+ await page.reload();
+ await expect(page.locator("#budget-hotel")).toHaveValue("200");
+ await expect(page.locator("#budget-nights")).toHaveValue("7");
+ await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
+ await page.goto(await page.locator("#trip-share-link").inputValue());
+ await expect(page.locator(".home-arrival")).toContainText(/25\.10\.2026.*00:40/);
+ await expect(page.locator("#budget-nights")).toHaveValue("7");
+ await expect(page.locator("#budget-hotel")).toHaveValue("200");
+ await expect(page.locator("#budget-food")).toHaveValue("50");
+ await page.goto("/deals/htr01-fixture");
+ await expect(page.locator("#budget-hotel")).toHaveValue("200");
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.locator(".detail-layout").screenshot({path:testInfo.outputPath("local-return.png")});
+});

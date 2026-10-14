@@ -1,11 +1,10 @@
+import {PriceAssessment} from "./price-assessment";
 import Link from "next/link";
 import type {Deal, ScoreExplanation} from "../../lib/api";
-import {money} from "../../lib/pl";
+import {money,dateTime} from "../../lib/pl";
 
 const number = (value:string|number) => new Intl.NumberFormat("pl-PL", {maximumFractionDigits:2}).format(Number(value));
-const timestamp = (value:string) => new Intl.DateTimeFormat("pl-PL", {
-  dateStyle:"medium", timeStyle:"short", timeZone:"Europe/Warsaw",
-}).format(new Date(value));
+const timestamp = dateTime;
 
 const labels:Record<string,string> = {
   price:"Cena na tle historii", history:"Liczba obserwacji", freshness:"Świeżość danych",
@@ -43,10 +42,12 @@ export function ScoreDetails({deal}:{deal:Deal}) {
   const score=deal.score_explanation;
   const unavailable=!score || score.status === "UNAVAILABLE";
   return <div className="score-details">
+    <PriceAssessment deal={deal}/>
     <p>Oceniamy ofertę cenową na podstawie zapisanych danych. Wynik nie ocenia linii lotniczej, komfortu ani prawdopodobieństwa zakupu.</p>
     {unavailable ? <p className="score-caution">Dla tej starszej oceny nie zapisano pełnego, zgodnego zestawu składników. Nie możemy rzetelnie odtworzyć punktów. Wyjaśnienie pojawi się po ponownym przeliczeniu oferty.</p> : <>
       {score.status === "PROVISIONAL" && <p className="score-caution"><strong>Ocena wstępna — mało danych.</strong> Neutralne punkty za cenę są założeniem, a nie dowodem okazji.</p>}
       {score.status === "LEGACY" && <p className="score-caution">Poprzednia metoda obliczeń. Poniżej pokazujemy składniki tego zapisanego wyniku; nowa metoda pojawi się po przeliczeniu oferty.</p>}
+      <details className="score-method score-calculation"><summary>Jak obliczono {deal.deal_score}/100?</summary>
       <p className="score-sum"><strong>{score.parts.map(part=>number(part.points)).join(" + ")} = {number(score.total_before_rounding!)} pkt</strong><br/>
         Wynik po zaokrągleniu: <strong>{deal.deal_score}/100</strong>.</p>
       <div className="score-parts">{score.parts.map(part=><section className="score-part" key={part.key}>
@@ -55,6 +56,7 @@ export function ScoreDetails({deal}:{deal:Deal}) {
         <p>{reason(part.key,score)}</p>
       </section>)}</div>
       {score.calculated_at && <p className="muted">Obliczono: <time dateTime={score.calculated_at}>{timestamp(score.calculated_at)}</time> (czas w Polsce). Punkty opisują dane z tej chwili i są odświeżane przy kolejnym przeliczeniu.</p>}
+      </details>
     </>}
     <details className="score-method"><summary>Co porównujemy, a czego nie uwzględniamy?</summary>
       <p>Porównujemy zapisane obserwacje tego samego dostawcy dla lotniska wylotu, kierunku, miesiąca i roku wylotu oraz długości pobytu. Loty w jedną stronę mają osobną grupę. To próbka, a nie pełny rynek; może obejmować obecną cenę i różne taryfy.</p>

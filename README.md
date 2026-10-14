@@ -30,3 +30,7 @@ For an isolated production-like rehearsal with no external token:
 Web http://localhost:58080; temporary databases are separate from the normal project.
 
 Development setup: [local-development.md](docs/local-development.md).
+# Ветки и автодеплой
+
+Рабочая ветка — `main`. Карта отложенных функций, порядок публикации и отката:
+[docs/branches-and-deployment.md](docs/branches-and-deployment.md).

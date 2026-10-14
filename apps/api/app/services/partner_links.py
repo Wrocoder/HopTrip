@@ -2,7 +2,7 @@
 
 import asyncio
 from dataclasses import dataclass
-from urllib.parse import parse_qs, urlsplit
+from urllib.parse import parse_qs, parse_qsl, urlencode, urlsplit, urlunsplit
 
 import httpx
 from app.config import get_settings
@@ -24,9 +24,15 @@ def source_url(link: object) -> str:
     if any(ord(c) < 32 or c == "\\" for c in link):
         raise ValueError("Invalid source link")
     url = "https://www.aviasales.com" + link
-    if urlsplit(url).fragment:
+    parsed = urlsplit(url)
+    if parsed.fragment:
         raise ValueError("Invalid source fragment")
-    return url
+    # Verified on aviasales.com: display currency is independent of the cached
+    # ticket's expected_price_currency. Preserve ticket identity and all other data.
+    query = [(key, value) for key, value in parse_qsl(parsed.query, keep_blank_values=True)
+             if key.lower() != "currency"]
+    query.append(("currency", "pln"))
+    return urlunsplit(parsed._replace(query=urlencode(query)))
 
 
 def same_url(first: str, second: str) -> bool:

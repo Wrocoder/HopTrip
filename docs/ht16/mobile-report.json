@@ -1,0 +1,260 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/mobile-journey.spec.ts",
+      "--project=mobile",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mobile-journey.spec.ts",
+      "file": "mobile-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "complete journey at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 23480,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:44:18.980Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-360",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjIyNC4xOTk5OTk5ODgwNzkwNywiZG9tQ29udGVudExvYWRlZE1zIjo3NDQuNjk5OTk5OTg4MDc5MSwidHJhbnNmZXJCeXRlcyI6MTgxOTR9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-022797395f85f8f86f7f",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        },
+        {
+          "title": "complete journey at 390px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 25523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:44:42.909Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-390",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjI2My4zOTk5OTk5NzYxNTgxNCwiZG9tQ29udGVudExvYWRlZE1zIjo3MTQuMzk5OTk5OTc2MTU4MSwidHJhbnNmZXJCeXRlcyI6MTgyMTB9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-0985311bc493345c1472",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        },
+        {
+          "title": "complete journey at 768px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31153,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:45:08.481Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-768",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjIxOC4xOTk5OTk5ODgwNzkwNywiZG9tQ29udGVudExvYWRlZE1zIjo1ODUuMTk5OTk5OTg4MDc5MSwidHJhbnNmZXJCeXRlcyI6MTgyNDF9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-c1e92d9114bc860d6097",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        },
+        {
+          "title": "complete journey at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27818,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:45:39.677Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-1440",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjIxMS41OTk5OTk5NjQyMzcyLCJkb21Db250ZW50TG9hZGVkTXMiOjUxNi44MDAwMDAwMTE5MjA5LCJ0cmFuc2ZlckJ5dGVzIjoxODE4Nn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-e127a13ae442ca36911e",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T13:44:13.158Z",
+    "duration": 116638.397,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

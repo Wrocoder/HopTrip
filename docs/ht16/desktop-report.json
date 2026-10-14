@@ -1,0 +1,525 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/mobile-journey.spec.ts",
+      "tests/airport-search.spec.ts",
+      "tests/destination-search.spec.ts",
+      "tests/trip-filters.spec.ts",
+      "--project=desktop",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "airport-search.spec.ts",
+      "file": "airport-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "home airport suggestions support keyboard and preserve search filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3563,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:41:52.931Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "828546fcd3355198afee-fb7788be5c50a92a5504",
+          "file": "airport-search.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "city, alias and IATA URLs show the same offers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11881,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:41:56.978Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "828546fcd3355198afee-078a39e0e2e8e40547f5",
+          "file": "airport-search.spec.ts",
+          "line": 31,
+          "column": 5
+        },
+        {
+          "title": "editing a selected airport never submits a stale code",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3592,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:42:08.893Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "828546fcd3355198afee-856286d69b46ec57cad7",
+          "file": "airport-search.spec.ts",
+          "line": 42,
+          "column": 5
+        },
+        {
+          "title": "home validates dates and remains accessible on a narrow screen",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3417,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:42:12.516Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "828546fcd3355198afee-fc23c4dd5fd7541f5a5f",
+          "file": "airport-search.spec.ts",
+          "line": 60,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "destination-search.spec.ts",
+      "file": "destination-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "destination aliases and keyboard suggestions preserve filters and allow clearing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8378,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:42:16.115Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9d7f470488386a6521e0-6dad7bfa57646f76a3a4",
+          "file": "destination-search.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "mobile-journey.spec.ts",
+      "file": "mobile-journey.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "complete journey at 360px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13590,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:42:24.564Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-360",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjI1OC44OTk5OTk5NzYxNTgxNCwiZG9tQ29udGVudExvYWRlZE1zIjo3MTIuODk5OTk5OTc2MTU4MSwidHJhbnNmZXJCeXRlcyI6MTgxOTV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-57e4ccf6cfa87c19ff4a",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        },
+        {
+          "title": "complete journey at 390px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14331,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:42:38.175Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-390",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjI1MSwiZG9tQ29udGVudExvYWRlZE1zIjo3MzEuOTAwMDAwMDM1NzYyOCwidHJhbnNmZXJCeXRlcyI6MTgxODF9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-d55fc9aae4f9475088fa",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        },
+        {
+          "title": "complete journey at 768px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14813,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:42:52.530Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-768",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjI1Mi43MDAwMDAwNDc2ODM3MiwiZG9tQ29udGVudExvYWRlZE1zIjo2NzUuNSwidHJhbnNmZXJCeXRlcyI6MTgxOTN9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-51ccc459687ace27342d",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        },
+        {
+          "title": "complete journey at 1440px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17062,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:43:07.370Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "local-dev-navigation-1440",
+                      "contentType": "application/json",
+                      "body": "eyJ0dGZiTXMiOjI2NC44OTk5OTk5NzYxNTgxNCwiZG9tQ29udGVudExvYWRlZE1zIjo3MDkuNjk5OTk5OTg4MDc5MSwidHJhbnNmZXJCeXRlcyI6MTgxOTV9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c2804f5ba368c3a30221-bc56bf42287e729aadf3",
+          "file": "mobile-journey.spec.ts",
+          "line": 16,
+          "column": 44
+        }
+      ]
+    },
+    {
+      "title": "trip-filters.spec.ts",
+      "file": "trip-filters.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "trip presets combine, survive history and reload, validate dates and clear",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11513,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:43:24.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8cf56eb0ad145eb35e04-63b5b4f3279494892612",
+          "file": "trip-filters.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "home presets carry the entered departure date into results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2179,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-12T13:43:36.080Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8cf56eb0ad145eb35e04-1dae9cd3531b628f6dd4",
+          "file": "trip-filters.spec.ts",
+          "line": 49,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-12T13:41:46.642Z",
+    "duration": 114340.381,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

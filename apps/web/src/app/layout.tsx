@@ -13,8 +13,9 @@ const headingFont=localFont({src:"./fonts/Fraunces.woff2",variable:"--font-headi
 const driveEnabled=process.env.NEXT_PUBLIC_SITE_URL==="https://hoptrip.pl";
 export const metadata:Metadata = {
   metadataBase:new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title:pl.title,description:pl.description,alternates:{canonical:"/"},
-  openGraph:{title:pl.title,description:pl.description,locale:"pl_PL",type:"website"},
+  title:pl.title,description:pl.description,
+  openGraph:{title:pl.title,description:pl.description,url:"/",locale:"pl_PL",type:"website",images:[{url:"/preview/site/home",width:1200,height:630,alt:pl.title}]},
+  twitter:{card:"summary_large_image",title:pl.title,description:pl.description,images:["/preview/site/home"]},
 };
 export default function RootLayout({children}:Readonly<{children:React.ReactNode}>) {
   return <html lang="pl" data-scroll-behavior="smooth" className={`${bodyFont.variable} ${headingFont.variable}`}>
@@ -22,8 +23,11 @@ export default function RootLayout({children}:Readonly<{children:React.ReactNode
     <a className="skip-link" href="#content">Przejdź do treści</a>
     <header className="page-shell site-header"><Link className="brand" href="/" aria-label="HopTrip — strona główna"><span className="brand-mark" aria-hidden="true">↗</span>HopTrip<span className="brand-dot" aria-hidden="true">.</span></Link>
     <SiteNav/></header>
+    <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{pl.disclosure}</p></div><nav className="footer-nav" aria-label="Informacje o serwisie">
+      <Link href="/saved">Zapisane wyjazdy</Link>
+      <Link href="/alerts">Subskrypcja lotów</Link>
       {(["about","contact","privacy","terms","partners"] as const).map(key=>
         ["contact","privacy","terms"].includes(key) ? <a key={key} href={`/info/${key}`}>{pl[key]}</a> :
         <Link key={key} href={`/info/${key}`}>{pl[key]}</Link>)}

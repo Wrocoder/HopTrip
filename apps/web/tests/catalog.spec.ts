@@ -18,13 +18,13 @@ test("airport to deal to partner keeps one session and records click",async({pag
  });
  await page.goto("/");
  await page.getByRole("button",{name:"Akceptuj wszystkie",exact:true}).click();
- await page.getByRole("link",{name:"Wrocław (WRO)",exact:true}).click();
+ await page.getByRole("link",{name:"Wrocław — WRO",exact:true}).click();
  await expect(page.locator(".deal-card")).toHaveCount(14);
  await page.locator('a[href="/deals/browser-deal"]').click();
  await expect(page.getByRole("heading",{level:1})).toContainText("Barcelona");
  await expect(page.getByText("200,25",{exact:false}).first()).toBeVisible();
  const sid=await page.evaluate(()=>JSON.parse(localStorage.getItem("hoptrip.session.v2")!).id);
- await page.getByRole("link",{name:"Sprawdź ofertę u partnera"}).focus();
+ await page.getByRole("link",{name:"Sprawdź lot — Fixture program"}).focus();
  await page.keyboard.press("Enter");
  await expect(page).toHaveURL(/127\.0\.0\.1:8100\/__test__\/partner\?/);
  await expect(page.getByText("Local partner fixture")).toBeVisible();
@@ -51,7 +51,7 @@ test("combined filters, pagination, empty and invalid states",async({page})=>{
 test("no link, expired and unknown route",async({page})=>{
  await page.goto("/deals/browser-1");
  await expect(page.getByText("Link do rezerwacji nie jest jeszcze dostępny.")).toBeVisible();
- await expect(page.getByRole("link",{name:"Sprawdź ofertę u partnera"})).toHaveCount(0);
+ await expect(page.getByRole("link",{name:"Sprawdź lot — Fixture program"})).toHaveCount(0);
  for(const path of ["/deals/browser-14","/from/ZZZ","/destinations/unknown"]) {
    await page.goto(path);
    await expect(page.getByRole("heading",{level:1})).toContainText("Nie znaleziono");
@@ -71,7 +71,7 @@ test("storage failure does not break UI and session rotates after inactivity",as
  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem("hoptrip.session.v2")!).id)).not.toBe(old);
  await page.addInitScript(()=>{Object.defineProperty(window,"localStorage",{get(){throw new Error("blocked");}});});
  await page.reload();
- await expect(page.getByRole("link",{name:"Sprawdź ofertę u partnera"})).toBeVisible();
+ await expect(page.getByRole("link",{name:"Sprawdź lot — Fixture program"})).toBeVisible();
 });
 
 test("canonical, sitemap and draft noindex",async({page,request})=>{

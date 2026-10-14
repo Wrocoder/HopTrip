@@ -1,0 +1,64 @@
+import {test,expect} from "@playwright/test";
+test.beforeEach(async({page})=>{
+ await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+});
+
+test("total, sorting and pagination survive URL, reload and filter changes",async({page})=>{
+ await page.goto("/deals?origin=WRO&sort=price");
+ await expect(page.locator(".result-count")).toHaveText("Liczba ofert: 14 · Wyświetlane: 1–12");
+ await expect(page.locator(".deal-price").first()).toContainText("200,25");
+ await page.getByRole("link",{name:"Następna",exact:false}).click();
+ await expect(page).toHaveURL(/offset=12/);
+ await expect(page.locator(".result-count")).toHaveText("Liczba ofert: 14 · Wyświetlane: 13–14");
+ await expect(page.locator(".deal-price").first()).toContainText("212,00");
+ await expect(page.getByRole("link",{name:"Następna",exact:false})).toHaveCount(0);
+ await page.reload();
+ await expect(page.getByLabel("Sortuj oferty")).toHaveValue("price");
+ await page.getByLabel("Sortuj oferty").selectOption("departure");
+ await expect(page).toHaveURL(/sort=departure/);
+ await expect(page).not.toHaveURL(/offset=/);
+ await page.getByRole("button",{name:"Loty do 300 zł",exact:true}).click();
+ await expect(page).toHaveURL(/sort=departure/);
+ await expect(page).toHaveURL(/budget=300/);
+ await page.goBack();
+ await expect(page).not.toHaveURL(/budget=/);
+ await expect(page.getByLabel("Sortuj oferty")).toHaveValue("departure");
+ await page.getByRole("link",{name:"Następna",exact:false}).click();
+ await expect(page.locator(".result-count")).toHaveText("Liczba ofert: 14 · Wyświetlane: 13–14");
+ await page.locator('input[name="budget"]').fill("205");
+ await page.getByRole("button",{name:"Filtruj",exact:true}).click();
+ await expect(page).not.toHaveURL(/offset=/);
+ await expect(page).toHaveURL(/budget=205/);
+ await expect(page.locator(".result-count")).toContainText("Liczba ofert: 6");
+ await expect(page).toHaveURL(/sort=departure/);
+});
+
+test("empty, invalid, unavailable and loading states are distinct",async({page},testInfo)=>{
+ await page.goto("/deals?origin=WRO&sort=price&budget=1");
+ await expect(page.getByRole("heading",{name:"Brak aktualnych ofert"})).toBeVisible();
+ const relax=page.getByRole("link",{name:"Usuń limit ceny",exact:true});
+ await expect(relax).toHaveAttribute("href","/deals?origin=WRO&sort=price");
+ await expect(page).toHaveURL(/budget=1/);
+ await relax.click();
+ await expect(page.locator(".result-count")).toContainText("14");
+ await page.goto("/deals?origin=WRO&sort=price&offset=120");
+ await expect(page.getByRole("heading",{name:"Na tej stronie nie ma ofert"})).toBeVisible();
+ await expect(page.locator(".result-count")).toHaveText("Liczba ofert: 14");
+ await page.getByRole("link",{name:"Wróć do pierwszej strony wyników"}).click();
+ await expect(page.locator(".deal-card")).toHaveCount(12);
+ await page.goto("/deals?sort=invalid");
+ await expect(page.getByRole("heading",{name:"Sprawdź parametry wyszukiwania"})).toBeVisible();
+ await expect(page.locator(".result-count")).toHaveCount(0);
+ await page.goto("/deals?budget=987653");
+ await expect(page.getByRole("heading",{name:"Nie udało się pobrać ofert"})).toBeVisible();
+ await expect(page.getByRole("link",{name:"Spróbuj ponownie"})).toBeVisible();
+ await expect(page.locator(".result-count")).toHaveCount(0);
+ await page.goto("/deals?budget=987654",{waitUntil:"commit"});
+ await expect(page.getByRole("status").filter({hasText:"Ładowanie ofert"})).toBeVisible();
+ await expect(page.locator(".result-count")).toContainText("14");
+ await page.goto("/deals?sort=price");
+ await expect(page.locator(".result-count")).toContainText("14");
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ await page.locator(".sort-control").scrollIntoViewIfNeeded();
+ await page.screenshot({path:testInfo.outputPath("catalog-results.png")});
+});

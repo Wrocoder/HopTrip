@@ -1,9 +1,10 @@
+from datetime import date
 from decimal import Decimal
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK"]
+EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK"]
 
 
 class ActivityContext(BaseModel):
@@ -18,6 +19,29 @@ class ActivityClickSummary(ActivityContext):
     sessions: int
 
 
+class SearchFilters(BaseModel):
+    origin: str | None = Field(None, pattern=r"^[A-Z]{3}$")
+    destination: str | None = Field(None, max_length=80, pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+    departure_from: date | None = None
+    departure_to: date | None = None
+    budget: Decimal | None = Field(None, ge=0, le=1000000)
+    duration_min: int | None = Field(None, ge=0, le=365)
+    duration_max: int | None = Field(None, ge=0, le=365)
+    offset: int | None = Field(None, ge=0, le=10000)
+    weekend: bool | None = None
+
+
+class SearchContext(BaseModel):
+    filters: SearchFilters
+    result_count: int | None = Field(None, ge=0, le=100)
+    error: Literal["invalid_filters", "unavailable"] | None = None
+
+
+class PartnerContext(BaseModel):
+    category: Literal["flight", "stay", "activity"]
+    provider: Literal["catalog", "stay22", "tiqets"]
+
+
 class AnalyticsEventCreate(BaseModel):
     event_id: str | None = Field(None, pattern=r"^[a-fA-F0-9-]{36}$")
     event_name: EventName
@@ -27,11 +51,25 @@ class AnalyticsEventCreate(BaseModel):
     source: str | None = Field(default=None, max_length=80)
     metadata: dict[str, Any] = Field(default_factory=dict)
     activity: ActivityContext | None = None
+    search: SearchContext | None = None
+    partner: PartnerContext | None = None
+
+    @field_validator("source")
+    @classmethod
+    def allowed_source(cls, value):
+        return value if value in {"homepage", "google", "facebook", "instagram", "newsletter", "direct", "test"} else None
 
     @model_validator(mode="after")
     def activity_matches_event(self):
         if (self.event_name == "ACTIVITY_CLICK") != (self.activity is not None):
             raise ValueError("Activity context is required only for ACTIVITY_CLICK")
+        if self.event_name == "SEARCH_RESULT":
+            if self.search is None or (self.search.result_count is None) == (self.search.error is None):
+                raise ValueError("Search result needs either a count or an error")
+        if self.search and self.event_name not in {"SEARCH", "SEARCH_RESULT"}:
+            raise ValueError("Search context only belongs to search events")
+        if (self.event_name == "PARTNER_CLICK") != (self.partner is not None):
+            raise ValueError("Partner context is required only for PARTNER_CLICK")
         return self
 
 

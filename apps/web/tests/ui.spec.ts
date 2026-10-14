@@ -7,12 +7,16 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
  for(const [name,path] of [["home","/"],["catalog","/deals"],["deal","/deals/browser-deal"],["article","/info/price-comparison"],["empty","/deals?budget=1"]]) {
   await page.goto(path);
   await expect(page.locator("main[role='status']")).toHaveCount(0);
-  await expect(page.locator("main")).toBeVisible();
+  await expect(page.getByRole("main")).toBeVisible();
   await page.evaluate(()=>document.fonts.ready);
-  expect(await page.evaluate(()=>Array.from(document.fonts).filter(font=>font.status==="loaded").length)).toBeGreaterThanOrEqual(2);
+  await expect.poll(()=>page.evaluate(()=>Array.from(document.fonts).filter(font=>font.status==="loaded").length)).toBeGreaterThanOrEqual(2);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   if(name==="deal" && testInfo.project.name==="mobile") {
-   await expect(page.getByRole("link",{name:"Sprawdź ofertę u partnera"})).toBeInViewport();
+   const facts=await page.locator(".detail-summary").boundingBox();
+   const booking=await page.locator(".booking-card").boundingBox();
+   expect(facts!.y).toBeLessThan(booking!.y);
+   await page.getByRole("link",{name:"Sprawdź lot — Fixture program"}).scrollIntoViewIfNeeded();
+   await expect(page.getByRole("link",{name:"Sprawdź lot — Fixture program"})).toBeInViewport();
   }
   await page.screenshot({path:testInfo.outputPath(`${name}.png`),fullPage:true});
  }
@@ -25,7 +29,7 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
  await page.getByRole("link",{name:"Aktualne okazje",exact:true}).last().hover();
  expect(await page.getByRole("link",{name:"Aktualne okazje",exact:true}).last().evaluate(el=>getComputedStyle(el).transform)).toBe("none");
  await page.setViewportSize({width:320,height:740});
- for(const path of ["/deals","/deals/browser-deal","/info/price-comparison"]) {
+ for(const path of ["/","/deals","/deals/browser-deal","/info/price-comparison"]) {
   await page.goto(path);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
  }
@@ -42,11 +46,11 @@ test("applied filter chips preserve other values and reset pagination",async({pa
  await expect(page.locator(".deal-card")).toHaveCount(2);
  const budget=page.getByRole("spinbutton",{name:"Budżet na lot / osobę (PLN)",exact:true});
  await budget.fill("999");
- await page.getByRole("link",{name:"Usuń filtr: Pobyt od (dni): 3",exact:true}).click();
+  await page.getByRole("link",{name:"Usuń filtr: Pobyt od (nocy): 3",exact:true}).click();
  await expect(page).not.toHaveURL(/offset=|duration_min=/);
  await expect(page).toHaveURL(/duration_max=3/);
  await expect(budget).toHaveValue("220");
- await expect(page.getByRole("textbox",{name:"Skąd",exact:true})).toHaveValue("WRO");
+  await expect(page.getByRole("combobox",{name:"Skąd",exact:true})).toHaveValue("Wrocław — WRO");
  await expect(page.locator(".deal-card")).toHaveCount(12);
  await page.getByRole("link",{name:"Wyczyść wszystkie filtry",exact:true}).click();
  await expect(page).toHaveURL("http://127.0.0.1:3100/deals");
@@ -66,7 +70,7 @@ test("advanced fields remain keyboard accessible and navigation shows current se
  const summary=page.locator(".advanced-filters summary");
  await summary.focus();
  await page.keyboard.press("Enter");
- const duration=page.getByRole("spinbutton",{name:"Pobyt od (dni)",exact:true});
+  const duration=page.getByRole("spinbutton",{name:"Pobyt od (nocy)",exact:true});
  await expect(duration).toBeVisible();
  await duration.fill("-1");
  await summary.click();

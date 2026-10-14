@@ -1,13 +1,13 @@
 import "server-only";
 import {Suspense} from "react";
 import {approximateEuro, getEurRate} from "../../lib/exchange-rate";
-import {money} from "../../lib/pl";
+import {money,date} from "../../lib/pl";
 
 async function EuroPrice({value}:{value:string|null}) {
   const rate = await getEurRate();
   const euro = approximateEuro(value, rate);
   if (!rate || !euro) return null;
-  const explanation = `Orientacyjnie ${euro}. Średni kurs NBP z ${rate.date}: 1 EUR = ${rate.plnPerEuro} PLN. Kurs płatności może się różnić.`;
+  const explanation = `Orientacyjnie ${euro}. Średni kurs NBP z ${date(rate.date)}: 1 EUR = ${rate.plnPerEuro.toLocaleString("pl-PL",{maximumFractionDigits:4})} PLN. Kurs płatności może się różnić.`;
   return <small className="price-eur" title={explanation} aria-label={explanation}>≈ {euro}</small>;
 }
 

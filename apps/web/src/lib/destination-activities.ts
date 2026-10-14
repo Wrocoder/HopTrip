@@ -9,6 +9,10 @@ export type DestinationActivity = {
   href:string;
   affiliateHref?:string;
   kind?:"ticket"|"visit";
+  audience?:string;
+  duration?:string;
+  durationSource?:string;
+  freeEntry?:boolean;
 };
 
 // Editorial selections, not live inventory. Keep source URLs separate from verified affiliate links.

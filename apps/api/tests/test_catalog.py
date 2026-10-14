@@ -57,10 +57,12 @@ def test_deal_catalog_filters_by_route() -> None:
         by_origin = client.get("/api/v1/deals?origin=wro")
         assert by_origin.status_code == 200
         assert [item["slug"] for item in by_origin.json()] == ["wro-barcelona"]
+        assert by_origin.json()[0]["destination_country_code"] == "ES"
 
         by_destination = client.get("/api/v1/deals?destination=rome")
         assert by_destination.status_code == 200
         assert [item["slug"] for item in by_destination.json()] == ["waw-rome"]
+        assert by_destination.json()[0]["destination_country_code"] == "IT"
 
         invalid_range = client.get(
             "/api/v1/deals?departure_from=2026-12-01&departure_to=2026-11-01"

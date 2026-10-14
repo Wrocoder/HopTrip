@@ -1,0 +1,34 @@
+import {test,expect} from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+
+test("WRO planning precedes offers and search shortcuts preserve origin",async({page,request},testInfo)=>{
+ await page.setViewportSize({width:testInfo.project.name==='mobile'?360:1440,height:900});
+ await page.goto('/from/WRO');
+ await page.getByRole('button',{name:'Odrzuć opcjonalne',exact:true}).click();
+ await expect(page.locator('h1')).toHaveText('Loty z Wrocławia (WRO)');
+ await expect(page).toHaveTitle(/Wrocławia.*weekend i krótki wyjazd/);
+ await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','http://127.0.0.1:3100/from/WRO');
+ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','index, follow');
+ const nav=page.getByRole('navigation',{name:'Zaplanuj podróż'});
+ await expect(nav.getByRole('link')).toHaveCount(6);
+ expect(await nav.evaluate(el=>Boolean(el.compareDocumentPosition(document.querySelector('.deal-card')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ for(const path of ['/info/wro-airport','/info/trip-budget','/info'])expect((await request.get(path)).status()).toBe(200);
+ await expect(page.locator('.deal-card')).toHaveCount(14);
+ expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
+ await page.screenshot({path:testInfo.outputPath('wro-landing.png')});
+ await nav.getByRole('link',{name:'Z WRO na 2–4 noce',exact:true}).click();
+ await expect(page).toHaveURL(/duration_max=4/);
+ for(const [key,value] of Object.entries({origin:'WRO',duration_min:'2',duration_max:'4'}))expect(new URL(page.url()).searchParams.get(key)).toBe(value);
+ await expect(page.getByRole('combobox',{name:'Skąd',exact:true})).toHaveValue(/Wrocław/);
+ await page.getByRole('spinbutton',{name:'Budżet na lot / osobę (PLN)',exact:true}).fill('220');
+ await page.getByRole('button',{name:'Filtruj',exact:true}).click();
+ await expect(page).toHaveURL(/origin=WRO/);
+ await expect(page).toHaveURL(/budget=220/);
+ await page.goto('/from/WRO');
+ await page.getByRole('link',{name:'Weekend z WRO: pt./sob. → niedz.',exact:true}).click();
+ await expect(page).toHaveURL(/weekend=true/);
+ expect(new URL(page.url()).searchParams.get('origin')).toBe('WRO');
+ expect(new URL(page.url()).searchParams.get('weekend')).toBe('true');
+ await expect(page.getByRole('button',{name:'Na weekend',exact:true})).toHaveAttribute('aria-pressed','true');
+});
