@@ -16,6 +16,11 @@ class ComponentRead(BaseModel):
 
 
 class FlightFacts(BaseModel):
+    origin_timezone: str | None = None
+    destination_timezone: str | None = None
+    airline_name: str | None = None
+    outbound_arrival_calculated: bool = False
+    return_arrival_calculated: bool = False
     origin_airport: str | None = None
     destination_airport: str | None = None
     destination_code: str | None = None

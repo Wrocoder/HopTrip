@@ -13,7 +13,8 @@ router = APIRouter(prefix="/api/v1/alerts", tags=["alerts"])
 
 @router.get("/status")
 def status(settings: Settings = Depends(get_settings)):
-    return {"enabled": settings.alerts_enabled}
+    return {"enabled": settings.alerts_enabled,
+            "delivery_enabled": settings.alerts_enabled and settings.alerts_digest_enabled}
 
 
 @router.post("", status_code=202)

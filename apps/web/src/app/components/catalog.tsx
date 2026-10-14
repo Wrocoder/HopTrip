@@ -1,4 +1,5 @@
 import {TripDetails} from "./trip-details";
+import {FlightSchedule} from "./flight-schedule";
 import {CountryFlag} from "./country-flag";
 import {flightPriceBasis} from "../../lib/flight-facts";
 import {cityLabel,originLabel} from "../../lib/cities";
@@ -9,6 +10,7 @@ import {Price} from "./price";
 import {Impression} from "./deal-view-tracker";
 import {ScoreDetails} from "./score-details";
 import {ScoreTrigger} from "./score-trigger";
+import {PriceSummary} from "./price-assessment";
 export function DealCard({deal}:{deal:Deal}) {
   return <article className="deal-card">
     <Impression slug={deal.slug}/>
@@ -17,12 +19,14 @@ export function DealCard({deal}:{deal:Deal}) {
     <Link className="deal-card-link" href={`/deals/${deal.slug}`}>
     <p className="deal-origin">{originLabel(deal.origin_city,deal.origin_code)} ({deal.origin_code}) <span aria-hidden="true">→</span></p>
     <h2>{cityLabel(deal.destination_city,deal.destination_slug)}<CountryFlag code={deal.destination_country_code}/></h2>
-    <p className="deal-dates">{date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>
+    <p className="deal-dates">Daty oferty: {date(deal.trip_start)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end)}`}</p>
     {tripNights(deal) && <p className="deal-note">{tripNights(deal)}</p>}
     <div className="deal-card-bottom">
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
     </Link>
+    <PriceSummary deal={deal}/>
+    <FlightSchedule deal={deal}/>
     <TripDetails deal={deal}/>
     <ScoreTrigger score={deal.deal_score} slug={deal.slug} destination={cityLabel(deal.destination_city,deal.destination_slug)} provisional={deal.score_explanation?.status === "PROVISIONAL"}><ScoreDetails deal={deal}/></ScoreTrigger>
   </article>;

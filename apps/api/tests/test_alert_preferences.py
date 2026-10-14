@@ -90,7 +90,7 @@ def test_disabled_expiry_and_active_preferences_are_protected(api_client, isolat
     assert alert.filters["budget"] == "250"
     assert "/manage#token=" in messages[-1][3]
     monkeypatch.setattr(settings, "alerts_enabled", False)
-    assert api_client.get("/api/v1/alerts/status").json() == {"enabled": False}
+    assert api_client.get("/api/v1/alerts/status").json() == {"enabled": False, "delivery_enabled": False}
     assert api_client.post("/api/v1/alerts", json=payload()).status_code == 503
     manage = alerts.capability(settings, alert, "manage")
     assert api_client.post("/api/v1/alerts/unsubscribe", json={"token": manage}).status_code == 200

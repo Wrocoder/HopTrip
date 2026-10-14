@@ -55,3 +55,76 @@ def test_enabled_alerts_require_credentials_and_trusted_site_origin(monkeypatch)
         with pytest.raises(ValidationError):
             Settings(_env_file=None, alerts_site_url=origin, **values)
     assert Settings(_env_file=None, alerts_site_url="https://example.test", **values).alerts_enabled
+
+
+@pytest.mark.parametrize("stage,error,expected", [
+    ("connect", TimeoutError(), 2),
+    ("login", alert_mail.smtplib.SMTPAuthenticationError(454, b"temporary"), 2),
+    ("login", alert_mail.smtplib.SMTPAuthenticationError(535, b"denied"), 1),
+    ("connect", alert_mail.ssl.SSLCertVerificationError(), 1),
+    ("send", TimeoutError(), 1),
+    ("quit", TimeoutError(), 1),
+])
+def test_bounded_retry_only_before_message_submission(monkeypatch, stage, error, expected):
+    calls = []
+    sends = []
+    sleeps = []
+
+    class Client:
+        def __init__(self, *args, **kwargs):
+            calls.append(True)
+            if stage == "connect":
+                raise error
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            if stage == "quit":
+                raise error
+
+        def login(self, *args):
+            if stage == "login":
+                raise error
+
+        def send_message(self, message):
+            sends.append(message)
+            if stage == "send":
+                raise error
+
+    monkeypatch.setattr(alert_mail.smtplib, "SMTP_SSL", Client)
+    monkeypatch.setattr(alert_mail.time, "sleep", sleeps.append)
+    with pytest.raises(type(error)):
+        alert_mail.send_alert_mail(Settings(_env_file=None), "recipient@example.test", "Test", "Test")
+    assert len(calls) == expected
+    assert sleeps == ([1] if expected == 2 else [])
+    assert len(sends) == (1 if stage in {"send", "quit"} else 0)
+
+
+def test_temporary_connect_failure_recovers_with_one_message(monkeypatch):
+    messages = []
+    attempts = []
+
+    class Client:
+        def __init__(self, *args, **kwargs):
+            attempts.append(True)
+            if len(attempts) == 1:
+                raise ConnectionRefusedError()
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            pass
+
+        def login(self, *args):
+            pass
+
+        def send_message(self, message):
+            messages.append(message)
+
+    monkeypatch.setattr(alert_mail.smtplib, "SMTP_SSL", Client)
+    monkeypatch.setattr(alert_mail.time, "sleep", lambda _: None)
+    alert_mail.send_alert_mail(Settings(_env_file=None), "recipient@example.test", "Test", "Test")
+    assert len(attempts) == 2
+    assert len(messages) == 1

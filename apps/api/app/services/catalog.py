@@ -4,6 +4,7 @@ from app.models.offer import TravelOffer
 from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
 from app.services.flight_facts import flight_facts
+from app.services.flight_reference import airport_timezone
 from app.services.score_explanation import explain_score
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -42,4 +43,5 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
                 result.trip_type = "ROUND_TRIP"
     if origin and not result.flight_facts.origin_airport:
         result.flight_facts.origin_airport = origin.iata_code
+        result.flight_facts.origin_timezone = airport_timezone(origin.iata_code)
     return result

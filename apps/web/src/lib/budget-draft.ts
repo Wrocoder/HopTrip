@@ -1,6 +1,6 @@
 import {emptyBudget,type BudgetInput} from "./trip-budget.ts";
 
-export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;context:string;review:boolean};
+export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;context:string;review:boolean;adultsOnly?:boolean};
 export const budgetDraftKey=(tripId?:string)=>`hoptrip.budget.v1:${tripId ? `deal:${tripId}` : "standalone"}`;
 
 export function readBudgetDraft(raw:string|null):BudgetDraft|null {
@@ -20,8 +20,16 @@ export function readBudgetDraft(raw:string|null):BudgetDraft|null {
     input[key]=value;
    } else input[key]=value;
   }
-  return {version:1,input,start:draft.start,end:draft.end,context:draft.context,review:draft.review};
+  if(draft.adultsOnly!==undefined && typeof draft.adultsOnly!=="boolean")return null;
+  return {version:1,input,start:draft.start,end:draft.end,context:draft.context,review:draft.review,
+   ...(draft.adultsOnly===undefined ? {} : {adultsOnly:draft.adultsOnly})};
  } catch {return null;}
+}
+
+export function changeStayDate(draft:BudgetDraft,key:"start"|"end",value:string):BudgetDraft {
+ const next={...draft,[key]:value,review:true};
+ const counts=budgetDateCounts(next.start,next.end);
+ return {...next,input:{...draft.input,nights:counts?.nights ?? "",days:counts?.days ?? ""}};
 }
 
 function validDate(value:string) {

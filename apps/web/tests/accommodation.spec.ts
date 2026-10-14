@@ -1,13 +1,13 @@
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-test("known flight schedule is labelled UTC and stay dates remain editable",async({page})=>{
+test("known flight schedule uses airport local time and stay dates remain editable",async({page})=>{
  await page.goto("/deals/browser-13");
  await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
  const schedule=page.locator("#stay-schedule");
- await expect(schedule).toContainText(/Zapisany przylot: .* UTC/);
- await expect(schedule).toContainText(/Zapisany wylot powrotny: .* UTC/);
- await expect(schedule).toContainText("nie w czasie lokalnym hotelu");
+ await expect(schedule).toContainText(/Zapisany przylot: .*Europe\/Madrid/);
+ await expect(schedule).toContainText(/Zapisany wylot powrotny: .*Europe\/Madrid/);
+ await expect(schedule).toContainText("Przylot do domu po północy nie dodaje nocy");
  await page.locator("#stay-checkin").fill("2027-01-16");
  await page.locator("#stay-checkout").fill("2027-01-18");
  const href=await page.getByRole("link",{name:/przez Stay22/}).getAttribute("href");
@@ -47,7 +47,7 @@ test("stay summary, accessible errors and manual budget cost survive the journey
  await page.goto("/deals/browser-deal");
  await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
  const stay=page.locator('section[aria-labelledby="accommodation-title"]');
- await expect(stay).toContainText("Nie znamy godziny przylotu");
+ await expect(stay).toContainText("Brak danych o godzinie przylotu");
  await page.locator("#stay-checkin").fill("2027-01-15");
  await page.locator("#stay-checkout").fill("2027-01-17");
  await page.locator("#stay-adults").fill("0");

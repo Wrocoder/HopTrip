@@ -3,6 +3,10 @@ import assert from "node:assert/strict";
 import {encodeTrip,decodeTrip,readSavedTrips} from "../src/lib/shared-trip.ts";
 import {emptyBudget} from "../src/lib/trip-budget.ts";
 const trip={version:1,offer:{slug:"example",origin:"Wrocław",destination:"Mediolan",start:"2027-01-15",end:"2027-01-17",price:"123.45",observedAt:"2026-10-11T12:00:00Z"},draft:{version:1,input:{...emptyBudget,flight:"123.45",hotel:"",food:"0"},start:"2027-01-15",end:"2027-01-17",context:"private-context",review:false}};
+test("adult confirmation survives sharing while old plans do not infer ages",()=>{
+ assert.equal(decodeTrip(encodeTrip(trip)).draft.adultsOnly,undefined);
+ for(const adultsOnly of [true,false])assert.equal(decodeTrip(encodeTrip({...trip,draft:{...trip.draft,adultsOnly}})).draft.adultsOnly,adultsOnly);
+});
 test("shared snapshot preserves Polish labels, unknowns and zero while stripping private fields",()=>{
  const token=encodeTrip({...trip,email:"private@example.com",draft:{...trip.draft,note:"private"}});
  const decoded=decodeTrip(token);

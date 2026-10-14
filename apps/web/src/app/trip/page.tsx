@@ -1,9 +1,12 @@
+import {TripDraftProvider} from "../components/trip-draft";
+import {TripAccommodation} from "../components/trip-accommodation";
 import type {Metadata} from "next";
 import Link from "next/link";
 import {decodeTrip,tripPath} from "../../lib/shared-trip";
 import {getDeal} from "../../lib/api";
 import {date,money,dateTime} from "../../lib/pl";
 import {TripBudgetCalculator} from "../components/trip-budget-calculator";
+import {FlightSchedule} from "../components/flight-schedule";
 type Props={searchParams:Promise<{plan?:string|string[]}>};
 export async function generateMetadata({searchParams}:Props):Promise<Metadata> {
  const {plan}=await searchParams;
@@ -30,7 +33,11 @@ export default async function SharedTripPage({searchParams}:Props) {
   <p>Obserwacja ceny: {offer.observedAt ? dateTime(offer.observedAt) : "czas nieznany"}. Dane w linku pochodzą z planu nadawcy; nie potwierdzają aktualnej ceny ani dostępności.</p>
   <p role="status">{expired ? "Termin zapisanej oferty już minął. Zachowaliśmy plan i budżet; wybierz nowe daty i sprawdź ceny ponownie." : failed ? "Nie udało się sprawdzić oferty. Plan pozostaje dostępny; spróbuj sprawdzić ofertę później." : !current ? "Ta oferta nie jest już dostępna w katalogu. Zapisany plan i budżet pozostają dostępne." : "Oferta jest w katalogu, ale zapisane ceny i daty mogą się różnić. Sprawdź aktualne warunki u partnera."}</p>
   {current && !expired && <Link href={`/deals/${offer.slug}`}>Sprawdź ofertę w katalogu</Link>}
+  {current && !expired ? <section aria-label="Rozkład aktualnej oferty"><h2>Rozkład aktualnej oferty</h2><p>To rozkład oferty w katalogu, nie potwierdzenie dat zmienionych w twoim planie pobytu. Nie zmienia noclegów ani zapisanych kwot.</p><FlightSchedule deal={current}/></section> : <p>Brak aktualnego rozkładu. Daty planu pobytu nie potwierdzają daty powrotu do domu.</p>}
+  <TripDraftProvider key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} adultsOnly={draft.adultsOnly===true} forceReview>
+  {current && !expired && <TripAccommodation deal={current}/>}
   <TripBudgetCalculator key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} shareOffer={offer} forceReview/>
+  </TripDraftProvider>
   <Link href="/saved">Zapisane wyjazdy</Link>
  </main>;
 }

@@ -7,6 +7,8 @@ export type ScoreExplanation = {
   observed_at:string|null; calculated_at:string|null; observation_basis:"SOURCE"|"FIRST_SEEN"|null;
 };
 export type FlightFacts = {
+  origin_timezone?:string|null; destination_timezone?:string|null; airline_name?:string|null;
+  outbound_arrival_calculated?:boolean; return_arrival_calculated?:boolean;
   origin_airport:string|null; destination_airport:string|null; destination_code:string|null;
   airline_code:string|null; outbound_stops:number|null; return_stops:number|null;
   outbound_departure:string|null; outbound_arrival:string|null;
@@ -62,10 +64,11 @@ export async function getDeal(slug:string):Promise<Deal|null> {
   catch(error) {if (error instanceof ApiError && error.status === 404) return null; throw error;}
 }
 export const getAirports = () => getJson<Airport[]>("/api/v1/airports");
-export const alertsEnabled = async () => {
-  try {return (await getJson<{enabled:boolean}>("/api/v1/alerts/status")).enabled;}
-  catch {return false;}
+export const alertStatus = async () => {
+  try {return await getJson<{enabled:boolean;delivery_enabled?:boolean}>("/api/v1/alerts/status");}
+  catch {return {enabled:false,delivery_enabled:false};}
 };
+export const alertsEnabled = async () => (await alertStatus()).enabled;
 export const getDestinations = () => getJson<Destination[]>("/api/v1/destinations");
 export const getDepartureDeals = (code:string) => getDeals({origin:code});
 export const getDestinationDeals = (slug:string) => getDeals({destination:slug});

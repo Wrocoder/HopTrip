@@ -63,6 +63,35 @@ test("invalid confirmation does not report success",async({page})=>{
  await expect(page.getByRole("link",{name:"Zarządzaj alertem"})).toHaveCount(0);
 });
 
+test("catalog subscription keeps filters and delivery status follows configuration",async({page,request})=>{
+ await request.post("http://127.0.0.1:8100/__test__/alerts-enabled?enabled=true&digest=true");
+ try {
+  await page.goto("/deals?origin=WRO&budget=1&duration_min=2&duration_max=4");
+  await expect(page.getByText("Brak aktualnych ofert",{exact:true})).toBeVisible();
+  await page.getByRole("link",{name:"Powiadom mnie o pasujących lotach"}).click();
+  await expect(page.getByLabel("Lotnisko wylotu")).toHaveValue("WRO");
+  await expect(page.getByLabel("Budżet na lot na osobę (PLN)")).toHaveValue("1");
+  await expect(page.getByLabel("Minimum nocy")).toHaveValue("2");
+  await expect(page.getByLabel("Maksimum nocy")).toHaveValue("4");
+  await expect(page.getByTestId("alert-delivery-status")).toContainText("Wysyłka jest włączona");
+  await page.goto("/alerts/confirm#token="+"a".repeat(100));
+  await expect(page.getByTestId("alert-delivery-status")).toContainText("Wysyłka jest włączona");
+ } finally {await request.post("http://127.0.0.1:8100/__test__/alerts-enabled?enabled=true&digest=false");}
+ await page.goto("/alerts");
+ await expect(page.getByTestId("alert-delivery-status")).toContainText("Wysyłka podsumowań jest obecnie wstrzymana");
+});
+
+test("delivery error never reports accepted signup",async({page})=>{
+ await page.route("**/api/v1/alerts",route=>route.fulfill({status:503,json:{detail:"Email delivery unavailable"}}));
+ await page.goto("/alerts?origin=WRO");
+ await page.getByLabel("Email",{exact:true}).fill("failure@example.test");
+ await page.getByRole("checkbox",{name:/Chcę otrzymywać/}).check();
+ await page.getByRole("button",{name:"Wyślij link potwierdzający"}).click();
+ await expect(page.getByRole("status")).toContainText("Nie udało się wykonać operacji");
+ await expect(page.getByRole("status")).not.toContainText("Sprawdź skrzynkę");
+ await expect(page.getByRole("button",{name:"Wyślij link potwierdzający"})).toBeEnabled();
+});
+
 test("email and capability pages never start tracking after saved consent",async({page})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:true,marketing:true,at:Date.now()})));
  const tracked:string[]=[];

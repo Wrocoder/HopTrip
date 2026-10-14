@@ -1,55 +1,29 @@
 "use client";
 import {money} from "../../lib/pl";
-import {useEffect,useState} from "react";
+import {useState} from "react";
 import {calculateBudget,costFields,emptyBudget,type BudgetInput} from "../../lib/trip-budget";
-import {budgetDateCounts,budgetDraftKey,readBudgetDraft,type BudgetDraft} from "../../lib/budget-draft";
+import {budgetDateCounts,changeStayDate} from "../../lib/budget-draft";
 import styles from "./trip-budget-calculator.module.css";
 import {ReferenceCosts} from "./reference-costs";
 import {TripActions} from "./trip-actions";
+import {TripDraftProvider,useTripDraft,type TripDraftProps} from "./trip-draft";
 import type {TripOffer} from "../../lib/shared-trip";
 
 const format=(grosz:number)=>money(String(grosz/100));
 
-export function TripBudgetCalculator({initialInput={},note,destinationSlug,tripId,start="",end="",shareOffer,forceReview=false}:{initialInput?:Partial<BudgetInput>;note?:string;destinationSlug?:string;tripId?:string;start?:string;end?:string;shareOffer?:TripOffer;forceReview?:boolean}) {
- const context=JSON.stringify({input:{...emptyBudget,...initialInput},start,end});
- const storageKey=budgetDraftKey(tripId);
- const [draft,setDraft]=useState<BudgetDraft>(()=>({version:1,input:{...emptyBudget,...initialInput},start,end,context,review:false}));
- const [ready,setReady]=useState(false);
- const [storageMessage,setStorageMessage]=useState("Wczytywanie szkicu…");
- const [extraOpen,setExtraOpen]=useState(false);
- useEffect(()=>{
-  const defaults=JSON.parse(context);
-  let restored:BudgetDraft={version:1,...defaults,context,review:forceReview};
-  let message="Zmiany zapisujemy automatycznie w tej przeglądarce, osobno dla każdej oferty.";
-  try {
-   const raw=localStorage.getItem(storageKey);
-   const saved=readBudgetDraft(raw);
-   if(saved) {
-    restored={...saved,review:saved.review || saved.context!==context};
-    message="Przywrócono zapisany szkic. Kolejne zmiany zapisujemy automatycznie.";
-   } else if(raw) message="Nie udało się odczytać szkicu. Wpisz kwoty ponownie; następna zmiana zapisze nowy szkic.";
-  } catch {message="Zapisywanie jest niedostępne. Po odświeżeniu utracisz zmiany.";}
-  // Read browser storage after hydration; keep controls disabled until restoration finishes.
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  setDraft(restored);
-  setStorageMessage(message);
-  setReady(true);
- },[context,storageKey,forceReview]);
+type Props=TripDraftProps & {note?:string;destinationSlug?:string;shareOffer?:TripOffer};
+export function TripBudgetCalculator(props:Props) {
+ const shared=useTripDraft();
+ return shared ? <BudgetCalculator {...props}/> : <TripDraftProvider {...props}><BudgetCalculator {...props}/></TripDraftProvider>;
+}
+function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
+ const {draft,save,ready,context,storageMessage}=useTripDraft()!;
  const input=draft.input;
- const save=(next:BudgetDraft)=>{
-  setDraft(next);
-  try {localStorage.setItem(storageKey,JSON.stringify(next));setStorageMessage("Szkic zapisany w tej przeglądarce. Odświeżenie strony go nie usuwa.");}
-  catch {setStorageMessage("Nie udało się zapisać zmian. Po odświeżeniu najnowsze kwoty mogą zostać utracone.");}
- };
+ const [extraOpen,setExtraOpen]=useState(false);
  const result=calculateBudget(input);
  const update=(key:keyof BudgetInput,value:string)=>save({...draft,input:{...input,[key]:value},
   review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
- const changeDate=(key:"start"|"end",value:string)=>{
-  const next={...draft,[key]:value,review:true};
-  const counts=budgetDateCounts(next.start,next.end);
-  next.input={...input,nights:counts?.nights ?? "",days:counts?.days ?? ""};
-  save(next);
- };
+ const changeDate=(key:"start"|"end",value:string)=>save(changeStayDate(draft,key,value));
  const datesInvalid=Boolean(draft.start || draft.end) && !budgetDateCounts(draft.start,draft.end);
  const field=(key:keyof BudgetInput,label:string,hint:string,money=false)=><div className={styles.field} key={key}>
   <label htmlFor={`budget-${key}`}>{label}{money ? " (PLN)" : ""}</label>
@@ -75,13 +49,15 @@ export function TripBudgetCalculator({initialInput={},note,destinationSlug,tripI
    <div className={styles.field}><label htmlFor="budget-end">Koniec pobytu (opcjonalnie)</label>
     <input id="budget-end" type="date" value={draft.end} aria-invalid={datesInvalid} aria-describedby={datesInvalid ? "budget-dates-error" : undefined} onChange={event=>changeDate("end",event.target.value)}/></div>
   </div>
-  <p className={styles.hint}>Daty przeliczają noce i dni wydatków. Możesz dopasować te liczby ręcznie. Ten plan nie zmienia wyszukiwania lotów ani dat w formularzu Stay22.</p>
+  <p className={styles.hint}>Daty przeliczają noce i dni wydatków. Możesz dopasować te liczby ręcznie. Daty pobytu są wspólne z wyszukiwaniem noclegu. Nie zmieniają dat oferty lotu.</p>
   {datesInvalid && <p id="budget-dates-error" className={styles.error}>Uzupełnij obie daty: koniec nie może być wcześniejszy niż początek; pobyt może obejmować najwyżej 365 dni.</p>}
   <div className={styles.grid}>
-   {field("people","Liczba osób","Od 1 do 50 osób")}
+   {field("people",draft.adultsOnly ? "Liczba dorosłych" : "Liczba osób","Od 1 do 50 osób")}
    {field("nights","Liczba nocy","Od 0 do 365 nocy")}
    {field("days","Liczba dni wydatków","Od 1 do 365 dni, także dni przylotu i odlotu")}
   </div>
+  <p><label><input type="checkbox" checked={draft.adultsOnly===true} onChange={event=>save({...draft,adultsOnly:event.target.checked,review:true})}/> Wszyscy podróżni są dorośli</label></p>
+  {!draft.adultsOnly && <p>Skład grupy nie jest potwierdzony jako wyłącznie dorośli. Potwierdź go, aby zastosować liczbę osób do Stay22. Dzieci i ich wiek ustaw u partnera; nie wysyłamy ich jako dorosłych.</p>}
   {draft.review && <div className={styles.result} data-testid="budget-review">
    <p>Zmieniono daty, długość pobytu, liczbę osób lub dane oferty. Sprawdź ponownie loty, nocleg, transfery i pozostałe wpisane kwoty. Przeliczenie sumy nie potwierdza cen u sprzedawców.</p>
    <button type="button" className="button button-secondary" onClick={()=>save({...draft,context,review:false})}>Kwoty sprawdzone dla tego planu</button>

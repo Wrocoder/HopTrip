@@ -5,6 +5,7 @@ from app.models.data_provider import DataProvider
 from app.models.offer import TravelOffer
 from app.services.catalog import serialize_deal
 from app.services.flight_facts import flight_facts
+from app.services.flight_reference import airline_name, airport_timezone
 from helpers import catalog_fixture
 
 
@@ -103,3 +104,38 @@ def test_public_contract_and_non_flight_component(api_client, isolated_db):
     result = serialize_deal(isolated_db, deal)
     assert result.trip_type == "ONE_WAY"
     assert result.flight_facts.airline_code is None
+
+
+def test_midnight_home_arrival_preserves_payload_and_elapsed_duration():
+    from copy import deepcopy
+    from zoneinfo import ZoneInfo
+
+    timed = offer()
+    timed.raw_payload = {
+        "origin_airport": "WRO", "destination_airport": "BCN", "airline": "FR",
+        "departure_at": "2026-10-17T10:00:00+02:00", "duration_to": 120,
+        "return_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
+        "link": "/search/unchanged?marker=fixture",
+    }
+    before = deepcopy(timed.raw_payload)
+    facts = flight_facts(timed)
+    assert facts.return_arrival == datetime(2026, 10, 24, 22, 40, tzinfo=UTC)
+    assert facts.origin_timezone == "Europe/Warsaw"
+    assert facts.destination_timezone == "Europe/Madrid"
+    assert facts.return_arrival.astimezone(ZoneInfo(facts.origin_timezone)).isoformat() == "2026-10-25T00:40:00+02:00"
+    assert facts.return_arrival_calculated and facts.outbound_arrival_calculated
+    assert facts.airline_name == "Ryanair"
+    assert timed.raw_payload == before
+
+
+def test_reference_unknowns_do_not_guess_a_city_timezone_or_airline():
+    assert airport_timezone("WRO") == "Europe/Warsaw"
+    assert airport_timezone("LHR") == "Europe/London"
+    assert airport_timezone("JFK") == "America/New_York"
+    assert airport_timezone("XXX") is None
+    assert airport_timezone(None) is None
+    assert airline_name("FR") == "Ryanair"
+    assert airline_name("??") is None
+    facts = flight_facts(offer(destination="LON", departure_at="2026-10-17"))
+    assert facts.destination_timezone is None
+    assert not facts.outbound_arrival_calculated

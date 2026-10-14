@@ -101,7 +101,10 @@ def signup(db: Session, settings: Settings, value: AlertSignup) -> None:
              f"do: {alert.filters.get('departure_to') or 'dowolny'}.")
     frequency = "raz w tygodniu" if alert.filters.get("frequency", "weekly") == "weekly" else "najwyżej raz dziennie"
     body += f"\nCzęstotliwość: {frequency}; tylko weekendy: {'tak' if alert.filters.get('weekend') else 'nie'}."
-    body += "\nUstawienia są zapisane. Wysyłka podsumowań nie jest jeszcze uruchomiona. Jeśli to nie Ty, zignoruj tę wiadomość.\n"
+    body += ("\nPo potwierdzeniu będziemy wysyłać nowe dopasowania według wybranej częstotliwości."
+             if settings.alerts_digest_enabled else
+             "\nUstawienia są zapisane. Wysyłka podsumowań jest obecnie wstrzymana.")
+    body += " Jeśli to nie Ty, zignoruj tę wiadomość.\n"
     body += "Wypisanie i ustawienia: " + alert_link(settings, alert, "manage")
     try:
         send_alert_mail(settings, alert.email, "Twój alert lotniczy HopTrip", body)

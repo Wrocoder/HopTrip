@@ -8,18 +8,33 @@ const deal={flight_price_pln:"200.25",price_per_person_pln:"200.25",last_verifie
 
 test("saved below, equal and above-median comparisons retain their direction",()=>{
   const original=JSON.stringify(deal);
-  assert.match(priceAssessment(deal).summary,/19,9% poniżej/);
+  assert.match(priceAssessment(deal).summary,/49,75 zł poniżej/);
   assert.match(priceAssessment(deal).sufficiency,/Liczba obserwacji: 24/);
-  for(const [difference,pattern] of [["0",/na poziomie/],["-12.5",/12,5% powyżej/]]) {
-    assert.match(priceAssessment({...deal,score_explanation:{...deal.score_explanation,price_difference_percent:difference}}).summary,pattern);
+  for(const [median,difference,pattern] of [["200.25","0",/na poziomie/],["178","-12.5",/22,25 zł powyżej/]]) {
+    assert.match(priceAssessment({...deal,score_explanation:{...deal.score_explanation,median_price_pln:median,price_difference_percent:difference}}).summary,pattern);
   }
   assert.equal(JSON.stringify(deal),original);
+});
+
+test("sub-zloty differences are neutral; display boundaries use rounded grosz",()=>{
+  for(const [median,pattern] of [["260.50",/Blisko mediany/],["260.99",/Blisko mediany/],
+    ["259.01",/Blisko mediany/],["261",/1,00 zł poniżej/],["259",/1,00 zł powyżej/],
+    ["260",/na poziomie/],["260.004",/na poziomie/],["260.999",/1,00 zł poniżej/]]) {
+    const result=priceAssessment({flight_price_pln:"260",price_per_person_pln:"260",score_explanation:{
+      ...deal.score_explanation,current_price_pln:"260",median_price_pln:median,
+      price_difference_percent:((Number(median)-260)/Number(median)*100).toFixed(2)}});
+    assert.equal(result.comparable,true);
+    assert.match(result.summary,pattern);
+    assert.doesNotMatch(result.summary,/%|oszczęd/);
+  }
 });
 
 test("incomplete, legacy and provisional history cannot advertise a discount",()=>{
   for(const patch of [{status:"PROVISIONAL"},{status:"LEGACY"},{status:"UNAVAILABLE"},
     {sample_count:4},{sample_count:null},{sample_count:2.5},{median_price_pln:null},{median_price_pln:"0"},
-    {median_price_pln:"NaN"},{price_difference_percent:null},{price_difference_percent:""},{price_difference_percent:"Infinity"}]) {
+    {median_price_pln:"NaN"},{median_price_pln:"-1"},{current_price_pln:"0"},
+    {price_difference_percent:"-19.90"},{price_difference_percent:"19.89"},
+    {price_difference_percent:null},{price_difference_percent:""},{price_difference_percent:"Infinity"}]) {
     const result=priceAssessment({...deal,discount_percent:"99",score_explanation:{...deal.score_explanation,...patch}});
     assert.equal(result.comparable,false);
     assert.equal(result.median,null);

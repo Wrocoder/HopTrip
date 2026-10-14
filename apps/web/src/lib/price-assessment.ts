@@ -1,6 +1,6 @@
 import type {Deal} from "./api.ts";
 
-const percent = (value:number) => new Intl.NumberFormat("pl-PL", {maximumFractionDigits:2}).format(value);
+const amount = (value:number) => new Intl.NumberFormat("pl-PL", {minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
 const positive = (value:string|null|undefined) => value != null && value.trim() !== "" && Number.isFinite(Number(value)) && Number(value)>0;
 
 /** Present the saved comparison only; never rescore or use the legacy discount field. */
@@ -9,16 +9,21 @@ export function priceAssessment(deal:Pick<Deal,"score_explanation"|"flight_price
   const count=score?.sample_count;
   const knownCount=typeof count === "number" && Number.isInteger(count) && count>=0;
   const difference=score?.price_difference_percent;
+  const delta=Number(score?.median_price_pln)-Number(score?.current_price_pln);
+  const expectedPercent=delta/Number(score?.median_price_pln)*100;
   const comparable=score?.status === "CURRENT" && knownCount && count>=5 &&
     positive(score.current_price_pln) && positive(score.median_price_pln) &&
     Number(score.current_price_pln)===Number(deal.flight_price_pln) &&
     Number(score.current_price_pln)===Number(deal.price_per_person_pln) &&
-    difference != null && difference.trim()!=="" && Number.isFinite(Number(difference));
+    difference != null && difference.trim()!=="" && Number.isFinite(Number(difference)) &&
+    Math.abs(Number(difference)-expectedPercent)<=0.005001;
   let summary="Brak wiarygodnego porównania tej ceny z historią.";
   if(comparable) {
-    const value=Number(difference);
-    summary=value===0 ? "Cena na poziomie mediany porównywalnych obserwacji." :
-      `Cena ${percent(Math.abs(value))}% ${value>0 ? "poniżej" : "powyżej"} mediany porównywalnych obserwacji.`;
+    // Compare displayed grosz amounts; this is display precision, not a bargain threshold.
+    const grosz=Math.round(Number(score.median_price_pln)*100)-Math.round(Number(score.current_price_pln)*100);
+    summary=grosz===0 ? "Cena na poziomie mediany próby." : Math.abs(grosz)<100 ?
+      "Blisko mediany — różnica mniejsza niż 1 zł." :
+      `Cena o ${amount(Math.abs(grosz)/100)} zł ${grosz>0 ? "poniżej" : "powyżej"} mediany próby.`;
   } else if(score?.status === "PROVISIONAL") {
     summary="Ocena wstępna — za mało danych do porównania ceny.";
   } else if(score?.status === "LEGACY") {

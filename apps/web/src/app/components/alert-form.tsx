@@ -15,7 +15,7 @@ async function action(path:string,body:unknown,method="POST") {
 }
 const linkToken=()=>new URLSearchParams(location.hash.slice(1)).get("token")??"";
 
-export function AlertForm({mode,airports,destinations,initial={}}:{mode:"signup"|"confirm"|"manage";airports:Airport[];destinations:Destination[];initial?:Filters}) {
+export function AlertForm({mode,airports,destinations,initial={},deliveryEnabled=false}:{deliveryEnabled?:boolean;mode:"signup"|"confirm"|"manage";airports:Airport[];destinations:Destination[];initial?:Filters}) {
   const [values,setValues]=useState({...initial,origin:initial.origin??"",budget:initial.budget??"200",duration_min:initial.duration_min??"0",duration_max:initial.duration_max??"14",frequency:"weekly",weekend:initial.weekend??"false"});
   const [message,setMessage]=useState("");
   const [busy,setBusy]=useState(false);
@@ -48,8 +48,9 @@ export function AlertForm({mode,airports,destinations,initial={}}:{mode:"signup"
     });
   }
   return <section className="alert-panel" aria-label="Alerty lotnicze">
+    <p data-testid="alert-delivery-status">{deliveryEnabled ? "Wysyłka jest włączona. Po potwierdzeniu emaila wysyłamy tylko nowe dopasowania, według wybranej częstotliwości. Gdy brak pasujących lotów, nie wysyłamy wiadomości." : "Wysyłka podsumowań jest obecnie wstrzymana. Możesz zapisać i potwierdzić preferencje; oferty otrzymasz dopiero po wznowieniu wysyłki."}</p>
     {mode==="confirm" && <>
-      <p>Potwierdź, że ten adres email należy do Ciebie. Ustawienia będą gotowe do dopasowania lotów; wysyłka podsumowań nie jest jeszcze uruchomiona. Wypisanie jest dostępne w ustawieniach.</p>
+      <p>Potwierdź, że ten adres email należy do Ciebie. Dopiero po potwierdzeniu subskrypcja staje się aktywna. Wypisanie jest dostępne w ustawieniach.</p>
       {!manageToken ? <button className="button" disabled={busy} onClick={()=>perform(async()=>{const result=await action("/confirm",{token:linkToken()});setManageToken(result.token);setMessage("Alert został potwierdzony.");})}>Potwierdzam zapis</button> :
         <a className="button" href={`/alerts/manage#token=${manageToken}`}>Zarządzaj alertem</a>}
     </>}
@@ -70,8 +71,7 @@ export function AlertForm({mode,airports,destinations,initial={}}:{mode:"signup"
       <label>Wylot do (opcjonalnie)<input type="date" min={values.departure_from} value={values.departure_to??""} onChange={e=>field("departure_to",e.target.value)}/></label>
       <label className="alert-consent"><input type="checkbox" checked={values.weekend==="true"} onChange={e=>field("weekend",String(e.target.checked))}/>Tylko weekendy: wylot w piątek lub sobotę, powrót w najbliższą niedzielę</label>
       <label>Częstotliwość<select value={values.frequency} onChange={e=>field("frequency",e.target.value)}><option value="weekly">Raz w tygodniu</option><option value="daily">Najwyżej raz dziennie</option></select></label>
-      <p>To preferencje przyszłych podsumowań. Wysyłka ofert nie jest jeszcze uruchomiona.</p>
-      {mode==="signup" && <label className="alert-consent"><input name="consent" type="checkbox" required/>Chcę otrzymywać od HopTrip email z pasującymi lotami według wybranej częstotliwości po uruchomieniu podsumowań. Mogę wyłączyć alert w każdej chwili.</label>}
+      {mode==="signup" && <label className="alert-consent"><input name="consent" type="checkbox" required/>Chcę otrzymywać od HopTrip email z pasującymi lotami według wybranej częstotliwości gdy wysyłka jest włączona. Mogę wyłączyć alert w każdej chwili.</label>}
       <button className="button" disabled={busy} type="submit">{busy?"Zapisywanie…":mode==="signup"?"Wyślij link potwierdzający":"Zapisz ustawienia"}</button>
     </form>}
     {status==="PENDING" && <p>Najpierw potwierdź zapis linkiem z emaila.</p>}

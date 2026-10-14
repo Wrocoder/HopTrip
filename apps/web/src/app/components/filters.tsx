@@ -101,18 +101,16 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
 
     <button type="submit">{hero ? "Szukaj lotów" : pl.filter}</button>
     </div>
-    {!hero && <p className="field-hint">Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy. Długość pobytu podaj osobno w nocach.</p>}
     <div className="trip-presets" role="group" aria-label="Szybkie filtry">
       {tripPresets.map(preset=><div key={preset.id}>
         <button type="button" aria-pressed={presetActive(filters,preset.id)} aria-describedby={`preset-${preset.id}`}
           onClick={event=>{const form=event.currentTarget.form!;if(form.reportValidity())submit(form,preset.id);}}>{preset.label}</button>
-        {!hero && <p id={`preset-${preset.id}`} className="field-hint">{preset.rule}</p>}
       </div>)}
     </div>
-    {hero ? <details className="preset-rules"><summary>Zasady szybkich filtrów</summary>{tripPresets.map(preset=><p id={`preset-${preset.id}`} className="field-hint" key={preset.id}><strong>{preset.label}: </strong>{preset.rule}</p>)}<p className="field-hint">Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.</p></details> : <p className="field-hint">Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.</p>}
+    <details className="preset-rules"><summary>{hero ? "Zasady szybkich filtrów" : "Jak działają filtry"}</summary>{tripPresets.map(preset=><p id={`preset-${preset.id}`} className="field-hint" key={preset.id}><strong>{preset.label}: </strong>{preset.rule}</p>)}<p className="field-hint">Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.</p><p className="field-hint">Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy.</p></details>
     <details className="advanced-filters" open={advancedCount>0}>
      <summary>Daty i długość pobytu{advancedCount>0 && <span className="badge">Aktywne: {advancedCount}</span>}</summary>
-     {hero && <p className="field-hint">Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy. Długość pobytu podaj osobno w nocach.</p>}
+     <p className="field-hint">Zakres dat wylotu, nie powrotu. Długość pobytu w nocach. Puste pole: bez ograniczenia.</p>
      <div className="filter-secondary">
     {dateFields}
     {(["duration_min","duration_max"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="number" min="0" max="365" defaultValue={filters[k]} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>)}

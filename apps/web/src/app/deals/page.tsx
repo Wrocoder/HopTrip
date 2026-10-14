@@ -3,7 +3,7 @@ import LoadingDeals from "./loading";
 import {analyticsFilters} from "../../lib/analytics-context";
 import {SearchResultTracker} from "../components/search-result-tracker";
 import Link from "next/link";
-import {getAirports,getDestinations,getDealResults,Filters,Deal,Airport,Destination,ApiError} from "../../lib/api";
+import {alertsEnabled,getAirports,getDestinations,getDealResults,Filters,Deal,Airport,Destination,ApiError} from "../../lib/api";
 import {pl} from "../../lib/pl";
 import {DealGrid} from "../components/catalog";
 import {FilterForm} from "../components/filters";
@@ -28,7 +28,9 @@ async function DealResultsPage({searchParams}:{searchParams:Promise<Record<strin
   }
   let total=0;
   let deals:Deal[]=[],airports:Airport[]=[],destinations:Destination[]=[],error="";
-  const [offers,origins,places]=await Promise.allSettled([getDealResults({...filters,limit:"12"}),getAirports(),getDestinations()]);
+  const [offers,origins,places,alerts]=await Promise.allSettled([getDealResults({...filters,limit:"12"}),getAirports(),getDestinations(),alertsEnabled()]);
+  const alertQuery=new URLSearchParams(filters);
+  for(const key of ["offset","sort"])alertQuery.delete(key);
   if(origins.status==="fulfilled")airports=origins.value;
   if(places.status==="fulfilled")destinations=places.value;
   if(offers.status==="fulfilled"){deals=offers.value.items;total=offers.value.total;}
@@ -66,6 +68,7 @@ async function DealResultsPage({searchParams}:{searchParams:Promise<Record<strin
       </nav>
       {offset+12>10000 && offset+deals.length<total && <p>Zawęź filtry, aby przejrzeć dalsze oferty.</p>}
     </>}
+    <p>{alerts.status==="fulfilled" && alerts.value && <><Link href={`/alerts?${alertQuery}`}>Powiadom mnie o pasujących lotach</Link>{" · "}</>}<Link href="/saved">Zapisane wyjazdy</Link></p>
     {!Object.values(filters).some(Boolean) && <CatalogIntro page={catalogPage("/deals")!}/>}
   </main>;
 }

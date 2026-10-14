@@ -6,10 +6,11 @@ import {destinationGuides} from "./destination-guides";
 import {moreDestinationGuides} from "./more-destination-guides";
 import {cityBreakGuides} from "./city-break-guides";
 import {weekendPilotGuides} from "./weekend-pilot-guides";
+import {threeDayGuides} from "./three-day-guides";
 export type {InfoContent} from "./info-types";
 
 export const content:Record<string,InfoContent> = {
- ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,...weekendPilotGuides,
+ ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,...weekendPilotGuides,...threeDayGuides,
  "trip-budget":{
   title:"Jak policzyć budżet całej podróży",
   description:"Kalkulator budżetu podróży w PLN: policz loty, bagaż, noclegi, dojazdy i wydatki na miejscu dla całej grupy oraz na osobę.",
@@ -66,14 +67,14 @@ export const content:Record<string,InfoContent> = {
   sections:[
    {title:"Co trafia do porównania",paragraphs:[
     "Grupujemy obserwacje od tego samego dostawcy dla lotniska wylotu, kierunku, miesiąca i roku wyjazdu oraz długości pobytu. Loty bez daty powrotu mają osobną grupę. Cena weekendowego wyjazdu nie jest więc porównywana z pobytem trwającym dwa tygodnie.",
-    "Taka grupa nie gwarantuje jednak identycznego bagażu, godzin lotu, przewoźnika ani warunków zmiany rezerwacji. Przed zakupem sprawdź te elementy u sprzedawcy; historyczne porównanie ich nie wyrównuje.",
+    "Porównujemy ceny lotu na osobę w PLN. Taka grupa nie gwarantuje jednak tego samego lotniska docelowego, identycznego bagażu, godzin lotu, przewoźnika ani warunków zmiany rezerwacji. Przed zakupem sprawdź te elementy u sprzedawcy; historyczne porównanie ich nie wyrównuje.",
    ]},
    {title:"Jak rozumieć procent poniżej mediany",paragraphs:[
-    "Mediana opisuje środek zapisanej próby cen. Procent poniżej mediany pokazuje różnicę między bieżącą obserwacją a tą wartością. Nie jest rabatem przyznanym przez sprzedawcę ani obietnicą najniższej ceny na rynku.",
+    "Na karcie pokazujemy różnicę w PLN względem mediany próby. Różnicę mniejszą niż 1 zł (po zaokrągleniu cen do groszy) opisujemy jako „Blisko mediany”. Jest to granica dokładności komunikatu, nie próg opłacalności. Przy równej cenie piszemy „na poziomie mediany”; większą różnicę opisujemy neutralnie jako poniżej lub powyżej mediany. Potrzeba co najmniej 5 obserwacji i zgodnego, aktualnego rachunku. Brak tych danych oznacza brak wiarygodnego porównania. Mediana opisuje środek zapisanej próby cen. Procent poniżej mediany pokazuje różnicę między bieżącą obserwacją a tą wartością. Nie jest rabatem przyznanym przez sprzedawcę ani obietnicą najniższej ceny na rynku.",
     "Przykład wyłącznie obliczeniowy: przy medianie 400 PLN i obserwacji 300 PLN różnica wynosi 25%. Te kwoty nie są ofertą podróży. Gdy brakuje porównania historycznego, nie mamy podstaw do wskazania oszczędności; zero w tym polu nie dowodzi, że cena jest typowa.",
    ]},
    {title:"Ocena pomaga uporządkować oferty",paragraphs:[
-    "Ocena oferty 0–100 łączy cenę na tle historii (do 60 pkt), liczbę obserwacji (do 25 pkt) i świeżość danych (do 15 pkt). To pomocniczy indeks według przyjętych przez HopTrip wag, a nie ocena linii lotniczej ani prawdopodobieństwo zakupu. Kliknij ocenę na karcie, aby zobaczyć dokładny podział punktów. Na stronie oferty ten sam rachunek jest widoczny pod ceną i linkiem do partnera.",
+    "Ocena oferty 0–100 łączy cenę na tle historii (do 60 pkt), liczbę obserwacji (do 25 pkt) i świeżość danych (do 15 pkt). To pomocniczy indeks według przyjętych przez HopTrip wag, a nie ocena linii lotniczej ani prawdopodobieństwo zakupu. Kliknij „Jak porównujemy cenę?” na karcie, a następnie rozwiń obliczenia, aby zobaczyć procent i podział punktów. Na stronie oferty ten sam rachunek można rozwinąć w sekcji „Cena na tle historii”.",
     "Przy co najmniej 5 obserwacjach i poprawnej medianie cena równa medianie daje 30 z 60 pkt. Każdy 1% poniżej mediany dodaje 0,6 pkt; każdy 1% powyżej odejmuje 0,6 pkt. Wynik tej części ograniczamy do 0–60. Gdy historii jest mniej lub mediana jest nieznana, przyjmujemy neutralne 30 pkt i oznaczamy ocenę jako wstępną. To założenie, nie potwierdzenie okazji.",
     "Za historię przyznajemy 25 × min(liczba obserwacji / 30, 1) pkt. Są to zapisane obserwacje, a nie liczba niezależnych sprzedawców. Próba może zawierać obecną cenę i nie musi reprezentować całego rynku. Świeżość daje do 15 pkt: punkty maleją liniowo z wiekiem obserwacji do 0 po 48 godzinach. Brak poprawnego czasu lub wygaśnięcie oferty oznacza 0 pkt za świeżość. Jeśli źródło nie podaje czasu znalezienia ceny, używamy pierwszego zapisania tej obserwacji w HopTrip, bez obietnicy ceny na żywo.",
     "Każdy składnik zaokrąglamy do 0,1 pkt, sumujemy widoczne wartości i zaokrąglamy wynik do liczby całkowitej, z połówkami w górę. Przykład wyłącznie obliczeniowy: cena 330 PLN przy medianie 400 PLN daje 40,5 pkt, 24 obserwacje dają 20 pkt, a wiek 24 godziny daje 7,5 pkt. Suma: 68/100. Przykład nie jest ofertą podróży. Wynik opisuje chwilę przeliczenia, której datę pokazujemy w wyjaśnieniu.",
@@ -158,8 +159,9 @@ const destinationConnections:Record<string,string[]>={
  "milan-airports":["milan-weekend"],
  "stockholm-airports":["stockholm-weekend"],
  "trip-budget":["city-break-planning","concert-trip"],
- "barcelona-airports":["madrid-airport","valencia-airport"],
- "lisbon-airport":["porto-airport"],
+ "barcelona-airports":["barcelona-3-days","madrid-airport","valencia-airport"],
+ "rome-airports":["rome-3-days"],
+ "lisbon-airport":["lisbon-3-days","porto-airport"],
  "budapest-airport":["vienna-airport","prague-airport"],
  "paris-airports":["amsterdam-airport","paris-weekend"],
  "london-airports":["copenhagen-airport","stockholm-airports"],

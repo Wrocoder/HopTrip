@@ -5,6 +5,7 @@ from datetime import UTC, datetime, timedelta
 
 from app.models.offer import TravelOffer
 from app.schemas.deal import FlightFacts
+from app.services.flight_reference import airline_name, airport_timezone
 
 
 def _code(value: object, pattern: str = r"[A-Z]{3}") -> str | None:
@@ -46,14 +47,19 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
     facts.destination_airport = _code(payload.get("destination_airport"))
     facts.destination_code = _code(payload.get("destination"))
     facts.airline_code = _code(payload.get("airline"), r"[A-Z0-9]{2}")
+    facts.airline_name = airline_name(facts.airline_code)
+    facts.origin_timezone = airport_timezone(facts.origin_airport)
+    facts.destination_timezone = airport_timezone(facts.destination_airport)
     facts.outbound_stops = _count(payload.get("transfers"), 20)
     if offer.departure_precision == "TIME":
         facts.outbound_departure = _time(payload.get("departure_at"))
     facts.outbound_arrival = _arrival(facts.outbound_departure, payload.get("duration_to"))
+    facts.outbound_arrival_calculated = facts.outbound_arrival is not None
     if offer.return_at is not None:
         facts.return_stops = _count(payload.get("return_transfers"), 20)
         facts.return_departure = _time(payload.get("return_at"))
         facts.return_arrival = _arrival(facts.return_departure, payload.get("duration_back"))
+        facts.return_arrival_calculated = facts.return_arrival is not None
         if facts.outbound_arrival and facts.return_departure:
             interval = (
                 facts.return_departure.astimezone(UTC) - facts.outbound_arrival

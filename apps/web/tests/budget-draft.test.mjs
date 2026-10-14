@@ -1,6 +1,6 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
-import {budgetDateCounts,budgetDraftKey,readBudgetDraft} from "../src/lib/budget-draft.ts";
+import {budgetDateCounts,budgetDraftKey,readBudgetDraft,changeStayDate} from "../src/lib/budget-draft.ts";
 import {emptyBudget,calculateBudget} from "../src/lib/trip-budget.ts";
 
 test("draft roundtrip preserves unknown, zero, decimal and both lodging modes",()=>{
@@ -21,4 +21,17 @@ test("date counts respect calendar days, same-day stays and invalid ranges",()=>
  assert.deepEqual(budgetDateCounts("2027-01-15","2027-01-15"),{nights:"0",days:"1"});
  for(const [start,end] of [["","2027-01-15"],["2027-01-16","2027-01-15"],["2027-02-30","2027-03-03"],["2027-01-01","2028-01-01"]])
   assert.equal(budgetDateCounts(start,end),null);
+});
+
+test("legacy groups stay unclassified; adult confirmation and amounts survive date edits",()=>{
+ const old={version:1,input:{...emptyBudget,people:"3",hotel:"200",hotel_total:"900",flight:"260"},start:"2027-01-15",end:"2027-01-17",context:"offer",review:false};
+ assert.equal(readBudgetDraft(JSON.stringify(old)).adultsOnly,undefined);
+ const next=changeStayDate({...old,adultsOnly:true},"end","2027-01-18");
+ const restored=readBudgetDraft(JSON.stringify(next));
+ assert.equal(restored.adultsOnly,true);
+ assert.equal(restored.input.nights,"3");
+ assert.equal(restored.input.days,"4");
+ for(const key of ["hotel","hotel_total","flight","people"])assert.equal(restored.input[key],old.input[key]);
+ assert.equal(restored.review,true);
+ assert.equal(readBudgetDraft(JSON.stringify({...old,adultsOnly:"true"})),null);
 });

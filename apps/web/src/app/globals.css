@@ -382,12 +382,48 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .sort-control select { width: 100%; min-height: 48px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; background: var(--input); color: var(--ink); font: inherit; }
 .sort-control select:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; }
 .result-count { color: var(--secondary); margin-bottom: 18px; }
+/* Compact catalog controls; retain the home search layout and full filter semantics. */
+main.catalog-page { padding-top: 16px; }
+.catalog-page .page-heading { margin: 0 0 18px; }
+.catalog-page .page-heading h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 4px 0 12px; }
+.catalog-page .page-heading .eyebrow { margin-bottom: 4px; }
+.catalog-page .page-heading .lead { margin-bottom: 0; }
+.catalog-page .filter-panel { padding: 18px; margin-bottom: 12px; }
+.catalog-page .filters { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr); gap: 8px 20px; }
+.catalog-page .filter-primary, .catalog-page .trip-presets,
+.catalog-page .filters > .notice { grid-column: 1 / -1; }
+.catalog-page .preset-rules { align-self: end; min-width: 0; }
+.catalog-page .preset-rules[open] { grid-column: 1 / -1; }
+.catalog-page .trip-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0; }
+.catalog-page .trip-presets button { padding: 8px 14px; font-size: 14px; }
+.catalog-page .preset-rules summary { cursor: pointer; min-height: 44px; padding-block: 10px; font-size: 14px; }
+.catalog-page .advanced-filters { border: 0; margin-top: 0; padding-top: 0; align-self: end; min-width: 0; }
+.catalog-page .advanced-filters[open] { grid-column: 1 / -1; }
+.catalog-page .advanced-filters summary { padding-block: 10px; }
+.catalog-page .sort-control { margin-top: 0; max-width: none; }
+.catalog-page .filter-secondary { padding-top: 8px; }
+.catalog-page .active-filters { margin-top: 10px; padding-top: 10px; }
+.catalog-page .filter-chips { gap: 6px; }
+.catalog-page .filter-chip { padding: 6px 10px; }
+.catalog-page .result-count { margin-bottom: 12px; }
+.catalog-page summary:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; border-radius: 4px; }
+@media (max-width: 640px) {
+  .catalog-page .filter-panel { padding: 14px; }
+  .catalog-page .filter-primary { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .catalog-page .filter-primary > button { align-self: end; margin-top: 0; }
+  .catalog-page .filter-primary .field-hint { font-size: 12px; }
+  .catalog-page .filters { grid-template-columns: minmax(0,1fr); gap: 6px; }
+  .catalog-page .trip-presets button { padding-inline: 10px; font-size: 13px; }
+  .catalog-page .page-heading { margin-bottom: 14px; }
+}
 .price-assessment { font-size: 14px; line-height: 1.6; margin-block: 16px; }
 .trip-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .alert-fields input:not([type="checkbox"]), .alert-fields select { min-height: 48px; border-color: var(--border); background: var(--surface); color: var(--ink); }
 .trip-share-link { display: block; width: 100%; min-width: 0; padding: 12px; margin-block: 8px; font: inherit; }
 .price-assessment p { margin: 0 0 8px; }
 .price-comparison { color: var(--green-dark); }
+.price-summary { margin: 0; font-size: .875rem; line-height: 1.5; color: var(--secondary); }
+.price-summary strong { color: var(--ink); }
 .price-samples, .price-observation, .price-availability { color: var(--secondary); }
 .deal-card > .score-trigger { align-self: flex-start; background: transparent; font-weight: 400; padding-inline: 0; }
 .deal-card-link { flex: initial; }
@@ -403,3 +439,6 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .trip-details-content h3 { margin: 0 0 12px; font-size: 16px; }
 .trip-details-content .price-assessment { margin-top: 0; }
 .country-flag { display: inline-block; width: 24px; height: 18px; margin-left: 10px; vertical-align: middle; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.12); object-fit: cover; }
+.flight-schedule { font-size: 14px; line-height: 1.6; margin-top: 14px; overflow-wrap: anywhere; }
+.flight-schedule p { margin: 0 0 10px; }
+.home-arrival { border-left: 3px solid var(--sage); padding-left: 10px; }

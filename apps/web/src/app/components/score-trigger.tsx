@@ -25,10 +25,10 @@ export function ScoreTrigger({score,slug,destination,provisional,children}:{
   },[open]);
   return <>
     <a ref={trigger} className="score-badge score-trigger" href={`/deals/${slug}#score`}
-      aria-haspopup="dialog" aria-label={`Wyjaśnij ocenę oferty cenowej ${score}/100: ${destination}${provisional ? ", ocena wstępna" : ""}`}
-      title="Sprawdź, skąd biorą się punkty"
+      aria-haspopup="dialog" aria-label={`Jak porównujemy cenę? Wyjaśnij ocenę oferty cenowej ${score}/100: ${destination}${provisional ? ", ocena wstępna" : ""}`}
+      title="Sprawdź porównanie i pomocniczą ocenę punktową"
       onClick={event=>{if(!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey){event.preventDefault();setOpen(true);}}}>
-      <span>{provisional ? "Wstępna ocena oferty cenowej" : "Ocena oferty cenowej"}: {score}/100 <span aria-hidden="true">ⓘ</span></span>
+      <span>Jak porównujemy cenę? <span aria-hidden="true">ⓘ</span></span>
     </a>
     <dialog ref={dialog} className="score-dialog" aria-labelledby={titleId}
       onClose={()=>setOpen(false)} onClick={event=>{
