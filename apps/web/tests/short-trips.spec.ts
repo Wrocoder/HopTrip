@@ -36,6 +36,7 @@ test("six short trips retain nights and airport in the catalog",async({page},tes
 test("airport choice persists with two or zero matches and never fills gaps with long trips",async({page})=>{
  await page.goto("/");
  await expect(page.locator("#short-trip-origin")).toHaveValue("WRO");
+ await page.locator(".short-trip-airport > summary").click();
  await page.locator("#short-trip-origin").selectOption("KTW");
  await page.getByRole("button",{name:"Pokaż krótkie wyjazdy"}).click();
  await expect(page).toHaveURL(/origin=KTW/);
@@ -45,6 +46,7 @@ test("airport choice persists with two or zero matches and never fills gaps with
  await page.reload();
  await expect(page.locator("#short-trip-origin")).toHaveValue("KTW");
  await expect(selection.locator(".deal-card")).toHaveCount(2);
+ await page.locator(".short-trip-airport > summary").click();
  await page.locator("#short-trip-origin").selectOption("GDN");
  await page.getByRole("button",{name:"Pokaż krótkie wyjazdy"}).click();
  await expect(selection.locator(".deal-card")).toHaveCount(0);

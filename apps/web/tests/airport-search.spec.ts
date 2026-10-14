@@ -10,7 +10,7 @@ test("home airport suggestions support keyboard and preserve search filters",asy
   await expect(page.getByRole("button",{name:"Szukaj lotów",exact:true})).toBeInViewport();
   const origin=page.getByRole("combobox",{name:"Skąd",exact:true});
   await origin.fill("wroclaw");
-  await expect(page.getByRole("option",{name:"Wrocław — WRO",exact:true})).toBeVisible();
+  await expect(page.getByRole("form",{name:"Filtry ofert"}).getByRole("option",{name:"Wrocław — WRO",exact:true})).toBeVisible();
   await origin.press("ArrowDown");
   await origin.press("Enter");
   await expect(origin).toHaveValue("Wrocław — WRO");
@@ -67,10 +67,10 @@ test("home validates dates and remains accessible on a narrow screen",async({pag
   await expect(page.getByLabel("Wylot do",{exact:true})).toBeFocused();
   await page.getByLabel("Wylot do",{exact:true}).fill("2027-05-21");
   await page.getByRole("combobox",{name:"Skąd",exact:true}).fill("wro");
-  await expect(page.getByRole("option",{name:"Wrocław — WRO",exact:true})).toBeVisible();
+  await expect(page.getByRole("form",{name:"Filtry ofert"}).getByRole("option",{name:"Wrocław — WRO",exact:true})).toBeVisible();
   const axe=await new AxeBuilder({page}).include(".hero-search").analyze();
   expect(axe.violations).toEqual([]);
-  await page.getByRole("option",{name:"Wrocław — WRO",exact:true}).click();
+  await page.getByRole("form",{name:"Filtry ofert"}).getByRole("option",{name:"Wrocław — WRO",exact:true}).click();
   await expect(page.getByRole("combobox",{name:"Skąd",exact:true})).toHaveValue("Wrocław — WRO");
   await page.setViewportSize({width:320,height:740});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();

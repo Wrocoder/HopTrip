@@ -26,18 +26,19 @@ export default async function HomePage({searchParams}:{searchParams:Promise<{ori
       <FilterForm key={origin} filters={{origin}} airports={airports} destinations={destinations} hero/></section>
 
     <section className="catalog-section" aria-labelledby="current-deals"><div className="section-heading"><div><p className="eyebrow">Wylot: {origin}</p><h2 id="current-deals">Krótkie wyjazdy · 2–4 noce</h2></div><span className="badge">{pl.perPerson} · PLN</span></div>
-      <p>{pl.flightOnly} Sprawdź godziny lotów i potrzebne dni urlopu.</p>
+      <details className="short-trip-airport"><summary>Zmień lotnisko krótkiego wyjazdu</summary>
       <Form key={origin} action="/"><label htmlFor="short-trip-origin">Lotnisko dla krótkich wyjazdów</label>{" "}
         <select id="short-trip-origin" name="origin" defaultValue={origin} required>
           {!airports.some(a=>a.iata_code===origin) && <option value="">Wybierz lotnisko</option>}
           {airports.map(a=><option key={a.id} value={a.iata_code}>{airportLabel(a)}</option>)}
         </select>{" "}<button type="submit" className="button button-secondary" disabled={!airports.length}>Pokaż krótkie wyjazdy</button>
-      </Form>
+      </Form></details>
       {failed ? <p className="notice" role="status">{pl.error}</p> : <>
+        {deals.length>0 && <DealGrid deals={deals}/>}
         <p role="status">{deals.length ? `Liczba propozycji na 2–4 noce: ${deals.length}.` : "Brak aktualnych lotów na 2–4 noce z tego lotniska. Wybierz inne lotnisko lub sprawdź katalog z inną długością pobytu."}</p>
         {deals.length>0 && deals.length<6 && <p>Obecnie pokazujemy mniej propozycji spełniających te warunki. Sprawdź ponownie później lub zmień lotnisko.</p>}
-        {deals.length>0 && <DealGrid deals={deals}/>}
       </>}
+      <p>{pl.flightOnly} Sprawdź godziny lotów i potrzebne dni urlopu.</p>
       <p><Link href={catalogHref}>Zobacz wszystkie loty na 2–4 noce →</Link></p>
     </section>
     <p className="search-explanation"><Link href="/deals">Zobacz loty ze wszystkich lotnisk →</Link> · <Link href="/info/price-comparison">{pl.why} →</Link></p>

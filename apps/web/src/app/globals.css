@@ -337,8 +337,8 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .home-page .hero-search .field-hint { margin-block: 4px; }
 .preset-rules { margin-top: 6px; }
 .preset-rules summary { cursor: pointer; font-size: 14px; color: var(--secondary); padding-block: 6px; min-height: 36px; }
-.home-page .catalog-section { padding-block: 22px; }
-.home-page .section-heading { margin-bottom: 16px; }
+.home-page .catalog-section { padding-block: 10px 22px; }
+.home-page .section-heading { margin-bottom: 4px; }
 .home-page .section-heading h2 { font-size: 28px; }
 .home-page .section-heading .eyebrow { margin-bottom: 4px; }
 @media (max-width: 700px) {
@@ -424,6 +424,9 @@ main.catalog-page { padding-top: 16px; }
 .price-comparison { color: var(--green-dark); }
 .price-summary { margin: 0; font-size: .875rem; line-height: 1.5; color: var(--secondary); }
 .price-summary strong { color: var(--ink); }
+.featured-card .price-summary, .featured-card .price-summary strong { color: #fff; }
+.short-trip-airport { margin-bottom: 4px; }
+.short-trip-airport > summary { min-height: 44px; padding-block: 10px; cursor: pointer; }
 .price-samples, .price-observation, .price-availability { color: var(--secondary); }
 .deal-card > .score-trigger { align-self: flex-start; background: transparent; font-weight: 400; padding-inline: 0; }
 .deal-card-link { flex: initial; }
@@ -434,6 +437,8 @@ main.catalog-page { padding-top: 16px; }
 .trip-details > summary::marker { color: var(--secondary); }
 .trip-details > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
 .trip-details > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+.featured-card .trip-details > summary, .featured-card .trip-details > summary::marker { color: var(--surface); }
+.featured-card .trip-details > summary:focus-visible { outline-color: var(--surface); }
 .trip-details-content { padding-block: 12px 8px; overflow-wrap: anywhere; }
 .trip-details-content section + section { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
 .trip-details-content h3 { margin: 0 0 12px; font-size: 16px; }
