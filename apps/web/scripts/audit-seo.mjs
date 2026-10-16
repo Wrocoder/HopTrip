@@ -23,14 +23,15 @@ try {
   if(doc.querySelector("parsererror")) throw new Error("Invalid sitemap XML");
   return [...doc.querySelectorAll("url > loc")].map(node=>node.textContent);
  },await sitemap.text());
- check(urls.length===52,`sitemap: expected 52 URLs, got ${urls.length}`);
+ check(urls.length===57,`sitemap: expected 57 URLs, got ${urls.length}`);
+ const growthPaths=["/from/KRK","/from/warszawa","/city-break","/tanie-loty-na-weekend","/routes/krakow-rome"];
  check(new Set(urls).size===urls.length,"sitemap: duplicate URLs");
  const paths=[];
  const titles=new Set(), descriptions=new Set();
  for(const loc of urls) {
   const url=new URL(loc), path=url.pathname;
   check(url.origin===canonical && !url.search && !url.hash,`${path}: incorrect sitemap URL`);
-   check(["/","/info","/deals","/from/WRO","/destinations/milan"].includes(path) || /^\/info\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path),`${path}: unexpected sitemap path`);
+   check(["/","/info","/deals","/from/WRO","/destinations/milan",...growthPaths].includes(path) || /^\/info\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path),`${path}: unexpected sitemap path`);
   paths.push(path);
   // Fetch only the server explicitly selected by the operator, never sitemap hosts.
   const response=await page.goto(`${base}${path}`);
@@ -90,6 +91,7 @@ try {
   }
  }
  check(paths.includes("/") && paths.includes("/info"),"sitemap: missing home or editorial index");
+ for(const path of growthPaths) check(paths.includes(path),`${path}: missing growth landing in sitemap`);
  for(const path of ["/info/contact","/info/privacy","/info/terms","/deals?origin=WRO","/destinations/barcelona"]) {
   check(!paths.includes(path),`${path}: must not appear in sitemap`);
   const response=await page.goto(`${base}${path}`);
@@ -102,8 +104,7 @@ try {
  for(const slug of ["privacy","terms","contact","constructor","seo-audit-missing-page"]) {
   check((await context.request.get(`${base}/share/${slug}`)).status()===404,`${slug}: draft/unknown share image must be 404`);
  }
- // Next.js can send 200 once streaming has started; the not-found UI must be noindex.
- check([200,404].includes(missing?.status()),"unknown article: unexpected HTTP status");
+ check(missing?.status()===404,"unknown article: expected HTTP 404");
  check(await page.locator("main").innerText().then(text=>/HopTrip · 404/i.test(text)),"unknown article: missing not-found UI");
  check(await page.locator('meta[name="robots"]').evaluateAll(nodes=>nodes.some(node=>/noindex/i.test(node.content))),"unknown article: missing noindex");
  const robots=await context.request.get(`${base}/robots.txt`,{timeout:15000,maxRedirects:0});
