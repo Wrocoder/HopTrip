@@ -23,7 +23,7 @@ export function AirportSelect({airports,value="",errorId}:{airports:Airport[];va
   return <div className="airport-select">
     <label htmlFor={id}>{pl.from}</label>
     <input ref={input} id={id} name="origin" value={text} maxLength={240}
-      placeholder="Wrocław lub WRO" autoComplete="off" role="combobox"
+      placeholder="Dowolne lotnisko" autoComplete="off" role="combobox"
       aria-autocomplete="list" aria-expanded={expanded} aria-controls={`${id}-options`}
       aria-activedescendant={expanded && active>=0 ? `${id}-option-${active}` : undefined}
       aria-invalid={Boolean(errorId)}

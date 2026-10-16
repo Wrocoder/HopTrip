@@ -379,7 +379,7 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 }
 
 .sort-control { max-width: 360px; margin-top: 18px; }
-.sort-control select { width: 100%; min-height: 48px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; background: var(--input); color: var(--ink); font: inherit; }
+.sort-control select { width: 100%; min-height: 48px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; background: var(--input); color: var(--ink); font: inherit; font-size: 16px; }
 .sort-control select:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; }
 .result-count { color: var(--secondary); margin-bottom: 18px; }
 /* Compact catalog controls; retain the home search layout and full filter semantics. */
@@ -447,3 +447,24 @@ main.catalog-page { padding-top: 16px; }
 .flight-schedule { font-size: 14px; line-height: 1.6; margin-top: 14px; overflow-wrap: anywhere; }
 .flight-schedule p { margin: 0 0 10px; }
 .home-arrival { border-left: 3px solid var(--sage); padding-left: 10px; }
+.catalog-note { color: var(--secondary); font-size: 14px; margin: 0 0 12px; }
+.deal-card { padding: 20px; }
+.deal-card .deal-origin { margin: 10px 0 2px; }
+.deal-card h2 { margin-bottom: 6px; overflow-wrap: anywhere; }
+.deal-card .deal-dates { margin: 0 0 4px; font-size: 14px; }
+.deal-card-link > .deal-note { margin: 0 0 8px; }
+.deal-card .deal-card-bottom { padding-top: 10px; }
+.deal-card .flight-schedule-compact { margin-top: 12px; }
+.flight-schedule-compact p { margin: 0 0 6px; }
+.flight-schedule-compact .schedule-basis, .flight-schedule-compact .schedule-airline { color: var(--secondary); font-size: 13px; }
+.deal-card .trip-details { margin-top: 8px; }
+.trip-navigation { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 20px 24px; }
+.trip-navigation a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px 18px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); color: var(--green-dark); font-weight: 600; text-decoration: none; }
+.trip-navigation a:hover { background: var(--input); }
+#trip-flight, #accommodation, #calculator, #trip-save { scroll-margin-top: 24px; }
+#trip-save { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+.partner-limitation { padding: 12px; border-left: 3px solid var(--sage); background: var(--input); font-size: .95rem; }
+.featured-card .flight-schedule-compact .schedule-basis, .featured-card .flight-schedule-compact .schedule-airline { color: var(--sage-light); }
+@media (max-width: 360px) {
+  .home-page .hero-search .filter-primary, .catalog-page .filter-primary { grid-template-columns: minmax(0, 1fr); }
+}

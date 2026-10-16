@@ -10,6 +10,72 @@ test.afterEach(async({request})=>{
  await request.post("http://127.0.0.1:8100/__test__/short-trips?enabled=false");
 });
 
+test("first visit has no airport restriction and explicit choices survive a new home visit",async({page,context},testInfo)=>{
+ await page.goto("/");
+ const origin=page.getByRole("combobox",{name:"Skąd",exact:true});
+ await expect(origin).toHaveValue("");
+ await expect(origin).toHaveAttribute("placeholder","Dowolne lotnisko");
+ await expect(page.locator(".catalog-section > .section-heading .eyebrow")).toHaveText("Wylot: dowolne lotnisko");
+ await expect(page.locator(".catalog-section .deal-card")).toHaveCount(6);
+ expect((await page.locator(".catalog-section .deal-origin").allTextContents()).some(text=>!text.includes("WRO"))).toBe(true);
+ await page.screenshot({path:testInfo.outputPath("home-any-airport.png"),scale:"css"});
+ await origin.fill("WAW");
+ await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+ await expect(page).toHaveURL(/origin=WAW/);
+ await page.getByRole("link",{name:"HopTrip — strona główna"}).click();
+ await expect(origin).toHaveValue(/WAW/);
+ await expect(page.locator("#short-trip-origin")).toHaveValue("WAW");
+ const fresh=await context.newPage();
+ await fresh.goto("/");
+ await expect(fresh.locator("#short-trip-origin")).toHaveValue("WAW");
+ await fresh.close();
+ await page.goto("/?origin=KTW");
+ await expect(origin).toHaveValue(/KTW/);
+ await expect(page.locator(".catalog-section .deal-card")).toHaveCount(2);
+ await page.goto("/?origin=");
+ await expect(origin).toHaveValue("");
+ await page.goto("/");
+ await expect(origin).toHaveValue(/WAW/);
+ await page.locator(".short-trip-airport > summary").click();
+ await page.locator("#short-trip-origin").selectOption("");
+ await page.getByRole("button",{name:"Pokaż krótkie wyjazdy"}).click();
+ await expect(page).toHaveURL(/origin=$/);
+ await page.goto("/");
+ await expect(origin).toHaveValue("");
+});
+
+test("short-trip selection and clearing a catalog origin update the preference",async({page})=>{
+ await page.goto("/");
+ await page.locator(".short-trip-airport > summary").click();
+ await page.locator("#short-trip-origin").selectOption("KTW");
+ await page.getByRole("button",{name:"Pokaż krótkie wyjazdy"}).click();
+ await expect(page).toHaveURL(/origin=KTW/);
+ await page.goto("/");
+ await expect(page.locator("#short-trip-origin")).toHaveValue("KTW");
+ await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+ await expect(page).toHaveURL(/origin=KTW/);
+ await page.getByRole("link",{name:/Usuń filtr: Skąd/}).click();
+ await expect(page).not.toHaveURL(/origin=/);
+ await page.goto("/");
+ await expect(page.locator("#short-trip-origin")).toHaveValue("");
+});
+
+test("stale preferences are ignored and an empty search clears a remembered airport",async({page,context})=>{
+ await context.addCookies([{name:"hoptrip.origin.v1",value:"ZZZ",url:"http://127.0.0.1:3100"}]);
+ await page.goto("/");
+ const origin=page.getByRole("combobox",{name:"Skąd",exact:true});
+ await expect(origin).toHaveValue("");
+ await context.addCookies([{name:"hoptrip.origin.v1",value:"WAW",url:"http://127.0.0.1:3100"}]);
+ await page.reload();
+ await expect(origin).toHaveValue(/WAW/);
+ await origin.fill("");
+ await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+ await expect(page).toHaveURL(/\/deals$/);
+ await page.goto("/");
+ await expect(origin).toHaveValue("");
+ expect((await context.cookies()).find(cookie=>cookie.name==="hoptrip.origin.v1")).toBeUndefined();
+});
+
 test("six short trips retain nights and airport in the catalog",async({page},testInfo)=>{
  await page.goto("/?origin=WAW");
  const selection=page.getByRole("region",{name:"Krótkie wyjazdy · 2–4 noce"});
@@ -35,7 +101,7 @@ test("six short trips retain nights and airport in the catalog",async({page},tes
 
 test("airport choice persists with two or zero matches and never fills gaps with long trips",async({page})=>{
  await page.goto("/");
- await expect(page.locator("#short-trip-origin")).toHaveValue("WRO");
+ await expect(page.locator("#short-trip-origin")).toHaveValue("");
  await page.locator(".short-trip-airport > summary").click();
  await page.locator("#short-trip-origin").selectOption("KTW");
  await page.getByRole("button",{name:"Pokaż krótkie wyjazdy"}).click();

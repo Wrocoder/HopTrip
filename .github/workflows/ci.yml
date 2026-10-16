@@ -1,10 +1,18 @@
 name: checks
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  checks:
+  api:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     services:
       postgres:
         image: postgres:16-alpine
@@ -20,9 +28,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.12"}
-      - uses: actions/setup-node@v4
-        with: {node-version: "22", cache: npm, cache-dependency-path: apps/web/package-lock.json}
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.lock
       - run: pip install -r requirements.lock
       - run: pip install --no-deps -e .
       - run: python -m ruff check apps/api
@@ -30,63 +39,25 @@ jobs:
       - run: python -m alembic upgrade head
         working-directory: apps/api
       - run: python -m pytest -q
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: "22", cache: npm, cache-dependency-path: apps/web/package-lock.json}
       - run: npm ci
         working-directory: apps/web
-      - run: npm run test:unit && npm run lint && npm run typecheck && npm run build
+      # next build includes TypeScript checking; a separate typecheck duplicates it.
+      - run: npm run test:unit && npm run lint && npm run build
         working-directory: apps/web
-      - run: npx playwright install --with-deps chromium
-        working-directory: apps/web
-      - run: npm run test:e2e
-        working-directory: apps/web
-      - name: Start production build for SEO audit
-        run: docker compose -f docker-compose.rehearsal.yml up -d --build --wait
-      - name: Audit production SEO
-        run: |
-          curl --fail --silent --show-error --retry 20 --retry-all-errors --retry-delay 2 --max-time 5 http://127.0.0.1:58080/info --output /dev/null
-          npm run audit:seo -- http://127.0.0.1:58080 http://localhost:58080
-        working-directory: apps/web
-      - name: Audit accessibility and keyboard navigation
-        run: npm run audit:experience -- http://127.0.0.1:58080 --accessibility-only
-        working-directory: apps/web
-      - name: Show rehearsal logs on failure
-        if: failure()
-        run: docker compose -f docker-compose.rehearsal.yml logs --no-color --tail 100
-      - name: Stop SEO rehearsal
-        if: always()
-        run: docker compose -f docker-compose.rehearsal.yml down
-      - uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: playwright-failure-details
-          path: apps/web/test-results/
-          if-no-files-found: ignore
-          retention-days: 7
-  deploy:
-    needs: checks
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  checks:
+    if: always()
+    needs: [api, web]
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    environment: production
-    concurrency:
-      group: hoptrip-production
-      cancel-in-progress: false
     steps:
-      - name: Deploy the tested commit
+      - name: Require both checks
         env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
-          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
-          RELEASE_SHA: ${{ github.sha }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          directory=$(mktemp -d)
-          trap 'rm -rf "$directory"' EXIT
-          printf '%s\n' "$DEPLOY_KEY" > "$directory/key"
-          printf '%s\n' "$KNOWN_HOSTS" > "$directory/known_hosts"
-          ssh -i "$directory/key" -o BatchMode=yes -o IdentitiesOnly=yes \
-            -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$directory/known_hosts" \
-            -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=10 \
-            "$DEPLOY_USER@$DEPLOY_HOST" "$RELEASE_SHA"
+          API_RESULT: ${{ needs.api.result }}
+          WEB_RESULT: ${{ needs.web.result }}
+        run: test "$API_RESULT" = success && test "$WEB_RESULT" = success

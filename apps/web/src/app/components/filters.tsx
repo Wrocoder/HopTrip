@@ -11,6 +11,7 @@ import {matchingDestinations,destinationLabel} from "../../lib/destinations";
 import {presetActive,togglePreset,tripPresets,type TripPreset} from "../../lib/trip-filters";
 import {DestinationSelect} from "./destination-select";
 import {AirportSelect} from "./airport-select";
+import {rememberOrigin} from "../actions/origin-preference";
 const filterLabels={origin:pl.from,destination:pl.to,budget:pl.budget,
  departure_from:pl.departure_from,departure_to:pl.departure_to,
  duration_min:pl.duration_min,duration_max:pl.duration_max,weekend:"Na weekend"};
@@ -26,7 +27,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
   const fieldError=(name:string)=>validation && invalidField===name ? errorId : undefined;
   const active=filterKeys.filter(key=>key==="weekend" ? presetActive(filters,"weekend") : !!filters[key]);
   const advancedCount=advancedKeys.filter(key=>!!filters[key]).length;
-  function submit(form:HTMLFormElement,preset?:TripPreset) {
+  async function submit(form:HTMLFormElement,preset?:TripPreset) {
     const data=new FormData(form);
     const query=new URLSearchParams();
     for(const key of filterKeys) {
@@ -71,6 +72,8 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     if(min && max && Number(min)>Number(max)) {invalid("duration_max","Maksymalny pobyt nie może być krótszy niż minimalny.");return;}
     setValidation("");track("FILTER_USE");
     track("SEARCH",undefined,undefined,{search:{filters:analyticsFilters(Object.fromEntries(query),airports,destinations)}});
+    // A failed preference save must not prevent the actual search.
+    try {await rememberOrigin(query.get("origin") ?? "");}catch {}
     router.push(query.size ? `/deals?${query}` : "/deals");
   }
   function filterValue(key:FilterKey):string {
@@ -87,6 +90,10 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     if(filters.sort)query.set("sort",filters.sort);
     for(const key of active) if(key!==removed) query.set(key,filters[key]!);
     return query.size ? `/deals?${query}` : "/deals";
+  }
+  async function clearOriginAndNavigate(href:string) {
+    try {await rememberOrigin("");}catch {}
+    router.push(href);
   }
   const dateFields=(["departure_from","departure_to"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="date" defaultValue={filters[k]} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>);
   return <section className={`filter-panel${hero ? " hero-search" : ""}`} aria-label="Wybór ofert">
@@ -132,10 +139,10 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
    </form>
    {!hero && active.length>0 && <div className="active-filters"><p>Zastosowane filtry</p>
     <nav className="filter-chips" aria-label="Zastosowane filtry">{active.map(key=>
-     <Link className="filter-chip" key={key} href={withoutFilter(key)} aria-label={`Usuń filtr: ${filterLabels[key]}: ${filterValue(key)}`} onClick={()=>track("FILTER_USE")}>
+     <Link className="filter-chip" key={key} href={withoutFilter(key)} aria-label={`Usuń filtr: ${filterLabels[key]}: ${filterValue(key)}`} onClick={()=>track("FILTER_USE")} onNavigate={event=>{if(key==="origin"){event.preventDefault();void clearOriginAndNavigate(withoutFilter(key));}}}>
       <span>{filterLabels[key]}: <strong>{filterValue(key)}</strong></span><span aria-hidden="true">×</span>
      </Link>
-    )}</nav><Link className="filter-reset" href={filters.sort ? `/deals?sort=${encodeURIComponent(filters.sort)}` : "/deals"} onClick={()=>track("FILTER_USE")}>Wyczyść wszystkie filtry</Link>
+    )}</nav><Link className="filter-reset" href={filters.sort ? `/deals?sort=${encodeURIComponent(filters.sort)}` : "/deals"} onClick={()=>track("FILTER_USE")} onNavigate={event=>{event.preventDefault();void clearOriginAndNavigate(filters.sort ? `/deals?sort=${encodeURIComponent(filters.sort)}` : "/deals");}}>Wyczyść wszystkie filtry</Link>
    </div>}
   </section>;
 }

@@ -10,7 +10,6 @@ import {Price} from "./price";
 import {Impression} from "./deal-view-tracker";
 import {ScoreDetails} from "./score-details";
 import {ScoreTrigger} from "./score-trigger";
-import {PriceSummary} from "./price-assessment";
 export function DealCard({deal}:{deal:Deal}) {
   return <article className="deal-card">
     <Impression slug={deal.slug}/>
@@ -25,13 +24,12 @@ export function DealCard({deal}:{deal:Deal}) {
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
     </Link>
-    <PriceSummary deal={deal}/>
-    <FlightSchedule deal={deal}/>
+    <FlightSchedule deal={deal} compact/>
     <TripDetails deal={deal}/>
     <ScoreTrigger score={deal.deal_score} slug={deal.slug} destination={cityLabel(deal.destination_city,deal.destination_slug)} provisional={deal.score_explanation?.status === "PROVISIONAL"}><ScoreDetails deal={deal}/></ScoreTrigger>
   </article>;
 }
 export function DealGrid({deals}:{deals:Deal[]}) {
-  return deals.length ? <section className="deal-grid">{deals.map(d=><DealCard key={d.slug} deal={d}/>)}</section>
+  return deals.length ? <><section className="deal-grid">{deals.map(d=><DealCard key={d.slug} deal={d}/>)}</section><p className="catalog-note">Cena lotu za osobę. Dostępność, bagaż i rozkład potwierdź u partnera; nocleg osobno.</p></>
     : <div className="empty-state"><span className="empty-mark" aria-hidden="true">↗</span><p>{pl.empty}</p><Link className="text-link" href="/info/price-freshness">Co oznacza świeżość oferty <span aria-hidden="true">→</span></Link></div>;
 }

@@ -23,6 +23,17 @@ export function flightTime(value:string|null|undefined,zone?:string|null):string
     timeZone:known ? zone : "UTC",...(known ? {timeZoneName:"shortOffset" as const} : {}),
   }).format(instant)+(known ? ` (${zone})` : " UTC · brak strefy lotniska");
 }
+export function compactFlightTime(value:string|null|undefined,zone?:string|null) {
+  const instant=instantDate(value);
+  if(!instant)return null;
+  const local=validFlightZone(zone);
+  const timeZone=local ? zone : "UTC";
+  return {
+    day:new Intl.DateTimeFormat("pl-PL",{day:"numeric",month:"short",timeZone}).format(instant),
+    time:new Intl.DateTimeFormat("pl-PL",{hour:"2-digit",minute:"2-digit",timeZone}).format(instant)+(local ? "" : " UTC"),
+    local,
+  };
+}
 function localDay(value:string|null|undefined,zone:string|null|undefined):number|null {
   const instant=instantDate(value);
   if(!instant || !validFlightZone(zone))return null;

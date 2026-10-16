@@ -26,8 +26,8 @@ test("round trip facts agree between card and detail without mobile overflow",as
   await page.goto("/deals");
   await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
   const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"]')});
-  await expect(card.locator(".home-arrival")).toBeVisible();
-  await expect(card.locator(".home-arrival")).toContainText("Europe/Warsaw");
+  await expect(card.locator(".flight-schedule-compact")).toBeVisible();
+  await expect(card.locator(".flight-schedule-compact")).not.toContainText("Europe/Warsaw");
   await expect(card.locator(".flight-schedule")).toContainText("Ryanair (FR)");
   await expect(card.locator(".trip-details")).not.toHaveAttribute("open","");
   await card.locator(".trip-details > summary").click();

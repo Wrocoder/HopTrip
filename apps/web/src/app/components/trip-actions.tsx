@@ -24,7 +24,7 @@ export function TripActions({offer,draft,ready}:{offer:TripOffer;draft:BudgetDra
   try {await navigator.clipboard.writeText(url);setMessage("Link skopiowany. Odbiorca otrzyma niezależną kopię planu.");}
   catch {setMessage("Skopiuj link z pola poniżej. Odbiorca otrzyma niezależną kopię planu.");}
  }
- return <section aria-label="Zapisz i udostępnij wyjazd">
+ return <section id="trip-save" tabIndex={-1} aria-label="Zapisz i udostępnij wyjazd">
   <h3>Zachowaj plan podróży</h3>
   <p>Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.</p>
   <div className="trip-actions"><button type="button" className="button" disabled={!ready || !token} onClick={save}>Zapisz wyjazd</button>

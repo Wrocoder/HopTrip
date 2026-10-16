@@ -126,6 +126,22 @@ def override():
 app.dependency_overrides[get_db] = override
 
 
+@app.post("/__test__/compact-card")
+def compact_card(scenario: str = "normal"):
+    """Isolated visual regression states; reset after each browser test."""
+    with Session(engine) as db:
+        offer = db.scalar(select(TravelOffer).where(TravelOffer.external_id == "schedule"))
+        payload = dict(offer.raw_payload)
+        departure = scheduled_departure + timedelta(days=3)
+        if scenario == "midnight":
+            departure = departure.replace(hour=21, minute=30)
+        payload["return_at"] = departure.isoformat()
+        offer.raw_payload = payload
+        offer.return_at = departure
+        db.commit()
+    return {"ok": True}
+
+
 @app.get("/api/v1/deals/htr01-fixture")
 def htr01_fixture():
     """Fixed audit example, isolated from catalog counts and production data."""

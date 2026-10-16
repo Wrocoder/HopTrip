@@ -11,8 +11,8 @@ test("trip details reveal comparison on demand without navigating or opening oth
   const summary=card.locator(".trip-details .price-assessment");
   await expect(summary).not.toBeVisible();
   await expect(card.locator(".deal-price")).toBeVisible();
-  await expect(card.locator(".price-summary")).toBeVisible();
-  const cardComparison=await card.locator(".price-summary").textContent();
+  await expect(card.locator(".price-summary")).toHaveCount(0);
+  const cardComparison=await summary.locator(".price-comparison strong").textContent();
   const toggle=card.locator(".trip-details > summary");
   await toggle.focus();
   await page.keyboard.press("Enter");
@@ -32,7 +32,7 @@ test("trip details reveal comparison on demand without navigating or opening oth
   await card.screenshot({path:testInfo.outputPath("price-card.png")});
   const observation=await summary.locator("time").getAttribute("datetime");
   await card.locator(".deal-card-link").click();
-  await expect(page.locator(".detail-summary .price-summary")).toHaveText(cardComparison!);
+  await expect(page.locator(".detail-summary .price-summary")).toContainText(cardComparison!);
   await expect(page.locator(".detail-summary .price-assessment")).not.toBeVisible();
   await page.locator(".detail-summary .trip-details > summary").click();
   await expect(page.locator(".detail-summary .price-assessment time")).toHaveAttribute("datetime",observation!);

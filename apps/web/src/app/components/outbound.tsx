@@ -4,14 +4,14 @@ import {pl} from "../../lib/pl";
 import {publicApi,sessionContext,track} from "../../lib/session";
 import {analyticsAllowed} from "../../lib/consent";
 import {useTripDraft} from "./trip-draft";
+import {passengerInstruction} from "../../lib/passenger-label";
 export function Outbound({component,dealSlug}:{component:Component;dealSlug?:string}) {
   const plan=useTripDraft();
   if (!component.available || !component.redirect_path) return <p>{component.reason==="PROGRAM_UNAVAILABLE" ? "Oferta partnera jest obecnie niedostępna. Spróbuj ponownie później." : pl.noLink}</p>;
   const path=component.redirect_path;
-  return <>{component.component_type==="FLIGHT" && plan && <p className="muted" data-testid="flight-search-limitation">
-    Ten link otwiera zapisaną ofertę lotu. Nie przekazujemy zmian dat ani liczby pasażerów.
-    {plan.ready && <> Twój plan: {plan.draft.input.people || "—"} {plan.draft.adultsOnly ? "dorosłych" : "osób (skład grupy do sprawdzenia)"}.</>}
-    {" "}Ustaw pasażerów i daty u partnera oraz sprawdź nową cenę. Daty pobytu nie zmieniają dat lotu.
+  return <>{component.component_type==="FLIGHT" && plan && <p className="partner-limitation" data-testid="flight-search-limitation">
+    <strong>{plan.ready ? passengerInstruction(plan.draft.input.people,plan.draft.adultsOnly===true) : "U partnera ustaw skład grupy."}</strong>{" "}
+    Link otwiera daty tej oferty. Nie przekazujemy zmian dat ani liczby pasażerów z planu. Sprawdź cenę u partnera.
   </p>}<a className="cta" rel="sponsored noopener" href={publicApi(path)} onClick={event=>{
     event.currentTarget.href=publicApi(path);
     if(!analyticsAllowed()) return;

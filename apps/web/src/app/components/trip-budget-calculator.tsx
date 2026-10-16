@@ -35,11 +35,13 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
    placeholder={money ? "Nieznane" : undefined}/>
   {result.errors[key] && <span id={`budget-${key}-error`} className={styles.error}>{result.errors[key]}</span>}
  </div>;
- return <section id="calculator" aria-labelledby="budget-heading" className={styles.calculator}>
+ return <section id="calculator" tabIndex={-1} aria-labelledby="budget-heading" className={styles.calculator}>
   <h2 id="budget-heading">Kalkulator budżetu podróży</h2>
-  {note && <p>{note}</p>}
   <p>Wpisz własne kwoty w PLN. Puste pole oznacza nieznany koszt; wpisz 0, jeśli wydatek nie występuje lub jest już uwzględniony w innej pozycji.</p>
+  <details><summary>Jak liczymy koszty?</summary>
+  {note && <p>{note}</p>}
   <p>Loty obejmują wszystkie potrzebne odcinki. Ceny na osobę traktujemy jako jednakowe dla całej grupy. Dla noclegu wybierz cenę za noc albo łączną cenę pobytu dla wszystkich gości i pokoi.</p>
+  </details>
   <p aria-live="polite">{storageMessage}</p>
   <fieldset disabled={!ready} className={styles.controls}>
   <legend>Twój plan podróży</legend>
