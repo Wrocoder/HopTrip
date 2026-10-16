@@ -1,4 +1,5 @@
 "use client";
+import {track} from "../../lib/session";
 import {money} from "../../lib/pl";
 import {useState} from "react";
 import {calculateBudget,costFields,emptyBudget,type BudgetInput} from "../../lib/trip-budget";
@@ -21,8 +22,11 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
  const input=draft.input;
  const [extraOpen,setExtraOpen]=useState(false);
  const result=calculateBudget(input);
- const update=(key:keyof BudgetInput,value:string)=>save({...draft,input:{...input,[key]:value},
-  review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
+ const update=(key:keyof BudgetInput,value:string)=>{
+  const next={...input,[key]:value};
+  save({...draft,input:next,review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
+  if(value.trim() && value!==input[key] && !calculateBudget(next).errors[key])track("BUDGET_USE");
+ };
  const changeDate=(key:"start"|"end",value:string)=>save(changeStayDate(draft,key,value));
  const datesInvalid=Boolean(draft.start || draft.end) && !budgetDateCounts(draft.start,draft.end);
  const field=(key:keyof BudgetInput,label:string,hint:string,money=false)=><div className={styles.field} key={key}>

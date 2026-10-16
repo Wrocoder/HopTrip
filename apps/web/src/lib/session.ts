@@ -1,4 +1,4 @@
-import {campaignLabel,sourceLabel,type EventContext} from "./analytics-context.ts";
+import {analyticsPageType,campaignLabel,sourceLabel,type EventContext} from "./analytics-context.ts";
 import {analyticsAllowed} from "./consent.ts";
 const KEY = "hoptrip.session.v2";
 const TIMEOUT = 30 * 60 * 1000;
@@ -35,11 +35,11 @@ export type ActivityContext={city:string;activity_id:string;page:string;link_kin
 function sendEvent(event_name:string,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {
  const route=location.pathname+location.search;
  if(visit!==route){visit=route;viewEvents.clear();}
- if(location.pathname.startsWith("/alerts"))return;
+ if(location.pathname.startsWith("/alerts") && event_name!=="ALERT_CONFIRMED")return;
  if(!analyticsAllowed()) return;
  const session=sessionContext();
  const key=[event_name,deal_slug,activity?.activity_id,JSON.stringify(context),location.pathname,location.search,session.id].join("|");
- const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT"].includes(event_name);
+ const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED"].includes(event_name);
  if(view && viewEvents.has(key))return;
  if(view)viewEvents.add(key);
  const now=Date.now();
@@ -49,7 +49,7 @@ function sendEvent(event_name:string,deal_slug?:string,activity?:ActivityContext
  void fetch(publicApi("/api/v1/analytics/events"),{
    method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,referrerPolicy:"no-referrer",
    body:JSON.stringify({event_id:crypto.randomUUID(),event_name,deal_slug,activity,...context,
-     anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign}}),
+     anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign,page_type:analyticsPageType(location.pathname)}}),
  }).catch(()=>undefined);
 }
 export function track(event_name:string,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {

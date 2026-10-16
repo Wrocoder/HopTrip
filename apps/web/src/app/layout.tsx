@@ -26,6 +26,7 @@ export default function RootLayout({children}:Readonly<{children:React.ReactNode
     <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{pl.disclosure}</p></div><nav className="footer-nav" aria-label="Informacje o serwisie">
+      <Link href="/city-break">City break</Link><Link href="/tanie-loty-na-weekend">Loty na weekend</Link><Link href="/from/warszawa">Loty z Warszawy</Link>
       <Link href="/saved">Zapisane wyjazdy</Link>
       <Link href="/alerts">Subskrypcja lotów</Link>
       {(["about","contact","privacy","terms","partners"] as const).map(key=>

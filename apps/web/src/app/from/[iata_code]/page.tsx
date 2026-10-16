@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {departureHeading} from "../../../lib/cities";
 import {notFound} from "next/navigation";
 import {getAirports,getDeals} from "../../../lib/api";
@@ -27,6 +28,7 @@ export default async function RoutePage({params}:Props) {
     <p className="lead">{catalogPage(`/from/${value}`)?.description ?? pl.routeIntro}</p></header>
     {catalogPage(`/from/${value}`) && <CatalogIntro page={catalogPage(`/from/${value}`)!} linksFirst/>}
     {value==="WRO" && <section aria-labelledby="wro-offers"><h2 id="wro-offers">Oferty lotów z Wrocławia</h2><p>Ceny pochodzą z zapisanych obserwacji. Sprawdź datę odświeżenia i zakres lotu; dostępność oraz końcową cenę potwierdzisz u sprzedawcy.</p></section>}
+    {["WAW","WMI"].includes(value) && <p><Link href="/from/warszawa">Porównaj loty z Chopina i Modlina</Link></p>}
     <DealGrid deals={deals}/>
     </main>;
 }

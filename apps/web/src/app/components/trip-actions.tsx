@@ -1,4 +1,5 @@
 "use client";
+import {track} from "../../lib/session";
 import {useState} from "react";
 import Link from "next/link";
 import type {BudgetDraft} from "../../lib/budget-draft";
@@ -14,6 +15,7 @@ export function TripActions({offer,draft,ready}:{offer:TripOffer;draft:BudgetDra
    const existing=readSavedTrips(localStorage.getItem(savedTripsKey));
    if(!existing.includes(token) && existing.length>=20){setMessage("Masz już 20 zapisanych planów. Usuń jeden na liście przed zapisaniem kolejnego.");return;}
    localStorage.setItem(savedTripsKey,JSON.stringify([token,...existing.filter(t=>t!==token)]));
+   if(!existing.includes(token))track("TRIP_SAVE");
    setMessage("Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.");
   }catch{setMessage("Nie udało się zapisać wyjazdu w przeglądarce. Nadal możesz udostępnić link.");}
  }

@@ -48,6 +48,7 @@ export default async function HomePage({searchParams}:{searchParams:Promise<{ori
       <p>{pl.flightOnly} Sprawdź godziny lotów i potrzebne dni urlopu.</p>
       <p><Link href={catalogHref}>Zobacz wszystkie loty na 2–4 noce →</Link></p>
     </section>
+    <nav className="route-link-grid" aria-label="Pomysły na krótki wyjazd"><Link href="/city-break">City break na 2–4 noce</Link><Link href="/tanie-loty-na-weekend">Tanie loty na weekend</Link><Link href="/from/warszawa">Warszawa — oba lotniska</Link></nav>
     <p className="search-explanation"><Link href="/deals">Zobacz loty ze wszystkich lotnisk →</Link> · <Link href="/info/price-comparison">{pl.why} →</Link></p>
     <aside className="travel-note" aria-label="Budżet podróży"><p>Zaplanuj cały wyjazd: loty, nocleg, dojazdy i atrakcje. Policz koszt dla siebie lub całej grupy.</p><Link className="button button-secondary" href="/info/trip-budget#calculator">Policz budżet podróży</Link></aside>
     <div className="browse-layout"><section className="route-links"><p className="eyebrow">02 / Skąd wyruszasz</p><h2>{pl.airports}</h2><div className="route-link-grid">{airports.map(a=><Link key={a.id} href={`/from/${a.iata_code}`}>{airportLabel(a)}</Link>)}</div></section>

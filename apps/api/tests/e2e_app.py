@@ -37,6 +37,9 @@ engine = create_engine(
 Base.metadata.create_all(engine)
 with Session(engine) as db:
     program = approved_program(db)
+    for code, city in [("KRK", "Kraków"), ("WAW", "Warszawa"), ("WMI", "Warszawa")]:
+        db.add(Airport(iata_code=code, city=city, name=code, country_code="PL"))
+    db.add(Destination(slug="rome", city="Rome", country="Italy", country_code="IT"))
     db.add(Destination(slug="milan", city="Milan", country="Italy", country_code="IT"))
     deal, component = catalog_fixture(db, program=program, slug="browser-deal")
     score_now = datetime.now(UTC)
@@ -124,6 +127,48 @@ def override():
 
 
 app.dependency_overrides[get_db] = override
+
+
+@app.delete("/__test__/growth")
+def clear_growth():
+    with Session(engine) as db:
+        ids = select(Deal.id).where(Deal.slug.like("growth-%"))
+        db.execute(delete(DealComponent).where(DealComponent.deal_id.in_(ids)))
+        db.execute(delete(Deal).where(Deal.slug.like("growth-%")))
+        db.execute(delete(TravelOffer).where(TravelOffer.external_id.like("growth-%")))
+        db.commit()
+    return {"ok": True}
+
+
+@app.post("/__test__/growth")
+def growth_fixture():
+    clear_growth()
+    with Session(engine) as db:
+        provider = db.scalar(select(DataProvider).limit(1))
+        destination = db.scalar(select(Destination).where(Destination.slug == "rome"))
+        for index in range(17):
+            code = "KRK" if index < 15 else "WAW" if index == 15 else "WMI"
+            origin = db.scalar(select(Airport).where(Airport.iata_code == code))
+            now = datetime.now(UTC)
+            start = datetime(2030, 5, 3, 10, tzinfo=UTC)
+            end = datetime(2030, 5, 5, 18, tzinfo=UTC)
+            offer = TravelOffer(data_provider_id=provider.id, external_id=f"growth-{index}",
+                                source="travelpayouts_data", product_type="FLIGHT", departure_precision="TIME",
+                                depart_at=start, return_at=end, original_price=100 + index, original_currency="PLN",
+                                raw_payload={"origin_airport": code, "destination_airport": "CIA",
+                                             "departure_at": start.isoformat(), "return_at": end.isoformat(),
+                                             "duration_to": 120, "duration_back": 120, "transfers": 0, "return_transfers": 0})
+            db.add(offer)
+            db.flush()
+            deal = Deal(slug=f"growth-{index}", origin_airport_id=origin.id, destination_id=destination.id,
+                        trip_start=start.date(), trip_end=end.date(), depart_at=start, nights=2, travelers=1,
+                        flight_price_pln=100 + index, total_estimated_pln=100 + index, price_per_person_pln=100 + index,
+                        deal_score=80, confidence=0, last_verified_at=now, expires_at=now + timedelta(hours=2))
+            db.add(deal)
+            db.flush()
+            db.add(DealComponent(deal_id=deal.id, component_type="FLIGHT", travel_offer_id=offer.id, price_pln=100 + index))
+        db.commit()
+    return {"ok": True}
 
 
 @app.post("/__test__/compact-card")

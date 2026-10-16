@@ -7,6 +7,7 @@ from app.models.statistics import RouteStatistics
 from app.services.availability import DEAL_FRESHNESS
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from app.services.time import utc
+from app.services.trip_dates import trip_dates
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -44,7 +45,8 @@ def generate_flight_deal(
         expires_at=utc(offer.expires_at) if offer.expires_at else None,
         now=checked_at,
     )
-    trip_end = offer.return_at.date() if offer.return_at else offer.depart_at.date()
+    trip_start, return_date = trip_dates(offer)
+    trip_end = return_date or trip_start
     slug = f"flight-{offer.id}-{offer.depart_at:%Y-%m-%d}"
     deal = db.scalar(select(Deal).where(Deal.slug == slug))
     values = {
@@ -57,9 +59,9 @@ def generate_flight_deal(
         },
         "explanation_codes": score.explanation,
         "destination_id": offer.destination_id,
-        "trip_start": offer.depart_at.date(),
+        "trip_start": trip_start,
         "trip_end": trip_end,
-        "nights": (trip_end - offer.depart_at.date()).days if offer.return_at else None,
+        "nights": (trip_end - trip_start).days if offer.return_at else None,
         "travelers": 1,
         "flight_price_pln": offer.price_pln,
         "hotel_price_pln": None,

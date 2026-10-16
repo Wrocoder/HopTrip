@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {destinationLabel} from "../../../lib/destinations";
 import {notFound} from "next/navigation";
 import {getDestinations,getDeals} from "../../../lib/api";
@@ -25,7 +26,7 @@ export default async function RoutePage({params}:Props) {
   if (!record) notFound();
   const deals=await getDeals({destination:value});
   return <main className="page-shell"><header className="page-heading"><p className="eyebrow">{pl.destinations}</p><h1>{destinationLabel(record)}</h1>
-    <p className="lead">{catalogPage(`/destinations/${value}`)?.description ?? pl.routeIntro}</p></header><DestinationGuides slug={value}/><DealGrid deals={deals}/>
+    <p className="lead">{catalogPage(`/destinations/${value}`)?.description ?? pl.routeIntro}</p></header><DestinationGuides slug={value}/><nav className="route-link-grid" aria-label="Wybierz długość pobytu"><Link href={`/city-break?destination=${encodeURIComponent(value)}`}>Loty na 2–4 noce</Link><Link href={`/tanie-loty-na-weekend?destination=${encodeURIComponent(value)}`}>Loty na weekend</Link>{value==="rome" && <Link href="/routes/krakow-rome">Loty Kraków — Rzym</Link>}</nav><DealGrid deals={deals}/>
     {catalogPage(`/destinations/${value}`) && <CatalogIntro page={catalogPage(`/destinations/${value}`)!}/>}
     </main>;
 }

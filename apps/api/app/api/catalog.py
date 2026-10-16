@@ -37,6 +37,7 @@ def list_deals(
     duration_min: int | None = Query(None, ge=0, le=365),
     duration_max: int | None = Query(None, ge=0, le=365),
     weekend: bool = Query(False, description="Friday/Saturday departure, return the same Sunday"),
+    round_trip: bool = Query(False, description="Only offers with a known return flight"),
     db: Session = Depends(get_db),
 ) -> list[DealRead] | DealPage:
     query = _filtered_deals_query(
@@ -54,6 +55,13 @@ def list_deals(
         query = query.where(Deal.nights >= duration_min)
     if duration_max is not None:
         query = query.where(Deal.nights <= duration_max)
+    if weekend or round_trip:
+        query = query.where(
+            select(DealComponent.id)
+            .join(TravelOffer, TravelOffer.id == DealComponent.travel_offer_id)
+            .where(DealComponent.deal_id == Deal.id, DealComponent.component_type == "FLIGHT",
+                   TravelOffer.return_at.is_not(None)).exists()
+        )
     if weekend:
         # PostgreSQL subtracts DATE values into days; SQLite needs julianday.
         days = (
@@ -61,21 +69,10 @@ def list_deals(
             if db.get_bind().dialect.name == "sqlite"
             else Deal.trip_end - Deal.trip_start
         )
-        has_return_flight = (
-            select(DealComponent.id)
-            .join(TravelOffer, TravelOffer.id == DealComponent.travel_offer_id)
-            .where(
-                DealComponent.deal_id == Deal.id,
-                DealComponent.component_type == "FLIGHT",
-                TravelOffer.return_at.is_not(None),
-            )
-            .exists()
-        )
         query = query.where(
             extract("dow", Deal.trip_start).in_([5, 6]),
             extract("dow", Deal.trip_end) == 0,
             days.between(1, 2),
-            has_return_flight,
         )
     query = query.order_by(None)
     if not include_total:
@@ -166,12 +163,14 @@ def _filtered_deals_query(
 ):
     query = available_deals_query()
     if origin:
-        airports = matching_airports(db, origin)
+        warsaw = origin.upper() in {"WAW,WMI", "WMI,WAW"}
+        airports = (list(db.scalars(select(Airport).where(Airport.iata_code.in_(["WAW", "WMI"]))))
+                    if warsaw else matching_airports(db, origin))
         if not airports:
             raise HTTPException(status_code=404, detail={"code": "UNKNOWN_ORIGIN"})
-        if len(airports) > 1:
+        if len(airports) > 1 and not warsaw:
             raise HTTPException(status_code=422, detail={"code": "AMBIGUOUS_ORIGIN"})
-        query = query.where(Deal.origin_airport_id == airports[0].id)
+        query = query.where(Deal.origin_airport_id.in_([airport.id for airport in airports]))
     if destination and destination.strip():
         matches = matching_destinations(db, destination)
         if not matches:

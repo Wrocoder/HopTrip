@@ -54,6 +54,6 @@ export function stopsLabel(stops:number|null|undefined):string {
 }
 
 export function destinationInterval(minutes:number|null|undefined):string|null {
-  if (minutes == null) return null;
+  if (minutes == null || !Number.isFinite(minutes) || minutes<0) return null;
   return `${Math.floor(minutes/60)} godz. ${minutes%60} min`;
 }

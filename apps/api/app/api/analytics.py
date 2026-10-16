@@ -48,12 +48,14 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     metadata: dict[str, Any] = {
         k: str(v)[:80] for k, v in payload.metadata.items() if k == "campaign" and v in ("hoptrip-launch", "wro-weekend", "test")
     }
+    if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "alerts", "guide"}:
+        metadata["page_type"] = payload.metadata["page_type"]
     if payload.activity:
         metadata["activity"] = payload.activity.model_dump()
     if payload.search:
         search = payload.search.model_dump(mode="json", exclude_none=True)
         filters = search["filters"]
-        if "origin" in filters and not db.scalar(select(Airport.id).where(Airport.iata_code == filters["origin"])):
+        if "origin" in filters and filters["origin"] != "WAW,WMI" and not db.scalar(select(Airport.id).where(Airport.iata_code == filters["origin"])):
             filters.pop("origin")
         if "destination" in filters and not db.scalar(select(Destination.id).where(Destination.slug == filters["destination"])):
             filters.pop("destination")

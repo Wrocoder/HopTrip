@@ -8,7 +8,7 @@ export type PartnerContext={category:"flight"|"stay"|"activity";provider:"catalo
 export type EventContext={search?:SearchContext;partner?:PartnerContext};
 export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
  const result:Filters={};
- if(airports.some(a=>a.iata_code===filters.origin))result.origin=filters.origin;
+ if(filters.origin==="WAW,WMI" || airports.some(a=>a.iata_code===filters.origin))result.origin=filters.origin;
  if(destinations.some(d=>d.slug===filters.destination))result.destination=filters.destination;
  for(const key of ["departure_from","departure_to"] as const) {
   const value=filters[key];
@@ -20,4 +20,19 @@ export function analyticsFilters(filters:Filters,airports:Airport[],destinations
  }
  if(filters.weekend==="true")result.weekend="true";
  return result;
+}
+
+export function analyticsPageType(path:string):string|undefined {
+ if(path==="/")return "home";
+ if(path==="/city-break")return "city_break";
+ if(path==="/tanie-loty-na-weekend")return "weekend";
+ if(path==="/deals")return "catalog";
+ if(path.startsWith("/deals/"))return "deal";
+ if(path.startsWith("/from/"))return "origin";
+ if(path.startsWith("/destinations/"))return "destination";
+ if(path.startsWith("/routes/"))return "route";
+ if(path==="/info/trip-budget")return "budget";
+ if(path==="/trip")return "saved_trip";
+ if(path.startsWith("/alerts"))return "alerts";
+ if(path.startsWith("/info/"))return "guide";
 }

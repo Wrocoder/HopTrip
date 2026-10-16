@@ -153,8 +153,8 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .filter-chip:hover { border-color: var(--sage); background: var(--background); }
 .filter-reset { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; font-size: 14px; }
 .filters label { display: grid; gap: 8px; min-width: 0; color: var(--secondary); font-size: 14px; font-weight: 500; }
-.filters input { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--border); border-radius: 9px; background: var(--input); color: var(--ink); padding: 10px 12px; font-size: 16px; }
-.filters input:focus { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(109,156,119,.12); }
+.filters input, .filter-primary select { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--border); border-radius: 9px; background: var(--input); color: var(--ink); padding: 10px 12px; font-size: 16px; }
+.filters input:focus, .filter-primary select:focus { border-color: var(--sage); box-shadow: 0 0 0 3px rgba(109,156,119,.12); }
 .filters input::placeholder { color: var(--secondary); opacity: 1; }
 .reference-costs { margin-block: 24px; padding: 18px; border: 1px solid var(--border); border-radius: 12px; }
 .reference-costs summary { cursor: pointer; min-height: 44px; font-weight: 600; }
@@ -468,3 +468,5 @@ main.catalog-page { padding-top: 16px; }
 @media (max-width: 360px) {
   .home-page .hero-search .filter-primary, .catalog-page .filter-primary { grid-template-columns: minmax(0, 1fr); }
 }
+
+@media (max-width: 600px) { .filter-primary > .origin-group { grid-column: 1 / -1; } }

@@ -60,3 +60,8 @@ test("offset-aware values are converted once; unknown clocks and zones stay expl
  assert.match(flightTime("2026-10-24T22:40:00Z","Unknown/Zone"),/22:40 UTC.*brak strefy/);
  assert.equal(flightDayShift("2026-10-24T22:00:00Z","2026-10-25T02:00:00Z",null,"Europe/Warsaw"),null);
 });
+
+test("unknown or invalid destination intervals never become zero",()=>{
+ for(const value of [null,undefined,-1,NaN,Infinity])assert.equal(destinationInterval(value),null);
+ assert.equal(destinationInterval(0),"0 godz. 0 min");
+});

@@ -1,4 +1,6 @@
 "use client";
+import {scenarioFilters,searchUrl} from "../../lib/search-policy";
+
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useId,useState} from "react";
@@ -19,14 +21,16 @@ type FilterKey=keyof typeof filterLabels;
 const filterKeys=Object.keys(filterLabels) as FilterKey[];
 const advancedKeys=["departure_from","departure_to","duration_min","duration_max"] as const;
 
-export function FilterForm({filters,airports=[],destinations=[],hero=false}:{filters:Filters;airports?:Airport[];destinations?:Destination[];hero?:boolean}) {
+export function FilterForm({filters,airports=[],destinations=[],hero=false,path="/deals"}:{filters:Filters;airports?:Airport[];destinations?:Destination[];hero?:boolean;path?:string}) {
   const router=useRouter();
+  const locked=scenarioFilters(path);
+  const warsaw=path==="/from/warszawa" || filters.origin==="WAW,WMI";
   const [validation,setValidation]=useState("");
   const [invalidField,setInvalidField]=useState("");
   const errorId=useId();
   const fieldError=(name:string)=>validation && invalidField===name ? errorId : undefined;
   const active=filterKeys.filter(key=>key==="weekend" ? presetActive(filters,"weekend") : !!filters[key]);
-  const advancedCount=advancedKeys.filter(key=>!!filters[key]).length;
+  const advancedCount=advancedKeys.filter(key=>!!filters[key] && !locked[key]).length;
   async function submit(form:HTMLFormElement,preset?:TripPreset) {
     const data=new FormData(form);
     const query=new URLSearchParams();
@@ -44,7 +48,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
       field.focus();
     }
     const origin=query.get("origin");
-    if(origin && airports.length) {
+    if(origin && origin!=="WAW,WMI" && airports.length) {
       const matches=matchingAirports(airports,origin);
       if(matches.length!==1) {
         invalid("origin",matches.length ? "To miasto ma kilka lotnisk. Wybierz konkretne lotnisko z listy." :
@@ -66,6 +70,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
       query.set("destination",matches[0].slug);
     }
     if(preset) togglePreset(query,preset);
+    for(const [key,value] of Object.entries(locked))query.set(key,value);
     const from=query.get("departure_from"),to=query.get("departure_to");
     if(from && to && from>to) {invalid("departure_to","Koniec zakresu dat nie może być wcześniejszy niż początek.");return;}
     const min=query.get("duration_min"),max=query.get("duration_max");
@@ -74,13 +79,14 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     track("SEARCH",undefined,undefined,{search:{filters:analyticsFilters(Object.fromEntries(query),airports,destinations)}});
     // A failed preference save must not prevent the actual search.
     try {await rememberOrigin(query.get("origin") ?? "");}catch {}
-    router.push(query.size ? `/deals?${query}` : "/deals");
+    router.push(searchUrl(path,Object.fromEntries(query)));
   }
   function filterValue(key:FilterKey):string {
     const value=filters[key]??"";
     if(key==="weekend")return "pt./sob. → niedz.";
     if(key==="budget")return money(value);
     if(key==="departure_from"||key==="departure_to")return date(value);
+    if(key==="origin" && value==="WAW,WMI")return "Warszawa — WAW i WMI";
     if(key==="origin") {const matches=matchingAirports(airports,value);if(matches.length===1)return airportLabel(matches[0]);}
     if(key==="destination") {const matches=matchingDestinations(destinations,value);if(matches.length===1)return destinationLabel(matches[0]);}
     return value;
@@ -89,7 +95,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     const query=new URLSearchParams();
     if(filters.sort)query.set("sort",filters.sort);
     for(const key of active) if(key!==removed) query.set(key,filters[key]!);
-    return query.size ? `/deals?${query}` : "/deals";
+    return searchUrl(locked[removed] || (path==="/from/warszawa" && removed==="origin") ? "/deals" : path,Object.fromEntries(query));
   }
   async function clearOriginAndNavigate(href:string) {
     try {await rememberOrigin("");}catch {}
@@ -97,19 +103,19 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
   }
   const dateFields=(["departure_from","departure_to"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="date" defaultValue={filters[k]} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>);
   return <section className={`filter-panel${hero ? " hero-search" : ""}`} aria-label="Wybór ofert">
-   <form className="filters" action="/deals" method="get" aria-label="Filtry ofert" onSubmit={event=>{event.preventDefault();submit(event.currentTarget);}}
+   <form className="filters" action={path} method="get" aria-label="Filtry ofert" onSubmit={event=>{event.preventDefault();submit(event.currentTarget);}}
     onChange={()=>setValidation("")}
     onInvalidCapture={event=>{const details=(event.target as HTMLInputElement).closest("details");if(details)details.open=true;}}>
     <input type="hidden" name="weekend" value={presetActive(filters,"weekend") ? "true" : ""}/>
     <div className="filter-primary">
-    <AirportSelect airports={airports} value={filters.origin} errorId={fieldError("origin")}/>
-    <DestinationSelect destinations={destinations} value={filters.destination} errorId={fieldError("destination")}/>
+    {locked.origin ? <label>Lotnisko wylotu<input name="origin" value={locked.origin} readOnly/></label> : warsaw ? <label className="origin-group">Lotnisko wylotu<select name="origin" defaultValue={filters.origin ?? "WAW,WMI"}><option value="WAW,WMI">Warszawa — WAW i WMI</option><option value="WAW">Warszawa Chopin — WAW</option><option value="WMI">Warszawa Modlin — WMI</option></select></label> : <AirportSelect airports={airports} value={filters.origin} errorId={fieldError("origin")}/>}
+    {locked.destination ? <label>Kierunek<input name="destination" value={locked.destination} readOnly/></label> : <DestinationSelect destinations={destinations} value={filters.destination} errorId={fieldError("destination")}/>}
     <label>{pl.budget}<input name="budget" type="number" min="0" max="1000000" step="0.01" defaultValue={filters.budget}/></label>
 
     <button type="submit">{hero ? "Szukaj lotów" : pl.filter}</button>
     </div>
     <div className="trip-presets" role="group" aria-label="Szybkie filtry">
-      {tripPresets.map(preset=><div key={preset.id}>
+      {tripPresets.filter(preset=>!(preset.id==="weekend" && locked.weekend) && !(preset.id==="nights" && locked.duration_min)).map(preset=><div key={preset.id}>
         <button type="button" aria-pressed={presetActive(filters,preset.id)} aria-describedby={`preset-${preset.id}`}
           onClick={event=>{const form=event.currentTarget.form!;if(form.reportValidity())submit(form,preset.id);}}>{preset.label}</button>
       </div>)}
@@ -117,10 +123,10 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false}:{fil
     <details className="preset-rules"><summary>{hero ? "Zasady szybkich filtrów" : "Jak działają filtry"}</summary>{tripPresets.map(preset=><p id={`preset-${preset.id}`} className="field-hint" key={preset.id}><strong>{preset.label}: </strong>{preset.rule}</p>)}<p className="field-hint">Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.</p><p className="field-hint">Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy.</p></details>
     <details className="advanced-filters" open={advancedCount>0}>
      <summary>Daty i długość pobytu{advancedCount>0 && <span className="badge">Aktywne: {advancedCount}</span>}</summary>
-     <p className="field-hint">Zakres dat wylotu, nie powrotu. Długość pobytu w nocach. Puste pole: bez ograniczenia.</p>
+     <p className="field-hint">Zakres dat wylotu, nie powrotu. Długość pobytu w nocach. {locked.duration_min ? "To zestawienie obejmuje 2–4 noce. Aby wybrać inną długość, przejdź do pełnego katalogu." : "Puste pole: bez ograniczenia."}</p>
      <div className="filter-secondary">
     {dateFields}
-    {(["duration_min","duration_max"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="number" min="0" max="365" defaultValue={filters[k]} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>)}
+    {(["duration_min","duration_max"] as const).map(k=><label key={k}>{pl[k]}<input name={k} type="number" min="0" max="365" defaultValue={filters[k]} readOnly={Boolean(locked[k])} aria-invalid={Boolean(fieldError(k))} aria-describedby={fieldError(k)}/></label>)}
      </div>
     </details>
     {!hero && <label className="sort-control">Sortuj oferty

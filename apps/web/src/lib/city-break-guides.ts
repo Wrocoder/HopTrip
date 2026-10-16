@@ -94,6 +94,6 @@ export const cityBreakGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Musée du Louvre — dni i godziny otwarcia",href:"https://www.louvre.fr/en/visit/hours-admission"},
    {label:"Visit Stockholm — muzea i spacery na Djurgården",href:"https://www.visitstockholm.com/see-do/attractions/district-guide-djurgarden/"},
-  ],routes:[{label:"Znajdź lot na krótki wyjazd",href:"/deals"}],related:["milan-weekend","paris-weekend","stockholm-weekend","oslo-weekend","trip-budget","baggage"],
+  ],routes:[{label:"Wybierz city break na 2–4 noce",href:"/city-break"}],related:["milan-weekend","paris-weekend","stockholm-weekend","oslo-weekend","trip-budget","baggage"],
  },
 };

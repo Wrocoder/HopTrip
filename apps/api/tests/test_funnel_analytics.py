@@ -41,7 +41,7 @@ def test_partner_category_and_deal_id(api_client, isolated_db, category, provide
     {"event_name": "SEARCH_RESULT", "search": {"filters": {}, "result_count": -1}},
     {"event_name": "PARTNER_CLICK"},
     {"event_name": "PARTNER_CLICK", "partner": {"category": "email", "provider": "stay22"}},
-    {"event_name": "TRIP_SAVE"}, {"event_name": "SUBSCRIPTION_CONFIRMED"},
+    {"event_name": "SUBSCRIPTION_CONFIRMED"},
 ])
 def test_invalid_or_future_events_are_rejected(api_client, extra):
     assert api_client.post("/api/v1/analytics/events", json={"anonymous_session_id": "test-session", **extra}).status_code == 422

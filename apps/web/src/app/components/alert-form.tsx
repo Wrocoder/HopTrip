@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import {useState,type FormEvent} from "react";
+import {useState,useSyncExternalStore,type FormEvent} from "react";
 import type {Airport,Destination,Filters} from "../../lib/api";
-import {publicApi} from "../../lib/session";
+import {publicApi,track} from "../../lib/session";
 import {cityLabel,originLabel} from "../../lib/cities";
 
 type AlertSettings={origin:string;budget:string;duration_min:number;duration_max:number;destination:string|null;departure_from:string|null;departure_to:string|null;weekend:boolean;frequency:"weekly"|"daily"};
@@ -13,9 +13,13 @@ async function action(path:string,body:unknown,method="POST") {
     response.status===429 ? "Limit prób został osiągnięty. Spróbuj później." : "Nie udało się wykonać operacji. Spróbuj ponownie później.");
   return response.json();
 }
+const subscribeHydration=()=>()=>{};
+const clientHydrated=()=>true;
+const serverHydrated=()=>false;
 const linkToken=()=>new URLSearchParams(location.hash.slice(1)).get("token")??"";
 
 export function AlertForm({mode,airports,destinations,initial={},deliveryEnabled=false}:{deliveryEnabled?:boolean;mode:"signup"|"confirm"|"manage";airports:Airport[];destinations:Destination[];initial?:Filters}) {
+  const hydrated=useSyncExternalStore(subscribeHydration,clientHydrated,serverHydrated);
   const [values,setValues]=useState({...initial,origin:initial.origin??"",budget:initial.budget??"200",duration_min:initial.duration_min??"0",duration_max:initial.duration_max??"14",frequency:"weekly",weekend:initial.weekend??"false"});
   const [message,setMessage]=useState("");
   const [busy,setBusy]=useState(false);
@@ -51,12 +55,12 @@ export function AlertForm({mode,airports,destinations,initial={},deliveryEnabled
     <p data-testid="alert-delivery-status">{deliveryEnabled ? "Wysyłka jest włączona. Po potwierdzeniu emaila wysyłamy tylko nowe dopasowania, według wybranej częstotliwości. Gdy brak pasujących lotów, nie wysyłamy wiadomości." : "Wysyłka podsumowań jest obecnie wstrzymana. Możesz zapisać i potwierdzić preferencje; oferty otrzymasz dopiero po wznowieniu wysyłki."}</p>
     {mode==="confirm" && <>
       <p>Potwierdź, że ten adres email należy do Ciebie. Dopiero po potwierdzeniu subskrypcja staje się aktywna. Wypisanie jest dostępne w ustawieniach.</p>
-      {!manageToken ? <button className="button" disabled={busy} onClick={()=>perform(async()=>{const result=await action("/confirm",{token:linkToken()});setManageToken(result.token);setMessage("Alert został potwierdzony.");})}>Potwierdzam zapis</button> :
+      {!manageToken ? <button className="button" disabled={busy || !hydrated} onClick={()=>perform(async()=>{const result=await action("/confirm",{token:linkToken()});setManageToken(result.token);track("ALERT_CONFIRMED");setMessage("Alert został potwierdzony.");})}>Potwierdzam zapis</button> :
         <a className="button" href={`/alerts/manage#token=${manageToken}`}>Zarządzaj alertem</a>}
     </>}
     {mode==="manage" && <div className="consent-actions">
-      {status==="UNLOADED" && <button disabled={busy} onClick={()=>perform(async()=>loadSettings(await action("/manage",{token:linkToken()})))}>Pokaż ustawienia</button>}
-      {status!=="STOPPED" && <button disabled={busy} onClick={()=>perform(async()=>{await action("/unsubscribe",{token:linkToken()});setStatus("STOPPED");setMessage("Alert wyłączony. Nie wyślemy kolejnych ofert.");})}>Wyłącz alert</button>}
+      {status==="UNLOADED" && <button disabled={busy || !hydrated} onClick={()=>perform(async()=>loadSettings(await action("/manage",{token:linkToken()})))}>Pokaż ustawienia</button>}
+      {status!=="STOPPED" && <button disabled={busy || !hydrated} onClick={()=>perform(async()=>{await action("/unsubscribe",{token:linkToken()});setStatus("STOPPED");setMessage("Alert wyłączony. Nie wyślemy kolejnych ofert.");})}>Wyłącz alert</button>}
     </div>}
     {(status==="NEW"||status==="ACTIVE") && <form className="alert-fields" onSubmit={submit}>
       {mode==="signup" && <label>Email<input name="email" type="email" autoComplete="email" required maxLength={254}/></label>}
@@ -72,7 +76,7 @@ export function AlertForm({mode,airports,destinations,initial={},deliveryEnabled
       <label className="alert-consent"><input type="checkbox" checked={values.weekend==="true"} onChange={e=>field("weekend",String(e.target.checked))}/>Tylko weekendy: wylot w piątek lub sobotę, powrót w najbliższą niedzielę</label>
       <label>Częstotliwość<select value={values.frequency} onChange={e=>field("frequency",e.target.value)}><option value="weekly">Raz w tygodniu</option><option value="daily">Najwyżej raz dziennie</option></select></label>
       {mode==="signup" && <label className="alert-consent"><input name="consent" type="checkbox" required/>Chcę otrzymywać od HopTrip email z pasującymi lotami według wybranej częstotliwości gdy wysyłka jest włączona. Mogę wyłączyć alert w każdej chwili.</label>}
-      <button className="button" disabled={busy} type="submit">{busy?"Zapisywanie…":mode==="signup"?"Wyślij link potwierdzający":"Zapisz ustawienia"}</button>
+      <button className="button" disabled={busy || !hydrated} type="submit">{busy?"Zapisywanie…":mode==="signup"?"Wyślij link potwierdzający":"Zapisz ustawienia"}</button>
     </form>}
     {status==="PENDING" && <p>Najpierw potwierdź zapis linkiem z emaila.</p>}
     {status==="STOPPED" && <p>Ten alert jest wyłączony.</p>}

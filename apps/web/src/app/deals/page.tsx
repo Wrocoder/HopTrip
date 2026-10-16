@@ -1,5 +1,6 @@
+import {searchFilters,searchSeo,searchUrl} from "../../lib/search-policy";
 import {Suspense} from "react";
-import LoadingDeals from "./loading";
+import LoadingDeals from "../components/loading-deals";
 import {analyticsFilters} from "../../lib/analytics-context";
 import {SearchResultTracker} from "../components/search-result-tracker";
 import Link from "next/link";
@@ -10,26 +11,22 @@ import {FilterForm} from "../components/filters";
 import {catalogPage,socialMetadata} from "../../lib/catalog-pages";
 import {CatalogIntro} from "../components/catalog-intro";
 export const dynamic="force-dynamic";
-type Props={searchParams:Promise<Record<string,string|string[]|undefined>>};
-export async function generateMetadata({searchParams}:Props) {
-  const raw=await searchParams,page=catalogPage("/deals")!;
-  const query=new URLSearchParams();
-  for(const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","offset","sort"]) {
-    if(typeof raw[key]==="string" && raw[key])query.set(key,raw[key]);
-  }
-  return socialMetadata({title:query.size ? `Wyniki wyszukiwania lotów | HopTrip` : page.title,
-    description:page.description,path:query.size ? `/deals?${query}` : "/deals",image:"/preview/catalog/deals",index:!query.size});
+type Props={searchParams:Promise<Record<string,string|string[]|undefined>>;path?:string};
+export async function generateMetadata({searchParams,path="/deals"}:Props) {
+  const raw=await searchParams,page=catalogPage(path)!;
+  const seo=searchSeo(raw,path);
+  return socialMetadata({title:seo.index ? page.title : `Wyniki wyszukiwania lotów | HopTrip`,
+    description:page.description,path:seo.canonical,image:"/preview/catalog/deals",index:seo.index});
 }
-async function DealResultsPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}) {
+async function DealResultsPage({searchParams,path="/deals"}:Props) {
   const raw=await searchParams;
-  const filters:Filters={};
-  for (const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","offset","sort"] as const) {
-    if (typeof raw[key] === "string") filters[key]=raw[key];
-  }
+  const filters=searchFilters(raw,path);
+  const landing=path!=="/deals" ? catalogPage(path) : undefined;
   let total=0;
   let deals:Deal[]=[],airports:Airport[]=[],destinations:Destination[]=[],error="";
-  const [offers,origins,places,alerts]=await Promise.allSettled([getDealResults({...filters,limit:"12"}),getAirports(),getDestinations(),alertsEnabled()]);
+  const [offers,origins,places,alerts]=await Promise.allSettled([getDealResults({...filters,limit:"12",...(path==="/city-break" ? {round_trip:"true"} : {})}),getAirports(),getDestinations(),alertsEnabled()]);
   const alertQuery=new URLSearchParams(filters);
+  if(filters.origin==="WAW,WMI")alertQuery.delete("origin");
   for(const key of ["offset","sort"])alertQuery.delete(key);
   if(origins.status==="fulfilled")airports=origins.value;
   if(places.status==="fulfilled")destinations=places.value;
@@ -46,11 +43,12 @@ async function DealResultsPage({searchParams}:{searchParams:Promise<Record<strin
   const offset=Number(filters.offset ?? 0);
   function pageLink(next:number) {
     const query=new URLSearchParams({...filters,offset:String(next)});
-    return "/deals?"+query;
+    return searchUrl(path,Object.fromEntries(query));
   }
-  return <main className="page-shell catalog-page"><header className="page-heading"><p className="eyebrow">Loty z Polski</p><h1>{pl.deals}</h1><p className="lead">{pl.flightOnly}</p></header>
+  return <main className="page-shell catalog-page"><header className="page-heading"><p className="eyebrow">Loty z Polski</p><h1>{landing?.heading ?? pl.deals}</h1><p className="lead">{landing?.intro ?? pl.flightOnly}</p></header>
+
     <SearchResultTracker context={{filters:analyticsFilters(filters,airports,destinations),...(error ? {error:searchError} : {result_count:deals.length})}}/>
-    <FilterForm key={new URLSearchParams(filters).toString()} filters={filters} airports={airports} destinations={destinations}/>
+    <FilterForm key={new URLSearchParams(filters).toString()} filters={filters} airports={airports} destinations={destinations} path={path}/>
     {error ? <section className="notice" role="alert"><h2>{searchError==="invalid_filters" ? "Sprawdź parametry wyszukiwania" : "Nie udało się pobrać ofert"}</h2><p>{error}</p>
       {searchError==="unavailable" ? <a href={pageLink(Number.isFinite(offset) ? offset : 0)}>Spróbuj ponownie</a> : <Link href="/deals">Wyczyść parametry wyszukiwania</Link>}
     </section> : <>
@@ -68,7 +66,8 @@ async function DealResultsPage({searchParams}:{searchParams:Promise<Record<strin
       </nav>
       {offset+12>10000 && offset+deals.length<total && <p>Zawęź filtry, aby przejrzeć dalsze oferty.</p>}
     </>}
-    <p>{alerts.status==="fulfilled" && alerts.value && <><Link href={`/alerts?${alertQuery}`}>Powiadom mnie o pasujących lotach</Link>{" · "}</>}<Link href="/saved">Zapisane wyjazdy</Link></p>
+    <p>{alerts.status==="fulfilled" && alerts.value && <><Link href={`/alerts?${alertQuery}`}>{filters.origin==="WAW,WMI" ? "Wybierz lotnisko dla powiadomień" : "Powiadom mnie o pasujących lotach"}</Link>{" · "}</>}<Link href="/saved">Zapisane wyjazdy</Link></p>
+    {landing && <CatalogIntro page={landing} showIntro={false}/> }
     {!Object.values(filters).some(Boolean) && <CatalogIntro page={catalogPage("/deals")!}/>}
   </main>;
 }
@@ -89,9 +88,9 @@ function relaxation(filters:Filters) {
   return <Link href={query.size ? `/deals?${query}` : "/deals"}>{choice.label}</Link>;
 }
 
-export default async function DealsPage({searchParams}:Props) {
+export default async function DealsPage({searchParams,path="/deals"}:Props) {
   const raw=await searchParams;
   return <Suspense key={JSON.stringify(raw)} fallback={<LoadingDeals/>}>
-    <DealResultsPage searchParams={Promise.resolve(raw)}/>
+    <DealResultsPage searchParams={Promise.resolve(raw)} path={path}/>
   </Suspense>;
 }

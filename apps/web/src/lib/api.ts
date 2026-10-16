@@ -29,7 +29,7 @@ export type Deal = {
 };
 export type Airport = {id:number; iata_code:string; name:string; city:string; country_code:string; is_active:boolean;aliases?:string[]};
 export type Destination = {display_name?:string;aliases?:string[];iata_codes?:string[];id:number; city:string; country:string; country_code:string; slug:string; is_active:boolean};
-export type Filters = Partial<Record<"origin"|"destination"|"departure_from"|"departure_to"|"budget"|"duration_min"|"duration_max"|"weekend"|"offset"|"limit"|"sort",string>>;
+export type Filters = Partial<Record<"origin"|"destination"|"departure_from"|"departure_to"|"budget"|"duration_min"|"duration_max"|"weekend"|"offset"|"limit"|"sort"|"round_trip",string>>;
 export class ApiError extends Error { constructor(public status:number,public code?:string) {super("Catalog unavailable");} }
 function apiUrl(path:string) {
   return (process.env.HOPTRIP_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/,"") + path;
@@ -44,7 +44,7 @@ async function getJson<T>(path:string):Promise<T> {
 }
 function dealParams(filters:Filters):URLSearchParams {
   const params = new URLSearchParams();
-  for (const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","offset","limit","sort"] as const) {
+  for (const key of ["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","offset","limit","sort","round_trip"] as const) {
     const value=filters[key];
     if (value) params.set(key, key === "origin" ? value.toUpperCase() : value);
   }

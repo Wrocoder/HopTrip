@@ -47,7 +47,7 @@ export const airportGuides:Record<string,InfoContent> = {
   ],sources:[
    {label:"Warszawa 19115 — dojazd na Lotnisko Chopina",href:"https://warszawa19115.pl/web/guest/-/dojazd-na-lotnisko?inheritRedirect=true"},
    {label:"SKM Warszawa — bilety i połączenie lotniskowe",href:"https://skm.warszawa.pl/en/faq-2/"},
-  ],routes:[{label:"Loty z Lotniska Chopina (WAW)",href:"/from/WAW"}],related:["wmi-airport","connections","baggage"],
+  ],routes:[{label:"Porównaj oba lotniska Warszawy",href:"/from/warszawa"},{label:"Loty z Lotniska Chopina (WAW)",href:"/from/WAW"}],related:["wmi-airport","connections","baggage"],
  },
  "wmi-airport":{
   title:"Warszawa-Modlin: jak zaplanować wylot z WMI",
@@ -71,7 +71,7 @@ export const airportGuides:Record<string,InfoContent> = {
   ],sources:[
    {label:"Koleje Mazowieckie — Bilet Lotniskowy i przesiadka",href:"https://lotniskowy.mazowieckie.com.pl/pl"},
    {label:"Warszawa-Modlin — opcje dojazdu",href:"https://www.modlinairport.pl/strona/dojazd"},
-  ],routes:[{label:"Loty z Warszawy-Modlina (WMI)",href:"/from/WMI"}],related:["waw-airport","trip-budget","connections"],
+  ],routes:[{label:"Porównaj oba lotniska Warszawy",href:"/from/warszawa"},{label:"Loty z Warszawy-Modlina (WMI)",href:"/from/WMI"}],related:["waw-airport","trip-budget","connections"],
  },
  "krk-airport":{
   title:"Kraków Airport: pociąg, autobus i wylot z KRK",

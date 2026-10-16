@@ -1,3 +1,4 @@
+import {growthPages} from "./growth-pages";
 import type {Metadata} from "next";
 
 export type CatalogPage={
@@ -7,6 +8,7 @@ export type CatalogPage={
 
 // Only these reviewed, permanent landing pages are opened to indexing.
 export const catalogPages:CatalogPage[]=[
+  ...growthPages,
   {path:"/deals",title:"Okazje lotnicze z Polski — wybierz lot | HopTrip",
     description:"Wybierz lotnisko w Polsce, daty i budżet na osobę. Porównaj zapisane oferty lotów, długość pobytu i świeżość ceny przed rezerwacją.",
     heading:"Jak wybrać okazję lotniczą",intro:"Zacznij od lotniska, z którego wygodnie dojedziesz na wylot. Następnie ustaw budżet na lot na osobę i opcjonalny zakres dat. Długość pobytu filtrujemy w nocach.",
@@ -20,7 +22,7 @@ export const catalogPages:CatalogPage[]=[
     sections:[
       {title:"Najpierw dojazd, potem godzina wylotu",text:"Dolicz dojazd do WRO, odprawę i transfer po przylocie. Sprawdź godziny obu lotów, zanim zarezerwujesz nocleg. Filtr weekendu oznacza wylot w piątek lub sobotę i powrót w najbliższą niedzielę; sam nie gwarantuje wyjazdu bez urlopu."},
       {title:"Dopasuj długość wyjazdu do budżetu",text:"Krótki wyjazd może ograniczyć koszt noclegu, ale sam tani lot nie wycenia całej podróży. Po wyborze oferty otwórz kalkulator i uzupełnij noclegi, transport, jedzenie oraz bagaż. Brakujące ceny pozostają nieznane."},
-    ],links:[{href:"/deals?origin=WRO&duration_min=2&duration_max=4",label:"Z WRO na 2–4 noce"},{href:"/deals?origin=WRO&weekend=true",label:"Weekend z WRO: pt./sob. → niedz."},{href:"/deals?origin=WRO",label:"Ustaw daty i budżet dla WRO"},{href:"/info/wro-airport",label:"Poradnik lotniska Wrocław"},{href:"/info/trip-budget",label:"Kalkulator kosztów podróży"},{href:"/info",label:"Przewodniki: dojazd i plan pobytu"}]},
+    ],links:[{href:"/deals?origin=WRO&budget=300",label:"Loty z WRO do 300 zł za osobę"},{href:"/city-break?origin=WRO",label:"Z WRO na 2–4 noce"},{href:"/tanie-loty-na-weekend?origin=WRO",label:"Weekend z WRO: pt./sob. → niedz."},{href:"/deals?origin=WRO",label:"Ustaw daty i budżet dla WRO"},{href:"/info/wro-airport",label:"Poradnik lotniska Wrocław"},{href:"/info/trip-budget",label:"Kalkulator kosztów podróży"},{href:"/info",label:"Przewodniki: dojazd i plan pobytu"}]},
   {path:"/destinations/milan",title:"Loty do Mediolanu — okazje i plan wyjazdu | HopTrip",
     description:"Znajdź lot do Mediolanu z Polski. Porównaj daty, sprawdź właściwe lotnisko oraz zaplanuj transfer, nocleg i weekend w mieście.",
     heading:"Wybierz lot do Mediolanu i zaplanuj pobyt",intro:"Wybierając Mediolan, porównuj nie tylko cenę lotu, ale też dokładny port przylotu i godziny podróży. Nazwa kierunku nie zastępuje sprawdzenia lotniska na bilecie. Oferta lotnicza i plan zwiedzania to dwa kroki tej samej podróży.",

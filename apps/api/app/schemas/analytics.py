@@ -4,7 +4,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK"]
+EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED"]
 
 
 class ActivityContext(BaseModel):
@@ -20,7 +20,7 @@ class ActivityClickSummary(ActivityContext):
 
 
 class SearchFilters(BaseModel):
-    origin: str | None = Field(None, pattern=r"^[A-Z]{3}$")
+    origin: str | None = Field(None, pattern=r"^(?:[A-Z]{3}|WAW,WMI)$")
     destination: str | None = Field(None, max_length=80, pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
     departure_from: date | None = None
     departure_to: date | None = None
