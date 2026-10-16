@@ -28,7 +28,8 @@ test("home layout comparison",async({page},testInfo)=>{
  await fs.writeFile(prefix+".json",JSON.stringify({viewport:page.viewportSize(),firstCardTop:firstCard?.y},null,2)+"\n");
  if(phase!=="before") {
    expect(firstCard!.y).toBeLessThan(mobile ? 844 : 650);
-   await expect(page.getByRole("combobox",{name:"Skąd",exact:true})).toHaveValue("Wrocław — WRO");
+   await expect(page.getByRole("combobox",{name:"Skąd",exact:true})).toHaveValue("");
+   await page.getByRole("combobox",{name:"Skąd",exact:true}).fill("WRO");
    await page.getByText("Zasady szybkich filtrów",{exact:true}).click();
    await expect(page.locator(".preset-rules")).toContainText("bez godzin nie gwarantujemy wyjazdu bez urlopu");
    await page.getByRole("combobox",{name:"Dokąd",exact:true}).fill("Mediolan");

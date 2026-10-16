@@ -1,0 +1,15 @@
+[Unit]
+Description=HopTrip daily Telegram disk usage report
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/hoptrip
+EnvironmentFile=/etc/hoptrip/monitor.env
+StateDirectory=hoptrip
+UMask=0077
+ExecStart=/usr/bin/python3 /opt/hoptrip/scripts/notify-storage.py
+TimeoutStartSec=420
+Nice=10
+IOSchedulingClass=idle

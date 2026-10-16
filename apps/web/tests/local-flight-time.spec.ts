@@ -5,9 +5,10 @@ test("audit midnight arrival is visible while seven hotel nights and manual mone
  await page.goto("/deals/htr01-fixture");
  const home=page.locator(".detail-summary .home-arrival");
  await expect(home).toBeVisible();
- await expect(home).toContainText(/25\.10\.2026.*00:40/);
+ await expect(home).toContainText("25 paź");
+ await expect(page.locator(".detail-summary .flight-schedule-compact")).toContainText("00:40");
  await expect(home).toContainText("+1 dzień");
- await expect(home).toContainText("obliczony z czasu lotu");
+ await expect(page.locator(".detail-summary .flight-schedule-compact")).toContainText("Przylot szacowany");
  await expect(page.locator(".detail-summary .trip-details")).not.toHaveAttribute("open","");
  await expect(page.locator("#stay-checkout")).toHaveValue("2026-10-24");
  await expect(page.locator("#budget-nights")).toHaveValue("7");
@@ -19,7 +20,8 @@ test("audit midnight arrival is visible while seven hotel nights and manual mone
  await expect(page.locator("#budget-nights")).toHaveValue("7");
  await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
  await page.goto(await page.locator("#trip-share-link").inputValue());
- await expect(page.locator(".home-arrival")).toContainText(/25\.10\.2026.*00:40/);
+ await expect(page.locator(".flight-schedule-compact .home-arrival")).toContainText("25 paź");
+ await expect(page.locator(".flight-schedule-compact")).toContainText("00:40");
  await expect(page.locator("#budget-nights")).toHaveValue("7");
  await expect(page.locator("#budget-hotel")).toHaveValue("200");
  await expect(page.locator("#budget-food")).toHaveValue("50");

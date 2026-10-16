@@ -1,7 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {flightPriceBasis,flightTime,flightDayShift,stopsLabel,destinationInterval} from "../src/lib/flight-facts.ts";
+import {compactFlightTime,flightPriceBasis,flightTime,flightDayShift,stopsLabel,destinationInterval} from "../src/lib/flight-facts.ts";
 import {budgetForTrip} from "../src/lib/trip-budget.ts";
+
+test("compact clocks retain local rollover and explicit UTC for unknown zones",()=>{
+ const local=compactFlightTime("2026-10-24T22:40:00Z","Europe/Warsaw");
+ assert.equal(local.time,"00:40");
+ assert.match(local.day,/25 paź/);
+ assert.equal(local.local,true);
+ for(const zone of [undefined,"Invalid/Zone"]){
+  const utc=compactFlightTime("2026-10-24T22:40:00Z",zone);
+  assert.equal(utc.time,"22:40 UTC");
+  assert.equal(utc.local,false);
+ }
+ for(const value of [null,"2026-10-24","2026-10-24T22:40:00","invalid"])
+  assert.equal(compactFlightTime(value,"Europe/Warsaw"),null);
+});
 
 test("price scope and known zero differ from unknown facts",()=>{
   assert.equal(flightPriceBasis({trip_type:"ROUND_TRIP"}),"za osobę · w obie strony");

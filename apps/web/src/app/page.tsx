@@ -1,7 +1,9 @@
 import {airportLabel} from "../lib/airports";
 import {destinationLabel} from "../lib/destinations";
 import Link from "next/link";
-import Form from "next/form";
+import {cookies} from "next/headers";
+import {chooseHomeOrigin} from "./actions/origin-preference";
+import {normalizedOrigin,originPreferenceCookie} from "../lib/origin-preference";
 import {getDeals,getAirports,getDestinations,Deal,Airport,Destination} from "../lib/api";
 import {pl} from "../lib/pl";
 import {DealGrid} from "./components/catalog";
@@ -10,32 +12,37 @@ export const dynamic="force-dynamic";
 export const metadata={alternates:{canonical:"/"}};
 export default async function HomePage({searchParams}:{searchParams:Promise<{origin?:string|string[]}>}) {
   const raw=await searchParams;
-  const origin=typeof raw.origin==="string" ? raw.origin.trim().toUpperCase() : "WRO";
+  const stored=normalizedOrigin((await cookies()).get(originPreferenceCookie)?.value);
+  const [origins,places]=await Promise.allSettled([getAirports(),getDestinations()]);
+  const airports:Airport[]=origins.status==="fulfilled" ? origins.value : [];
+  const destinations:Destination[]=places.status==="fulfilled" ? places.value : [];
+  const origin=raw.origin!==undefined ? normalizedOrigin(raw.origin)
+    : airports.some(a=>a.iata_code===stored) ? stored : "";
   const filters={origin,duration_min:"2",duration_max:"4"};
   const catalogHref="/deals?"+new URLSearchParams(filters);
-  let deals:Deal[]=[], airports:Airport[]=[], destinations:Destination[]=[], failed=false;
-  const [offers,origins,places]=await Promise.allSettled([getDeals({...filters,limit:"100"}),getAirports(),getDestinations()]);
+  let deals:Deal[]=[], failed=false;
+  const [offers]=await Promise.allSettled([getDeals({...filters,limit:"100"})]);
   if(offers.status==="fulfilled")deals=offers.value.filter(deal=>{
     const nights=(Date.parse(deal.trip_end)-Date.parse(deal.trip_start))/86400000;
-    return deal.origin_code===origin && deal.trip_type==="ROUND_TRIP" && Number.isInteger(nights) && nights>=2 && nights<=4;
+    return (!origin || deal.origin_code===origin) && deal.trip_type==="ROUND_TRIP" && Number.isInteger(nights) && nights>=2 && nights<=4;
   }).slice(0,6);else failed=true;
-  if(origins.status==="fulfilled")airports=origins.value;
-  if(places.status==="fulfilled")destinations=places.value;
   return <main className="page-shell home-page">
     <section className="hero"><div className="hero-copy"><p className="eyebrow"><span className="status-dot"/>Loty z Polski · HopTrip</p><h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1><p className="lead">Porównaj loty i zaplanuj budżet wyjazdu.</p></div>
       <FilterForm key={origin} filters={{origin}} airports={airports} destinations={destinations} hero/></section>
 
-    <section className="catalog-section" aria-labelledby="current-deals"><div className="section-heading"><div><p className="eyebrow">Wylot: {origin}</p><h2 id="current-deals">Krótkie wyjazdy · 2–4 noce</h2></div><span className="badge">{pl.perPerson} · PLN</span></div>
+    <section className="catalog-section" aria-labelledby="current-deals"><div className="section-heading"><div><p className="eyebrow">Wylot: {origin || "dowolne lotnisko"}</p><h2 id="current-deals">Krótkie wyjazdy · 2–4 noce</h2></div><span className="badge">{pl.perPerson} · PLN</span></div>
       <details className="short-trip-airport"><summary>Zmień lotnisko krótkiego wyjazdu</summary>
-      <Form key={origin} action="/"><label htmlFor="short-trip-origin">Lotnisko dla krótkich wyjazdów</label>{" "}
-        <select id="short-trip-origin" name="origin" defaultValue={origin} required>
-          {!airports.some(a=>a.iata_code===origin) && <option value="">Wybierz lotnisko</option>}
+      <form key={origin} action={chooseHomeOrigin}><label htmlFor="short-trip-origin">Lotnisko dla krótkich wyjazdów</label>{" "}
+        <select id="short-trip-origin" name="origin" defaultValue={origin}>
+          <option value="">Dowolne lotnisko</option>
+          {origin && !airports.some(a=>a.iata_code===origin) && <option value={origin}>{origin}</option>}
           {airports.map(a=><option key={a.id} value={a.iata_code}>{airportLabel(a)}</option>)}
         </select>{" "}<button type="submit" className="button button-secondary" disabled={!airports.length}>Pokaż krótkie wyjazdy</button>
-      </Form></details>
+      <p className="field-hint">Zapamiętamy wybór na tym urządzeniu. Wybierz „Dowolne lotnisko”, aby go usunąć.</p>
+      </form></details>
       {failed ? <p className="notice" role="status">{pl.error}</p> : <>
         {deals.length>0 && <DealGrid deals={deals}/>}
-        <p role="status">{deals.length ? `Liczba propozycji na 2–4 noce: ${deals.length}.` : "Brak aktualnych lotów na 2–4 noce z tego lotniska. Wybierz inne lotnisko lub sprawdź katalog z inną długością pobytu."}</p>
+        <p role="status">{deals.length ? `Liczba propozycji na 2–4 noce: ${deals.length}.` : origin ? "Brak aktualnych lotów na 2–4 noce z tego lotniska. Wybierz inne lotnisko lub sprawdź katalog z inną długością pobytu." : "Brak aktualnych lotów na 2–4 noce. Sprawdź katalog z inną długością pobytu."}</p>
         {deals.length>0 && deals.length<6 && <p>Obecnie pokazujemy mniej propozycji spełniających te warunki. Sprawdź ponownie później lub zmień lotnisko.</p>}
       </>}
       <p>{pl.flightOnly} Sprawdź godziny lotów i potrzebne dni urlopu.</p>

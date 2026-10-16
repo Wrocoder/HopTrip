@@ -1,0 +1,11 @@
+[Unit]
+Description=HopTrip storage report every morning at 08:00 Warsaw time
+
+[Timer]
+OnCalendar=*-*-* 08:00:00 Europe/Warsaw
+AccuracySec=1min
+Persistent=false
+Unit=hoptrip-storage.service
+
+[Install]
+WantedBy=timers.target
