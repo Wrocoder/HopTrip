@@ -362,3 +362,20 @@ breadcrumbs, preview и sitemap. Всего с четырьмя новыми с�
 [Пошаговая инструкция владельцу для публикации и Search Console](nordic-articles-indexing.md).
 Сначала выкладка, затем запрос индексации чистых URL; наличие sitemap не гарантирует
 включение в индекс. Рассылки и публикации аудитории не выполнялись.
+
+## Публикация четырёх статей — 2026-10-18
+
+По команде владельца выполнены push и deploy релиза
+`6941a9b246ed01924affe9c2b7917244d4618732`. CI
+[39073009279](https://github.com/Wrocoder/HopTrip/actions/runs/39073009279)
+успешен (API/PostgreSQL и web). Штатный deploy через systemd
+`hoptrip-articles-6941a9b` завершён 2026-10-17 22:00:05 UTC,
+то есть 18 октября 00:00:05 Europe/Warsaw. API readiness: ready.
+Backup: `/opt/hoptrip/backups/deploy-20261017T215851Z-6941a9b246ed01924affe9c2b7917244d4618732`.
+
+Production SEO-аудит: **61 страница, failures: []**. Все четыре статьи возвращают
+200, собственные canonical и index/follow; входят в sitemap. [HTTP-отчёт](seo-growth/articles-production-check.json).
+Статус обоих редакционных пакетов теперь **опубликовано / проверено на production**,
+но **не подтверждено в Search Console**. Инструкция владельцу актуализирована.
+Следующий коммит отчёта содержит только документацию; приложение на сервере — 6941a9b.
+Пользовательские .idea и stay22.md сохранены, сообщения аудитории не отправлялись.
