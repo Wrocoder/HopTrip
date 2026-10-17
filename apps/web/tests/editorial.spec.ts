@@ -1,6 +1,7 @@
 import {test,expect} from "@playwright/test";
 import {content,publishedInfoPages,relatedInfoPages} from "../src/lib/content";
 import {destinationForGuide,guidesForDestination} from "../src/lib/guide-destinations";
+import {catalogPages} from "../src/lib/catalog-pages";
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
@@ -54,7 +55,7 @@ test("editorial registry has complete references and no links to drafts",()=>{
   expect(destination).toBeDefined();
   expect(guidesForDestination(destination!.slug).map(guide=>guide.slug)).toContain(slug);
  }
- expect(publishedInfoPages()).toHaveLength(47);
+ expect(publishedInfoPages()).toHaveLength(51);
  for(const [slug,page] of publishedInfoPages()) {
   const links=relatedInfoPages(slug).map(item=>item.slug);
   expect(new Set(links).size).toBe(links.length);
@@ -76,7 +77,7 @@ test("editorial registry has complete references and no links to drafts",()=>{
    expect(Object.hasOwn(content,related)).toBe(true);
    expect(content[related].draft).toBe(false);
   }
-  for(const route of guide.routes ?? []) expect(route.href).toMatch(/^\/(deals|from\/[A-Z]{3}|destinations\/[a-z-]+)$/);
+  for(const route of guide.routes ?? []) expect(catalogPages.some(page=>page.path===route.href) || /^\/(from\/[A-Z]{3}|destinations\/[a-z-]+)$/.test(route.href)).toBe(true);
  }
 });
 
@@ -101,16 +102,16 @@ test("guide remains readable when the destination API is unavailable",async({pag
  await expect(flights.locator(".deal-card")).toHaveCount(0);
 });
 
-test("editorial index groups all 47 pages and sitemap excludes trust drafts",async({page,request})=>{
+test("editorial index groups all 51 pages and sitemap excludes trust drafts",async({page,request})=>{
  await page.goto("/info");
- await expect(page.locator("main .deal-card")).toHaveCount(47);
- for(const [id,count] of [["method",5],["planning",7],["airports",7],["destinations",28]] as const) {
+ await expect(page.locator("main .deal-card")).toHaveCount(51);
+ for(const [id,count] of [["method",5],["planning",9],["airports",7],["destinations",30]] as const) {
   await expect(page.locator(`#${id} .deal-card`)).toHaveCount(count);
  }
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(52);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(61);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);

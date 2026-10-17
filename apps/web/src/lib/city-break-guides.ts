@@ -62,7 +62,7 @@ export const cityBreakGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"VisitOSLO — promenada portowa",href:"https://www.visitoslo.com/articles/the-harbour-promenade"},
    {label:"MUNCH — informacje dla odwiedzających",href:"https://www.munch.no/en/visit-us/"},
-  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals"}],related:["stockholm-weekend","city-break-planning","concert-trip"],
+  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals"}],related:["norwegia-wieloryby-lodowce-fiordy","islandia-wieloryby-lodowce-atrakcje","stockholm-weekend","city-break-planning","concert-trip"],
  },
  "concert-trip":{
   title:"Wyjazd na koncert za granicę: lot, nocleg i bilety",
@@ -94,6 +94,6 @@ export const cityBreakGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Musée du Louvre — dni i godziny otwarcia",href:"https://www.louvre.fr/en/visit/hours-admission"},
    {label:"Visit Stockholm — muzea i spacery na Djurgården",href:"https://www.visitstockholm.com/see-do/attractions/district-guide-djurgarden/"},
-  ],routes:[{label:"Wybierz city break na 2–4 noce",href:"/city-break"}],related:["milan-weekend","paris-weekend","stockholm-weekend","oslo-weekend","trip-budget","baggage"],
+  ],routes:[{label:"Wybierz city break na 2–4 noce",href:"/city-break"}],related:["gdzie-poleciec-na-weekend-jesienia","tanie-loty-last-minute","milan-weekend","paris-weekend","stockholm-weekend","oslo-weekend","trip-budget","baggage"],
  },
 };

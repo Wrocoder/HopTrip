@@ -7,10 +7,12 @@ import {moreDestinationGuides} from "./more-destination-guides";
 import {cityBreakGuides} from "./city-break-guides";
 import {weekendPilotGuides} from "./weekend-pilot-guides";
 import {threeDayGuides} from "./three-day-guides";
+import {shortTripGuides} from "./short-trip-guides";
+import {nordicGuides} from "./nordic-guides";
 export type {InfoContent} from "./info-types";
 
 export const content:Record<string,InfoContent> = {
- ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,...weekendPilotGuides,...threeDayGuides,
+ ...travelGuides,...airportGuides,...destinationGuides,...moreDestinationGuides,...cityBreakGuides,...weekendPilotGuides,...threeDayGuides,...shortTripGuides,...nordicGuides,
  "trip-budget":{
   title:"Jak policzyć budżet całej podróży",
   description:"Kalkulator budżetu podróży w PLN: policz loty, bagaż, noclegi, dojazdy i wydatki na miejscu dla całej grupy oraz na osobę.",

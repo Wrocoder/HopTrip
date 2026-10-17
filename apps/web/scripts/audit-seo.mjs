@@ -23,7 +23,7 @@ try {
   if(doc.querySelector("parsererror")) throw new Error("Invalid sitemap XML");
   return [...doc.querySelectorAll("url > loc")].map(node=>node.textContent);
  },await sitemap.text());
- check(urls.length===57,`sitemap: expected 57 URLs, got ${urls.length}`);
+ check(urls.length===61,`sitemap: expected 61 URLs, got ${urls.length}`);
  const growthPaths=["/from/KRK","/from/warszawa","/city-break","/tanie-loty-na-weekend","/routes/krakow-rome"];
  check(new Set(urls).size===urls.length,"sitemap: duplicate URLs");
  const paths=[];
