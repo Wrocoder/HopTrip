@@ -1,4 +1,4 @@
-"""Apply a reviewed provider catalog; never fetch or guess mappings during ingestion."""
+"""Apply reviewed or reference-validated rows; preserve manual mappings and visibility."""
 
 import json
 from pathlib import Path
@@ -11,13 +11,14 @@ CATALOG = Path(__file__).resolve().parents[1] / "data" / "destinations.json"
 PROVIDER = "travelpayouts_data"
 
 
-def sync_destinations(db: Session) -> dict[str, int]:
+def sync_destinations(db: Session, *, rows: list[dict] | None = None) -> dict[str, int]:
     """Flush changes without committing; caller owns transaction and pipeline lock.
 
     Preserve existing names, primary IATA, visibility and manual mappings. Conflicts
     abort the transaction instead of redirecting an existing destination silently.
     """
-    rows = json.loads(CATALOG.read_text(encoding="utf-8-sig"))["destinations"]
+    if rows is None:
+        rows = json.loads(CATALOG.read_text(encoding="utf-8-sig"))["destinations"]
     result = {"destinations_added": 0, "aliases_added": 0, "destinations_existing": 0}
     for row in rows:
         destination = db.scalar(select(Destination).where(Destination.slug == row["slug"]))

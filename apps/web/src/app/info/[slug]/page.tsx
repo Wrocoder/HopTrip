@@ -78,6 +78,10 @@ export default async function InfoPage({params}:Props) {
   <ul>{page.routes.map(route=><li key={route.href}><Link href={route.href}>{route.label}</Link></li>)}</ul>
  </nav>}
  {destination && <DestinationActivities slug={destination.slug}/>}
+ {slug==="islandia-wieloryby-lodowce-atrakcje" && <>
+  <p>Poniższe wycieczki zaczynają się w Reykjavíku. Dojazd z lotniska i innych części Islandii planujesz osobno.</p>
+  <DestinationActivities slug="reykjavik"/>
+ </>}
  {related.length>0 && <nav aria-label="Powiązane poradniki"><h2>Czytaj dalej</h2><ul>{related.map(({slug,page,reason})=>
   <li key={slug}><Link href={`/info/${slug}`}>{page.title}</Link>{reason && <p className="related-reason">{reason}</p>}</li>
  )}</ul><Link href="/deals">{pl.deals}</Link></nav>}

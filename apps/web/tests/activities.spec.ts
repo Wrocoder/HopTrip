@@ -14,6 +14,7 @@ test("published city guides have matching activity selections",()=>{
 for(const [guide,city,id,kind] of [
   ["barcelona-airports","barcelona","tiqets-973672","affiliate"],
   ["oslo-weekend","oslo","official-oslo","official"],
+  ["islandia-wieloryby-lodowce-atrakcje","reykjavik","tiqets-976255","affiliate"],
 ] as const) {
   test(`guide ${guide}: native links work and tracking follows consent`,async({page,context})=>{
     // Fulfil external navigation locally; never generate real partner clicks in tests.
@@ -27,7 +28,7 @@ for(const [guide,city,id,kind] of [
     });
     await page.goto(`/info/${guide}?private_parameter=discard`);
     await page.getByRole("button",{name:"Odrzuć opcjonalne"}).click();
-    const panel=page.getByRole("region",{name:"Muzea i atrakcje"});
+    const panel=page.getByRole("region",{name:/Muzea i atrakcje|Wycieczki i atrakcje/});
     const link=panel.getByRole("link").first();
     async function openLink() {
       const popupPromise=page.waitForEvent("popup");
@@ -56,8 +57,8 @@ for(const [guide,city,id,kind] of [
 }
 
 test("catalog keeps distinct city-specific sources and verified affiliate destinations",()=>{
-  expect(Object.keys(activitySelections)).toHaveLength(68);
-  expect(Object.values(activitySelections).filter(s=>s.items.some(i=>i.affiliateHref))).toHaveLength(32);
+  expect(Object.keys(activitySelections)).toHaveLength(69);
+  expect(Object.values(activitySelections).filter(s=>s.items.some(i=>i.affiliateHref))).toHaveLength(35);
   const urls:string[]=[];
   for(const selection of Object.values(activitySelections)) {
     expect(selection.items.length).toBeGreaterThan(0);
@@ -92,6 +93,36 @@ test("catalog keeps distinct city-specific sources and verified affiliate destin
   expect(activitiesForDestination("constructor")).toBeUndefined();
 });
 
+test("Nordic tours match their departure city and preserve official alternatives",()=>{
+  const ids=(city:string)=>activitiesForDestination(city)!.items.map(item=>item.id);
+  expect(ids("oslo")).toEqual(["official-oslo","tiqets-1041446"]);
+  expect(ids("bergen")).toEqual(["official-bergen","tiqets-1097659"]);
+  expect(ids("tromso")).toEqual(["official-tromso","official-tromso-whales"]);
+  expect(ids("reykjavik")).toEqual(["tiqets-976255","tiqets-977170","tiqets-1109840"]);
+  expect(activitiesForDestination("iceland")).toBeUndefined();
+  expect(activitiesForDestination("norway")).toBeUndefined();
+  expect(activitiesForDestination("tromso")!.items[1].affiliateHref).toBeUndefined();
+  expect(activitiesForDestination("reykjavik")!.items[2].beforeBooking).toContain("nie trekking");
+});
+
+test("Iceland guide discloses Reykjavik departure and long glacier trip",async({page})=>{
+  const external:string[]=[];
+  page.on("request",request=>{if(/tiqets\.com|tp\.media/.test(request.url()))external.push(request.url());});
+  await page.goto("/info/islandia-wieloryby-lodowce-atrakcje");
+  await page.getByRole("button",{name:"Odrzuć opcjonalne"}).click();
+  await expect(page.getByText("Poniższe wycieczki zaczynają się w Reykjavíku.",{exact:false})).toBeVisible();
+  const panel=page.getByRole("region",{name:"Wycieczki i atrakcje"});
+  await expect(panel.getByRole("listitem")).toHaveCount(3);
+  await expect(panel).toContainText("14,5 godziny");
+  await expect(panel).toContainText("nie trekking po lodowcu");
+  await expect(panel.getByText("Link afiliacyjny — możemy otrzymać prowizję za zakup.")).toHaveCount(3);
+  await expect(panel).not.toContainText("Oslofjord");
+  await expect(panel.getByRole("link",{name:"Uwzględnij atrakcje w budżecie"})).toHaveAttribute("href","/info/trip-budget#calculator");
+  expect(external).toEqual([]);
+  await page.setViewportSize({width:320,height:800});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
 test("trip shows only local attractions without provider requests or changing flight price",async({page},testInfo)=>{
   const hydrationErrors:string[]=[];
   page.on("console",message=>{if(/hydrat/i.test(message.text()))hydrationErrors.push(message.text());});
@@ -101,7 +132,7 @@ test("trip shows only local attractions without provider requests or changing fl
   });
   await page.goto("/deals/browser-deal");
   await page.getByRole("button",{name:"Odrzuć opcjonalne"}).click();
-  const panel=page.getByRole("region",{name:"Muzea i atrakcje"});
+  const panel=page.getByRole("region",{name:/Muzea i atrakcje|Wycieczki i atrakcje/});
   await expect(panel.getByRole("heading",{name:"Casa Batlló — bilet Blue"})).toBeVisible();
   await expect(panel.getByRole("heading",{name:"Aquarium Barcelona — bilet wstępu"})).toBeVisible();
   await expect(panel.getByRole("listitem")).toHaveCount(3);

@@ -61,6 +61,8 @@ def test_pipeline_keeps_each_origin_diagnostics_in_job_result(monkeypatch):
         db.commit()
 
     def handle(request):
+        if request.url.path.startswith("/data/en/"):
+            return httpx.Response(503)
         data = (
             [
                 None,
@@ -92,6 +94,7 @@ def test_pipeline_keeps_each_origin_diagnostics_in_job_result(monkeypatch):
         assert [r["offers_returned"] for r in stored] == [1, 0]
         assert [r["stop_reason"] for r in stored] == ["short_page", "empty_page"]
         assert "mock-secret" not in str(stored)
+        assert db.scalar(select(JobRun)).result_json["destination_discovery"]["status"] == "reference_unavailable"
 
 
 def test_tracked_pipeline_persists_failure() -> None:

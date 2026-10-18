@@ -9,7 +9,7 @@ export function DestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:b
   if(!selection) return null;
   return <section className={styles.section} aria-labelledby="destination-activities-title">
     <p className="eyebrow">Pomysły na pobyt · {selection.city}</p>
-    <h2 id="destination-activities-title">Muzea i atrakcje</h2>
+    <h2 id="destination-activities-title">{selection.heading ?? "Muzea i atrakcje"}</h2>
     <p>Bilety kupujesz osobno. Dostępność na daty Twojej podróży sprawdzisz u sprzedawcy lub na oficjalnej stronie obiektu.</p>
     <ul className={styles.grid}>
       {selection.items.map(item=><li key={item.id} className={styles.card}>
@@ -19,6 +19,7 @@ export function DestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:b
         {item.audience && <p><strong>Dla kogo:</strong> {item.audience}</p>}
         {item.duration && <p><strong>Czas wizyty:</strong> {item.duration}</p>}
         <p className={styles.note}>{item.beforeBooking}</p>
+        {item.checkedAt && <p className="muted">Opis sprawdzono {date(item.checkedAt)}. Termin i dostępność potwierdź u organizatora.</p>}
         <div className={styles.booking}>
           <p className="muted">{item.freeEntry ? "Samodzielna wizyta: bezpłatny wstęp według oficjalnej strony." : item.kind==="visit" ? "Oficjalna strona — bilety i godziny zwiedzania" : "Cena do sprawdzenia w Tiqets"}</p>
           {item.affiliateHref && <p className="muted">Link afiliacyjny — możemy otrzymać prowizję za zakup.</p>}
@@ -35,8 +36,8 @@ export function DestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:b
     </ul>
     <p className="muted">Koszt atrakcji nie jest wliczony w cenę lotu. Przed zakupem sprawdź zakres biletu,
       ulgi i zasady anulowania. W dni podróży uwzględnij czas lotu i dojazdu.</p>
-    {slug==="barcelona" && <>
-      <p className="muted">Opisy i zasady sprawdzono {date(selection.checkedAt)}. To przegląd źródeł, nie potwierdzenie dostępności biletów na daty podróży.</p>
+    {(slug==="barcelona" || selection.heading) && <>
+      {slug==="barcelona" && <p className="muted">Opisy i zasady sprawdzono {date(selection.checkedAt)}. To przegląd źródeł, nie potwierdzenie dostępności biletów na daty podróży.</p>}
       <p>W kalkulatorze wpisz łączny koszt wybranych atrakcji w PLN na osobę za cały pobyt. Przy różnych cenach biletów użyj średniej na osobę. Sam bezpłatny wstęp nie oznacza zerowych kosztów dojazdu.</p>
       <ActivityBudgetLink inTrip={inTrip}/>
     </>}

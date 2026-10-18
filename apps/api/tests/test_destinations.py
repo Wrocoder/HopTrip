@@ -1,11 +1,15 @@
 from dataclasses import replace
 
 import pytest
+from app.models.data_provider import DataProvider
 from app.models.location import Destination, DestinationAlias
+from app.models.offer import TravelOffer
+from app.services.currency import PlnOnlyConverter
+from app.services.destination_search import matching_destinations
 from app.services.destinations import PROVIDER, sync_destinations
-from app.services.ingestion import resolve_destination
+from app.services.ingestion import ingest_offers, resolve_destination
 from sqlalchemy import func, select
-from tests.test_lifecycle import setup
+from tests.test_lifecycle import NOW, setup
 
 
 def test_catalog_resolves_city_and_airport_preserving_existing(isolated_db):
@@ -32,6 +36,9 @@ def test_catalog_resolves_city_and_airport_preserving_existing(isolated_db):
         ("PAR", "BVA", "paris"),
         ("ROM", "CIA", "rome"),
         ("BUD", "BUD", "budapest"),
+        ("REK", "KEF", "reykjavik"),
+        ("REK", "RKV", "reykjavik"),
+        ("KEF", "KEF", "reykjavik"),
     ]:
         target = db.scalar(select(Destination).where(Destination.slug == slug))
         assert resolve_destination(
@@ -44,6 +51,28 @@ def test_catalog_resolves_city_and_airport_preserving_existing(isolated_db):
         None,
         False,
     )
+
+
+@pytest.mark.parametrize("code", ["REK", "KEF", "RKV"])
+def test_iceland_offers_ingest_after_catalog_sync(isolated_db, code):
+    db = isolated_db
+    raw = replace(setup(db), destination=code, payload={})
+    db.add(DataProvider(code=PROVIDER, name="Travelpayouts"))
+    db.commit()
+    before = ingest_offers(db, provider_code=PROVIDER, offers=[raw], converter=PlnOnlyConverter(), now=NOW)
+    assert before.skipped_unresolved_routes == 1
+    sync_destinations(db)
+    after = ingest_offers(db, provider_code=PROVIDER, offers=[raw], converter=PlnOnlyConverter(), now=NOW)
+    assert after.saved_offers == 1
+    assert after.skipped_unresolved_routes == 0
+    destination = db.scalar(select(Destination).where(Destination.slug == "reykjavik"))
+    assert destination.country_code == "IS"
+    offer = db.scalar(select(TravelOffer))
+    assert offer.destination_id == destination.id
+    for query in ["Reykjavik", "reykjavik", "REK", "KEF", "RKV"]:
+        assert matching_destinations(db, query) == [destination]
+    # Other Icelandic towns must not be silently treated as Reykjavik.
+    assert resolve_destination(db, PROVIDER, replace(raw, destination="AEY")) == (None, False)
 
 
 def test_conflict_rolls_back_catalog(isolated_db):
