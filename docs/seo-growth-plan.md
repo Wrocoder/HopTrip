@@ -461,3 +461,15 @@ Edge Chromium, production build с read-only production API: 390 и 1366px,
 каталог Reykjavik → страница перелёта: флаг загружен (naturalWidth > 0), польская
 подсказка Islandia, горизонтального переполнения нет. Статус: готово локально,
 ещё не опубликовано. Пользовательские изменения сохранены.
+
+### Публикация флагов — 2026-10-18
+
+По указанию владельца выполнены push и deploy
+`d8972ce7d32ff2a8d16f23cb0a4b8c1a731ea6bb`.
+CI [39131951907](https://github.com/Wrocoder/HopTrip/actions/runs/39131951907) успешен.
+Deploy завершён 13:34:50 UTC, ExecMainStatus=0, readiness=ready.
+Backup: `/opt/hoptrip/backups/deploy-20261018T133337Z-d8972ce7d32ff2a8d16f23cb0a4b8c1a731ea6bb`.
+Production Edge Chromium, 390/1366px: каталог Reykjavik → страница перелёта,
+оба флага загружены (naturalWidth > 0), title=Islandia, переполнения нет.
+Статус исправления: **опубликовано и проверено на production**.
+Следующий коммит — только отчёт; приложение остаётся на d8972ce.
