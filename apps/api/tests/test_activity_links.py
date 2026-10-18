@@ -12,8 +12,8 @@ ITEM = {"city": "milan", "id": "tiqets-1111408",
 def test_catalog_is_the_same_complete_source_used_by_web():
     path = Path(__file__).resolve().parents[3] / "apps/web/src/lib/activity-expansion.json"
     items = links.load_catalog(path)
-    assert len(items) == 72
-    assert len({item["city"] for item in items}) == 68
+    assert len(items) == 78
+    assert len({item["city"] for item in items}) == 69
     assert all("tpx.gr" not in item["url"] and "tp.media" not in item["url"] for item in items)
 
 
