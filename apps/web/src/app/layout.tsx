@@ -19,6 +19,10 @@ export const metadata:Metadata = {
 };
 export default function RootLayout({children}:Readonly<{children:React.ReactNode}>) {
   return <html lang="pl" data-scroll-behavior="smooth" className={`${bodyFont.variable} ${headingFont.variable}`}>
+    <head>
+      {/* Impact requires its supplied value attribute instead of standard meta content. */}
+      <meta {...{name:"impact-site-verification",value:"a24efacb-dac8-4a2c-9372-ea05112f3b24"}} />
+    </head>
     <body>
     <a className="skip-link" href="#content">Przejdź do treści</a>
     <header className="page-shell site-header"><Link className="brand" href="/" aria-label="HopTrip — strona główna"><span className="brand-mark" aria-hidden="true">↗</span>HopTrip<span className="brand-dot" aria-hidden="true">.</span></Link>
