@@ -1,4 +1,5 @@
 import type {Airport,Destination,Filters} from "./api";
+import {localizedHref} from "./i18n/routing.ts";
 export const sources=["homepage","google","facebook","instagram","newsletter","direct","test"];
 export const campaigns=["hoptrip-launch","wro-weekend","test"];
 export const campaignLabel=(value:string|null|undefined)=>campaigns.includes(value??"") ? value! : undefined;
@@ -23,6 +24,8 @@ export function analyticsFilters(filters:Filters,airports:Airport[],destinations
 }
 
 export function analyticsPageType(path:string):string|undefined {
+ if(!path.startsWith("/") || path.startsWith("//"))return undefined;
+ path=localizedHref(path,"pl");
  if(path==="/")return "home";
  if(path==="/city-break")return "city_break";
  if(path==="/tanie-loty-na-weekend")return "weekend";

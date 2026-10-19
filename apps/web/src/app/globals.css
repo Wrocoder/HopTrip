@@ -444,6 +444,10 @@ main.catalog-page { padding-top: 16px; }
 .trip-details-content h3 { margin: 0 0 12px; font-size: 16px; }
 .trip-details-content .price-assessment { margin-top: 0; }
 .country-flag { display: inline-block; width: 24px; height: 18px; margin-left: 10px; vertical-align: middle; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.12); object-fit: cover; }
+.site-header:has(.language-switcher) { flex-wrap:wrap; }
+.language-switcher { display:flex; flex-wrap:wrap; gap:8px 14px; width:100%; font-size:.9rem; }
+.language-switcher a { padding:6px 0; }
+.language-switcher [aria-current="page"] { font-weight:700; text-decoration:underline; text-underline-offset:4px; }
 .flight-schedule { font-size: 14px; line-height: 1.6; margin-top: 14px; overflow-wrap: anywhere; }
 .flight-schedule p { margin: 0 0 10px; }
 .flight-stops { display: block; font-size: 13px; font-weight: 600; margin-top: 3px; }

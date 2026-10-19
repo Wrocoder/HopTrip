@@ -2,6 +2,8 @@ import {notFound} from "next/navigation";
 import {Suspense} from "react";
 import Link from "next/link";
 import type {Metadata} from "next";
+import {locales} from "../../../lib/i18n/config";
+import {languageAlternates} from "../../../lib/i18n/routing";
 import {getInfoContent,relatedInfoPages} from "../../../lib/content";
 import {pl} from "../../../lib/pl";
 import {isLegalPage} from "../../../lib/legal-content";
@@ -16,7 +18,8 @@ export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
  if(!page) notFound();
  const description=page.description ?? page.paragraphs[0];
- return {title:page.title,description,alternates:{canonical:`/info/${slug}`},
+ return {title:page.title,description,alternates:{canonical:`/info/${slug}`,
+  ...(slug==="trip-budget" ? {languages:languageAlternates("/info/trip-budget",locales)} : {})},
   robots:{index:!page.draft && !page.noindex,follow:true},
   openGraph:{title:page.title,description,url:`/info/${slug}`,locale:"pl_PL",type:"website",
    ...(!page.draft && !page.noindex ? {images:[{url:`/share/${slug}`,width:1200,height:630,alt:page.title}]} : {})},

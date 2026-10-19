@@ -1,0 +1,56 @@
+import type {Locale} from "./config.ts";
+
+export const filterCopy:Record<string,readonly [string,string,string]>={
+ "Na weekend":["Weekend","На выходные","На вихідні"],
+ "pt./sob. → niedz.":["Fri/Sat → Sun","пт/сб → вс","пт/сб → нд"],
+ "Warszawa — WAW i WMI":["Warsaw — WAW and WMI","Варшава — WAW и WMI","Варшава — WAW і WMI"],
+ "Warszawa Chopin — WAW":["Warsaw Chopin — WAW","Варшава Шопен — WAW","Варшава Шопен — WAW"],
+ "Warszawa Modlin — WMI":["Warsaw Modlin — WMI","Варшава Модлин — WMI","Варшава Модлін — WMI"],
+ "To miasto ma kilka lotnisk. Wybierz konkretne lotnisko z listy.":["This city has several airports. Choose one from the list.","В этом городе несколько аэропортов. Выберите конкретный из списка.","У цьому місті кілька аеропортів. Виберіть конкретний зі списку."],
+ "Nie znaleziono lotniska. Sprawdź nazwę miasta lub kod IATA.":["Airport not found. Check the city name or IATA code.","Аэропорт не найден. Проверьте название города или код IATA.","Аеропорт не знайдено. Перевірте назву міста або код IATA."],
+ "Ta nazwa wskazuje kilka kierunków. Wybierz miasto z listy.":["This name matches several destinations. Choose a city from the list.","Этому названию соответствуют несколько направлений. Выберите город из списка.","Цій назві відповідають кілька напрямків. Виберіть місто зі списку."],
+ "Nie znaleziono kierunku. Wybierz miasto z podpowiedzi lub zostaw pole puste.":["Destination not found. Choose a suggested city or leave the field empty.","Направление не найдено. Выберите город из подсказок или оставьте поле пустым.","Напрямок не знайдено. Виберіть місто з підказок або залиште поле порожнім."],
+ "Koniec zakresu dat nie może być wcześniejszy niż początek.":["The end date cannot be before the start date.","Конец периода не может быть раньше начала.","Кінець періоду не може бути раніше початку."],
+ "Maksymalny pobyt nie może być krótszy niż minimalny.":["The maximum stay cannot be shorter than the minimum.","Максимальный срок поездки не может быть меньше минимального.","Максимальний строк поїздки не може бути меншим за мінімальний."],
+ "Wybór ofert":["Choose flights","Выбор перелётов","Вибір перельотів"],
+ "Filtry ofert":["Flight filters","Фильтры перелётов","Фільтри перельотів"],
+ "Lotnisko wylotu":["Departure airport","Аэропорт вылета","Аеропорт вильоту"],
+ "Kierunek":["Destination","Направление","Напрямок"],
+ "Szukaj lotów":["Find flights","Найти перелёты","Знайти перельоти"],
+ "Szybkie filtry":["Quick filters","Быстрые фильтры","Швидкі фільтри"],
+ "Zasady szybkich filtrów":["Quick filter rules","Правила быстрых фильтров","Правила швидких фільтрів"],
+ "Jak działają filtry":["How filters work","Как работают фильтры","Як працюють фільтри"],
+ "2–3 noce":["2–3 nights","2–3 ночи","2–3 ночі"],
+ "Loty do 300 zł":["Flights up to PLN 300","Перелёты до 300 PLN","Перельоти до 300 PLN"],
+ "Wylot w piątek lub sobotę, powrót w najbliższą niedzielę. Tylko loty z powrotem; bez godzin nie gwarantujemy wyjazdu bez urlopu.":["Depart Friday or Saturday and return the following Sunday. Return flights only; without flight times, a trip may still require time off work.","Вылет в пятницу или субботу, возвращение в ближайшее воскресенье. Только перелёты туда и обратно; без расписания нельзя гарантировать поездку без отпуска.","Виліт у п’ятницю або суботу, повернення найближчої неділі. Лише перельоти туди й назад; без розкладу не можна гарантувати поїздку без відпустки."],
+ "Pobyt od 2 do 3 nocy włącznie. Zastępuje oba pola długości pobytu.":["Stay for 2 to 3 nights inclusive. Replaces both stay limits.","От 2 до 3 ночей включительно. Заменяет оба ограничения срока поездки.","Від 2 до 3 ночей включно. Замінює обидва обмеження строку поїздки."],
+ "Cena lotu do 300 zł na osobę włącznie. Zastępuje limit ceny; nie obejmuje noclegu ani innych kosztów.":["Flight price up to PLN 300 per person inclusive. Replaces the price limit; accommodation and other costs are not included.","Цена перелёта до 300 PLN на человека включительно. Заменяет лимит цены; жильё и другие расходы не включены.","Ціна перельоту до 300 PLN на людину включно. Замінює ліміт ціни; житло та інші витрати не включені."],
+ "Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.":["Quick filters combine with other conditions and dates. Clicking again removes their conditions without restoring previous values.","Быстрые фильтры сочетаются с другими условиями и датами. Повторное нажатие удаляет их условия, не восстанавливая прежние значения.","Швидкі фільтри поєднуються з іншими умовами й датами. Повторне натискання видаляє їхні умови, не відновлюючи попередні значення."],
+ "Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy.":["Dates define the departure range, including both endpoints, not the return date. An empty field means no limit.","Даты задают период вылета с обеими границами включительно, а не дату возвращения. Пустое поле означает отсутствие ограничения.","Дати задають період вильоту з обома межами включно, а не дату повернення. Порожнє поле означає відсутність обмеження."],
+ "Daty i długość pobytu":["Dates and length of stay","Даты и срок поездки","Дати й строк поїздки"],
+ "Aktywne:":["Active:","Активно:","Активно:"],
+ "Zakres dat wylotu, nie powrotu. Długość pobytu w nocach.":["Departure date range, not return dates. Stay length in nights.","Период вылета, а не возвращения. Срок поездки в ночах.","Період вильоту, а не повернення. Строк поїздки в ночах."],
+ "To zestawienie obejmuje 2–4 noce. Aby wybrać inną długość, przejdź do pełnego katalogu.":["This selection covers 2–4 nights. Open the full catalogue to choose a different stay length.","В этой подборке поездки на 2–4 ночи. Для другого срока откройте полный каталог.","У цій добірці поїздки на 2–4 ночі. Для іншого строку відкрийте повний каталог."],
+ "Puste pole: bez ograniczenia.":["Empty field: no limit.","Пустое поле: без ограничения.","Порожнє поле: без обмеження."],
+ "Sortuj oferty":["Sort flights","Сортировка перелётов","Сортування перельотів"],
+ "Wybierz sortowanie":["Choose sorting","Выберите сортировку","Виберіть сортування"],
+ "Ocena oferty — najwyższa":["Offer score — highest first","Оценка предложения — сначала высокая","Оцінка пропозиції — спочатку висока"],
+ "Cena — najniższa":["Price — lowest first","Цена — сначала низкая","Ціна — спочатку низька"],
+ "Wylot — najbliższy":["Departure — soonest first","Вылет — сначала ближайший","Виліт — спочатку найближчий"],
+ "Zastosowane filtry":["Applied filters","Применённые фильтры","Застосовані фільтри"],
+ "Usuń filtr:":["Remove filter:","Убрать фильтр:","Прибрати фільтр:"],
+ "Wyczyść wszystkie filtry":["Clear all filters","Сбросить все фильтры","Скинути всі фільтри"],
+ "Dowolne lotnisko":["Any airport","Любой аэропорт","Будь-який аеропорт"],
+ "Lotniska wylotu":["Departure airports","Аэропорты вылета","Аеропорти вильоту"],
+ "Podpowiedzi są niedostępne. Wpisz kod lotniska, np. WRO.":["Suggestions are unavailable. Enter an airport code, e.g. WRO.","Подсказки недоступны. Введите код аэропорта, например WRO.","Підказки недоступні. Введіть код аеропорту, наприклад WRO."],
+ "Miasto lub kod IATA. Puste pole: dowolne.":["City or IATA code. Leave empty for any.","Город или код IATA. Пустое поле: любой вариант.","Місто або код IATA. Порожнє поле: будь-який варіант."],
+ "Mediolan lub MIL":["Milan or MIL","Милан или MIL","Мілан або MIL"],
+ "Kierunki podróży":["Destinations","Направления поездок","Напрямки поїздок"],
+ "Podpowiedzi są niedostępne. Wpisz nazwę lub identyfikator kierunku, np. milan.":["Suggestions are unavailable. Enter a destination name or ID, e.g. milan.","Подсказки недоступны. Введите название или идентификатор направления, например milan.","Підказки недоступні. Введіть назву або ідентифікатор напрямку, наприклад milan."],
+};
+export function filterText(locale:Locale,source:string):string {
+ if(locale==="pl")return source;
+ const row=filterCopy[source];
+ if(!row)throw new Error(`Missing filter translation: ${source}`);
+ return row[({en:0,ru:1,uk:2} as const)[locale]];
+}
