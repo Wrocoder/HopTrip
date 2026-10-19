@@ -1,12 +1,13 @@
 import {cityLabel} from "./cities.ts";
+import {locales,type Locale} from "./i18n/config.ts";
 import type {Destination} from "./api";
 
 export function normalizeDestination(value:string):string {
  return value.trim().toLowerCase().replace(/ł/g,"l").normalize("NFKD")
   .replace(/\p{M}/gu,"").replace(/\s+/g," ");
 }
-export const destinationLabel=(destination:Destination)=>cityLabel(destination.display_name || destination.city,destination.slug);
-const terms=(d:Destination)=>[d.slug,d.city,destinationLabel(d),...(d.aliases??[]),...(d.iata_codes??[])].map(normalizeDestination);
+export const destinationLabel=(destination:Destination,locale:Locale="pl")=>cityLabel(locale==="pl" ? destination.display_name || destination.city : destination.city,destination.slug,locale);
+const terms=(d:Destination)=>[d.slug,d.city,...locales.map(locale=>destinationLabel(d,locale)),...(d.aliases??[]),...(d.iata_codes??[])].map(normalizeDestination);
 export function matchingDestinations(destinations:Destination[],value:string):Destination[] {
  const normalized=normalizeDestination(value);
  if(!normalized)return [];

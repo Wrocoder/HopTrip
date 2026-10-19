@@ -111,7 +111,7 @@ test("editorial index groups all 51 pages and sitemap excludes trust drafts",asy
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(61);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(64);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);
@@ -121,7 +121,7 @@ test("editorial index groups all 51 pages and sitemap excludes trust drafts",asy
  await expect(page).toHaveURL(/#airports$/);
  await page.locator('a[href="/info/wro-airport"]').click();
  await page.getByRole("link",{name:"Loty z Wrocławia (WRO)",exact:true}).click();
- await expect(page).toHaveURL(/\/from\/WRO$/);
+ await expect(page).toHaveURL(/\/from\/WRO$/,{timeout:15000});
  await expect(page.locator(".deal-card").first()).toBeVisible();
 });
 

@@ -1,4 +1,5 @@
-import {originLabel} from "./cities.ts";
+import {originLabel,cityLabel} from "./cities.ts";
+import {locales,type Locale} from "./i18n/config.ts";
 import type {Airport} from "./api";
 
 export function normalizeAirport(value:string):string {
@@ -6,12 +7,12 @@ export function normalizeAirport(value:string):string {
     .replace(/\p{M}/gu,"").replace(/\s+/g," ");
 }
 
-export function airportLabel(airport:Airport):string {
-  return `${originLabel(airport.city,airport.iata_code)} — ${airport.iata_code}`;
+export function airportLabel(airport:Airport,locale:Locale="pl"):string {
+  return `${originLabel(airport.city,airport.iata_code,locale)} — ${airport.iata_code}`;
 }
 
 function terms(airport:Airport):string[] {
-  return [airport.iata_code,airport.city,airport.name,airportLabel(airport),...(airport.aliases ?? [])]
+  return [airport.iata_code,airport.city,airport.name,...locales.flatMap(locale=>[airportLabel(airport,locale),originLabel(airport.city,airport.iata_code,locale),cityLabel(airport.city,undefined,locale)]),...(airport.aliases ?? [])]
     .map(normalizeAirport);
 }
 
