@@ -1,67 +1,54 @@
 import {PriceAssessment} from "./price-assessment";
 import Link from "next/link";
-import type {Deal, ScoreExplanation} from "../../lib/api";
+import type {Deal,ScoreExplanation} from "../../lib/api";
 import {money,dateTime} from "../../lib/pl";
+import {intlLocales,type Locale} from "../../lib/i18n/config";
+import {localizedHref} from "../../lib/i18n/routing";
+import {scoreText,type ScoreKey} from "../../lib/i18n/score-copy";
 
-const number = (value:string|number) => new Intl.NumberFormat("pl-PL", {maximumFractionDigits:2}).format(Number(value));
-const timestamp = dateTime;
-
-const labels:Record<string,string> = {
-  price:"Cena na tle historii", history:"Liczba obserwacji", freshness:"Świeżość danych",
-  flight_price:"Pozycja ceny w historycznym przedziale", historical_discount:"Różnica względem mediany",
-  convenience:"Wygoda lotu", confidence:"Liczba obserwacji",
-};
-
-function reason(key:string, score:ScoreExplanation):string {
-  if(score.status === "LEGACY") {
-    const legacy:Record<string,string> = {
-      flight_price:"Poprzednia metoda porównywała cenę z kwartylami historii. Przy braku zróżnicowanej próby przyjmowała neutralne 50/100, czyli 17,5 z 35 pkt.",
-      historical_discount:"Procent poniżej mediany był mnożony przez wagę 20%. Brak potwierdzonej różnicy oznaczał 0 pkt w tej części.",
-      convenience:"W używanym wcześniej modelu nieznana wygoda otrzymywała 7,5 z 15 pkt. Te punkty nie potwierdzają dogodnych godzin, bagażu ani braku przesiadek.",
-      freshness:"Punkty zależały od czasu pozostałego do wygaśnięcia oferty podczas obliczenia. Nie mierzyły bezpośrednio wieku obserwacji ceny.",
-      confidence:`Wielkość próby przeliczano na maksymalnie 15 pkt; pełny wynik przy 30 obserwacjach. Zapisana liczba obserwacji: ${score.sample_count ?? "nieznana"}. To nie prawdopodobieństwo zakupu.`,
-    };
-    return legacy[key] ?? "Składnik zapisanej oceny.";
-  }
-  if(key === "price") {
-    if(score.status === "PROVISIONAL") return "Mniej niż 5 obserwacji lub brak poprawnej mediany: przyjmujemy neutralne 30 z 60 pkt. Nie oznacza to potwierdzenia korzystnej ceny.";
-    const difference=Number(score.price_difference_percent);
-    const comparison=difference === 0 ? "na poziomie mediany" : `${number(Math.abs(difference))}% ${difference > 0 ? "poniżej" : "powyżej"} mediany`;
-    return `Cena ${money(score.current_price_pln)}, mediana ${money(score.median_price_pln)}: ${comparison}. Cena równa medianie daje 30 pkt; każde 1% poniżej dodaje 0,6 pkt, a powyżej odejmuje 0,6 pkt. Zakres: 0–60 pkt.`;
-  }
-  if(key === "history") return `${score.sample_count ?? 0} obserwacji w grupie porównawczej. Przyznajemy 25 × min(liczba obserwacji / 30, 1) pkt. Większa próba daje więcej danych do porównania, ale nie gwarantuje reprezentatywności ani dostępności biletu.`;
-  if(key === "freshness") {
-    const age=score.observed_at && score.calculated_at ? (Date.parse(score.calculated_at)-Date.parse(score.observed_at))/3600000 : null;
-    const ageText=age !== null && age >= 0 ? `Wiek obserwacji w chwili obliczenia: ${number(age)} godz. ` : "Brak poprawnego czasu obserwacji: 0 pkt. ";
-    return `${ageText}Maksymalnie 15 pkt dla nowej obserwacji, spadek liniowy do 0 po 48 godzinach. Wygaśnięcie oferty również oznacza 0 pkt. ${score.observation_basis === "FIRST_SEEN" ? "Źródło nie podało czasu znalezienia ceny: liczymy od pierwszego zapisania tej obserwacji w HopTrip. To nie sprawdzenie ceny na żywo." : "Korzystamy z czasu obserwacji otrzymanego od źródła; nie jest to potwierdzenie ceny na żywo."}`;
-  }
-  return "Składnik zapisanej oceny.";
+export function scoreReason(key:string,score:ScoreExplanation,locale:Locale):string {
+ const t=(key:ScoreKey,values:Record<string,string|number>={})=>scoreText(locale,key,values);
+ const number=(value:string|number)=>new Intl.NumberFormat(intlLocales[locale],{maximumFractionDigits:2}).format(Number(value));
+ if(score.status==="LEGACY"){
+  const legacy:Record<string,ScoreKey>={flight_price:"legacyPrice",historical_discount:"legacyDiscount",convenience:"legacyConvenience",freshness:"legacyFreshness",confidence:"legacyHistory"};
+  return t(legacy[key]??"component",{count:score.sample_count??t("unknown")});
+ }
+ if(key==="price"){
+  if(score.status==="PROVISIONAL")return t("provisionalPrice");
+  const difference=Number(score.price_difference_percent);
+  const comparison=difference===0 ? t("atMedian") : `${number(Math.abs(difference))}% ${t(difference>0 ? "below" : "above")} ${t("median")}`;
+  return t("priceReason",{price:money(score.current_price_pln,locale),median:money(score.median_price_pln,locale),comparison});
+ }
+ if(key==="history")return t("historyReason",{count:score.sample_count??0});
+ if(key==="freshness"){
+  const age=score.observed_at && score.calculated_at ? (Date.parse(score.calculated_at)-Date.parse(score.observed_at))/3600000 : null;
+  return (age!==null && age>=0 ? t("age",{age:number(age)}) : t("noAge"))+t("freshnessReason")+t(score.observation_basis==="FIRST_SEEN" ? "firstSeen" : "sourceTime");
+ }
+ return t("component");
 }
 
-export function ScoreDetails({deal}:{deal:Deal}) {
-  const score=deal.score_explanation;
-  const unavailable=!score || score.status === "UNAVAILABLE";
-  return <div className="score-details">
-    <PriceAssessment deal={deal}/>
-    <p>Oceniamy ofertę cenową na podstawie zapisanych danych. Wynik nie ocenia linii lotniczej, komfortu ani prawdopodobieństwa zakupu.</p>
-    {unavailable ? <p className="score-caution">Dla tej starszej oceny nie zapisano pełnego, zgodnego zestawu składników. Nie możemy rzetelnie odtworzyć punktów. Wyjaśnienie pojawi się po ponownym przeliczeniu oferty.</p> : <>
-      {score.status === "PROVISIONAL" && <p className="score-caution"><strong>Ocena wstępna — mało danych.</strong> Neutralne punkty za cenę są założeniem, a nie dowodem okazji.</p>}
-      {score.status === "LEGACY" && <p className="score-caution">Poprzednia metoda obliczeń. Poniżej pokazujemy składniki tego zapisanego wyniku; nowa metoda pojawi się po przeliczeniu oferty.</p>}
-      <details className="score-method score-calculation"><summary>Jak obliczono {deal.deal_score}/100?</summary>
-      <p className="score-sum"><strong>{score.parts.map(part=>number(part.points)).join(" + ")} = {number(score.total_before_rounding!)} pkt</strong><br/>
-        Wynik po zaokrągleniu: <strong>{deal.deal_score}/100</strong>.</p>
-      <div className="score-parts">{score.parts.map(part=><section className="score-part" key={part.key}>
-        <div className="score-part-heading"><h3>{labels[part.key] ?? part.key}</h3><strong>{number(part.points)} / {part.max_points} pkt</strong></div>
-        <div className="score-meter" aria-hidden="true"><span style={{width:`${Number(part.points)/part.max_points*100}%`}}/></div>
-        <p>{reason(part.key,score)}</p>
-      </section>)}</div>
-      {score.calculated_at && <p className="muted">Obliczono: <time dateTime={score.calculated_at}>{timestamp(score.calculated_at)}</time> (czas w Polsce). Punkty opisują dane z tej chwili i są odświeżane przy kolejnym przeliczeniu.</p>}
-      </details>
-    </>}
-    <details className="score-method"><summary>Co porównujemy, a czego nie uwzględniamy?</summary>
-      <p>Porównujemy zapisane obserwacje tego samego dostawcy dla lotniska wylotu, kierunku, miesiąca i roku wylotu oraz długości pobytu. Loty w jedną stronę mają osobną grupę. To próbka, a nie pełny rynek; może obejmować obecną cenę i różne taryfy.</p>
-      <p>Nie punktujemy bagażu, godzin lotów, przesiadek, opóźnień ani warunków zwrotu, bo nie mamy kompletnych danych. Sprawdź je u sprzedawcy. Prowizja partnerska nie wpływa na ocenę.</p>
-    </details>
-    <Link className="text-link" href="/info/price-comparison">Pełna metodologia porównania cen →</Link>
-  </div>;
+export function ScoreDetails({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
+ const t=(key:ScoreKey,values:Record<string,string|number>={})=>scoreText(locale,key,values);
+ const number=(value:string|number)=>new Intl.NumberFormat(intlLocales[locale],{maximumFractionDigits:2}).format(Number(value));
+ const labels:Record<string,ScoreKey>={price:"price",history:"history",freshness:"freshness",flight_price:"flight_price",historical_discount:"historical_discount",convenience:"convenience",confidence:"history"};
+ const score=deal.score_explanation,unavailable=!score || score.status==="UNAVAILABLE";
+ return <div className="score-details">
+  <PriceAssessment deal={deal} locale={locale}/><p>{t("intro")}</p>
+  {unavailable ? <p className="score-caution">{t("unavailable")}</p> : <>
+   {score.status==="PROVISIONAL" && <p className="score-caution"><strong>{t("provisional")}</strong> {t("neutral")}</p>}
+   {score.status==="LEGACY" && <p className="score-caution">{t("legacy")}</p>}
+   <details className="score-method score-calculation"><summary>{t("calculation",{score:deal.deal_score})}</summary>
+    <p className="score-sum"><strong>{score.parts.map(part=>number(part.points)).join(" + ")} = {number(score.total_before_rounding!)} {t("points")}</strong><br/>
+     {t("rounded")} <strong>{deal.deal_score}/100</strong>.</p>
+    <div className="score-parts">{score.parts.map(part=><section className="score-part" key={part.key}>
+     <div className="score-part-heading"><h3>{labels[part.key] ? t(labels[part.key]) : part.key}</h3><strong>{number(part.points)} / {part.max_points} {t("points")}</strong></div>
+     <div className="score-meter" aria-hidden="true"><span style={{width:`${Number(part.points)/part.max_points*100}%`}}/></div>
+     <p>{scoreReason(part.key,score,locale)}</p>
+    </section>)}</div>
+    {score.calculated_at && <p className="muted">{t("calculated")} <time dateTime={score.calculated_at}>{dateTime(score.calculated_at,locale)}</time> {t("calculationTime")}</p>}
+   </details>
+  </>}
+  <details className="score-method"><summary>{t("scope")}</summary><p>{t("grouping")}</p><p>{t("exclusions")}</p></details>
+  <Link className="text-link" href={localizedHref("/info/price-comparison",locale)}>{t("methodology")} →</Link>
+ </div>;
 }

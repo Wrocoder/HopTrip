@@ -111,7 +111,7 @@ test("editorial index groups all 51 pages and sitemap excludes trust drafts",asy
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(64);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(85);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);

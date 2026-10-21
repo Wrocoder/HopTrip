@@ -14,12 +14,12 @@ test("only ready pages expose translations and retain analytics and affiliate po
   assert.deepEqual(pageLocales(path+"?origin=WRO#calculator"),locales);
   assert.equal(pathLocale(path),locale);
   assert.equal(availableHref("/info/trip-budget",locale),path);
-  assert.equal(availableHref("/deals?origin=WRO",locale),"/deals?origin=WRO");
+  assert.equal(availableHref("/deals?origin=WRO",locale),localizedHref("/deals?origin=WRO",locale));
   assert.equal(analyticsPageType(path),"budget");
   assert.equal(driveAllowedOnPage(path),false);
  }
- assert.deepEqual(pageLocales("/deals"),["pl"]);
- assert.equal(pathLocale("/en/deals"),"pl");
+ assert.deepEqual(pageLocales("/deals"),locales);
+ assert.equal(pathLocale("/en/deals"),"en");
 });
 
 test("budget copy covers every declared message in all languages",()=>{

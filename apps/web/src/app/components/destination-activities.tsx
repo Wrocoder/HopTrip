@@ -3,8 +3,17 @@ import styles from "./destination-activities.module.css";
 import {ActivityLink} from "./activity-link";
 import {ActivityBudgetLink} from "./activity-budget-link";
 import {date} from "../../lib/pl";
+import type {Locale} from "../../lib/i18n/config";
+import {tripText} from "../../lib/i18n/trip-copy";
 
-export function DestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:boolean}) {
+export function DestinationActivities({slug,inTrip=false,locale="pl"}:{slug:string;inTrip?:boolean;locale?:Locale}) {
+  if(locale==="pl")return <PolishDestinationActivities slug={slug} inTrip={inTrip}/>;
+  if(!activitiesForDestination(slug))return null;
+  return <details><summary>{tripText(locale,"Pomysły na pobyt")} ({tripText(locale,"po polsku")})</summary>
+    <div lang="pl"><PolishDestinationActivities slug={slug} inTrip={inTrip}/></div>
+  </details>;
+}
+function PolishDestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:boolean}) {
   const selection=activitiesForDestination(slug);
   if(!selection) return null;
   return <section id="destination-activities" tabIndex={-1} className={styles.section} aria-labelledby="destination-activities-title">

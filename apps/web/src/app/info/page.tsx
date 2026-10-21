@@ -1,24 +1,29 @@
 import type {Metadata} from "next";
-import Link from "next/link";
 import {publishedInfoPages} from "../../lib/content";
+import {locales,openGraphLocales,type Locale} from "../../lib/i18n/config";
+import {localizedHref,languageAlternates} from "../../lib/i18n/routing";
+import {editorialCopy} from "../../lib/i18n/editorial-copy";
+import {editorialCard} from "../../lib/i18n/editorial-card";
 
-const title="Poradniki podróżnicze i planowanie wyjazdu";
-const description="Trasy na weekend w Europie, wyjazdy na koncerty, budżet podróży, bagaż i dojazdy z lotnisk. Zaplanuj wyjazd z HopTrip.";
-export const metadata:Metadata={
- title,description,alternates:{canonical:"/info"},robots:{index:true,follow:true},
- openGraph:{title,description,url:"/info",locale:"pl_PL",type:"website"},
-};
-
-export default function InfoIndex() {
- const groups=[{id:"method",title:"Jak działa serwis"},{id:"planning",title:"Planowanie podróży"},
-  {id:"airports",title:"Lotniska wylotu w Polsce"},{id:"destinations",title:"Dojazd i planowanie na miejscu"}];
- return <main className="page-shell"><div className="page-heading"><h1>{title}</h1><p>{description}</p></div>
-  <nav aria-label="Tematy poradników"><ul>{groups.map(group=><li key={group.id}><a href={`#${group.id}`}>{group.title}</a></li>)}</ul></nav>
-  {groups.map(group=><section id={group.id} key={group.id}><h2>{group.title}</h2>
-  <div className="deal-grid">{publishedInfoPages().filter(([,page])=>(page.category ?? "method")===group.id).map(([slug,page])=>
-   <Link className="deal-card" href={`/info/${slug}`} key={slug}>
-    <h2>{page.title}</h2><p>{page.description ?? page.paragraphs[0]}</p>
-   </Link>
-  )}</div></section>)}
+export function generateMetadata({locale="pl"}:{locale?:Locale}={}):Metadata {
+ const {title,description}=editorialCopy[locale],canonical=localizedHref("/info",locale);
+ return {title,description,alternates:{canonical,languages:languageAlternates("/info",locales)},robots:{index:true,follow:true},
+  openGraph:{title,description,url:canonical,locale:openGraphLocales[locale],type:"website"}};
+}
+export default function InfoIndex({locale="pl"}:{locale?:Locale}) {
+ const text=editorialCopy[locale];
+ const groups=["method","planning","airports","destinations"] as const;
+ return <main className="page-shell"><div className="page-heading"><h1>{text.title}</h1><p>{text.description}</p>
+  {locale!=="pl" && <p>{text.notice}</p>}</div>
+  <nav aria-label={text.topics}><ul>{groups.map(id=><li key={id}><a href={`#${id}`}>{text[id]}</a></li>)}</ul></nav>
+  {groups.map(id=><section id={id} key={id}><h2>{text[id]}</h2><div className="deal-grid">
+   {publishedInfoPages().filter(([,page])=>(page.category??"method")===id).map(([slug,page])=>{
+    const card=editorialCard(slug,page,locale),CardLink="a";
+    return <CardLink className="deal-card" href={localizedHref(`/info/${slug}`,card.translated ? locale : "pl")} hrefLang={card.translated ? locale : "pl"} key={slug}>
+     {!card.translated && <p className="muted">{text.polish}</p>}
+     <h2 lang={card.translated ? locale : "pl"}>{card.title}</h2><p lang={card.translated ? locale : "pl"}>{card.description}</p>
+    </CardLink>;
+   })}
+  </div></section>)}
  </main>;
 }

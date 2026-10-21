@@ -1,5 +1,5 @@
 "use client";
-/* eslint-disable @next/next/no-html-link-for-pages -- Full navigation unloads Drive before rendering personal operator details. */
+// Full navigation unloads Drive before rendering personal operator details.
 import {useEffect,useRef,useState,useSyncExternalStore} from "react";
 import {createPortal} from "react-dom";
 import {useLocale} from "./locale-provider";
@@ -65,7 +65,7 @@ export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
         {text.marketing}</label>
       <details><summary>{text.consentHow}</summary>
         <p>{text.consentDetails}</p>
-        <p><a href="/info/privacy">{messages.privacy}{locale!=="pl" && ` (${text.polish})`}</a>{" · "}
+        <p><a href={localizedHref("/info/privacy",locale)}>{messages.privacy}</a>{" · "}
           <a href="https://support.travelpayouts.com/hc/en-us/articles/360004121052-Privacy-Policy" rel="noopener noreferrer" target="_blank">{text.partnerPolicy}</a></p>
       </details>
       <div className="consent-actions">

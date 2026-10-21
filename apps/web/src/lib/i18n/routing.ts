@@ -1,8 +1,11 @@
 import {defaultLocale,isLocale,publishedLocales,locales,type Locale} from "./config.ts";
 
-export const translatedPaths=["/info/trip-budget"] as const;
+export const translatedPaths=["/info/trip-budget","/deals","/info/about","/info/partners","/info","/info/price-comparison","/info/price-freshness","/info/price-history"] as const;
 export function pageLocales(path:string):readonly Locale[] {
- return (translatedPaths as readonly string[]).includes(localizedHref(path,"pl").split(/[?#]/)[0]) ? locales : publishedLocales;
+ const base=localizedHref(path,"pl").split(/[?#]/)[0];
+ // Private plans and temporary offers support languages but stay out of sitemap.
+ return (translatedPaths as readonly string[]).includes(base) ||
+  ["/saved","/trip","/alerts","/alerts/confirm","/alerts/manage","/info/contact","/info/privacy","/info/terms"].includes(base) || /^\/deals\/[a-zA-Z0-9_-]{1,180}$/.test(base) ? locales : publishedLocales;
 }
 export function availableHref(href:string,locale:Locale):string {
  return localizedHref(href,pageLocales(href).includes(locale) ? locale : "pl");

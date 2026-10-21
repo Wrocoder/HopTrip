@@ -27,5 +27,5 @@ export default async function LocalizedBudgetPage({params}:Props) {
   <h1>{budgetText(locale,"Kalkulator budżetu podróży")}</h1><p>{text.budgetIntro}</p>
  </header><TripBudgetCalculator/>
  <p><a href="/info/trip-budget" hrefLang="pl">{text.polishGuide}</a></p>
- <p><a href="/deals" hrefLang="pl">{text.back} ({text.polish})</a></p></main>;
+ <p><a href={localizedHref("/deals",locale)}>{text.back}</a></p></main>;
 }

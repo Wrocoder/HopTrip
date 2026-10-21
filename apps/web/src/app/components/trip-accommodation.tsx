@@ -1,5 +1,5 @@
 "use client";
-
+import {useLocale} from "./locale-provider";
 import {tripText,type TripKey} from "../../lib/i18n/trip-copy";
 
 import {cityLabel} from "../../lib/cities";
@@ -13,7 +13,7 @@ import {flightLegs,flightTime} from "../../lib/flight-facts";
 import styles from "./trip-accommodation.module.css";
 
 export function TripAccommodation({deal}:{deal:Deal}) {
- const locale="pl" as const;
+ const {locale}=useLocale();
  const t=(source:TripKey)=>tripText(locale,source);
  const {draft,save,ready}=useTripDraft()!;
  const checkin=draft.start,checkout=draft.end,adults=draft.input.people;

@@ -48,10 +48,10 @@ test("budget language switch preserves drafts, query, hash and consent",async({p
 test("only translated pages exist and locale headers cannot override Polish URLs",async({request})=>{
  const response=await request.get("/info/trip-budget",{headers:{"x-hoptrip-locale":"ru"}});
  expect(await response.text()).toContain('lang="pl"');
- for(const path of ["/de/info/trip-budget","/ua/info/trip-budget","/pl/info/trip-budget","/en/deals"]){
+ for(const path of ["/de/info/trip-budget","/ua/info/trip-budget","/pl/info/trip-budget","/en/deals/untranslated-offer"]){
   expect((await request.get(path)).status()).toBe(404);
  }
  const xml=await (await request.get("/sitemap.xml")).text();
  for(const locale of ["en","ru","uk"])expect(xml).toContain(`/${locale}/info/trip-budget`);
- expect(xml).not.toContain("/en/deals");
+ expect(xml).toContain("/en/deals");
 });
