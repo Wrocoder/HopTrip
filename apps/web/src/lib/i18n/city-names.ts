@@ -6,7 +6,7 @@ const names:Record<string,readonly [string,string,string]>={
  lodz:["Łódź","Лодзь","Лодзь"],rzeszow:["Rzeszów","Жешув","Ряшів"],szczecin:["Szczecin","Щецин","Щецин"],
  bydgoszcz:["Bydgoszcz","Быдгощ","Бидгощ"],lublin:["Lublin","Люблин","Люблін"],
  "zielona gora":["Zielona Góra","Зелёна-Гура","Зелена Гура"],olsztyn:["Olsztyn","Ольштын","Ольштин"],
- rome:["Rome","Рим","Рим"],milan:["Milan","Милан","Мілан"],paris:["Paris","Париж","Париж"],
+ rome:["Rome","Рим","Рим"],milan:["Milan","Милан","Мілан"],paris:["Paris","Париж","Париж"],barcelona:["Barcelona","Барселона","Барселона"],
  london:["London","Лондон","Лондон"],lisbon:["Lisbon","Лиссабон","Лісабон"],athens:["Athens","Афины","Афіни"],
  brussels:["Brussels","Брюссель","Брюссель"],chisinau:["Chișinău","Кишинёв","Кишинів"],basel:["Basel","Базель","Базель"],
  budapest:["Budapest","Будапешт","Будапешт"],venice:["Venice","Венеция","Венеція"],nice:["Nice","Ницца","Ніцца"],

@@ -1,3 +1,4 @@
+import {intlLocales,type Locale} from "./i18n/config.ts";
 export type EurRate = {plnPerEuro:number; date:string};
 const DAY = 86_400_000;
 const MAX_AGE = 7 * DAY;
@@ -20,11 +21,11 @@ export function parseEurRate(value:unknown, now:number):EurRate|null {
   return isFreshRate(rate, now) && date.toISOString().slice(0,10) === rate.date ? rate : null;
 }
 
-export function approximateEuro(value:string|null, rate:EurRate|null):string|null {
+export function approximateEuro(value:string|null, rate:EurRate|null,locale:Locale="pl"):string|null {
   if (!rate || value === null || !/^\d+(\.\d+)?$/.test(value) ||
       !Number.isFinite(rate.plnPerEuro) || rate.plnPerEuro <= 0) return null;
   const euro = Number(value) / rate.plnPerEuro;
-  return Number.isFinite(euro) ? new Intl.NumberFormat("pl-PL", {
+  return Number.isFinite(euro) ? new Intl.NumberFormat(intlLocales[locale], {
     style:"currency", currency:"EUR", minimumFractionDigits:0, maximumFractionDigits:0,
   }).format(euro) : null;
 }

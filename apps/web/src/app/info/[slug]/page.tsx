@@ -13,10 +13,14 @@ import {GuideFlights} from "../../components/guide-flights";
 import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
 import {DestinationActivities} from "../../components/destination-activities";
 import {AirportTransfer} from "../../components/airport-transfer";
+import {isServiceSlug} from "../../../lib/i18n/service-content";
+import {serviceMetadata} from "../../components/service-info";
+import {LegalSources} from "../../components/legal-sources";
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
  if(!page) notFound();
+ if(isServiceSlug(slug))return serviceMetadata(slug,"pl");
  const description=page.description ?? page.paragraphs[0];
  return {title:page.title,description,alternates:{canonical:`/info/${slug}`,
   ...(slug==="trip-budget" ? {languages:languageAlternates("/info/trip-budget",locales)} : {})},
@@ -53,14 +57,7 @@ export default async function InfoPage({params}:Props) {
    <a href={`mailto:${operator.email}`}>{operator.email}</a>
   </p> : <p role="alert">Dane kontaktowe są chwilowo niedostępne. Spróbuj ponownie później.</p>}
  </section>}
- {slug==="privacy" && <section><h2>Informacje dostawców i organ nadzorczy</h2><ul>
-  <li><a href="https://www.oracle.com/legal/privacy/services-privacy-policy.html">Oracle — prywatność usług</a></li>
-  <li><a href="https://www.ovhcloud.com/pl/personal-data-protection/">OVHcloud — ochrona danych</a></li>
-  <li><a href="https://support.travelpayouts.com/hc/en-us/articles/360004121052-Privacy-Policy">Travelpayouts — prywatność</a></li>
-  <li><a href="https://www.aviasales.com/privacy">Aviasales — prywatność</a></li>
-  <li><a href="https://telegram.org/privacy">Telegram — prywatność</a></li>
-  <li><a href="https://uodo.gov.pl/">Urząd Ochrony Danych Osobowych</a></li>
- </ul></section>}
+ {slug==="privacy" && <LegalSources locale="pl"/>}
  {page.reviewedAt && <p className="muted">HopTrip · Sprawdzono <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
  {page.draft && <p role="note">{pl.draft}</p>}{page.paragraphs.map(p=><p key={p}>{p}</p>)}
  {slug==="trip-budget" && <TripBudgetCalculator/>}

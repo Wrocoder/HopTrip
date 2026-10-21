@@ -14,7 +14,12 @@ const names:Record<string,string> = {
 };
 const normalize=(value:string)=>value.trim().toLowerCase().replace(/ł/g,"l").normalize("NFKD").replace(/\p{M}/gu,"");
 export function cityLabel(city:string,slug?:string,locale:Locale="pl"):string {
- if(locale!=="pl")return translatedCity(city,slug,locale) ?? city;
+ if(locale!=="pl"){
+  // Old saved plans contain display names, not destination IDs. Resolve known
+  // Polish names for display only; keep unknown snapshot labels verbatim.
+  const polishSlug=Object.keys(names).find(key=>normalize(names[key])===normalize(city));
+  return translatedCity(city,slug??polishSlug,locale) ?? city;
+ }
  return names[normalize(slug??city)] ?? names[normalize(city)] ?? city;
 }
 export function originLabel(city:string,code:string,locale:Locale="pl"):string {

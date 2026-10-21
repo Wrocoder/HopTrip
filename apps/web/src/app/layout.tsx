@@ -4,6 +4,7 @@ import Link from "next/link";
 import localFont from "next/font/local";
 import {pl} from "../lib/pl";
 import {openGraphLocales} from "../lib/i18n/config";
+import {localizedHref,availableHref,pageLocales} from "../lib/i18n/routing";
 import {requestLocale} from "../lib/i18n/server";
 import {shell} from "../lib/i18n/shell";
 import {LanguageSwitcher} from "./components/language-switcher";
@@ -42,10 +43,10 @@ export default async function RootLayout({children}:Readonly<{children:React.Rea
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{text.disclosure}</p></div><nav className="footer-nav" aria-label={labels.info}>
       <NavLink href="/city-break">City break{suffix}</NavLink><NavLink href="/tanie-loty-na-weekend">{labels.weekend}{suffix}</NavLink><NavLink href="/from/warszawa">{labels.warsaw}{suffix}</NavLink>
-      <NavLink href="/saved">{labels.saved}{suffix}</NavLink>
-      <NavLink href="/alerts">{labels.alerts}{suffix}</NavLink>
+      <NavLink href={localizedHref("/saved",locale)}>{labels.saved}</NavLink>
+      <NavLink href={localizedHref("/alerts",locale)}>{labels.alerts}</NavLink>
       {(["about","contact","privacy","terms","partners"] as const).map(key=>
-        ["contact","privacy","terms"].includes(key) ? <a key={key} href={`/info/${key}`}>{text[key]}{suffix}</a> :
-        <NavLink key={key} href={`/info/${key}`}>{text[key]}{suffix}</NavLink>)}
+        ["contact","privacy","terms"].includes(key) ? <a key={key} href={availableHref(`/info/${key}`,locale)}>{text[key]}{!pageLocales(`/info/${key}`).includes(locale) && suffix}</a> :
+        <NavLink key={key} href={availableHref(`/info/${key}`,locale)}>{text[key]}{!pageLocales(`/info/${key}`).includes(locale) && suffix}</NavLink>)}
     </nav><ConsentControls driveEnabled={driveEnabled}/></footer></LocaleProvider></body></html>;
 }

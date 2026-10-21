@@ -1,6 +1,8 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- The Polish reference guide needs a full navigation to update html lang and locale context. */
 import {useLocale} from "./locale-provider";
 import {budgetText} from "../../lib/i18n/budget-copy";
+import {shell} from "../../lib/i18n/shell";
 import {track} from "../../lib/session";
 import {money} from "../../lib/pl";
 import {useState} from "react";
@@ -75,6 +77,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   </div>}
   {locale==="pl" && <ReferenceCosts destinationSlug={destinationSlug} filled={Boolean(input.local_transport.trim())}
     onApply={amount=>{if(!input.local_transport.trim()){update("local_transport",amount);setExtraOpen(true);}}}/>}
+  {locale!=="pl" && destinationSlug && <p><a href="/info/trip-budget" hrefLang="pl">{shell[locale].polishGuide}</a></p>}
   <h3>{t("Główne koszty")}</h3>
   <div className={styles.grid}>{costFields.filter(cost=>["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>cost.key!=="hotel" ? field(cost.key,cost.label,cost.hint,true) :
    <div key="hotel" className={styles.field}>

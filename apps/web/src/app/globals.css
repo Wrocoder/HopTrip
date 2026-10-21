@@ -384,11 +384,11 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .result-count { color: var(--secondary); margin-bottom: 18px; }
 /* Compact catalog controls; retain the home search layout and full filter semantics. */
 main.catalog-page { padding-top: 16px; }
-.catalog-page .page-heading { margin: 0 0 18px; }
-.catalog-page .page-heading h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 4px 0 12px; }
+.catalog-page .page-heading { margin: 0 0 10px; }
+.catalog-page .page-heading h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 4px 0 8px; }
 .catalog-page .page-heading .eyebrow { margin-bottom: 4px; }
 .catalog-page .page-heading .lead { margin-bottom: 0; }
-.catalog-page .filter-panel { padding: 18px; margin-bottom: 12px; }
+.catalog-page .filter-panel { padding: 14px; margin-bottom: 12px; }
 .catalog-page .filters { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr); gap: 8px 20px; }
 .catalog-page .filter-primary, .catalog-page .trip-presets,
 .catalog-page .filters > .notice { grid-column: 1 / -1; }
@@ -405,6 +405,13 @@ main.catalog-page { padding-top: 16px; }
 .catalog-page .active-filters { margin-top: 10px; padding-top: 10px; }
 .catalog-page .filter-chips { gap: 6px; }
 .catalog-page .filter-chip { padding: 6px 10px; }
+/* Keep translated navigation and longer labels above the first catalog offer. */
+body:has(.catalog-page) .site-header { padding-block: 12px; gap: 8px 24px; }
+.catalog-page .page-heading .lead { max-width: none; }
+@media (min-width: 641px) {
+  .catalog-page .active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .catalog-page .active-filters > p, .catalog-page .filter-reset { margin: 0; }
+}
 .catalog-page .result-count { margin-bottom: 12px; }
 .catalog-page summary:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; border-radius: 4px; }
 @media (max-width: 640px) {
