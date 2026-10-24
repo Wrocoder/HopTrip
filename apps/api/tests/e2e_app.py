@@ -19,8 +19,10 @@ from app.models.data_provider import DataProvider
 from app.models.deal import Deal, DealComponent
 from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
+from app.schemas.event import EventResults
 from app.services import alerts
 from app.services.catalog import serialize_deal
+from app.services.events import event_service
 from app.services.flight_facts import flight_facts
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from helpers import approved_program, catalog_fixture
@@ -30,6 +32,10 @@ from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse, JSONResponse
 
 fixture_dir = tempfile.TemporaryDirectory(prefix="hoptrip-browser-")
+# Browser tests intercept event responses. Never call the real provider from this app.
+get_settings().events_enabled = True
+get_settings().ticketmaster_api_key = SecretStr('local-browser-fixture')
+event_service.search = lambda *args, **kwargs: EventResults(status='EMPTY')
 engine = create_engine(
     "sqlite:///" + fixture_dir.name.replace("\\", "/") + "/fixture.db",
     connect_args={"check_same_thread": False, "timeout": 30},

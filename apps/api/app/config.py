@@ -28,6 +28,15 @@ class Settings(BaseSettings):
     public_rate_limit: int = Field(default=120, ge=1, le=10000)
     provider_max_pages: int = Field(default=5, ge=1, le=100)
     analytics_retention_days: int = Field(default=90, ge=1, le=730)
+    events_enabled: bool = False
+    ticketmaster_api_key: SecretStr = SecretStr("")
+    ticketmaster_affiliate_id: str = "7853869"
+    events_countries: str = "AT,BE,CH,CY,CZ,DE,DK,ES,FI,FR,GB,GR,IE,IT,NL,NO,PL,SE,TR"
+    events_sync_enabled: bool = False
+    events_max_age_hours: int = Field(default=18, ge=6, le=24)
+    events_daily_request_limit: int = Field(default=4000, ge=1, le=4500)
+    events_run_request_limit: int = Field(default=1000, ge=1, le=4000)
+    events_horizon_days: int = Field(default=365, ge=30, le=365)
     alerts_enabled: bool = False
     alerts_digest_enabled: bool = False
     alerts_digest_hour: int = Field(default=9, ge=0, le=23)

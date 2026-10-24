@@ -55,7 +55,7 @@ def newest_backup_ok(directory: Path, now: float) -> bool:
         return False
 
 
-def pipeline_ok() -> bool:
+def pipeline_ok(*, events: bool = False) -> bool:
     # Only statuses and age, never database credentials or provider payloads.
     sql = """SELECT CASE WHEN
       (SELECT max(finished_at) FROM job_runs WHERE job_type='TRAVELPAYOUTS_PIPELINE'
@@ -63,6 +63,9 @@ def pipeline_ok() -> bool:
       AND (SELECT status FROM job_runs WHERE job_type='TRAVELPAYOUTS_PIPELINE'
         AND status <> 'SKIPPED' ORDER BY id DESC LIMIT 1)
         IN ('SUCCEEDED','RUNNING','RETRYING') THEN 'OK' ELSE 'FAILED' END;"""
+    if events:
+        sql = sql.replace('TRAVELPAYOUTS_PIPELINE', 'EVENTS_SYNC').replace(
+            '2 hours 15 minutes', '7 hours 30 minutes')
     try:
         result = subprocess.run(
             COMPOSE
@@ -171,6 +174,11 @@ def main() -> int:
             ["docker", "inspect", "--format", "{{.State.Running}}", "hoptrip-worker-1"], "true"
         ),
     }
+    if os.environ.get('EVENTS_MONITOR_ENABLED', '').lower() == 'true':
+        checks['events_pipeline'] = pipeline_ok(events=True)
+        checks['events_worker'] = command_equals(
+            ['docker', 'inspect', '--format', '{{.State.Running}}', 'hoptrip-events-worker-1'], 'true'
+        )
     if os.environ.get("TELEGRAM_BOT_TOKEN") and os.environ.get("TELEGRAM_CHAT_ID"):
         checks["activity_service"] = command_equals(
             ["systemctl", "show", "hoptrip-activity.service", "-p", "Result", "--value"], "success"

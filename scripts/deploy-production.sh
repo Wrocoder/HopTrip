@@ -31,18 +31,29 @@ compose_at() {
   local directory=$1; shift
   docker compose -p hoptrip --env-file "$root/.env.production" \
     -f "$directory/docker-compose.yml" -f "$directory/docker-compose.production.yml" \
-    -f "$directory/docker-compose.domain.yml" --profile worker "$@"
+    -f "$directory/docker-compose.domain.yml" --profile worker --profile events "$@"
 }
+previous_services=(api worker web)
+new_services=(api worker web)
+writers=(worker api)
+if docker inspect hoptrip-events-worker-1 >/dev/null 2>&1; then
+  previous_services+=(events-worker)
+  writers+=(events-worker)
+fi
 switched=0
 rollback() {
   local status=$?
   trap - ERR
   if [[ $switched == 1 ]]; then
     echo 'Deployment failed; restoring previous application images (no database downgrade)' >&2
-    for service in api worker web; do
+    # A newly introduced events worker must not keep writing during rollback.
+    if [[ " ${new_services[*]} " == *' events-worker '* ]]; then
+      compose_at "$release" stop events-worker || true
+    fi
+    for service in "${previous_services[@]}"; do
       docker image tag "hoptrip-$service:rollback-$stamp" "hoptrip-$service:latest"
     done
-    compose_at "$previous" up -d --no-deps --no-build --wait --wait-timeout 120 api worker web || true
+    compose_at "$previous" up -d --no-deps --no-build --wait --wait-timeout 120 "${previous_services[@]}" || true
   fi
   echo "Failed release $sha; backup: $backup" >&2
   exit "$status"
@@ -52,12 +63,16 @@ curl -fLsS --retry 3 --max-time 120 "https://api.github.com/repos/Wrocoder/HopTr
 tar -xzf "$backup/source.tar.gz" --strip-components=1 -C "$release"
 printf '%s\n' "$sha" > "$release/RELEASE_SHA"
 compose_at "$release" config --quiet
-for service in api worker web; do
+if grep -Eq '^EVENTS_SYNC_ENABLED=(true|1|True)([[:space:]]|$)' "$root/.env.production"; then
+  compose_at "$release" config --services | grep -qx events-worker
+  new_services+=(events-worker)
+fi
+for service in "${previous_services[@]}"; do
   image=$(docker inspect --format '{{.Image}}' "hoptrip-$service-1")
   docker image tag "$image" "hoptrip-$service:rollback-$stamp"
 done
 printf '%s\n' "$previous" > "$backup/previous-source"
-compose_at "$release" build api worker migrate web
+compose_at "$release" build "${new_services[@]}" migrate
 compose_at "$release" run --rm --no-deps api /usr/local/bin/python -m app.jobs.preflight
 assert_main
 # The removed subscription feature was never enabled. Do not strand real subscribers.
@@ -66,12 +81,12 @@ if [[ ! -f $release/apps/api/app/services/alerts.py ]]; then
   [[ $subscribers == 0 ]] || { echo 'Refusing to remove alerts with existing subscriber records' >&2; exit 1; }
 fi
 switched=1
-compose_at "$previous" stop worker api
+compose_at "$previous" stop "${writers[@]}"
 docker exec hoptrip-db-1 sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc' > "$backup/database.dump"
 test -s "$backup/database.dump"
 docker exec -i hoptrip-db-1 pg_restore --list < "$backup/database.dump" > /dev/null
 compose_at "$release" run --rm --no-deps migrate
-compose_at "$release" up -d --no-deps --no-build --wait --wait-timeout 120 api worker web
+compose_at "$release" up -d --no-deps --no-build --wait --wait-timeout 120 "${new_services[@]}"
 curl -fsS --retry 10 --retry-all-errors --retry-delay 2 --max-time 15 https://hoptrip.pl/health/ready
 curl -fsS --retry 10 --retry-all-errors --retry-delay 2 --max-time 15 https://hoptrip.pl/ -o /dev/null
 curl -fsS --max-time 15 https://hoptrip.pl/preview/site/home -o /dev/null

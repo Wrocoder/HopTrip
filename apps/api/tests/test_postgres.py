@@ -101,7 +101,7 @@ def test_migration_head():
     with create_engine(url).connect() as db:
         assert (
             db.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0014_deal_alerts"
+            == "0015_events_catalog"
         )
 
 
@@ -264,3 +264,26 @@ def test_legacy_duplicate_migration_fails_without_removing_history():
         with engine.begin() as db:
             db.execute(text(f'DROP SCHEMA "{schema}" CASCADE'))
         engine.dispose()
+
+
+def test_events_lock_and_catalogue_upsert(pg_factory):
+    from app.models.event import LocalEvent
+    from app.services.event_sync import save_window, sync_lock
+    from tests.test_event_sync import sample
+    from tests.test_events import END, START
+
+    factory, _ = pg_factory
+    with sync_lock(factory) as first:
+        assert first
+        with sync_lock(factory) as second:
+            assert not second
+        with pipeline_lock(factory) as flights:
+            assert flights
+    with factory() as db:
+        destination_id = db.scalar(select(Destination.id))
+        args = (db, destination_id, START, END, [sample()], datetime.now(UTC))
+        assert save_window(*args)['added'] == 1
+        db.commit()
+        assert save_window(*args)['added'] == 0
+        db.commit()
+        assert len(list(db.scalars(select(LocalEvent)))) == 1

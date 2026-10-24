@@ -59,6 +59,47 @@ def completed_jobs(cursor):
     return [json.loads(line) for line in result.stdout.splitlines() if line.strip()]
 
 
+def completed_event_jobs(cursor):
+    where = '' if cursor is None else f'AND id > {int(cursor)}'
+    order = 'DESC LIMIT 1' if cursor is None else 'ASC LIMIT 5'
+    sql = """SELECT json_build_object('id',id,'status',status,'started',started_at,
+      'finished',finished_at,'duration_ms',duration_ms,'stats',result_json)
+      FROM job_runs WHERE job_type='EVENTS_SYNC'
+      AND status IN ('SUCCEEDED','FAILED','INTERRUPTED') """
+    result = subprocess.run(
+        COMPOSE + ['exec', '-T', 'db', 'sh', '-c',
+                   'exec psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -At -v ON_ERROR_STOP=1'],
+        input=sql + where + ' ORDER BY id ' + order + ';',
+        text=True, capture_output=True, timeout=25, cwd=ROOT,
+    )
+    if result.returncode:
+        raise RuntimeError('Event job query failed')
+    return [json.loads(line) for line in result.stdout.splitlines() if line.strip()]
+
+
+def notify_event_jobs(state):
+    for job in completed_event_jobs(state.get('event_job_id')):
+        stats = job.get('stats') or {}
+        status = {'SUCCEEDED': 'завершено', 'FAILED': 'не завершено полностью',
+                  'INTERRUPTED': 'прервано'}[job['status']]
+        message = (
+            f"HopTrip: обновление событий {status} (#{int(job['id'])}).\n"
+            f"Длительность: {format_duration(job.get('duration_ms'))}\n"
+            f"Добавлено: {int(stats.get('added', 0))}\n"
+            f"Обновлено: {int(stats.get('updated', 0))}\n"
+            f"Скрыто: {int(stats.get('hidden', 0))}\n"
+            f"Проверено периодов по городам: {int(stats.get('windows', 0))}"
+            f" / {int(stats.get('planned', 0))}\n"
+            f"Ошибок загрузки: {int(stats.get('failed', 0))}\n"
+            f"Запросов API: {int(stats.get('requests', 0))}\n"
+            f"Начало UTC: {job.get('started')}\nЗавершение UTC: {job.get('finished')}"
+        )
+        if not deliver(message):
+            raise RuntimeError('Event summary delivery failed')
+        state['event_job_id'] = int(job['id'])
+        save(state)
+
+
 def format_duration(milliseconds):
     if milliseconds is None:
         return "нет данных"
@@ -191,7 +232,8 @@ def main():
         print('{"activity": "STATE_ERROR"}')
         return 1
     checks = {}
-    for name, function in (("pipeline_summaries", notify_jobs), ("inbox", notify_mail)):
+    for name, function in (("pipeline_summaries", notify_jobs),
+                           ("event_summaries", notify_event_jobs), ("inbox", notify_mail)):
         try:
             checks[name] = function(state) or "OK"
         except Exception as error:

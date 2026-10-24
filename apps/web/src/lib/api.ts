@@ -20,6 +20,7 @@ export type Deal = {
   id:number; slug:string; trip_start:string; trip_end:string; origin_airport_id:number; destination_id:number;
   origin_code:string; origin_city:string; destination_city:string; destination_slug:string;
   destination_country_code?:string;
+  events_supported?:boolean;
   trip_type:"ONE_WAY"|"ROUND_TRIP"; price_basis:string; components:Component[];
   flight_price_pln:string|null; hotel_price_pln:string|null; total_estimated_pln:string; price_per_person_pln:string;
   historical_baseline_pln:string|null; discount_percent:string|null; deal_score:number; confidence:string;

@@ -9,6 +9,7 @@ def activity(monkeypatch, tmp_path):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[3] / "scripts"))
     result = module("notify-activity")
     monkeypatch.setattr(result, "STATE", tmp_path / "activity.json")
+    monkeypatch.setattr(result, "completed_event_jobs", lambda cursor: [])
     monkeypatch.setenv("IMAP_USER", "kontakt@hoptrip.pl")
     monkeypatch.setenv("IMAP_PASSWORD", "private-password")
     return result
@@ -279,3 +280,25 @@ def test_monitor_routes_all_notifications_to_selected_topic(monkeypatch):
     monkeypatch.setattr(monitor.urllib.request, "urlopen", send)
     assert monitor.deliver("summary")
     assert sent == [{"chat_id": "-100123", "text": "summary", "message_thread_id": 42}]
+
+@pytest.mark.parametrize('status', ['SUCCEEDED', 'FAILED', 'INTERRUPTED'])
+def test_event_summary_separate_cursor(activity, monkeypatch, status):
+    jobs = [{'id': 22, 'status': status, 'stats': {'added': 3, 'windows': 1, 'planned': 2},
+             'started': '2026-10-23', 'finished': '2026-10-23', 'duration_ms': 65000}]
+    monkeypatch.setattr(activity, 'completed_event_jobs', lambda cursor: jobs)
+    messages = []
+    monkeypatch.setattr(activity, 'deliver', lambda message: messages.append(message) or True)
+    state = {'job_id': 99}
+    activity.notify_event_jobs(state)
+    assert state == {'job_id': 99, 'event_job_id': 22}
+    assert 'Добавлено: 3' in messages[0] and '1 / 2' in messages[0]
+
+
+def test_event_delivery_failure_keeps_cursor(activity, monkeypatch):
+    monkeypatch.setattr(activity, 'completed_event_jobs', lambda cursor: [
+        {'id': 22, 'status': 'FAILED', 'finished': None}])
+    monkeypatch.setattr(activity, 'deliver', lambda message: False)
+    state = {'event_job_id': 21}
+    with pytest.raises(RuntimeError):
+        activity.notify_event_jobs(state)
+    assert state == {'event_job_id': 21}

@@ -43,6 +43,7 @@ class DealRead(BaseModel):
     destination_city: str = ""
     destination_slug: str = ""
     destination_country_code: str = ""
+    events_supported: bool = False
     trip_type: str = "ONE_WAY"
     price_basis: str = "FLIGHT_PER_PERSON"
     flight_facts: FlightFacts = Field(default_factory=FlightFacts)

@@ -47,6 +47,12 @@ services:
       PUBLIC_RATE_LIMIT: ${PUBLIC_RATE_LIMIT:-120}
       PROVIDER_MAX_PAGES: ${PROVIDER_MAX_PAGES:-5}
       ANALYTICS_RETENTION_DAYS: ${ANALYTICS_RETENTION_DAYS:-90}
+      EVENTS_ENABLED: ${EVENTS_ENABLED:-false}
+      TICKETMASTER_API_KEY: ${TICKETMASTER_API_KEY:-}
+      TICKETMASTER_AFFILIATE_ID: ${TICKETMASTER_AFFILIATE_ID:-7853869}
+      EVENTS_COUNTRIES: ${EVENTS_COUNTRIES:-AT,BE,CH,CY,CZ,DE,DK,ES,FI,FR,GB,GR,IE,IT,NL,NO,PL,SE,TR}
+      EVENTS_MAX_AGE_HOURS: ${EVENTS_MAX_AGE_HOURS:-18}
+      EVENTS_DAILY_REQUEST_LIMIT: ${EVENTS_DAILY_REQUEST_LIMIT:-4000}
       TRAVELPAYOUTS_API_TOKEN: ${TRAVELPAYOUTS_API_TOKEN:-}
       TRAVELPAYOUTS_LINKS_ENABLED: ${TRAVELPAYOUTS_LINKS_ENABLED:-false}
       TRAVELPAYOUTS_MARKER: ${TRAVELPAYOUTS_MARKER:-0}
@@ -96,6 +102,28 @@ services:
       migrate:
         condition: service_completed_successfully
     command: ["python", "-m", "app.jobs.scheduler"]
+
+  events-worker:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    profiles: ["events"]
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
+      ADMIN_TOKEN: change-me-in-development
+      EVENTS_ENABLED: ${EVENTS_ENABLED:-false}
+      EVENTS_SYNC_ENABLED: ${EVENTS_SYNC_ENABLED:-false}
+      TICKETMASTER_API_KEY: ${TICKETMASTER_API_KEY:-}
+      TICKETMASTER_AFFILIATE_ID: ${TICKETMASTER_AFFILIATE_ID:-7853869}
+      EVENTS_COUNTRIES: ${EVENTS_COUNTRIES:-AT,BE,CH,CY,CZ,DE,DK,ES,FI,FR,GB,GR,IE,IT,NL,NO,PL,SE,TR}
+      EVENTS_DAILY_REQUEST_LIMIT: ${EVENTS_DAILY_REQUEST_LIMIT:-4000}
+      EVENTS_RUN_REQUEST_LIMIT: ${EVENTS_RUN_REQUEST_LIMIT:-1000}
+      EVENTS_HORIZON_DAYS: ${EVENTS_HORIZON_DAYS:-365}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    command: ["python", "-m", "app.jobs.event_scheduler"]
 
   alerts-worker:
     build:
