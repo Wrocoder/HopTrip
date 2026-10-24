@@ -54,7 +54,7 @@ def test_read_coverage_empty_partial_and_stale_without_provider(isolated_db):
     db.commit()
     assert service.search(*args).partial
     row = db.scalar(select(LocalEvent))
-    row.checked_at = now - timedelta(hours=19)
+    row.checked_at = now - timedelta(hours=31)
     window.checked_at = row.checked_at
     db.commit()
     assert service.search(*args).status == 'UNAVAILABLE'
@@ -135,3 +135,13 @@ def test_windows_only_current_supported_routes_and_deduplicate(isolated_db, monk
     deal.expires_at = datetime.now(UTC) - timedelta(seconds=1)
     isolated_db.commit()
     assert not sync.desired_windows(isolated_db, get_settings(), datetime.now(UTC))
+
+
+@pytest.mark.parametrize('now,expected', [
+    ('2026-10-24T03:00:00+00:00', '2026-10-24T04:00:00+00:00'),
+    ('2026-10-24T04:00:00+00:00', '2026-10-25T05:00:00+00:00'),
+    ('2026-03-28T05:00:00+00:00', '2026-03-29T04:00:00+00:00'),
+])
+def test_daily_schedule_keeps_six_am_across_dst(now, expected):
+    from app.jobs.event_scheduler import next_event_start
+    assert next_event_start(datetime.fromisoformat(now)) == datetime.fromisoformat(expected)

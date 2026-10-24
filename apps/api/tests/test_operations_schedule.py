@@ -86,7 +86,7 @@ def test_monitor_age_and_invalid_backup(tmp_path):
     assert not monitor.newest_backup_ok(tmp_path, now + 31 * 3600)
 
 
-def test_events_monitor_uses_own_job_and_six_hour_cadence(monkeypatch):
+def test_events_monitor_uses_own_job_and_daily_cadence(monkeypatch):
     monitor = module('monitor')
     queries = []
     def run(*args, **kwargs):
@@ -94,5 +94,5 @@ def test_events_monitor_uses_own_job_and_six_hour_cadence(monkeypatch):
         return SimpleNamespace(returncode=0, stdout='OK\n')
     monkeypatch.setattr(monitor.subprocess, 'run', run)
     assert monitor.pipeline_ok(events=True)
-    assert 'EVENTS_SYNC' in queries[0] and '7 hours 30 minutes' in queries[0]
+    assert 'EVENTS_SYNC' in queries[0] and '27 hours' in queries[0]
     assert 'TRAVELPAYOUTS_PIPELINE' not in queries[0]

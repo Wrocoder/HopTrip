@@ -65,7 +65,7 @@ def pipeline_ok(*, events: bool = False) -> bool:
         IN ('SUCCEEDED','RUNNING','RETRYING') THEN 'OK' ELSE 'FAILED' END;"""
     if events:
         sql = sql.replace('TRAVELPAYOUTS_PIPELINE', 'EVENTS_SYNC').replace(
-            '2 hours 15 minutes', '7 hours 30 minutes')
+            '2 hours 15 minutes', '27 hours')
     try:
         result = subprocess.run(
             COMPOSE
