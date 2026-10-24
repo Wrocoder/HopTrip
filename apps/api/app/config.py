@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     ticketmaster_affiliate_id: str = "7853869"
     events_countries: str = "AT,BE,CH,CY,CZ,DE,DK,ES,FI,FR,GB,GR,IE,IT,NL,NO,PL,SE,TR"
     events_sync_enabled: bool = False
-    events_max_age_hours: int = Field(default=30, ge=26, le=48)
+    events_max_age_hours: int = Field(default=30, ge=6, le=48)
     events_daily_request_limit: int = Field(default=4000, ge=1, le=4500)
     events_run_request_limit: int = Field(default=1000, ge=1, le=4000)
     events_horizon_days: int = Field(default=365, ge=30, le=365)
