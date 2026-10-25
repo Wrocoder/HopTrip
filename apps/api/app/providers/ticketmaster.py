@@ -2,10 +2,11 @@
 
 import logging
 import re
-from datetime import date, time
+from datetime import UTC, date, datetime, time
 from decimal import Decimal, InvalidOperation
 from typing import Literal
 from urllib.parse import parse_qsl, urlsplit
+from zoneinfo import ZoneInfo
 
 import httpx
 
@@ -36,6 +37,16 @@ class EventsUnavailable(Exception):
     def __init__(self, status_code: int | None = None):
         self.status_code = status_code
         super().__init__("Event source temporarily unavailable")
+
+
+def exact_datetime(raw: object) -> datetime | None:
+    if not isinstance(raw, str) or 'T' not in raw:
+        return None
+    try:
+        parsed = datetime.fromisoformat(raw.replace('Z', '+00:00'))
+        return parsed.astimezone(UTC) if parsed.tzinfo is not None else None
+    except ValueError:
+        return None
 
 
 def safe_ticket_url(value: str, affiliate_id: str = '7853869') -> str | None:
@@ -78,6 +89,9 @@ def normalize_event(
         start_date = date.fromisoformat(first["localDate"])
         last = dates.get("end") or {}
         end_date = date.fromisoformat(last["localDate"]) if last.get("localDate") else None
+        ends_at = exact_datetime(last.get('dateTime')) if not last.get('approximate') and not last.get('noSpecificTime') else None
+        if end_date is None and ends_at:
+            end_date = ends_at.astimezone(ZoneInfo(city.timezone)).date()
         if (end_date and end_date < start_date) or start_date > end or (end_date or start_date) < start:
             return None
         venues = raw["_embedded"]["venues"]
@@ -91,6 +105,20 @@ def normalize_event(
         zone = dates.get("timezone") or venue.get("timezone") or city.timezone
         if zone != city.timezone:
             return None
+        local_time = time.fromisoformat(first["localTime"]) if first.get("localTime") and not first.get("timeTBA") and not first.get("noSpecificTime") else None
+        starts_at = exact_datetime(first.get('dateTime')) if not first.get('timeTBA') and not first.get('noSpecificTime') else None
+        if starts_at and (starts_at.astimezone(ZoneInfo(zone)).date() != start_date
+                          or (local_time is not None and starts_at.astimezone(ZoneInfo(zone)).time() != local_time)):
+            starts_at = None
+            local_time = None
+        if starts_at and local_time is None:
+            local_time = starts_at.astimezone(ZoneInfo(zone)).time()
+        if ends_at:
+            local_end_date = ends_at.astimezone(ZoneInfo(zone)).date()
+            if local_end_date < start_date or (end_date is not None and end_date != local_end_date) or (starts_at and ends_at <= starts_at):
+                ends_at = None
+            else:
+                end_date = local_end_date
         url = safe_ticket_url(raw["url"], affiliate_id)
         if not url:
             return None
@@ -120,9 +148,7 @@ def normalize_event(
             venue=venue["name"], venue_id=venue.get("id"),
             city=venue["city"]["name"], start_date=start_date,
             end_date=end_date, timezone=zone, status=status, url=url,
-            local_time=time.fromisoformat(first["localTime"])
-            if first.get("localTime") and not first.get("timeTBA")
-            and not first.get("noSpecificTime") else None,
+            local_time=local_time, start_at=starts_at, end_at=ends_at,
             price_from=price, currency=currency,
         )
     except (ValueError, TypeError, KeyError, AttributeError):

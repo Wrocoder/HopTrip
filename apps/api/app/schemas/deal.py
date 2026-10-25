@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from decimal import Decimal
+from typing import Literal
 
 from app.schemas.score import ScoreExplanation
 from pydantic import BaseModel, ConfigDict, Field
@@ -23,6 +24,10 @@ class FlightFacts(BaseModel):
     return_arrival_calculated: bool = False
     origin_airport: str | None = None
     destination_airport: str | None = None
+    return_origin_airport: str | None = None
+    return_destination_airport: str | None = None
+    return_origin_timezone: str | None = None
+    return_destination_timezone: str | None = None
     destination_code: str | None = None
     airline_code: str | None = None
     outbound_stops: int | None = None
@@ -32,6 +37,16 @@ class FlightFacts(BaseModel):
     return_departure: datetime | None = None
     return_arrival: datetime | None = None
     destination_interval_minutes: int | None = None
+
+
+class PriceFreshness(BaseModel):
+    observed_at: datetime | None = None
+    observation_basis: Literal["SOURCE", "FIRST_SEEN"] | None = None
+    fetched_at: datetime | None = None
+    # Cache ingestion never constitutes a seller inventory check.
+    availability_checked_at: datetime | None = None
+    hidden_after: datetime | None = None
+    max_age_hours: int = 48
 
 
 class DealRead(BaseModel):
@@ -52,6 +67,7 @@ class DealRead(BaseModel):
     score_version: str = "legacy"
     score_components: dict = Field(default_factory=dict)
     score_explanation: ScoreExplanation = Field(default_factory=ScoreExplanation)
+    price_freshness: PriceFreshness = Field(default_factory=PriceFreshness)
     slug: str
     origin_airport_id: int
     destination_id: int

@@ -37,3 +37,15 @@ def test_travelpayouts_normalizes_fixture() -> None:
     assert offer.currency == "PLN"
     assert offer.depart_at == datetime(2026, 10, 18, 8, tzinfo=UTC)
     assert offer.destination == "BCN"
+
+
+def test_distinct_explicit_return_airports_do_not_overwrite_each_other():
+    provider = TravelpayoutsDataProvider(token="fixture")
+    item = {"origin_airport":"WRO", "destination":"LON", "destination_airport":"STN",
+            "departure_at":"2030-10-24T10:00:00Z", "return_at":"2030-10-27T10:00:00Z", "price":200}
+    query = SearchQuery(origin="WRO")
+    stn = provider._normalize(item | {"return_origin_airport":"STN", "return_destination_airport":"WRO"}, query)
+    ltn = provider._normalize(item | {"return_origin_airport":"LTN", "return_destination_airport":"WRO"}, query)
+    assert stn.external_id != ltn.external_id
+    assert stn.payload["return_origin_airport"] == "STN"
+    assert ltn.payload["return_origin_airport"] == "LTN"

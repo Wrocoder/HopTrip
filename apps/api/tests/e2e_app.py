@@ -49,6 +49,7 @@ with Session(engine) as db:
     db.add(Destination(slug="milan", city="Milan", country="Italy", country_code="IT"))
     deal, component = catalog_fixture(db, program=program, slug="browser-deal")
     score_now = datetime.now(UTC)
+    deal.last_verified_at = score_now - timedelta(hours=24)
     score = score_flight_deal(
         current_price=deal.flight_price_pln, baseline_price=Decimal("250"), sample_count=24,
         observed_at=score_now - timedelta(hours=24), expires_at=None, now=score_now,
@@ -106,7 +107,8 @@ with Session(engine) as db:
     scheduled_component = db.scalar(
         select(DealComponent).where(DealComponent.deal_id == scheduled_deal.id)
     )
-    scheduled_departure = scheduled_deal.depart_at.replace(tzinfo=UTC)
+    # A normal schedule must not turn into a midnight-return case as the clock advances.
+    scheduled_departure = scheduled_deal.depart_at.replace(tzinfo=UTC, hour=10, minute=0, second=0, microsecond=0)
     scheduled_offer = TravelOffer(
         data_provider_id=provider.id, external_id="schedule", source="travelpayouts_data",
         product_type="FLIGHT", departure_precision="TIME",
@@ -115,6 +117,7 @@ with Session(engine) as db:
         original_price=213, original_currency="PLN",
         raw_payload={
             "origin_airport": "WRO", "destination": "BCN", "destination_airport": "BCN",
+            "return_origin_airport": "BCN", "return_destination_airport": "WRO",
             "airline": "FR", "transfers": 0, "return_transfers": 1,
             "departure_at": scheduled_departure.isoformat(),
             "return_at": (scheduled_departure + timedelta(days=3)).isoformat(),
@@ -162,6 +165,7 @@ def growth_fixture():
                                 source="travelpayouts_data", product_type="FLIGHT", departure_precision="TIME",
                                 depart_at=start, return_at=end, original_price=100 + index, original_currency="PLN",
                                 raw_payload={"origin_airport": code, "destination_airport": "CIA",
+                                             "return_origin_airport": "CIA", "return_destination_airport": code,
                                              "departure_at": start.isoformat(), "return_at": end.isoformat(),
                                              "duration_to": 120, "duration_back": 120, "transfers": 0, "return_transfers": 0})
             db.add(offer)
@@ -186,6 +190,16 @@ def compact_card(scenario: str = "normal"):
         departure = scheduled_departure + timedelta(days=3)
         if scenario == "midnight":
             departure = departure.replace(hour=21, minute=30)
+        payload.update(origin_airport="WRO", destination_airport="BCN",
+                       return_origin_airport="BCN", return_destination_airport="WRO")
+        if scenario == "open-jaw":
+            payload.update(destination_airport="STN", return_origin_airport="LTN")
+        elif scenario == "unknown-airports":
+            for key in ("origin_airport", "destination_airport", "return_origin_airport", "return_destination_airport"):
+                payload.pop(key, None)
+        elif scenario == "unknown-return":
+            payload.pop("return_origin_airport", None)
+            payload.pop("return_destination_airport", None)
         payload["return_at"] = departure.isoformat()
         offer.raw_payload = payload
         offer.return_at = departure
@@ -207,6 +221,7 @@ def htr01_fixture():
         return_at=datetime(2026, 10, 24, 20, tzinfo=UTC),
         raw_payload={
             "origin_airport": "WRO", "destination_airport": "BCN", "airline": "FR",
+            "return_origin_airport": "BCN", "return_destination_airport": "WRO",
             "departure_at": "2026-10-17T10:00:00+02:00", "duration_to": 120,
             "return_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
         },
@@ -215,6 +230,21 @@ def htr01_fixture():
 
 
 # This exact local fixture must precede the existing /deals/{slug} route.
+app.router.routes.insert(0, app.router.routes.pop())
+
+
+@app.get('/api/v1/deals/freshness-fixture')
+def freshness_fixture():
+    with Session(engine) as db:
+        view = serialize_deal(db, db.scalar(select(Deal).where(Deal.slug == 'browser-deal')))
+    now = datetime.now(UTC)
+    view.price_freshness.observed_at = now-timedelta(hours=3)
+    view.price_freshness.observation_basis = 'SOURCE'
+    view.price_freshness.fetched_at = now
+    view.price_freshness.hidden_after = now+timedelta(seconds=60)
+    return view
+
+
 app.router.routes.insert(0, app.router.routes.pop())
 
 # Explicit E2E mode above is mandatory. No external mail is sent.

@@ -14,6 +14,6 @@ def trip_dates(offer: TravelOffer) -> tuple[date, date | None]:
         start = (facts.outbound_departure.astimezone(ZoneInfo(facts.origin_timezone))
                  if facts.origin_timezone else facts.outbound_departure).date()
     if facts.return_departure:
-        end = (facts.return_departure.astimezone(ZoneInfo(facts.destination_timezone))
-               if facts.destination_timezone else facts.return_departure).date()
+        end = (facts.return_departure.astimezone(ZoneInfo(facts.return_origin_timezone))
+               if facts.return_origin_timezone else facts.return_departure).date()
     return start, end

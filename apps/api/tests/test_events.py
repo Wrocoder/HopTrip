@@ -173,3 +173,98 @@ def test_route_filters_flight_hours_and_uses_destination_dates(api_client, isola
     assert response.status_code == 200
     assert observed[0][2] == date(2099, 10, 25)
     assert [e['id'] for e in response.json()['events']] == ['12']
+
+
+def test_explicit_stay_dates_can_extend_beyond_return_without_changing_default_contract(api_client, isolated_db, monkeypatch):
+    from datetime import time
+
+    from app.api import events as routes
+    from app.schemas.event import EventRead
+    from app.services.catalog import serialize_deal
+
+    monkeypatch.setattr(get_settings(), 'events_enabled', True)
+    deal, _ = catalog_fixture(isolated_db)
+    context = serialize_deal(isolated_db, deal)
+    context.trip_type = 'ROUND_TRIP'
+    context.flight_facts = FlightFacts(return_departure=datetime.combine(deal.trip_end, time(12), UTC))
+    monkeypatch.setattr(routes, 'serialize_deal', lambda *args: context)
+    extended = deal.trip_end + timedelta(days=1)
+    sample = EventRead(id='extended-stay', name='Concert after original return', category='MUSIC',
+        venue='Sala', city='Barcelona', start_date=extended, local_time=time(20),
+        timezone='Europe/Madrid', status='onsale', url=tracked())
+    observed = []
+
+    def search(*args):
+        observed.append(args)
+        return EventResults(status='READY', events=[sample])
+
+    monkeypatch.setattr(service_module.event_service, 'search', search)
+    path = f'/api/v1/deals/{deal.slug}/events'
+    params = {'start_date':str(deal.trip_start), 'end_date':str(extended)}
+    assert api_client.get(path, params=params).status_code == 422
+    response = api_client.get(path, params=params | {'date_mode':'stay'})
+    assert response.status_code == 200
+    assert response.json()['date_mode'] == 'stay'
+    assert response.json()['events'][0]['id'] == 'extended-stay'
+    assert observed[-1][2:4] == (deal.trip_start, extended)
+    # An independent search can also start before the original flight dates.
+    independent = deal.trip_start - timedelta(days=3)
+    response = api_client.get(path, params={'start_date':str(independent),
+        'end_date':str(extended), 'date_mode':'other'})
+    assert response.status_code == 200 and response.json()['date_mode'] == 'other'
+    assert observed[-1][2] == independent
+    assert deal.trip_end < extended  # The offer itself was not edited.
+
+
+@pytest.mark.parametrize('mode', ['stay', 'other'])
+def test_explicit_search_modes_require_dates_and_bounded_calendar_window(api_client, isolated_db, monkeypatch, mode):
+    monkeypatch.setattr(get_settings(), 'events_enabled', True)
+    deal, _ = catalog_fixture(isolated_db)
+    path = f'/api/v1/deals/{deal.slug}/events'
+    assert api_client.get(path, params={'date_mode':mode}).status_code == 422
+    for start, end in [(deal.trip_start, deal.trip_start - timedelta(days=1)),
+                       (deal.trip_start, deal.trip_start + timedelta(days=31)),
+                       (date.today() + timedelta(days=370), date.today() + timedelta(days=371))]:
+        assert api_client.get(path, params={'date_mode':mode,'start_date':str(start),'end_date':str(end)}).status_code == 422
+    monkeypatch.setattr(service_module.event_service, 'search', lambda *args: EventResults(status='EMPTY'))
+    response = api_client.get(path, params={'date_mode':mode, 'start_date':str(deal.trip_start),
+        'end_date':str(deal.trip_start + timedelta(days=30))})
+    assert response.status_code == 200 and response.json()['date_mode'] == mode
+    assert api_client.get(path, params={'date_mode':'unknown'}).status_code == 422
+    deal.is_visible = False
+    isolated_db.commit()
+    assert api_client.get(path, params={'date_mode':mode}).status_code == 404
+
+
+def test_exact_event_end_is_normalized_from_event_dates_and_crosses_midnight():
+    from datetime import time
+    from zoneinfo import ZoneInfo
+
+    raw = raw_event()
+    start = datetime.combine(START,time(20),ZoneInfo(CITY.timezone)).astimezone(UTC)
+    end = start + timedelta(hours=6)
+    raw['dates']['start']['dateTime'] = start.isoformat()
+    raw['dates']['end'] = {'dateTime':end.isoformat()}
+    normalized = normalize_event(raw,CITY,START,END)
+    assert normalized and normalized.start_at == start and normalized.end_at == end
+    assert normalized.end_date == START + timedelta(days=1)
+    assert 'flight_fit' not in normalized.model_dump()  # Assessments belong to a trip, not the event.
+    raw['dates']['end']['approximate'] = True
+    assert normalize_event(raw,CITY,START,END).end_at is None
+    raw['dates']['end'] = {'dateTime':'2099-10-25T22:00:00'}  # No offset is not an instant.
+    assert normalize_event(raw,CITY,START,END).end_at is None
+    raw['dates'].pop('end')
+    raw['sales'] = {'public':{'endDateTime':end.isoformat()}}
+    assert normalize_event(raw,CITY,START,END).end_at is None
+
+
+def test_explicit_start_can_resolve_dst_but_unknown_or_contradictory_times_stay_unknown():
+    raw = raw_event()
+    raw['dates']['start']['dateTime'] = f'{START}T18:00:00Z'
+    raw['dates']['start']['timeTBA'] = True
+    normalized = normalize_event(raw,CITY,START,END)
+    assert normalized.local_time is None and normalized.start_at is None
+    raw['dates']['start'].pop('timeTBA')
+    raw['dates']['start']['dateTime'] = f'{START}T01:00:00Z'  # Contradicts the stated 20:00 local.
+    normalized = normalize_event(raw,CITY,START,END)
+    assert normalized.local_time is None and normalized.start_at is None

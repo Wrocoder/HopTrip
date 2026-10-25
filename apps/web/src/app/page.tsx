@@ -27,7 +27,7 @@ export default async function HomePage({searchParams}:{searchParams:Promise<{ori
     return (!origin || deal.origin_code===origin) && deal.trip_type==="ROUND_TRIP" && Number.isInteger(nights) && nights>=2 && nights<=4;
   }).slice(0,6);else failed=true;
   return <main className="page-shell home-page">
-    <section className="hero"><div className="hero-copy"><p className="eyebrow"><span className="status-dot"/>Loty z Polski · HopTrip</p><h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1><p className="lead">Porównaj loty i zaplanuj budżet wyjazdu.</p></div>
+    <section className="hero"><div className="hero-copy"><p className="eyebrow"><span className="status-dot"/>Loty z Polski · HopTrip</p><h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1><p className="lead">Porównaj loty, sprawdź koncerty i mecze na miejscu, zaplanuj budżet.</p><p className="hero-events">Wydarzenia znajdziesz w ofercie lotu — według miasta i dat pobytu.</p></div>
       <FilterForm key={origin} filters={{origin}} airports={airports} destinations={destinations} hero/></section>
 
     <section className="catalog-section" aria-labelledby="current-deals"><div className="section-heading"><div><p className="eyebrow">Wylot: {origin || "dowolne lotnisko"}</p><h2 id="current-deals">Krótkie wyjazdy · 2–4 noce</h2></div><span className="badge">{pl.perPerson} · PLN</span></div>

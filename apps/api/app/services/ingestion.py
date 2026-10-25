@@ -92,6 +92,7 @@ def ingest_offers(
             not raw.price.is_finite()
             or raw.price <= 0
             or raw.depart_at.tzinfo is None
+            or (raw.expires_at and raw.expires_at.tzinfo is None)
             or (raw.return_at and (raw.return_at.tzinfo is None or raw.return_at < raw.depart_at))
             or (
                 raw.source_observed_at
@@ -185,6 +186,11 @@ def ingest_offers(
                 if raw.expires_at
                 else verified_at + DEAL_FRESHNESS
             )
+        # Re-delivery of the same cached observation cannot extend its earlier expiry.
+        if existing.observation_key == key and existing.expires_at:
+            previous_expiry = values["expires_at"]
+            assert isinstance(previous_expiry, datetime)
+            values["expires_at"] = min(utc(existing.expires_at), previous_expiry)
         # Late delivery of an older observation must not replace a newer price.
         if utc(existing.last_verified_at) <= verified_at:
             for field, value in values.items():

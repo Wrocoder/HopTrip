@@ -167,6 +167,15 @@ class TravelpayoutsDataProvider:
                 item.get("transfers", ""),
             )
         )
+        # Optional explicit return airports are preserved in raw_payload and must not
+        # collapse into the same cached offer when an upstream record supplies them.
+        return_airports = [item.get("return_origin_airport"), item.get("return_destination_airport")]
+        if return_at and any(isinstance(code, str) and len(code) == 3
+                             and code.isascii() and code.isalpha() and code.isupper()
+                             for code in return_airports):
+            identity += "|return_airports|" + "|".join(
+                code if isinstance(code, str) and len(code) == 3 and code.isascii()
+                and code.isalpha() and code.isupper() else "" for code in return_airports)
         return RawTravelOffer(
             external_id=hashlib.sha256(identity.encode()).hexdigest(),
             origin=origin,

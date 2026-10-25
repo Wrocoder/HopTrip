@@ -7,6 +7,7 @@ import Link from "next/link";
 import {Deal} from "../../lib/api";
 import {pl,date,tripNights} from "../../lib/pl";
 import {Price} from "./price";
+import {PriceFreshness} from "./price-freshness";
 import {Impression} from "./deal-view-tracker";
 import {ScoreDetails} from "./score-details";
 import {ScoreTrigger} from "./score-trigger";
@@ -24,6 +25,7 @@ export function DealCard({deal}:{deal:Deal}) {
     <p className="deal-price"><Price value={deal.price_per_person_pln}/> <span>{flightPriceBasis(deal)}</span></p>
     <span className="card-arrow" aria-hidden="true">↗</span></div>
     </Link>
+    <PriceFreshness deal={deal} compact/>
     <FlightSchedule deal={deal} compact/>
     {deal.trip_type==="ROUND_TRIP" && <p className="deal-note">{destinationInterval(deal.flight_facts?.destination_interval_minutes) ? `Między przylotem a odlotem: ${destinationInterval(deal.flight_facts?.destination_interval_minutes)}${deal.flight_facts?.outbound_arrival_calculated ? " (szac.)" : ""}.` : "Czas na miejscu: brak pełnych danych o godzinach."}</p>}
     <TripDetails deal={deal}/>

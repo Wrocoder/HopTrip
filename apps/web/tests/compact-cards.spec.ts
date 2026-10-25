@@ -24,7 +24,14 @@ test("compact cards preserve clocks, missing facts, keyboard access and long nam
  await expect(card.locator(".flight-schedule-compact")).toContainText("Godziny lokalne");
  await expect(card.locator(".flight-schedule-compact")).toContainText("Przylot szacowany");
  await expect(card.locator(".flight-schedule-compact")).not.toContainText(/Europe\/|GMT/);
- if(testInfo.project.name==="desktop")expect((await card.boundingBox())!.height).toBeLessThan(530);
+ // Two stop summaries now belong to the collapsed card, one for each direction.
+ await expect(card.locator(".flight-stops")).toHaveCount(2);
+ if(testInfo.project.name==="desktop") {
+  // Observation and availability are now always visible; the existing card stays compact.
+  const freshness=await card.locator('.price-freshness').boundingBox();
+  expect(freshness!.height).toBeLessThan(130);
+  expect((await card.boundingBox())!.height).toBeLessThan(730);
+ }
  await page.screenshot({path:testInfo.outputPath("catalog.png")});
  await card.screenshot({path:testInfo.outputPath("card.png")});
  await card.locator(".trip-details > summary").focus();
