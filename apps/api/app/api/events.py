@@ -13,7 +13,8 @@ from app.schemas.event import EventCategory, EventResults
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.event_destinations import event_city
-from app.services.event_flight_fit import event_flight_fit, event_instants
+from app.services.event_flight_fit import combined_flight_fit, event_instants
+from app.services.event_grouping import group_events
 from app.services.events import event_service
 
 router = APIRouter(prefix="/api/v1", tags=["events"])
@@ -85,10 +86,11 @@ def deal_events(
             )) for t in instants):
                 continue
         eligible.append(event)
-    result.events = eligible[:12]
-    result.flight_fit = {event.id: event_flight_fit(
+    grouped = group_events(eligible)
+    result.events = grouped[:12]
+    result.flight_fit = {event.id: combined_flight_fit(
         event, facts, trip_start, trip_end if context.trip_type == "ROUND_TRIP" else None,
     ) for event in result.events}
-    result.partial = result.partial or len(eligible) > 12
+    result.partial = result.partial or len(grouped) > 12
     result.status = "READY" if result.events else "EMPTY"
     return result

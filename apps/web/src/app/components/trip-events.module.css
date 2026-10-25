@@ -20,6 +20,12 @@
 .grid,.skeletons{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem;margin:1rem 0 1.5rem}
 .card{display:flex;flex-direction:column;padding:1.25rem;border:1px solid var(--border);background:#fff;border-radius:var(--radius-medium);overflow-wrap:anywhere;box-shadow:0 4px 14px #243e2c06}
 .cardTop{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.empty{padding:1rem 1.2rem;border:1px solid var(--border);border-radius:var(--radius-medium);background:#fff;margin-block:1rem}
+.empty h3{margin:0 0 .5rem;font-size:1.15rem}.empty p{max-width:80ch;color:var(--secondary)}
+.emptyActions{display:flex;flex-wrap:wrap;gap:.65rem}.emptyActions>*{min-height:44px;white-space:normal;text-align:center}
+.variants{margin-top:auto}.variants h4{font-family:inherit;font-size:.95rem;margin:1rem 0 .65rem}
+.variants ul{list-style:none;padding:0;margin:0;display:grid;gap:1rem}.variants li{padding-top:.8rem;border-top:1px solid var(--border)}
+.variants p{margin:.35rem 0}.variants a{width:100%;box-sizing:border-box}.optionName,.variantHint{font-size:.8rem;color:var(--secondary);line-height:1.5}
 .category{font-size:.75rem;font-weight:600;color:var(--green-dark);background:#edf4eb;padding:.25rem .65rem;border-radius:99px}
 .day{font-size:.9rem;font-weight:700;color:var(--green-dark);white-space:nowrap}
 .card h3{margin:.9rem 0 .45rem;font-size:1.2rem;line-height:1.35;letter-spacing:-.015em}

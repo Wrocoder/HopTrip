@@ -47,7 +47,7 @@ test('events are fetched on demand with affiliate links and reset when dates cha
  expect(width.page).toBeLessThanOrEqual(width.viewport);
 });
 
-test('provider failure keeps the flight page usable; empty results have no links',async({page})=>{
+test('provider failure keeps the flight page usable; empty results have no ticket links',async({page})=>{
  let fail=true;
  await page.route('**/api/v1/deals/*/events?**',route=>route.fulfill({json:{status:fail?'UNAVAILABLE':'EMPTY',events:[],partial:false,checked_at:null}}));
  await page.goto('/deals/browser-deal');
@@ -61,5 +61,6 @@ test('provider failure keeps the flight page usable; empty results have no links
  fail=false;
  await section.getByRole('button',{name:/Spróbuj ponownie/}).click();
  await expect(section.getByText(/Nie znaleźliśmy pasujących ofert/)).toBeVisible();
- await expect(section.getByRole('link')).toHaveCount(0);
+ await expect(section.locator('a[href^="https://ticketmaster.evyy.net/"]')).toHaveCount(0);
+ await expect(section.getByRole('button',{name:'Zmień okres wyszukiwania'})).toBeVisible();
 });

@@ -7,7 +7,7 @@ import {date} from "../../lib/pl";
 export function DestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:boolean}) {
   const selection=activitiesForDestination(slug);
   if(!selection) return null;
-  return <section className={styles.section} aria-labelledby="destination-activities-title">
+  return <section id="destination-activities" tabIndex={-1} className={styles.section} aria-labelledby="destination-activities-title">
     <p className="eyebrow">Pomysły na pobyt · {selection.city}</p>
     <h2 id="destination-activities-title">{selection.heading ?? "Muzea i atrakcje"}</h2>
     <p>Bilety kupujesz osobno. Dostępność na daty Twojej podróży sprawdzisz u sprzedawcy lub na oficjalnej stronie obiektu.</p>

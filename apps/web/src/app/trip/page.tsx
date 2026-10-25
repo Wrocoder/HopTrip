@@ -2,6 +2,7 @@ import {TripNavigation} from "../components/trip-navigation";
 import {TripDraftProvider} from "../components/trip-draft";
 import {TripAccommodation} from "../components/trip-accommodation";
 import {TripEvents} from "../components/trip-events";
+import {activitiesForDestination} from "../../lib/destination-activities";
 import type {Metadata} from "next";
 import Link from "next/link";
 import {decodeTrip,tripPath} from "../../lib/shared-trip";
@@ -42,7 +43,7 @@ export default async function SharedTripPage({searchParams}:Props) {
   <TripDraftProvider key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} adultsOnly={draft.adultsOnly===true} forceReview>
   {current && !expired && <TripAccommodation deal={current}/>}
   <TripBudgetCalculator key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} shareOffer={offer} forceReview/>
-  {current && !expired && <TripEvents key={`events-copy-${offer.slug}`} deal={current}/>}
+  {current && !expired && <TripEvents key={`events-copy-${offer.slug}`} deal={current} activitiesHref={activitiesForDestination(current.destination_slug)?`/deals/${current.slug}#destination-activities`:undefined}/>}
   </TripDraftProvider>
   <Link href="/saved">Zapisane wyjazdy</Link>
  </main>;

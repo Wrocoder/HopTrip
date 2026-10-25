@@ -1,0 +1,63 @@
+// Public production smoke check; local browser storage only, no partner clicks.
+import {createRequire} from 'node:module';
+import {mkdir,writeFile} from 'node:fs/promises';
+const require=createRequire(new URL('../apps/web/package.json',import.meta.url));
+const {chromium,expect}=require('@playwright/test');
+const AxeBuilder=require('@axe-core/playwright').default;
+const base='https://hoptrip.pl';
+const ready=await fetch(base+'/health/ready');
+if(!ready.ok)throw new Error('Production readiness failed');
+const deals=await (await fetch(base+'/api/v1/deals?destination=london&limit=3')).json();
+const deal=deals.find(item=>item.events_supported&&item.trip_type==='ROUND_TRIP');
+if(!deal?.price_freshness)throw new Error('Release price metadata absent');
+const browser=await chromium.launch({channel:'msedge',headless:true});
+const report={checked_at:new Date().toISOString(),slug:deal.slug,checks:[]};
+await mkdir(new URL('../docs/releases/',import.meta.url),{recursive:true});
+try{
+ for(const mobile of [false,true]){
+  const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1366,height:900},isMobile:mobile,hasTouch:mobile});
+  await context.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+  const page=await context.newPage(),errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(base+'/',{waitUntil:'domcontentloaded'});
+  await expect(page.locator('.hero')).toContainText('koncerty i mecze');
+  const saved=page.getByRole('navigation',{name:'Nawigacja główna'}).getByRole('link',{name:'Zapisane',exact:true});
+  await expect(saved).toBeInViewport();await saved.click();
+  await expect(saved).toHaveAttribute('aria-current','page');
+  await page.goto(base+'/deals/'+deal.slug,{waitUntil:'domcontentloaded'});
+  const events=page.locator('#trip-events');
+  await expect(page.locator('#flight-price-freshness')).toContainText('Bez potwierdzenia na żywo');
+  const eventsLink=page.getByRole('navigation',{name:'Sekcje planu podróży'}).getByRole('link',{name:'Wydarzenia',exact:true});
+  await expect(eventsLink).toBeInViewport();await eventsLink.click();
+  await expect(events).toBeFocused();
+  await expect(events.getByRole('heading',{name:'Wydarzenia w terminie podróży'})).toBeVisible();
+  const checkout=page.getByLabel('Wymeldowanie',{exact:true});
+  const oldEnd=await checkout.inputValue();
+  const next=new Date(oldEnd+'T12:00:00Z');next.setUTCDate(next.getUTCDate()+1);
+  const end=next.toISOString().slice(0,10);
+  const updated=page.waitForResponse(response=>response.url().includes('/events?')&&new URL(response.url()).searchParams.get('end_date')===end);
+  await checkout.fill(end);
+  const response=await updated,result=await response.json();
+  if(!response.ok()||!['READY','EMPTY'].includes(result.status))throw new Error('Changed stay search unavailable');
+  await expect(events.getByLabel('Do',{exact:true})).toHaveValue(end);
+  if(result.events.length&&!result.events.every(item=>result.flight_fit?.[item.id]))throw new Error('Flight compatibility absent');
+  await expect(events).toContainText('Londyn');
+  await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
+  await page.getByRole('navigation',{name:'Nawigacja główna'}).getByRole('link',{name:'Zapisane',exact:true}).click();
+  const planLink=page.locator('main a[href^="/trip?plan="]').first();
+  await expect(planLink).toBeVisible();await planLink.click();
+  await expect(page.getByRole('navigation',{name:'Sekcje planu podróży'}).getByRole('link',{name:'Wydarzenia',exact:true})).toBeVisible();
+  await expect(page.locator('#trip-events').getByLabel('Do',{exact:true})).toHaveValue(end);
+  if(mobile)await page.setViewportSize({width:320,height:844});
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
+  if(overflow)throw new Error('Horizontal overflow');
+  const violations=(await new AxeBuilder({page}).include('.site-header').include('.trip-navigation').include('#trip-events').analyze()).violations;
+  if(violations.length)throw new Error('Accessibility: '+violations.map(item=>item.id).join(','));
+  if(errors.length)throw new Error('Page errors: '+errors.join(';'));
+  report.checks.push({viewport:mobile?'mobile-320':'desktop',menu:true,event_anchor:true,shared_dates:true,saved_plan_reopened:true,event_count:result.events.length,flight_fit:true,axe_violations:0,page_errors:0,horizontal_overflow:false});
+  await page.screenshot({path:new URL('../docs/releases/trip-reliability-'+(mobile?'mobile':'desktop')+'-20261025.png',import.meta.url).pathname.replace(/^\/([A-Z]:)/,'$1')});
+  await context.close();
+ }
+}finally{await browser.close();}
+await writeFile(new URL('../docs/releases/trip-reliability-20261025.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));

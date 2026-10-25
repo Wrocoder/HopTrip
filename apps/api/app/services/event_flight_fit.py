@@ -9,6 +9,32 @@ from app.schemas.event import EventFlightFit, EventRead, FitReason
 BUFFER_MINUTES = 180  # Product warning threshold, not a route or airport check-in calculation.
 
 
+def combined_flight_fit(event: EventRead, facts: FlightFacts, trip_start: date,
+                        trip_end: date | None) -> EventFlightFit:
+    if not event.ticket_options:
+        return event_flight_fit(event, facts, trip_start, trip_end)
+    fits = [event_flight_fit(event.model_copy(update=option.model_dump(exclude={'name', 'ticket_kind'})),
+                            facts, trip_start, trip_end) for option in event.ticket_options]
+    order = {'NO_KNOWN_CONFLICT': 0, 'CHECK': 1, 'TIGHT': 2, 'CONFLICT': 3}
+    worst = max(fits, key=lambda fit: order[fit.status])
+    reasons = list(dict.fromkeys(reason for fit in fits for reason in fit.reasons))
+    durations = {fit.duration_minutes for fit in fits}
+    duration = durations.pop() if len(durations) == 1 else None
+    if duration is None and 'UNKNOWN_DURATION' not in reasons:
+        reasons.append('UNKNOWN_DURATION')
+    status = worst.status
+    if reasons and status == 'NO_KNOWN_CONFLICT':
+        status = 'CHECK'
+    def minimum(field: str) -> int | None:
+        values = [getattr(fit, field) for fit in fits if getattr(fit, field) is not None]
+        return min(values) if values else None
+    return worst.model_copy(update={'status': status, 'reasons': reasons, 'duration_minutes': duration,
+        'arrival_gap_minutes': minimum('arrival_gap_minutes'),
+        'return_start_gap_minutes': minimum('return_start_gap_minutes'),
+        # A return margin from the end is known only if every option has an end time.
+        'return_gap_minutes': minimum('return_gap_minutes') if all(fit.return_gap_minutes is not None for fit in fits) else None})
+
+
 def instant(value: datetime | None) -> datetime | None:
     return value.astimezone(UTC) if value is not None and value.tzinfo is not None else None
 
