@@ -10,12 +10,15 @@ export type FlightFacts = {
   origin_timezone?:string|null; destination_timezone?:string|null; airline_name?:string|null;
   outbound_arrival_calculated?:boolean; return_arrival_calculated?:boolean;
   origin_airport:string|null; destination_airport:string|null; destination_code:string|null;
+  return_origin_airport?:string|null; return_destination_airport?:string|null;
+  return_origin_timezone?:string|null; return_destination_timezone?:string|null;
   airline_code:string|null; outbound_stops:number|null; return_stops:number|null;
   outbound_departure:string|null; outbound_arrival:string|null;
   return_departure:string|null; return_arrival:string|null;
   destination_interval_minutes:number|null;
 };
 export type Deal = {
+  price_freshness?:PriceFreshness;
   flight_facts?:FlightFacts;
   id:number; slug:string; trip_start:string; trip_end:string; origin_airport_id:number; destination_id:number;
   origin_code:string; origin_city:string; destination_city:string; destination_slug:string;
@@ -29,6 +32,8 @@ export type Deal = {
   last_verified_at:string; expires_at:string|null;
 };
 export type Airport = {id:number; iata_code:string; name:string; city:string; country_code:string; is_active:boolean;aliases?:string[]};
+export type PriceFreshness={observed_at:string|null;observation_basis:"SOURCE"|"FIRST_SEEN"|null;
+  fetched_at:string|null;availability_checked_at:string|null;hidden_after:string|null;max_age_hours:number};
 export type Destination = {display_name?:string;aliases?:string[];iata_codes?:string[];id:number; city:string; country:string; country_code:string; slug:string; is_active:boolean};
 export type Filters = Partial<Record<"origin"|"destination"|"departure_from"|"departure_to"|"budget"|"duration_min"|"duration_max"|"weekend"|"offset"|"limit"|"sort"|"round_trip",string>>;
 export class ApiError extends Error { constructor(public status:number,public code?:string) {super("Catalog unavailable");} }

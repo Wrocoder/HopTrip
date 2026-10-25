@@ -20,6 +20,7 @@ def test_local_dates_midnight_and_dst(departure, return_at, expected):
     offer = TravelOffer(source='travelpayouts_data', product_type='FLIGHT', departure_precision='TIME',
                         depart_at=datetime.fromisoformat(departure), return_at=datetime.fromisoformat(return_at),
                         raw_payload={'origin_airport': 'KRK', 'destination_airport': 'CIA',
+                                     'return_origin_airport': 'CIA', 'return_destination_airport': 'KRK',
                                      'departure_at': departure, 'return_at': return_at})
     assert tuple(d.isoformat() for d in trip_dates(offer)) == expected
 
@@ -45,6 +46,7 @@ def test_generated_local_dates_drive_weekend_and_nights(api_client, isolated_db,
                         original_price=100, original_currency='PLN', price_pln=100,
                         last_verified_at=datetime.now(UTC), raw_payload={
                             'origin_airport': 'WRO', 'destination_airport': 'BCN',
+                            'return_origin_airport': 'BCN', 'return_destination_airport': 'WRO',
                             'departure_at': '2030-05-02T22:30:00Z', 'return_at': return_at})
     isolated_db.add(offer)
     isolated_db.flush()
@@ -55,6 +57,20 @@ def test_generated_local_dates_drive_weekend_and_nights(api_client, isolated_db,
     assert [item['slug'] for item in results] == ([generated.slug] if expected else [])
     results = api_client.get('/api/v1/deals?round_trip=true&duration_min=2&duration_max=4').json()
     assert [item['slug'] for item in results] == [generated.slug]
+
+
+def test_return_calendar_uses_its_own_airport_zone_not_outbound_destination():
+    # London and Tokyo have different calendar dates at this instant.
+    offer = TravelOffer(source='travelpayouts_data', product_type='FLIGHT', departure_precision='TIME',
+        depart_at=datetime(2030, 5, 2, 10, tzinfo=UTC),
+        return_at=datetime(2030, 5, 4, 22, 30, tzinfo=UTC),
+        raw_payload={'origin_airport':'WRO', 'destination_airport':'STN',
+                     'return_origin_airport':'NRT', 'return_destination_airport':'WRO',
+                     'departure_at':'2030-05-02T10:00:00Z', 'return_at':'2030-05-04T22:30:00Z'})
+    assert trip_dates(offer)[1].isoformat() == '2030-05-05'
+    offer.raw_payload = {key:value for key,value in offer.raw_payload.items()
+                         if key not in {'return_origin_airport', 'return_destination_airport'}}
+    assert trip_dates(offer)[1].isoformat() == '2030-05-04'
 
 
 def test_warsaw_union_filters_total_and_pagination(api_client, isolated_db):

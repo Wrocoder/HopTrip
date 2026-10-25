@@ -56,6 +56,12 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
     facts.outbound_arrival = _arrival(facts.outbound_departure, payload.get("duration_to"))
     facts.outbound_arrival_calculated = facts.outbound_arrival is not None
     if offer.return_at is not None:
+        # Each leg needs its own explicit evidence. prices_for_dates does not guarantee
+        # return airports: never reverse the outbound pair, the city or the search route.
+        facts.return_origin_airport = _code(payload.get("return_origin_airport"))
+        facts.return_destination_airport = _code(payload.get("return_destination_airport"))
+        facts.return_origin_timezone = airport_timezone(facts.return_origin_airport)
+        facts.return_destination_timezone = airport_timezone(facts.return_destination_airport)
         facts.return_stops = _count(payload.get("return_transfers"), 20)
         facts.return_departure = _time(payload.get("return_at"))
         facts.return_arrival = _arrival(facts.return_departure, payload.get("duration_back"))

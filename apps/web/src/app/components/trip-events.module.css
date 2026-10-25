@@ -6,6 +6,9 @@
 .stay{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .8rem;margin:1.25rem 0 0;font-size:.9rem}
 .stay span{color:var(--secondary)}
 .stay strong{font-weight:600}
+.dateMode{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+.dateMode strong{font-size:.9rem}
+.modeHint{font-size:.9rem;color:var(--secondary);margin:.65rem 0 0;max-width:85ch}
 .form{display:flex;flex-wrap:wrap;align-items:end;gap:.8rem;margin-block:1.25rem;padding:1rem;background:rgba(255,255,255,.75);border:1px solid var(--border);border-radius:var(--radius-medium)}
 .form label{display:grid;gap:.4rem;flex:1 1 145px;min-width:0;font-size:.85rem;font-weight:600}
 .form input,.form select{font:inherit;font-size:1rem;font-weight:400;padding:.7rem;border:1px solid #a8bcb4;border-radius:.65rem;background:#fff;color:var(--ink);min-width:0;width:100%;min-height:48px;box-sizing:border-box}
@@ -22,6 +25,16 @@
 .card h3{margin:.9rem 0 .45rem;font-size:1.2rem;line-height:1.35;letter-spacing:-.015em}
 .card p{margin:0 0 .8rem;font-size:.9rem}
 .card .venue{color:var(--secondary)}
+.fit{border:1px solid #c4d0d3;border-left:4px solid #536c78;border-radius:.55rem;background:#f2f5f6;padding:.8rem;margin:.2rem 0 .8rem}
+.fit[data-status='CONFLICT']{border-color:#dba79c;border-left-color:#9d3927;background:#fff1ed;color:#6f281e}
+.fit[data-status='TIGHT']{border-color:#d9bc7f;border-left-color:#966014;background:#fff7e7;color:#6d430e}
+.fit[data-status='NO_KNOWN_CONFLICT']{border-color:#b9ceba;border-left-color:#446f4a;background:#f0f6ed}
+.card .fit p{font-size:.85rem;margin:0 0 .45rem}
+.card .fit .fitTitle{font-size:.9rem}
+.fit ul{padding-left:1.1rem;margin:0 0 .5rem;font-size:.85rem;line-height:1.5}
+.fit ul:empty{display:none}
+.card .fit .fitSmall{font-size:.8rem}
+.fit :last-child{margin-bottom:0}
 .card .price{margin-top:auto;padding-top:1rem;font-weight:600}
 .card a{white-space:normal;display:flex;justify-content:space-between;gap:.75rem;min-height:48px;font-size:.9rem}
 .details{border-top:1px solid #cfddcf;padding-top:.8rem;margin-top:1.25rem;font-size:.9rem;color:var(--secondary)}

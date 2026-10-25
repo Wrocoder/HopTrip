@@ -56,7 +56,8 @@ def offer(db, *, price='200', departure=None, nights=2, return_flight=True, **ch
     travel = TravelOffer(data_provider_id=provider.id, external_id=uuid4().hex, source='fixture',
                          origin_airport_id=airport.id, destination_id=destination.id,
                          depart_at=departure, return_at=arrival if return_flight else None,
-                         original_price=Decimal(price), original_currency='PLN', price_pln=Decimal(price))
+                         original_price=Decimal(price), original_currency='PLN', price_pln=Decimal(price),
+                         last_verified_at=NOW, fetched_at=NOW)
     db.add(travel)
     db.flush()
     values = dict(slug='fixture-' + uuid4().hex, origin_airport_id=airport.id,
@@ -99,6 +100,8 @@ def test_five_sorted_new_matches_then_no_repeat_and_working_unsubscribe(isolated
     for deal in deals:
         deal.last_verified_at = NOW + timedelta(days=7)
         deal.expires_at = NOW + timedelta(days=8)
+        component = db.scalar(select(DealComponent).where(DealComponent.deal_id == deal.id))
+        db.get(TravelOffer, component.travel_offer_id).last_verified_at = deal.last_verified_at
     db.commit()
     assert digests.deliver_digests(db, config, NOW + timedelta(days=7))['sent'] == 1
     assert mail[1][3].count('/deals/') == 2

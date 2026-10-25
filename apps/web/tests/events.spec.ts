@@ -30,6 +30,7 @@ test('events are fetched on demand with affiliate links and reset when dates cha
  await page.getByRole('button',{name:'Odrzuć opcjonalne'}).click();
  const section=page.getByRole('region',{name:'Wydarzenia w terminie podróży'});
  await expect(section).toBeVisible();expect(calls).toBe(0);
+ await section.getByRole('button',{name:'Inne daty',exact:true}).click();
  const start=await section.getByLabel('Od',{exact:true}).inputValue();
  await section.getByLabel('Do',{exact:true}).fill(start);
  await section.getByRole('button',{name:'Pokaż wydarzenia'}).click();
@@ -52,6 +53,7 @@ test('provider failure keeps the flight page usable; empty results have no links
  await page.goto('/deals/browser-deal');
  await page.getByRole('button',{name:'Odrzuć opcjonalne'}).click();
  const section=page.getByRole('region',{name:'Wydarzenia w terminie podróży'});
+ await section.getByRole('button',{name:'Inne daty',exact:true}).click();
  await section.getByLabel('Do',{exact:true}).fill(await section.getByLabel('Od',{exact:true}).inputValue());
  await section.getByRole('button',{name:'Pokaż wydarzenia'}).click();
  await expect(section.getByText(/Wydarzenia są chwilowo niedostępne/)).toBeVisible();

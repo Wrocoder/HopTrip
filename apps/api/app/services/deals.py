@@ -72,9 +72,9 @@ def generate_flight_deal(
         "discount_percent": score.discount_percent,
         "deal_score": score.deal_score,
         "confidence": stats.confidence if stats else Decimal(0),
-        "status": "ACTIVE"
-        if not offer.expires_at or utc(offer.expires_at) > checked_at
-        else "EXPIRED",
+        "status": "EXPIRED" if offer.expires_at and utc(offer.expires_at) <= checked_at
+        else "STALE" if not checked_at - DEAL_FRESHNESS < utc(offer.last_verified_at) <= checked_at
+        else "ACTIVE",
         "explanation": [],
         "last_verified_at": offer.last_verified_at,
         "expires_at": offer.expires_at,
@@ -111,7 +111,8 @@ def generate_fresh_deals(db: Session, now: datetime | None = None) -> int:
             TravelOffer.price_pln.is_not(None),
             TravelOffer.product_type == "FLIGHT",
             TravelOffer.depart_at > checked_at,
-            TravelOffer.last_verified_at >= freshness_cutoff,
+            TravelOffer.last_verified_at > freshness_cutoff,
+            TravelOffer.last_verified_at <= checked_at,
             (TravelOffer.expires_at.is_(None) | (TravelOffer.expires_at > checked_at)),
         )
     ).all()
@@ -131,7 +132,7 @@ def expire_deals(db: Session, now: datetime | None = None) -> int:
             utc(deal.depart_at) <= checked if deal.depart_at else deal.trip_start <= checked.date()
         )
         expired = deal.expires_at is not None and utc(deal.expires_at) <= checked
-        stale = utc(deal.last_verified_at) < checked - DEAL_FRESHNESS
+        stale = not checked - DEAL_FRESHNESS < utc(deal.last_verified_at) <= checked
         if departed or expired or stale:
             deal.status = "EXPIRED" if departed or expired else "STALE"
             count += 1

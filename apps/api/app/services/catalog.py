@@ -6,7 +6,7 @@ from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
 from app.services.event_destinations import event_city
 from app.services.flight_facts import flight_facts
-from app.services.flight_reference import airport_timezone
+from app.services.price_freshness import price_freshness
 from app.services.score_explanation import explain_score
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -15,6 +15,7 @@ from sqlalchemy.orm import Session
 def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result = DealRead.model_validate(deal)
     result.score_explanation = explain_score(deal)
+    result.price_freshness = price_freshness(deal)
     origin = db.get(Airport, deal.origin_airport_id)
     destination = db.get(Destination, deal.destination_id)
     result.origin_code = origin.iata_code if origin else ""
@@ -48,9 +49,7 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
             offer = db.get(TravelOffer, component.travel_offer_id)
             if offer:
                 result.flight_facts = flight_facts(offer)
+                result.price_freshness = price_freshness(deal, offer)
             if offer and offer.return_at:
                 result.trip_type = "ROUND_TRIP"
-    if origin and not result.flight_facts.origin_airport:
-        result.flight_facts.origin_airport = origin.iata_code
-        result.flight_facts.origin_timezone = airport_timezone(origin.iata_code)
     return result

@@ -1,8 +1,12 @@
-export function TripNavigation({hasAccommodation=true}:{hasAccommodation?:boolean}) {
- return <nav className="trip-navigation" aria-label="Sekcje planu podróży">
-  <a href="#trip-flight">Lot</a>
-  {hasAccommodation && <a href="#accommodation">Nocleg</a>}
-  <a href="#calculator">Budżet</a>
-  <a href="#trip-save">Zapisz</a>
+import type {Locale} from "../../lib/i18n/config";
+import {tripText,type TripKey} from "../../lib/i18n/trip-copy";
+export function TripNavigation({hasAccommodation=true,hasEvents=false,locale="pl"}:{hasAccommodation?:boolean;hasEvents?:boolean;locale?:Locale}) {
+ const t=(source:TripKey)=>tripText(locale,source);
+ return <nav className="trip-navigation" aria-label={t("Sekcje planu podróży")}>
+  <a href="#trip-flight">{t("Lot")}</a>
+  {hasAccommodation && <a href="#accommodation">{t("Nocleg")}</a>}
+  {hasEvents && <a href="#trip-events">{t("Wydarzenia")}</a>}
+  <a href="#calculator">{t("Budżet")}</a>
+  <a href="#trip-save">{t("Zapisz")}</a>
  </nav>;
 }

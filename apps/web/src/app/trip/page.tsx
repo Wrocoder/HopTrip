@@ -1,6 +1,7 @@
 import {TripNavigation} from "../components/trip-navigation";
 import {TripDraftProvider} from "../components/trip-draft";
 import {TripAccommodation} from "../components/trip-accommodation";
+import {TripEvents} from "../components/trip-events";
 import type {Metadata} from "next";
 import Link from "next/link";
 import {decodeTrip,tripPath} from "../../lib/shared-trip";
@@ -28,7 +29,7 @@ export default async function SharedTripPage({searchParams}:Props) {
  try{current=await getDeal(offer.slug);}catch{failed=true;}
  const expired=Boolean(offer.start && offer.start<new Date().toISOString().slice(0,10));
  return <main className="page-shell"><h1>{offer.origin} → {offer.destination}</h1>
-  <TripNavigation hasAccommodation={Boolean(current && !expired)}/>
+  <TripNavigation hasAccommodation={Boolean(current && !expired)} hasEvents={Boolean(current && !expired && current.events_supported)}/>
   <section id="trip-flight" tabIndex={-1} aria-label="Lot zapisany w planie">
   <p>Kopia zapisanego planu. Twoje zmiany nie zmieniają planu autora ani treści otrzymanego linku.</p>
   <p>Plan zapisany w otrzymanym linku: {draft.start ? date(draft.start) : "daty nieustalone"}{draft.end && ` – ${date(draft.end)}`}. Liczba osób w linku: {draft.input.people}. Swoje zmiany wprowadź w kalkulatorze poniżej.</p>
@@ -41,6 +42,7 @@ export default async function SharedTripPage({searchParams}:Props) {
   <TripDraftProvider key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} adultsOnly={draft.adultsOnly===true} forceReview>
   {current && !expired && <TripAccommodation deal={current}/>}
   <TripBudgetCalculator key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} shareOffer={offer} forceReview/>
+  {current && !expired && <TripEvents key={`events-copy-${offer.slug}`} deal={current}/>}
   </TripDraftProvider>
   <Link href="/saved">Zapisane wyjazdy</Link>
  </main>;

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {compactFlightTime,flightPriceBasis,flightTime,flightDayShift,stopsLabel,destinationInterval} from "../src/lib/flight-facts.ts";
+import {compactFlightTime,flightPriceBasis,flightTime,flightDayShift,stopsLabel,destinationInterval,flightLegs} from "../src/lib/flight-facts.ts";
 import {budgetForTrip} from "../src/lib/trip-budget.ts";
 
 test("compact clocks retain local rollover and explicit UTC for unknown zones",()=>{
@@ -64,4 +64,18 @@ test("offset-aware values are converted once; unknown clocks and zones stay expl
 test("unknown or invalid destination intervals never become zero",()=>{
  for(const value of [null,undefined,-1,NaN,Infinity])assert.equal(destinationInterval(value),null);
  assert.equal(destinationInterval(0),"0 godz. 0 min");
+});
+
+test("outbound and return airports and timezones are independent",()=>{
+ const f={origin_airport:"WRO",destination_airport:"STN",origin_timezone:"Europe/Warsaw",destination_timezone:"Europe/London",
+  return_origin_airport:"LTN",return_destination_airport:"WRO",return_origin_timezone:"Europe/London",return_destination_timezone:"Europe/Warsaw",
+  outbound_stops:0,return_stops:1};
+ const {outbound,inbound}=flightLegs(f);
+ assert.deepEqual([outbound.origin,outbound.destination,inbound.origin,inbound.destination],["WRO","STN","LTN","WRO"]);
+ assert.equal(inbound.originZone,"Europe/London");assert.equal(inbound.destinationZone,"Europe/Warsaw");
+ assert.equal(outbound.stops,0);assert.equal(inbound.stops,1);
+ const unknown=flightLegs({origin_airport:"WRO",destination_airport:"STN",origin_timezone:"Europe/Warsaw",destination_timezone:"Europe/London"});
+ assert.equal(unknown.inbound.origin,undefined);assert.equal(unknown.inbound.destination,undefined);
+ assert.equal(unknown.inbound.originZone,undefined);assert.equal(unknown.inbound.destinationZone,undefined);
+ assert.equal(flightLegs(undefined).outbound.origin,undefined);
 });

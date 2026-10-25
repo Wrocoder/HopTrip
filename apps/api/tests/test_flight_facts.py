@@ -95,7 +95,10 @@ def test_public_contract_and_non_flight_component(api_client, isolated_db):
     assert response.status_code == 200
     body = response.json()
     assert body["trip_type"] == "ROUND_TRIP"
-    assert body["flight_facts"]["origin_airport"] == "WRO"
+    assert body["flight_facts"]["origin_airport"] is None
+    assert body["flight_facts"]["origin_timezone"] is None
+    assert body["flight_facts"]["return_origin_airport"] is None
+    assert body["flight_facts"]["return_destination_airport"] is None
     assert body["flight_facts"]["destination_airport"] == "BGY"
     assert body["flight_facts"]["airline_code"] == "FR"
     assert "secret" not in response.text
@@ -113,6 +116,7 @@ def test_midnight_home_arrival_preserves_payload_and_elapsed_duration():
     timed = offer()
     timed.raw_payload = {
         "origin_airport": "WRO", "destination_airport": "BCN", "airline": "FR",
+        "return_origin_airport": "BCN", "return_destination_airport": "WRO",
         "departure_at": "2026-10-17T10:00:00+02:00", "duration_to": 120,
         "return_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
         "link": "/search/unchanged?marker=fixture",
@@ -122,7 +126,7 @@ def test_midnight_home_arrival_preserves_payload_and_elapsed_duration():
     assert facts.return_arrival == datetime(2026, 10, 24, 22, 40, tzinfo=UTC)
     assert facts.origin_timezone == "Europe/Warsaw"
     assert facts.destination_timezone == "Europe/Madrid"
-    assert facts.return_arrival.astimezone(ZoneInfo(facts.origin_timezone)).isoformat() == "2026-10-25T00:40:00+02:00"
+    assert facts.return_arrival.astimezone(ZoneInfo(facts.return_destination_timezone)).isoformat() == "2026-10-25T00:40:00+02:00"
     assert facts.return_arrival_calculated and facts.outbound_arrival_calculated
     assert facts.airline_name == "Ryanair"
     assert timed.raw_payload == before
@@ -139,3 +143,66 @@ def test_reference_unknowns_do_not_guess_a_city_timezone_or_airline():
     facts = flight_facts(offer(destination="LON", departure_at="2026-10-17"))
     assert facts.destination_timezone is None
     assert not facts.outbound_arrival_calculated
+
+
+def test_each_airport_and_timezone_is_independent_and_missing_data_is_not_reversed():
+    facts = flight_facts(offer(origin_airport="WRO", destination_airport="STN",
+        return_origin_airport="LTN", return_destination_airport="KRK"))
+    assert (facts.origin_airport, facts.destination_airport) == ("WRO", "STN")
+    assert (facts.return_origin_airport, facts.return_destination_airport) == ("LTN", "KRK")
+    assert facts.return_origin_timezone == "Europe/London"
+    assert facts.return_destination_timezone == "Europe/Warsaw"
+    missing = flight_facts(offer(origin_airport="WRO", destination_airport="STN", destination="LON"))
+    assert missing.return_origin_airport is None and missing.return_destination_airport is None
+    assert missing.return_origin_timezone is None and missing.return_destination_timezone is None
+    one_way = flight_facts(offer(return_at=None, return_origin_airport="LTN", return_destination_airport="WRO"))
+    assert one_way.return_origin_airport is None and one_way.return_destination_airport is None
+
+
+@pytest.mark.parametrize("bad", [None, True, "", "lon", "LONDON", "<x>", 123, {}])
+def test_invalid_return_airports_stay_unknown(bad):
+    facts = flight_facts(offer(return_origin_airport=bad, return_destination_airport=bad))
+    assert facts.return_origin_airport is None and facts.return_destination_airport is None
+    assert facts.return_origin_timezone is None and facts.return_destination_timezone is None
+
+
+def test_open_jaw_route_survives_normalization_storage_and_public_api(api_client, isolated_db):
+    from datetime import timedelta
+
+    from app.models.location import Destination
+    from app.providers.base import SearchQuery
+    from app.providers.travelpayouts import TravelpayoutsDataProvider
+    from app.services.currency import PlnOnlyConverter
+    from app.services.deals import generate_flight_deal
+    from app.services.ingestion import ingest_offers
+    from sqlalchemy import select
+
+    base, _ = catalog_fixture(isolated_db)
+    destination = isolated_db.get(Destination, base.destination_id)
+    destination.iata_code = "LON"
+    destination.slug, destination.city, destination.country_code = "london", "London", "GB"
+    provider = DataProvider(code="travelpayouts_data", name="Fixture")
+    isolated_db.add(provider)
+    isolated_db.commit()
+    departure = datetime.now(UTC) + timedelta(days=30)
+    payload = {"origin":"WRO", "destination":"LON", "origin_airport":"WRO",
+        "destination_airport":"STN", "return_origin_airport":"LTN", "return_destination_airport":"WRO",
+        "price":250, "currency":"PLN", "departure_at":departure.isoformat(),
+        "return_at":(departure + timedelta(days=3)).isoformat(), "duration_to":120, "duration_back":130,
+        "transfers":0, "return_transfers":1}
+    normalized = TravelpayoutsDataProvider(token="fixture")._normalize(payload, SearchQuery(origin="WRO"))
+    result = ingest_offers(isolated_db, provider_code=provider.code, offers=[normalized], converter=PlnOnlyConverter())
+    assert result.saved_offers == 1
+    stored = isolated_db.scalar(select(TravelOffer).where(TravelOffer.data_provider_id == provider.id))
+    assert stored.raw_payload == payload
+    assert stored.raw_payload["destination_airport"] == "STN"
+    assert stored.raw_payload["return_origin_airport"] == "LTN"
+    deal = generate_flight_deal(isolated_db, stored)
+    response = api_client.get("/api/v1/deals/" + deal.slug)
+    assert response.status_code == 200
+    facts = response.json()["flight_facts"]
+    assert (facts["origin_airport"], facts["destination_airport"]) == ("WRO", "STN")
+    assert (facts["return_origin_airport"], facts["return_destination_airport"]) == ("LTN", "WRO")
+    assert facts["outbound_stops"] == 0 and facts["return_stops"] == 1
+    listing = api_client.get("/api/v1/deals").json()
+    assert next(d for d in listing if d["slug"] == deal.slug)["flight_facts"] == facts
