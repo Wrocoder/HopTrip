@@ -14,7 +14,7 @@ export function cleanSharedTrip(value:unknown):SharedTrip|null {
   !date(o.start) || !date(o.end) || typeof o.price!=="string" || moneyInGrosz(o.price)===undefined ||
   typeof o.observedAt!=="string" || o.observedAt.length>40 || (o.observedAt!=="" && !Number.isFinite(Date.parse(o.observedAt))))return null;
  const draft=readBudgetDraft(JSON.stringify(v.draft));
- if(!draft || !calculateBudget(draft.input).valid ||
+ if(!draft || !calculateBudget(draft.input,draft.events).valid ||
   (draft.end && !budgetDateCounts(draft.start,draft.end)))return null;
  for(const [key,amount] of Object.entries(draft.input)) {
   if(!["hotel_basis","people","nights","days"].includes(key) && moneyInGrosz(amount)===undefined)return null;

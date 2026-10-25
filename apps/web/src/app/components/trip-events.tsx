@@ -13,6 +13,8 @@ import type {EventFlightFit} from '../../lib/event-flight-fit';
 import {eventFitCopy} from '../../lib/i18n/event-fit-copy';
 import {cityLabel,eventCityLabel} from '../../lib/cities';
 import {eventResultsCopy} from '../../lib/i18n/event-results-copy';
+import {AddEventToPlan} from './planned-events';
+import type {PlannedEvent} from '../../lib/planned-events';
 import styles from './trip-events.module.css';
 
 type Category='ALL'|'MUSIC'|'SPORTS'|'CULTURE';
@@ -84,6 +86,11 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
  function price(amount:string|null,currency:string|null){
   return amount!==null&&currency?`${t.price} ${new Intl.NumberFormat(intl,{style:'currency',currency}).format(Number(amount))}`:t.unknownPrice;
  }
+ function selection(item:EventItem,option?:TicketOption):PlannedEvent{
+  const ticket=option??item;
+  return {id:ticket.id,name:ticket.name,venue:item.venue,date:item.start_date,time:item.local_time?.slice(0,8)??null,
+   timezone:item.timezone,url:ticket.url,quantity:'1',unitPricePln:''};
+ }
  if(!deal.events_supported)return null;
  const unavailable=error===t.unavailable||!!(result&&['DISABLED','UNAVAILABLE','UNSUPPORTED'].includes(result.status));
  return <section id="trip-events" tabIndex={-1} className={styles.section} aria-labelledby="trip-events-title">
@@ -138,9 +145,10 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
      <p><strong>{option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}</strong></p>
      <p className={styles.optionName}>{option.name}</p><p className={styles.price}>{price(option.price_from,option.currency)}</p>
      <a className="button button-secondary" href={option.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${option.name} (${option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}). ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a>
+     <AddEventToPlan event={selection(item,option)} locale={locale}/>
     </li>)}</ul>
    </div>:<><p className={styles.price}>{price(item.price_from,item.currency)}</p>
-    <a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a></>}
+    <a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a><AddEventToPlan event={selection(item)} locale={locale}/></>}
   </li>)}</ul>}
   {result?.checked_at&&<p className="muted">{t.source} · {t.checked}: {new Intl.DateTimeFormat(intl,{dateStyle:'short',timeStyle:'short'}).format(new Date(result.checked_at))}</p>}
   <details className={styles.details}><summary>{ux.before}</summary><p>{t.warning}</p></details>
