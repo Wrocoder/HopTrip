@@ -17,9 +17,20 @@ async function reachable(locator:Locator) {
  })).toBe(true);
 }
 
-for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width}px`,async({page,context,request},testInfo)=>{
+for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width}px`,async({page,browser,request},testInfo)=>{
  test.skip((width===1366)!==(testInfo.project.name==="desktop"),"Desktop at 1366; touch emulation at other widths");
- test.setTimeout(90000);
+ test.setTimeout(120000);
+ const eventName='Koncert z wyjątkowo długą nazwą — wieczór muzyki i specjalni goście z całej Europy';
+ const venue='Sala koncertowa z bardzo długą nazwą w centrum miasta';
+ const ticket=(id:string)=>`https://ticketmaster.evyy.net/c/7853869/123/456?u=https%3A%2F%2Fwww.ticketmaster.es%2Fevent%2F${id}`;
+ await page.route('**/api/v1/deals/*/events?**',route=>{
+  const query=new URL(route.request().url()).searchParams;
+  return route.fulfill({json:{status:query.get('category')==='SPORTS'?'EMPTY':'READY',partial:false,checked_at:null,
+   events:query.get('category')==='SPORTS'?[]:[{id:'mobile-event',name:eventName,venue,city:'Barcelona',category:'MUSIC',
+    start_date:query.get('start_date'),end_date:null,local_time:'20:00:00',timezone:'Europe/Madrid',status:'onsale',url:ticket('standard'),price_from:'50',currency:'EUR',
+    ticket_options:[{id:'mobile-event',name:eventName,ticket_kind:'STANDARD',url:ticket('standard'),price_from:'50',currency:'EUR'},
+     {id:'mobile-premium',name:eventName+' - Venue Premium Tickets',ticket_kind:'PREMIUM',url:ticket('premium'),price_from:'100',currency:'EUR'}]}]}});
+ });
  const screenshotPath=(name:string)=>process.env.HOPTRIP_UI04_CAPTURE
   ? `../../docs/htui04/${name}-${width}.png` : testInfo.outputPath(`${name}-${width}.png`);
  const activate=(target:Locator)=>testInfo.project.name==="mobile" ? target.tap() : target.click();
@@ -42,6 +53,8 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await page.addInitScript(()=>Object.defineProperty(navigator,"clipboard",{get(){throw new Error("blocked for fallback test");}}));
  await page.setViewportSize({width,height});
  await page.goto("/");
+ await expect(page.locator('meta[name="viewport"]')).toHaveAttribute('content',/width=device-width/);
+ expect(await page.locator('meta[name="viewport"]').getAttribute('content')).not.toMatch(/user-scalable=no|maximum-scale=1(?:,|$)/);
  await expect(page.locator(".consent-panel")).toBeVisible();
  await noOverflow(page);
  await capture("home-consent");
@@ -129,6 +142,25 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  const params=new URL((await page.getByRole("link",{name:/przez Stay22/}).getAttribute("href"))!).searchParams;
  expect(Object.fromEntries(params)).toMatchObject({checkin:"2027-01-15",checkout:"2027-01-17",adults:"2",aid:"hoptrip",campaign:"hoptrip_accommodation"});
  await capture("stay",page.locator("#accommodation"));
+ await activate(nav.getByRole('link',{name:'Wydarzenia',exact:true}));
+ const events=page.locator('#trip-events');await expect(events).toBeFocused();
+ await expect(events.getByLabel('Od',{exact:true})).toHaveValue('2027-01-15');
+ await expect(events.getByLabel('Do',{exact:true})).toHaveValue('2027-01-17');
+ await events.getByLabel('Kategoria').selectOption('SPORTS');
+ await expect(events).toContainText('Pusta lista nie oznacza');
+ await activate(events.getByRole('button',{name:'Pokaż wszystkie kategorie',exact:true}));
+ await expect(events.getByRole('heading',{name:eventName,exact:true})).toBeVisible();
+ await capture('events',events);
+ await fields('#trip-events input, #trip-events select');
+ await noOverflow(page);
+ const add=events.getByRole('button',{name:`Dodaj do planu: ${eventName}`,exact:true});
+ await reachable(add);await activate(add);
+ const planned=page.locator('#planned-events');
+ await expect(planned.getByLabel('Cena jednego biletu (PLN)')).toHaveValue('');
+ await expect(planned).toContainText('Cena nieznana');
+ await planned.getByLabel('Liczba biletów').fill('2');
+ const ticketPrice=planned.getByLabel('Cena jednego biletu (PLN)');
+ await ticketPrice.fill('120,29');
  await activate(nav.getByRole("link",{name:"Lot",exact:true}));
  await expect(page.locator("#trip-flight")).toBeFocused();
  await activate(nav.getByRole("link",{name:"Budżet",exact:true}));
@@ -147,6 +179,9 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await hotel.focus();await reachable(hotel);
  await expect(hotel).toHaveAttribute("inputmode","decimal");
  await noOverflow(page);
+ await ticketPrice.focus();await reachable(ticketPrice);
+ await expect(ticketPrice).toHaveAttribute('inputmode','decimal');
+ await expect(page.getByTestId('budget-total')).toHaveText(/1\s*387,58/);
  await page.setViewportSize({width,height});
  await fields('#calculator input:not([type="checkbox"]), #calculator select, #accommodation input');
  await capture("budget",page.locator("#calculator"));
@@ -154,7 +189,9 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await activate(page.getByRole("button",{name:"Zapisz wyjazd",exact:true}));
  await page.reload();
  await expect(hotel).toHaveValue("210,50");
- await expect(page.getByTestId("budget-total")).toHaveText(/1\s*147,00/);
+ await expect(page.getByTestId("budget-total")).toHaveText(/1\s*387,58/);
+ await expect(planned.getByLabel('Liczba biletów')).toHaveValue('2');
+ await expect(ticketPrice).toHaveValue('120,29');
  await expect(page.locator("#calculator")).toContainText("Budżet niepełny");
  await activate(page.getByRole("button",{name:"Udostępnij",exact:true}));
  await expect(page.locator("#trip-save")).toContainText("Skopiuj link z pola");
@@ -163,21 +200,28 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await share.focus();
  expect(await share.evaluate((el:HTMLInputElement)=>el.selectionEnd!-el.selectionStart!)).toBe((await share.inputValue()).length);
  await capture("share-fallback",page.locator("#trip-save"));
- const copy=await context.newPage();
- await copy.setViewportSize({width,height});
+ const copyContext=await browser.newContext({viewport:{width,height},isMobile:testInfo.project.name==='mobile',hasTouch:testInfo.project.name==='mobile'});
+ await copyContext.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+ const copy=await copyContext.newPage();
  await copy.goto(await share.inputValue());
  await expect(copy.locator("#stay-adults")).toHaveValue("2");
  await expect(copy.locator("#stay-checkout")).toHaveValue("2027-01-17");
- await expect(copy.getByTestId("budget-total")).toHaveText(/1\s*147,00/);
+ await expect(copy.getByTestId("budget-total")).toHaveText(/1\s*387,58/);
+ await expect(copy.locator('#planned-events')).toContainText(eventName);
+ await expect(copy.locator('#planned-events')).toContainText(venue);
+ await expect(copy.locator('#planned-events').getByRole('link')).toHaveAttribute('href',ticket('standard'));
+ await copy.locator('#planned-events').getByLabel('Liczba biletów').fill('3');
+ await copy.reload();await expect(copy.getByTestId('budget-total')).toHaveText(/1\s*507,87/);
  await noOverflow(copy);
  await copy.addStyleTag({content:"nextjs-portal {display:none}"});
  await copy.locator("#accommodation").screenshot({path:screenshotPath("copy-stay"),scale:"css"});
- await copy.close();
+ await copyContext.close();
  await page.goto("/saved");
  await capture("saved");
  await noOverflow(page);
  await page.getByRole("main").getByRole("link",{name:/→/}).first().click();
- await expect(page.getByTestId("budget-total")).toHaveText(/1\s*147,00/);
+ await expect(page.getByTestId("budget-total")).toHaveText(/1\s*387,58/);
+ await expect(page.locator('#planned-events').getByLabel('Liczba biletów')).toHaveValue('2');
  await page.goto("/deals/browser-deal");
  const timing=await page.evaluate(()=>{
   const n=performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming;
