@@ -40,6 +40,11 @@ class EventSession(BaseModel):
     currency: str | None = None
 
 
+class EventTicketOption(EventSession):
+    name: str
+    ticket_kind: Literal["STANDARD", "PREMIUM"]
+
+
 class EventRead(EventSession):
     name: str
     category: Literal["MUSIC", "SPORTS", "CULTURE", "OTHER"]
@@ -48,6 +53,8 @@ class EventRead(EventSession):
     venue_id: str | None = None
     city: str
     sessions: list[EventSession] = Field(default_factory=list)
+    # Options describe one session; different start times remain separate EventRead cards.
+    ticket_options: list[EventTicketOption] = Field(default_factory=list)
 
 
 class EventResults(BaseModel):

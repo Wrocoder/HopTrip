@@ -19,6 +19,7 @@ import {ScoreDetails} from "../../components/score-details";
 import {DestinationGuides} from "../../components/destination-guides";
 import {DestinationActivities} from "../../components/destination-activities";
 import {TripEvents} from "../../components/trip-events";
+import {activitiesForDestination} from "../../../lib/destination-activities";
 import {TripAccommodation} from "../../components/trip-accommodation";
 import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
 import {budgetForTrip} from "../../../lib/trip-budget";
@@ -56,7 +57,7 @@ export default async function DealPage({params}:Props) {
     <section className="rationale" id="score"><div className="section-heading"><h2>Cena na tle historii</h2></div>
     <ScoreDetails deal={deal}/></section>
     <DestinationActivities slug={deal.destination_slug} inTrip/>
-    <TripEvents key={'events-'+deal.slug} deal={deal}/>
+    <TripEvents key={'events-'+deal.slug} deal={deal} activitiesHref={activitiesForDestination(deal.destination_slug)?"#destination-activities":undefined}/>
     <DestinationGuides slug={deal.destination_slug}/>
   </article></TripDraftProvider></main>;
 }
