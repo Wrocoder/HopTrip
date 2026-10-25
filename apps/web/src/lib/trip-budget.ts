@@ -1,3 +1,5 @@
+import type {PlannedEvent} from './planned-events.ts';
+
 export const costFields = [
  {key:"flight",label:"Loty",hint:"Na osobę, za wszystkie planowane odcinki",basis:"person"},
  {key:"baggage",label:"Bagaż i dodatki do lotu",hint:"Na osobę, łącznie za całą podróż",basis:"person"},
@@ -38,8 +40,14 @@ export function moneyInGrosz(raw:string):number | null | undefined {
  return Number(whole)*100+Number(fraction.padEnd(2,"0"));
 }
 
-export function calculateBudget(input:BudgetInput) {
- const errors:Partial<Record<keyof BudgetInput,string>>={};
+export function plannedEventCost(event:PlannedEvent){
+ const quantity=/^\d+$/.test(event.quantity)&&Number(event.quantity)>=1&&Number(event.quantity)<=50?Number(event.quantity):null;
+ const price=moneyInGrosz(event.unitPricePln);
+ return {valid:quantity!==null&&price!==undefined,total:quantity!==null&&price!=null?quantity*price:null};
+}
+
+export function calculateBudget(input:BudgetInput,events:PlannedEvent[]=[]) {
+ const errors:Partial<Record<keyof BudgetInput|'events',string>>={};
  const counts={people:0,nights:0,days:0};
  for(const key of ["people","nights","days"] as const) {
   const min=key==="nights" ? 0 : 1;
@@ -49,7 +57,7 @@ export function calculateBudget(input:BudgetInput) {
    errors[key]=`Wpisz liczbę całkowitą od ${min} do ${max}.`;
   else counts[key]=Number(value);
  }
- const lines=costFields.map(field=>{
+ const lines:{key:string;label:string;total:number|null;incomplete?:boolean}[]=costFields.map(field=>{
   const wholeStay=field.key==="hotel" && input.hotel_basis==="stay";
   const key=wholeStay ? "hotel_total" : field.key;
   const amount=moneyInGrosz(input[key]);
@@ -58,7 +66,14 @@ export function calculateBudget(input:BudgetInput) {
    field.basis==="day" ? counts.people*counts.days : 1;
   return {...field,total:amount==null ? null : amount*multiplier};
  });
- const missing=lines.filter(line=>line.total===null).map(line=>line.label);
+ if(events.length){
+  const costs=events.filter((event,index)=>events.findIndex(item=>item.id===event.id)===index).map(plannedEventCost);
+  if(costs.some(cost=>!cost.valid))errors.events='Popraw liczbę biletów i ceny wydarzeń.';
+  const known=costs.filter(cost=>cost.total!==null);
+  lines.push({key:'events',label:'Wydarzenia w planie',total:known.length?known.reduce((sum,cost)=>sum+cost.total!,0):null,
+   incomplete:known.length<costs.length});
+ }
+ const missing=lines.filter(line=>line.total===null||line.incomplete).map(line=>line.label);
  const total=lines.reduce((sum,line)=>sum+(line.total ?? 0),0);
  const valid=Object.keys(errors).length===0;
  return {errors,lines,missing,valid,total:valid ? total : null,

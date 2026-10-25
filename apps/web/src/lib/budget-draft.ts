@@ -1,10 +1,11 @@
 import {emptyBudget,type BudgetInput} from "./trip-budget.ts";
+import {readPlannedEvents,type PlannedEvent} from "./planned-events.ts";
 
-export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;context:string;review:boolean;adultsOnly?:boolean};
+export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;context:string;review:boolean;adultsOnly?:boolean;events?:PlannedEvent[]};
 export const budgetDraftKey=(tripId?:string)=>`hoptrip.budget.v1:${tripId ? `deal:${tripId}` : "standalone"}`;
 
 export function readBudgetDraft(raw:string|null):BudgetDraft|null {
- if(!raw || raw.length>10000) return null;
+ if(!raw || raw.length>50000) return null;
  try {
   const draft=JSON.parse(raw);
   if(draft?.version!==1 || !draft.input || typeof draft.review!=="boolean" ||
@@ -21,8 +22,10 @@ export function readBudgetDraft(raw:string|null):BudgetDraft|null {
    } else input[key]=value;
   }
   if(draft.adultsOnly!==undefined && typeof draft.adultsOnly!=="boolean")return null;
+  const events=draft.events===undefined?undefined:readPlannedEvents(draft.events);
+  if(events===null)return null;
   return {version:1,input,start:draft.start,end:draft.end,context:draft.context,review:draft.review,
-   ...(draft.adultsOnly===undefined ? {} : {adultsOnly:draft.adultsOnly})};
+   ...(draft.adultsOnly===undefined ? {} : {adultsOnly:draft.adultsOnly}),...(events===undefined?{}:{events})};
  } catch {return null;}
 }
 

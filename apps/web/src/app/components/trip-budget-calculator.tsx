@@ -9,6 +9,8 @@ import {ReferenceCosts} from "./reference-costs";
 import {TripActions} from "./trip-actions";
 import {TripDraftProvider,useTripDraft,type TripDraftProps} from "./trip-draft";
 import type {TripOffer} from "../../lib/shared-trip";
+import {PlannedEvents} from './planned-events';
+import {plannedEventsCopy} from '../../lib/i18n/planned-events-copy';
 
 const format=(grosz:number)=>money(String(grosz/100));
 
@@ -21,7 +23,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
  const {draft,save,ready,context,storageMessage}=useTripDraft()!;
  const input=draft.input;
  const [extraOpen,setExtraOpen]=useState(false);
- const result=calculateBudget(input);
+ const result=calculateBudget(input,draft.events);
  const update=(key:keyof BudgetInput,value:string)=>{
   const next={...input,[key]:value};
   save({...draft,input:next,review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
@@ -83,9 +85,10 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
     <span className={styles.hint}>Oba pola pamiętają własne kwoty. Do sumy trafia tylko wybrany wariant; po zmianie dat lub liczby gości sprawdź cenę ponownie.</span>
    </div>)}</div>
   <details open={extraOpen} onToggle={event=>setExtraOpen(event.currentTarget.open)}><summary>Dodatkowe koszty: bagaż, transport miejski, atrakcje i rezerwa</summary>
-   <div className={styles.grid}>{costFields.filter(cost=>!["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>field(cost.key,cost.label,cost.hint,true))}</div>
+   <div className={styles.grid}>{costFields.filter(cost=>!["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>field(cost.key,cost.label,cost.key==='activities'&&draft.events?.length?plannedEventsCopy.pl.remaining:cost.hint,true))}</div>
   </details>
   </fieldset>
+  <PlannedEvents/>
   <div className={styles.result} role="status" aria-live="polite" aria-atomic="true">
    {!result.valid || datesInvalid ? <p>Popraw zaznaczone pola i daty, aby obliczyć budżet.</p> : <>
     <p>{result.missing.length ? "Suma znanych kosztów" : "Budżet według wpisanych kosztów"}: <strong data-testid="budget-total">{format(result.total!)}</strong></p>
@@ -94,7 +97,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
    </>}
   </div>
   {result.valid && !datesInvalid && <details><summary>Rozbicie kosztów całej grupy</summary><dl className={styles.breakdown}>
-   {result.lines.map(line=><div key={line.key}><dt>{line.label}</dt><dd>{line.total===null ? "Nieznane" : format(line.total)}</dd></div>)}
+   {result.lines.map(line=><div key={line.key}><dt>{line.label}</dt><dd>{line.total===null ? "Nieznane" : format(line.total)+(line.incomplete?plannedEventsCopy.pl.plusUnknown:'')}</dd></div>)}
   </dl></details>}
   <p className={styles.hint}>To twój plan kosztów, nie oferta ani rezerwacja. Sprawdź końcowe ceny u sprzedawców. Szkic jest dostępny tylko w tej przeglądarce; usunięcie danych witryny usuwa też szkice.</p>
   <button type="button" disabled={!ready} className="button" onClick={()=>save({version:1,input:{...emptyBudget},start:"",end:"",context,review:false})}>Wyczyść kalkulator</button>
