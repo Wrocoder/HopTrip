@@ -28,7 +28,8 @@ try{
   const activate=target=>mobile?target.tap():target.click();
   const noOverflow=async target=>{if(await target.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('Horizontal overflow');};
   if(mobileJourney){
-   await page.goto(base+'/',{waitUntil:'domcontentloaded'});await noOverflow(page);
+   // Wait for the initial scripts before typing into server-rendered comboboxes.
+   await page.goto(base+'/',{waitUntil:'load'});await noOverflow(page);
    const form=page.getByRole('form',{name:'Filtry ofert'});
    await form.locator('[name="origin"]').fill(deal.origin_code);
    await activate(form.getByRole('option',{name:new RegExp(` — ${deal.origin_code}$`)}));
