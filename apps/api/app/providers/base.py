@@ -35,6 +35,8 @@ class SearchQuery:
     market: str = "pl"
     limit: int = 100
     page: int = 1
+    departure_date: date | None = None
+    return_date: date | None = None
 
 
 @dataclass(frozen=True)

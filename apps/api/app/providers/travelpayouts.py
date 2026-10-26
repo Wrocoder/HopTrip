@@ -71,8 +71,12 @@ class TravelpayoutsDataProvider:
         }
         if query.destination:
             params["destination"] = query.destination
-        if query.beginning_of_period:
+        if query.departure_date:
+            params["departure_at"] = query.departure_date.isoformat()
+        elif query.beginning_of_period:
             params["departure_at"] = query.beginning_of_period.strftime("%Y-%m")
+        if query.return_date and not query.one_way:
+            params["return_at"] = query.return_date.isoformat()
         offers: dict[str, RawTravelOffer] = {}
         seen_pages: set[str] = set()
         self.diagnostics.stop_reason = "error"

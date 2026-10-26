@@ -49,10 +49,10 @@ with Session(engine) as db:
     db.add(Destination(slug="milan", city="Milan", country="Italy", country_code="IT"))
     deal, component = catalog_fixture(db, program=program, slug="browser-deal")
     score_now = datetime.now(UTC)
-    deal.last_verified_at = score_now - timedelta(hours=24)
+    deal.last_verified_at = score_now - timedelta(hours=3)
     score = score_flight_deal(
         current_price=deal.flight_price_pln, baseline_price=Decimal("250"), sample_count=24,
-        observed_at=score_now - timedelta(hours=24), expires_at=None, now=score_now,
+        observed_at=score_now - timedelta(hours=3), expires_at=None, now=score_now,
     )
     deal.score_version = SCORE_VERSION
     deal.score_components = {"breakdown": score.breakdown.model_dump(mode="json")}
@@ -277,6 +277,7 @@ def freshness_fixture():
     view.price_freshness.observation_basis = 'SOURCE'
     view.price_freshness.fetched_at = now
     view.price_freshness.hidden_after = now+timedelta(seconds=60)
+    view.price_freshness.max_age_hours = 6
     return view
 
 

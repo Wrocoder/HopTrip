@@ -19,7 +19,7 @@ export function PriceFreshness({deal,locale='pl',id,compact=false}:{deal:Deal;lo
   {expired&&<p role="status" className="price-expired"><strong>{t.expired}</strong></p>}
   {!compact&&<details><summary>{t.details}</summary>
    <p>{t.delivery}: {stamp(deal.price_freshness?.fetched_at)} ({t.zone}). {t.deliveryNote}</p>
-   <p>{t.hidden}: {stamp(deadline)} ({t.zone}). {t.rule}</p>
+   <p>{t.hidden}: {stamp(deadline)} ({t.zone}). {t.rule.replace('{hours}',String(deal.price_freshness?.max_age_hours??48))}</p>
   </details>}
  </div>;
 }

@@ -18,7 +18,7 @@ test('observation and seller caveat are visible next to the price without openin
  await expect(detail.locator('> p time')).toHaveAttribute('datetime',observed!);
  await expect(detail.getByText(/Bez potwierdzenia na żywo/)).toBeVisible();
  await detail.locator('summary').click();
- await expect(detail).toContainText('48 h');
+ await expect(detail).toContainText('24 h');
  await expect(detail).toContainText('Pobrano rekord: czas nieznany');
  expect((await new AxeBuilder({page}).include('.detail-layout').analyze()).violations).toEqual([]);
  await page.setViewportSize({width:320,height:844});
@@ -33,6 +33,7 @@ test('delivery time is separate and an open tab removes the partner link at the 
  await expect(notice.getByText(/Obserwacja ceny u źródła/)).toBeVisible();
  await expect(page.getByRole('link',{name:'Sprawdź lot — Fixture program'})).toBeVisible();
  await notice.locator('summary').click();
+ await expect(notice).toContainText('6 h');
  const stamps=await notice.locator('time').evaluateAll(nodes=>nodes.map(node=>node.getAttribute('datetime')!));
  expect(Date.parse(stamps[1])-Date.parse(stamps[0])).toBe(3*3600000);
  await page.clock.fastForward(61000);

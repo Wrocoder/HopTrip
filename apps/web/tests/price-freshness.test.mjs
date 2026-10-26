@@ -6,10 +6,11 @@ import {freshnessCopy} from '../src/lib/i18n/freshness-copy.ts';
 
 const deal={last_verified_at:'2030-10-24T10:00:00Z',trip_start:'2030-11-01',expires_at:null};
 test('expiry fallback uses the earliest TTL, source expiry or departure, never fetch time',()=>{
- assert.equal(offerDeadline(deal),'2030-10-26T10:00:00.000Z');
+ assert.equal(offerDeadline(deal),'2030-10-25T00:00:00.000Z');
+ assert.equal(offerDeadline({...deal,trip_start:'2030-12-01'}),'2030-10-26T10:00:00.000Z');
  assert.equal(offerDeadline({...deal,expires_at:'2030-10-24T11:00:00Z'}),'2030-10-24T11:00:00.000Z');
- assert.equal(offerDeadline({...deal,flight_facts:{outbound_departure:'2030-10-25T12:00:00Z'}}),'2030-10-25T12:00:00.000Z');
- assert.equal(offerDeadline({...deal,trip_start:'2030-10-25'}),'2030-10-25T00:00:00.000Z');
+ assert.equal(offerDeadline({...deal,flight_facts:{outbound_departure:'2030-10-25T12:00:00Z'}}),'2030-10-24T16:00:00.000Z');
+ assert.equal(offerDeadline({...deal,trip_start:'2030-10-25'}),'2030-10-24T16:00:00.000Z');
  assert.equal(offerDeadline({last_verified_at:'invalid',expires_at:'invalid',trip_start:'invalid'}),null);
 });
 test('explicit snapshot provenance wins over score calculation and new delivery',()=>{
