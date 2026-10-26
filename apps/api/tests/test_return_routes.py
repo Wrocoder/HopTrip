@@ -286,3 +286,16 @@ def test_source_offset_retains_return_calendar_day_when_airport_zone_is_unknown(
     assert facts.return_origin_timezone is None
     assert facts.return_departure.isoformat() == "2030-11-05T01:30:00+03:00"
     assert trip_dates(offer)[1].isoformat() == "2030-11-05"
+
+
+def test_unmatched_ticket_retry_does_not_starve_other_routes_or_invent_unavailability(isolated_db):
+    offer, row = route_fixture(isolated_db)
+    missing = dict(row, ticket_link="/other?t=other-ticket")
+    first = asyncio.run(enrich_routes(isolated_db, provider_for(missing), NOW))
+    assert first.unmatched == 1 and offer.route_details["status"] == "INCONCLUSIVE"
+    assert flight_facts(offer).return_origin_airport is None
+    deferred = asyncio.run(enrich_routes(isolated_db, provider_for(row), NOW + timedelta(minutes=59)))
+    assert deferred.deferred == 1 and deferred.requests == 0
+    retried = asyncio.run(enrich_routes(isolated_db, provider_for(row), NOW + timedelta(hours=1)))
+    assert retried.enriched == 1 and retried.deferred == 0
+    assert flight_facts(offer).return_origin_airport == "LTN"

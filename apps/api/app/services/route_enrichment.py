@@ -1,7 +1,7 @@
 """Enrich fresh cached offers without replacing or renewing their prices."""
 from collections import defaultdict
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 from app.models.offer import TravelOffer
 from app.providers.base import ProviderError
@@ -16,6 +16,7 @@ from sqlalchemy.orm import Session
 class RouteEnrichmentResult:
     attempted_offers: int = 0
     already_known: int = 0
+    deferred: int = 0
     enriched: int = 0
     unmatched: int = 0
     rejected: int = 0
@@ -42,6 +43,13 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
     for offer in offers:
         if validated_segments(offer, offer.route_details):
             result.already_known += 1
+        elif (isinstance(offer.route_details, dict)
+              and offer.route_details.get("ticket_key") == ticket_key(offer.raw_payload.get("link"))
+              and offer.route_details.get("status") == "INCONCLUSIVE"
+              and (attempted := instant(offer.route_details.get("attempted_at"))) is not None
+              and checked - timedelta(hours=1) < attempted <= checked):
+            # An unmatched old ticket must not consume every pass and starve new routes.
+            result.deferred += 1
         elif (offer.departure_precision == "TIME" and instant(offer.raw_payload.get("departure_at"))
               and all(isinstance(offer.raw_payload.get(k), str)
                       and len(offer.raw_payload[k]) == 3 and offer.raw_payload[k].isascii()
@@ -76,6 +84,7 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
         result.attempted_offers += len(group)
         completed: set[int] = set()
         seen_pages: set[str] = set()
+        failed = False
         try:
             for page in range(5):
                 if provider.requests >= 35:
@@ -117,6 +126,20 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
             # Cached prices remain usable under their existing TTL if route lookup fails.
             db.rollback()
             result.groups_failed += 1
+            failed = True
+        if not failed:
+            for key, ids in targets.items():
+                for offer_id in ids:
+                    if offer_id in completed:
+                        continue
+                    current = db.scalar(select(TravelOffer).where(TravelOffer.id == offer_id)
+                                        .with_for_update().execution_options(populate_existing=True))
+                    if (current and ticket_key(current.raw_payload.get("link")) == key
+                            and not validated_segments(current, current.route_details)):
+                        # This is lookup scheduling metadata, never evidence of unavailability.
+                        current.route_details = {"source": "travelpayouts_graphql", "ticket_key": key,
+                                                 "attempted_at": checked.isoformat(), "status": "INCONCLUSIVE"}
+            db.commit()
         result.unmatched += len(group) - len(completed)
     result.requests = provider.requests
     return result

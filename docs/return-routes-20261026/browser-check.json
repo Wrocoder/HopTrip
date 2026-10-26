@@ -1,0 +1,188 @@
+{
+  "checked_at": "2026-10-26T19:19:27.837Z",
+  "physical_device": false,
+  "read_only": true,
+  "total": 258,
+  "round_trips": 258,
+  "with_structured_return": 152,
+  "with_different_airports": 25,
+  "with_connections": 30,
+  "missing_return_airports": 106,
+  "examples": [
+    {
+      "slug": "flight-3439-2026-10-31",
+      "price": "147.00",
+      "observed_at": "2026-10-26T15:00:08.716083Z",
+      "trip_start": "2026-10-31",
+      "trip_end": "2026-11-04",
+      "flight_facts": {
+        "outbound_legs": [
+          {
+            "origin_airport": "WMI",
+            "destination_airport": "MXP",
+            "origin_timezone": "Europe/Warsaw",
+            "destination_timezone": "Europe/Rome",
+            "departure": "2026-10-31T13:15:00Z",
+            "arrival": "2026-10-31T15:25:00Z",
+            "airline_code": "FR",
+            "airline_name": "Ryanair",
+            "flight_number": "5820"
+          }
+        ],
+        "return_legs": [
+          {
+            "origin_airport": "BGY",
+            "destination_airport": "WMI",
+            "origin_timezone": "Europe/Rome",
+            "destination_timezone": "Europe/Warsaw",
+            "departure": "2026-11-04T21:00:00Z",
+            "arrival": "2026-11-04T22:55:00Z",
+            "airline_code": "FR",
+            "airline_name": "Ryanair",
+            "flight_number": "1903"
+          }
+        ],
+        "origin_timezone": "Europe/Warsaw",
+        "destination_timezone": "Europe/Rome",
+        "airline_name": "Ryanair",
+        "outbound_arrival_calculated": false,
+        "return_arrival_calculated": false,
+        "origin_airport": "WMI",
+        "destination_airport": "MXP",
+        "return_origin_airport": "BGY",
+        "return_destination_airport": "WMI",
+        "return_origin_timezone": "Europe/Rome",
+        "return_destination_timezone": "Europe/Warsaw",
+        "destination_code": "MIL",
+        "airline_code": "FR",
+        "outbound_stops": 0,
+        "return_stops": 0,
+        "outbound_departure": "2026-10-31T14:15:00+01:00",
+        "outbound_arrival": "2026-10-31T15:25:00Z",
+        "return_departure": "2026-11-04T21:00:00Z",
+        "return_arrival": "2026-11-04T22:55:00Z",
+        "destination_interval_minutes": 6095
+      }
+    },
+    {
+      "slug": "flight-3427-2026-11-14",
+      "price": "447.00",
+      "observed_at": "2026-10-26T17:00:06.288060Z",
+      "trip_start": "2026-11-14",
+      "trip_end": "2026-11-18",
+      "flight_facts": {
+        "outbound_legs": [
+          {
+            "origin_airport": "KTW",
+            "destination_airport": "BGY",
+            "origin_timezone": "Europe/Warsaw",
+            "destination_timezone": "Europe/Rome",
+            "departure": "2026-11-14T17:35:00Z",
+            "arrival": "2026-11-14T19:25:00Z",
+            "airline_code": "FR",
+            "airline_name": "Ryanair",
+            "flight_number": "3409"
+          },
+          {
+            "origin_airport": "BGY",
+            "destination_airport": "MLA",
+            "origin_timezone": "Europe/Rome",
+            "destination_timezone": "Europe/Malta",
+            "departure": "2026-11-14T21:35:00Z",
+            "arrival": "2026-11-14T23:35:00Z",
+            "airline_code": "FR",
+            "airline_name": "Ryanair",
+            "flight_number": "7854"
+          }
+        ],
+        "return_legs": [
+          {
+            "origin_airport": "MLA",
+            "destination_airport": "CTA",
+            "origin_timezone": "Europe/Malta",
+            "destination_timezone": "Europe/Rome",
+            "departure": "2026-11-18T17:10:00Z",
+            "arrival": "2026-11-18T18:00:00Z",
+            "airline_code": "FR",
+            "airline_name": "Ryanair",
+            "flight_number": "367"
+          },
+          {
+            "origin_airport": "CTA",
+            "destination_airport": "KTW",
+            "origin_timezone": "Europe/Rome",
+            "destination_timezone": "Europe/Warsaw",
+            "departure": "2026-11-19T10:15:00Z",
+            "arrival": "2026-11-19T12:45:00Z",
+            "airline_code": "FR",
+            "airline_name": "Ryanair",
+            "flight_number": "6372"
+          }
+        ],
+        "origin_timezone": "Europe/Warsaw",
+        "destination_timezone": "Europe/Malta",
+        "airline_name": "Ryanair",
+        "outbound_arrival_calculated": false,
+        "return_arrival_calculated": false,
+        "origin_airport": "KTW",
+        "destination_airport": "MLA",
+        "return_origin_airport": "MLA",
+        "return_destination_airport": "KTW",
+        "return_origin_timezone": "Europe/Malta",
+        "return_destination_timezone": "Europe/Warsaw",
+        "destination_code": "MLA",
+        "airline_code": "FR",
+        "outbound_stops": 1,
+        "return_stops": 1,
+        "outbound_departure": "2026-11-14T18:35:00+01:00",
+        "outbound_arrival": "2026-11-14T23:35:00Z",
+        "return_departure": "2026-11-18T17:10:00Z",
+        "return_arrival": "2026-11-19T12:45:00Z",
+        "destination_interval_minutes": 5375
+      }
+    }
+  ],
+  "checks": [
+    {
+      "slug": "flight-3439-2026-10-31",
+      "width": 320,
+      "engine": "Edge",
+      "version": "156.0.4314.42",
+      "return_departure_displayed": "22:00",
+      "axe_scope": "flight schedule and connecting legs",
+      "axe": 0,
+      "page_errors": []
+    },
+    {
+      "slug": "flight-3439-2026-10-31",
+      "width": 1440,
+      "engine": "Edge",
+      "version": "156.0.4314.42",
+      "return_departure_displayed": "22:00",
+      "axe_scope": "flight schedule and connecting legs",
+      "axe": 0,
+      "page_errors": []
+    },
+    {
+      "slug": "flight-3427-2026-11-14",
+      "width": 320,
+      "engine": "Edge",
+      "version": "156.0.4314.42",
+      "return_departure_displayed": "18:10",
+      "axe_scope": "flight schedule and connecting legs",
+      "axe": 0,
+      "page_errors": []
+    },
+    {
+      "slug": "flight-3427-2026-11-14",
+      "width": 1440,
+      "engine": "Edge",
+      "version": "156.0.4314.42",
+      "return_departure_displayed": "18:10",
+      "axe_scope": "flight schedule and connecting legs",
+      "axe": 0,
+      "page_errors": []
+    }
+  ],
+  "unknown_warning_verified": true
+}
