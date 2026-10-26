@@ -2,13 +2,18 @@
 .controls { border: 0; margin: 20px 0 0; padding: 0; min-width: 0; }
 .controls legend { font-weight: 600; }
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(110px, .6fr); gap: 18px; margin-top: 16px; }
-.field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.field { display: flex; flex-direction: column; gap: 8px; min-width: 0; max-width: 100%; }
 .field label { font-weight: 600; }
 .field input { width: 100%; min-width: 0; min-height: 48px; border: 1px solid var(--border); border-radius: 9px; background: var(--input); color: var(--ink); padding: 10px 12px; font: inherit; font-size: 16px; }
-.field input:focus-visible { border-color: var(--sage); outline: 2px solid var(--green-dark); outline-offset: 3px; }
+.field input[type="date"] { display: block; -webkit-appearance: none; appearance: none; box-sizing: border-box; inline-size: 100%; min-inline-size: 0; max-inline-size: 100%; }
+.field input[type="date"]::-webkit-date-and-time-value { min-inline-size: 0; text-align: left; }
+.field input[type="date"]::-webkit-datetime-edit { padding: 0; min-inline-size: 0; }
+.section:focus,.field input:focus { outline: 2px solid transparent; outline-offset: 3px; box-shadow: 0 0 0 3px var(--green-dark); }
+.field input:focus { border-color: var(--sage); }
 .field input[aria-invalid="true"] { border-color: #a12622; }
 .error { color: #a12622; font-size: .9rem; }
 .search { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 20px; }
 .search p { flex: 1 1 260px; margin: 0; }
 .section summary { cursor: pointer; min-height: 44px; padding-block: 10px; }
 @media (max-width: 600px) { .grid { grid-template-columns: minmax(0, 1fr); } .search > a { width: 100%; text-align: center; } }
+@media (forced-colors: active) { .section:focus,.field input:focus { outline-color: Highlight; box-shadow: none; } }
