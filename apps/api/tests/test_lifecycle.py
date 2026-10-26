@@ -32,7 +32,7 @@ def setup(db):
     )
     db.commit()
     return RawTravelOffer(
-        "one", "WRO", "BCN", NOW + timedelta(days=30), None, Decimal("200"), "PLN", None, "test", {}
+        "one", "WRO", "BCN", NOW + timedelta(days=60), None, Decimal("200"), "PLN", None, "test", {}
     )
 
 

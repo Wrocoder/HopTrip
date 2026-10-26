@@ -8,8 +8,8 @@ from app.models.data_provider import DataProvider
 from app.models.location import Airport, Destination, DestinationAlias
 from app.models.offer import PriceObservation, TravelOffer
 from app.providers.base import RawTravelOffer
-from app.services.availability import DEAL_FRESHNESS
 from app.services.currency import CurrencyConverter
+from app.services.price_lifetime import price_deadline
 from app.services.time import utc
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -129,9 +129,9 @@ def ingest_offers(
             else (utc(observed.observed_at) if observed else fetched_at)
         )
         expiry = (
-            min(utc(raw.expires_at), verified_at + DEAL_FRESHNESS)
+            min(utc(raw.expires_at), price_deadline(verified_at, raw.depart_at))
             if raw.expires_at
-            else verified_at + DEAL_FRESHNESS
+            else price_deadline(verified_at, raw.depart_at)
         )
         query = select(TravelOffer).where(
             TravelOffer.data_provider_id == provider.id, TravelOffer.external_id == raw.external_id
@@ -182,9 +182,9 @@ def ingest_offers(
             values["last_verified_at"] = verified_at
             values["exchange_rate_at"] = verified_at if conversion else None
             values["expires_at"] = (
-                min(utc(raw.expires_at), verified_at + DEAL_FRESHNESS)
+                min(utc(raw.expires_at), price_deadline(verified_at, raw.depart_at))
                 if raw.expires_at
-                else verified_at + DEAL_FRESHNESS
+                else price_deadline(verified_at, raw.depart_at)
             )
         # Re-delivery of the same cached observation cannot extend its earlier expiry.
         if existing.observation_key == key and existing.expires_at:

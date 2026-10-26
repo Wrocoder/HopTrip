@@ -109,7 +109,8 @@ def test_catalogue_reports_current_snapshot_provenance_without_claiming_live_che
     assert datetime.fromisoformat(data['observed_at']) == now-timedelta(hours=3)
     assert datetime.fromisoformat(data['fetched_at']) == now
     assert data['observation_basis'] == 'SOURCE' and data['availability_checked_at'] is None
-    assert datetime.fromisoformat(data['hidden_after']) == now+timedelta(hours=45)
+    assert datetime.fromisoformat(data['hidden_after']) == now+timedelta(hours=21)
+    assert data['max_age_hours'] == 24
     # An offer updated ahead of regeneration must not lend provenance to a different snapshot.
     offer.price_pln = Decimal(999)
     db.commit()

@@ -4,7 +4,7 @@ from decimal import Decimal
 from app.models.deal import Deal, DealComponent
 from app.models.offer import TravelOffer
 from app.models.statistics import RouteStatistics
-from app.services.availability import DEAL_FRESHNESS
+from app.services.price_lifetime import fresh_price_clause, price_deadline
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from app.services.time import utc
 from app.services.trip_dates import trip_dates
@@ -73,7 +73,7 @@ def generate_flight_deal(
         "deal_score": score.deal_score,
         "confidence": stats.confidence if stats else Decimal(0),
         "status": "EXPIRED" if offer.expires_at and utc(offer.expires_at) <= checked_at
-        else "STALE" if not checked_at - DEAL_FRESHNESS < utc(offer.last_verified_at) <= checked_at
+        else "STALE" if not utc(offer.last_verified_at) <= checked_at < price_deadline(offer.last_verified_at, offer.depart_at)
         else "ACTIVE",
         "explanation": [],
         "last_verified_at": offer.last_verified_at,
@@ -104,15 +104,13 @@ def generate_flight_deal(
 
 def generate_fresh_deals(db: Session, now: datetime | None = None) -> int:
     checked_at = now or datetime.now(UTC)
-    freshness_cutoff = checked_at - DEAL_FRESHNESS
     expire_deals(db, checked_at)
     offers = db.scalars(
         select(TravelOffer).where(
             TravelOffer.price_pln.is_not(None),
             TravelOffer.product_type == "FLIGHT",
             TravelOffer.depart_at > checked_at,
-            TravelOffer.last_verified_at > freshness_cutoff,
-            TravelOffer.last_verified_at <= checked_at,
+            fresh_price_clause(TravelOffer.last_verified_at, TravelOffer.depart_at, checked_at),
             (TravelOffer.expires_at.is_(None) | (TravelOffer.expires_at > checked_at)),
         )
     ).all()
@@ -132,7 +130,8 @@ def expire_deals(db: Session, now: datetime | None = None) -> int:
             utc(deal.depart_at) <= checked if deal.depart_at else deal.trip_start <= checked.date()
         )
         expired = deal.expires_at is not None and utc(deal.expires_at) <= checked
-        stale = not checked - DEAL_FRESHNESS < utc(deal.last_verified_at) <= checked
+        stale = not utc(deal.last_verified_at) <= checked < price_deadline(
+            deal.last_verified_at, deal.depart_at or datetime.combine(deal.trip_start, datetime.min.time(), UTC))
         if departed or expired or stale:
             deal.status = "EXPIRED" if departed or expired else "STALE"
             count += 1
