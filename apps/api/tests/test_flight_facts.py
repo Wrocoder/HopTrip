@@ -33,7 +33,7 @@ def test_offset_and_dst_interval_uses_elapsed_time_and_independent_legs():
     timed = offer()
     timed.raw_payload = {
         "departure_at": "2030-03-30T23:00:00+01:00", "duration_to": 120,
-        "return_at": "2030-03-31T12:00:00+02:00", "duration_back": 90,
+        "return_departure_at": "2030-03-31T12:00:00+02:00", "duration_back": 90,
     }
     facts = flight_facts(timed)
     assert facts.destination_interval_minutes == 600
@@ -118,7 +118,7 @@ def test_midnight_home_arrival_preserves_payload_and_elapsed_duration():
         "origin_airport": "WRO", "destination_airport": "BCN", "airline": "FR",
         "return_origin_airport": "BCN", "return_destination_airport": "WRO",
         "departure_at": "2026-10-17T10:00:00+02:00", "duration_to": 120,
-        "return_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
+        "return_departure_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
         "link": "/search/unchanged?marker=fixture",
     }
     before = deepcopy(timed.raw_payload)

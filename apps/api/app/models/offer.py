@@ -44,6 +44,8 @@ class TravelOffer(Base):
     exchange_rate_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     source: Mapped[str] = mapped_column(String(80))
     raw_payload: Mapped[dict] = mapped_column(JSON, default=dict, nullable=False)
+    # Exact-ticket route evidence is separate from the original price observation.
+    route_details: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     last_verified_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()

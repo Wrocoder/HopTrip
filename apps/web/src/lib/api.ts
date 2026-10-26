@@ -6,7 +6,14 @@ export type ScoreExplanation = {
   current_price_pln:string|null; median_price_pln:string|null; price_difference_percent:string|null;
   observed_at:string|null; calculated_at:string|null; observation_basis:"SOURCE"|"FIRST_SEEN"|null;
 };
+export type FlightLeg = {
+  origin_airport:string; destination_airport:string;
+  origin_timezone:string|null; destination_timezone:string|null;
+  departure:string; arrival:string;
+  airline_code:string|null; airline_name:string|null; flight_number:string|null;
+};
 export type FlightFacts = {
+  outbound_legs?:FlightLeg[]; return_legs?:FlightLeg[];
   origin_timezone?:string|null; destination_timezone?:string|null; airline_name?:string|null;
   outbound_arrival_calculated?:boolean; return_arrival_calculated?:boolean;
   origin_airport:string|null; destination_airport:string|null; destination_code:string|null;

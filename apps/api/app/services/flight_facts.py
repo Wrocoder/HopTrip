@@ -4,8 +4,9 @@ import re
 from datetime import UTC, datetime, timedelta
 
 from app.models.offer import TravelOffer
-from app.schemas.deal import FlightFacts
+from app.schemas.deal import FlightFacts, FlightLeg
 from app.services.flight_reference import airline_name, airport_timezone
+from app.services.flight_routes import instant, validated_segments
 
 
 def _code(value: object, pattern: str = r"[A-Z]{3}") -> str | None:
@@ -63,9 +64,39 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
         facts.return_origin_timezone = airport_timezone(facts.return_origin_airport)
         facts.return_destination_timezone = airport_timezone(facts.return_destination_airport)
         facts.return_stops = _count(payload.get("return_transfers"), 20)
-        facts.return_departure = _time(payload.get("return_at"))
+        # REST return_at is not a guaranteed return departure: a real GraphQL match
+        # shows it can be the arrival home. Only an explicit field/segment is a clock.
+        facts.return_departure = _time(payload.get("return_departure_at"))
         facts.return_arrival = _arrival(facts.return_departure, payload.get("duration_back"))
         facts.return_arrival_calculated = facts.return_arrival is not None
+    segments = validated_segments(offer, offer.route_details)
+    if segments:
+        for name, legs in zip(("outbound", "return"), segments):
+            public = []
+            for leg in legs:
+                carrier = _code(leg.get("operating_carrier"), r"[A-Z0-9]{2}")
+                number = _code(leg.get("flight_number"), r"[0-9]{1,5}[A-Z]?")
+                departure, arrival = instant(leg["departure_at"]), instant(leg["arrival_at"])
+                assert departure is not None and arrival is not None
+                public.append(FlightLeg(
+                    origin_airport=leg["origin"], destination_airport=leg["destination"],
+                    origin_timezone=airport_timezone(leg["origin"]),
+                    destination_timezone=airport_timezone(leg["destination"]),
+                    departure=departure, arrival=arrival,
+                    airline_code=carrier, airline_name=airline_name(carrier), flight_number=number,
+                ))
+            if name == "outbound":
+                facts.outbound_legs = public
+                facts.outbound_arrival = public[-1].arrival
+                facts.outbound_arrival_calculated = False
+            else:
+                facts.return_legs = public
+                facts.return_origin_airport, facts.return_destination_airport = public[0].origin_airport, public[-1].destination_airport
+                facts.return_origin_timezone, facts.return_destination_timezone = public[0].origin_timezone, public[-1].destination_timezone
+                facts.return_departure, facts.return_arrival = public[0].departure, public[-1].arrival
+                facts.return_arrival_calculated = False
+                facts.return_stops = len(public) - 1
+    if offer.return_at is not None:
         if facts.outbound_arrival and facts.return_departure:
             interval = (
                 facts.return_departure.astimezone(UTC) - facts.outbound_arrival

@@ -16,7 +16,21 @@ class ComponentRead(BaseModel):
     partner_name: str | None = None
 
 
+class FlightLeg(BaseModel):
+    origin_airport: str
+    destination_airport: str
+    origin_timezone: str | None = None
+    destination_timezone: str | None = None
+    departure: datetime
+    arrival: datetime
+    airline_code: str | None = None
+    airline_name: str | None = None
+    flight_number: str | None = None
+
+
 class FlightFacts(BaseModel):
+    outbound_legs: list[FlightLeg] = Field(default_factory=list)
+    return_legs: list[FlightLeg] = Field(default_factory=list)
     origin_timezone: str | None = None
     destination_timezone: str | None = None
     airline_name: str | None = None
