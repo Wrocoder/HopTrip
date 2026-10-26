@@ -1,6 +1,18 @@
 import {intlLocales,type Locale} from "./i18n/config.ts";
 import {catalogText} from "./i18n/catalog-copy.ts";
 import type {Deal} from "./api";
+import {flightRouteCopy} from './i18n/flight-route-copy.ts';
+
+export function returnAirportNotice(facts:Deal['flight_facts'],locale:Locale='pl'):string|null {
+ const t=flightRouteCopy[locale];
+ if(!facts?.return_origin_airport||!facts.return_destination_airport)return t.unknown;
+ const notes=[];
+ if(facts.destination_airport&&facts.destination_airport!==facts.return_origin_airport)
+  notes.push(t.departure.replace('{back}',facts.return_origin_airport).replace('{out}',facts.destination_airport));
+ if(facts.origin_airport&&facts.origin_airport!==facts.return_destination_airport)
+  notes.push(t.arrival.replace('{back}',facts.return_destination_airport).replace('{out}',facts.origin_airport));
+ return notes.join(' ')||null;
+}
 
 // Keep the two directions independent, including for old API responses without return fields.
 export function flightLegs(facts:Deal["flight_facts"]) {

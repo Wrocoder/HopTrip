@@ -101,7 +101,7 @@ def test_migration_head():
     with create_engine(url).connect() as db:
         assert (
             db.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0015_events_catalog"
+            == "0016_flight_route_details"
         )
 
 

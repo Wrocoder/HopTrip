@@ -1,5 +1,28 @@
 import {test,expect} from "@playwright/test";
 
+test('structured return shows the actual airports, clocks and connecting flights',async({page,request})=>{
+ await request.post('http://127.0.0.1:8100/__test__/compact-card?scenario=structured-return');
+ await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+ try{
+  await page.goto('/deals/browser-13');
+  const summary=page.locator('.detail-summary'),schedule=summary.locator('.flight-schedule-compact');
+  await expect(schedule.locator('.outbound-leg')).toContainText(/WRO .*→ STN/);
+  await expect(schedule.locator('.return-leg')).toContainText(/LTN .*→ WRO/);
+  await expect(schedule.locator('.return-leg')).not.toContainText('szac.');
+  await expect(schedule.locator('.flight-route-warning')).toContainText('Powrót z innego lotniska: LTN (przylot: STN)');
+  await expect(schedule.locator('.schedule-airline')).toContainText('FR 8406');
+  await expect(schedule.locator('.schedule-airline')).toContainText('W6 1234');
+  await expect(schedule.locator('.schedule-airline')).toContainText('LO 999');
+  await summary.locator('.trip-details > summary').click();
+  await expect(summary.locator('.flight-connections')).toContainText('LTN → BER');
+  await expect(summary.locator('.flight-connections')).toContainText('BER → WRO');
+  const body=await(await request.get('http://127.0.0.1:8100/api/v1/deals/browser-13')).json();
+  expect(body.flight_facts.return_legs).toHaveLength(2);
+  expect((Date.parse(body.flight_facts.return_arrival)-Date.parse(body.flight_facts.return_departure))/60000).toBe(180);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ }finally{await request.post('http://127.0.0.1:8100/__test__/compact-card?scenario=normal');}
+});
+
 test("unknown flight details remain explicit before the partner click",async({page})=>{
   await page.goto("/deals");
   await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
