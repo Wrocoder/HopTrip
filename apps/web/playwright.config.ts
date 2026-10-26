@@ -1,12 +1,13 @@
 import {defineConfig,devices} from "@playwright/test";
 import path from "node:path";
 const python=process.env.HOPTRIP_TEST_PYTHON ?? "python";
+const browserName=process.env.HOPTRIP_TEST_BROWSER==='webkit'?'webkit':'chromium';
 export default defineConfig({
  testDir:"./tests",fullyParallel:false,workers:1,retries:0,timeout:30000,
- use:{baseURL:"http://127.0.0.1:3100",trace:"retain-on-failure",
-   ...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL} : {})},
+ use:{baseURL:"http://127.0.0.1:3100",trace:"retain-on-failure",browserName,
+   ...(browserName==='chromium'&&process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL} : {})},
  projects:[{name:"desktop",use:{...devices["Desktop Chrome"]}},
-           {name:"mobile",use:{...devices["iPhone 13"],defaultBrowserType:"chromium"}}],
+           {name:"mobile",use:{...devices["iPhone 13"],defaultBrowserType:browserName}}],
  webServer:[
    {command:`"${python}" -m uvicorn e2e_app:app --app-dir ../api/tests --host 127.0.0.1 --port 8100 --no-access-log`,
     url:"http://127.0.0.1:8100/health",reuseExistingServer:false,
