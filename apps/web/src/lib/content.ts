@@ -96,7 +96,7 @@ export const content:Record<string,InfoContent> = {
     "Gdy źródło nie podaje czasu obserwacji, znamy jedynie moment pierwszego otrzymania tej ceny. Nie wiemy, jak długo istniała wcześniej u dostawcy. Powtórne otrzymanie identycznego wpisu bez nowego czasu nie potwierdza jego aktualności.",
    ]},
    {title:"Kiedy przestajemy pokazywać ofertę",paragraphs:[
-    "Obecny limit publikacji wynosi 48 godzin od zachowanego momentu obserwacji. Krótszy termin ważności podany przez źródło ma pierwszeństwo. Oferta znika również po czasie wylotu lub po jej wyłączeniu.",
+    "Limit od zachowanego momentu obserwacji wynosi 6 godzin dla wylotów w najbliższych 7 dniach, 24 godziny dla wylotów w najbliższych 30 dniach i 48 godzin dla dalszych terminów. Skracamy go, gdy wylot wchodzi w bliższy przedział. Krótszy termin ważności podany przez źródło ma pierwszeństwo. Oferta znika również po czasie wylotu lub po jej wyłączeniu.",
     "Jeśli znamy tylko dzień wylotu, bez godziny, zamykamy ofertę na początku tego dnia według UTC. To ostrożna granica publikacji, a nie informacja o godzinie startu samolotu.",
     "Kontrola dostępności działa także przy otwieraniu szczegółów i przy próbie przejścia do partnera. Dlatego wcześniej otwarta karta lub zapisany link mogą już nie pozwalać na przejście. Odśwież katalog, aby zobaczyć dostępne propozycje.",
    ]},
