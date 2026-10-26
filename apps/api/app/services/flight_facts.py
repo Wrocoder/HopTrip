@@ -54,7 +54,9 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
     facts.outbound_stops = _count(payload.get("transfers"), 20)
     if offer.departure_precision == "TIME":
         facts.outbound_departure = _time(payload.get("departure_at"))
-    facts.outbound_arrival = _arrival(facts.outbound_departure, payload.get("duration_to"))
+    # REST duration is airborne time: layovers are missing, so calculate only direct flights.
+    facts.outbound_arrival = (_arrival(facts.outbound_departure, payload.get("duration_to"))
+                              if facts.outbound_stops == 0 else None)
     facts.outbound_arrival_calculated = facts.outbound_arrival is not None
     if offer.return_at is not None:
         # Each leg needs its own explicit evidence. prices_for_dates does not guarantee
@@ -64,10 +66,10 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
         facts.return_origin_timezone = airport_timezone(facts.return_origin_airport)
         facts.return_destination_timezone = airport_timezone(facts.return_destination_airport)
         facts.return_stops = _count(payload.get("return_transfers"), 20)
-        # REST return_at is not a guaranteed return departure: a real GraphQL match
-        # shows it can be the arrival home. Only an explicit field/segment is a clock.
-        facts.return_departure = _time(payload.get("return_departure_at"))
-        facts.return_arrival = _arrival(facts.return_departure, payload.get("duration_back"))
+        # REST return_at is departure; GraphQL's same-named field is arrival home.
+        facts.return_departure = _time(payload.get("return_at"))
+        facts.return_arrival = (_arrival(facts.return_departure, payload.get("duration_back"))
+                               if facts.return_stops == 0 else None)
         facts.return_arrival_calculated = facts.return_arrival is not None
     segments = validated_segments(offer, offer.route_details)
     if segments:

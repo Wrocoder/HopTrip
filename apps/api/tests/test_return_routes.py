@@ -26,23 +26,23 @@ def route_fixture(db):
     city.iata_code, city.slug, city.city = "LON", "london", "London"
     db.commit()
     payload = dict(origin="WRO", destination="LON", origin_airport="WRO", destination_airport="STN",
-                   departure_at="2030-11-01T13:00:00+01:00", return_at="2030-11-05T01:30:00+01:00",
+                   departure_at="2030-11-01T13:00:00+01:00", return_at="2030-11-04T22:30:00Z",
                    price=209, currency="PLN", airline="FR", flight_number="8406",
                    transfers=0, return_transfers=0, duration_to=120, duration_back=120,
                    link="/search/WRO0111LON04111?t=opaque-selected-ticket&marker=private")
     raw = TravelpayoutsDataProvider(token="fixture")._normalize(payload, SearchQuery(origin="WRO"))
     ingest(db, raw, NOW)
     offer = db.scalar(select(TravelOffer))
-    row = dict(departure_at=payload["departure_at"], return_at=payload["return_at"],
+    row = dict(departure_at=payload["departure_at"], return_at="2030-11-05T01:30:00+01:00",
                origin_airport_iata="WRO", destination_airport_iata="STN", value=208.81,
                currency="pln", ticket_link="/WRO0111LON04111?t=opaque-selected-ticket")
     row["segments"] = [
         dict(departure_at=payload["departure_at"], arrival_at="2030-11-01T14:00:00Z",
              flight_legs=[dict(origin="WRO", destination="STN", departure_at=payload["departure_at"],
                                arrival_at="2030-11-01T14:00:00Z", operating_carrier="FR", flight_number="8406")]),
-        dict(departure_at="2030-11-04T22:30:00Z", arrival_at=payload["return_at"],
+        dict(departure_at="2030-11-04T22:30:00Z", arrival_at=row["return_at"],
              flight_legs=[dict(origin="LTN", destination="WRO", departure_at="2030-11-04T22:30:00Z",
-                               arrival_at=payload["return_at"], operating_carrier="W6", flight_number="1234")]),
+                               arrival_at=row["return_at"], operating_carrier="W6", flight_number="1234")]),
     ]
     return offer, row
 
@@ -115,7 +115,7 @@ def test_nonmatching_or_broken_route_never_fills_return_airports(isolated_db, ba
     result = asyncio.run(enrich_routes(isolated_db, provider_for(row), NOW))
     assert result.enriched == 0
     assert flight_facts(offer).return_origin_airport is None
-    assert flight_facts(offer).return_departure is None
+    assert flight_facts(offer).return_departure == datetime(2030, 11, 4, 22, 30, tzinfo=UTC)
 
 
 def test_route_evidence_is_invalidated_when_original_ticket_changes(isolated_db):
@@ -172,15 +172,17 @@ def test_structured_return_reaches_deal_dates_and_both_public_endpoints(api_clie
     assert "ticket_key" not in detail.text and "private" not in detail.text
 
 
-def test_rest_return_at_alone_is_not_a_confirmed_departure(isolated_db):
+def test_rest_departure_and_graphql_arrival_use_their_own_source_contracts(isolated_db):
     offer, _ = route_fixture(isolated_db)
     facts = flight_facts(offer)
-    assert facts.return_departure is None and facts.return_arrival is None
+    assert facts.return_departure == datetime(2030, 11, 4, 22, 30, tzinfo=UTC)
+    assert facts.return_arrival == datetime(2030, 11, 5, 0, 30, tzinfo=UTC)
+    assert facts.return_arrival_calculated and facts.return_origin_airport is None
 
 
 def test_connection_legs_keep_both_airports_and_operating_carriers(isolated_db):
     offer, row = route_fixture(isolated_db)
-    offer.raw_payload = {**offer.raw_payload, "return_transfers": 1}
+    offer.raw_payload = {**offer.raw_payload, "return_transfers": 1, "duration_back": 90}
     row["segments"][1]["flight_legs"] = [
         dict(origin="LTN", destination="BER", departure_at="2030-11-04T22:30:00Z",
              arrival_at="2030-11-04T23:15:00Z", operating_carrier="W6", flight_number="1234"),
@@ -217,3 +219,57 @@ def test_legacy_incomplete_payload_cannot_crash_or_trigger_an_unanchored_lookup(
     offer.raw_payload = payload
     isolated_db.commit()
     assert asyncio.run(enrich_routes(isolated_db, provider_for(row), NOW)).requests == 0
+
+
+def test_graphql_400_record_limit_and_next_page_offset_are_respected(isolated_db):
+    import re
+
+    offer, row = route_fixture(isolated_db)
+    offsets = []
+    def respond(request):
+        body = json.loads(request.content)
+        limit = int(re.search(r"limit:(\d+)", body["query"])[1])
+        offset = body["variables"]["offset"]
+        offsets.append(offset)
+        if limit > 400 or offset not in (0, 400):
+            return httpx.Response(400, json={"errors": [{"message": "limit must be equal or less than 400"}]})
+        rows = [dict(row, ticket_link=f"/other?t=other-{i}") for i in range(400)] if offset == 0 else [row]
+        return httpx.Response(200, json={"data": {"prices_round_trip": rows}})
+    p = TravelpayoutsRouteProvider(token="private", interval=0, transport=httpx.MockTransport(respond))
+    result = asyncio.run(enrich_routes(isolated_db, p, NOW))
+    assert offsets == [0, 400] and result.enriched == 1 and result.requests == 2
+    assert flight_facts(offer).return_origin_airport == "LTN"
+
+
+def test_graphql_departure_dates_are_batched_within_five_date_limit(isolated_db):
+    offer, _ = route_fixture(isolated_db)
+    for index in range(1, 6):
+        departure = offer.depart_at.replace(tzinfo=UTC) + timedelta(days=index)
+        isolated_db.add(TravelOffer(
+            data_provider_id=offer.data_provider_id, external_id=f"chunk-{index}", source=offer.source,
+            product_type="FLIGHT", departure_precision="TIME", depart_at=departure,
+            return_at=departure + timedelta(days=3), original_price=209, original_currency="PLN",
+            last_verified_at=NOW, fetched_at=NOW, expires_at=NOW + timedelta(hours=48),
+            raw_payload={**offer.raw_payload, "departure_at": departure.isoformat(),
+                         "link": f"/search/fixture?t=chunk-{index}"}))
+    isolated_db.commit()
+    batches = []
+    def respond(request):
+        params = json.loads(request.content)["variables"]["params"]
+        batches.append(params["depart_dates"])
+        if len(params["depart_dates"]) > 5:
+            return httpx.Response(400, json={"errors": [{"message": "depart_dates maximum 5"}]})
+        return httpx.Response(200, json={"data": {"prices_round_trip": []}})
+    p = TravelpayoutsRouteProvider(token="private", interval=0, transport=httpx.MockTransport(respond))
+    result = asyncio.run(enrich_routes(isolated_db, p, NOW))
+    assert [len(batch) for batch in batches] == [5, 1]
+    assert len(set(day for batch in batches for day in batch)) == 6
+    assert result.groups_failed == 0
+
+
+def test_missing_segments_do_not_treat_airborne_time_as_total_with_layovers(isolated_db):
+    offer, _ = route_fixture(isolated_db)
+    offer.raw_payload = {**offer.raw_payload, "transfers": 1, "return_transfers": 1}
+    facts = flight_facts(offer)
+    assert facts.outbound_arrival is None and facts.return_arrival is None
+    assert facts.return_departure is not None

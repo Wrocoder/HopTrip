@@ -11,9 +11,11 @@ from app.providers.base import (
     ProviderTransientError,
 )
 
+PAGE_SIZE = 400
+
 QUERY = """query($params:ParamsRoundTrip!,$offset:Int!){
  prices_round_trip(params:$params,grouping:NONE,currency:"pln",market:"pl",
- paging:{limit:1000,offset:$offset},sorting:VALUE_ASC){
+ paging:{limit:400,offset:$offset},sorting:VALUE_ASC){
   departure_at return_at origin_airport_iata destination_airport_iata value currency
   segments{departure_at arrival_at flight_legs{
    origin destination departure_at arrival_at flight_number operating_carrier
