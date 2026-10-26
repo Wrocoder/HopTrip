@@ -33,6 +33,15 @@ test("schedule explicitly uses UTC across day and DST boundary",()=>{
   assert.equal(flightTime("invalid"),null);
 });
 
+test("known zero-offset airports use a stable GMT label in every supported locale",()=>{
+ for(const locale of ["pl","en","ru","uk"]){
+  assert.match(flightTime("2027-01-08T15:05:00Z","Europe/London",locale),/15:05 GMT \(Europe\/London\)$/);
+  assert.match(flightTime("2027-01-08T15:05:00+00:00","Atlantic/Reykjavik",locale),/15:05 GMT \(Atlantic\/Reykjavik\)$/);
+ }
+ assert.match(flightTime("2027-07-08T15:05:00Z","Europe/London"),/16:05 GMT\+1/);
+ assert.match(flightTime("2027-01-08T15:05:00Z","Asia/Kathmandu"),/20:50 GMT\+5:45/);
+});
+
 test("HTR-01: local home arrival crosses midnight without adding a hotel night",()=>{
  const arrival="2026-10-24T22:40:00Z";
  assert.match(flightTime(arrival,"Europe/Warsaw"),/25\.10\.2026.*00:40.*GMT\+2/);

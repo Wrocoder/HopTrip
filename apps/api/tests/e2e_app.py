@@ -233,6 +233,41 @@ def htr01_fixture():
 app.router.routes.insert(0, app.router.routes.pop())
 
 
+@app.get("/api/v1/deals/hydration-fixture")
+def hydration_fixture():
+    """London in winter exposes GMT/GMT+0 differences between Node and WebKit."""
+    with Session(engine) as db:
+        view = serialize_deal(db, db.scalar(select(Deal).where(Deal.slug == "browser-13")))
+    view.slug = "hydration-fixture"
+    view.trip_start = date(2027, 1, 8)
+    view.trip_end = date(2027, 1, 11)
+    view.destination_city = "London"
+    view.destination_slug = "london"
+    view.destination_country_code = "GB"
+    view.flight_facts = flight_facts(TravelOffer(
+        source="travelpayouts_data", product_type="FLIGHT", departure_precision="TIME",
+        return_at=datetime(2027, 1, 11, 5, 55, tzinfo=UTC),
+        raw_payload={
+            "origin_airport": "WRO", "destination_airport": "STN", "airline": "FR",
+            "return_origin_airport": "LTN", "return_destination_airport": "WRO",
+            "departure_at": "2027-01-08T12:45:00Z", "duration_to": 140,
+            "return_at": "2027-01-11T05:55:00Z", "duration_back": 125,
+        },
+    ))
+    return view
+
+
+app.router.routes.insert(0, app.router.routes.pop())
+
+
+@app.get("/api/v1/deals/hydration-fixture/events")
+def hydration_events():
+    return EventResults(status="EMPTY")
+
+
+app.router.routes.insert(0, app.router.routes.pop())
+
+
 @app.get('/api/v1/deals/freshness-fixture')
 def freshness_fixture():
     with Session(engine) as db:

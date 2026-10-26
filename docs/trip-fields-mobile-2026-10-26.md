@@ -31,8 +31,27 @@ Select сохраняет системное меню и получает общ
 Задать SDK через `HOPTRIP_TEST_PYTHON`; для WebKit — `HOPTRIP_TEST_BROWSER=webkit`,
 для Chromium — `HOPTRIP_TEST_BROWSER=chromium`, `PLAYWRIGHT_CHANNEL=msedge`.
 
-Далее: завершить сборку, CI и выпуск; выполнить контроль сайта через
-`node scripts/verify-stay-mobile-release.mjs --all-controls`.
+Опубликовано через [PR #9](https://github.com/Wrocoder/HopTrip/pull/9), выпуск
+`2644dbbab637ca8e31bc7b14237949df94cc908b`. Production build с TypeScript прошёл;
+CI PR `40347490790` и main `40347877223` успешны (API с PostgreSQL и web).
+Штатный деплой: `/opt/hoptrip/releases/2644dbbab637ca8e31bc7b14237949df94cc908b-20261026T151757Z`.
+Backup: `/opt/hoptrip/backups/deploy-20261026T151757Z-2644dbbab637ca8e31bc7b14237949df94cc908b`.
+Readiness ready. Схема не менялась; события обновляются раз в сутки, следующий
+проход 27 октября в 06:00 Europe/Warsaw, дополнительный проход не запускался.
+
+Контроль сайта 15:19 UTC: Wrocław → Londyn, `flight-3672-2027-01-08`.
+В каждом из 8 сочетаний движка/ширины проверены 20 полей, включая раскрытые
+расходы. Везде границы и центр для нажатия доступны, рамки совпадают, axe — 0,
+горизонтального переполнения нет. Выезд 11 → 12 января даёт 4 ночи и обновляет «Do».
+Выбранные билеты проверены локальными фикстурами, на сайте билеты не добавлялись.
+Chromium без ошибок JS; WebKit во всех 4 случаях регистрирует прежний React #418.
+Поэтому скрипт завершается с кодом 1, хотя проверки размеров и дат прошли:
+это не полностью чистый общий прогон. Причина #418 пока не установлена.
+
+[Отчёт сайта](stay-mobile-20261026/trip-controls-live-check.json),
+[дата бюджета](stay-mobile-20261026/live-all-webkit-budget-end-320.png),
+[список жилья](stay-mobile-20261026/live-all-webkit-budget-hotel-basis-320.png).
+Воспроизведение: `node scripts/verify-stay-mobile-release.mjs --all-controls`.
 Пункт 8 остаётся открытым до полного прохождения на телефоне владельца.
 Ранее зарегистрированный WebKit React #418 учитывается отдельно в
 [первом протоколе](stay-mobile-fix-2026-10-26.md); исправление CSS его не устраняет.

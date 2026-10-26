@@ -17,7 +17,8 @@ test("unknown flight details remain explicit before the partner click",async({pa
   await expect(card.locator(".deal-price")).toContainText("za osobę · w jedną stronę");
   await expect(card.locator(".flight-facts")).toContainText("Lotnisko wylotu: do sprawdzenia u partnera");
   await expect(card.locator(".flight-facts")).toContainText("Brak danych o godzinie");
-  await card.locator(".deal-card-link").click();
+  await card.locator(".deal-card-link").focus();
+  await page.keyboard.press("Enter");
   await expect(page.locator("h1 .country-flag")).toHaveAttribute("title","Hiszpania");
   await page.locator(".detail-summary .trip-details > summary").click();
   await expect(page.locator(".detail-summary .flight-facts")).toContainText("Bagaż do sprawdzenia u partnera");
