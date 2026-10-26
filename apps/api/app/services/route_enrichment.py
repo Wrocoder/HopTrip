@@ -5,7 +5,7 @@ from datetime import UTC, datetime
 
 from app.models.offer import TravelOffer
 from app.providers.base import ProviderError
-from app.providers.travelpayouts_routes import TravelpayoutsRouteProvider
+from app.providers.travelpayouts_routes import PAGE_SIZE, TravelpayoutsRouteProvider
 from app.services.flight_routes import instant, ticket_key, validated_segments
 from app.services.price_lifetime import fresh_price_clause
 from sqlalchemy import select
@@ -49,13 +49,20 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                       for k in ("origin_airport", "destination_airport"))
               and ticket_key(offer.raw_payload.get("link"))):
             groups[offer.raw_payload.get("origin_airport", "")].append(offer)
+    batches = []
     for origin, group in groups.items():
+        dates = sorted({o.raw_payload["departure_at"][:10] for o in group})
+        for start in range(0, len(dates), 5):
+            days = dates[start:start + 5]
+            batches.append((origin, [o for o in group if o.raw_payload["departure_at"][:10] in days], days))
+    # Prioritize near departures across airports, rather than spending the budget on one airport.
+    batches.sort(key=lambda batch: min(o.depart_at for o in batch[1]))
+    for origin, group, dates in batches:
         if provider.requests >= 35:
             result.truncated = True
             break
         # Batch by departure airport. Do not guess a return departure date from REST return_at.
-        params = {"origin": origin, "origin_type": "AIRPORT",
-                  "depart_dates": sorted({o.raw_payload["departure_at"][:10] for o in group})}
+        params = {"origin": origin, "origin_type": "AIRPORT", "depart_dates": dates}
         targets: dict[str | None, list[int]] = defaultdict(list)
         for offer in group:
             targets[ticket_key(offer.raw_payload.get("link"))].append(offer.id)
@@ -67,7 +74,7 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                 if provider.requests >= 35:
                     result.truncated = True
                     break
-                rows = await provider.page(params, page * 1000)
+                rows = await provider.page(params, page * PAGE_SIZE)
                 page_key = "|".join(sorted(str(ticket_key(r.get("ticket_link")))
                                            for r in rows if isinstance(r, dict)))
                 if rows and page_key in seen_pages:
@@ -95,7 +102,7 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                         else:
                             result.rejected += 1
                 db.commit()
-                if len(completed) == len(group) or len(rows) < 1000:
+                if len(completed) == len(group) or len(rows) < PAGE_SIZE:
                     break
             else:
                 result.truncated = True

@@ -47,15 +47,14 @@ def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]]
         return None
     currency = evidence.get("currency")
     if (not isinstance(currency, str) or instant(evidence.get("departure_at")) != utc(offer.depart_at)
-            or instant(evidence.get("return_at")) != utc(offer.return_at)
             or evidence.get("origin_airport_iata") != payload.get("origin_airport")
             or evidence.get("destination_airport_iata") != payload.get("destination_airport")
             or currency.upper() != offer.original_currency.upper()):
         return None
     try:
         value = Decimal(str(evidence.get("value")))
-        # REST rounds the same cached PLN price (e.g. 208.81 becomes 209).
-        if not value.is_finite() or abs(value - Decimal(offer.original_price)) > Decimal("0.5"):
+        # The same opaque ticket has slightly different converted/rounded PLN values.
+        if not value.is_finite() or abs(value - Decimal(offer.original_price)) > Decimal("1"):
             return None
     except (InvalidOperation, TypeError, ValueError):
         return None
@@ -77,6 +76,7 @@ def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]]
             return None
         previous_end = end
         last_arrival = None
+        airborne = 0.0
         for leg in legs:
             if not isinstance(leg, dict):
                 return None
@@ -88,16 +88,20 @@ def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]]
                     or (last_arrival and departure < last_arrival)):
                 return None
             last_arrival = arrival
+            airborne += (arrival - departure).total_seconds() / 60
         if instant(legs[0]["departure_at"]) != start or last_arrival != end:
             return None
-        if index == 1 and utc(offer.return_at) not in (start, end):
+        # Do not compare same-named fields across APIs: REST is departure, GQL arrival.
+        if index == 1 and (utc(offer.return_at) != start or instant(evidence.get("return_at")) != end):
             return None
         stops = payload.get("transfers" if index == 0 else "return_transfers")
         if type(stops) is int and stops != len(legs) - 1:
             return None
         duration = payload.get("duration_to" if index == 0 else "duration_back")
-        if type(duration) is int and abs((end - start).total_seconds() / 60 - duration) > 1:
-            return None
+        if type(duration) is int:
+            elapsed = (end - start).total_seconds() / 60
+            if min(abs(elapsed - duration), abs(airborne - duration)) > 1:
+                return None
         result.append(legs)
     if (result[0][0]["origin"] != payload.get("origin_airport")
             or result[0][-1]["destination"] != payload.get("destination_airport")

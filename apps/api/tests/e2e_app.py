@@ -121,7 +121,6 @@ with Session(engine) as db:
             "airline": "FR", "transfers": 0, "return_transfers": 1,
             "departure_at": scheduled_departure.isoformat(),
             "return_at": (scheduled_departure + timedelta(days=3)).isoformat(),
-            "return_departure_at": (scheduled_departure + timedelta(days=3)).isoformat(),
             "duration_to": 120, "duration_back": 180,
         },
     )
@@ -167,7 +166,7 @@ def growth_fixture():
                                 depart_at=start, return_at=end, original_price=100 + index, original_currency="PLN",
                                 raw_payload={"origin_airport": code, "destination_airport": "CIA",
                                              "return_origin_airport": "CIA", "return_destination_airport": code,
-                                             "departure_at": start.isoformat(), "return_at": end.isoformat(), "return_departure_at": end.isoformat(),
+                                             "departure_at": start.isoformat(), "return_at": end.isoformat(),
                                              "duration_to": 120, "duration_back": 120, "transfers": 0, "return_transfers": 0})
             db.add(offer)
             db.flush()
@@ -193,7 +192,7 @@ def compact_card(scenario: str = "normal"):
             departure = departure.replace(hour=21, minute=30)
         payload.update(origin_airport="WRO", destination_airport="BCN",
                        return_origin_airport="BCN", return_destination_airport="WRO",
-                       return_transfers=1, duration_back=180)
+                       return_transfers=0 if scenario == "midnight" else 1, duration_back=180)
         if scenario == "open-jaw":
             payload.update(destination_airport="STN", return_origin_airport="LTN")
         elif scenario == "unknown-airports":
@@ -203,7 +202,6 @@ def compact_card(scenario: str = "normal"):
             payload.pop("return_origin_airport", None)
             payload.pop("return_destination_airport", None)
         payload["return_at"] = departure.isoformat()
-        payload["return_departure_at"] = departure.isoformat()
         offer.raw_payload = payload
         offer.return_at = departure
         offer.route_details = None
@@ -212,11 +210,11 @@ def compact_card(scenario: str = "normal"):
 
             outbound_arrival = scheduled_departure + timedelta(minutes=120)
             arrival = departure + timedelta(minutes=180)
-            payload.update(destination_airport="STN", return_at=arrival.isoformat(),
+            payload.update(destination_airport="STN", return_at=departure.isoformat(), duration_back=150,
                            link="/search/fixture?t=structured-route")
             for key in ("return_origin_airport", "return_destination_airport", "return_departure_at"):
                 payload.pop(key, None)
-            offer.return_at = arrival
+            offer.return_at = departure
             offer.route_details = dict(
                 source="travelpayouts_graphql", ticket_key=ticket_key(payload["link"]),
                 departure_at=scheduled_departure.isoformat(), return_at=arrival.isoformat(),
@@ -248,9 +246,10 @@ def htr01_fixture():
         return_at=datetime(2026, 10, 24, 20, tzinfo=UTC),
         raw_payload={
             "origin_airport": "WRO", "destination_airport": "BCN", "airline": "FR",
+            "transfers": 0, "return_transfers": 0,
             "return_origin_airport": "BCN", "return_destination_airport": "WRO",
             "departure_at": "2026-10-17T10:00:00+02:00", "duration_to": 120,
-            "return_departure_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
+            "return_at": "2026-10-24T22:00:00+02:00", "duration_back": 160,
         },
     ))
     return view
@@ -276,9 +275,10 @@ def hydration_fixture():
         return_at=datetime(2027, 1, 11, 5, 55, tzinfo=UTC),
         raw_payload={
             "origin_airport": "WRO", "destination_airport": "STN", "airline": "FR",
+            "transfers": 0, "return_transfers": 0,
             "return_origin_airport": "LTN", "return_destination_airport": "WRO",
             "departure_at": "2027-01-08T12:45:00Z", "duration_to": 140,
-            "return_departure_at": "2027-01-11T05:55:00Z", "duration_back": 125,
+            "return_at": "2027-01-11T05:55:00Z", "duration_back": 125,
         },
     ))
     return view
