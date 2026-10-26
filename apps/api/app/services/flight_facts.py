@@ -6,7 +6,7 @@ from datetime import UTC, datetime, timedelta
 from app.models.offer import TravelOffer
 from app.schemas.deal import FlightFacts, FlightLeg
 from app.services.flight_reference import airline_name, airport_timezone
-from app.services.flight_routes import instant, validated_segments
+from app.services.flight_routes import validated_segments
 
 
 def _code(value: object, pattern: str = r"[A-Z]{3}") -> str | None:
@@ -78,7 +78,8 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
             for leg in legs:
                 carrier = _code(leg.get("operating_carrier"), r"[A-Z0-9]{2}")
                 number = _code(leg.get("flight_number"), r"[0-9]{1,5}[A-Z]?")
-                departure, arrival = instant(leg["departure_at"]), instant(leg["arrival_at"])
+                # Retain the source offset for calendar dates when our zone reference is absent.
+                departure, arrival = _time(leg["departure_at"]), _time(leg["arrival_at"])
                 assert departure is not None and arrival is not None
                 public.append(FlightLeg(
                     origin_airport=leg["origin"], destination_airport=leg["destination"],

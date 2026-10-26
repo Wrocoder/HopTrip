@@ -38,7 +38,7 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
         fresh_price_clause(TravelOffer.last_verified_at, TravelOffer.depart_at, checked),
         TravelOffer.expires_at.is_(None) | (TravelOffer.expires_at > checked),
     ).order_by(TravelOffer.depart_at, TravelOffer.id)).all()
-    groups: dict[str, list[TravelOffer]] = defaultdict(list)
+    groups: dict[tuple[str, str | None], list[TravelOffer]] = defaultdict(list)
     for offer in offers:
         if validated_segments(offer, offer.route_details):
             result.already_known += 1
@@ -48,21 +48,28 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                       and offer.raw_payload[k].isalpha() and offer.raw_payload[k].isupper()
                       for k in ("origin_airport", "destination_airport"))
               and ticket_key(offer.raw_payload.get("link"))):
-            groups[offer.raw_payload.get("origin_airport", "")].append(offer)
+            city = offer.raw_payload.get("destination")
+            if not (isinstance(city, str) and len(city) == 3 and city.isascii()
+                    and city.isalpha() and city.isupper()):
+                city = None
+            groups[(offer.raw_payload["origin_airport"], city)].append(offer)
     batches = []
-    for origin, group in groups.items():
+    for (origin, city), group in groups.items():
         dates = sorted({o.raw_payload["departure_at"][:10] for o in group})
         for start in range(0, len(dates), 5):
             days = dates[start:start + 5]
-            batches.append((origin, [o for o in group if o.raw_payload["departure_at"][:10] in days], days))
+            batches.append((origin, [o for o in group if o.raw_payload["departure_at"][:10] in days], days, city))
     # Prioritize near departures across airports, rather than spending the budget on one airport.
     batches.sort(key=lambda batch: min(o.depart_at for o in batch[1]))
-    for origin, group, dates in batches:
+    for origin, group, dates, city in batches:
         if provider.requests >= 35:
             result.truncated = True
             break
         # Batch by departure airport. Do not guess a return departure date from REST return_at.
         params = {"origin": origin, "origin_type": "AIRPORT", "depart_dates": dates}
+        if city:
+            # AIRPORT would exclude open-jaw tickets (e.g. BGY in, MXP out).
+            params.update(destination=city, destination_type="CITY")
         targets: dict[str | None, list[int]] = defaultdict(list)
         for offer in group:
             targets[ticket_key(offer.raw_payload.get("link"))].append(offer.id)

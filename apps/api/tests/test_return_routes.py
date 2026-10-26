@@ -70,7 +70,8 @@ def test_exact_structured_return_keeps_airports_times_carrier_and_price_separate
     result = asyncio.run(enrich_routes(db, provider_for(row, requests), NOW))
     assert result.enriched == 1 and result.requests == 1
     assert requests[0]["variables"]["params"] == {
-        "origin": "WRO", "origin_type": "AIRPORT", "depart_dates": ["2030-11-01"]}
+        "origin": "WRO", "origin_type": "AIRPORT", "depart_dates": ["2030-11-01"],
+        "destination": "LON", "destination_type": "CITY"}
     facts = flight_facts(offer)
     assert facts.destination_airport == "STN"
     assert (facts.return_origin_airport, facts.return_destination_airport) == ("LTN", "WRO")
@@ -273,3 +274,15 @@ def test_missing_segments_do_not_treat_airborne_time_as_total_with_layovers(isol
     facts = flight_facts(offer)
     assert facts.outbound_arrival is None and facts.return_arrival is None
     assert facts.return_departure is not None
+
+
+def test_source_offset_retains_return_calendar_day_when_airport_zone_is_unknown(isolated_db):
+    offer, row = route_fixture(isolated_db)
+    segment = row["segments"][1]
+    segment["departure_at"] = "2030-11-05T01:30:00+03:00"
+    segment["flight_legs"][0].update(origin="ZZZ", departure_at=segment["departure_at"])
+    offer.route_details = evidence(row)
+    facts = flight_facts(offer)
+    assert facts.return_origin_timezone is None
+    assert facts.return_departure.isoformat() == "2030-11-05T01:30:00+03:00"
+    assert trip_dates(offer)[1].isoformat() == "2030-11-05"
