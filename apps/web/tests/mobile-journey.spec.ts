@@ -231,7 +231,8 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await page.route("http://127.0.0.1:8100/go/**",async route=>{
   const response=await route.fetch({maxRedirects:0});expect(response.status()).toBe(307);
   expect(new URL(response.headers().location).host).toBe("partner.example");
-  await route.fulfill({response,headers:{...response.headers(),location:"http://127.0.0.1:8100/__test__/partner"}});
+  // WebKit cannot fulfill a redirect; validate it above, then load the local fixture.
+  await route.continue({url:"http://127.0.0.1:8100/__test__/partner"});
  });
  const partner=page.getByRole("link",{name:"Sprawdź lot — Fixture program"});
  await reachable(partner);await partner.focus();await page.keyboard.press("Enter");

@@ -37,7 +37,10 @@ export function flightTime(value:string|null|undefined,zone?:string|null,locale:
   return new Intl.DateTimeFormat(intlLocales[locale],{
     day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",
     timeZone:known ? zone : "UTC",...(known ? {timeZoneName:"shortOffset" as const} : {}),
-  }).format(instant)+(known ? ` (${zone})` : ` UTC · ${catalogText(locale,"brak strefy lotniska")}`);
+  }).formatToParts(instant).map(part=>
+    // ICU versions disagree on GMT versus GMT+0. Keep hydration text identical.
+    part.type==="timeZoneName" && /^(?:GMT|UTC)(?:[+-]0{1,2}(?::00)?)?$/.test(part.value) ? "GMT" : part.value
+  ).join("")+(known ? ` (${zone})` : ` UTC · ${catalogText(locale,"brak strefy lotniska")}`);
 }
 export function compactFlightTime(value:string|null|undefined,zone?:string|null,locale:Locale="pl") {
   const instant=instantDate(value);
