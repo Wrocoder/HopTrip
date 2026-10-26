@@ -482,3 +482,29 @@ main.catalog-page { padding-top: 16px; }
 .featured-card .price-expired{color:#842a23}
 .hero-events{font-size:.9rem;color:var(--secondary);max-width:46rem}
 #trip-events{scroll-margin-top:1.5rem}
+/* Shared controls across the whole trip: stay, budget and events. */
+:is(#accommodation, #calculator, #trip-events) :is(input:not([type="checkbox"]), select) {
+  box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; font-size: 16px; border-radius: 9px;
+}
+:is(#accommodation, #calculator, #trip-events) input[type="date"] {
+  display: block; -webkit-appearance: none; appearance: none; inline-size: 100%;
+}
+:is(#accommodation, #calculator, #trip-events) select {
+  -webkit-appearance: none; appearance: none; padding-inline-end: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23245C40' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center; background-size: 12px 8px;
+}
+:is(#accommodation, #calculator, #trip-events) input[type="date"]::-webkit-date-and-time-value { min-inline-size: 0; text-align: left; }
+:is(#accommodation, #calculator, #trip-events) input[type="date"]::-webkit-datetime-edit { padding: 0; min-inline-size: 0; }
+:is(#accommodation, #calculator, #trip-events):focus,
+:is(#accommodation, #calculator, #trip-events) :is(input:not([type="checkbox"]), select):focus {
+  outline: 2px solid transparent; outline-offset: 3px; box-shadow: 0 0 0 3px var(--green-dark);
+}
+:is(#accommodation, #calculator, #trip-events) :is(input:not([type="checkbox"]), select):focus:not([aria-invalid="true"]) { border-color: var(--sage); }
+@media (forced-colors: active) {
+  :is(#accommodation, #calculator, #trip-events) select { appearance: auto; background-image: none; }
+  :is(#accommodation, #calculator, #trip-events):focus,
+  :is(#accommodation, #calculator, #trip-events) :is(input:not([type="checkbox"]), select):focus {
+    outline-color: Highlight; box-shadow: none;
+  }
+}
