@@ -1,6 +1,16 @@
 import type {Locale} from './config';
-export const eventResultsCopy:Record<Locale,Record<"emptyTitle"|"coverage"|"partialEmpty"|"clearCategory"|"changeDates"|"attractions"|"variants"|"standard"|"premium"|"variantHint",string>>={
+export const eventResultsCopy:Record<Locale,Record<"emptyTitle"|"coverage"|"partialEmpty"|"clearCategory"|"changeDates"|"attractions"|"variants"|"standard"|"premium"|"variantHint"|"browseDays"|"allDays"|"previousDay"|"nextDay"|"previousPage"|"nextPage"|"firstPage"|"pages"|"page"|"of",string>>={
   "pl": {
+    "browseDays": "Przeglądaj dni",
+    "allDays": "Wszystkie dni",
+    "previousDay": "Poprzedni dzień",
+    "nextDay": "Następny dzień",
+    "previousPage": "Poprzednia strona",
+    "nextPage": "Następna strona",
+    "firstPage": "Pierwsza strona",
+    "pages": "Strony wydarzeń",
+    "page": "Strona",
+    "of": "z",
     "emptyTitle": "Co możesz zrobić dalej?",
     "coverage": "Pokazujemy oferty z Ticketmaster z poprawnym linkiem do biletów. Katalog nie obejmuje wszystkich organizatorów, wydarzeń i terminów. Pusta lista nie oznacza, że w mieście nic się nie dzieje.",
     "partialEmpty": "Dane dla tego okresu mogą być niepełne. Spróbuj ponownie później lub zmień zakres wyszukiwania.",
@@ -13,6 +23,16 @@ export const eventResultsCopy:Record<Locale,Record<"emptyTitle"|"coverage"|"part
     "variantHint": "Ta sama data i godzina. Ocena lotu uwzględnia wszystkie warianty; sprawdź zakres wybranego biletu."
   },
   "en": {
+    "browseDays": "Browse days",
+    "allDays": "All days",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "firstPage": "First page",
+    "pages": "Event pages",
+    "page": "Page",
+    "of": "of",
     "emptyTitle": "What can you do next?",
     "coverage": "We show Ticketmaster offers with a valid ticket link. The catalogue does not cover every organiser, event or date. An empty list does not mean there are no events in the city.",
     "partialEmpty": "Data for this period may be incomplete. Try again later or change your search range.",
@@ -25,6 +45,16 @@ export const eventResultsCopy:Record<Locale,Record<"emptyTitle"|"coverage"|"part
     "variantHint": "Same date and start time. Flight assessment considers all options; check what your chosen ticket includes."
   },
   "ru": {
+    "browseDays": "События по дням",
+    "allDays": "Все дни",
+    "previousDay": "Предыдущий день",
+    "nextDay": "Следующий день",
+    "previousPage": "Предыдущая страница",
+    "nextPage": "Следующая страница",
+    "firstPage": "Первая страница",
+    "pages": "Страницы событий",
+    "page": "Страница",
+    "of": "из",
     "emptyTitle": "Что можно сделать дальше?",
     "coverage": "Мы показываем предложения Ticketmaster с корректной ссылкой на билеты. Каталог охватывает не всех организаторов, события и даты. Пустая выдача не означает, что в городе нет событий.",
     "partialEmpty": "Данные за этот период могут быть неполными. Попробуйте позже или измените период поиска.",
@@ -37,6 +67,16 @@ export const eventResultsCopy:Record<Locale,Record<"emptyTitle"|"coverage"|"part
     "variantHint": "Одинаковые дата и время начала. Оценка перелёта учитывает все варианты; проверьте, что входит в выбранный билет."
   },
   "uk": {
+    "browseDays": "Події за днями",
+    "allDays": "Усі дні",
+    "previousDay": "Попередній день",
+    "nextDay": "Наступний день",
+    "previousPage": "Попередня сторінка",
+    "nextPage": "Наступна сторінка",
+    "firstPage": "Перша сторінка",
+    "pages": "Сторінки подій",
+    "page": "Сторінка",
+    "of": "з",
     "emptyTitle": "Що можна зробити далі?",
     "coverage": "Ми показуємо пропозиції Ticketmaster із коректним посиланням на квитки. Каталог охоплює не всіх організаторів, події та дати. Порожня видача не означає, що в місті немає подій.",
     "partialEmpty": "Дані за цей період можуть бути неповними. Спробуйте пізніше або змініть період пошуку.",

@@ -65,5 +65,10 @@ class EventResults(BaseModel):
     end_date: date | None = None
     checked_at: datetime | None = None
     partial: bool = False
+    event_date: date | None = None
+    page: int = 1
+    page_size: int = 12
+    total: int = 0
+    has_more: bool = False
     # Per-flight results are computed on read, never saved in the shared event catalogue.
     flight_fit: dict[str, EventFlightFit] = Field(default_factory=dict)

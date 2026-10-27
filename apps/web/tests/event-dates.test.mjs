@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {validEventDates} from '../src/lib/event-dates.ts';
+import {eventSearchDays,validEventDates} from '../src/lib/event-dates.ts';
 import {changeStayDate} from '../src/lib/budget-draft.ts';
 import {emptyBudget} from '../src/lib/trip-budget.ts';
 import {eventUx} from '../src/lib/i18n/event-copy.ts';
@@ -21,4 +21,14 @@ test('calendar windows preserve the edited stay and allow up to 31 inclusive day
 
 test('date modes have complete labels in every supported language',()=>{
  for(const copy of Object.values(eventUx))for(const key of ['tripDates','otherDates','useTripDates','sharedHint','otherHint','noDates','restoring'])assert.ok(copy[key].trim());
+});
+
+test('day navigation includes both ends and stays on calendar dates across clock changes',()=>{
+ assert.deepEqual(eventSearchDays('2026-10-24','2026-10-26'),['2026-10-24','2026-10-25','2026-10-26']);
+ assert.deepEqual(eventSearchDays('2026-03-28','2026-03-30'),['2026-03-28','2026-03-29','2026-03-30']);
+ assert.deepEqual(eventSearchDays('2026-12-31','2027-01-01'),['2026-12-31','2027-01-01']);
+ assert.equal(eventSearchDays('2026-10-01','2026-10-31').length,31);
+ assert.deepEqual(eventSearchDays('2026-10-27','2026-10-27'),['2026-10-27']);
+ assert.deepEqual(eventSearchDays('2026-02-30','2026-03-01'),[]);
+ assert.deepEqual(eventSearchDays('2026-10-01','2026-11-01'),[]);
 });

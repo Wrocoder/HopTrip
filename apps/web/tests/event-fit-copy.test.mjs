@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {eventFitReasons} from '../src/lib/event-flight-fit.ts';
+import {eventFitReasons,primaryFitReason} from '../src/lib/event-flight-fit.ts';
 import {eventFitCopy} from '../src/lib/i18n/event-fit-copy.ts';
 
 test('flight compatibility warnings and unknowns are translated in every language',()=>{
@@ -11,4 +11,12 @@ test('flight compatibility warnings and unknowns are translated in every languag
  }
  assert.match(eventFitCopy.pl.policy,/180 min/);
  assert.match(eventFitCopy.pl.durationUnknown,/nieznany/);
+});
+
+test('the compact warning prioritises conflicts over missing data and tight intervals',()=>{
+ assert.equal(primaryFitReason({reasons:['UNKNOWN_DURATION','UNKNOWN_ARRIVAL','ARRIVAL_BUFFER','AFTER_RETURN']}),'AFTER_RETURN');
+ assert.equal(primaryFitReason({reasons:['UNKNOWN_EVENT_TIME','RETURN_BUFFER']}),'RETURN_BUFFER');
+ assert.equal(primaryFitReason({reasons:['UNKNOWN_DURATION','INVALID_EVENT_TIME']}),'INVALID_EVENT_TIME');
+ assert.equal(primaryFitReason({reasons:['UNKNOWN_DURATION']}),undefined);
+ assert.equal(primaryFitReason(undefined),undefined);
 });
