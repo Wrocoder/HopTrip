@@ -16,6 +16,20 @@
 .section :is(button,a,summary):focus-visible{outline:3px solid var(--green-dark);outline-offset:4px}
 .feedback{font-size:.95rem;color:var(--secondary)}
 .feedback p{margin:.75rem 0}
+.feedback{scroll-margin-top:5rem}
+.dayNavigation{display:flex;align-items:end;gap:.5rem;margin-block:1rem;min-width:0}
+.dayNavigation label{display:grid;gap:.4rem;flex:1;min-width:0;font-size:.85rem;font-weight:600}
+.dayNavigation select{width:100%;min-width:0;min-height:48px;padding:.65rem;border:1px solid #a8bcb4;border-radius:.65rem;background:#fff;color:var(--ink);font:inherit;font-size:1rem;box-sizing:border-box}
+.dayNavigation button{flex:0 0 48px;min-height:48px;padding:.5rem}
+.pagination{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.75rem;margin-block:1.25rem;font-size:.9rem}
+.pagination span{text-align:center}
+.retry:disabled{opacity:.5;cursor:default}
+.fitPolicy{font-size:.85rem;color:var(--secondary);margin-block:.5rem}
+.fitPolicy summary,.fitDetails summary{min-height:44px;align-content:center;cursor:pointer;font-weight:600}
+.fitPolicy p{max-width:85ch;margin:.4rem 0}
+.fitDetails{font-size:.8rem;border-top:1px solid currentColor;margin-top:.5rem}
+.fitDetails summary{line-height:1.4}
+.card .fitDetails p{font-size:.8rem}
 .hint{font-size:.9rem;color:var(--secondary);border-left:3px solid #8eab8e;padding-left:.8rem}
 .grid,.skeletons{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:1rem;margin:1rem 0 1.5rem}
 .card{display:flex;flex-direction:column;padding:1.25rem;border:1px solid var(--border);background:#fff;border-radius:var(--radius-medium);overflow-wrap:anywhere;box-shadow:0 4px 14px #243e2c06}

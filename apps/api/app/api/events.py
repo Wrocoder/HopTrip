@@ -2,7 +2,7 @@ from datetime import UTC, date, datetime, timedelta
 from typing import Literal
 from zoneinfo import ZoneInfo
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
@@ -25,6 +25,7 @@ def deal_events(
     slug: str, start_date: date | None = None, end_date: date | None = None,
     category: EventCategory = "ALL", db: Session = Depends(get_db),
     date_mode: Literal["flight", "stay", "other"] = "flight",
+    event_date: date | None = None, page: int = Query(1, ge=1, le=84),
 ) -> EventResults:
     settings = get_settings()
     if not settings.events_enabled:
@@ -66,18 +67,26 @@ def deal_events(
         raise HTTPException(422, "Dates must fit the trip; maximum event search is 31 days")
     if date_mode != "flight" and end_date > today + timedelta(days=365):
         raise HTTPException(422, "Search dates must be within the next 365 days")
+    if event_date is not None and not start_date <= event_date <= end_date:
+        raise HTTPException(422, "Selected day must be within the search dates")
     start_date = max(start_date, today)
-    if end_date < start_date:
-        return EventResults(status="EMPTY", start_date=start_date, end_date=end_date, date_mode=date_mode)
-    result = event_service.search(settings, deal.destination_id, start_date, end_date, category, db)
+    search_start, search_end = (event_date, event_date) if event_date else (start_date, end_date)
+    if search_end < start_date:
+        return EventResults(status="EMPTY", start_date=start_date, end_date=end_date,
+                            date_mode=date_mode, event_date=event_date, page=page)
+    # Read the selected day directly: a busy first day must not consume the catalogue limit
+    # and hide later dates. Public requests still read only the local catalogue.
+    result = event_service.search(settings, deal.destination_id, search_start, search_end, category, db)
     result.date_mode = date_mode
+    result.start_date, result.end_date = start_date, end_date
+    result.event_date, result.page = event_date, page
     if result.status not in {"READY", "EMPTY"}:
         return result
     # Stay/other dates describe an editorial search window, not flight compatibility.
     # Keep the original flight-constrained contract as the default for existing callers.
     eligible = []
     for event in result.events:
-        if (event.end_date or event.start_date) < start_date:
+        if (event.end_date or event.start_date) < search_start or event.start_date > search_end:
             continue
         if (event.local_time or event.start_at) and (not event.end_date or event.end_date == event.start_date):
             instants = event_instants(event, zone)
@@ -87,10 +96,12 @@ def deal_events(
                 continue
         eligible.append(event)
     grouped = group_events(eligible)
-    result.events = grouped[:12]
+    result.total = len(grouped)
+    offset = (page - 1) * result.page_size
+    result.events = grouped[offset:offset + result.page_size]
+    result.has_more = offset + result.page_size < result.total
     result.flight_fit = {event.id: combined_flight_fit(
         event, facts, trip_start, trip_end if context.trip_type == "ROUND_TRIP" else None,
     ) for event in result.events}
-    result.partial = result.partial or len(grouped) > 12
     result.status = "READY" if result.events else "EMPTY"
     return result

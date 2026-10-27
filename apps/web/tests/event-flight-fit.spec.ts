@@ -38,8 +38,16 @@ test('flight conflicts, tight transfers and unknown durations are visible on eve
  await expect(card('Nieznana godzina rozpoczęcia')).toContainText('Czas trwania nieznany');
  await expect(card('Wydarzenie z podaną długością')).toContainText('Czas trwania: 120 min');
  await expect(card('Brak oceny zgodności')).toContainText('Zgodność z lotem nie została sprawdzona');
- // Warnings are ordinary card content, not hidden inside the booking disclosure.
- await expect(section.locator('details')).not.toHaveAttribute('open','');
+ // The main risk, gap and missing duration remain visible; repeated details are collapsed.
+ await expect(tight.getByText('Mało czasu między przylotem a początkiem wydarzenia.',{exact:true})).toBeHidden();
+ await expect(tight.getByText('Czas trwania nieznany.',{exact:true})).toBeVisible();
+ await expect(tight.getByText('Przylot obliczony z czasu lotu; potwierdź rozkład.',{exact:true})).toBeHidden();
+ await expect(section.locator('details[open]')).toHaveCount(0);
+ await tight.getByText('Szczegóły dopasowania',{exact:true}).click();
+ await expect(tight.getByText('Mało czasu między przylotem a początkiem wydarzenia.',{exact:true})).toBeVisible();
+ await expect(tight.getByText('Przylot obliczony z czasu lotu; potwierdź rozkład.',{exact:true})).toBeVisible();
+ await expect(tight).toContainText('Orientacyjny zapas: 180 min');
+ await tight.getByText('Szczegóły dopasowania',{exact:true}).click();
  await expect(tight.getByRole('note')).toBeVisible();
  expect((await new AxeBuilder({page}).include('[aria-labelledby="trip-events-title"]').analyze()).violations).toEqual([]);
  await page.setViewportSize({width:320,height:844});

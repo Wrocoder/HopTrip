@@ -5,7 +5,7 @@ import type {Deal} from '../../lib/api';
 import {publicApi} from '../../lib/session';
 import {intlLocales,type Locale} from '../../lib/i18n/config';
 import {eventCopy,eventUx} from '../../lib/i18n/event-copy';
-import {validEventDates} from '../../lib/event-dates';
+import {eventSearchDays,validEventDates} from '../../lib/event-dates';
 import {changeStayDate} from '../../lib/budget-draft';
 import {useTripDraft} from './trip-draft';
 import {EventFlightNotice} from './event-flight-notice';
@@ -22,7 +22,8 @@ type TicketOption={id:string;name:string;ticket_kind:'STANDARD'|'PREMIUM';url:st
 type EventItem={id:string;name:string;category:Exclude<Category,'ALL'>|'OTHER';venue:string;city:string;
  start_date:string;end_date:string|null;local_time:string|null;timezone:string;status:string;
  url:string;price_from:string|null;currency:string|null;ticket_options?:TicketOption[]};
-type Results={status:string;events:EventItem[];checked_at:string|null;partial:boolean;flight_fit?:Record<string,EventFlightFit>};
+type Results={status:string;events:EventItem[];checked_at:string|null;partial:boolean;flight_fit?:Record<string,EventFlightFit>;
+ total?:number;page?:number;page_size?:number;has_more?:boolean};
 type FetchState={key:string;kind:'ready'|'error'|'invalid';result?:Results};
 export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:Locale;activitiesHref?:string}){
  const t=eventCopy[locale],intl=intlLocales[locale];
@@ -36,9 +37,16 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
  const [category,setCategory]=useState<Category>('ALL');
  const [applied,setApplied]=useState<string|null>(null),[refresh,setRefresh]=useState(0);
  const [state,setState]=useState<FetchState|null>(null);
+ const [navigation,setNavigation]=useState({query:'',day:'',page:1});
+ const resultsRef=useRef<HTMLDivElement>(null);
  const valid=validEventDates(start,end);
  const query=new URLSearchParams({start_date:start,end_date:end,category,date_mode:mode}).toString();
- const url=publicApi(`/api/v1/deals/${encodeURIComponent(deal.slug)}/events?${query}`);
+ const day=navigation.query===query?navigation.day:'';
+ const page=navigation.query===query?navigation.page:1;
+ const days=eventSearchDays(start,end);
+ const dayIndex=days.indexOf(day);
+ const navigationQuery=new URLSearchParams({page:String(page),...(day?{event_date:day}:{})}).toString();
+ const url=publicApi(`/api/v1/deals/${encodeURIComponent(deal.slug)}/events?${query}&${navigationQuery}`);
  const requestKey=ready&&deal.events_supported&&valid&&(mode==='stay'||applied===query)?`${url}#${refresh}`:'';
  const current=state?.key===requestKey?state:null;
  const result=current?.result;
@@ -83,6 +91,11 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   setCategory('ALL');
   if(mode==='other')setApplied(new URLSearchParams({start_date:start,end_date:end,category:'ALL',date_mode:mode}).toString());
  }
+ function selectDay(value:string){setNavigation({query,day:value,page:1});}
+ function selectPage(value:number){
+  setNavigation({query,day,page:value});
+  resultsRef.current?.scrollIntoView({block:'start'});
+ }
  function price(amount:string|null,currency:string|null){
   return amount!==null&&currency?`${t.price} ${new Intl.NumberFormat(intl,{style:'currency',currency}).format(Number(amount))}`:t.unknownPrice;
  }
@@ -107,7 +120,15 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
     {(['ALL','MUSIC','SPORTS','CULTURE'] as const).map(c=><option key={c} value={c}>{labels[c]}</option>)}
    </select></label><button className="button" disabled={!ready||busy} type="submit">{busy?t.loading:t.search}</button>
   </form>
-  <div role="status" aria-live="polite" className={styles.feedback}>
+  {ready&&valid&&(mode==='stay'||applied===query)&&<div className={styles.dayNavigation}>
+   <label>{resultsCopy.browseDays}<select value={day} onChange={e=>selectDay(e.target.value)}>
+    <option value="">{resultsCopy.allDays}</option>
+    {days.map(value=><option key={value} value={value}>{new Intl.DateTimeFormat(intl,{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(`${value}T12:00:00Z`))}</option>)}
+   </select></label>
+   <button type="button" className={styles.retry} aria-label={resultsCopy.previousDay} disabled={dayIndex<=0} onClick={()=>selectDay(days[dayIndex-1])}>←</button>
+   <button type="button" className={styles.retry} aria-label={resultsCopy.nextDay} disabled={dayIndex>=days.length-1} onClick={()=>selectDay(days[dayIndex+1])}>→</button>
+  </div>}
+  <div ref={resultsRef} role="status" aria-live="polite" className={styles.feedback}>
    {busy&&<p>{t.loading}</p>}
    {error&&<p>{error}</p>}
    {!error&&unavailable&&<p>{t.unavailable}</p>}
@@ -115,12 +136,15 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
    {result?.status==='NEEDS_DATES'&&<p>{t.dates}</p>}
    {!ready&&<p>{ux.restoring}</p>}
    {ready&&!busy&&!result&&!error&&<p>{start&&end?ux.edit:deal.trip_type==='ONE_WAY'?t.oneWay:ux.noDates}</p>}
-   {!!result?.events.length&&<p>{ux.results}: <strong>{result.events.length}</strong> · {ux.local}</p>}
+   {!!result?.events.length&&<p>{ux.results}: <strong>{result.total!=null?`${(page-1)*(result.page_size??12)+1}–${(page-1)*(result.page_size??12)+result.events.length} ${resultsCopy.of} ${result.total}`:result.events.length}</strong> · {day?date(day):resultsCopy.allDays} · {ux.local}</p>}
   </div>
   {!busy&&!error&&result?.status==='EMPTY'&&<div className={styles.empty}>
    <h3>{resultsCopy.emptyTitle}</h3><p>{resultsCopy.coverage}</p>
    {result.partial&&<p>{resultsCopy.partialEmpty}</p>}
    <div className={styles.emptyActions}>
+    {dayIndex>=0&&dayIndex<days.length-1&&<button type="button" className={styles.retry} onClick={()=>selectDay(days[dayIndex+1])}>{resultsCopy.nextDay} →</button>}
+    {day&&<button type="button" className={styles.retry} onClick={()=>selectDay('')}>{resultsCopy.allDays}</button>}
+    {page>1&&<button type="button" className={styles.retry} onClick={()=>selectPage(1)}>{resultsCopy.firstPage}</button>}
     {category!=='ALL'&&<button type="button" className={styles.retry} onClick={clearCategory}>{resultsCopy.clearCategory}</button>}
     <button type="button" className={styles.retry} onClick={editDates}>{resultsCopy.changeDates}</button>
     {activitiesHref&&<a className="button button-secondary" href={activitiesHref}>{resultsCopy.attractions}{locale!=='pl'?' (PL)':''}</a>}
@@ -129,7 +153,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   {unavailable&&<button type="button" className={styles.retry} onClick={()=>setRefresh(value=>value+1)}>{ux.retry} <span aria-hidden="true">↻</span></button>}
   {busy&&<div className={styles.skeletons} aria-hidden="true">{[0,1,2].map(i=><div key={i} className={styles.skeleton}><span/><span/><span/></div>)}</div>}
   {result?.partial&&result.status==='READY'&&<p className={styles.hint}>{t.partial}</p>}
-  {!!result?.events.length&&<p className={styles.hint}>{eventFitCopy[locale].policy}</p>}
+  {!!result?.events.length&&<details className={styles.fitPolicy}><summary>{eventFitCopy[locale].title}</summary><p>{eventFitCopy[locale].policy}</p></details>}
   {!!result?.events.length&&<ul className={styles.grid}>{result.events.map(item=><li className={styles.card} key={item.id}>
    <div className={styles.cardTop}><span className={styles.category}>{labels[item.category]}</span>
     <span className={styles.day} aria-hidden="true">{new Intl.DateTimeFormat(intl,{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(`${item.start_date}T12:00:00Z`))}</span></div>
@@ -150,6 +174,11 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
    </div>:<><p className={styles.price}>{price(item.price_from,item.currency)}</p>
     <a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a><AddEventToPlan event={selection(item)} locale={locale}/></>}
   </li>)}</ul>}
+  {(page>1||result?.has_more)&&<nav className={styles.pagination} aria-label={resultsCopy.pages}>
+   <button type="button" className={styles.retry} disabled={busy||page===1} onClick={()=>selectPage(page-1)}>{resultsCopy.previousPage}</button>
+   <span>{resultsCopy.page} {page}{result?.total!=null&&<> {resultsCopy.of} {Math.max(1,Math.ceil(result.total/(result.page_size??12)))}</>}</span>
+   <button type="button" className={styles.retry} disabled={busy||!result?.has_more} onClick={()=>selectPage(page+1)}>{resultsCopy.nextPage}</button>
+  </nav>}
   {result?.checked_at&&<p className="muted">{t.source} · {t.checked}: {new Intl.DateTimeFormat(intl,{dateStyle:'short',timeStyle:'short'}).format(new Date(result.checked_at))}</p>}
   <details className={styles.details}><summary>{ux.before}</summary><p>{t.warning}</p></details>
   <p className={styles.disclosure}>{t.disclosure}</p>
