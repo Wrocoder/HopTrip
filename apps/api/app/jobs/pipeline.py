@@ -10,6 +10,7 @@ from app.services.deals import generate_fresh_deals
 from app.services.destination_discovery import DiscoveryResult, discover_destinations
 from app.services.ingestion import IngestionResult, ingest_offers
 from app.services.partner_links import LinkSyncResult, sync_partner_links
+from app.services.price_refresh import PriceRefreshResult, refresh_prices
 from app.services.route_enrichment import RouteEnrichmentResult, enrich_routes
 from app.services.statistics import recalculate_route_statistics
 
@@ -23,6 +24,7 @@ class PipelineResult:
     partner_links: LinkSyncResult = field(default_factory=LinkSyncResult)
     destination_discovery: DiscoveryResult = field(default_factory=DiscoveryResult)
     route_enrichment: RouteEnrichmentResult = field(default_factory=RouteEnrichmentResult)
+    price_refresh: PriceRefreshResult = field(default_factory=PriceRefreshResult)
 
 
 async def run_travelpayouts_pipeline() -> PipelineResult:
@@ -48,6 +50,8 @@ async def run_travelpayouts_pipeline() -> PipelineResult:
         discovery = await discover_destinations(
             db, offers, base_url=provider.base_url, transport=provider.transport,
         )
+        # Check existing structured itineraries before a broad feed can replace their tickets.
+        price_refresh = await refresh_prices(db)
         ingestion = ingest_offers(
             db,
             provider_code=provider.code,
@@ -60,5 +64,5 @@ async def run_travelpayouts_pipeline() -> PipelineResult:
         partner_links = await sync_partner_links(db)
     return PipelineResult(
         ingestion, statistics_routes, generated_deals, provider_searches, partner_links, discovery,
-        route_enrichment,
+        route_enrichment, price_refresh,
     )

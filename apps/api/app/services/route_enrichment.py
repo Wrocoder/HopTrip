@@ -112,7 +112,7 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                         evidence.update(source="travelpayouts_graphql", ticket_key=key,
                                         fetched_at=checked.isoformat())
                         if current and validated_segments(current, evidence):
-                            current.route_details = evidence
+                            current.route_details = {**(current.route_details or {}), **evidence}
                             completed.add(offer_id)
                             result.enriched += 1
                         else:
@@ -137,7 +137,8 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                     if (current and ticket_key(current.raw_payload.get("link")) == key
                             and not validated_segments(current, current.route_details)):
                         # This is lookup scheduling metadata, never evidence of unavailability.
-                        current.route_details = {"source": "travelpayouts_graphql", "ticket_key": key,
+                        current.route_details = {**(current.route_details or {}),
+                                                 "source": "travelpayouts_graphql", "ticket_key": key,
                                                  "attempted_at": checked.isoformat(), "status": "INCONCLUSIVE"}
             db.commit()
         result.unmatched += len(group) - len(completed)

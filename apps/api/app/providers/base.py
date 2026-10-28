@@ -32,7 +32,7 @@ class SearchQuery:
     trip_class: int = 0
     trip_duration: int | None = None
     currency: str = "pln"
-    market: str = "pl"
+    market: str | None = None
     limit: int = 100
     page: int = 1
     departure_date: date | None = None
