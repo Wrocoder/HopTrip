@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 
 @dataclass
 class IngestionResult:
+    snapshot_protected: int = 0
     saved_offers: int = 0
     updated_offers: int = 0
     saved_observations: int = 0
@@ -81,6 +82,8 @@ def ingest_offers(
     offers: list[RawTravelOffer],
     converter: CurrencyConverter,
     now: datetime | None = None,
+    price_snapshot: bool = False,
+    commit: bool = True,
 ) -> IngestionResult:
     fetched_at = now or datetime.now(UTC)
     provider = db.scalar(select(DataProvider).where(DataProvider.code == provider_code))
@@ -118,6 +121,19 @@ def ingest_offers(
                 result.skipped_unresolved_routes += 1
             continue
         key = observation_key(provider_code, raw)
+        query = select(TravelOffer).where(
+            TravelOffer.data_provider_id == provider.id, TravelOffer.external_id == raw.external_id
+        )
+        existing = db.scalar(query.with_for_update().execution_options(populate_existing=True))
+        snapshot = (existing.route_details or {}).get("price_snapshot", {}) if existing else {}
+        if (not price_snapshot and existing and isinstance(snapshot, dict)
+                and snapshot.get("observation_key") == existing.observation_key
+                and snapshot.get("market") and existing.observation_key):
+            # A broad cheapest-destinations feed is not authoritative for this exact trip.
+            # Only another structured date-specific refresh may replace its checked quote.
+            existing.fetched_at = fetched_at
+            result.snapshot_protected += 1
+            continue
         conversion = converter.to_pln(raw.price, raw.currency, fetched_at)
         observed = db.scalar(
             select(PriceObservation).where(PriceObservation.observation_key == key)
@@ -133,10 +149,6 @@ def ingest_offers(
             if raw.expires_at
             else price_deadline(verified_at, raw.depart_at)
         )
-        query = select(TravelOffer).where(
-            TravelOffer.data_provider_id == provider.id, TravelOffer.external_id == raw.external_id
-        )
-        existing = db.scalar(query.with_for_update())
         values = dict(
             product_type="FLIGHT",
             origin_airport_id=origin.id,
@@ -167,7 +179,7 @@ def ingest_offers(
                     db.flush()
                 result.saved_offers += 1
             except IntegrityError:
-                existing = db.scalar(query.with_for_update())
+                existing = db.scalar(query.with_for_update().execution_options(populate_existing=True))
                 if existing is None:
                     raise
                 result.updated_offers += 1
@@ -191,8 +203,9 @@ def ingest_offers(
             previous_expiry = values["expires_at"]
             assert isinstance(previous_expiry, datetime)
             values["expires_at"] = min(utc(existing.expires_at), previous_expiry)
-        # Late delivery of an older observation must not replace a newer price.
-        if utc(existing.last_verified_at) <= verified_at:
+        # A current exact-trip snapshot may return a previously seen price; keep its
+        # original first-seen age. An explicitly older source timestamp still cannot win.
+        if (price_snapshot and raw.source_observed_at is None) or utc(existing.last_verified_at) <= verified_at:
             for field, value in values.items():
                 setattr(existing, field, value)
         else:
@@ -232,5 +245,6 @@ def ingest_offers(
             ):
                 raise
             result.duplicate_observations += 1
-    db.commit()
+    if commit:
+        db.commit()
     return result

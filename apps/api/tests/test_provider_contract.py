@@ -1,5 +1,6 @@
 import asyncio
 from datetime import UTC, date, datetime
+from decimal import Decimal
 
 import httpx
 import pytest
@@ -217,7 +218,7 @@ def test_mixed_records_are_reported_without_aborting_valid_offers():
         ),
     )
     offers = asyncio.run(provider.search(SearchQuery(origin="WRO", trip_duration=3)))
-    assert len(offers) == 1 and offers[0].price == 201
+    assert len(offers) == 1 and offers[0].price == Decimal("200.25")
     assert provider.diagnostics.received_items == 7
     assert provider.rejected_items == 4
     assert provider.diagnostics.filtered_items == 1

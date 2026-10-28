@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     admin_token: str = "change-me-in-development"
     travelpayouts_api_token: str | None = None
     travelpayouts_api_base_url: str = "https://api.travelpayouts.com"
+    # The outbound search is aviasales.com; its Data API market is US, currency stays PLN.
+    travelpayouts_market: str = Field(default="us", pattern=r"^[a-z]{2}$")
+    flight_price_refresh_groups: int = Field(default=40, ge=1, le=100)
     travelpayouts_links_enabled: bool = False
     travelpayouts_marker: int = Field(default=0, ge=0)
     travelpayouts_project_id: int = Field(default=0, ge=0)

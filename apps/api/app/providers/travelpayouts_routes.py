@@ -13,8 +13,8 @@ from app.providers.base import (
 
 PAGE_SIZE = 400
 
-QUERY = """query($params:ParamsRoundTrip!,$offset:Int!){
- prices_round_trip(params:$params,grouping:NONE,currency:"pln",market:"pl",
+QUERY = """query($params:ParamsRoundTrip!,$offset:Int!,$market:String!){
+ prices_round_trip(params:$params,grouping:NONE,currency:"pln",market:$market,
  paging:{limit:400,offset:$offset},sorting:VALUE_ASC){
   departure_at return_at origin_airport_iata destination_airport_iata value currency
   segments{departure_at arrival_at flight_legs{
@@ -30,6 +30,7 @@ class TravelpayoutsRouteProvider:
         self.token = token if token is not None else settings.travelpayouts_api_token
         self.base_url = (base_url or settings.travelpayouts_api_base_url).rstrip("/")
         self.transport = transport
+        self.market = settings.travelpayouts_market
         self.interval = max(0, interval)
         self.last_request = 0.0
         self.requests = 0
@@ -48,7 +49,8 @@ class TravelpayoutsRouteProvider:
                 response = await client.post(
                     f"{self.base_url}/graphql/v1/query",
                     headers={"X-Access-Token": self.token},
-                    json={"query": QUERY, "variables": {"params": params, "offset": offset}},
+                    json={"query": QUERY, "variables": {
+                        "params": params, "offset": offset, "market": self.market}},
                 )
         except httpx.TransportError as exc:
             raise ProviderTransientError("Route Data API transport failure") from exc

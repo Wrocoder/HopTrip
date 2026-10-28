@@ -45,6 +45,7 @@ class TravelpayoutsDataProvider:
         self.token = token if token is not None else settings.travelpayouts_api_token
         self.base_url = (base_url or settings.travelpayouts_api_base_url).rstrip("/")
         self.transport = transport
+        self.market = settings.travelpayouts_market
         self.max_pages = settings.provider_max_pages if max_pages is None else max_pages
         if not 1 <= self.max_pages <= 100:
             raise ValueError("max_pages must be between 1 and 100")
@@ -63,7 +64,7 @@ class TravelpayoutsDataProvider:
         params: dict[str, Any] = {
             "origin": query.origin,
             "currency": query.currency,
-            "market": query.market,
+            "market": query.market or self.market,
             "one_way": str(query.one_way).lower(),
             "limit": min(query.limit, 1000),
             "sorting": "price",
@@ -130,7 +131,11 @@ class TravelpayoutsDataProvider:
                         continue
                     if offer.external_id in offers:
                         self.diagnostics.duplicate_offers += 1
-                    offers[offer.external_id] = offer
+                    # The sorted response can contain several sellers for one itinerary.
+                    # Keep the lowest quote, not the last (most expensive) duplicate.
+                    previous = offers.get(offer.external_id)
+                    if previous is None or offer.price < previous.price:
+                        offers[offer.external_id] = offer
                     if preserve_variants:
                         # Diagnostic callers must see every quote for the same itinerary.
                         variants.append(offer)
