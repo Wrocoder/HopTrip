@@ -54,7 +54,7 @@ class TravelpayoutsDataProvider:
     def rejected_items(self) -> int:
         return self.diagnostics.rejected_items
 
-    async def search(self, query: SearchQuery) -> list[RawTravelOffer]:
+    async def search(self, query: SearchQuery, *, preserve_variants: bool = False) -> list[RawTravelOffer]:
         self.diagnostics = SearchDiagnostics()
         if query.trip_class != 0 or query.limit < 1 or query.page < 1:
             raise ProviderPermanentError("Unsupported search parameters")
@@ -78,6 +78,7 @@ class TravelpayoutsDataProvider:
         if query.return_date and not query.one_way:
             params["return_at"] = query.return_date.isoformat()
         offers: dict[str, RawTravelOffer] = {}
+        variants: list[RawTravelOffer] = []
         seen_pages: set[str] = set()
         self.diagnostics.stop_reason = "error"
         async with httpx.AsyncClient(timeout=30, transport=self.transport) as client:
@@ -130,12 +131,15 @@ class TravelpayoutsDataProvider:
                     if offer.external_id in offers:
                         self.diagnostics.duplicate_offers += 1
                     offers[offer.external_id] = offer
+                    if preserve_variants:
+                        # Diagnostic callers must see every quote for the same itinerary.
+                        variants.append(offer)
                 if len(data) < params["limit"]:
                     self.diagnostics.stop_reason = "short_page" if data else "empty_page"
                     break
             else:
                 self.diagnostics.stop_reason = "page_limit"
-        return list(offers.values())
+        return variants if preserve_variants else list(offers.values())
 
     def _normalize(self, item: dict[str, Any], query: SearchQuery) -> RawTravelOffer:
         if not isinstance(item, dict):

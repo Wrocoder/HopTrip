@@ -2,6 +2,7 @@ import asyncio
 from datetime import UTC, datetime
 from decimal import Decimal
 
+import httpx
 from app.providers.base import ProviderNotConfigured, SearchQuery
 from app.providers.travelpayouts import TravelpayoutsDataProvider
 
@@ -49,3 +50,19 @@ def test_distinct_explicit_return_airports_do_not_overwrite_each_other():
     assert stn.external_id != ltn.external_id
     assert stn.payload["return_origin_airport"] == "STN"
     assert ltn.payload["return_origin_airport"] == "LTN"
+
+
+def test_diagnostics_can_preserve_all_quotes_without_changing_default_ingestion_contract():
+    item = {'origin_airport':'WRO', 'destination':'BCN', 'departure_at':'2030-11-01T10:00:00Z',
+            'return_at':'2030-11-04T08:00:00Z', 'airline':'FR', 'flight_number':'123',
+            'price':289, 'link':'/search/WRO0111BCN04111?t=original'}
+    rows = [item, item | {'price':541, 'link':'/search/WRO0111BCN04111?t=alternative'}]
+    provider = TravelpayoutsDataProvider(token='fixture', transport=httpx.MockTransport(
+        lambda _: httpx.Response(200, json={'success':True, 'data':rows})))
+    query = SearchQuery(origin='WRO')
+    normal = asyncio.run(provider.search(query))
+    assert len(normal) == 1 and normal[0].price == Decimal(541)
+    variants = asyncio.run(provider.search(query, preserve_variants=True))
+    assert [item.price for item in variants] == [Decimal(289), Decimal(541)]
+    assert variants[0].external_id == variants[1].external_id
+    assert provider.diagnostics.duplicate_offers == 1
