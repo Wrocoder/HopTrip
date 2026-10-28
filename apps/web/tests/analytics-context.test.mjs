@@ -3,6 +3,37 @@ import test from "node:test";
 import {analyticsFilters,campaignLabel,sourceLabel} from "../src/lib/analytics-context.ts";
 import {track,clearSession} from "../src/lib/session.ts";
 import {CONSENT_KEY} from "../src/lib/consent.ts";
+import {localizedHref,pageLocales,translatedPaths} from "../src/lib/i18n/routing.ts";
+import {driveAllowedOnPage} from "../src/lib/drive-policy.ts";
+
+test("all alert languages suppress automatic tracking and keep capability pages private",()=>{
+ const saved={window:globalThis.window,localStorage:globalThis.localStorage,location:globalThis.location,fetch:globalThis.fetch};
+ const storage=new Map(),events=[];
+ globalThis.window={};
+ globalThis.localStorage={getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
+ globalThis.fetch=async(url,options)=>{events.push(JSON.parse(options.body));return {};};
+ try {
+  storage.set(CONSENT_KEY,JSON.stringify({version:1,analytics:true,marketing:true,at:Date.now()}));
+  for(const path of ["/alerts","/alerts/confirm","/alerts/manage"]){
+   assert.equal(translatedPaths.includes(path),false);
+   for(const locale of ["pl","en","ru","uk"]){
+    const pathname=localizedHref(path,locale);
+    assert.equal(driveAllowedOnPage(pathname),false);
+    assert.ok(pageLocales(pathname).includes(locale));
+    globalThis.location={pathname,search:"?email=private@example.test",hash:"#token=private-token"};
+    clearSession();
+    const before=events.length;
+    track("PAGE_VIEW");track("SEARCH_RESULT");
+    assert.equal(events.length,before);
+    track("ALERT_CONFIRMED");track("ALERT_CONFIRMED");
+    assert.equal(events.length,before+1);
+   }
+  }
+  assert.ok(!JSON.stringify(events).includes("private"));
+  storage.set(CONSENT_KEY,JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()}));
+  const before=events.length;clearSession();track("ALERT_CONFIRMED");assert.equal(events.length,before);
+ } finally {clearSession();Object.assign(globalThis,saved);}
+});
 
 test("filters and campaign labels never copy arbitrary URL fields",()=>{
  assert.deepEqual(analyticsFilters({origin:"WRO",destination:"private-token",budget:"300",departure_from:"2030-02-30",email:"x@example.com"},[{iata_code:"WRO"}],[]),{origin:"WRO",budget:"300"});

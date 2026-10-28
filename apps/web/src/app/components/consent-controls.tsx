@@ -1,7 +1,10 @@
 "use client";
-/* eslint-disable @next/next/no-html-link-for-pages -- Full navigation unloads Drive before rendering personal operator details. */
+// Full navigation unloads Drive before rendering personal operator details.
 import {useEffect,useRef,useState,useSyncExternalStore} from "react";
 import {createPortal} from "react-dom";
+import {useLocale} from "./locale-provider";
+import {shell} from "../../lib/i18n/shell";
+import {localizedHref} from "../../lib/i18n/routing";
 import {driveAllowedOnPage} from "../../lib/drive-policy";
 import {usePathname} from "next/navigation";
 import {consentSnapshot,readConsent,saveConsent,subscribeConsent} from "../../lib/consent";
@@ -11,7 +14,9 @@ import {clearSession,track} from "../../lib/session";
 const subscribePanel=()=>()=>{};
 
 export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
-  const pathname=usePathname();
+  const pathname=localizedHref(usePathname(),"pl");
+  const {locale,messages}=useLocale();
+  const text=shell[locale];
   const panelHost=useSyncExternalStore(subscribePanel,()=>document.getElementById("privacy-panel"),()=>null);
   // Curated affiliate links must not be rewritten by an independent script.
   const managedLinks=!driveAllowedOnPage(pathname);
@@ -50,25 +55,23 @@ export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
     <button ref={settings} type="button" className="privacy-settings" onClick={()=>{
       setAnalytics(analytics);setMarketing(marketing);setEditing(true);
       requestAnimationFrame(()=>panel.current?.focus());
-    }}>Ustawienia prywatności</button>
+    }}>{text.settings}</button>
     {open && panelHost && createPortal(<section ref={panel} tabIndex={-1} className="consent-panel" aria-labelledby="consent-title">
-      <h2 id="consent-title">Twój wybór prywatności</h2>
-      <p>Korzystaj z ofert także bez opcjonalnych zgód. Wybór możesz zmienić w ustawieniach prywatności.</p>
+      <h2 id="consent-title">{text.consentTitle}</h2>
+      <p>{text.consentIntro}</p>
       <label><input type="checkbox" checked={selectedAnalytics} onChange={e=>setAnalytics(e.target.checked)}/>
-        Analityka HopTrip — statystyki korzystania z ofert.</label>
+        {text.analytics}</label>
       <label><input type="checkbox" checked={selectedMarketing} onChange={e=>setMarketing(e.target.checked)}/>
-        Travelpayouts Drive — marketing partnerski.</label>
-      <details><summary>Jak działają zgody i partnerzy</summary>
-        <p>Zapamiętamy wybór przez 180 dni. Analityka używa identyfikatora sesji w przeglądarce.
-          Drive to zewnętrzny skrypt z emrld.ltd: odczytuje stronę i zmienia linki na partnerskie.
-          Wycofanie zgody na Drive odświeży stronę. Przejścia do partnerów odbywają się na ich zasadach.</p>
-        <p><a href="/info/privacy">Prywatność</a>{" · "}
-          <a href="https://support.travelpayouts.com/hc/en-us/articles/360004121052-Privacy-Policy" rel="noopener noreferrer" target="_blank">Zasady Travelpayouts</a></p>
+        {text.marketing}</label>
+      <details><summary>{text.consentHow}</summary>
+        <p>{text.consentDetails}</p>
+        <p><a href={localizedHref("/info/privacy",locale)}>{messages.privacy}</a>{" · "}
+          <a href="https://support.travelpayouts.com/hc/en-us/articles/360004121052-Privacy-Policy" rel="noopener noreferrer" target="_blank">{text.partnerPolicy}</a></p>
       </details>
       <div className="consent-actions">
-        <button type="button" onClick={()=>choose(false,false)}>Odrzuć opcjonalne</button>
-        <button type="button" onClick={()=>choose(true,true)}>Akceptuj wszystkie</button>
-        <button type="button" onClick={()=>choose(selectedAnalytics,selectedMarketing)}>Zapisz wybór</button>
+        <button type="button" onClick={()=>choose(false,false)}>{text.reject}</button>
+        <button type="button" onClick={()=>choose(true,true)}>{text.accept}</button>
+        <button type="button" onClick={()=>choose(selectedAnalytics,selectedMarketing)}>{text.save}</button>
       </div>
     </section>,panelHost)}
   </div>;

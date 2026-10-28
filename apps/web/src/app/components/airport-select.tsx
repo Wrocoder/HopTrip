@@ -1,36 +1,40 @@
 "use client";
+import {useLocale} from "./locale-provider";
+import {filterText} from "../../lib/i18n/filter-copy";
 
 import {useId,useRef,useState} from "react";
 import type {Airport} from "../../lib/api";
 import {airportLabel,airportSuggestions,matchingAirports} from "../../lib/airports";
-import {pl} from "../../lib/pl";
+
 
 export function AirportSelect({airports,value="",errorId}:{airports:Airport[];value?:string;errorId?:string}) {
+  const {locale,messages:pl}=useLocale();
+  const t=(source:string)=>filterText(locale,source);
   const id=useId();
   const input=useRef<HTMLInputElement>(null);
   const [text,setText]=useState(()=>{
     const matches=matchingAirports(airports,value);
-    return matches.length===1 ? airportLabel(matches[0]) : value;
+    return matches.length===1 ? airportLabel(matches[0],locale) : value;
   });
   const [open,setOpen]=useState(false);
   const [active,setActive]=useState(-1);
   const suggestions=airportSuggestions(airports,text);
   const expanded=open && suggestions.length>0;
   function choose(airport:Airport) {
-    setText(airportLabel(airport));setOpen(false);setActive(-1);
+    setText(airportLabel(airport,locale));setOpen(false);setActive(-1);
     input.current?.setCustomValidity("");
   }
   return <div className="airport-select">
     <label htmlFor={id}>{pl.from}</label>
     <input ref={input} id={id} name="origin" value={text} maxLength={240}
-      placeholder="Dowolne lotnisko" autoComplete="off" role="combobox"
+      placeholder={t("Dowolne lotnisko")} autoComplete="off" role="combobox"
       aria-autocomplete="list" aria-expanded={expanded} aria-controls={`${id}-options`}
       aria-activedescendant={expanded && active>=0 ? `${id}-option-${active}` : undefined}
       aria-invalid={Boolean(errorId)}
       aria-describedby={`${id}-hint${errorId ? ` ${errorId}` : ""}`}
       onFocus={()=>{setOpen(true);setActive(-1);}}
       onBlur={()=>setOpen(false)}
-      onChange={event=>{setText(event.target.value);setOpen(true);setActive(-1);event.target.setCustomValidity("");}}
+      onChange={event=>{setText(event.target.value);setOpen(Boolean(event.target.value.trim()));setActive(-1);event.target.setCustomValidity("");}}
       onKeyDown={event=>{
         if(event.key==="Escape") {setOpen(false);setActive(-1);}
         if((event.key==="ArrowDown" || event.key==="ArrowUp") && suggestions.length) {
@@ -42,15 +46,15 @@ export function AirportSelect({airports,value="",errorId}:{airports:Airport[];va
           event.preventDefault();choose(suggestions[active]);
         }
       }}/>
-    <ul id={`${id}-options`} role="listbox" aria-label="Lotniska wylotu" hidden={!expanded}>
+    <ul id={`${id}-options`} role="listbox" aria-label={t("Lotniska wylotu")} hidden={!expanded}>
       {suggestions.map((airport,index)=><li id={`${id}-option-${index}`} key={airport.id}
         role="option" aria-selected={active===index}
         onMouseDown={event=>event.preventDefault()} onClick={()=>choose(airport)}>
-        {airportLabel(airport)}
+        {airportLabel(airport,locale)}
       </li>)}
     </ul>
     <span id={`${id}-hint`} className="field-hint">{!airports.length
-      ? "Podpowiedzi są niedostępne. Wpisz kod lotniska, np. WRO."
-      : "Miasto lub kod IATA. Puste pole: dowolne."}</span>
+      ? t("Podpowiedzi są niedostępne. Wpisz kod lotniska, np. WRO.")
+      : t("Miasto lub kod IATA. Puste pole: dowolne.")}</span>
   </div>;
 }

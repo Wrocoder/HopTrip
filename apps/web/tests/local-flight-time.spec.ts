@@ -20,8 +20,15 @@ test("audit midnight arrival is visible while seven hotel nights and manual mone
  await expect(page.locator("#budget-nights")).toHaveValue("7");
  await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
  await page.goto(await page.locator("#trip-share-link").inputValue());
- await expect(page.locator(".flight-schedule-compact .home-arrival")).toContainText("25 paź");
- await expect(page.locator(".flight-schedule-compact")).toContainText("00:40");
+ // This audit fixture deliberately keeps the original October dates. After its
+ // departure, a shared plan correctly hides the current schedule as expired.
+ if("2026-10-17"<new Date().toISOString().slice(0,10)) {
+  await expect(page.getByRole("status").filter({hasText:"Termin zapisanej oferty już minął"})).toBeVisible();
+  await expect(page.locator(".flight-schedule-compact")).toHaveCount(0);
+ } else {
+  await expect(page.locator(".flight-schedule-compact .home-arrival")).toContainText("25 paź");
+  await expect(page.locator(".flight-schedule-compact")).toContainText("00:40");
+ }
  await expect(page.locator("#budget-nights")).toHaveValue("7");
  await expect(page.locator("#budget-hotel")).toHaveValue("200");
  await expect(page.locator("#budget-food")).toHaveValue("50");

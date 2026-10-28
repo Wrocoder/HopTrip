@@ -38,3 +38,17 @@ test("destination aliases and keyboard suggestions preserve filters and allow cl
  await page.goto("/deals?destination=unknown-city");
  await expect(page.getByRole("alert").filter({hasText:"Nie znaleziono kierunku"})).toBeVisible();
 });
+
+test("Cyrillic input submits stable airport and destination identifiers",async({page})=>{
+ await page.goto("/deals?budget=300");
+ await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
+ for(const city of ["Милан","Мілан"]){
+  await page.locator('input[name="origin"]').fill("Вроцлав");
+  await page.locator('input[name="destination"]').fill(city);
+  await page.locator('form[aria-label="Filtry ofert"] button[type="submit"]').click();
+  await expect(page).toHaveURL(/origin=WRO/);
+  await expect(page).toHaveURL(/destination=milan/);
+  await expect(page).toHaveURL(/budget=300/);
+  await expect(page.locator('input[name="destination"]')).toHaveValue("Mediolan");
+ }
+});

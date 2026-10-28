@@ -384,11 +384,11 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .result-count { color: var(--secondary); margin-bottom: 18px; }
 /* Compact catalog controls; retain the home search layout and full filter semantics. */
 main.catalog-page { padding-top: 16px; }
-.catalog-page .page-heading { margin: 0 0 18px; }
-.catalog-page .page-heading h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 4px 0 12px; }
+.catalog-page .page-heading { margin: 0 0 10px; }
+.catalog-page .page-heading h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 4px 0 8px; }
 .catalog-page .page-heading .eyebrow { margin-bottom: 4px; }
 .catalog-page .page-heading .lead { margin-bottom: 0; }
-.catalog-page .filter-panel { padding: 18px; margin-bottom: 12px; }
+.catalog-page .filter-panel { padding: 14px; margin-bottom: 12px; }
 .catalog-page .filters { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1.2fr); gap: 8px 20px; }
 .catalog-page .filter-primary, .catalog-page .trip-presets,
 .catalog-page .filters > .notice { grid-column: 1 / -1; }
@@ -405,6 +405,13 @@ main.catalog-page { padding-top: 16px; }
 .catalog-page .active-filters { margin-top: 10px; padding-top: 10px; }
 .catalog-page .filter-chips { gap: 6px; }
 .catalog-page .filter-chip { padding: 6px 10px; }
+/* Keep translated navigation and longer labels above the first catalog offer. */
+body:has(.catalog-page) .site-header { padding-block: 12px; gap: 8px 24px; }
+.catalog-page .page-heading .lead { max-width: none; }
+@media (min-width: 641px) {
+  .catalog-page .active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .catalog-page .active-filters > p, .catalog-page .filter-reset { margin: 0; }
+}
 .catalog-page .result-count { margin-bottom: 12px; }
 .catalog-page summary:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; border-radius: 4px; }
 @media (max-width: 640px) {
@@ -444,6 +451,10 @@ main.catalog-page { padding-top: 16px; }
 .trip-details-content h3 { margin: 0 0 12px; font-size: 16px; }
 .trip-details-content .price-assessment { margin-top: 0; }
 .country-flag { display: inline-block; width: 24px; height: 18px; margin-left: 10px; vertical-align: middle; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.12); object-fit: cover; }
+.site-header:has(.language-switcher) { flex-wrap:wrap; }
+.language-switcher { display:flex; flex-wrap:wrap; gap:8px 14px; width:100%; font-size:.9rem; }
+.language-switcher a { padding:6px 0; }
+.language-switcher [aria-current="page"] { font-weight:700; text-decoration:underline; text-underline-offset:4px; }
 .flight-schedule { font-size: 14px; line-height: 1.6; margin-top: 14px; overflow-wrap: anywhere; }
 .flight-schedule p { margin: 0 0 10px; }
 .flight-stops { display: block; font-size: 13px; font-weight: 600; margin-top: 3px; }

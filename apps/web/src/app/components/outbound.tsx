@@ -1,5 +1,5 @@
 "use client";
-import {pl} from "../../lib/pl";
+import {useLocale} from "./locale-provider";
 import {tripText,type TripKey} from "../../lib/i18n/trip-copy";
 import {Component} from "../../lib/api";
 
@@ -10,7 +10,7 @@ import {passengerInstruction} from "../../lib/passenger-label";
 import {useOfferExpired} from './use-offer-expired';
 import {freshnessCopy} from '../../lib/i18n/freshness-copy';
 export function Outbound({component,dealSlug,hiddenAfter}:{component:Component;dealSlug?:string;hiddenAfter?:string|null}) {
- const locale="pl" as const;
+ const {locale,messages:pl}=useLocale();
  const t=(source:TripKey)=>tripText(locale,source);
   const plan=useTripDraft();
   const expired=useOfferExpired(hiddenAfter);
