@@ -19,8 +19,8 @@ test("score explains exact points without navigating and restores focus",async({
   await expect(dialog.getByRole("button",{name:"Zamknij wyjaśnienie oceny"})).toBeFocused();
   await dialog.locator(".score-calculation summary").click();
   await expect(dialog.locator(".score-part")).toHaveCount(3);
-  await expect(dialog.locator(".score-sum")).toContainText("41,9 + 20 + 7,5 = 69,4");
-  await expect(dialog.locator(".score-sum")).toContainText("69/100");
+  await expect(dialog.locator(".score-sum")).toContainText("41,9 + 20 + 14,1 = 76");
+  await expect(dialog.locator(".score-sum")).toContainText("76/100");
   await expect(dialog).toContainText("200,25");
   await expect(dialog).toContainText("250,00");
   await expect(dialog).toContainText("pierwszego zapisania");
@@ -43,7 +43,7 @@ test("score explains exact points without navigating and restores focus",async({
   await expect(dialog).not.toBeVisible();
   await card.locator(".deal-card-link").click();
   await expect(page).toHaveURL(/\/deals\/browser-deal$/);
-  await expect(page.locator("#score .score-sum")).toContainText("69/100");
+  await expect(page.locator("#score .score-sum")).toContainText("76/100");
 });
 
 test("provisional, legacy and missing explanations stay honest",async({page})=>{
@@ -65,7 +65,7 @@ test("score link can open the full explanation in a separate tab",async({page,co
   await page.locator('a.score-trigger[href="/deals/browser-deal#score"]').click({modifiers:["Control"]});
   const detail=await opened;
   await expect(detail).toHaveURL(/\/deals\/browser-deal#score$/);
-  await expect(detail.locator("#score .score-sum")).toContainText("69/100");
+  await expect(detail.locator("#score .score-sum")).toContainText("76/100");
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await detail.close();
 });

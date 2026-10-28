@@ -48,8 +48,9 @@ test("translated score shows the same saved calculation and all uncertainty stat
   await page.goto(`/${locale}/deals/browser-deal`);
   await page.locator("#score .score-calculation summary").click();
   await expect(page.locator("#score .score-part")).toHaveCount(3);
-  await expect(page.locator("#score .score-sum")).toContainText(locale==="en" ? "41.9 + 20 + 7.5 = 69.4" : "41,9 + 20 + 7,5 = 69,4");
-  await expect(page.locator("#score .score-sum")).toContainText("69/100");
+  // The current fixture retains a three-hour observation: 14.1 freshness points.
+  await expect(page.locator("#score .score-sum")).toContainText(locale==="en" ? "41.9 + 20 + 14.1 = 76" : "41,9 + 20 + 14,1 = 76");
+  await expect(page.locator("#score .score-sum")).toContainText("76/100");
   await expect(page.locator("#score")).toContainText(scoreText(locale,"firstSeen"));
   await expect(page.locator('#score [lang="pl"]')).toHaveCount(0);
   await page.locator("#score details").last().locator("summary").click();
