@@ -11,7 +11,7 @@ export const priceDataGuides:Record<Exclude<Locale,"pl">,Record<"price-freshness
     "When the source provides no observation time, we know only when we first received that price. We do not know how long it had already existed at the provider. Receiving an identical entry again without a new timestamp does not confirm that it is current.",
    ]},
    {title:"When we stop displaying an offer",paragraphs:[
-    "The current publication limit is 48 hours from the retained observation time. An earlier expiry supplied by the source takes priority. An offer also disappears after departure or after it is disabled.",
+    "The limit from the retained observation time is 6 hours for departures within the next 7 days, 24 hours for departures within the next 30 days and 48 hours for later departures. We shorten the limit as departure enters a nearer window. An earlier expiry supplied by the source takes priority. An offer also disappears after departure or after it is disabled.",
     "If we know only the departure date, without a time, we close the offer at the start of that day in UTC. This is a cautious publication boundary, not information about the aircraft's departure time.",
     "Availability checks also apply when opening details and attempting to visit the partner. A card opened earlier or a saved link may therefore no longer allow the onward visit. Refresh the catalog to see available options.",
    ]},
@@ -46,7 +46,7 @@ export const priceDataGuides:Record<Exclude<Locale,"pl">,Record<"price-freshness
     "Когда источник не сообщает время наблюдения, мы знаем только момент первого получения этой цены. Мы не знаем, как долго она уже существовала у поставщика. Повторное получение одинаковой записи без нового времени не подтверждает её актуальность.",
    ]},
    {title:"Когда мы перестаём показывать предложение",paragraphs:[
-    "Текущий срок публикации — 48 часов от сохранённого момента наблюдения. Более короткий срок действия, указанный источником, имеет приоритет. Предложение также исчезает после времени вылета или отключения.",
+    "Срок от сохранённого момента наблюдения составляет 6 часов при вылете в ближайшие 7 дней, 24 часа при вылете в ближайшие 30 дней и 48 часов для более поздних вылетов. Срок сокращается, когда вылет переходит в более близкий интервал. Более короткий срок действия, указанный источником, имеет приоритет. Предложение также исчезает после времени вылета или отключения.",
     "Если известен только день вылета без времени, мы закрываем предложение в начале этого дня по UTC. Это осторожная граница публикации, а не указание времени вылета самолёта.",
     "Проверка доступности действует и при открытии подробностей, и при попытке перейти к партнёру. Поэтому ранее открытая карточка или сохранённая ссылка могут уже не разрешать переход. Обновите каталог, чтобы увидеть доступные варианты.",
    ]},
@@ -81,7 +81,7 @@ export const priceDataGuides:Record<Exclude<Locale,"pl">,Record<"price-freshness
     "Коли джерело не повідомляє часу спостереження, ми знаємо лише момент першого отримання цієї ціни. Ми не знаємо, як довго вона вже існувала в постачальника. Повторне отримання однакового запису без нового часу не підтверджує його актуальності.",
    ]},
    {title:"Коли ми перестаємо показувати пропозицію",paragraphs:[
-    "Поточний строк публікації — 48 годин від збереженого моменту спостереження. Коротший строк дії, зазначений джерелом, має пріоритет. Пропозиція також зникає після часу вильоту або вимкнення.",
+    "Строк від збереженого моменту спостереження становить 6 годин для вильотів протягом найближчих 7 днів, 24 години для вильотів протягом найближчих 30 днів і 48 годин для пізніших вильотів. Строк скорочується, коли виліт переходить у ближчий інтервал. Коротший строк дії, зазначений джерелом, має пріоритет. Пропозиція також зникає після часу вильоту або вимкнення.",
     "Якщо відомий лише день вильоту без часу, ми закриваємо пропозицію на початку цього дня за UTC. Це обережна межа публікації, а не зазначення часу вильоту літака.",
     "Перевірка доступності діє і під час відкриття подробиць, і під час спроби перейти до партнера. Тому раніше відкрита картка або збережене посилання можуть уже не дозволяти переходу. Оновіть каталог, щоб побачити доступні варіанти.",
    ]},

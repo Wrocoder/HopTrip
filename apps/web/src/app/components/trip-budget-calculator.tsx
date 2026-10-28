@@ -26,11 +26,13 @@ export function TripBudgetCalculator(props:Props) {
 function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
  const {draft,save,ready,context,storageMessage}=useTripDraft()!;
  const {locale}=useLocale();
+ const planCopy=plannedEventsCopy[locale];
  const t=(text:string)=>budgetText(locale,text);
  const format=(grosz:number)=>money(String(grosz/100),locale);
  const input=draft.input;
  const [extraOpen,setExtraOpen]=useState(false);
  const result=calculateBudget(input,draft.events);
+ const lineLabel=(label:string)=>label==='Wydarzenia w planie'?planCopy.budgetLine:t(label);
  const update=(key:keyof BudgetInput,value:string)=>{
   const next={...input,[key]:value};
   save({...draft,input:next,review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
@@ -40,7 +42,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
  const datesInvalid=Boolean(draft.start || draft.end) && !budgetDateCounts(draft.start,draft.end);
  const field=(key:keyof BudgetInput,label:string,hint:string,money=false)=><div className={styles.field} key={key}>
   <label htmlFor={`budget-${key}`}>{t(label)}{money ? " (PLN)" : ""}</label>
-  <span id={`budget-${key}-hint`} className={styles.hint}>{t(hint)}</span>
+  <span id={`budget-${key}-hint`} className={styles.hint}>{hint===plannedEventsCopy.pl.remaining?planCopy.remaining:t(hint)}</span>
   <input id={`budget-${key}`} type="text" inputMode={money ? "decimal" : "numeric"}
    value={input[key]} onChange={event=>update(key,event.target.value)} maxLength={money ? 11 : 3}
    aria-invalid={Boolean(result.errors[key])}
@@ -92,20 +94,20 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
      : cost.hint,true)}
     <span className={styles.hint}>{t("Oba pola pamiętają własne kwoty. Do sumy trafia tylko wybrany wariant; po zmianie dat lub liczby gości sprawdź cenę ponownie.")}</span>
    </div>)}</div>
-  <details open={extraOpen} onToggle={event=>setExtraOpen(event.currentTarget.open)}><summary>Dodatkowe koszty: bagaż, transport miejski, atrakcje i rezerwa</summary>
+  <details open={extraOpen} onToggle={event=>setExtraOpen(event.currentTarget.open)}><summary>{t("Dodatkowe koszty: bagaż, transport miejski, atrakcje i rezerwa")}</summary>
    <div className={styles.grid}>{costFields.filter(cost=>!["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>field(cost.key,cost.label,cost.key==='activities'&&draft.events?.length?plannedEventsCopy.pl.remaining:cost.hint,true))}</div>
   </details>
   </fieldset>
-  <PlannedEvents/>
+  <PlannedEvents locale={locale}/>
   <div className={styles.result} role="status" aria-live="polite" aria-atomic="true">
    {!result.valid || datesInvalid ? <p>{t("Popraw zaznaczone pola i daty, aby obliczyć budżet.")}</p> : <>
     <p>{t(result.missing.length ? "Suma znanych kosztów" : "Budżet według wpisanych kosztów")}: <strong data-testid="budget-total">{format(result.total!)}</strong></p>
     <p>{t("Na osobę przy równym podziale (w zaokrągleniu):")}{" "}<strong data-testid="budget-person">{format(result.perPerson!)}</strong></p>
-    {result.missing.length>0 && <p>{t("Budżet niepełny. Do uzupełnienia:")}{" "}{result.missing.map(t).join(", ")}.</p>}
+    {result.missing.length>0 && <p>{t("Budżet niepełny. Do uzupełnienia:")}{" "}{result.missing.map(lineLabel).join(", ")}.</p>}
    </>}
   </div>
-  {result.valid && !datesInvalid && <details><summary>Rozbicie kosztów całej grupy</summary><dl className={styles.breakdown}>
-   {result.lines.map(line=><div key={line.key}><dt>{line.label}</dt><dd>{line.total===null ? "Nieznane" : format(line.total)+(line.incomplete?plannedEventsCopy.pl.plusUnknown:'')}</dd></div>)}
+  {result.valid && !datesInvalid && <details><summary>{t("Rozbicie kosztów całej grupy")}</summary><dl className={styles.breakdown}>
+   {result.lines.map(line=><div key={line.key}><dt>{lineLabel(line.label)}</dt><dd>{line.total===null ? t("Nieznane") : format(line.total)+(line.incomplete?planCopy.plusUnknown:'')}</dd></div>)}
   </dl></details>}
   <p className={styles.hint}>{t("To twój plan kosztów, nie oferta ani rezerwacja. Sprawdź końcowe ceny u sprzedawców. Szkic jest dostępny tylko w tej przeglądarce; usunięcie danych witryny usuwa też szkice.")}</p>
   <button type="button" disabled={!ready} className="button" onClick={()=>save({version:1,input:{...emptyBudget},start:"",end:"",context,review:false})}>{t("Wyczyść kalkulator")}</button>

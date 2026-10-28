@@ -4,6 +4,7 @@ import {editorialCopy} from "../src/lib/i18n/editorial-copy";
 import {priceGuide} from "../src/lib/i18n/price-guide";
 import {priceDataGuides} from "../src/lib/i18n/price-data-guides";
 import {scoreText} from "../src/lib/i18n/score-copy";
+import {getInfoContent} from "../src/lib/content";
 test.setTimeout(120000);
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
@@ -99,7 +100,8 @@ test("freshness and history articles preserve language, complete text and public
    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/${locale}/info/${slug}`);
    await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(5);
    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
-   await expect(page.locator('time[datetime="2026-09-21"]')).toBeVisible();
+   await expect(page.locator(`time[datetime="${getInfoContent(slug)!.reviewedAt}"]`)).toBeVisible();
+   if(slug==="price-freshness")await expect(page.locator("main p").filter({hasText:/6.*7.*24.*30.*48/})).toBeVisible();
    await expect(page.locator('meta[property="og:image"]')).toHaveCount(0);
    expect((await new AxeBuilder({page}).include("main").analyze()).violations).toEqual([]);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

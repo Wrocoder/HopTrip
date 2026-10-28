@@ -49,7 +49,7 @@ export default async function SharedTripPage({searchParams,locale="pl"}:Props) {
   <TripDraftProvider key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} initialEvents={draft.events} start={draft.start} end={draft.end} adultsOnly={draft.adultsOnly===true} forceReview>
   {current && !expired && <TripAccommodation deal={current}/>}
   <TripBudgetCalculator key={plan as string} tripId={`copy:${plan}`} initialInput={draft.input} start={draft.start} end={draft.end} shareOffer={offer} forceReview/>
-  {current && !expired && <TripEvents key={`events-copy-${offer.slug}`} deal={current} locale={locale} activitiesHref={activitiesForDestination(current.destination_slug)?`/deals/${current.slug}#destination-activities`:undefined}/>}
+  {current && !expired && <TripEvents key={`events-copy-${offer.slug}`} deal={current} locale={locale} activitiesHref={activitiesForDestination(current.destination_slug)?localizedHref(`/deals/${current.slug}#destination-activities`,locale):undefined}/>}
   </TripDraftProvider>
   <Link href={localizedHref("/saved",locale)}>{t("Zapisane wyjazdy")}</Link>
  </main>;
