@@ -62,6 +62,28 @@ def create_offer(client, source):
     return result.json()
 
 
+def test_editor_deadline_respects_near_departure_price_lifetime(editor, source, isolated_db, monkeypatch):
+    from app.services import editorial
+
+    checked = datetime.now(UTC)
+    monkeypatch.setattr(editorial, "now", lambda: checked)
+    deal, _, event = source
+    deal.depart_at = checked + timedelta(days=3)
+    deal.trip_start = deal.depart_at.date()
+    deal.trip_end = deal.trip_start + timedelta(days=3)
+    deal.last_verified_at = checked - timedelta(hours=5, minutes=55)
+    deal.expires_at = checked + timedelta(days=1)
+    event.start_date = event.end_date = deal.trip_start + timedelta(days=1)
+    event.payload = {**event.payload, "start_date": str(event.start_date)}
+    isolated_db.commit()
+
+    item = create_offer(editor, source)
+    deadline = datetime.fromisoformat(item["snapshot"]["valid_until"])
+    assert deadline == checked + timedelta(minutes=5)
+    approved = approve(editor, item).json()
+    assert datetime.fromisoformat(approved["approval_expires_at"]) == deadline
+
+
 def approve(client, item, channels=None):
     return client.post(f'{BASE}/items/{item["id"]}/approve', json={"version": item["version"],
         "channels": channels or ["telegram"]})

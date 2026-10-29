@@ -14,6 +14,7 @@ from app.providers.ticketmaster import safe_ticket_url
 from app.schemas.event import EventRead
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
+from app.services.price_freshness import price_freshness
 from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -96,8 +97,10 @@ def source_snapshot(db: Session, kind: str, source: dict) -> dict:
     if offer and offer.price_pln != deal.flight_price_pln:
         raise HTTPException(409, "Цена источника изменилась. Дождитесь обновления предложения")
     observed = utc(offer.source_observed_at or offer.last_verified_at) if offer else utc(deal.last_verified_at)
-    valid_until = min(checked + timedelta(hours=6), utc(deal.last_verified_at) + timedelta(hours=48),
-                      observed + timedelta(hours=48),
+    price_deadline = price_freshness(deal, offer, checked).hidden_after
+    if price_deadline is None:
+        raise HTTPException(409, "Неизвестен срок актуальности цены")
+    valid_until = min(checked + timedelta(hours=6), price_deadline,
                       utc(event.checked_at) + timedelta(hours=get_settings().events_max_age_hours))
     if deal.expires_at:
         valid_until = min(valid_until, utc(deal.expires_at))
