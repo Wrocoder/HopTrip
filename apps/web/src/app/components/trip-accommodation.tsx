@@ -6,6 +6,8 @@ import {cityLabel} from "../../lib/cities";
 import {track} from "../../lib/session";
 import {useTripDraft} from "./trip-draft";
 import {changeStayDate} from "../../lib/budget-draft";
+import {validCalendarDate} from "../../lib/calendar-date";
+import {dateCopy} from "../../lib/i18n/date-copy";
 import type {Deal} from "../../lib/api";
 import {stay22Link} from "../../lib/accommodation-links";
 import {date,tripNights} from "../../lib/i18n/format";
@@ -23,6 +25,7 @@ export function TripAccommodation({deal}:{deal:Deal}) {
  const record=()=>track("PARTNER_CLICK",deal.slug,undefined,{partner:{category:"stay",provider:"stay22"}});
  const href=ready && draft.adultsOnly && Number(adults)<=50 ? stay22Link({city:deal.destination_city,checkin,checkout,adults}) : null;
  const datesValid=Boolean(stay22Link({city:deal.destination_city,checkin,checkout,adults:"1"}));
+ const malformed=[checkin,checkout].some(value=>value!==''&&!validCalendarDate(value));
  const adultsValid=/^[1-9]\d*$/.test(adults) && Number.isSafeInteger(Number(adults)) && Number(adults)<=50;
  const {outbound,inbound}=flightLegs(deal.flight_facts);
  const arrival=flightTime(outbound.arrival,outbound.destinationZone,locale);
@@ -41,10 +44,10 @@ export function TripAccommodation({deal}:{deal:Deal}) {
    <fieldset className={styles.controls} disabled={!ready}><legend>{t("Daty pobytu i dorośli")}</legend>
    <div className={styles.grid}>
    <div className={styles.field}><label htmlFor="stay-checkin">{t("Zameldowanie")}</label>
-    <input id="stay-checkin" type="date" value={checkin} aria-invalid={!datesValid} aria-describedby={!datesValid ? "stay-dates-error" : undefined} onChange={event=>setCheckin(event.target.value)}/></div>
+    <input id="stay-checkin" type="date" min="0001-01-01" max="9999-12-31" value={checkin} aria-invalid={!datesValid} aria-describedby={!datesValid ? "stay-dates-error" : undefined} onChange={event=>setCheckin(event.target.value)}/></div>
    <div className={styles.field}><label htmlFor="stay-checkout">{t("Wymeldowanie")}</label>
-    <input id="stay-checkout" type="date" min={checkin} value={checkout} aria-invalid={!datesValid} aria-describedby={!datesValid ? "stay-dates-error" : undefined} onChange={event=>setCheckout(event.target.value)}/>
-   {!datesValid && <span className={styles.error} id="stay-dates-error" role="status">{t("Wybierz datę wymeldowania późniejszą niż zameldowanie.")}</span>}</div>
+    <input id="stay-checkout" type="date" min={validCalendarDate(checkin)?checkin:'0001-01-01'} max="9999-12-31" value={checkout} aria-invalid={!datesValid} aria-describedby={!datesValid ? "stay-dates-error" : undefined} onChange={event=>setCheckout(event.target.value)}/>
+   {!datesValid && <span className={styles.error} id="stay-dates-error" role="status">{malformed?dateCopy[locale].invalid:t("Wybierz datę wymeldowania późniejszą niż zameldowanie.")}</span>}</div>
    <div className={styles.field}><label htmlFor="stay-adults">{t("Dorośli")}</label>
     <input id="stay-adults" type="number" min="1" max="50" step="1" value={draft.adultsOnly ? adults : ""} aria-invalid={!adultsValid} aria-describedby={!adultsValid ? "stay-adults-error" : undefined} onChange={event=>setAdults(event.target.value)}/>
    {!adultsValid && <span className={styles.error} id="stay-adults-error" role="status">{t("Wpisz liczbę całkowitą: od 1 do 50 dorosłych.")}</span>}</div>

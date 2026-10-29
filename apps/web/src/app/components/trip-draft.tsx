@@ -1,7 +1,7 @@
 "use client";
 import {createContext,useContext,useEffect,useState,type ReactNode} from "react";
 import {emptyBudget,type BudgetInput} from "../../lib/trip-budget";
-import {budgetDraftKey,readBudgetDraft,type BudgetDraft} from "../../lib/budget-draft";
+import {budgetDraftKey,readLocalBudgetDraft,type BudgetDraft} from "../../lib/budget-draft";
 import type {PlannedEvent} from '../../lib/planned-events';
 export type TripDraftProps={initialInput?:Partial<BudgetInput>;initialEvents?:PlannedEvent[];tripId?:string;start?:string;end?:string;forceReview?:boolean;adultsOnly?:boolean};
 type State={draft:BudgetDraft;save:(next:BudgetDraft)=>void;ready:boolean;context:string;storageMessage:string};
@@ -21,10 +21,12 @@ export function TripDraftProvider({children,initialInput={},initialEvents,tripId
   let message="Zmiany zapisujemy automatycznie w tej przeglądarce, osobno dla każdej oferty.";
   try {
    const raw=localStorage.getItem(storageKey);
-   const saved=readBudgetDraft(raw);
+   const saved=readLocalBudgetDraft(raw);
    if(saved) {
-    restored={...saved,review:saved.review || saved.context!==context};
-    message="Przywrócono zapisany szkic. Kolejne zmiany zapisujemy automatycznie.";
+    restored={...saved.draft,review:saved.draft.review || saved.draft.context!==context || forceReview};
+    message=saved.datesNeedReview
+     ? "Przywrócono kwoty, podróżnych i wydarzenia. Popraw daty pobytu, aby wznowić obliczenia i wyszukiwanie."
+     : "Przywrócono zapisany szkic. Kolejne zmiany zapisujemy automatycznie.";
    } else if(raw) message="Nie udało się odczytać szkicu. Wpisz kwoty ponownie; następna zmiana zapisze nowy szkic.";
   } catch {message="Zapisywanie jest niedostępne. Po odświeżeniu utracisz zmiany.";}
   // Read browser storage after hydration; keep controls disabled until restoration finishes.

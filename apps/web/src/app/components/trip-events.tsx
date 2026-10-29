@@ -7,6 +7,8 @@ import {intlLocales,type Locale} from '../../lib/i18n/config';
 import {eventCopy,eventUx} from '../../lib/i18n/event-copy';
 import {eventSearchDays,validEventDates} from '../../lib/event-dates';
 import {changeStayDate} from '../../lib/budget-draft';
+import {formatCalendarDate,validCalendarDate} from '../../lib/calendar-date';
+import {dateCopy} from '../../lib/i18n/date-copy';
 import {useTripDraft} from './trip-draft';
 import {EventFlightNotice} from './event-flight-notice';
 import type {EventFlightFit} from '../../lib/event-flight-fit';
@@ -51,7 +53,8 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
  const current=state?.key===requestKey?state:null;
  const result=current?.result;
  const busy=Boolean(requestKey&&!current);
- const error=(ready&&start&&end&&!valid)||current?.kind==='invalid'?t.dates:current?.kind==='error'?t.unavailable:'';
+ const malformed=[start,end].some(value=>value!==''&&!validCalendarDate(value));
+ const error=ready&&malformed?dateCopy[locale].invalid:(ready&&(start||end)&&!valid)||current?.kind==='invalid'?t.dates:current?.kind==='error'?t.unavailable:'';
  useEffect(()=>{
   if(!requestKey)return;
   const controller=new AbortController();
@@ -71,7 +74,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   return()=>{active=false;controller.abort();clearTimeout(delay);clearTimeout(timeout);};
  },[requestKey,url]);
  const labels={ALL:t.all,MUSIC:t.music,SPORTS:t.sports,CULTURE:t.culture,OTHER:t.other};
- function date(value:string){return new Intl.DateTimeFormat(intl,{dateStyle:'medium',timeZone:'UTC'}).format(new Date(`${value}T12:00:00Z`));}
+ function date(value:string,options?:Intl.DateTimeFormatOptions){return formatCalendarDate(value,intl,options)??(value?dateCopy[locale].invalid:ux.noDates);}
  function changeDate(key:'start'|'end',value:string){
   if(mode==='stay')save(changeStayDate(draft,key,value));
   else setCustom(previous=>({...previous,[key]:value}));
@@ -114,8 +117,8 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
    <button type="button" className={styles.retry} disabled={!ready} onClick={mode==='stay'?otherDates:()=>setMode('stay')}>{mode==='stay'?ux.otherDates:ux.useTripDates}</button></div>
   <p className={styles.modeHint}>{mode==='stay'?ux.sharedHint:ux.otherHint}</p>
   <form className={styles.form} onSubmit={submit}>
-   <label>{t.from}<input ref={startInput} type="date" required disabled={!ready} value={start} aria-invalid={Boolean(start&&end&&!valid)} onChange={e=>changeDate('start',e.target.value)}/></label>
-   <label>{t.to}<input type="date" required disabled={!ready} value={end} min={start||undefined} aria-invalid={Boolean(start&&end&&!valid)} onChange={e=>changeDate('end',e.target.value)}/></label>
+   <label>{t.from}<input ref={startInput} type="date" min="0001-01-01" max="9999-12-31" required disabled={!ready} value={start} aria-invalid={!valid} aria-describedby={error?'event-dates-error':undefined} onChange={e=>changeDate('start',e.target.value)}/></label>
+   <label>{t.to}<input type="date" max="9999-12-31" required disabled={!ready} value={end} min={validCalendarDate(start)?start:'0001-01-01'} aria-invalid={!valid} aria-describedby={error?'event-dates-error':undefined} onChange={e=>changeDate('end',e.target.value)}/></label>
    <label>{t.category}<select value={category} disabled={!ready} onChange={e=>setCategory(e.target.value as Category)}>
     {(['ALL','MUSIC','SPORTS','CULTURE'] as const).map(c=><option key={c} value={c}>{labels[c]}</option>)}
    </select></label><button className="button" disabled={!ready||busy} type="submit">{busy?t.loading:t.search}</button>
@@ -130,7 +133,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   </div>}
   <div ref={resultsRef} role="status" aria-live="polite" className={styles.feedback}>
    {busy&&<p>{t.loading}</p>}
-   {error&&<p>{error}</p>}
+   {error&&<p id="event-dates-error">{error}</p>}
    {!error&&unavailable&&<p>{t.unavailable}</p>}
    {!busy&&result?.status==='EMPTY'&&<p>{t.empty}</p>}
    {result?.status==='NEEDS_DATES'&&<p>{t.dates}</p>}
@@ -156,7 +159,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   {!!result?.events.length&&<details className={styles.fitPolicy}><summary>{eventFitCopy[locale].title}</summary><p>{eventFitCopy[locale].policy}</p></details>}
   {!!result?.events.length&&<ul className={styles.grid}>{result.events.map(item=><li className={styles.card} key={item.id}>
    <div className={styles.cardTop}><span className={styles.category}>{labels[item.category]}</span>
-    <span className={styles.day} aria-hidden="true">{new Intl.DateTimeFormat(intl,{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(`${item.start_date}T12:00:00Z`))}</span></div>
+    <span className={styles.day} aria-hidden="true">{date(item.start_date,{day:'numeric',month:'short'})}</span></div>
    <h3>{item.name}</h3><p className={styles.venue}>{item.venue} · {eventCityLabel(item.city,locale)}</p>
    <p><time dateTime={item.start_date}>{date(item.start_date)}</time>
     {item.end_date&&item.end_date!==item.start_date&&<> – {date(item.end_date)}</>}

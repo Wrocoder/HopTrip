@@ -1,4 +1,5 @@
 import {chromium} from "@playwright/test";
+import {auditSitemap,auditPage,auditReciprocity,publishedPages,localizedPath} from './seo-contract.mjs';
 
 function origin(value) {
  const url=new URL(value);
@@ -10,6 +11,7 @@ const base=origin(process.argv[2] ?? "http://127.0.0.1:58080");
 const canonical=origin(process.argv[3] ?? base);
 const staging=process.argv.includes("--staging");
 const failures=[];
+const expectedPages=publishedPages(),pagesData=new Map();
 function check(ok,message) { if(!ok) failures.push(message); }
 const browser=await chromium.launch({...(process.env.PLAYWRIGHT_CHANNEL ? {channel:process.env.PLAYWRIGHT_CHANNEL} : {})});
 try {
@@ -23,15 +25,13 @@ try {
   if(doc.querySelector("parsererror")) throw new Error("Invalid sitemap XML");
   return [...doc.querySelectorAll("url > loc")].map(node=>node.textContent);
  },await sitemap.text());
- check(urls.length===61,`sitemap: expected 61 URLs, got ${urls.length}`);
- const growthPaths=["/from/KRK","/from/warszawa","/city-break","/tanie-loty-na-weekend","/routes/krakow-rome"];
- check(new Set(urls).size===urls.length,"sitemap: duplicate URLs");
+ failures.push(...auditSitemap(urls,canonical,expectedPages));
  const paths=[];
  const titles=new Set(), descriptions=new Set();
  for(const loc of urls) {
-  const url=new URL(loc), path=url.pathname;
-  check(url.origin===canonical && !url.search && !url.hash,`${path}: incorrect sitemap URL`);
-   check(["/","/info","/deals","/from/WRO","/destinations/milan",...growthPaths].includes(path) || /^\/info\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path),`${path}: unexpected sitemap path`);
+  let url;try{url=new URL(loc);}catch{continue;}
+  const path=url.pathname,expected=expectedPages.get(path);
+  if(!expected || paths.includes(path))continue;
   paths.push(path);
   // Fetch only the server explicitly selected by the operator, never sitemap hosts.
   const response=await page.goto(`${base}${path}`);
@@ -40,23 +40,20 @@ try {
    title:document.title,
    description:document.querySelector('meta[name="description"]')?.content,
    canonical:[...document.querySelectorAll('link[rel="canonical"]')].map(node=>node.href),
+   alternates:[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(node=>({lang:node.hreflang,href:node.href})),
    robots:[...document.querySelectorAll('meta[name="robots"]')].map(node=>node.content).join(","),
    ogTitle:document.querySelector('meta[property="og:title"]')?.content,
    ogDescription:document.querySelector('meta[property="og:description"]')?.content,
    ogUrl:document.querySelector('meta[property="og:url"]')?.content,
    lang:document.documentElement.lang, headings:document.querySelectorAll("h1").length,
   }));
-  check(data.lang==="pl" && data.headings===1,`${path}: expected Polish lang and one h1`);
+  pagesData.set(path,data);
   check(Boolean(data.title) && !titles.has(data.title),`${path}: missing or duplicate title`);
   check(Boolean(data.description) && !descriptions.has(data.description),`${path}: missing or duplicate description`);
   titles.add(data.title); descriptions.add(data.description);
-  check(data.canonical.length===1 && new URL(data.canonical[0]).href===new URL(path,canonical).href,`${path}: incorrect canonical`);
   const headerRobots=response?.headers()["x-robots-tag"] ?? "";
-  if(staging) check(/noindex/i.test(headerRobots),`${path}: staging requires X-Robots-Tag noindex`);
-  else check(!/noindex|none/i.test(data.robots+","+headerRobots),`${path}: unexpected noindex`);
-  check(Boolean(data.ogTitle) && Boolean(data.ogDescription),`${path}: missing Open Graph metadata`);
-  if(path!=="/") check(data.ogUrl===`${canonical}${path}`,`${path}: incorrect Open Graph URL`);
-  if(["/","/deals","/from/WRO","/destinations/milan"].includes(path)) {
+  failures.push(...auditPage(path,data,canonical,{status:response?.status(),actualPath:new URL(page.url()).pathname,headerRobots,staging,pages:expectedPages}));
+  if(expected.preview) {
    const image=await page.locator('meta[property="og:image"]').getAttribute("content");
    check(Boolean(image) && image.startsWith(`${canonical}/preview/`),`${path}: missing catalog preview`);
    if(image?.startsWith(`${canonical}/preview/`)) {
@@ -66,7 +63,7 @@ try {
      png.length>24 && png.readUInt32BE(16)===1200 && png.readUInt32BE(20)===630,`${path}: invalid preview PNG`);
    }
   }
-  if(path.startsWith("/info/")) {
+  if(expected.article) {
    const image=await page.locator('meta[property="og:image"]').getAttribute("content");
    check(image===`${canonical}/share/${path.split("/").pop()}`,`${path}: incorrect share image URL`);
    check(await page.locator('meta[name="twitter:card"]').getAttribute("content")==="summary_large_image",`${path}: missing large Twitter card`);
@@ -88,17 +85,23 @@ try {
    check(await nav.locator('[aria-current="page"]').textContent()===data.title,`${path}: incorrect current breadcrumb`);
    await page.setViewportSize({width:320,height:740});
    check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${path}: horizontal overflow at 320px`);
+  }else if(expected.locale!=='pl'){
+   // Current translated service/catalog pages use text cards, without Polish artwork
+   // or Polish article breadcrumbs. Change this policy with a reviewed asset rollout.
+   check(await page.locator('meta[name="twitter:card"]').getAttribute('content')==='summary',`${path}: expected translated text card`);
+   check(await page.locator('meta[property="og:image"], meta[name="twitter:image"]').count()===0,`${path}: unexpected untranslated social image`);
+   check(await page.locator('script[type="application/ld+json"]').count()===0,`${path}: unexpected untranslated structured data`);
   }
  }
- check(paths.includes("/") && paths.includes("/info"),"sitemap: missing home or editorial index");
- for(const path of growthPaths) check(paths.includes(path),`${path}: missing growth landing in sitemap`);
- for(const path of ["/info/contact","/info/privacy","/info/terms","/deals?origin=WRO","/destinations/barcelona"]) {
+ failures.push(...auditReciprocity(pagesData));
+ const privatePaths=['pl','en','ru','uk'].flatMap(locale=>['/info/contact','/info/privacy','/info/terms','/saved','/trip','/alerts','/deals?origin=WRO'].map(path=>localizedPath(path,locale)));
+ for(const path of [...privatePaths,"/destinations/barcelona"]) {
   check(!paths.includes(path),`${path}: must not appear in sitemap`);
   const response=await page.goto(`${base}${path}`);
   check(response?.status()===200,`${path}: expected HTTP 200`);
   const robots=await page.locator('meta[name="robots"]').evaluateAll(nodes=>nodes.map(node=>node.content).join(","));
   check(/noindex/i.test(robots),`${path}: missing noindex`);
-  if(path.startsWith("/info/")) check(await page.locator('script[type="application/ld+json"]').count()===0,`${path}: draft must not advertise structured data`);
+  if(/\/info\//.test(path)) check(await page.locator('script[type="application/ld+json"]').count()===0,`${path}: draft must not advertise structured data`);
  }
  const missing=await page.goto(`${base}/info/seo-audit-missing-page`);
  for(const slug of ["privacy","terms","contact","constructor","seo-audit-missing-page"]) {
@@ -115,7 +118,7 @@ try {
   const admin=await context.request.get(`${base}/api/v1/admin/system/status`,{timeout:15000,maxRedirects:0});
   check(admin.status()===404,"staging: public admin endpoint must be blocked");
  } else check(robotLines.includes(`Sitemap: ${canonical}/sitemap.xml`),"robots.txt: incorrect sitemap origin");
- console.log(JSON.stringify({pages:urls.length,failures},null,2));
+ console.log(JSON.stringify({pages:urls.length,expected:expectedPages.size,byLanguage:Object.fromEntries(['pl','en','ru','uk'].map(locale=>[locale,[...pagesData.values()].filter(page=>page.lang===locale).length])),failures},null,2));
  process.exitCode=failures.length ? 1 : 0;
 } finally {
  await browser.close();

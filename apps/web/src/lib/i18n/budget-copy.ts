@@ -1,6 +1,7 @@
 import type {Locale} from "./config.ts";
 // Reviewed UI translations: source keys keep the existing Polish calculator unchanged.
 export const budgetCopy:Record<string,readonly [string,string,string]>={
+"Przywrócono kwoty, podróżnych i wydarzenia. Popraw daty pobytu, aby wznowić obliczenia i wyszukiwanie.":["Amounts, travellers and events restored. Correct the stay dates to resume calculations and searches.","Суммы, путешественники и события восстановлены. Исправьте даты пребывания, чтобы возобновить расчёт и поиск.","Суми, мандрівників і події відновлено. Виправте дати перебування, щоб відновити розрахунок і пошук."],
 "Nieznane":["Unknown","Неизвестно","Невідомо"],
 "Kalkulator budżetu podróży":["Trip budget calculator","Калькулятор бюджета поездки","Калькулятор бюджету подорожі"],
 "Wpisz własne kwoty w PLN. Puste pole oznacza nieznany koszt; wpisz 0, jeśli wydatek nie występuje lub jest już uwzględniony w innej pozycji.":["Enter your own amounts in PLN. An empty field means an unknown cost; enter 0 if there is no expense or it is already included elsewhere.","Введите свои суммы в PLN. Пустое поле означает неизвестный расход; укажите 0, если расхода нет или он уже учтён в другой строке.","Введіть власні суми в PLN. Порожнє поле означає невідомі витрати; вкажіть 0, якщо витрат немає або їх уже враховано в іншому рядку."],
