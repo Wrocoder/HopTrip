@@ -8,6 +8,8 @@ import {money} from "../../lib/pl";
 import {useState} from "react";
 import {calculateBudget,costFields,emptyBudget,type BudgetInput} from "../../lib/trip-budget";
 import {budgetDateCounts,changeStayDate} from "../../lib/budget-draft";
+import {validCalendarDate} from "../../lib/calendar-date";
+import {dateCopy} from "../../lib/i18n/date-copy";
 import styles from "./trip-budget-calculator.module.css";
 import {ReferenceCosts} from "./reference-costs";
 import {TripActions} from "./trip-actions";
@@ -40,6 +42,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
  };
  const changeDate=(key:"start"|"end",value:string)=>save(changeStayDate(draft,key,value));
  const datesInvalid=Boolean(draft.start || draft.end) && !budgetDateCounts(draft.start,draft.end);
+ const malformed=[draft.start,draft.end].some(value=>value!==''&&!validCalendarDate(value));
  const field=(key:keyof BudgetInput,label:string,hint:string,money=false)=><div className={styles.field} key={key}>
   <label htmlFor={`budget-${key}`}>{t(label)}{money ? " (PLN)" : ""}</label>
   <span id={`budget-${key}-hint`} className={styles.hint}>{hint===plannedEventsCopy.pl.remaining?planCopy.remaining:t(hint)}</span>
@@ -62,12 +65,12 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   <legend>{t("Twój plan podróży")}</legend>
   <div className={styles.grid}>
    <div className={styles.field}><label htmlFor="budget-start">{t("Początek pobytu (opcjonalnie)")}</label>
-    <input id="budget-start" type="date" value={draft.start} aria-invalid={datesInvalid} aria-describedby={datesInvalid ? "budget-dates-error" : undefined} onChange={event=>changeDate("start",event.target.value)}/></div>
+    <input id="budget-start" type="date" min="0001-01-01" max="9999-12-31" value={draft.start} aria-invalid={datesInvalid} aria-describedby={datesInvalid ? "budget-dates-error" : undefined} onChange={event=>changeDate("start",event.target.value)}/></div>
    <div className={styles.field}><label htmlFor="budget-end">{t("Koniec pobytu (opcjonalnie)")}</label>
-    <input id="budget-end" type="date" value={draft.end} aria-invalid={datesInvalid} aria-describedby={datesInvalid ? "budget-dates-error" : undefined} onChange={event=>changeDate("end",event.target.value)}/></div>
+    <input id="budget-end" type="date" min="0001-01-01" max="9999-12-31" value={draft.end} aria-invalid={datesInvalid} aria-describedby={datesInvalid ? "budget-dates-error" : undefined} onChange={event=>changeDate("end",event.target.value)}/></div>
   </div>
   <p className={styles.hint}>{t("Daty przeliczają noce i dni wydatków. Możesz dopasować te liczby ręcznie. Daty pobytu są wspólne z wyszukiwaniem noclegu. Nie zmieniają dat oferty lotu.")}</p>
-  {datesInvalid && <p id="budget-dates-error" className={styles.error}>{t("Uzupełnij obie daty: koniec nie może być wcześniejszy niż początek; pobyt może obejmować najwyżej 365 dni.")}</p>}
+  {datesInvalid && <p id="budget-dates-error" className={styles.error}>{malformed?dateCopy[locale].invalid:t("Uzupełnij obie daty: koniec nie może być wcześniejszy niż początek; pobyt może obejmować najwyżej 365 dni.")}</p>}
   <div className={styles.grid}>
    {field("people",draft.adultsOnly ? "Liczba dorosłych" : "Liczba osób","Od 1 do 50 osób")}
    {field("nights","Liczba nocy","Od 0 do 365 nocy")}
