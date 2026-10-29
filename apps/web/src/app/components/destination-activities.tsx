@@ -5,49 +5,48 @@ import {ActivityBudgetLink} from "./activity-budget-link";
 import {date} from "../../lib/pl";
 import type {Locale} from "../../lib/i18n/config";
 import {tripText} from "../../lib/i18n/trip-copy";
+import {activityText} from '../../lib/i18n/activity-copy';
+import {activityUi,type ActivityUiKey} from '../../lib/i18n/activity-ui';
+import {cityLabel} from '../../lib/cities';
 
 export function DestinationActivities({slug,inTrip=false,locale="pl"}:{slug:string;inTrip?:boolean;locale?:Locale}) {
-  if(locale==="pl")return <PolishDestinationActivities slug={slug} inTrip={inTrip}/>;
-  if(!activitiesForDestination(slug))return null;
-  return <details><summary>{tripText(locale,"Pomysły na pobyt")} ({tripText(locale,"po polsku")})</summary>
-    <div lang="pl"><PolishDestinationActivities slug={slug} inTrip={inTrip}/></div>
-  </details>;
-}
-function PolishDestinationActivities({slug,inTrip=false}:{slug:string;inTrip?:boolean}) {
-  const selection=activitiesForDestination(slug);
-  if(!selection) return null;
+  const source=activitiesForDestination(slug);
+  if(!source)return null;
+  const translate=(value:string)=>activityText(locale,value);
+  const selection={...source,city:cityLabel(source.city,slug,locale),heading:source.heading?translate(source.heading):undefined,
+   items:source.items.map(item=>({...item,title:translate(item.title),category:translate(item.category),description:translate(item.description),beforeBooking:translate(item.beforeBooking),
+    audience:item.audience?translate(item.audience):undefined,duration:item.duration?translate(item.duration):undefined}))};
+  const t=(key:ActivityUiKey,values?:Record<string,string>)=>activityUi(locale,key,values);
   return <section id="destination-activities" tabIndex={-1} className={styles.section} aria-labelledby="destination-activities-title">
-    <p className="eyebrow">Pomysły na pobyt · {selection.city}</p>
-    <h2 id="destination-activities-title">{selection.heading ?? "Muzea i atrakcje"}</h2>
-    <p>Bilety kupujesz osobno. Dostępność na daty Twojej podróży sprawdzisz u sprzedawcy lub na oficjalnej stronie obiektu.</p>
+    <p className="eyebrow">{tripText(locale,'Pomysły na pobyt')} · {selection.city}</p>
+    <h2 id="destination-activities-title">{selection.heading ?? t('museums')}</h2><p>{t('intro')}</p>
     <ul className={styles.grid}>
       {selection.items.map(item=><li key={item.id} className={styles.card}>
         <span className="badge">{item.category}</span>
         <h3>{item.title}</h3>
         <p>{item.description}</p>
-        {item.audience && <p><strong>Dla kogo:</strong> {item.audience}</p>}
-        {item.duration && <p><strong>Czas wizyty:</strong> {item.duration}</p>}
+        {item.audience && <p><strong>{t('audience')}</strong> {item.audience}</p>}
+        {item.duration && <p><strong>{t('duration')}</strong> {item.duration}</p>}
         <p className={styles.note}>{item.beforeBooking}</p>
-        {item.checkedAt && <p className="muted">Opis sprawdzono {date(item.checkedAt)}. Termin i dostępność potwierdź u organizatora.</p>}
+        {item.checkedAt && <p className="muted">{t('reviewed',{date:date(item.checkedAt,locale)})}</p>}
         <div className={styles.booking}>
-          <p className="muted">{item.freeEntry ? "Samodzielna wizyta: bezpłatny wstęp według oficjalnej strony." : item.kind==="visit" ? "Oficjalna strona — bilety i godziny zwiedzania" : "Cena do sprawdzenia w Tiqets"}</p>
-          {item.affiliateHref && <p className="muted">Link afiliacyjny — możemy otrzymać prowizję za zakup.</p>}
+          <p className="muted">{t(item.freeEntry?'free':item.kind==='visit'?'official':'price')}</p>
+          {item.affiliateHref && <p className="muted">{t('affiliate')}</p>}
           <ActivityLink city={slug} activityId={item.id} affiliate={Boolean(item.affiliateHref)}
             className="button button-secondary" href={item.affiliateHref ?? item.href} target="_blank"
             rel={item.affiliateHref ? "sponsored noopener noreferrer" : "noopener noreferrer"}
-            aria-label={`${item.kind==="visit" ? "Sprawdź zasady wizyty" : "Sprawdź daty i cenę w Tiqets"}: ${item.title} (nowa karta)`}>
-            {item.kind==="visit" ? "Sprawdź zasady wizyty" : "Sprawdź daty i cenę"}
+            aria-label={`${t(item.kind==='visit'?'visit':'buyTiqets')}: ${item.title} (${t('newTab')})`}>
+            {t(item.kind==='visit'?'visit':'buy')}
           </ActivityLink>
           {item.durationSource && <p><ActivityLink city={slug} activityId={item.id} affiliate={false}
-            href={item.durationSource} target="_blank" rel="noopener noreferrer">Źródło informacji o czasie wizyty (nowa karta)</ActivityLink></p>}
+            href={item.durationSource} target="_blank" rel="noopener noreferrer">{t('durationSource')}</ActivityLink></p>}
         </div>
       </li>)}
     </ul>
-    <p className="muted">Koszt atrakcji nie jest wliczony w cenę lotu. Przed zakupem sprawdź zakres biletu,
-      ulgi i zasady anulowania. W dni podróży uwzględnij czas lotu i dojazdu.</p>
+    <p className="muted">{t('exclude')}</p>
     {(slug==="barcelona" || selection.heading) && <>
-      {slug==="barcelona" && <p className="muted">Opisy i zasady sprawdzono {date(selection.checkedAt)}. To przegląd źródeł, nie potwierdzenie dostępności biletów na daty podróży.</p>}
-      <p>W kalkulatorze wpisz łączny koszt wybranych atrakcji w PLN na osobę za cały pobyt. Przy różnych cenach biletów użyj średniej na osobę. Sam bezpłatny wstęp nie oznacza zerowych kosztów dojazdu.</p>
+      {slug==="barcelona" && <p className="muted">{t('snapshot',{date:date(selection.checkedAt,locale)})}</p>}
+      <p>{t('costs')}</p>
       <ActivityBudgetLink inTrip={inTrip}/>
     </>}
   </section>;

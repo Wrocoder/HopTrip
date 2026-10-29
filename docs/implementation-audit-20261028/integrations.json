@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-28 19:01:42.542144+00:00",
+  "data_providers": [
+    "travelpayouts_data",
+    "amadeus"
+  ],
+  "affiliate_providers": [
+    {
+      "code": "trip_com",
+      "is_active": false,
+      "onboarding_status": "NOT_CONFIGURED",
+      "capabilities_json": []
+    },
+    {
+      "code": "discovercars",
+      "is_active": false,
+      "onboarding_status": "NOT_CONFIGURED",
+      "capabilities_json": []
+    },
+    {
+      "code": "travelpayouts",
+      "is_active": true,
+      "onboarding_status": "APPROVED",
+      "capabilities_json": [
+        "AFFILIATE_LINK",
+        "DEEP_LINK"
+      ]
+    }
+  ],
+  "affiliate_programs": [
+    {
+      "code": "aviasales",
+      "is_active": true,
+      "onboarding_status": "APPROVED",
+      "capabilities_json": [
+        "AFFILIATE_LINK",
+        "DEEP_LINK"
+      ]
+    }
+  ],
+  "conversions": [],
+  "jobs": [
+    {
+      "type": "TRAVELPAYOUTS_PIPELINE",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-28 19:00:00.034190+00:00",
+      "finished_at": "2026-10-28 19:01:25.462467+00:00"
+    },
+    {
+      "type": "EVENTS_SYNC",
+      "status": "SUCCEEDED",
+      "started_at": "2026-10-28 05:00:00.019742+00:00",
+      "finished_at": "2026-10-28 05:13:08.952545+00:00"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>Редакция · HopTrip</title>
+  <link rel="stylesheet" href="assets/editor.css"><script src="assets/editor.js" defer></script>
+</head>
+<body>
+<header><a class="brand" href="/api/v1/editor/">HopTrip <span>редакция</span></a>
+  <div class="header-actions"><span class="pill">Подготовка · dry-run</span><button id="logout" hidden>Выйти</button></div></header>
+<main>
+  <div id="message" role="status" aria-live="polite" hidden></div>
+  <section id="login" class="login panel" hidden>
+    <p class="eyebrow">Личный кабинет владельца</p><h1>Истории начинаются здесь</h1>
+    <p>Подготовьте подборку, проверьте факты и одобрите текст для выбранных каналов.</p>
+    <form id="login-form"><label for="password">Пароль редакции</label>
+      <input id="password" type="password" autocomplete="current-password" required maxlength="512">
+      <button class="primary" type="submit">Войти в редакцию</button></form>
+  </section>
+  <section id="workspace" hidden>
+    <div class="intro"><div><p class="eyebrow">От идеи до готового черновика</p><h1>Редакционный стол</h1>
+      <p>Публикации на польском. Проверка и управление — на русском.</p></div><button id="new" class="primary">+ Новый черновик</button></div>
+    <p class="notice">Аккаунты соцсетей ещё не подключены. Одобрение разрешает выгрузку предпросмотра; отправка и расписание появятся на следующем этапе.</p>
+    <section id="composer" class="panel" hidden aria-labelledby="composer-title">
+      <h2 id="composer-title">Основа публикации</h2>
+      <form id="create-form"><div class="source-grid">
+        <label>Тип материала<select id="kind"><option value="offer">Перелёт + событие</option><option value="guide">Гайд HopTrip</option></select></label>
+        <label id="deal-label">Перелёт<select id="deal"></select></label>
+        <label id="event-label">Событие в городе<select id="event"></select></label>
+        <label id="stay-label">Пребывание до<input id="stay" type="date"><small>Для перелёта в одну сторону; максимум 31 день.</small></label>
+        <label id="guide-label" hidden>Гайд<select id="guide"></select></label>
+      </div><p id="source-note" class="muted">Показаны до 50 актуальных предложений и до 100 событий. Точное совпадение дат проверяется при создании.</p>
+      <div class="actions"><button class="primary" type="submit">Создать черновик</button><button id="cancel-create" type="button">Закрыть</button></div></form>
+    </section>
+    <div class="desk"><aside class="panel"><h2>Черновики <span id="count" class="muted"></span></h2><nav id="items" aria-label="Черновики"></nav></aside>
+      <section id="empty" class="panel empty"><span class="empty-icon" aria-hidden="true">↗</span><h2>Соберите первую историю</h2>
+        <p>Выберите перелёт и подходящее событие или начните с готового гайда. Здесь появятся текст, карточка и проверенные источники.</p><button id="empty-new">Создать черновик</button></section>
+      <article id="detail" class="panel" hidden>
+        <div class="detail-top"><div><p id="revision" class="eyebrow"></p><h2 id="title"></h2></div><span id="status" class="pill"></span></div>
+        <p id="issue" class="warning" hidden></p>
+        <details class="sources" open><summary>Источники и актуальность</summary><dl id="facts"></dl><p class="muted">Проверяется сохранённый каталог. Наличие мест и окончательная цена у продавца не подтверждаются этой проверкой.</p></details>
+        <div class="editor-grid"><section><label for="channel">Вариант для канала</label><select id="channel">
+          <option value="telegram">Telegram</option><option value="facebook">Facebook</option><option value="instagram">Instagram</option><option value="tiktok">TikTok</option><option value="linkedin">LinkedIn</option></select>
+          <p id="channel-note" class="muted"></p><label for="text">Текст публикации</label><textarea id="text" rows="12" maxlength="1800"></textarea>
+          <p id="text-count" class="muted"></p><p class="muted">Ссылка, дата наблюдения и партнёрское пояснение добавляются автоматически. При обновлении источника тексты будут сформированы заново.</p>
+          <div class="actions"><button id="save" class="primary">Сохранить новую версию</button><button id="refresh">Обновить источник и тексты</button></div>
+        </section><section class="preview" aria-label="Предпросмотр публикации"><p class="eyebrow">Предпросмотр · PL</p>
+          <img id="media" width="1200" height="630" alt="Карточка публикации HopTrip"><p class="muted">Собственная карточка HopTrip · шаблон 1</p>
+          <pre id="preview-text"></pre><p class="muted">Текст и карточка точные; внешний вид внутри соцсети может отличаться. SVG — исходник для будущего адаптера, для TikTok понадобится видео.</p></section></div>
+        <section class="approval"><h3>Одобрение версии</h3><p>Проверьте тексты каждого выбранного канала. Редактирование снимает одобрение.</p>
+          <fieldset id="channels"><legend>Выберите каналы для редакционного одобрения</legend>
+            <label><input type="checkbox" value="telegram" checked> Telegram</label><label><input type="checkbox" value="facebook"> Facebook</label>
+            <label><input type="checkbox" value="instagram"> Instagram</label><label><input type="checkbox" value="tiktok"> TikTok</label><label><input type="checkbox" value="linkedin"> LinkedIn</label></fieldset>
+          <p id="approval-note" class="muted"></p><div class="actions"><button id="approve" class="primary">Одобрить выбранные</button><button id="export">Скачать dry-run пакет</button><button id="reject" class="danger">Отклонить</button></div>
+        </section><details><summary>История изменений</summary><ol id="history"></ol></details>
+      </article></div>
+  </section>
+</main><footer>HopTrip · редакция владельца · время Europe/Warsaw</footer>
+</body></html>

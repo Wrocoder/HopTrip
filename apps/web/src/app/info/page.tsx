@@ -13,11 +13,13 @@ export function generateMetadata({locale="pl"}:{locale?:Locale}={}):Metadata {
 export default function InfoIndex({locale="pl"}:{locale?:Locale}) {
  const text=editorialCopy[locale];
  const groups=["method","planning","airports","destinations"] as const;
+ const pages=publishedInfoPages();
+ const hasUntranslated=pages.some(([slug,page])=>!editorialCard(slug,page,locale).translated);
  return <main className="page-shell"><div className="page-heading"><h1>{text.title}</h1><p>{text.description}</p>
-  {locale!=="pl" && <p>{text.notice}</p>}</div>
+  {hasUntranslated && <p>{text.notice}</p>}</div>
   <nav aria-label={text.topics}><ul>{groups.map(id=><li key={id}><a href={`#${id}`}>{text[id]}</a></li>)}</ul></nav>
   {groups.map(id=><section id={id} key={id}><h2>{text[id]}</h2><div className="deal-grid">
-   {publishedInfoPages().filter(([,page])=>(page.category??"method")===id).map(([slug,page])=>{
+   {pages.filter(([,page])=>(page.category??"method")===id).map(([slug,page])=>{
     const card=editorialCard(slug,page,locale),CardLink="a";
     return <CardLink className="deal-card" href={localizedHref(`/info/${slug}`,card.translated ? locale : "pl")} hrefLang={card.translated ? locale : "pl"} key={slug}>
      {!card.translated && <p className="muted">{text.polish}</p>}

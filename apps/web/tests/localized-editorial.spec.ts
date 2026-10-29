@@ -11,14 +11,15 @@ test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
 
-test("editorial index separates translated guides and labelled Polish material",async({page,request})=>{
+test("editorial index exposes every translated guide and keeps language through related articles",async({page,request})=>{
  for(const locale of ["en","ru","uk"] as const){
   await page.goto(`/${locale}/info`);
   await expect(page.getByRole("heading",{level:1})).toHaveText(editorialCopy[locale].title);
   await expect(page.locator("main .deal-card")).toHaveCount(51);
-  const polish=page.locator('main .deal-card[href="/info/one-way-round-trip"]');
-  await expect(polish).toContainText(editorialCopy[locale].polish);
-  await expect(polish.locator("h2")).toHaveAttribute("lang","pl");
+  const translated=page.locator(`main .deal-card[href="/${locale}/info/one-way-round-trip"]`);
+  await expect(translated).toBeVisible();
+  await expect(translated.locator("h2")).toHaveAttribute("lang",locale);
+  await expect(page.locator('main [lang="pl"]')).toHaveCount(0);
   await page.locator(`main .deal-card[href="/${locale}/info/price-comparison"]`).click();
   await expect(page.getByRole("heading",{level:1})).toHaveText(priceGuide[locale].title);
   for(const section of priceGuide[locale].sections??[]){
@@ -30,17 +31,17 @@ test("editorial index separates translated guides and labelled Polish material",
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
   await expect(page.locator('meta[property="og:image"]')).toHaveCount(0);
   await expect(page.locator('time[datetime="2026-09-27"]')).toBeVisible();
-  await page.locator('main a[href="/info/one-way-round-trip"]').click();
-  await expect(page.locator("html")).toHaveAttribute("lang","pl");
+  await page.locator(`main a[href="/${locale}/info/one-way-round-trip"]`).click();
+  await expect(page.locator("html")).toHaveAttribute("lang",locale);
  }
  const sitemap=await (await request.get("/sitemap.xml")).text();
  expect((sitemap.match(/<loc>/g)??[]).length).toBe(publishedPageCount);
  for(const locale of ["en","ru","uk"]){
   expect(sitemap).toContain(`/${locale}/info</loc>`);
   expect(sitemap).toContain(`/${locale}/info/price-comparison</loc>`);
-  expect(sitemap).not.toContain(`/${locale}/info/one-way-round-trip`);
+  expect(sitemap).toContain(`/${locale}/info/one-way-round-trip`);
  }
- expect((await request.get("/ru/info/one-way-round-trip")).status()).toBe(404);
+ expect((await request.get("/ru/info/one-way-round-trip")).status()).toBe(200);
  expect((await request.get("/de/info")).status()).toBe(404);
 });
 

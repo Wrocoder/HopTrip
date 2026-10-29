@@ -1,0 +1,348 @@
+{
+  "at": "2026-10-28T18:09:03.448Z",
+  "readiness": {
+    "status": 200,
+    "data": {
+      "status": "ready"
+    }
+  },
+  "results": [
+    {
+      "slug": "flight-3884-2026-10-31",
+      "status": 404,
+      "data": {
+        "detail": "Deal not found"
+      }
+    },
+    {
+      "slug": "flight-3827-2026-11-04",
+      "status": 200,
+      "data": {
+        "id": 3828,
+        "origin_code": "WMI",
+        "origin_city": "Warsaw",
+        "destination_city": "Milan",
+        "destination_slug": "milan",
+        "destination_country_code": "IT",
+        "events_supported": true,
+        "trip_type": "ROUND_TRIP",
+        "price_basis": "FLIGHT_PER_PERSON",
+        "flight_facts": {
+          "outbound_legs": [
+            {
+              "origin_airport": "WMI",
+              "destination_airport": "BGY",
+              "origin_timezone": "Europe/Warsaw",
+              "destination_timezone": "Europe/Rome",
+              "departure": "2026-11-04T19:30:00+01:00",
+              "arrival": "2026-11-04T21:35:00+01:00",
+              "airline_code": "FR",
+              "airline_name": "Ryanair",
+              "flight_number": "1904"
+            }
+          ],
+          "return_legs": [
+            {
+              "origin_airport": "BGY",
+              "destination_airport": "WMI",
+              "origin_timezone": "Europe/Rome",
+              "destination_timezone": "Europe/Warsaw",
+              "departure": "2026-11-09T09:05:00+01:00",
+              "arrival": "2026-11-09T11:00:00+01:00",
+              "airline_code": "FR",
+              "airline_name": "Ryanair",
+              "flight_number": "3341"
+            }
+          ],
+          "origin_timezone": "Europe/Warsaw",
+          "destination_timezone": "Europe/Rome",
+          "airline_name": "Ryanair",
+          "outbound_arrival_calculated": false,
+          "return_arrival_calculated": false,
+          "origin_airport": "WMI",
+          "destination_airport": "BGY",
+          "return_origin_airport": "BGY",
+          "return_destination_airport": "WMI",
+          "return_origin_timezone": "Europe/Rome",
+          "return_destination_timezone": "Europe/Warsaw",
+          "destination_code": "MIL",
+          "airline_code": "FR",
+          "outbound_stops": 0,
+          "return_stops": 0,
+          "outbound_departure": "2026-11-04T19:30:00+01:00",
+          "outbound_arrival": "2026-11-04T21:35:00+01:00",
+          "return_departure": "2026-11-09T09:05:00+01:00",
+          "return_arrival": "2026-11-09T11:00:00+01:00",
+          "destination_interval_minutes": 6450
+        },
+        "components": [
+          {
+            "id": 3828,
+            "component_type": "FLIGHT",
+            "price_pln": "249.00",
+            "available": true,
+            "reason": "AVAILABLE",
+            "redirect_path": "/go/flight-3827-2026-11-04/flight",
+            "partner_name": "Aviasales"
+          }
+        ],
+        "explanation_codes": [
+          "CACHED_PRICE",
+          "HISTORY_AVAILABLE"
+        ],
+        "score_version": "flight-v3",
+        "score_components": {
+          "sample_count": 41,
+          "breakdown": {
+            "status": "CURRENT",
+            "parts": [
+              {
+                "key": "price",
+                "points": "0.0",
+                "max_points": 60
+              },
+              {
+                "key": "history",
+                "points": "25.0",
+                "max_points": 25
+              },
+              {
+                "key": "freshness",
+                "points": "14.3",
+                "max_points": 15
+              }
+            ],
+            "total_before_rounding": "39.3",
+            "sample_count": 41,
+            "current_price_pln": "249.00",
+            "median_price_pln": "154.00",
+            "price_difference_percent": "-61.69",
+            "observed_at": "2026-10-28T14:39:08.034631Z",
+            "calculated_at": "2026-10-28T17:02:14.647696Z",
+            "observation_basis": "FIRST_SEEN"
+          }
+        },
+        "score_explanation": {
+          "status": "CURRENT",
+          "parts": [
+            {
+              "key": "price",
+              "points": "0.0",
+              "max_points": 60
+            },
+            {
+              "key": "history",
+              "points": "25.0",
+              "max_points": 25
+            },
+            {
+              "key": "freshness",
+              "points": "14.3",
+              "max_points": 15
+            }
+          ],
+          "total_before_rounding": "39.3",
+          "sample_count": 41,
+          "current_price_pln": "249.00",
+          "median_price_pln": "154.00",
+          "price_difference_percent": "-61.69",
+          "observed_at": "2026-10-28T14:39:08.034631Z",
+          "calculated_at": "2026-10-28T17:02:14.647696Z",
+          "observation_basis": "FIRST_SEEN"
+        },
+        "price_freshness": {
+          "observed_at": "2026-10-28T14:39:08.034631Z",
+          "observation_basis": "FIRST_SEEN",
+          "fetched_at": "2026-10-28T14:39:08.034631Z",
+          "availability_checked_at": null,
+          "hidden_after": "2026-10-28T20:39:08.034631Z",
+          "max_age_hours": 24
+        },
+        "slug": "flight-3827-2026-11-04",
+        "origin_airport_id": 3,
+        "destination_id": 7,
+        "trip_start": "2026-11-04",
+        "trip_end": "2026-11-09",
+        "nights": 5,
+        "travelers": 1,
+        "flight_price_pln": "249.00",
+        "hotel_price_pln": null,
+        "total_estimated_pln": "249.00",
+        "price_per_person_pln": "249.00",
+        "historical_baseline_pln": "154.00",
+        "discount_percent": "0.00",
+        "deal_score": 39,
+        "confidence": "1.0000",
+        "explanation": [],
+        "last_verified_at": "2026-10-28T14:39:08.034631Z",
+        "expires_at": "2026-10-28T20:39:08.034631Z",
+        "is_featured": false
+      }
+    },
+    {
+      "slug": "flight-3719-2026-11-27",
+      "status": 200,
+      "data": {
+        "id": 3719,
+        "origin_code": "GDN",
+        "origin_city": "Gdansk",
+        "destination_city": "Stockholm",
+        "destination_slug": "stockholm",
+        "destination_country_code": "SE",
+        "events_supported": true,
+        "trip_type": "ROUND_TRIP",
+        "price_basis": "FLIGHT_PER_PERSON",
+        "flight_facts": {
+          "outbound_legs": [
+            {
+              "origin_airport": "GDN",
+              "destination_airport": "ARN",
+              "origin_timezone": "Europe/Warsaw",
+              "destination_timezone": "Europe/Stockholm",
+              "departure": "2026-11-27T23:10:00+01:00",
+              "arrival": "2026-11-28T00:35:00+01:00",
+              "airline_code": "FR",
+              "airline_name": "Ryanair",
+              "flight_number": "4679"
+            }
+          ],
+          "return_legs": [
+            {
+              "origin_airport": "ARN",
+              "destination_airport": "GDN",
+              "origin_timezone": "Europe/Stockholm",
+              "destination_timezone": "Europe/Warsaw",
+              "departure": "2026-11-30T06:05:00+01:00",
+              "arrival": "2026-11-30T07:25:00+01:00",
+              "airline_code": "FR",
+              "airline_name": "Ryanair",
+              "flight_number": "4616"
+            }
+          ],
+          "origin_timezone": "Europe/Warsaw",
+          "destination_timezone": "Europe/Stockholm",
+          "airline_name": "Ryanair",
+          "outbound_arrival_calculated": false,
+          "return_arrival_calculated": false,
+          "origin_airport": "GDN",
+          "destination_airport": "ARN",
+          "return_origin_airport": "ARN",
+          "return_destination_airport": "GDN",
+          "return_origin_timezone": "Europe/Stockholm",
+          "return_destination_timezone": "Europe/Warsaw",
+          "destination_code": "STO",
+          "airline_code": "FR",
+          "outbound_stops": 0,
+          "return_stops": 0,
+          "outbound_departure": "2026-11-27T23:10:00+01:00",
+          "outbound_arrival": "2026-11-28T00:35:00+01:00",
+          "return_departure": "2026-11-30T06:05:00+01:00",
+          "return_arrival": "2026-11-30T07:25:00+01:00",
+          "destination_interval_minutes": 3210
+        },
+        "components": [
+          {
+            "id": 3719,
+            "component_type": "FLIGHT",
+            "price_pln": "141.00",
+            "available": true,
+            "reason": "AVAILABLE",
+            "redirect_path": "/go/flight-3719-2026-11-27/flight",
+            "partner_name": "Aviasales"
+          }
+        ],
+        "explanation_codes": [
+          "CACHED_PRICE",
+          "HISTORY_AVAILABLE"
+        ],
+        "score_version": "flight-v3",
+        "score_components": {
+          "sample_count": 17,
+          "breakdown": {
+            "status": "CURRENT",
+            "parts": [
+              {
+                "key": "price",
+                "points": "28.7",
+                "max_points": 60
+              },
+              {
+                "key": "history",
+                "points": "14.2",
+                "max_points": 25
+              },
+              {
+                "key": "freshness",
+                "points": "14.3",
+                "max_points": 15
+              }
+            ],
+            "total_before_rounding": "57.2",
+            "sample_count": 17,
+            "current_price_pln": "141.00",
+            "median_price_pln": "138.00",
+            "price_difference_percent": "-2.17",
+            "observed_at": "2026-10-28T14:39:08.034631Z",
+            "calculated_at": "2026-10-28T17:02:14.647696Z",
+            "observation_basis": "FIRST_SEEN"
+          }
+        },
+        "score_explanation": {
+          "status": "CURRENT",
+          "parts": [
+            {
+              "key": "price",
+              "points": "28.7",
+              "max_points": 60
+            },
+            {
+              "key": "history",
+              "points": "14.2",
+              "max_points": 25
+            },
+            {
+              "key": "freshness",
+              "points": "14.3",
+              "max_points": 15
+            }
+          ],
+          "total_before_rounding": "57.2",
+          "sample_count": 17,
+          "current_price_pln": "141.00",
+          "median_price_pln": "138.00",
+          "price_difference_percent": "-2.17",
+          "observed_at": "2026-10-28T14:39:08.034631Z",
+          "calculated_at": "2026-10-28T17:02:14.647696Z",
+          "observation_basis": "FIRST_SEEN"
+        },
+        "price_freshness": {
+          "observed_at": "2026-10-28T14:39:08.034631Z",
+          "observation_basis": "FIRST_SEEN",
+          "fetched_at": "2026-10-28T17:01:35.141739Z",
+          "availability_checked_at": null,
+          "hidden_after": "2026-10-29T14:39:08.034631Z",
+          "max_age_hours": 48
+        },
+        "slug": "flight-3719-2026-11-27",
+        "origin_airport_id": 6,
+        "destination_id": 82,
+        "trip_start": "2026-11-27",
+        "trip_end": "2026-11-30",
+        "nights": 3,
+        "travelers": 1,
+        "flight_price_pln": "141.00",
+        "hotel_price_pln": null,
+        "total_estimated_pln": "141.00",
+        "price_per_person_pln": "141.00",
+        "historical_baseline_pln": "138.00",
+        "discount_percent": "0.00",
+        "deal_score": 57,
+        "confidence": "0.5667",
+        "explanation": [],
+        "last_verified_at": "2026-10-28T14:39:08.034631Z",
+        "expires_at": "2026-10-29T14:39:08.034631Z",
+        "is_featured": false
+      }
+    }
+  ]
+}

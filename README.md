@@ -11,6 +11,7 @@ approval, domain/Oracle deployment and actual commission attribution remain exte
 - [Current implementation and verification](docs/implementation-status.md)
 - [18 internal tasks and completion log](docs/independent-development-tasks.md)
 - [Пошаговые действия владельца: домен, аккаунты, ссылки](docs/owner-action-guide.md)
+- [План соцсетей: создание аккаунтов, проверка постов и автопубликация](docs/social-publishing-plan.md)
 - [Operations and safe migration/backup procedures](docs/operations.md)
 - [Original audit](docs/project-audit-and-plan.md)
 
