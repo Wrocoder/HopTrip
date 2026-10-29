@@ -9,6 +9,7 @@ from app.models.editorial import (
     EditorialApproval,
     EditorialAudit,
     EditorialItem,
+    EditorialRehearsal,
     EditorialRevision,
     EditorSession,
 )
@@ -19,7 +20,8 @@ from app.models.offer import PriceObservation, TravelOffer
 from app.models.statistics import RouteStatistics
 
 __all__ = [
-    "EditorialApproval", "EditorialAudit", "EditorialItem", "EditorialRevision", "EditorSession",
+    "EditorialApproval", "EditorialAudit", "EditorialItem", "EditorialRehearsal",
+    "EditorialRevision", "EditorSession",
     "AlertDelivery",
     "DealAlert",
     "AffiliateClick",

@@ -219,3 +219,82 @@ def test_changed_template_requires_new_approval(editor, source, monkeypatch):
     monkeypatch.setattr(editorial, "DISCLOSURE", "Updated disclosure")
     result = editor.post(f'{BASE}/items/{item["id"]}/dry-run', json={"version":1})
     assert result.status_code == 409 and "Шаблон" in result.json()["detail"]
+
+
+def test_rehearsal_schedule_timezone_dedup_due_and_revalidation(editor, source, isolated_db, monkeypatch):
+    from app.models.editorial import EditorialRehearsal
+    from app.services import editor_rehearsal
+
+    item = create_offer(editor, source)
+    path = f'{BASE}/items/{item["id"]}/rehearsal'
+    assert editor.post(path, json={"version": 1}).status_code == 409
+    assert approve(editor, item, ["telegram", "instagram"]).status_code == 200
+    due = datetime.now(UTC) + timedelta(minutes=2)
+    body = {"version": 1, "scheduled_at": due.isoformat()}
+    assert editor.post(path, json={**body, "scheduled_at": due.replace(tzinfo=None).isoformat()}).status_code == 422
+    assert editor.post(path, json={**body, "scheduled_at": item["snapshot"]["valid_until"]}).status_code == 422
+    first = editor.post(path, json=body)
+    assert first.status_code == 201, first.text
+    # Same instant with another offset is the same schedule, including across DST.
+    from datetime import timezone
+    retry = editor.post(path, json={**body, "scheduled_at": due.astimezone(timezone(timedelta(hours=2))).isoformat()})
+    assert retry.json()["id"] == first.json()["id"]
+    assert len(list(isolated_db.scalars(select(EditorialRehearsal)))) == 1
+    assert editor.post(path + "/run", json={"version": 1}).json()["package"] is None
+    monkeypatch.setattr(editor_rehearsal, "now", lambda: due + timedelta(seconds=1))
+    result = editor.post(path + "/run", json={"version": 1}).json()
+    assert result["state"] == "READY"
+    package = result["package"]
+    assert package["publishable"] is False and package["accounts"] == []
+    assert set(package["variants"]) == {"telegram", "instagram"}
+    assert package["checksum"] == item["checksum"]
+    assert editor.post(path, json={"version": 1}).json()["id"] == first.json()["id"]
+    assert editor_rehearsal.process_due(isolated_db) == []
+    source[0].flight_price_pln = Decimal("999")
+    isolated_db.commit()
+    blocked = editor.post(path + "/run", json={"version": 1}).json()
+    assert blocked["state"] == "NEEDS_REVIEW" and blocked["package"] is None
+
+
+@pytest.mark.parametrize("action", ["cancel", "revise", "reject", "expire", "approval", "template"])
+def test_rehearsal_cancel_and_invalidation(editor, isolated_db, monkeypatch, action):
+    from app.models.editorial import EditorialRehearsal
+    from app.services import editor_rehearsal, editorial
+
+    item = editor.post(BASE + "/items", json={"kind": "guide"}).json()
+    assert approve(editor, item).status_code == 200
+    path = f'{BASE}/items/{item["id"]}'
+    assert editor.post(path + "/rehearsal", json={"version": 1}).status_code == 201
+    if action == "cancel":
+        assert editor.post(path + "/rehearsal/cancel", json={"version": 1}).json()["state"] == "CANCELLED"
+    elif action == "revise":
+        editor.post(path + "/revise", json={"version": 1, "variants": item["variants"]})
+    elif action == "reject":
+        editor.post(path + "/reject", json={"version": 1})
+    elif action == "expire":
+        isolated_db.scalar(select(EditorialApproval)).expires_at = datetime.now(UTC) - timedelta(seconds=1)
+        isolated_db.commit()
+    elif action == "approval":
+        isolated_db.scalar(select(EditorialApproval)).channels = ["facebook"]
+        isolated_db.commit()
+    else:
+        monkeypatch.setattr(editorial, "media_svg", lambda snapshot: "Changed template")
+    editor_rehearsal.process_due(isolated_db)
+    job = isolated_db.scalar(select(EditorialRehearsal))
+    assert job.state == ("CANCELLED" if action in {"cancel", "revise", "reject"} else
+                         "EXPIRED" if action == "expire" else "NEEDS_REVIEW")
+    assert job.package is None
+    assert editor_rehearsal.process_due(isolated_db) == []
+
+
+def test_rehearsal_endpoints_require_owner_csrf_and_current_version(editor):
+    item = editor.post(BASE + "/items", json={"kind": "guide"}).json()
+    approve(editor, item)
+    path = f'{BASE}/items/{item["id"]}/rehearsal'
+    assert editor.post(path, json={"version": 99}).status_code == 409
+    assert editor.post(path, json={"version": 1, "accounts": ["unapproved"]}).status_code == 422
+    editor.headers["x-csrf-token"] = "wrong"
+    for suffix in ["", "/run", "/cancel"]:
+        assert editor.post(path + suffix, json={"version": 1}).status_code == 403
+    editor.cookies.clear()
+    assert editor.post(path, json={"version": 1}).status_code == 401

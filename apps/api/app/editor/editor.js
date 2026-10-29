@@ -2,7 +2,8 @@
 const $ = (id) => document.getElementById(id);
 const base = "/api/v1/editor";
 const labels = {DRAFT:"Черновик",APPROVED:"Одобрено для dry-run",REJECTED:"Отклонено",NEEDS_REVIEW:"Нужна проверка"};
-const actions = {CREATED:"Создан черновик",REVISED:"Создана новая версия",APPROVED_DRY_RUN:"Одобрено для dry-run",REJECTED:"Отклонено",STALE:"Источник устарел",DRY_RUN:"Выгружен пакет"};
+const actions = {CREATED:"Создан черновик",REVISED:"Создана новая версия",APPROVED_DRY_RUN:"Одобрено для dry-run",REJECTED:"Отклонено",STALE:"Источник устарел",DRY_RUN:"Выгружен пакет",REHEARSAL_SCHEDULED:"Назначена пробная проверка",REHEARSAL_CANCELLED:"Пробная задача отменена",REHEARSAL_CHECKED:"Пробная задача проверена"};
+const queueLabels={SCHEDULED:"Ожидает проверки",READY:"Пакет подготовлен, отправка отключена",CANCELLED:"Отменено",EXPIRED:"Одобрение истекло",NEEDS_REVIEW:"Нужна новая проверка"};
 const names = {telegram:"Telegram",facebook:"Facebook",instagram:"Instagram",tiktok:"TikTok",linkedin:"LinkedIn"};
 let csrf = "", current = null, variants = {}, channel = "telegram", dirty = false, sources = null, busy = false;
 let sourceRequest = 0;
@@ -21,6 +22,9 @@ async function enter(session){csrf=session.csrf;$("login").hidden=true;$("worksp
 function controls(){if(!current)return;$("save").disabled=busy||!dirty;$("approve").disabled=busy||dirty||!!current.issue||["REJECTED","NEEDS_REVIEW","APPROVED"].includes(current.status);
   $("export").disabled=busy||dirty||!current.approved_channels.length;$("reject").disabled=busy||dirty||current.status==="REJECTED";
   $("approval-note").textContent=dirty?"Есть несохранённые изменения. Сначала сохраните новую версию.":current.approval_expires_at?`Одобрено до ${date(current.approval_expires_at)} (Варшава). Каналы: ${current.approved_channels.map(c=>names[c]).join(", ")}.`:"Аккаунты не подключены. Это одобрение подготовки, а не отправки.";
+  const job=current.rehearsals.find(j=>j.version===current.version),active=job&&["SCHEDULED","READY"].includes(job.state);
+  $("schedule").disabled=$("rehearse-now").disabled=busy||dirty||!current.approved_channels.length||!!job;
+  $("run-rehearsal").disabled=$("cancel-rehearsal").disabled=busy||dirty||!active;
 }
 async function list(){const rows=await api("/items");$("items").replaceChildren();$("count").textContent=rows.length;
   for(const row of rows){const button=document.createElement("button");button.className="item";button.setAttribute("aria-current",String(current?.id===row.id));
@@ -40,6 +44,9 @@ function show(item){current=item;variants={...item.variants};dirty=false;$("empt
   }else{fact("Редактура гайда",f.reviewed_at);fact("Версия источника",String(f.version));}
   $("history").replaceChildren();for(const entry of item.history){const li=document.createElement("li");li.textContent=`${date(entry.at)} · v${entry.version} · ${actions[entry.action]||entry.action} · ${entry.owner}`;$("history").append(li);}
   document.querySelectorAll("#channels input").forEach(c=>c.checked=item.approved_channels.length?item.approved_channels.includes(c.value):c.value==="telegram");
+  $("rehearsal-zone").textContent=`(${Intl.DateTimeFormat().resolvedOptions().timeZone})`;
+  const job=item.rehearsals[0];$("rehearsal-status").textContent=job?`v${job.version} · ${queueLabels[job.state]} · ${date(job.scheduled_at)} (Варшава)${job.reason?` · ${job.reason}`:""}`:"Пробных задач пока нет.";
+  $("rehearsal-time").value="";
   channel=$("channel").value;changeChannel();controls();
 }
 function changeChannel(){channel=$("channel").value;$("text").value=variants[channel]||"";
@@ -73,5 +80,16 @@ $("reject").onclick=()=>run(async()=>{show(await api(`/items/${current.id}/rejec
 $("export").onclick=()=>run(async()=>{const payload=await api(`/items/${current.id}/dry-run`,{version:current.version});
   const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=`hoptrip-draft-${current.id}-v${current.version}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   show(await api(`/items/${current.id}`));notice("Пакет скачан. В соцсети ничего не отправлено.");});
+async function scheduleRehearsal(immediate){let scheduled_at=null;
+  if(!immediate){const value=$("rehearsal-time").value;if(!value)throw new Error("Выберите время пробной проверки");scheduled_at=new Date(value).toISOString();}
+  await api(`/items/${current.id}/rehearsal`,{version:current.version,scheduled_at});
+  if(immediate)await runRehearsal();else{show(await api(`/items/${current.id}`));notice("Пробная проверка запланирована. Отправка отключена.");}}
+async function runRehearsal(){const result=await api(`/items/${current.id}/rehearsal/run`,{version:current.version});
+  show(await api(`/items/${current.id}`));
+  if(!result.package){notice(result.reason||"Назначенное время ещё не наступило.",result.state!=="SCHEDULED");return;}
+  const url=URL.createObjectURL(new Blob([JSON.stringify(result.package,null,2)],{type:"application/json"}));
+  const a=document.createElement("a");a.href=url;a.download=`hoptrip-rehearsal-${result.id}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notice("Пробная проверка пройдена, пакет скачан. Отправка отключена.");}
+$("schedule").onclick=()=>run(()=>scheduleRehearsal(false));$("rehearse-now").onclick=()=>run(()=>scheduleRehearsal(true));
+$("run-rehearsal").onclick=()=>run(runRehearsal);$("cancel-rehearsal").onclick=()=>run(async()=>{await api(`/items/${current.id}/rehearsal/cancel`,{version:current.version});show(await api(`/items/${current.id}`));notice("Пробная задача отменена.");});
 window.addEventListener("beforeunload",e=>{if(dirty){e.preventDefault();e.returnValue="";}});
 run(async()=>{try{await enter(await api("/session"));}catch{showLogin();}});

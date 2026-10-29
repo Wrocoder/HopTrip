@@ -1,0 +1,10 @@
+[Unit]
+Description=Check due HopTrip dry-run rehearsals every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:30
+Persistent=true
+Unit=hoptrip-editor-rehearsal.service
+
+[Install]
+WantedBy=timers.target

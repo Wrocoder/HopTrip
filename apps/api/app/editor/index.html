@@ -20,7 +20,7 @@
   <section id="workspace" hidden>
     <div class="intro"><div><p class="eyebrow">От идеи до готового черновика</p><h1>Редакционный стол</h1>
       <p>Публикации на польском. Проверка и управление — на русском.</p></div><button id="new" class="primary">+ Новый черновик</button></div>
-    <p class="notice">Аккаунты соцсетей ещё не подключены. Одобрение разрешает выгрузку предпросмотра; отправка и расписание появятся на следующем этапе.</p>
+    <p class="notice">Аккаунты соцсетей ещё не подключены. Одобрение разрешает предпросмотр и пробную очередь. Отправка в соцсети отключена.</p>
     <section id="composer" class="panel" hidden aria-labelledby="composer-title">
       <h2 id="composer-title">Основа публикации</h2>
       <form id="create-form"><div class="source-grid">
@@ -52,6 +52,13 @@
             <label><input type="checkbox" value="telegram" checked> Telegram</label><label><input type="checkbox" value="facebook"> Facebook</label>
             <label><input type="checkbox" value="instagram"> Instagram</label><label><input type="checkbox" value="tiktok"> TikTok</label><label><input type="checkbox" value="linkedin"> LinkedIn</label></fieldset>
           <p id="approval-note" class="muted"></p><div class="actions"><button id="approve" class="primary">Одобрить выбранные</button><button id="export">Скачать dry-run пакет</button><button id="reject" class="danger">Отклонить</button></div>
+        </section>
+        <section class="approval" aria-labelledby="rehearsal-title"><h3 id="rehearsal-title">Пробная очередь · без отправки</h3>
+          <p>В назначенное время можно повторно проверить источник и скачать пакет. Изменение версии отменяет задачу. Для нового расписания нужна новая версия.</p>
+          <label for="rehearsal-time">Время на этом устройстве <span id="rehearsal-zone"></span></label>
+          <input id="rehearsal-time" type="datetime-local">
+          <div class="actions"><button id="schedule">Запланировать пробную проверку</button><button id="rehearse-now">Проверить сейчас</button><button id="run-rehearsal">Проверить срок и скачать</button><button id="cancel-rehearsal">Отменить пробную задачу</button></div>
+          <p id="rehearsal-status" role="status"></p>
         </section><details><summary>История изменений</summary><ol id="history"></ol></details>
       </article></div>
   </section>
