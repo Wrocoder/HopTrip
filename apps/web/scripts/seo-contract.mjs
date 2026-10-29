@@ -7,6 +7,7 @@ export function publishedPages(inventory=config){
  const pages=new Map();
  if(new Set(inventory.polishPaths).size!==inventory.polishPaths.length)throw new Error('Duplicate published path in SEO inventory');
  for(const path of inventory.translatedPaths)if(!inventory.polishPaths.includes(path))throw new Error(`Translation without Polish source: ${path}`);
+ for(const path of inventory.translatedArticlePaths??[])if(!path.startsWith('/info/')||!inventory.translatedPaths.includes(path))throw new Error(`Translated article without translated route: ${path}`);
  for(const path of inventory.polishPaths){
   const locales=inventory.translatedPaths.includes(path)?inventory.locales:['pl'];
   for(const locale of locales)pages.set(localizedPath(path,locale),{path,locale,locales,

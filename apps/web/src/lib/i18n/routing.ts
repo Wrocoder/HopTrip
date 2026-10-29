@@ -1,10 +1,11 @@
+import {hasGuideTranslation} from './guide-slugs.ts';
 import {defaultLocale,isLocale,publishedLocales,locales,type Locale} from "./config.ts";
 
 export const translatedPaths=["/","/info/trip-budget","/deals","/info/about","/info/partners","/info","/info/price-comparison","/info/price-freshness","/info/price-history","/city-break","/tanie-loty-na-weekend","/from/warszawa","/from/WRO","/from/KRK","/destinations/milan","/routes/krakow-rome"] as const;
 export function pageLocales(path:string):readonly Locale[] {
  const base=localizedHref(path,"pl").split(/[?#]/)[0];
  // Private plans and temporary offers support languages but stay out of sitemap.
- return (translatedPaths as readonly string[]).includes(base) ||
+ return (translatedPaths as readonly string[]).includes(base) || (base.startsWith("/info/")&&hasGuideTranslation(base.slice(6))) ||
   ["/saved","/trip","/alerts","/alerts/confirm","/alerts/manage","/info/contact","/info/privacy","/info/terms"].includes(base) || /^\/deals\/[a-zA-Z0-9_-]{1,180}$/.test(base) ? locales : publishedLocales;
 }
 export function availableHref(href:string,locale:Locale):string {
