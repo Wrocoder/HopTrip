@@ -33,8 +33,8 @@ if [[ $* == *'config --services'* ]]; then
  trap 'exit 255' PIPE
  printf 'events-worker\n'
  sleep 0.05
- for ((i=0;i<2000;i++)); do printf 'service-%s\n' "$i"; done
- printf 'producer-finished\n'
+ for ((i=0;i<2000;i++)); do printf 'service-%s\n' "$i" || exit 255; done
+ printf 'producer-finished\n' || exit 255
 elif [[ $* == *inspect* ]]; then
  echo fixture-image
 elif [[ $* == *pg_dump* ]]; then
