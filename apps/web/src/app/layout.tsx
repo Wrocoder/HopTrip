@@ -46,7 +46,7 @@ export default async function RootLayout({children}:Readonly<{children:React.Rea
     <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{text.disclosure}</p></div><nav className="footer-nav" aria-label={labels.info}>
-      <NavLink href="/city-break">City break{suffix}</NavLink><NavLink href="/tanie-loty-na-weekend">{labels.weekend}{suffix}</NavLink><NavLink href="/from/warszawa">{labels.warsaw}{suffix}</NavLink>
+      <NavLink href={localizedHref("/city-break",locale)}>City break</NavLink><NavLink href={localizedHref("/tanie-loty-na-weekend",locale)}>{labels.weekend}</NavLink><NavLink href={localizedHref("/from/warszawa",locale)}>{labels.warsaw}</NavLink>
       <NavLink href={localizedHref("/saved",locale)}>{labels.saved}</NavLink>
       <NavLink href={localizedHref("/alerts",locale)}>{labels.alerts}</NavLink>
       {(["about","contact","privacy","terms","partners"] as const).map(key=>

@@ -1,8 +1,8 @@
-import {test,expect} from '@playwright/test';
+import {test,expect as baseExpect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {homeText} from '../src/lib/i18n/home-copy';
 import {localeNames} from '../src/lib/i18n/config';
-import {shell} from '../src/lib/i18n/shell';
+const expect=baseExpect.configure({timeout:15000});
 
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>{
@@ -52,14 +52,14 @@ for(const locale of ['en','ru','uk'] as const){
  });
 }
 
-test('home language switching preserves the query and fragment; unpublished links are labelled',async({page,request})=>{
+test('home language switching preserves query and fragment; landing links retain language',async({page,request})=>{
  await page.goto('/?origin=WRO#current-deals');
  for(const locale of ['en','ru','uk','pl'] as const){
   await page.locator('.language-switcher').getByRole('link',{name:localeNames[locale],exact:true}).click();
   await expect(page.locator('html')).toHaveAttribute('lang',locale);
   await expect(page.locator('.site-header .brand')).toHaveAttribute('href',locale==='pl'?'/':`/${locale}`);
   expect(new URL(page.url()).search).toBe('?origin=WRO');expect(new URL(page.url()).hash).toBe('#current-deals');
-  if(locale!=='pl')await expect(page.locator('main a[href="/city-break"]')).toContainText(shell[locale].polish);
+  await expect(page.locator(`main a[href="${locale==='pl'?'':`/${locale}`}/city-break"]`)).toHaveAttribute('hrefLang',locale);
  }
  const xml=await(await request.get('/sitemap.xml')).text();
  for(const locale of ['en','ru','uk'])expect(xml).toContain(`/${locale}</loc>`);

@@ -16,6 +16,7 @@ import {AirportTransfer} from "../../components/airport-transfer";
 import {isServiceSlug} from "../../../lib/i18n/service-content";
 import {serviceMetadata} from "../../components/service-info";
 import {LegalSources} from "../../components/legal-sources";
+import {hasGuideTranslation} from '../../../lib/i18n/guide-slugs';
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
@@ -23,7 +24,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata> {
  if(isServiceSlug(slug))return serviceMetadata(slug,"pl");
  const description=page.description ?? page.paragraphs[0];
  return {title:page.title,description,alternates:{canonical:`/info/${slug}`,
-  ...(slug==="trip-budget" ? {languages:languageAlternates("/info/trip-budget",locales)} : {})},
+  ...(slug==="trip-budget"||hasGuideTranslation(slug) ? {languages:languageAlternates(`/info/${slug}`,locales)} : {})},
   robots:{index:!page.draft && !page.noindex,follow:true},
   openGraph:{title:page.title,description,url:`/info/${slug}`,locale:"pl_PL",type:"website",
    ...(!page.draft && !page.noindex ? {images:[{url:`/share/${slug}`,width:1200,height:630,alt:page.title}]} : {})},

@@ -1,6 +1,12 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {auditSitemap,auditPage,auditReciprocity,publishedPages,localizedPath} from '../scripts/seo-contract.mjs';
+import inventory from '../scripts/seo-pages.json' with {type:'json'};
+
+test('translated article metadata is enabled only for reviewed translated routes',()=>{
+ assert.throws(()=>publishedPages({...inventory,translatedArticlePaths:['/info/unreviewed']}),/without translated route/);
+ assert.throws(()=>publishedPages({...inventory,translatedArticlePaths:['/deals']}),/without translated route/);
+});
 
 const canonical='https://hoptrip.pl',pages=publishedPages();
 const urls=[...pages.keys()].map(path=>new URL(path,canonical).href);

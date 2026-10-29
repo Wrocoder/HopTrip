@@ -150,7 +150,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
     {page>1&&<button type="button" className={styles.retry} onClick={()=>selectPage(1)}>{resultsCopy.firstPage}</button>}
     {category!=='ALL'&&<button type="button" className={styles.retry} onClick={clearCategory}>{resultsCopy.clearCategory}</button>}
     <button type="button" className={styles.retry} onClick={editDates}>{resultsCopy.changeDates}</button>
-    {activitiesHref&&<a className="button button-secondary" href={activitiesHref}>{resultsCopy.attractions}{locale!=='pl'?' (PL)':''}</a>}
+    {activitiesHref&&<a className="button button-secondary" href={activitiesHref}>{resultsCopy.attractions}</a>}
    </div>
   </div>}
   {unavailable&&<button type="button" className={styles.retry} onClick={()=>setRefresh(value=>value+1)}>{ux.retry} <span aria-hidden="true">↻</span></button>}

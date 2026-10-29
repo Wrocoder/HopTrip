@@ -14,6 +14,7 @@ import {DealGrid} from "../components/catalog";
 import {FilterForm} from "../components/filters";
 import {catalogPage,socialMetadata} from "../../lib/catalog-pages";
 import {CatalogIntro} from "../components/catalog-intro";
+import {landingPage,landingMetadata} from "../../lib/i18n/landing-copy";
 export const dynamic="force-dynamic";
 type Props={searchParams:Promise<Record<string,string|string[]|undefined>>;path?:string;locale?:Locale};
 export async function generateMetadata({searchParams,path="/deals",locale="pl"}:Props) {
@@ -21,7 +22,7 @@ export async function generateMetadata({searchParams,path="/deals",locale="pl"}:
   const seo=searchSeo(raw,path);
   const metadata=socialMetadata({title:seo.index ? page.title : `Wyniki wyszukiwania lotów | HopTrip`,
     description:page.description,path:seo.canonical,image:"/preview/catalog/deals",index:seo.index});
-  if(path!=="/deals")return metadata;
+  if(path!=="/deals")return landingMetadata(metadata,path,locale);
   const messages=getMessages(locale),title=locale==="pl" ? String(metadata.title) : seo.index ? messages.title : catalogText(locale,"Wyniki wyszukiwania lotów | HopTrip"),description=locale==="pl" ? page.description : messages.description;
   const canonical=localizedHref(seo.canonical,locale);
   return {...metadata,title,description,alternates:{canonical,languages:languageAlternates(seo.canonical,locales)},
@@ -33,7 +34,7 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
   const catalogPath=localizedHref(path,locale);
   const raw=await searchParams;
   const filters=searchFilters(raw,path);
-  const landing=path!=="/deals" ? catalogPage(path) : undefined;
+  const landing=path!=="/deals" ? landingPage(path,locale) : undefined;
   let total=0;
   let deals:Deal[]=[],airports:Airport[]=[],destinations:Destination[]=[],error="";
   const [offers,origins,places,alerts]=await Promise.allSettled([getDealResults({...filters,limit:"12",...(path==="/city-break" ? {round_trip:"true"} : {})}),getAirports(),getDestinations(),alertsEnabled()]);
@@ -79,7 +80,7 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
       {offset+12>10000 && offset+deals.length<total && <p>{t("Zawęź filtry, aby przejrzeć dalsze oferty.")}</p>}
     </>}
     <p>{alerts.status==="fulfilled" && alerts.value && <><Link href={localizedHref(`/alerts?${alertQuery}`,locale)}>{filters.origin==="WAW,WMI" ? t("Wybierz lotnisko dla powiadomień") : t("Powiadom mnie o pasujących lotach")}</Link>{" · "}</>}<Link href={localizedHref("/saved",locale)}>{t("Zapisane wyjazdy")}</Link></p>
-    {landing && <CatalogIntro page={landing} showIntro={false}/> }
+    {landing && <CatalogIntro page={landing} showIntro={false} locale={locale}/> }
     {locale==="pl" && !Object.values(filters).some(Boolean) && <CatalogIntro page={catalogPage("/deals")!}/>}
   </main>;
 }

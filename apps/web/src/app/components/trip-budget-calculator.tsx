@@ -1,8 +1,8 @@
 "use client";
-/* eslint-disable @next/next/no-html-link-for-pages -- The Polish reference guide needs a full navigation to update html lang and locale context. */
 import {useLocale} from "./locale-provider";
 import {budgetText} from "../../lib/i18n/budget-copy";
-import {shell} from "../../lib/i18n/shell";
+import {guideUi} from '../../lib/i18n/guide-ui';
+import {localizedHref} from '../../lib/i18n/routing';
 import {track} from "../../lib/session";
 import {money} from "../../lib/pl";
 import {useState} from "react";
@@ -82,9 +82,9 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
    <p>{t("Zmieniono daty, długość pobytu, liczbę osób lub dane oferty. Sprawdź ponownie loty, nocleg, transfery i pozostałe wpisane kwoty. Przeliczenie sumy nie potwierdza cen u sprzedawców.")}</p>
    <button type="button" className="button button-secondary" onClick={()=>save({...draft,context,review:false})}>{t("Kwoty sprawdzone dla tego planu")}</button>
   </div>}
-  {locale==="pl" && <ReferenceCosts destinationSlug={destinationSlug} filled={Boolean(input.local_transport.trim())}
-    onApply={amount=>{if(!input.local_transport.trim()){update("local_transport",amount);setExtraOpen(true);}}}/>}
-  {locale!=="pl" && destinationSlug && <p><a href="/info/trip-budget" hrefLang="pl">{shell[locale].polishGuide}</a></p>}
+  <ReferenceCosts destinationSlug={destinationSlug} filled={Boolean(input.local_transport.trim())}
+    onApply={amount=>{if(!input.local_transport.trim()){update("local_transport",amount);setExtraOpen(true);}}}/>
+  {locale!=="pl" && destinationSlug && <p><a href={localizedHref('/info/trip-budget',locale)}>{guideUi(locale,'budgetGuide')}</a></p>}
   <h3>{t("Główne koszty")}</h3>
   <div className={styles.grid}>{costFields.filter(cost=>["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>cost.key!=="hotel" ? field(cost.key,cost.label,cost.hint,true) :
    <div key="hotel" className={styles.field}>

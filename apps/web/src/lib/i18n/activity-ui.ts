@@ -1,0 +1,25 @@
+import type {Locale} from './config';
+const ui={
+ museums:['Muzea i atrakcje','Museums and attractions','Музеи и достопримечательности','Музеї та пам’ятки'],
+ intro:['Bilety kupujesz osobno. Dostępność na daty Twojej podróży sprawdzisz u sprzedawcy lub na oficjalnej stronie obiektu.','Tickets are purchased separately. Check availability for your travel dates with the seller or on the attraction’s official website.','Билеты покупают отдельно. Наличие на даты поездки проверь у продавца или на официальном сайте достопримечательности.','Квитки купують окремо. Наявність на дати подорожі перевір у продавця або на офіційному сайті пам’ятки.'],
+ audience:['Dla kogo:','Who it suits:','Для кого:','Для кого:'],
+ duration:['Czas wizyty:','Visit duration:','Время посещения:','Тривалість відвідування:'],
+ reviewed:['Opis sprawdzono {date}. Termin i dostępność potwierdź u organizatora.','Description checked on {date}. Confirm the date and availability with the organiser.','Описание проверено {date}. Дату и наличие подтверди у организатора.','Опис перевірено {date}. Дату й наявність підтвердь в організатора.'],
+ free:['Samodzielna wizyta: bezpłatny wstęp według oficjalnej strony.','Independent visit: free admission according to the official website.','Самостоятельное посещение: по официальному сайту вход бесплатный.','Самостійне відвідування: за офіційним сайтом вхід безкоштовний.'],
+ official:['Oficjalna strona — bilety i godziny zwiedzania','Official website — tickets and visiting hours','Официальный сайт — билеты и время посещения','Офіційний сайт — квитки й час відвідування'],
+ price:['Cena do sprawdzenia w Tiqets','Check the price at Tiqets','Цену нужно уточнить в Tiqets','Ціну потрібно уточнити в Tiqets'],
+ affiliate:['Link afiliacyjny — możemy otrzymać prowizję za zakup.','Affiliate link — we may receive a commission for a purchase.','Партнёрская ссылка — мы можем получить комиссию за покупку.','Партнерське посилання — ми можемо отримати комісію за купівлю.'],
+ visit:['Sprawdź zasady wizyty','Check visiting rules','Уточнить правила посещения','Уточнити правила відвідування'],
+ buy:['Sprawdź daty i cenę','Check dates and price','Уточнить даты и цену','Уточнити дати й ціну'],
+ buyTiqets:['Sprawdź daty i cenę w Tiqets','Check dates and price at Tiqets','Уточнить даты и цену в Tiqets','Уточнити дати й ціну в Tiqets'],
+ newTab:['nowa karta','new tab','новая вкладка','нова вкладка'],
+ durationSource:['Źródło informacji o czasie wizyty (nowa karta)','Source for visit duration (new tab)','Источник времени посещения (новая вкладка)','Джерело тривалості відвідування (нова вкладка)'],
+ exclude:['Koszt atrakcji nie jest wliczony w cenę lotu. Przed zakupem sprawdź zakres biletu, ulgi i zasady anulowania. W dni podróży uwzględnij czas lotu i dojazdu.','Attraction costs are not included in the flight price. Before buying, check ticket inclusions, discounts and cancellation terms. Allow for flights and transfers on travel days.','Достопримечательности не включены в стоимость перелёта. До покупки проверь состав билета, льготы и условия отмены. В дни поездки учти время перелётов и трансферов.','Пам’ятки не включені у вартість перельоту. До купівлі перевір склад квитка, пільги й умови скасування. У дні подорожі врахуй час перельотів і трансферів.'],
+ snapshot:['Opisy i zasady sprawdzono {date}. To przegląd źródeł, nie potwierdzenie dostępności biletów na daty podróży.','Descriptions and rules checked on {date}. This is a source review, not confirmation of ticket availability for your travel dates.','Описания и правила проверены {date}. Это обзор источников, а не подтверждение наличия билетов на даты поездки.','Описи й правила перевірені {date}. Це огляд джерел, а не підтвердження наявності квитків на дати подорожі.'],
+ costs:['W kalkulatorze wpisz łączny koszt wybranych atrakcji w PLN na osobę za cały pobyt. Przy różnych cenach biletów użyj średniej na osobę. Sam bezpłatny wstęp nie oznacza zerowych kosztów dojazdu.','Enter the total cost of selected attractions in PLN per person for the whole stay. If ticket prices differ, use the average per person. Free admission alone does not mean transport costs are zero.','В калькуляторе укажи общую стоимость выбранных достопримечательностей в PLN на человека за всё проживание. Если цены билетов различаются, используй среднюю на человека. Бесплатный вход не означает, что дорога тоже бесплатна.','У калькуляторі зазнач загальну вартість вибраних пам’яток у PLN на людину за весь час проживання. Якщо ціни квитків різняться, використовуй середню на людину. Безкоштовний вхід не означає, що дорога теж безкоштовна.'],
+ budget:['Uwzględnij atrakcje w budżecie','Include attractions in your budget','Учесть достопримечательности в бюджете','Урахувати пам’ятки в бюджеті'],
+} as const;
+export type ActivityUiKey=keyof typeof ui;
+export function activityUi(locale:Locale,key:ActivityUiKey,values:Record<string,string>={}){
+ return ui[key][({pl:0,en:1,ru:2,uk:3} as const)[locale]].replace(/\{(\w+)\}/g,(_,name)=>values[name]??`{${name}}`);
+}

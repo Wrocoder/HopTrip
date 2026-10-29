@@ -1,5 +1,6 @@
 import {chromium} from "@playwright/test";
 import {auditSitemap,auditPage,auditReciprocity,publishedPages,localizedPath} from './seo-contract.mjs';
+import inventory from './seo-pages.json' with {type:'json'};
 
 function origin(value) {
  const url=new URL(value);
@@ -86,11 +87,21 @@ try {
    await page.setViewportSize({width:320,height:740});
    check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${path}: horizontal overflow at 320px`);
   }else if(expected.locale!=='pl'){
-   // Current translated service/catalog pages use text cards, without Polish artwork
-   // or Polish article breadcrumbs. Change this policy with a reviewed asset rollout.
+   // Translations use text cards. Reviewed guides also have localized breadcrumbs.
    check(await page.locator('meta[name="twitter:card"]').getAttribute('content')==='summary',`${path}: expected translated text card`);
    check(await page.locator('meta[property="og:image"], meta[name="twitter:image"]').count()===0,`${path}: unexpected untranslated social image`);
-   check(await page.locator('script[type="application/ld+json"]').count()===0,`${path}: unexpected untranslated structured data`);
+   const schemas=await page.locator('script[type="application/ld+json"]').evaluateAll(nodes=>nodes.map(node=>JSON.parse(node.textContent)));
+   if(inventory.translatedArticlePaths?.includes(expected.path)){
+    const labels={en:['Home','Travel guides and trip planning','Breadcrumbs'],ru:['Главная','Путеводители и планирование поездки','Навигационная цепочка'],uk:['Головна','Путівники та планування подорожі','Навігаційний ланцюжок']}[expected.locale];
+    const hrefs=[localizedPath('/',expected.locale),localizedPath('/info',expected.locale),path];
+    const items=hrefs.map((href,index)=>({'@type':'ListItem',position:index+1,name:index<2?labels[index]:data.title,item:new URL(href,canonical).href}));
+    check(schemas.length===1&&schemas[0]['@context']==='https://schema.org'&&schemas[0]['@type']==='BreadcrumbList'&&JSON.stringify(schemas[0].itemListElement)===JSON.stringify(items),`${path}: incorrect translated breadcrumbs`);
+    const nav=page.getByRole('navigation',{name:labels[2]});
+    check(await nav.locator(`a[href="${hrefs[0]}"]`).count()===1&&await nav.locator(`a[href="${hrefs[1]}"]`).count()===1,`${path}: missing translated breadcrumb links`);
+    check(await nav.locator('[aria-current="page"]').textContent()===data.title,`${path}: incorrect current translated breadcrumb`);
+    await page.setViewportSize({width:320,height:740});
+    check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${path}: horizontal overflow at 320px`);
+   }else check(schemas.length===0,`${path}: unexpected untranslated structured data`);
   }
  }
  failures.push(...auditReciprocity(pagesData));
