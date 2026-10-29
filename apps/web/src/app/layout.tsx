@@ -41,7 +41,7 @@ export default async function RootLayout({children}:Readonly<{children:React.Rea
     </head>
     <body><LocaleProvider locale={locale} messages={getMessages(locale)}>
     <a className="skip-link" href="#content">{labels.skip}</a>
-    <header className="page-shell site-header"><NavLink className="brand" href="/" aria-label={labels.home+suffix}><span className="brand-mark" aria-hidden="true">↗</span>HopTrip<span className="brand-dot" aria-hidden="true">.</span></NavLink>
+    <header className="page-shell site-header"><NavLink className="brand" href={localizedHref("/",locale)} aria-label={labels.home}><span className="brand-mark" aria-hidden="true">↗</span>HopTrip<span className="brand-dot" aria-hidden="true">.</span></NavLink>
     <SiteNav/><Suspense fallback={null}><LanguageSwitcher/></Suspense></header>
     <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>

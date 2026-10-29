@@ -1,3 +1,4 @@
+import {publishedPageCount} from './seo-inventory';
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import {serviceContent,serviceLabels,serviceSlugs} from "../src/lib/i18n/service-content";
@@ -89,7 +90,7 @@ test("footer, language switches and legal links stay in the selected language",a
  await page.locator('main a[href="/uk/info/privacy"]').click();
  await expect(page.locator("html")).toHaveAttribute("lang","uk");
  const sitemap=await (await request.get("/sitemap.xml")).text();
- expect((sitemap.match(/<loc>/g)??[]).length).toBe(85);
+ expect((sitemap.match(/<loc>/g)??[]).length).toBe(publishedPageCount);
  for(const locale of ["en","ru","uk"]){
   for(const slug of ["about","partners"])expect(sitemap).toContain(`/${locale}/info/${slug}</loc>`);
   for(const slug of ["contact","privacy","terms"])expect(sitemap).not.toContain(`/${locale}/info/${slug}`);
