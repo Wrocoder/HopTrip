@@ -1,0 +1,9 @@
+[Unit]
+Description=HopTrip editorial rehearsal (dry-run only, no social delivery)
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/docker exec hoptrip-api-1 python -m app.jobs.editor_rehearsal --limit 50
+TimeoutStartSec=50

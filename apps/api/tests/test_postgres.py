@@ -101,7 +101,7 @@ def test_migration_head():
     with create_engine(url).connect() as db:
         assert (
             db.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0017_routes_editorial_merge"
+            == "0018_editorial_rehearsal"
         )
 
 
@@ -334,22 +334,101 @@ def test_editor_upgrade_preserves_existing_catalogue():
     scoped = create_engine(scoped_url)
     env = {**os.environ, "DATABASE_URL": scoped_url.render_as_string(hide_password=False)}
     try:
-        for revision in ["0016_flight_route_details", "head"]:
+        for revision in ["0016_flight_route_details", "0017_routes_editorial_merge", "head"]:
             result = subprocess.run([sys.executable, "-m", "alembic", "upgrade", revision],
                                     cwd=Path(__file__).parents[1], env=env,
                                     capture_output=True, text=True, timeout=60)
             assert result.returncode == 0, result.stderr
             with scoped.begin() as db:
-                if revision != "head":
+                if revision == "0016_flight_route_details":
                     db.execute(text("INSERT INTO data_providers (code, name) "
                                     "VALUES ('editor-upgrade-sentinel', 'Existing catalogue')"))
+                elif revision == "0017_routes_editorial_merge":
+                    item_id = db.scalar(text("INSERT INTO editorial_items "
+                        "(kind, source, version, status, created_at) VALUES "
+                        "('guide', '{}', 1, 'APPROVED', now()) RETURNING id"))
+                    db.execute(text("INSERT INTO editorial_revisions "
+                        "(item_id, version, snapshot, variants, artifacts, checksum, owner, created_at) "
+                        "VALUES (:id, 1, '{}', '{\"telegram\":\"Existing text\"}', '{}', :checksum, 'fixture', now())"),
+                        {"id": item_id, "checksum": "a" * 64})
+                    db.execute(text("INSERT INTO editorial_approvals "
+                        "(item_id, version, channels, checksum, owner, created_at, expires_at) "
+                        "VALUES (:id, 1, '[\"telegram\"]', :checksum, 'fixture', now(), now()+interval '1 day')"),
+                        {"id": item_id, "checksum": "a" * 64})
                 else:
                     assert db.scalar(text("SELECT name FROM data_providers "
                                           "WHERE code='editor-upgrade-sentinel'")) == "Existing catalogue"
-                    assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0017_routes_editorial_merge"
-                    assert db.scalar(text("SELECT count(*) FROM editorial_revisions")) == 0
+                    assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0018_editorial_rehearsal"
+                    assert db.scalar(text("SELECT variants FROM editorial_revisions")) == {"telegram": "Existing text"}
+                    assert db.scalar(text("SELECT checksum FROM editorial_approvals")) == "a" * 64
+                    assert db.scalar(text("SELECT count(*) FROM editorial_rehearsals")) == 0
     finally:
         scoped.dispose()
         with engine.begin() as db:
             db.execute(text(f'DROP SCHEMA "{schema}" CASCADE'))
         engine.dispose()
+
+
+def test_rehearsal_workers_skip_locked_and_prepare_once(pg_factory):
+    from threading import Barrier
+
+    from app.api.editor import Approve, Create, Rehearse, approve, create, rehearse
+    from app.models.editorial import (
+        EditorialAudit,
+        EditorialItem,
+        EditorialRehearsal,
+        EditorSession,
+    )
+    from app.services.editor_rehearsal import process_due
+
+    factory, _ = pg_factory
+    owner = EditorSession(owner="fixture")
+    with factory() as db:
+        item = create(Create(kind="guide"), owner, db)
+        approve(item["id"], Approve(version=1, channels=["telegram"]), owner, db)
+        rehearse(item["id"], Rehearse(version=1), owner, db)
+    with factory() as locked, factory() as other:
+        locked.scalar(select(EditorialItem).where(EditorialItem.id == item["id"]).with_for_update())
+        assert process_due(other) == []
+    barrier = Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            return process_due(db)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(run) for _ in range(2)]
+        assert sum(len(f.result(timeout=20)) for f in futures) == 1
+    with factory() as db:
+        job = db.scalar(select(EditorialRehearsal))
+        assert job.state == "READY" and job.package["publishable"] is False
+        assert job.package["accounts"] == []
+        assert len(list(db.scalars(select(EditorialAudit).where(
+            EditorialAudit.action == "REHEARSAL_CHECKED")))) == 1
+
+
+def test_rehearsal_concurrent_scheduling_is_idempotent(pg_factory):
+    from threading import Barrier
+
+    from app.api.editor import Approve, Create, Rehearse, approve, create, rehearse
+    from app.models.editorial import EditorialRehearsal, EditorSession
+
+    factory, _ = pg_factory
+    owner = EditorSession(owner="fixture")
+    with factory() as db:
+        item = create(Create(kind="guide"), owner, db)
+        approve(item["id"], Approve(version=1, channels=["telegram"]), owner, db)
+    body = Rehearse(version=1, scheduled_at=datetime.now(UTC) + timedelta(minutes=1))
+    barrier = Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            return rehearse(item["id"], body, owner, db)["id"]
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(run) for _ in range(2)]
+        assert len({f.result(timeout=20) for f in futures}) == 1
+    with factory() as db:
+        assert len(list(db.scalars(select(EditorialRehearsal)))) == 1

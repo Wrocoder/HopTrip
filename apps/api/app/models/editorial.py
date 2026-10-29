@@ -1,4 +1,4 @@
-"""Private editorial records. There is intentionally no delivery queue in SOC-02."""
+"""Private editorial records and an isolated dry-run rehearsal queue."""
 from datetime import datetime
 
 from sqlalchemy import JSON, DateTime, ForeignKey, String, UniqueConstraint
@@ -62,3 +62,22 @@ class EditorialApproval(Base):
     owner: Mapped[str] = mapped_column(String(100))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class EditorialRehearsal(Base):
+    __tablename__ = "editorial_rehearsals"
+    __table_args__ = (UniqueConstraint("revision_id", name="uq_editorial_rehearsal_revision"),)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    item_id: Mapped[int] = mapped_column(ForeignKey("editorial_items.id"), index=True)
+    revision_id: Mapped[int] = mapped_column(ForeignKey("editorial_revisions.id"))
+    approval_id: Mapped[int] = mapped_column(ForeignKey("editorial_approvals.id"))
+    version: Mapped[int]
+    checksum: Mapped[str] = mapped_column(String(64))
+    channels: Mapped[list] = mapped_column(JSON)
+    scheduled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    state: Mapped[str] = mapped_column(String(20), default="SCHEDULED")
+    reason: Mapped[str | None] = mapped_column(String(500))
+    package: Mapped[dict | None] = mapped_column(JSON)
+    owner: Mapped[str] = mapped_column(String(100))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    checked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

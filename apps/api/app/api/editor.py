@@ -6,7 +6,7 @@ from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
 from sqlalchemy import delete, select, update
 from sqlalchemy.orm import Session
 
@@ -17,6 +17,7 @@ from app.models.editorial import (
     EditorialApproval,
     EditorialAudit,
     EditorialItem,
+    EditorialRehearsal,
     EditorialRevision,
     EditorSession,
 )
@@ -24,6 +25,12 @@ from app.models.event import LocalEvent
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.editor_auth import digest, verify_password
+from app.services.editor_rehearsal import (
+    check_job,
+    describe_rehearsal,
+    invalidate_rehearsals,
+    schedule,
+)
 from app.services.editorial import (
     CHANNELS,
     GUIDES,
@@ -150,6 +157,10 @@ class Approve(Version):
         min_length=1, max_length=5)
 
 
+class Rehearse(Version):
+    scheduled_at: AwareDatetime | None = None
+
+
 def load(db: Session, item_id: int) -> tuple[EditorialItem, EditorialRevision]:
     item = db.get(EditorialItem, item_id)
     if not item:
@@ -187,6 +198,9 @@ def describe(db: Session, item: EditorialItem, revision: EditorialRevision) -> d
                       "rights": "HopTrip: собственная SVG-карточка, без сторонних фото"},
             "approved_channels": approval.channels if valid_approval and approval else [],
             "approval_expires_at": utc(approval.expires_at).isoformat() if valid_approval and approval else None,
+            "rehearsals": [describe_rehearsal(job) for job in db.scalars(
+                select(EditorialRehearsal).where(EditorialRehearsal.item_id == item.id)
+                .order_by(EditorialRehearsal.id.desc()).limit(10))],
             "history": [{"version": a.version, "action": a.action, "owner": a.owner,
                          "at": utc(a.created_at).isoformat(), "details": a.details}
                         for a in db.scalars(select(EditorialAudit).where(
@@ -263,6 +277,7 @@ def revise(item_id: int, body: Edit, session: EditorSession = Depends(owner), db
     item, old = load(db, item_id)
     lock(db, item, body.version)
     snapshot = source_snapshot(db, item.kind, item.source) if body.refresh_source else old.snapshot
+    invalidate_rehearsals(db, item, session.owner)
     variants = dict.fromkeys(CHANNELS, draft_text(snapshot, item.kind)) if body.refresh_source else body.variants
     item.version += 1
     item.status = "DRAFT"
@@ -313,10 +328,37 @@ def reject(item_id: int, body: Version, session: EditorSession = Depends(owner),
     item, revision = load(db, item_id)
     lock(db, item, body.version)
     if item.status != "REJECTED":
+        invalidate_rehearsals(db, item, session.owner)
         item.status = "REJECTED"
         audit(db, item, session.owner, "REJECTED")
     db.commit()
     return describe(db, item, revision)
+
+
+@router.post("/items/{item_id}/rehearsal", status_code=201)
+def rehearse(item_id: int, body: Rehearse, session: EditorSession = Depends(owner),
+             db: Session = Depends(get_db)):
+    item, revision = load(db, item_id)
+    lock(db, item, body.version)
+    job = schedule(db, item, revision, body.scheduled_at, session.owner)
+    db.commit()
+    return describe_rehearsal(job)
+
+
+@router.post("/items/{item_id}/rehearsal/{action}")
+def rehearsal_action(item_id: int, action: Literal["run", "cancel"], body: Version,
+                     session: EditorSession = Depends(owner), db: Session = Depends(get_db)):
+    item, revision = load(db, item_id)
+    lock(db, item, body.version)
+    job = db.scalar(select(EditorialRehearsal).where(EditorialRehearsal.revision_id == revision.id))
+    if not job:
+        raise HTTPException(404, "Пробная задача не найдена")
+    if action == "cancel":
+        invalidate_rehearsals(db, item, session.owner)
+    else:
+        check_job(db, item, job, session.owner)
+    db.commit()
+    return {**describe_rehearsal(job), "package": job.package}
 
 
 @router.post("/items/{item_id}/dry-run")
