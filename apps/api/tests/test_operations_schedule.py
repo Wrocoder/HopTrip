@@ -4,6 +4,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from types import SimpleNamespace
 
+import pytest
 from app.models.affiliate_click import AffiliateClick
 from app.models.analytics import AnalyticsEvent
 from sqlalchemy import select
@@ -16,6 +17,30 @@ def module(name):
     result = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(result)
     return result
+
+
+@pytest.mark.parametrize('failed', [None, 'pipeline', 'events_pipeline'])
+def test_monitor_check_only_preserves_state_and_never_notifies(tmp_path, monkeypatch, capsys, failed):
+    monitor = module('monitor')
+    state = tmp_path / 'state.json'
+    state.write_text('{"delivered_incident":"pipeline"}')
+    monkeypatch.setattr(monitor, 'STATE', state)
+    monkeypatch.setattr(monitor, 'ROOT', tmp_path)
+    monkeypatch.setattr(monitor, 'http_check', lambda *a: True)
+    monkeypatch.setattr(monitor, 'newest_backup_ok', lambda *a: True)
+    monkeypatch.setattr(monitor, 'command_equals', lambda *a: True)
+    monkeypatch.setattr(monitor, 'link_report_fresh', lambda *a: True)
+    monkeypatch.setattr(monitor.shutil, 'disk_usage', lambda p: SimpleNamespace(total=10**11, free=5*10**10))
+    monkeypatch.setattr(monitor, 'pipeline_ok', lambda events=False:
+                        ('events_pipeline' if events else 'pipeline') != failed)
+    monkeypatch.setattr(monitor, 'deliver', lambda _: pytest.fail('check-only sent a notification'))
+    monkeypatch.setenv('EVENTS_MONITOR_ENABLED', 'true')
+    monkeypatch.setattr('sys.argv', ['monitor', '--check-only'])
+    assert monitor.main() == (1 if failed else 0)
+    assert state.read_text() == '{"delivered_incident":"pipeline"}'
+    checks = json.loads(capsys.readouterr().out)['checks']
+    assert checks['events_worker'] and checks['worker']
+    assert all(checks.values()) == (failed is None)
 
 
 def test_redirect_without_session_does_not_create_analytics(api_client, isolated_db):

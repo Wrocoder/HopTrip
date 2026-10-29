@@ -154,7 +154,10 @@ def main() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--test-alert", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--test-alert", action="store_true")
+    mode.add_argument("--check-only", action="store_true",
+                      help="Check all configured signals without notifications or state writes")
     args = parser.parse_args()
     if args.test_alert:
         success = deliver("HopTrip: test notification. No outage has been simulated.")
@@ -195,6 +198,9 @@ def main() -> int:
         checks["disk_space"] = disk.free >= max(1024**3, disk.total * 0.1)
     except OSError:
         checks["disk_space"] = False
+    if args.check_only:
+        print(json.dumps({"checks": checks}))
+        return 0 if all(checks.values()) else 1
     try:
         state = json.loads(STATE.read_text())
         if not isinstance(state, dict):
