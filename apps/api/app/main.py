@@ -3,7 +3,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import admin, affiliate, alerts, analytics, catalog, events, health
+from app.api import admin, affiliate, alerts, analytics, catalog, editor, events, health
 from app.config import get_settings
 from app.security import SecurityMiddleware
 
@@ -22,6 +22,7 @@ app.include_router(health.router)
 app.include_router(alerts.router)
 app.include_router(catalog.router)
 app.include_router(events.router)
+app.include_router(editor.router)
 app.include_router(admin.router)
 app.include_router(analytics.router)
 app.include_router(affiliate.router)

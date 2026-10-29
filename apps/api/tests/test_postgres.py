@@ -101,7 +101,7 @@ def test_migration_head():
     with create_engine(url).connect() as db:
         assert (
             db.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0016_flight_route_details"
+            == "0017_routes_editorial_merge"
         )
 
 
@@ -287,3 +287,31 @@ def test_events_lock_and_catalogue_upsert(pg_factory):
         assert save_window(*args)['added'] == 0
         db.commit()
         assert len(list(db.scalars(select(LocalEvent)))) == 1
+
+
+def test_editor_concurrent_revisions_have_one_winner(pg_factory):
+    from threading import Barrier
+
+    from app.api.editor import Create, Edit, create, revise
+    from app.models.editorial import EditorialRevision, EditorSession
+    from fastapi import HTTPException
+
+    factory, _ = pg_factory
+    owner = EditorSession(owner="fixture")
+    with factory() as db:
+        item = create(Create(kind="guide"), owner, db)
+    barrier = Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            try:
+                return revise(item["id"], Edit(version=1, variants=item["variants"]), owner, db)["version"]
+            except HTTPException as exc:
+                return exc.status_code
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = [future.result(timeout=20) for future in [pool.submit(run), pool.submit(run)]]
+    assert sorted(results) == [2, 409]
+    with factory() as db:
+        assert len(list(db.scalars(select(EditorialRevision)))) == 2

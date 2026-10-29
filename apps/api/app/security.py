@@ -45,11 +45,14 @@ class SecurityMiddleware:
         if scope["method"] in ("POST", "PATCH") or path.startswith("/go/"):
             # Client is the socket peer; never trust arbitrary X-Forwarded-For here.
             peer = (scope.get("client") or ("unknown",))[0]
+            login = path == "/api/v1/editor/login"
+            if login:
+                peer = "editor-login:" + peer
             now = monotonic()
             while self.buckets and next(iter(self.buckets.values()))[0] <= now - 60:
                 self.buckets.popitem(last=False)
             start, count = self.buckets.get(peer, (now, 0))
-            if count >= self.rate_limit or (
+            if count >= (5 if login else self.rate_limit) or (
                 peer not in self.buckets and len(self.buckets) >= 10000
             ):
                 return await reject(429, "Rate limit exceeded")

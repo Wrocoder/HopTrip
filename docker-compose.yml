@@ -34,6 +34,10 @@ services:
       APP_ENV: development
       DATABASE_URL: postgresql+psycopg://hoptrip:hoptrip@db:5432/hoptrip
       ADMIN_TOKEN: change-me-in-development
+      EDITOR_ENABLED: ${EDITOR_ENABLED:-false}
+      EDITOR_PASSWORD_HASH: ${EDITOR_PASSWORD_HASH:-}
+      EDITOR_OWNER: ${EDITOR_OWNER:-owner}
+      EDITOR_ORIGIN: ${EDITOR_ORIGIN:-http://localhost:8000}
       ALERTS_ENABLED: ${ALERTS_ENABLED:-false}
       ALERTS_SITE_URL: ${ALERTS_SITE_URL:-http://localhost:3000}
       ALERTS_SIGNING_KEY: ${ALERTS_SIGNING_KEY:-}
