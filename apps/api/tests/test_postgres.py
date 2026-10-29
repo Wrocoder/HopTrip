@@ -101,7 +101,7 @@ def test_migration_head():
     with create_engine(url).connect() as db:
         assert (
             db.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0016_flight_route_details"
+            == "0017_routes_editorial_merge"
         )
 
 
@@ -287,3 +287,69 @@ def test_events_lock_and_catalogue_upsert(pg_factory):
         assert save_window(*args)['added'] == 0
         db.commit()
         assert len(list(db.scalars(select(LocalEvent)))) == 1
+
+
+def test_editor_concurrent_revisions_have_one_winner(pg_factory):
+    from threading import Barrier
+
+    from app.api.editor import Create, Edit, create, revise
+    from app.models.editorial import EditorialRevision, EditorSession
+    from fastapi import HTTPException
+
+    factory, _ = pg_factory
+    owner = EditorSession(owner="fixture")
+    with factory() as db:
+        item = create(Create(kind="guide"), owner, db)
+    barrier = Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            try:
+                return revise(item["id"], Edit(version=1, variants=item["variants"]), owner, db)["version"]
+            except HTTPException as exc:
+                return exc.status_code
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = [future.result(timeout=20) for future in [pool.submit(run), pool.submit(run)]]
+    assert sorted(results) == [2, 409]
+    with factory() as db:
+        assert len(list(db.scalars(select(EditorialRevision)))) == 2
+
+
+def test_editor_upgrade_preserves_existing_catalogue():
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    url = os.getenv("TEST_DATABASE_URL")
+    if not url:
+        pytest.skip("Set TEST_DATABASE_URL")
+    assert make_url(url).database == "hoptrip_test"
+    schema = "test_editor_upgrade_" + uuid4().hex
+    engine = create_engine(url)
+    with engine.begin() as db:
+        db.execute(text(f'CREATE SCHEMA "{schema}"'))
+    scoped_url = make_url(url).update_query_dict({"options": f"-csearch_path={schema}"})
+    scoped = create_engine(scoped_url)
+    env = {**os.environ, "DATABASE_URL": scoped_url.render_as_string(hide_password=False)}
+    try:
+        for revision in ["0016_flight_route_details", "head"]:
+            result = subprocess.run([sys.executable, "-m", "alembic", "upgrade", revision],
+                                    cwd=Path(__file__).parents[1], env=env,
+                                    capture_output=True, text=True, timeout=60)
+            assert result.returncode == 0, result.stderr
+            with scoped.begin() as db:
+                if revision != "head":
+                    db.execute(text("INSERT INTO data_providers (code, name) "
+                                    "VALUES ('editor-upgrade-sentinel', 'Existing catalogue')"))
+                else:
+                    assert db.scalar(text("SELECT name FROM data_providers "
+                                          "WHERE code='editor-upgrade-sentinel'")) == "Existing catalogue"
+                    assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0017_routes_editorial_merge"
+                    assert db.scalar(text("SELECT count(*) FROM editorial_revisions")) == 0
+    finally:
+        scoped.dispose()
+        with engine.begin() as db:
+            db.execute(text(f'DROP SCHEMA "{schema}" CASCADE'))
+        engine.dispose()
