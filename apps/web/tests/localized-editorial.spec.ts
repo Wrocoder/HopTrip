@@ -1,3 +1,4 @@
+import {publishedPageCount} from './seo-inventory';
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import {editorialCopy} from "../src/lib/i18n/editorial-copy";
@@ -33,7 +34,7 @@ test("editorial index separates translated guides and labelled Polish material",
   await expect(page.locator("html")).toHaveAttribute("lang","pl");
  }
  const sitemap=await (await request.get("/sitemap.xml")).text();
- expect((sitemap.match(/<loc>/g)??[]).length).toBe(85);
+ expect((sitemap.match(/<loc>/g)??[]).length).toBe(publishedPageCount);
  for(const locale of ["en","ru","uk"]){
   expect(sitemap).toContain(`/${locale}/info</loc>`);
   expect(sitemap).toContain(`/${locale}/info/price-comparison</loc>`);

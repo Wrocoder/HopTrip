@@ -3,6 +3,8 @@
 import {cookies} from "next/headers";
 import {redirect} from "next/navigation";
 import {normalizedOrigin,originPreferenceCookie} from "../../lib/origin-preference";
+import {isLocale} from '../../lib/i18n/config';
+import {localizedHref} from '../../lib/i18n/routing';
 
 export async function rememberOrigin(value:string) {
  const origin=normalizedOrigin(value);
@@ -14,5 +16,6 @@ export async function rememberOrigin(value:string) {
 export async function chooseHomeOrigin(data:FormData) {
  const origin=normalizedOrigin(data.get("origin"));
  await rememberOrigin(origin);
- redirect(`/?origin=${origin}`);
+ const language=data.get('locale'),locale=isLocale(language)?language:'pl';
+ redirect(localizedHref(`/?origin=${origin}`,locale));
 }

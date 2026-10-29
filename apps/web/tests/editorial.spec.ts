@@ -1,3 +1,4 @@
+import {publishedPageCount} from './seo-inventory';
 import {test,expect} from "@playwright/test";
 import {content,publishedInfoPages,relatedInfoPages} from "../src/lib/content";
 import {destinationForGuide,guidesForDestination} from "../src/lib/guide-destinations";
@@ -111,7 +112,7 @@ test("editorial index groups all 51 pages and sitemap excludes trust drafts",asy
  const response=await request.get("/sitemap.xml");
  expect(response.ok()).toBe(true);
  const xml=await response.text();
- expect((xml.match(/<loc>/g) ?? []).length).toBe(85);
+ expect((xml.match(/<loc>/g) ?? []).length).toBe(publishedPageCount);
  for(const [slug,title] of guides) {
   await expect(page.locator(`main a[href="/info/${slug}"]`)).toContainText(title);
   expect(xml).toContain(`/info/${slug}</loc>`);
