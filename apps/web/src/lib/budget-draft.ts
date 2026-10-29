@@ -6,13 +6,26 @@ export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;con
 export const budgetDraftKey=(tripId?:string)=>`hoptrip.budget.v1:${tripId ? `deal:${tripId}` : "standalone"}`;
 
 export function readBudgetDraft(raw:string|null):BudgetDraft|null {
+ return parseBudgetDraft(raw,false);
+}
+
+// Local editing may temporarily contain invalid dates. Never use this recovery
+// reader for shared links: those continue through the strict readBudgetDraft.
+export function readLocalBudgetDraft(raw:string|null):{draft:BudgetDraft;datesNeedReview:boolean}|null {
+ const draft=parseBudgetDraft(raw,true);
+ if(!draft)return null;
+ const datesNeedReview=Boolean(draft.start||draft.end)&&budgetDateCounts(draft.start,draft.end)===null;
+ return {draft:datesNeedReview?{...draft,review:true}:draft,datesNeedReview};
+}
+
+function parseBudgetDraft(raw:string|null,local:boolean):BudgetDraft|null {
  if(!raw || raw.length>50000) return null;
  try {
   const draft=JSON.parse(raw);
-  if(draft?.version!==1 || !draft.input || typeof draft.review!=="boolean" ||
+  if(draft?.version!==1 || !draft.input || typeof draft.input!=="object" || Array.isArray(draft.input) || typeof draft.review!=="boolean" ||
    typeof draft.context!=="string" || draft.context.length>2000 ||
    typeof draft.start!=="string" || typeof draft.end!=="string" ||
-   ![draft.start,draft.end].every(value=>value==="" || validCalendarDate(value))) return null;
+   ![draft.start,draft.end].every(value=>value.length<=32 && (local || value==="" || validCalendarDate(value)))) return null;
   const input={...emptyBudget};
   for(const key of Object.keys(input) as (keyof BudgetInput)[]) {
    const value=draft.input[key];
