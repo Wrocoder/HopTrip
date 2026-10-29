@@ -1,6 +1,6 @@
 import {defaultLocale,isLocale,publishedLocales,locales,type Locale} from "./config.ts";
 
-export const translatedPaths=["/","/info/trip-budget","/deals","/info/about","/info/partners","/info","/info/price-comparison","/info/price-freshness","/info/price-history"] as const;
+export const translatedPaths=["/","/info/trip-budget","/deals","/info/about","/info/partners","/info","/info/price-comparison","/info/price-freshness","/info/price-history","/city-break","/tanie-loty-na-weekend","/from/warszawa","/from/WRO","/from/KRK","/destinations/milan","/routes/krakow-rome"] as const;
 export function pageLocales(path:string):readonly Locale[] {
  const base=localizedHref(path,"pl").split(/[?#]/)[0];
  // Private plans and temporary offers support languages but stay out of sitemap.

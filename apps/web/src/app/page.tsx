@@ -9,8 +9,7 @@ import type {Metadata} from "next";
 import {locales,openGraphLocales,type Locale} from "../lib/i18n/config";
 import {getMessages} from "../lib/i18n/messages";
 import {homeText,type HomeKey} from "../lib/i18n/home-copy";
-import {localizedHref,languageAlternates} from "../lib/i18n/routing";
-import {shell} from "../lib/i18n/shell";
+import {localizedHref,languageAlternates,pageLocales} from "../lib/i18n/routing";
 import {DealGrid} from "./components/catalog";
 import {FilterForm} from "./components/filters";
 export const dynamic="force-dynamic";
@@ -26,7 +25,6 @@ export function generateMetadata({locale="pl"}:{locale?:Locale}={}):Metadata {
 }
 export default async function HomePage({searchParams,locale="pl"}:Props) {
   const pl=getMessages(locale),t=(key:HomeKey,values?:Record<string,string|number>)=>homeText(locale,key,values);
-  const suffix=locale==="pl"?"":` (${shell[locale].polish})`;
   const raw=await searchParams;
   const stored=normalizedOrigin((await cookies()).get(originPreferenceCookie)?.value);
   const [origins,places]=await Promise.allSettled([getAirports(),getDestinations()]);
@@ -64,11 +62,11 @@ export default async function HomePage({searchParams,locale="pl"}:Props) {
       <p>{pl.flightOnly} {t("Sprawdź godziny lotów i potrzebne dni urlopu.")}</p>
       <p><Link href={catalogHref}>{t("Zobacz wszystkie loty na 2–4 noce →")}</Link></p>
     </section>
-    <nav className="route-link-grid" aria-label={t("Pomysły na krótki wyjazd")}>{([['/city-break','City break na 2–4 noce'],['/tanie-loty-na-weekend','Tanie loty na weekend'],['/from/warszawa','Warszawa — oba lotniska']] as const).map(([href,label])=><a key={href} href={href} hrefLang="pl">{t(label)}{suffix}</a>)}</nav>
+    <nav className="route-link-grid" aria-label={t("Pomysły na krótki wyjazd")}>{([['/city-break','City break na 2–4 noce'],['/tanie-loty-na-weekend','Tanie loty na weekend'],['/from/warszawa','Warszawa — oba lotniska']] as const).map(([href,label])=><a key={href} href={localizedHref(href,locale)} hrefLang={locale}>{t(label)}</a>)}</nav>
     <p className="search-explanation"><Link href={localizedHref("/deals",locale)}>{t("Zobacz loty ze wszystkich lotnisk →")}</Link> · <Link href={localizedHref("/info/price-comparison",locale)}>{pl.why} →</Link></p>
     <aside className="travel-note" aria-label={t("Budżet podróży")}><p>{t("Zaplanuj cały wyjazd: loty, nocleg, dojazdy i atrakcje. Policz koszt dla siebie lub całej grupy.")}</p><Link className="button button-secondary" href={localizedHref("/info/trip-budget#calculator",locale)}>{t("Policz budżet podróży")}</Link></aside>
-    <div className="browse-layout"><section className="route-links"><p className="eyebrow">{t("02 / Skąd wyruszasz")}</p><h2>{pl.airports}</h2><div className="route-link-grid">{airports.map(a=><Link key={a.id} href={locale==="pl"?`/from/${a.iata_code}`:localizedHref(`/deals?origin=${a.iata_code}`,locale)}>{airportLabel(a,locale)}</Link>)}</div></section>
-    <section className="route-links destination-links"><p className="eyebrow">{t("03 / Dokąd chcesz polecieć")}</p><h2>{pl.destinations}</h2><div className="route-link-grid">{destinations.map(d=><Link key={d.id} href={locale==="pl"?`/destinations/${d.slug}`:localizedHref(`/deals?destination=${encodeURIComponent(d.slug)}`,locale)}>{destinationLabel(d,locale)}</Link>)}</div></section></div>
+    <div className="browse-layout"><section className="route-links"><p className="eyebrow">{t("02 / Skąd wyruszasz")}</p><h2>{pl.airports}</h2><div className="route-link-grid">{airports.map(a=><Link key={a.id} href={pageLocales(`/from/${a.iata_code}`).includes(locale)?localizedHref(`/from/${a.iata_code}`,locale):localizedHref(`/deals?origin=${a.iata_code}`,locale)}>{airportLabel(a,locale)}</Link>)}</div></section>
+    <section className="route-links destination-links"><p className="eyebrow">{t("03 / Dokąd chcesz polecieć")}</p><h2>{pl.destinations}</h2><div className="route-link-grid">{destinations.map(d=><Link key={d.id} href={pageLocales(`/destinations/${d.slug}`).includes(locale)?localizedHref(`/destinations/${d.slug}`,locale):localizedHref(`/deals?destination=${encodeURIComponent(d.slug)}`,locale)}>{destinationLabel(d,locale)}</Link>)}</div></section></div>
     <aside className="travel-note"><span className="note-mark" aria-hidden="true">↗</span><p>{pl.flightOnly}</p><Link href={localizedHref("/info/partners",locale)}>{pl.partners} →</Link></aside>
   </main>;
 }

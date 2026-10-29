@@ -1,4 +1,5 @@
 import {test,expect} from "@playwright/test";
+import {pathLocale} from "../src/lib/i18n/routing";
 
 test.use({javaScriptEnabled:false,userAgent:"Twitterbot/1.0"});
 
@@ -16,7 +17,7 @@ test("every sitemap page has server-rendered unique metadata and reachable edito
   expect(new URL(url).search).toBe('');
   const res=await page.goto(url);
   expect(res?.status(),url).toBe(200);
-  await expect(page.locator('html')).toHaveAttribute('lang','pl');
+  await expect(page.locator('html')).toHaveAttribute('lang',pathLocale(new URL(url).pathname));
   await expect(page.locator('main h1')).toHaveCount(1);
   await expect(page.locator('main').filter({has:page.locator('h1')})).not.toBeEmpty();
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);

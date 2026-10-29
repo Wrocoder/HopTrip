@@ -1,8 +1,10 @@
-import Link from "next/link";
 import type {CatalogPage} from "../../lib/catalog-pages";
+import type {Locale} from "../../lib/i18n/config";
+import {landingText} from "../../lib/i18n/landing-copy";
+import {pathLocale} from "../../lib/i18n/routing";
 
-export function CatalogIntro({page,linksFirst=false,showIntro=true}:{page:CatalogPage;linksFirst?:boolean;showIntro?:boolean}) {
-  const links=<nav className="route-link-grid" aria-label="Zaplanuj podróż">{page.links.map(link=><Link key={link.href} href={link.href}>{link.label}</Link>)}</nav>;
+export function CatalogIntro({page,linksFirst=false,showIntro=true,locale="pl"}:{page:CatalogPage;linksFirst?:boolean;showIntro?:boolean;locale?:Locale}) {
+  const links=<nav className="route-link-grid" aria-label={landingText(locale,"Zaplanuj podróż")}>{page.links.map(link=><a key={link.href} href={link.href} hrefLang={pathLocale(link.href)}>{link.label}</a>)}</nav>;
   return <section className="rationale catalog-intro" aria-label={page.heading}>
     <h2>{page.heading}</h2>
     {linksFirst && links}
