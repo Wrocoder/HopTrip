@@ -77,6 +77,7 @@ for scenario in success services preflight postflight; do
  ln -s "$target/previous" "$target/current"
  sed "s|^root=/opt/hoptrip$|root=$target|" "$repository/scripts/deploy-production.sh" > "$fixture/deploy.sh"
  # The production root-user guard is unrelated to these isolated filesystem tests.
+ # shellcheck disable=SC2016 -- Match the literal variable in the production script.
  sed -i '/^\[\[ \$EUID == 0 \]\]/d' "$fixture/deploy.sh"
  status=0
  bash "$fixture/deploy.sh" "$TARGET_SHA" > "$fixture/$scenario.log" 2>&1 || status=$?
@@ -92,7 +93,7 @@ for scenario in success services preflight postflight; do
    postflight) grep -q 'stage=monitor-postflight' "$fixture/$scenario.log" ;;
   esac
   if [[ $scenario != postflight ]]; then
-   ! grep -q stop "$TRACE" 2>/dev/null
+   if grep -q stop "$TRACE" 2>/dev/null; then exit 1; fi
   else
    [[ $(grep -c up "$TRACE") == 2 ]]
   fi
