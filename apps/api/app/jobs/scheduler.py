@@ -5,7 +5,13 @@ from datetime import UTC, datetime, timedelta
 from time import monotonic
 from zoneinfo import ZoneInfo
 
+from sqlalchemy import select
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm import Session
+
 from app.config import get_settings
+from app.db.session import SessionLocal
+from app.models.job import JobRun, JobStatus
 from app.providers.base import ProviderError
 from app.services.jobs import PipelineBusy, run_tracked_pipeline
 
@@ -55,15 +61,40 @@ def next_calendar_start(now: datetime, interval: int, timezone: ZoneInfo) -> dat
 
 async def run_calendar_scheduler(interval: int, timezone: ZoneInfo) -> None:
     while True:
-        target = next_calendar_start(datetime.now(UTC), interval, timezone)
-        logger.info("Next travel pipeline start: %s", target.astimezone(timezone).isoformat())
-        while (delay := (target - datetime.now(UTC)).total_seconds()) > 0:
-            # Recheck the wall clock to tolerate host clock corrections.
-            await asyncio.sleep(min(delay, 30))
-        if (datetime.now(UTC) - target).total_seconds() >= 60:
-            logger.warning("Travel pipeline skipped a missed calendar slot")
-            continue
-        await run_pipeline_once()
+        try:
+            checked = datetime.now(UTC)
+            with SessionLocal() as db:
+                due = calendar_refresh_due(db, checked, interval, timezone)
+            if due:
+                logger.info("Running due travel pipeline (scheduled or catch-up)")
+                await run_pipeline_once()
+        except SQLAlchemyError:
+            logger.error("Travel scheduler database unavailable; will retry")
+        await asyncio.sleep(60)
+
+
+def latest_calendar_start(now: datetime, interval: int, timezone: ZoneInfo) -> datetime:
+    if interval % 3600 or 86400 % interval:
+        raise ValueError("Calendar interval must be whole hours and divide 24 hours")
+    candidate = now.astimezone(UTC).replace(minute=0, second=0, microsecond=0)
+    while candidate.astimezone(timezone).hour % (interval // 3600):
+        candidate -= timedelta(hours=1)
+    return candidate
+
+
+def calendar_refresh_due(db: Session, now: datetime, interval: int, timezone: ZoneInfo) -> bool:
+    success = db.scalar(select(JobRun.id).where(
+        JobRun.job_type == "TRAVELPAYOUTS_PIPELINE", JobRun.status == JobStatus.SUCCEEDED,
+        JobRun.started_at >= latest_calendar_start(now, interval, timezone),
+    ).limit(1))
+    if success is not None:
+        return False
+    failed = db.scalar(select(JobRun.id).where(
+        JobRun.job_type == "TRAVELPAYOUTS_PIPELINE",
+        JobRun.status.in_([JobStatus.FAILED, JobStatus.INTERRUPTED]),
+        JobRun.finished_at > now - timedelta(seconds=min(interval, 3600)),
+    ).limit(1))
+    return failed is None
 
 
 async def run_scheduler() -> None:

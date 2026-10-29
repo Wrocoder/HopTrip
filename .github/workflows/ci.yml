@@ -36,6 +36,7 @@ jobs:
       - run: pip install --no-deps -e .
       - run: python -m ruff check apps/api
       - run: python -m mypy
+      - run: bash scripts/tests/deploy-production.test.sh
       - run: python -m alembic upgrade head
         working-directory: apps/api
       - run: python -m pytest -q

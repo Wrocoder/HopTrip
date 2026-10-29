@@ -91,8 +91,11 @@ def test_calendar_slots_include_dst(now, expected):
     ) == datetime.fromisoformat(expected)
 
 
-def test_calendar_waits_at_start_and_skips_overrun(monkeypatch):
+def test_calendar_waits_at_start_and_catches_latest_missed_slot(monkeypatch):
+    from contextlib import nullcontext
+
     now = datetime(2026, 10, 4, 13, 43, tzinfo=UTC).timestamp()
+    last_success = datetime(2026, 10, 4, 12, tzinfo=UTC)
     starts = []
 
     class Clock:
@@ -105,15 +108,74 @@ def test_calendar_waits_at_start_and_skips_overrun(monkeypatch):
         now += delay
 
     async def run():
-        nonlocal now
+        nonlocal now, last_success
+        last_success = datetime.fromtimestamp(now, UTC)
         starts.append(datetime.fromtimestamp(now, UTC).isoformat())
         if len(starts) == 2:
             raise asyncio.CancelledError
         now += 7300
 
     monkeypatch.setattr(scheduler, "datetime", Clock)
+    monkeypatch.setattr(scheduler, "SessionLocal", lambda: nullcontext(None))
+    monkeypatch.setattr(scheduler, "calendar_refresh_due", lambda db, checked, interval, zone:
+                        checked >= scheduler.next_calendar_start(last_success, interval, zone))
     monkeypatch.setattr(scheduler.asyncio, "sleep", sleep)
     monkeypatch.setattr(scheduler, "run_pipeline_once", run)
     with pytest.raises(asyncio.CancelledError):
         asyncio.run(scheduler.run_calendar_scheduler(7200, ZoneInfo("Europe/Warsaw")))
-    assert starts == ["2026-10-04T14:00:00+00:00", "2026-10-04T18:00:00+00:00"]
+    assert starts == ["2026-10-04T14:00:00+00:00", "2026-10-04T16:02:40+00:00"]
+
+
+@pytest.mark.parametrize('checked,slot', [
+    ('2026-10-29T13:43:00+00:00', '2026-10-29T13:00:00+00:00'),
+    ('2026-10-25T01:30:00+00:00', '2026-10-25T01:00:00+00:00'),
+    ('2026-10-25T00:30:00+00:00', '2026-10-25T00:00:00+00:00'),
+    ('2026-03-29T01:30:00+00:00', '2026-03-28T23:00:00+00:00'),
+])
+def test_latest_flight_slot_uses_real_hours_across_dst(checked, slot):
+    assert scheduler.latest_calendar_start(datetime.fromisoformat(checked), 7200,
+                                           ZoneInfo('Europe/Warsaw')) == datetime.fromisoformat(slot)
+
+
+def test_flight_catchup_persists_success_and_failure_backoff(isolated_db):
+    from datetime import timedelta
+
+    from app.models.job import JobRun
+
+    checked = datetime(2026, 10, 29, 14, 30, tzinfo=UTC)
+    zone = ZoneInfo('Europe/Warsaw')
+    assert scheduler.calendar_refresh_due(isolated_db, checked, 7200, zone)
+    isolated_db.add(JobRun(job_type='TRAVELPAYOUTS_PIPELINE', status='FAILED',
+                           started_at=checked - timedelta(minutes=10), finished_at=checked))
+    isolated_db.commit()
+    assert not scheduler.calendar_refresh_due(isolated_db, checked, 7200, zone)
+    assert scheduler.calendar_refresh_due(isolated_db, checked + timedelta(hours=1), 7200, zone)
+    isolated_db.add(JobRun(job_type='TRAVELPAYOUTS_PIPELINE', status='SUCCEEDED',
+                           started_at=checked, finished_at=checked))
+    isolated_db.commit()
+    assert not scheduler.calendar_refresh_due(isolated_db, checked + timedelta(minutes=1), 7200, zone)
+
+
+def test_calendar_startup_uses_persisted_history(isolated_db, monkeypatch):
+    from contextlib import nullcontext
+
+    from app.models.job import JobRun
+
+    calls = []
+
+    async def run():
+        calls.append(True)
+        isolated_db.add(JobRun(job_type='TRAVELPAYOUTS_PIPELINE', status='SUCCEEDED',
+                               started_at=datetime.now(UTC), finished_at=datetime.now(UTC)))
+        isolated_db.commit()
+
+    async def stop(_):
+        raise asyncio.CancelledError()
+
+    monkeypatch.setattr(scheduler, 'SessionLocal', lambda: nullcontext(isolated_db))
+    monkeypatch.setattr(scheduler, 'run_pipeline_once', run)
+    monkeypatch.setattr(scheduler.asyncio, 'sleep', stop)
+    for _ in range(2):
+        with pytest.raises(asyncio.CancelledError):
+            asyncio.run(scheduler.run_calendar_scheduler(7200, ZoneInfo('Europe/Warsaw')))
+    assert len(calls) == 1
