@@ -17,6 +17,8 @@ import {isServiceSlug} from "../../../lib/i18n/service-content";
 import {ServiceLinks,serviceMetadata} from "../../components/service-info";
 import {LegalSources} from "../../components/legal-sources";
 import {hasGuideTranslation} from '../../../lib/i18n/guide-slugs';
+import {ArticleIllustration} from '../../components/article-illustration';
+import {articleInlineSection} from '../../../lib/article-imagery';
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
@@ -61,13 +63,15 @@ export default async function InfoPage({params}:Props) {
  {slug==="privacy" && <LegalSources locale="pl"/>}
  {page.reviewedAt && <p className="muted">HopTrip · Sprawdzono <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
  {page.draft && <p role="note">{pl.draft}</p>}{page.paragraphs.map(p=><p key={p}>{p}</p>)}
+ {!page.draft && !page.noindex && <ArticleIllustration slug={slug}/>}
  {slug==="trip-budget" && <TripBudgetCalculator/>}
- {page.sections?.map(section=><section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map(p=><p key={p}>{p}</p>)}
+ {page.sections?.map((section,index)=><section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map(p=><p key={p}>{p}</p>)}
   {section.links && <ul>{section.links.map(link=><li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}</ul>}
   {section.sourceIds && <ul aria-label={`Źródła: ${section.title}`}>{section.sourceIds.map(id=>{
    const source=page.sources?.[id];
    return source ? <li key={source.href}><a href={source.href}>{source.label}</a></li> : null;
   })}</ul>}
+ {!page.draft && !page.noindex && index===articleInlineSection(slug) && <ArticleIllustration slug={slug} placement="inline"/>}
  </section>)}
  {!page.draft && !page.noindex && <AirportTransfer slug={slug}/>}
  {page.sources && <section aria-label="Aktualność informacji"><h2>Przed podróżą sprawdź aktualizacje</h2>

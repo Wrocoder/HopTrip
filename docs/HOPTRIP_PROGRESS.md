@@ -3,6 +3,22 @@
 Дата обновления: 2026-11-02. Источник задач: [HOPTRIP_MASTER_PLAN.md](HOPTRIP_MASTER_PLAN.md).
 Статусы относятся только к новому мастер-плану; старые отчёты не переносятся как выполненные задачи без проверки.
 
+## UI-02 follow-up — фотографии статей (2026-11-02)
+
+Прямой запрос владельца: использовать фотографии с проверяемыми условиями вместо
+копирования из Pinterest. Добавлены 31 Commons WebP, обложки 49 материалов ×4 локали
+и две тематические иллюстрации ледников. Видимые автор/лицензия, раскрываемые
+источник/название/обработка/ShareAlike, локализованные подписи и alt, responsive
+размеры и fallback. [Отчёт и реестр лицензий](article-imagery/README.md).
+
+Node218/218, ESLint, production build/TypeScript и новые browser14/14 прошли;
+40 новых scoped axe scans без violations. Старый registry-test имеет отдельное
+не связанное с фото route assertion failure; не объявляется passed. Прежние
+rendering/CTA/SEO desktop46/46 + mobile6/6 passed;244 sitemap pages и54 editorial
+links HTTP200. Всего66 unique accepted browser cases; не полный suite.
+Публикация ожидает CI. Следующие roadmap задачи
+не создаются; email/digest/персональный Telegram остаются выключенными.
+
 ## Release follow-up 2026-11-02 — DEPLOYED
 
 Production переключён на `a9187b78eb09cadabc74567c489912405dfdb254` 02/11/2026,

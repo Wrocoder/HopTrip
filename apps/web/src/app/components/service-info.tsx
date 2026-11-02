@@ -9,6 +9,7 @@ import {serviceContent,serviceLabels,serviceSlugs,type ServiceSlug} from "../../
 import {editorialCopy} from "../../lib/i18n/editorial-copy";
 import {editorialCard} from "../../lib/i18n/editorial-card";
 import {getInfoContent} from "../../lib/content";
+import {ArticleIllustration} from './article-illustration';
 
 export function serviceMetadata(slug:ServiceSlug,locale:Locale):Metadata {
  const page=serviceContent(slug,locale),path=`/info/${slug}`;
@@ -37,6 +38,7 @@ export async function ServiceInfo({slug,locale}:{slug:ServiceSlug;locale:Locale}
   <h1>{page.title}</h1>
   {page.reviewedAt && <p className="muted">HopTrip · {editorialCopy[locale].reviewed} <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
   {page.paragraphs.map(paragraph=><p key={paragraph}>{paragraph}</p>)}
+  {!page.noindex && <ArticleIllustration slug={slug} locale={locale}/>}
   {legal && <section aria-label={labels.contact} data-nosnippet>
    <h2>{labels.contact}</h2>
    {operator ? <p><a href={`mailto:${operator.email}`}>{operator.email}</a></p> : <p role="alert">{labels.unavailable}</p>}

@@ -2,6 +2,20 @@
 
 Дата: 2026-10-30. Источник требований: [HOPTRIP_MASTER_PLAN.md](HOPTRIP_MASTER_PLAN.md), раздел 12. Проверенные результаты AUD-05 — [HOPTRIP_AUDIT.md](HOPTRIP_AUDIT.md); окружение и артефакты — [aud05/README.md](aud05/README.md).
 
+## UI-02 follow-up — фотографии и права
+
+- [Unit](../apps/web/tests/article-imagery.test.mjs): 49 slug×4 локали, unknown/legal/prototype
+  paths,31 реальный WebP/hash/размер/бюджет/нет EXIF-XMP, CC licence URI и credit inventory.
+- [Browser](../apps/web/tests/article-imagery.spec.ts):14 desktop/mobile cases,0skipped/flaky,
+  40 новых main-scoped axe scans без violations; responsive actual image load,4 локали,
+  credit keyboard/details/source,320px overflow,2 inline placements/lazy,31 HTTP200,
+  no-JS credits и image404 fallback. Capture/contact sheets проверены визуально.
+- Старый static editorial registry route assertion не проходит независимо от изображений:
+  query-based CTA после SEO-04 не предусмотрены regex. Первоначальный run0/1/111not-run
+  сохранён. Selected rendering/CTA/technical SEO desktop46/46+mobile6/6 passed;
+  244 sitemap pages/54 editorial links HTTP200. Deployment smoke дополняется
+  в [отчёте](article-imagery/README.md). Полный suite не заявляется зелёным.
+
 Это карта защиты существующего поведения, а не процент покрытия строк. Наличие spec-файла не означает успешный прогон всех его сценариев. Полный список обнаруженных browser-тестов хранится в [e2e-inventory.json](aud05/e2e-inventory.json).
 
 ## Уровни защиты
