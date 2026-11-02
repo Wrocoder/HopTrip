@@ -30,11 +30,8 @@ test("catalog languages preserve filters, pages, consent and server language",as
   }
   await page.evaluate(()=>scrollTo(0,0));
   if(testInfo.project.name==="desktop"){
-   // The expanded catalogue filters precede results. Keep the primary action
-   // on screen, and verify the first price is reachable by ordinary scrolling.
-   await expect(page.getByRole('button',{name:messages.filter,exact:true})).toBeInViewport();
-   await page.locator('.deal-price').first().scrollIntoViewIfNeeded();
-   await expect(page.locator('.deal-price').first()).toBeInViewport();
+   const price=await page.locator('.deal-price').first().boundingBox();
+   expect(price!.y+price!.height).toBeLessThan(900);
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.screenshot({path:testInfo.outputPath(`catalog-${locale}.png`)});

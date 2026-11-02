@@ -146,7 +146,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false,path=
 
     <button type="submit" disabled={pending}>{hero ? t("Znajdź tani lot") : pl.filter}</button>
     </fieldset>
-    <details className="advanced-filters" open={!hero || advancedCount>0}>
+    <details className="advanced-filters" open={advancedCount>0}>
      <summary>{hero ? t("Więcej opcji: długość pobytu") : t("Daty i długość pobytu")}{advancedCount>0 && <span className="badge">{t("Aktywne:")}{" "}{advancedCount}</span>}</summary>
      <p className="field-hint">{t("Zakres dat wylotu, nie powrotu. Długość pobytu w nocach.")}{" "}{locked.duration_min ? t("To zestawienie obejmuje 2–4 noce. Aby wybrać inną długość, przejdź do pełnego katalogu.") : t("Puste pole: bez ograniczenia.")}</p>
      <div className="filter-secondary">
@@ -163,19 +163,17 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false,path=
       </select>
       <span className="field-hint">{t('Zmiana sortowania stosuje też wpisane filtry.')}</span>
     </label>}
-    {!hero && <p className="sort-explanation field-hint" id={sortRuleId}>
-      {appliedSort ? <>{t('Zastosowane sortowanie:')} <strong>{t(appliedSort.label)}</strong>. {t(appliedSort.rule)}{' '}
-        {appliedSort.value==='score' && <Link prefetch={false} href={localizedHref('/info/price-comparison',locale)}>{t('Jak działa wynik pomocniczy?')}</Link>}
-      </> : t('Wybierz poprawne sortowanie, aby uporządkować wyniki.')}
-    </p>}
     {!hero && <div className="trip-presets" role="group" aria-label={t("Szybkie filtry")}>
       {tripPresets.filter(preset=>!(preset.id==="weekend" && locked.weekend) && !(preset.id==="nights" && locked.duration_min)).map(preset=><div key={preset.id}>
         <button type="button" disabled={pending} aria-pressed={presetActive(presetDraft??filters,preset.id)} aria-describedby={`preset-${preset.id}`}
           onClick={event=>{const form=event.currentTarget.form!;if(form.reportValidity())submit(form,preset.id);}}>{t(preset.label)}</button>
       </div>)}
     </div>}
-    {!hero && <p className="field-hint">{t('Skróty zastępują własne pola i od razu stosują formularz. Ponowne kliknięcie usuwa te warunki.')}</p>}
-    {!hero && <details className="preset-rules"><summary>{t("Jak działają filtry")}</summary>{tripPresets.map(preset=><p id={`preset-${preset.id}`} className="field-hint" key={preset.id}><strong>{t(preset.label)}: </strong>{t(preset.rule)}</p>)}<p className="field-hint">{t("Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.")}</p><p className="field-hint">{t("Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy.")}</p></details>}
+    {!hero && <details className="preset-rules"><summary>{t("Jak działają filtry")}</summary><p className="sort-explanation field-hint" id={sortRuleId}>
+      {appliedSort ? <>{t('Zastosowane sortowanie:')} <strong>{t(appliedSort.label)}</strong>. {t(appliedSort.rule)}{' '}
+        {appliedSort.value==='score' && <Link prefetch={false} href={localizedHref('/info/price-comparison',locale)}>{t('Jak działa wynik pomocniczy?')}</Link>}
+      </> : t('Wybierz poprawne sortowanie, aby uporządkować wyniki.')}
+    </p><p className="field-hint">{t('Skróty zastępują własne pola i od razu stosują formularz. Ponowne kliknięcie usuwa te warunki.')}</p>{tripPresets.map(preset=><p id={`preset-${preset.id}`} className="field-hint" key={preset.id}><strong>{t(preset.label)}: </strong>{t(preset.rule)}</p>)}<p className="field-hint">{t("Szybkie filtry łączą się z pozostałymi warunkami i wybranymi datami. Ponowne kliknięcie usuwa ich warunki, bez przywracania wcześniejszych wartości.")}</p><p className="field-hint">{t("Daty wyznaczają zakres możliwego wylotu (obie granice włącznie), nie termin powrotu. Puste pole oznacza brak granicy.")}</p></details>}
     {validation && <p id={errorId} className="notice" role="alert">{validation}</p>}
     {pending && <p className="filter-pending" role="status">{stateText(locale,'Stosujemy wybrane filtry…')}</p>}
 

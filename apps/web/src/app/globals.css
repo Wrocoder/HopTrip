@@ -631,3 +631,15 @@ fieldset.filter-primary { min-width: 0; margin: 0; padding: 0; border: 0; }
 .airport-select ul { max-height: min(260px, 40dvh); overscroll-behavior: contain; scroll-padding-block: 6px; }
 .back-link, .preset-rules summary { min-height: var(--target-height); }
 .language-switcher a { display: inline-flex; align-items: center; justify-content: center; min-width: var(--target-height); min-height: var(--target-height); }
+
+/* Keep desktop catalogue results visible without shrinking interactive targets. */
+@media (min-width: 1100px) {
+  body:has(.catalog-page) .site-header { padding-block: 6px; }
+  body:has(.catalog-page) .site-header .language-switcher { width: auto; }
+  .catalog-page .page-heading h1 { font-size: 2.25rem; margin-block: 2px 4px; }
+  .catalog-page .filter-panel { padding: 8px; }
+  .catalog-page .filters { grid-template-columns: minmax(140px,.8fr) minmax(200px,1.2fr) minmax(0,3fr) auto; gap: 2px 12px; }
+  .catalog-page .trip-presets, .catalog-page .preset-rules { grid-column: auto; }
+  .catalog-page .preset-rules[open] { grid-column: 1 / -1; }
+  .catalog-page .active-filters { margin-top: 6px; padding-top: 6px; }
+}

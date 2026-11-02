@@ -1,5 +1,17 @@
 # Релиз roadmap — 2026-11-02
 
+## Финальный кандидат
+
+Исправлены layout regression и тесты сортировки: initial advanced filters закрыты
+без активных дополнительных условий; подробные правила сортировки/пресетов перенесены
+в существующую справку с сохранением текстов, IDs и aria-describedby. Desktop grid и
+header spacing уплотнены без уменьшения touch targets; мобильный layout сохраняется.
+Исходный first-price<900 assertion сохранён на4 языках. Build/TypeScript, ESLint и
+215Node tests прошли. Финальный scoped browser run36/36 passed (desktop/mobile,4locales,
+0skipped/flaky/errors,217.86s). [Acceptance](acceptance.json). Полный800-case suite
+не объявляется зелёным. Deployment ожидает финальный CI. Исторические failures ниже
+сохраняются и не являются утверждением о текущем состоянии кандидата.
+
 Разрешение владельца: завершить необходимые release checks и задеплоить;
 email и личный Telegram оставить выключенными. 43 задачи master plan выполнены
 локально; этот отчёт отделяет проверку релиза от прежних task-level acceptance.
@@ -47,6 +59,11 @@ email и личный Telegram оставить выключенными. 43 з�
 - Новая fixture-only opt-out header позволяет policy tests прочитать original307
   при `maxRedirects:0`, затем они сами заменяют переход loopback-адресом. Обычные
   browser /go redirects остаются внутри fixture; production такого bypass не имеет.
+- Общий прогон подтвердил shared fixture defect: short-trips cleanup удалял базовый
+  WAW, после чего growth setup возвращал500. Cleanup теперь сохраняет baseline WAW
+  и его ID. Новый subprocess regression проверяет два полных enable/disable cycles,
+  исходный registry и следующий growth setup/detail/cleanup;1/1 passed, Ruff passed.
+  Это test-only исправление, production airports не изменялись.
 - Подтверждены отсутствующие production HSTS/CSP. Подготовлены HSTS30days только
   основного домена без preload/subdomains и базовая CSP object/base/frame/form.
   Inline Next bootstrap остаётся разрешённым; strict nonce policy не заявляется.
@@ -66,6 +83,22 @@ Returning visitors/device split недоступны в текущем privacy-p
 
 Ещё не выполнен. Требуются проверенный опубликованный commit, CI, штатный backup,
 миграции deploy script, health/smoke и проверка фактических flags после запуска.
+
+### Уточнение после общего прогона
+
+Проверка compact-catalog подтвердила реальную layout regression. Прежняя гипотеза,
+что first-price<900 просто устарел, отозвана; исходное assertion восстановлено.
+Пустые advanced filters снова закрыты по умолчанию, активные открываются автоматически.
+Это ещё не полное исправление: измерение при закрытом блоке даёт нижнюю границу цены
+около1086px в1366×900. Требуются дальнейшее уплотнение и browser acceptance до deployment.
+Новый runtime change пока не объявлен verified; Node215 passed, ESLint проверяется.
+Два CSS-прототипа в isolated fixture результата не дали и в production source не внесены.
+
+Также зафиксирован local C: ENOSPC. Запас места перед broad run не был проверен.
+Автоматическая проверка отклонила перенос/очистку task-temp каталогов (`blocked by policy`);
+старые файлы сохранены. Новые Chrome/SQLite/result artifacts направлены в отдельный
+task directory на F:. Неполный resume-final run прерван между пользовательскими turns;
+progress JSONL сохраняется, полного зелёного browser suite и deployment пока нет.
 
 Deploy script сохраняет running application images и previous-source, делает pg_dump
 при остановленных writers и проверяет pg_restore --list. При failure восстанавливает

@@ -70,8 +70,7 @@ test("advanced fields remain keyboard accessible and navigation shows current se
  const summary=page.locator(".advanced-filters summary");
  await summary.focus();
  await page.keyboard.press("Enter");
- await expect(page.locator('.advanced-filters')).not.toHaveAttribute('open','');
- await page.keyboard.press('Enter');
+ await expect(page.locator('.advanced-filters')).toHaveAttribute('open','');
   const duration=page.getByRole("spinbutton",{name:"Pobyt od (nocy)",exact:true});
  await expect(duration).toBeVisible();
  await duration.fill("-1");

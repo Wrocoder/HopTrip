@@ -95,12 +95,12 @@ test("canonical, sitemap and draft noindex",async({page,request})=>{
  await expect(page.getByRole("heading",{name:"Jak rozumieć procent poniżej mediany"})).toBeVisible();
  await page.getByRole('navigation',{name:'Powiązane poradniki',exact:true}).getByRole("link",{name:"Co oznacza świeżość oferty",exact:true}).click();
  await expect(page.getByRole("heading",{level:1})).toHaveText("Co oznacza świeżość oferty");
- await page.getByRole("link",{name:"Co mówi, a czego nie mówi historia cen",exact:true}).click();
+ await page.getByRole('navigation',{name:'Powiązane poradniki',exact:true}).getByRole("link",{name:"Co mówi, a czego nie mówi historia cen",exact:true}).click();
  await expect(page.getByRole("heading",{level:1})).toHaveText("Co mówi, a czego nie mówi historia cen");
  await page.goto("/info/trip-budget");
  await expect(page.getByRole("heading",{name:"Nie zamieniaj brakującej ceny w zero"})).toBeVisible();
  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href","http://127.0.0.1:3100/info/trip-budget");
- await page.getByRole("link",{name:"Lot w jedną stronę czy w obie strony",exact:true}).click();
+ await page.getByRole('navigation',{name:'Powiązane poradniki',exact:true}).getByRole("link",{name:"Lot w jedną stronę czy w obie strony",exact:true}).click();
  await expect(page.getByRole("heading",{level:1})).toHaveText("Lot w jedną stronę czy w obie strony");
  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
 });

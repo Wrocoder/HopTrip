@@ -22,6 +22,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: applied sort
  await expect(select.locator('option')).toHaveCount(3);
  for(const [key,label] of Object.entries(labels))await expect(select.locator(`option[value="${key}"]`)).toHaveText(t(label));
  expect(await select.getAttribute('aria-describedby')).toBe(await rule.getAttribute('id'));
+ await page.locator('.preset-rules > summary').click();
  await expect(rule.getByRole('link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));
  let release!:()=>void;const gate=new Promise<void>(resolve=>{release=resolve;});
  await page.route('**/*',async route=>{if(route.request().method()==='POST'&&route.request().headers()['next-action'])await gate;await route.continue();});
