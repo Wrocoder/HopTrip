@@ -16,8 +16,14 @@ Node218/218, ESLint, production build/TypeScript и новые browser14/14 пр
 не связанное с фото route assertion failure; не объявляется passed. Прежние
 rendering/CTA/SEO desktop46/46 + mobile6/6 passed;244 sitemap pages и54 editorial
 links HTTP200. Всего66 unique accepted browser cases; не полный suite.
-Публикация ожидает CI. Следующие roadmap задачи
-не создаются; email/digest/персональный Telegram остаются выключенными.
+DONE / DEPLOYED: `5a04ffa00f12ddeabaeb45adb20c58bed2194b05`,
+[CI API/web/checks](https://github.com/Wrocoder/HopTrip/actions/runs/41517645708) success.
+[Production](article-imagery/production.json):196/196 pages200,31/31 actual WebP hashes,
+24 browser page/locale/viewport combinations, no-JS credits; JS/CSP/external errors=[],
+320px overflow=false. Backup5266215bytes/mode600/pg_restore-list valid,12monitor checks
+passed; все4personal delivery flags false, оба public status endpoints disabled.
+Новых migrations/Caddy config changes нет. Следующие roadmap задачи не создаются;
+email/digest/персональный Telegram остаются выключенными. Работа завершена.
 
 ## Release follow-up 2026-11-02 — DEPLOYED
 

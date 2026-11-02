@@ -1,6 +1,6 @@
 # Фотографии в статьях HopTrip
 
-Дата: 2026-11-02. Дополнение к UI-02 по прямому запросу владельца. Статус: локальные acceptance пройдены; публикация и production smoke ожидаются.
+Дата: 2026-11-02. Дополнение к UI-02 по прямому запросу владельца. Статус: DONE / DEPLOYED, acceptance и production smoke пройдены.
 
 ## Что добавлено
 
@@ -44,6 +44,12 @@
 
 ## Публикация и откат
 
-Публикация выполняется штатным pinned-SHA deploy script после успешного CI; результат будет записан здесь. Email, digest и персональный Telegram остаются выключенными. Operational monitoring сохраняется.
+Опубликован и задеплоен `5a04ffa00f12ddeabaeb45adb20c58bed2194b05` штатным pinned-SHA script. [CI API/web/checks](https://github.com/Wrocoder/HopTrip/actions/runs/41517645708): все три jobs success. Production source: `/opt/hoptrip/releases/5a04ffa00f12ddeabaeb45adb20c58bed2194b05-20261102T201841Z`; фактический deployed-sha/current проверен. Все12 monitor checks true. Caddy config не менялся, его пересоздание не требовалось.
+
+Backup: `/opt/hoptrip/backups/deploy-20261102T201841Z-5a04ffa00f12ddeabaeb45adb20c58bed2194b05/database.dump`,5266215bytes,mode600; штатный `pg_restore --list` прошёл до миграционного шага. Новых миграций в этой задаче нет. Сохранены предыдущие application images для штатного rollback.
+
+[Production smoke](production.json):196/196 языковых страниц HTTP200 с обложкой/лицензией/прежним canonical;31/31 WebP HTTP200 с точным SHA-256. В браузере24 сочетания (четыре локали×два viewport×Париж/Норвегия/Исландия): actual optimized image load, inline lazy load, keyboard attribution/source, без overflow; no-JS credit дополнительно проверен. JS errors=[], CSP violations=[], external attempts=[]; desktop/mobile production captures просмотрены. Для воспроизведения: `node docs/article-imagery/verify-production.cjs` из корня, с браузерным temp на отдельном диске.
+
+Все четыре runtime flags `alerts_enabled`, `alerts_digest_enabled`, `telegram_enabled`, `telegram_delivery_enabled` проверены и равны false; оба public status endpoints также enabled=false/delivery_enabled=false. Email, digest и персональный Telegram не включались. Operational monitoring сохранён.
 
 Для отката достаточно восстановить предыдущий web image/source штатным application rollback. Изменений схемы/данных/миграций в этой задаче нет; database downgrade и удаление данных не нужны. При отзыве конкретного фото удалить его mapping до проверки замены, сохранив запись происхождения в истории Git.

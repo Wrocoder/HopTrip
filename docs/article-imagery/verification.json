@@ -87,7 +87,39 @@
     "No legal or full WCAG certification"
   ],
   "deployment": {
-    "status": "pending-ci",
-    "deliveryEnabled": false
+    "status": "deployed",
+    "sha": "5a04ffa00f12ddeabaeb45adb20c58bed2194b05",
+    "ci": {
+      "run": 41517645708,
+      "url": "https://github.com/Wrocoder/HopTrip/actions/runs/41517645708",
+      "api": "success",
+      "web": "success",
+      "checks": "success"
+    },
+    "source": "/opt/hoptrip/releases/5a04ffa00f12ddeabaeb45adb20c58bed2194b05-20261102T201841Z",
+    "backup": {
+      "path": "/opt/hoptrip/backups/deploy-20261102T201841Z-5a04ffa00f12ddeabaeb45adb20c58bed2194b05/database.dump",
+      "bytes": 5266215,
+      "mode": "600",
+      "pgRestoreList": "passed"
+    },
+    "monitorPassed": 12,
+    "deliveryFlags": {
+      "alerts_enabled": false,
+      "alerts_digest_enabled": false,
+      "telegram_enabled": false,
+      "telegram_delivery_enabled": false
+    },
+    "productionSmoke": {
+      "checkedAt": "2026-11-02T20:22:01.137Z",
+      "pages": 196,
+      "photoHashes": 31,
+      "browserCases": 24,
+      "noJavaScriptCredits": true,
+      "errors": [],
+      "csp": [],
+      "external": []
+    },
+    "runtimeChangedAfterDeployment": false
   }
 }
