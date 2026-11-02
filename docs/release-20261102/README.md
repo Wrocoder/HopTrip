@@ -31,6 +31,30 @@ email и личный Telegram оставить выключенными. 43 з�
   веток fixture заменён in-memory. Real partner navigation не нужна для acceptance.
 - Полный браузерный прогон: выполняется; окончательный результат будет записан ниже.
 
+### Follow-up review
+
+- `17307acc3524b3b5ebac819d7c0ee7eb49e9f660` опубликован;
+  [CI API/web/checks](https://github.com/Wrocoder/HopTrip/actions/runs/41475778401) successful.
+- После двух общих navigation timeouts и нескольких отложенных UI состояний
+  параллельность ограничена двумя отдельными средами. Остановлены только процессы
+  проверенных собственных runner trees; их неполные отчёты не считаются passed.
+  Focused unchanged repeat дат:4/4 mobile; catalog subscription:2/2 desktop/mobile.
+- Старые assertions обновлены под `returnTo`, текущий 404 и loading при применении
+  фильтров (`aria-busy`/status) вместо удалённого SEO-01 initial SSR placeholder.
+  Селекторы ограничены нужными видимыми trip/related sections. Catalog test больше
+  не требует цену первой карточки в первых900px после expanded filters: отдельно
+  проверяет primary filter action в viewport и цену после обычной прокрутки.
+- Новая fixture-only opt-out header позволяет policy tests прочитать original307
+  при `maxRedirects:0`, затем они сами заменяют переход loopback-адресом. Обычные
+  browser /go redirects остаются внутри fixture; production такого bypass не имеет.
+- Подтверждены отсутствующие production HSTS/CSP. Подготовлены HSTS30days только
+  основного домена без preload/subdomains и базовая CSP object/base/frame/form.
+  Inline Next bootstrap остаётся разрешённым; strict nonce policy не заявляется.
+  Caddy validate passed; adapted config требует отсутствующий upstream CSP,
+  сохраняя более строгие policies. [Семантика default header](https://caddyserver.com/docs/caddyfile/directives/header).
+  Первое диагностическое assertion предположило неверную JSON shape адаптера;
+  actual output проверен, затем проверка исправлена. Конфигурация при этом не менялась.
+
 ## Доставка и границы
 
 Email, digest и личный Telegram не активируются; sender/bot/webhook не настраиваются,
@@ -42,3 +66,14 @@ Returning visitors/device split недоступны в текущем privacy-p
 
 Ещё не выполнен. Требуются проверенный опубликованный commit, CI, штатный backup,
 миграции deploy script, health/smoke и проверка фактических flags после запуска.
+
+Deploy script сохраняет running application images и previous-source, делает pg_dump
+при остановленных writers и проверяет pg_restore --list. При failure восстанавливает
+прежние приложения без database downgrade. Новые nullable fields/tables допускают
+такой откат без удаления данных.
+
+Caddy требует отдельного `compose up -d --no-deps caddy` из final release: старый
+контейнер держит bind mount прежнего release path. Сначала validate на установленном
+образе; затем recreate с существующими TLS/data volumes и HTTPS smoke. Откат Caddy —
+тот же compose command из сохранённого previous-source. HSTS сохраняется в клиентах
+до30дней; продолжать обслуживать HTTPS при любом rollback, не переходить на HTTP.

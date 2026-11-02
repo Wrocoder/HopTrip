@@ -514,7 +514,9 @@ def short_trip_fixtures(enabled: bool):
         db.execute(delete(DealComponent).where(DealComponent.deal_id.in_(ids)))
         db.execute(delete(Deal).where(Deal.slug.like("short-%")))
         db.execute(delete(TravelOffer).where(TravelOffer.external_id.like("short-%")))
-        db.execute(delete(Airport).where(Airport.iata_code.in_(["WAW", "KTW", "GDN"])))
+        # WAW belongs to the baseline registry. Removing it leaked fixture state
+        # into later airport/growth scenarios in the full suite.
+        db.execute(delete(Airport).where(Airport.iata_code.in_(["KTW", "GDN"])))
         if not enabled:
             db.commit()
             return {"enabled": False}
@@ -523,8 +525,10 @@ def short_trip_fixtures(enabled: bool):
         # HTR-05: isolated airport selections with six, two and zero short trips.
         for code, city, lengths in [("WAW", "Warszawa", [2, 3, 4, 2, 3, 4, 8]),
                                     ("KTW", "Katowice", [2, 4, 7]), ("GDN", "Gdańsk", [9])]:
-            airport = Airport(iata_code=code, name=city, city=city, country_code="PL")
-            db.add(airport)
+            airport = db.scalar(select(Airport).where(Airport.iata_code == code))
+            if airport is None:
+                airport = Airport(iata_code=code, name=city, city=city, country_code="PL")
+                db.add(airport)
             db.flush()
             for index, nights in enumerate(lengths):
                 start = datetime.now(UTC) + timedelta(days=30)
