@@ -1,5 +1,51 @@
 # Релиз roadmap — 2026-11-02
 
+## DEPLOYED — проверено 2026-11-02 19:23UTC
+
+- Приложение: `a9187b78eb09cadabc74567c489912405dfdb254`, https://hoptrip.pl/.
+  [CI API/web/checks](https://github.com/Wrocoder/HopTrip/actions/runs/41507946833):success.
+- Финальные36/36 browser cases passed,0skipped/flaky/errors,217.86s;
+  215Node/ESLint/production build/TypeScript passed. Backend CI прошёл,
+  включая новый fixture lifecycle regression. Полный800-case suite не объявляется зелёным.
+- [Production checks](production-checks.json):4locale home/catalog/saved/privacy200,
+  реальная карточка200/calculator focus,320px без overflow; JS/CSP errors=[],
+  внешние переходы не выполнялись. Снимок mobile home просмотрен.
+- Database:`0021_telegram_alerts`; deploy backup
+  `/opt/hoptrip/backups/deploy-20261102T192118Z-a9187b78eb09cadabc74567c489912405dfdb254/database.dump`,
+  5,250,021bytes/mode600/pg_restore--list valid. 12monitor checks passed.
+- Все4personal delivery flags false; public email/Telegram status enabled=false,
+  delivery_enabled=false. Sender/bot/webhook/campaigns не включались.
+  Existing operational monitoring оставлен. Internal usage без auth401,
+  protected dashboards PL/EN/RU/UK200; public admin404. certifi2026.10.23 в runtime.
+- Actual aggregate usage получен read-only; raw IDs/PII не извлекались.
+  Внутренний usage report сохранён локально, в публичный repository не включён.
+- Caddy пересоздан с bind mounts final release; HTTPS200, HSTS30days и базовая CSP
+  подтверждены. Во время recreate был краткий connection refusal, retry прошёл.
+
+### Операционный сбой и восстановление
+
+Первый deploy остановился на preserve-images до остановки writers/backup/migrations:
+работающие API/worker/events-worker ссылались на отсутствующие image metadata.
+Причина их исчезновения не установлена; web image был доступен. Первое сообщение
+об ошибке web уточнено после inspect. Нельзя приписывать исчезновение без доказательств
+конкретной предыдущей операции Docker.
+
+В закрытом server backup сохранены filesystem exports трёх контейнеров; Docker import
+восстановил CMD/ENTRYPOINT/WORKDIR/PATH без runtime ENV credentials. Образы и архивы
+не покидали VM; опубликованных snapshots нет. Старые сервисы пересозданы из этих
+baseline images и прошли readiness, image inspect восстановлен. После этого штатный
+deploy с автоматическим application rollback повторён успешно. Скрипт deployment
+не изменялся. Исходники/файлы БД не редактировались напрямую; downgrade не выполнялся.
+
+### Границы результата
+
+GSC/Keyword Planner/field CWV, offsite backup и legal certification не подтверждены.
+Returning/device split недоступны по текущему contract. Строгая nonce CSP не внедрена;
+действует проверенная базовая policy. Email/личный Telegram выключены по указанию владельца.
+Local C: cleanup ранее заблокирован автоматической проверкой (`blocked by policy`),
+обход не выполнялся; файлы сохранены, новые temp/results направлены на F:.
+Ниже сохранена история подготовки; её pending statements относятся к прежним этапам.
+
 ## Финальный кандидат
 
 Исправлены layout regression и тесты сортировки: initial advanced filters закрыты

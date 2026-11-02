@@ -3,7 +3,24 @@
 Дата обновления: 2026-11-02. Источник задач: [HOPTRIP_MASTER_PLAN.md](HOPTRIP_MASTER_PLAN.md).
 Статусы относятся только к новому мастер-плану; старые отчёты не переносятся как выполненные задачи без проверки.
 
-## Release follow-up 2026-11-02 — в работе
+## Release follow-up 2026-11-02 — DEPLOYED
+
+Production переключён на `a9187b78eb09cadabc74567c489912405dfdb254` 02/11/2026,
+проверен19:23UTC. [CI API/web/checks](https://github.com/Wrocoder/HopTrip/actions/runs/41507946833)
+successful. Финальный bundle:215Node/ESLint/build+TypeScript и36/36 scoped browser
+desktop/mobile cases passed; это не заявление о полном зелёном800-case suite.
+[Production smoke](release-20261102/production-checks.json):4locales/home/catalog/saved/privacy,
+реальная offer detail+calculator HTTP200; no JS/CSP errors/external navigation/320px overflow.
+Миграции0021 применены; backup5,250,021bytes, mode600, pg_restore--list valid.
+12monitor checks passed. HSTS30days/base CSP включены; строгие upstream policies сохранены.
+Все4email/digest/personalTelegram flags false, оба public status endpoints подтверждают
+delivery disabled. Operational monitoring сохранён. Internal analytics401 без токена,
+4локали dashboard200 с авторизацией, public admin404. certifi2026.10.23 подтверждён.
+Первый deploy остановился до writers/migrations: отсутствовали image metadata API/workers.
+Восстановлены filesystem-only rollback images без ENV credentials, baseline readiness
+проверена; повторный штатный deploy успешен. [Отчёт](release-20261102/README.md).
+
+Предыдущие этапы подготовки (история):
 
 Владелец разрешил завершение release preparation и deployment, явно оставив email/личный
 Telegram выключенными. Все 43 task IDs DONE; новые roadmap tasks не выдумываются.
