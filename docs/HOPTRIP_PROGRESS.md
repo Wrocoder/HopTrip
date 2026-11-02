@@ -3,6 +3,22 @@
 Дата обновления: 2026-11-02. Источник задач: [HOPTRIP_MASTER_PLAN.md](HOPTRIP_MASTER_PLAN.md).
 Статусы относятся только к новому мастер-плану; старые отчёты не переносятся как выполненные задачи без проверки.
 
+## Server maintenance follow-up — очистка 2026-11-02 — DONE
+
+По прямому разрешению владельца удалены180 старых Docker-тегов,40 release source
+и2 preflight copies, завершённый migrate-container и private build-cache records,
+не использованные7дней. Прежние backup/DB/TLS volumes/config/logs сохранены;
+оставлены current+два rollback source sets, protected images и новый image-save
+архив211544762bytes/mode600 с проверенными tar manifest/gzip/SHA-256.
+Свободно11,12→30,39GB, занято77%→36%; net+19264520192bytes (19,26GB).
+Build-cache15,39→5,073GB; Docker reported prune10,32GB, active37 preserved.
+Все6 running container IDs/images/mounts прежние,3volumes сохранены, SHA5a04ffa
+не менялся;12monitor checks + core/article/31actual-photo-hash production smoke passed.
+Email/digest/личный Telegram false. Первые stopped-migrate guard failure и0B cache
+filter attempt зафиксированы; не скрываются и не считаются успешной очисткой.
+[Отчёт, замеры, сохранённые комплекты и восстановление](server-cleanup-20261102/README.md).
+Код/миграции/таймеры очистки не менялись, новых roadmap IDs не добавлено. Остановка.
+
 ## UI-02 follow-up — фотографии статей (2026-11-02)
 
 Прямой запрос владельца: использовать фотографии с проверяемыми условиями вместо

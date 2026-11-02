@@ -1,0 +1,269 @@
+{
+  "status": "DONE",
+  "checkedAt": "2026-11-02T21:09:53.495Z",
+  "sourceCommit": "00f064cf1143d64c01b9427c556c64c3e5579de2",
+  "productionSha": "5a04ffa00f12ddeabaeb45adb20c58bed2194b05",
+  "disk": {
+    "total": 47321268224,
+    "used": 16918368256,
+    "available": 30386122752,
+    "usedPercent": "36%",
+    "beforeUsed": 36182888448,
+    "beforeAvailable": 11121602560,
+    "netAvailableIncrease": 19264520192
+  },
+  "inventory": {
+    "before": {
+      "dockerSystemDfImages": 153,
+      "imageTags": 200,
+      "cacheRecords": 389,
+      "cacheSize": "15.39GB",
+      "containers": 7,
+      "running": 6,
+      "volumes": 3
+    },
+    "after": {
+      "dockerSystemDfImages": 18,
+      "visibleDistinctImageIds": 15,
+      "imageTags": 24,
+      "cacheRecords": 142,
+      "cacheSize": "5.073GB",
+      "containers": 6,
+      "running": 6,
+      "volumes": 3
+    }
+  },
+  "removed": {
+    "oldImageTags": 180,
+    "sourceDirectories": 40,
+    "preflightDirectories": 2,
+    "directoryBytes": 3453034496,
+    "completedMigrationContainer": "hoptrip-migrate-1",
+    "cacheReportedReclaimed": "10.32GB",
+    "cacheRecordsRemoved": 247,
+    "aptGetClean": "success"
+  },
+  "retained": {
+    "sourceDirectories": [
+      "/opt/hoptrip/releases/2395f1631b2c202c07bfc50dd5585f3abe31c404-20261029T215719Z",
+      "/opt/hoptrip/releases/5a04ffa00f12ddeabaeb45adb20c58bed2194b05-20261102T201841Z",
+      "/opt/hoptrip/releases/a9187b78eb09cadabc74567c489912405dfdb254-20261102T192118Z"
+    ],
+    "imageTags": [
+      {
+        "tag": "hoptrip-web:latest",
+        "id": "sha256:1b32e56e512967ec700304f07ad3ec982e24fdf51f372e3dfa9188aa057fe47b"
+      },
+      {
+        "tag": "hoptrip-events-worker:recovered-baseline",
+        "id": "sha256:ead6e90967aa4b673d446ac5e21c9238cc1fa95685305eb6e6f016d851652811"
+      },
+      {
+        "tag": "hoptrip-events-worker:rollback-20261102T192118Z",
+        "id": "sha256:ead6e90967aa4b673d446ac5e21c9238cc1fa95685305eb6e6f016d851652811"
+      },
+      {
+        "tag": "hoptrip-worker:recovered-baseline",
+        "id": "sha256:bb73d62b6f07b90498d2568a3e67ca646e6edf54374458ed0aa623e59b2c6bf0"
+      },
+      {
+        "tag": "hoptrip-worker:rollback-20261102T192118Z",
+        "id": "sha256:bb73d62b6f07b90498d2568a3e67ca646e6edf54374458ed0aa623e59b2c6bf0"
+      },
+      {
+        "tag": "hoptrip-api:recovered-baseline",
+        "id": "sha256:a275bbdc7f8d4cf073c21edab2f237e8079d0c2d7e55f8970e3a7b98f54c4455"
+      },
+      {
+        "tag": "hoptrip-api:rollback-20261102T192118Z",
+        "id": "sha256:a275bbdc7f8d4cf073c21edab2f237e8079d0c2d7e55f8970e3a7b98f54c4455"
+      },
+      {
+        "tag": "hoptrip-web:rollback-20261102T201841Z",
+        "id": "sha256:d03c1a77fe2d1a16f8aeee4aba393ea19ef460797015afecf3d984c031a5be88"
+      },
+      {
+        "tag": "hoptrip-worker:rollback-20261102T201841Z",
+        "id": "sha256:d887a3489f976cdc819edfeacd46c6cebd9742ff5dba5f72f2374d2c7a20449b"
+      },
+      {
+        "tag": "hoptrip-events-worker:latest",
+        "id": "sha256:feb43a3771ee7f6be6421f1d72c41605a988f72ae924e340ad6d6223b93148d7"
+      },
+      {
+        "tag": "hoptrip-api:latest",
+        "id": "sha256:fdac2aa234783002d628eb6cd5063ab96f8a6ab2fc5eb7ae66fd05a183892ed4"
+      },
+      {
+        "tag": "hoptrip-worker:latest",
+        "id": "sha256:e2b872d4d3ca787c8e362720d5b6a23f30db545c503b9f7d28cd40f397cf22a6"
+      },
+      {
+        "tag": "hoptrip-events-worker:rollback-20261102T201841Z",
+        "id": "sha256:6da4689c61b2721ef3340b1495a71f99f59eaa825fd96ba61a1dd04c329d4a36"
+      },
+      {
+        "tag": "hoptrip-api:rollback-20261102T201841Z",
+        "id": "sha256:991873eeb435ec38ee7e1ec2ea217836e658ad07dab45645dc5d96b6dcdfbaa2"
+      },
+      {
+        "tag": "hoptrip-migrate:latest",
+        "id": "sha256:24af40ceace2c0c6ea77cde12ca75fef1320b411188990d4240c196cb0828e12"
+      },
+      {
+        "tag": "hoptrip-web:rollback-20261029T213409Z",
+        "id": "sha256:fab8b9a7cff240f96f869f08320ac3beeb5b6f378b4a0e9906b952ca3c60a6db"
+      },
+      {
+        "tag": "hoptrip-web:rollback-20261029T215719Z",
+        "id": "sha256:fab8b9a7cff240f96f869f08320ac3beeb5b6f378b4a0e9906b952ca3c60a6db"
+      },
+      {
+        "tag": "hoptrip-web:rollback-20261102T192118Z",
+        "id": "sha256:fab8b9a7cff240f96f869f08320ac3beeb5b6f378b4a0e9906b952ca3c60a6db"
+      },
+      {
+        "tag": "caddy:2-alpine",
+        "id": "sha256:6aeddd44c3078b0f9a35206472a11420648a79c184603ef95957d0a20044cb2b"
+      },
+      {
+        "tag": "postgres:16-alpine",
+        "id": "sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea"
+      }
+    ],
+    "allExistingBackups": true,
+    "databaseAndTlsVolumes": true,
+    "productionEnvAndCredentials": true,
+    "logsAndTimers": true,
+    "currentApplicationImages": [
+      {
+        "tag": "hoptrip-web:cleanup-current-20261102T210349Z",
+        "id": "sha256:1b32e56e512967ec700304f07ad3ec982e24fdf51f372e3dfa9188aa057fe47b"
+      },
+      {
+        "tag": "hoptrip-api:cleanup-current-20261102T210349Z",
+        "id": "sha256:991873eeb435ec38ee7e1ec2ea217836e658ad07dab45645dc5d96b6dcdfbaa2"
+      },
+      {
+        "tag": "hoptrip-events-worker:cleanup-current-20261102T210349Z",
+        "id": "sha256:6da4689c61b2721ef3340b1495a71f99f59eaa825fd96ba61a1dd04c329d4a36"
+      },
+      {
+        "tag": "hoptrip-worker:cleanup-current-20261102T210349Z",
+        "id": "sha256:d887a3489f976cdc819edfeacd46c6cebd9742ff5dba5f72f2374d2c7a20449b"
+      }
+    ]
+  },
+  "guards": {
+    "deployLock": true,
+    "currentShaAndSourcePinned": true,
+    "exactImageTagIdsChecked": true,
+    "forcedImageRemoval": false,
+    "parentImagePrune": false,
+    "realpathAndKeepList": true,
+    "symlinkTargetRefused": true,
+    "oneFileSystem": true,
+    "volumePrune": false,
+    "manualDockerStorageDeletion": false,
+    "runningContainersAndMountsUnchanged": true,
+    "volumesUnchanged": true
+  },
+  "cachePolicy": {
+    "builder": "default",
+    "unusedFor": "168h",
+    "selector": "private=\"\"",
+    "activeCacheRecordsBefore": 37,
+    "activeCacheRecordsAfter": 37
+  },
+  "recovery": {
+    "directory": "/opt/hoptrip/backups/cleanup-20261102T210349Z",
+    "archiveBytes": 211544762,
+    "archiveMode": "600",
+    "directoryMode": "700",
+    "sha256": "bda469d1a637ba2fb48f189423ffcf0f14ea4c2945bcb4d76be2af004d331943",
+    "images": 5,
+    "tags": [
+      "hoptrip-web:cleanup-current-20261102T210349Z",
+      "hoptrip-api:cleanup-current-20261102T210349Z",
+      "hoptrip-api:rollback-20261102T201841Z",
+      "hoptrip-events-worker:cleanup-current-20261102T210349Z",
+      "hoptrip-events-worker:rollback-20261102T201841Z",
+      "hoptrip-worker:cleanup-current-20261102T210349Z",
+      "hoptrip-worker:rollback-20261102T201841Z",
+      "hoptrip-web:rollback-20261102T201841Z"
+    ],
+    "requiredTagsVerified": 8,
+    "gzipAndTarList": "passed",
+    "sha256AfterCachePrune": "passed"
+  },
+  "checks": {
+    "monitorPassed": 12,
+    "publicSmoke": "public-smoke.json",
+    "articleSmoke": "article-smoke.json",
+    "deliveryFlags": {
+      "alerts_enabled": false,
+      "alerts_digest_enabled": false,
+      "telegram_enabled": false,
+      "telegram_delivery_enabled": false
+    },
+    "runtimeSourceChanged": false,
+    "newDeployment": false,
+    "fullUnitOrE2ESuiteRun": false
+  },
+  "initialAttempts": [
+    {
+      "result": "stopped-before-mutations-except-empty-audit-directory",
+      "reason": "Completed five-week-old migration container references an already missing image; all running image IDs valid",
+      "fix": "Keep strict checks for running services; remove the successful obsolete migration container separately"
+    },
+    {
+      "result": "0B-cache-pruned",
+      "reason": "Boolean selectors compared to false literal did not match empty-string presence fields",
+      "fix": "Validated quoted-empty private selector against installed CLI and primary BuildKit source, then reclaimed old unused cache"
+    }
+  ],
+  "removedSourcePaths": [
+    "/opt/hoptrip/releases/00e7b408467dc7e0872ae376053c82f8cd7b26a3-20261014T174303Z",
+    "/opt/hoptrip/releases/09c0e33c6800fa041b176fbbd54f2855a494a37c-20261011T201818Z",
+    "/opt/hoptrip/releases/0bd6d9809d17346cb0ddd515170911b8d4a1393b-20261026T175220Z",
+    "/opt/hoptrip/releases/0f74b27a1858fbfb7f0e90df230a12a72f5085c6-20261029T133011Z",
+    "/opt/hoptrip/releases/1d86695a45d3420183d31764ce8376d7ff0f24a8-20261029T161606Z",
+    "/opt/hoptrip/releases/1d86695a45d3420183d31764ce8376d7ff0f24a8-20261029T161742Z",
+    "/opt/hoptrip/releases/2644dbbab637ca8e31bc7b14237949df94cc908b-20261026T151757Z",
+    "/opt/hoptrip/releases/2e7d85b062049c6325803209039cbc11edd07cb1-20261026T185228Z",
+    "/opt/hoptrip/releases/4481326ecc2b19ea30ce2a6a762813a191e69acc-20261026T174706Z",
+    "/opt/hoptrip/releases/4fd165cb25eac976f0487c940d1c8b52af7a06f7-20261019T081013Z",
+    "/opt/hoptrip/releases/5894c940bacc83ba5a6473208cafc105019022cd-20261025T083843Z",
+    "/opt/hoptrip/releases/6001b3a555874beb3a04c21ae9b8d97b0fb3fcce-20261025T150254Z",
+    "/opt/hoptrip/releases/631cc3a7c6a3871b00e62314736eb5d58117232c-20261025T074324Z",
+    "/opt/hoptrip/releases/6941a9b246ed01924affe9c2b7917244d4618732-20261017T215851Z",
+    "/opt/hoptrip/releases/6dd9cbc370d61efa9379d637ff09b0ff72533802-20261028T143806Z",
+    "/opt/hoptrip/releases/78655944bd87876cd47ba56856272fedd77de260-20261025T081113Z",
+    "/opt/hoptrip/releases/81a540328b3e017d1290e73ccaec818d9306f0a6-20261026T192008Z",
+    "/opt/hoptrip/releases/8575a05ec4291ce7e458bf6c00f1fc0a9aee86a8-20261029T184249Z",
+    "/opt/hoptrip/releases/88c7c818bbdec6c6736b75e16033192bebad4199-20261026T131929Z",
+    "/opt/hoptrip/releases/9861c974da5be50bd247a36025e77448a274a91b-20261029T010125Z",
+    "/opt/hoptrip/releases/9861c974da5be50bd247a36025e77448a274a91b-20261029T080642Z",
+    "/opt/hoptrip/releases/a9187b78eb09cadabc74567c489912405dfdb254-20261102T191610Z",
+    "/opt/hoptrip/releases/b03455ec19643d51ba7f7ada4b12b77bb7ab13b5-20261026T192927Z",
+    "/opt/hoptrip/releases/c12f43f18c32cd705dc5df60d4f4113a666604bd-20261013T120604Z",
+    "/opt/hoptrip/releases/c2321325ec08a60a7f499ca968a56fa1fecf78f9-20261013T141230Z",
+    "/opt/hoptrip/releases/c5726b16982a8bd2106521d75b7c19787c0605a0-20261026T171605Z",
+    "/opt/hoptrip/releases/c84cfa5a45a00faa1cd1ca082c0ab1669892364e-20261018T082151Z",
+    "/opt/hoptrip/releases/ca55391c02cc85a9e96fc1030fbb6428f114e727-20261024T071554Z",
+    "/opt/hoptrip/releases/d8972ce7d32ff2a8d16f23cb0a4b8c1a731ea6bb-20261018T133337Z",
+    "/opt/hoptrip/releases/dc12571b27cf20e41c6dad7349be7d230ac8cf0d-20261027T075143Z",
+    "/opt/hoptrip/releases/e80de0f2ad5a4be0d3843cb138341ffa8346e4d3-20261026T190840Z",
+    "/opt/hoptrip/releases/e97a6cedc7e0a1a580533d4be1c47c1d8b7df2cb-20261016T125800Z",
+    "/opt/hoptrip/releases/e97c3f3724cfd76afed4044b98c297987fd6e7ae-20261024T124405Z",
+    "/opt/hoptrip/releases/e97c3f3724cfd76afed4044b98c297987fd6e7ae-20261024T124508Z",
+    "/opt/hoptrip/releases/e9e791006e4a66cc147ded23e3e64cf846f9e588-20261010T093944Z",
+    "/opt/hoptrip/releases/eaad4442ac99c1b789993ff252bc5856807fc04c-20261016T211351Z",
+    "/opt/hoptrip/releases/eaad4442ac99c1b789993ff252bc5856807fc04c-20261017T080947Z",
+    "/opt/hoptrip/releases/f695593e72ed2598dcd6cf6de77dc0b8ca92c61b-20261028T092029Z",
+    "/opt/hoptrip/releases/fafa1645e49d871dd37bc013c4c2bb940be72ab6-20261029T213409Z",
+    "/opt/hoptrip/releases/fcd1046d0b7f749a59027019cff90ac013f98949-20261028T201210Z",
+    "/opt/hoptrip/release-preflight/525e2e6c0c60269185513392d646cb3ea02125e5",
+    "/opt/hoptrip/release-preflight/a9187b78eb09cadabc74567c489912405dfdb254"
+  ]
+}
