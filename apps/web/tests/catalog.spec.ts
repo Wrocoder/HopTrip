@@ -5,7 +5,7 @@ test("airport to deal to partner keeps one session and records click",async({pag
  // Redirect hops cannot reliably be routed in Chromium. Check the real API
  // response, then change only its destination to the local fixture server.
  await page.route("http://127.0.0.1:8100/go/**",async route=>{
-  const response=await route.fetch({maxRedirects:0});
+  const response=await route.fetch({maxRedirects:0,headers:{...route.request().headers(),'x-hoptrip-fixture-original-redirect':'1'}});
   expect(response.status()).toBe(307);
   const destination=new URL(response.headers().location);
   expect(destination.origin).toBe("https://partner.example");
@@ -93,7 +93,7 @@ test("canonical, sitemap and draft noindex",async({page,request})=>{
  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content","Jak porównujemy ceny lotów");
  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
  await expect(page.getByRole("heading",{name:"Jak rozumieć procent poniżej mediany"})).toBeVisible();
- await page.getByRole("link",{name:"Co oznacza świeżość oferty",exact:true}).click();
+ await page.getByRole('navigation',{name:'Powiązane poradniki',exact:true}).getByRole("link",{name:"Co oznacza świeżość oferty",exact:true}).click();
  await expect(page.getByRole("heading",{level:1})).toHaveText("Co oznacza świeżość oferty");
  await page.getByRole("link",{name:"Co mówi, a czego nie mówi historia cen",exact:true}).click();
  await expect(page.getByRole("heading",{level:1})).toHaveText("Co mówi, a czego nie mówi historia cen");

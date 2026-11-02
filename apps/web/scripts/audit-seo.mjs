@@ -119,7 +119,7 @@ try {
   check((await context.request.get(`${base}/share/${slug}`)).status()===404,`${slug}: draft/unknown share image must be 404`);
  }
  check(missing?.status()===404,"unknown article: expected HTTP 404");
- check(await page.locator("main").innerText().then(text=>/HopTrip · 404/i.test(text)),"unknown article: missing not-found UI");
+ check(await page.locator('main h1').innerText()==='Nie znaleziono aktualnej strony lub oferta wygasła.',"unknown article: missing not-found UI");
  check(await page.locator('meta[name="robots"]').evaluateAll(nodes=>nodes.some(node=>/noindex/i.test(node.content))),"unknown article: missing noindex");
  const robots=await context.request.get(`${base}/robots.txt`,{timeout:15000,maxRedirects:0});
  check(robots.status()===200,"robots.txt: expected HTTP 200");

@@ -53,8 +53,10 @@ test("empty, invalid, unavailable and loading states are distinct",async({page},
  await expect(page.getByRole("heading",{name:"Nie udało się pobrać ofert"})).toBeVisible();
  await expect(page.getByRole("link",{name:"Spróbuj ponownie"})).toBeVisible();
  await expect(page.locator(".result-count")).toHaveCount(0);
- await page.goto("/deals?budget=987654",{waitUntil:"commit"});
- await expect(page.getByRole("status").filter({hasText:"Ładowanie ofert"})).toBeVisible();
+ await page.locator('input[name="budget"]').fill('987654');
+ await page.getByRole('button',{name:'Filtruj',exact:true}).click();
+ await expect(page.locator('form.filters')).toHaveAttribute('aria-busy','true');
+ await expect(page.locator('.filter-pending[role="status"]')).toBeVisible();
  await expect(page.locator(".result-count")).toContainText("14");
  await page.goto("/deals?sort=price");
  await expect(page.locator(".result-count")).toContainText("14");

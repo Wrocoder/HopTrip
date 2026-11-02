@@ -5,6 +5,11 @@
 
 {$HOPTRIP_DOMAIN} {
     encode gzip
+    # HTTPS is permanent for this host; do not enroll unrelated subdomains/preload.
+    header Strict-Transport-Security "max-age=2592000"
+    # Preserve stricter policies from private applications. Next inline bootstrap
+    # and consent-controlled partner scripts need a separate nonce rollout.
+    header ?Content-Security-Policy "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
     @private path /api/* /go/* /health /health/* /info/contact /info/contact/* /info/privacy /info/privacy/* /info/terms /info/terms/*
     header @private X-Robots-Tag "noindex, follow"
     @legal path /info/contact /info/contact/* /info/privacy /info/privacy/* /info/terms /info/terms/*

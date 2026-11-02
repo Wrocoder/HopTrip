@@ -230,7 +230,7 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  });
  await testInfo.attach(`local-dev-navigation-${width}`,{body:JSON.stringify(timing),contentType:"application/json"});
  await page.route("http://127.0.0.1:8100/go/**",async route=>{
-  const response=await route.fetch({maxRedirects:0});expect(response.status()).toBe(307);
+  const response=await route.fetch({maxRedirects:0,headers:{...route.request().headers(),'x-hoptrip-fixture-original-redirect':'1'}});expect(response.status()).toBe(307);
   expect(new URL(response.headers().location).host).toBe("partner.example");
   // WebKit cannot fulfill a redirect; validate it above, then load the local fixture.
   await route.continue({url:"http://127.0.0.1:8100/__test__/partner"});

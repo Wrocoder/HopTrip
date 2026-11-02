@@ -50,7 +50,8 @@ if os.getenv("HOPTRIP_E2E_LOCAL_PARTNERS") == "1":
     async def keep_partner_redirects_local(request, call_next):
         """Exercise the real /go policy and journal, then contain browser navigation."""
         response = await call_next(request)
-        if request.url.path.startswith("/go/") and response.status_code == 307:
+        if (request.url.path.startswith("/go/") and response.status_code == 307
+                and request.headers.get("x-hoptrip-fixture-original-redirect") != "1"):
             response.headers["Location"] = "/__test__/grow03-external"
             response.headers["X-HopTrip-Fixture"] = "loopback-partner"
         return response

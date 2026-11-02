@@ -3,6 +3,19 @@
 Дата обновления: 2026-11-02. Источник задач: [HOPTRIP_MASTER_PLAN.md](HOPTRIP_MASTER_PLAN.md).
 Статусы относятся только к новому мастер-плану; старые отчёты не переносятся как выполненные задачи без проверки.
 
+## Release follow-up 2026-11-02 — в работе
+
+Владелец разрешил завершение release preparation и deployment, явно оставив email/личный
+Telegram выключенными. Все 43 task IDs DONE; новые roadmap tasks не выдумываются.
+[Отчёт релиза](release-20261102/README.md): 907 non-PG +18 PG tests, 215 Node,
+Ruff/mypy/ESLint/production build passed; исправленный SEO-growth 10/10.
+Коммит `525e2e6c0c60269185513392d646cb3ea02125e5` опубликован;
+[CI API/web/checks](https://github.com/Wrocoder/HopTrip/actions/runs/41471099136) successful.
+Production ARM64 images собраны; контейнеры ещё не переключались. Четыре personal
+delivery flags явно false, приватный env backup сохранён. Общий browser inventory800;
+идёт проверка и исправление stale test expectations, результат ещё не объявлен зелёным.
+IDE изменения сохранены и не включены в release commit.
+
 | Task ID | Title | Priority | Status | Dependencies | Files changed | Tests | Notes |
 |---|---|---|---|---|---|---|---|
 | AUD-01 | Repository Architecture Audit | P0 | DONE | None | docs/HOPTRIP_AUDIT.md; docs/HOPTRIP_PROGRESS.md | Статическое сопоставление исходников/конфигураций и документации; git diff --check; проверка ссылок и git status. Runtime tests/lint/typecheck/build/E2E не запускались: только документация | Карта и ограничения: [HOPTRIP_AUDIT.md](HOPTRIP_AUDIT.md). Код и production не изменялись. Пользовательские изменения мастер-плана сохранены |

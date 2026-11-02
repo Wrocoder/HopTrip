@@ -49,7 +49,7 @@ for(const width of [320,375,390,768,1440])test.describe(`${width}px`,()=>{
   }
   await overflow('home');if(locale==='pl')await hero.screenshot({path:info.outputPath(`home-${width}.png`),scale:'css',animations:'disabled'});
   await activate(hero.locator('button[type="submit"]'));
-  await expect(page).toHaveURL(/\/deals\?/);await expect(page.locator('.sort-control select')).toBeEnabled();
+  await page.waitForURL(/\/deals\?/);await expect(page.locator('.sort-control select')).toBeEnabled();
   const selected={origin:'WRO',destination:'barcelona',departure_from:start,departure_to:start,budget:'500'};
   for(const [key,value] of Object.entries(selected))expect(new URL(page.url()).searchParams.get(key)).toBe(value);
   const sort=page.locator('.sort-control select');await sort.selectOption('price');await expect(page).toHaveURL(/sort=price/);
@@ -61,6 +61,7 @@ for(const width of [320,375,390,768,1440])test.describe(`${width}px`,()=>{
   const dialog=page.locator('dialog[open]');await expect(dialog).toBeVisible();
   await fit(dialog.locator('.score-close'));const box=await dialog.boundingBox();expect(box!.height).toBeLessThanOrEqual(844);expect(box!.x+box!.width).toBeLessThanOrEqual(width+1);
   await page.keyboard.press('Escape');await expect(trigger).toBeFocused();await activate(card.locator('.deal-card-link'));
+  await page.waitForURL(/\/deals\/browser-deal\?/);
   await expect(page.locator('#budget-start')).toBeEnabled();await fit(page.locator('.back-link'));await overflow('detail');
   for(const id of ['trip-booking','accommodation','trip-events','calculator']){
    const link=page.locator(`.trip-navigation a[href="#${id}"]`);await link.focus();await page.keyboard.press('Enter');await expect(page.locator('#'+id)).toBeFocused();

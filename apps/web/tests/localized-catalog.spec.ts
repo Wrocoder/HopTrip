@@ -30,8 +30,11 @@ test("catalog languages preserve filters, pages, consent and server language",as
   }
   await page.evaluate(()=>scrollTo(0,0));
   if(testInfo.project.name==="desktop"){
-   const price=await page.locator(".deal-price").first().boundingBox();
-   expect(price!.y+price!.height).toBeLessThan(900);
+   // The expanded catalogue filters precede results. Keep the primary action
+   // on screen, and verify the first price is reachable by ordinary scrolling.
+   await expect(page.getByRole('button',{name:messages.filter,exact:true})).toBeInViewport();
+   await page.locator('.deal-price').first().scrollIntoViewIfNeeded();
+   await expect(page.locator('.deal-price').first()).toBeInViewport();
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.screenshot({path:testInfo.outputPath(`catalog-${locale}.png`)});
@@ -44,6 +47,7 @@ test("catalog languages preserve filters, pages, consent and server language",as
   await expect(page).not.toHaveURL(/offset=/);
   await page.goBack();
   await expect(page).toHaveURL(/offset=12/);
+  await expect(page.locator('.result-count')).toContainText('13–14');
   await page.getByRole("link",{name:messages.previous,exact:true}).click();
   await expect(page.locator(".deal-card")).toHaveCount(12);
  }
@@ -57,10 +61,10 @@ test("translated details and offer links retain the catalog language",async({pag
   const card=page.locator(".deal-card").first();
   await card.locator(".trip-details > summary").click();
   await expect(card.locator(".flight-facts")).toContainText(catalogText(locale,"Bagaż do sprawdzenia u partnera"));
-  await expect(card.locator(".price-assessment")).toContainText(catalogText(locale,"Dostępność i ostateczną cenę sprawdź u partnera. Bez potwierdzenia na żywo."));
+  await expect(card.locator(".trip-details .price-assessment")).toContainText(catalogText(locale,"Dostępność i ostateczną cenę sprawdź u partnera. Bez potwierdzenia na żywo."));
   expect((await new AxeBuilder({page}).include("main").analyze()).violations).toEqual([]);
   await card.locator(".deal-card-link").click();
-  await expect(page).toHaveURL(/\/deals\/[^/?]+$/);
+  await expect(page).toHaveURL(/\/deals\/[^/?]+(?:\?returnTo=[^#]+)?$/);
   await expect(page.locator("html")).toHaveAttribute("lang",locale);
  }
 });
@@ -74,14 +78,17 @@ test("localized empty, invalid, unavailable and loading results keep conditions"
   await expect(relax).toHaveAttribute("href",`/${locale}/deals?origin=WRO&sort=price`);
   await expect(page.locator('input[name="budget"]')).toHaveValue("1");
   await relax.click();
+  await page.waitForURL(`**/${locale}/deals?origin=WRO&sort=price`);
   await expect(page.locator(".deal-card")).toHaveCount(12);
   await page.goto(`/${locale}/deals?sort=invalid`);
   await expect(page.getByRole("heading",{name:t("Sprawdź parametry wyszukiwania")})).toBeVisible();
   await page.goto(`/${locale}/deals?budget=987653`);
   await expect(page.getByRole("heading",{name:t("Nie udało się pobrać ofert")})).toBeVisible();
   await expect(page.getByRole("link",{name:t("Spróbuj ponownie")})).toBeVisible();
-  await page.goto(`/${locale}/deals?budget=987654`,{waitUntil:"commit"});
-  await expect(page.getByRole("status").filter({hasText:getMessages(locale).loading})).toBeVisible();
+  await page.locator('input[name="budget"]').fill('987654');
+  await page.getByRole('button',{name:getMessages(locale).filter,exact:true}).click();
+  await expect(page.locator('form.filters')).toHaveAttribute('aria-busy','true');
+  await expect(page.locator('.filter-pending[role="status"]')).toBeVisible();
   await expect(page.locator(".result-count")).toContainText("14");
  }
 });

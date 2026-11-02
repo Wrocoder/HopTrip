@@ -17,7 +17,7 @@ test("catalog to offer to saved plan keeps adults, money and partner parameters 
  page.on("request",r=>{if(r.url().endsWith("/analytics/events"))events.push(r.url());});
  await page.goto("/en/deals?origin=WRO&sort=price");
  await page.locator(".deal-card-link").first().click();
- await expect(page).toHaveURL(/\/en\/deals\/browser-deal$/);
+ await expect(page).toHaveURL(/\/en\/deals\/browser-deal(?:\?returnTo=[^#]+)?$/);
  const flight=page.locator(".booking-card a.cta").first();
  const flightHref=await flight.getAttribute("href");
  await page.locator("#budget-people").fill("2");
