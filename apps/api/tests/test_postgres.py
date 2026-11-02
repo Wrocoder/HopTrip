@@ -28,6 +28,75 @@ from sqlalchemy.orm import sessionmaker
 pytestmark = pytest.mark.postgres
 
 
+def test_personal_telegram_concurrent_updates_have_one_subscription_and_reply(pg_factory):
+    from threading import Barrier
+
+    from app.models.telegram import TelegramDelivery, TelegramSubscription
+    from app.services.telegram_subscriptions import receive_update
+    from test_alert_digests import NOW, offer
+    from test_telegram import config, update
+
+    factory, _ = pg_factory
+    with factory() as db:
+        offer(db)
+    barrier = Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            receive_update(db, config(), update(text='/subscribe origin=WRO budget=250'), NOW)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(run) for _ in range(2)]
+        for future in futures:
+            future.result(timeout=20)
+    with factory() as db:
+        assert len(list(db.scalars(select(TelegramSubscription)))) == 1
+        assert len(list(db.scalars(select(TelegramDelivery)))) == 1
+
+
+def test_personal_telegram_concurrent_workers_have_one_submission(pg_factory):
+    from threading import Barrier
+
+    from app.models.telegram import TelegramDelivery
+    from app.services.telegram_delivery import deliver_once
+    from test_alert_digests import NOW
+    from test_telegram import Sender, active, config
+
+    factory, _ = pg_factory
+    with factory() as db:
+        active(db)
+    sender, barrier = Sender(), Barrier(2)
+
+    def run():
+        with factory() as db:
+            barrier.wait(timeout=10)
+            return deliver_once(db, config(), sender, NOW)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(run) for _ in range(2)]
+        results = [future.result(timeout=20) for future in futures]
+    assert sum(result['sent'] for result in results) == 1
+    assert len(sender.messages) == 1
+    with factory() as db:
+        assert len(list(db.scalars(select(TelegramDelivery)))) == 1
+
+
+def test_personal_telegram_accepts_fresh_reset_identifier_after_inactivity(pg_factory):
+    from app.services.telegram_subscriptions import receive_update
+    from test_alert_digests import NOW
+    from test_telegram import active, config, update
+
+    factory, _ = pg_factory
+    with factory() as db:
+        sub = active(db)
+        later = NOW + timedelta(days=8)
+        receive_update(db, config(), update(1, '/stop', now=later), later)
+        assert sub.status == 'STOPPED'
+        receive_update(db, config(), update(0, '/confirm', now=later), later)
+        assert sub.status == 'STOPPED'
+
+
 def test_concurrent_digest_workers_send_one_message(pg_factory, monkeypatch):
     from threading import Barrier
 
@@ -101,8 +170,131 @@ def test_migration_head():
     with create_engine(url).connect() as db:
         assert (
             db.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0018_editorial_rehearsal"
+            == "0021_telegram_alerts"
         )
+
+
+def test_observation_deadline_survives_concurrent_quote_reappearance(pg_factory):
+    from dataclasses import replace
+    from threading import Barrier
+
+    from app.services.time import utc
+
+    factory, _ = pg_factory
+    now = datetime.now(UTC)
+    deadline = now + timedelta(hours=1)
+    raw = RawTravelOffer("expiry-race", "WRO", "BCN", now + timedelta(days=60), None,
+                         Decimal(209), "PLN", deadline, "test", {})
+    with factory() as db:
+        ingest_offers(db, provider_code="test", offers=[raw], converter=PlnOnlyConverter(), now=now)
+        ingest_offers(db, provider_code="test", offers=[replace(raw, price=Decimal(220), expires_at=None)],
+                      converter=PlnOnlyConverter(), now=now + timedelta(minutes=30))
+    barrier = Barrier(2)
+
+    def repeat(expiry):
+        with factory() as db:
+            barrier.wait(timeout=10)
+            return ingest_offers(db, provider_code="test", offers=[replace(raw, expires_at=expiry)],
+                                 converter=PlnOnlyConverter(), now=now + timedelta(hours=2),
+                                 price_snapshot=True)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(repeat, expiry) for expiry in (None, now + timedelta(days=5))]
+        for future in futures:
+            future.result(timeout=30)
+    with factory() as db:
+        assert utc(db.scalar(select(TravelOffer)).expires_at) == deadline
+        history = list(db.scalars(select(PriceObservation).order_by(PriceObservation.observed_at)))
+        assert len(history) == 2 and utc(history[0].expires_at) == deadline
+
+
+def test_observation_expiry_migration_preserves_populated_history(pg_factory):
+    import importlib.util
+    from pathlib import Path
+
+    from alembic.migration import MigrationContext
+    from alembic.operations import Operations
+    from sqlalchemy import inspect
+
+    factory, _ = pg_factory
+    with factory() as db:
+        provider = db.scalar(select(DataProvider))
+        db.add(PriceObservation(data_provider_id=provider.id, product_type="FLIGHT",
+            departure_date=datetime.now(UTC).date(), observed_price_pln=123,
+            original_price=123, original_currency="PLN", source="migration-fixture"))
+        db.commit()
+    path = Path(__file__).resolve().parents[1] / "alembic/versions/0019_observation_expiry.py"
+    spec = importlib.util.spec_from_file_location("observation_expiry_migration", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    engine = factory.kw["bind"]
+    with engine.begin() as connection:
+        # Only this fixture's generated schema in hoptrip_test is affected.
+        connection.execute(text("ALTER TABLE price_observations DROP COLUMN expires_at"))
+        with Operations.context(MigrationContext.configure(connection)):
+            module.upgrade()
+            row = connection.execute(text(
+                "SELECT original_price, source, expires_at FROM price_observations"
+            )).one()
+            assert row.original_price == Decimal(123)
+            assert row.source == "migration-fixture" and row.expires_at is None
+            assert next(c for c in inspect(connection).get_columns("price_observations")
+                        if c["name"] == "expires_at")["nullable"]
+            module.downgrade()
+            assert connection.scalar(text("SELECT count(*) FROM price_observations")) == 1
+            module.upgrade()
+            assert connection.scalar(text("SELECT count(*) FROM price_observations")) == 1
+
+
+def test_statistics_version_migration_does_not_certify_legacy_cache(pg_factory):
+    import importlib.util
+    from pathlib import Path
+
+    from alembic.migration import MigrationContext
+    from alembic.operations import Operations
+
+    factory, _ = pg_factory
+    with factory() as db:
+        db.add(RouteStatistics(data_provider_id=1, origin_airport_id=1, destination_id=1,
+            product_type="FLIGHT", departure_month="2030-10", trip_duration_days=None,
+            sample_count=30, min_price_pln=123, p25_price_pln=123, median_price_pln=123,
+            p75_price_pln=123, max_price_pln=123, confidence=1))
+        db.commit()
+    path = Path(__file__).resolve().parents[1] / "alembic/versions/0020_statistics_method.py"
+    spec = importlib.util.spec_from_file_location("statistics_method_migration", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    with factory.kw["bind"].begin() as connection:
+        connection.execute(text("ALTER TABLE route_statistics DROP COLUMN methodology_version"))
+        with Operations.context(MigrationContext.configure(connection)):
+            module.upgrade()
+            row = connection.execute(text(
+                "SELECT sample_count, median_price_pln, methodology_version FROM route_statistics"
+            )).one()
+            assert row.sample_count == 30 and row.median_price_pln == 123
+            assert row.methodology_version is None
+            module.downgrade()
+            assert connection.scalar(text("SELECT count(*) FROM route_statistics")) == 1
+            module.upgrade()
+
+
+def test_statistics_rejects_postgres_numeric_nan_and_future_records(pg_factory):
+    from app.services.statistics import recalculate_route_statistics
+
+    factory, _ = pg_factory
+    now = datetime.now(UTC)
+    with factory() as db:
+        for price, stamp in [(200, now), (Decimal("NaN"), now), (0, now), (-1, now),
+                             (10000, now + timedelta(hours=1))]:
+            db.add(PriceObservation(data_provider_id=1, origin_airport_id=1, destination_id=1,
+                product_type="FLIGHT", departure_date=now.date(), trip_duration_days=3,
+                observed_price_pln=price, original_price=200, original_currency="PLN",
+                source="test", observed_at=stamp))
+        db.commit()
+        assert recalculate_route_statistics(db, now=now) == 1
+        stats = db.scalar(select(RouteStatistics))
+        assert stats.sample_count == 1 and stats.median_price_pln == 200
+        assert db.query(PriceObservation).count() == 5
 
 
 def test_concurrent_ingestion_and_null_duration_uniqueness(pg_factory):
@@ -358,7 +550,7 @@ def test_editor_upgrade_preserves_existing_catalogue():
                 else:
                     assert db.scalar(text("SELECT name FROM data_providers "
                                           "WHERE code='editor-upgrade-sentinel'")) == "Existing catalogue"
-                    assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0018_editorial_rehearsal"
+                    assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0021_telegram_alerts"
                     assert db.scalar(text("SELECT variants FROM editorial_revisions")) == {"telegram": "Existing text"}
                     assert db.scalar(text("SELECT checksum FROM editorial_approvals")) == "a" * 64
                     assert db.scalar(text("SELECT count(*) FROM editorial_rehearsals")) == 0

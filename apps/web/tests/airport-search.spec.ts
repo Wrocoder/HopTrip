@@ -7,7 +7,11 @@ test.beforeEach(async({page})=>{
 
 test("home airport suggestions support keyboard and preserve search filters",async({page})=>{
   await page.goto("/");
-  await expect(page.getByRole("button",{name:"Szukaj lotów",exact:true})).toBeInViewport();
+  const search=page.getByRole("button",{name:"Znajdź tani lot",exact:true});
+  await expect(search).toBeVisible();
+  // UX-01 exposes both departure bounds; short viewports scroll within the form.
+  await search.scrollIntoViewIfNeeded();
+  await expect(search).toBeInViewport();
   const origin=page.getByRole("combobox",{name:"Skąd",exact:true});
   await origin.fill("wroclaw");
   await expect(page.getByRole("form",{name:"Filtry ofert"}).getByRole("option",{name:"Wrocław — WRO",exact:true})).toBeVisible();
@@ -15,11 +19,10 @@ test("home airport suggestions support keyboard and preserve search filters",asy
   await origin.press("Enter");
   await expect(origin).toHaveValue("Wrocław — WRO");
   await expect(origin).toHaveAttribute("aria-expanded","false");
-  await page.getByRole("spinbutton",{name:"Budżet na lot / osobę (PLN)",exact:true}).fill("220");
-  await page.getByText("Daty i długość pobytu",{exact:true}).click();
+  await page.locator('.hero input[name="budget"]').fill("220");
   await page.getByLabel("Wylot od",{exact:true}).fill("2026-01-01");
   await page.getByLabel("Wylot do",{exact:true}).fill("2099-12-31");
-  await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+  await page.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
   await expect(page).toHaveURL(/origin=WRO/);
   await expect(page).toHaveURL(/departure_from=2026-01-01/);
   await expect(page).toHaveURL(/departure_to=2099-12-31/);
@@ -51,6 +54,8 @@ test("editing a selected airport never submits a stale code",async({page})=>{
   await expect(origin).toHaveAttribute("aria-expanded","false");
   await origin.press("Enter");
   await expect(page).toHaveURL(/origin=WRO/);
+  // The URL is unchanged by this submit; wait for its server action before editing.
+  await expect(page.getByRole("form",{name:"Filtry ofert"})).toHaveAttribute("aria-busy","false");
   await origin.fill("");
   await page.getByRole("button",{name:"Filtruj",exact:true}).click();
   await expect(page).not.toHaveURL(/origin=/);
@@ -59,10 +64,9 @@ test("editing a selected airport never submits a stale code",async({page})=>{
 
 test("home validates dates and remains accessible on a narrow screen",async({page},testInfo)=>{
   await page.goto("/");
-  await page.getByText("Daty i długość pobytu",{exact:true}).click();
   await page.getByLabel("Wylot od",{exact:true}).fill("2027-05-20");
   await page.getByLabel("Wylot do",{exact:true}).fill("2027-05-10");
-  await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+  await page.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
   await expect(page.getByRole("form",{name:"Filtry ofert"}).getByRole("alert")).toContainText("Koniec zakresu dat");
   await expect(page.getByLabel("Wylot do",{exact:true})).toBeFocused();
   await page.getByLabel("Wylot do",{exact:true}).fill("2027-05-21");

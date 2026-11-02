@@ -46,12 +46,12 @@ test("trip presets combine, survive history and reload, validate dates and clear
  await expect(page.locator('.deal-card').first()).toBeVisible();
 });
 
-test("home presets carry the entered departure date into results",async({page})=>{
+test("home search carries the entered departure date and budget into results",async({page})=>{
  await page.goto("/");
  await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
- await page.getByText("Daty i długość pobytu",{exact:true}).click();
  await page.locator('input[name="departure_from"]').fill("2030-05-01");
- await page.getByRole("button",{name:"Loty do 300 zł",exact:true}).click();
+ await page.locator('input[name="budget"]').fill('300');
+ await page.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
  await expect(page).toHaveURL(/\/deals\?/);
  await expect(page).toHaveURL(/budget=300/);
  await expect(page).toHaveURL(/departure_from=2030-05-01/);

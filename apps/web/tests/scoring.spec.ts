@@ -8,7 +8,7 @@ test.beforeEach(async({page})=>{
 test("score explains exact points without navigating and restores focus",async({page},testInfo)=>{
   await page.goto("/from/WRO");
   const card=page.locator(".deal-card").filter({has:page.locator('a.deal-card-link[href="/deals/browser-deal"]')});
-  const trigger=card.getByRole("link",{name:/Wyjaśnij ocenę/});
+  const trigger=card.getByRole("link",{name:/Wyjaśnij porównanie ceny/});
   await trigger.focus();
   await page.keyboard.press("Enter");
   const dialog=page.getByRole("dialog");
@@ -16,7 +16,7 @@ test("score explains exact points without navigating and restores focus",async({
   await expect(page).toHaveURL(/\/from\/WRO$/);
   await expect(dialog.locator(".score-calculation")).not.toHaveAttribute("open", "");
   await expect(dialog.locator(".score-sum")).not.toBeVisible();
-  await expect(dialog.getByRole("button",{name:"Zamknij wyjaśnienie oceny"})).toBeFocused();
+  await expect(dialog.getByRole("button",{name:"Zamknij porównanie ceny"})).toBeFocused();
   await dialog.locator(".score-calculation summary").click();
   await expect(dialog.locator(".score-part")).toHaveCount(3);
   await expect(dialog.locator(".score-sum")).toContainText("41,9 + 20 + 14,1 = 76");
@@ -24,12 +24,12 @@ test("score explains exact points without navigating and restores focus",async({
   await expect(dialog).toContainText("200,25");
   await expect(dialog).toContainText("250,00");
   await expect(dialog).toContainText("pierwszego zapisania");
-  await dialog.getByRole("button",{name:"Zamknij wyjaśnienie oceny"}).focus();
+  await dialog.getByRole("button",{name:"Zamknij porównanie ceny"}).focus();
   await page.keyboard.press("Shift+Tab");
   expect(await page.evaluate(()=>!!document.activeElement?.closest("dialog"))).toBeTruthy();
   await dialog.getByText("Co porównujemy, a czego nie uwzględniamy?",{exact:true}).click();
   await expect(dialog).toContainText("Prowizja partnerska nie wpływa");
-  await expect(dialog.getByRole("button",{name:"Zamknij wyjaśnienie oceny"})).toBeInViewport();
+  await expect(dialog.getByRole("button",{name:"Zamknij porównanie ceny"})).toBeInViewport();
   expect((await new AxeBuilder({page}).include("dialog[open]").analyze()).violations).toEqual([]);
   expect(await dialog.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBeTruthy();
   await dialog.evaluate(el=>{el.scrollTop=0;});
@@ -39,7 +39,7 @@ test("score explains exact points without navigating and restores focus",async({
   await expect(trigger).toBeFocused();
   expect(await page.evaluate(()=>document.body.style.overflow)).not.toBe("hidden");
   await trigger.click();
-  await page.getByRole("button",{name:"Zamknij wyjaśnienie oceny"}).click();
+  await page.getByRole("button",{name:"Zamknij porównanie ceny"}).click();
   await expect(dialog).not.toBeVisible();
   await card.locator(".deal-card-link").click();
   await expect(page).toHaveURL(/\/deals\/browser-deal$/);
@@ -60,11 +60,14 @@ test("provisional, legacy and missing explanations stay honest",async({page})=>{
 });
 
 test("score link can open the full explanation in a separate tab",async({page,context})=>{
-  await page.goto("/from/WRO");
+  await page.goto("/?origin=WRO&budget=220&sort=price");
+  await page.locator('.hero button[type="submit"]').click();
+  await expect(page).toHaveURL(/\/deals\?origin=WRO&budget=220&sort=price$/);
   const opened=context.waitForEvent("page");
-  await page.locator('a.score-trigger[href="/deals/browser-deal#score"]').click({modifiers:["Control"]});
+  await page.locator('a.score-trigger[href^="/deals/browser-deal?"]').click({modifiers:["Control"]});
   const detail=await opened;
-  await expect(detail).toHaveURL(/\/deals\/browser-deal#score$/);
+  await expect(detail).toHaveURL(/\/deals\/browser-deal\?returnTo=.*#score$/);
+  await expect(detail.locator('.back-link')).toHaveAttribute('href','/deals?origin=WRO&budget=220&sort=price');
   await expect(detail.locator("#score .score-sum")).toContainText("76/100");
   await expect(page.getByRole("dialog")).not.toBeVisible();
   await detail.close();

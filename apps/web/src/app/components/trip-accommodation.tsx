@@ -12,11 +12,14 @@ import type {Deal} from "../../lib/api";
 import {stay22Link} from "../../lib/accommodation-links";
 import {date,tripNights} from "../../lib/i18n/format";
 import {flightLegs,flightTime} from "../../lib/flight-facts";
+import {staySuggestion,applyStaySuggestion} from '../../lib/stay-context';
+import {stayText,type StayKey} from '../../lib/i18n/stay-copy';
 import styles from "./trip-accommodation.module.css";
 
 export function TripAccommodation({deal}:{deal:Deal}) {
  const {locale}=useLocale();
  const t=(source:TripKey)=>tripText(locale,source);
+ const s=(key:StayKey)=>stayText(locale,key);
  const {draft,save,ready}=useTripDraft()!;
  const checkin=draft.start,checkout=draft.end,adults=draft.input.people;
  const setCheckin=(value:string)=>save(changeStayDate(draft,"start",value));
@@ -26,7 +29,9 @@ export function TripAccommodation({deal}:{deal:Deal}) {
  const href=ready && draft.adultsOnly && Number(adults)<=50 ? stay22Link({city:deal.destination_city,checkin,checkout,adults}) : null;
  const datesValid=Boolean(stay22Link({city:deal.destination_city,checkin,checkout,adults:"1"}));
  const malformed=[checkin,checkout].some(value=>value!==''&&!validCalendarDate(value));
- const adultsValid=/^[1-9]\d*$/.test(adults) && Number.isSafeInteger(Number(adults)) && Number(adults)<=50;
+ const adultsValid=Boolean(draft.adultsOnly && /^[1-9]\d*$/.test(adults) && Number.isSafeInteger(Number(adults)) && Number(adults)<=50);
+ const suggestion=staySuggestion(deal);
+ const canApply=Boolean(suggestion.checkin&&suggestion.checkin!==checkin||suggestion.checkout&&suggestion.checkout!==checkout);
  const {outbound,inbound}=flightLegs(deal.flight_facts);
  const arrival=flightTime(outbound.arrival,outbound.destinationZone,locale);
  const departure=deal.trip_type==="ROUND_TRIP" ? flightTime(inbound.departure,inbound.originZone,locale) : null;
@@ -34,6 +39,17 @@ export function TripAccommodation({deal}:{deal:Deal}) {
  return <section id="accommodation" tabIndex={-1} className={styles.section} aria-labelledby="accommodation-title">
    <h2 id="accommodation-title">{t("Znajdź nocleg —")} {city}</h2>
    <p>{t("Nocleg rezerwujesz osobno od lotu. Daty i dorośli są wspólne z budżetem; daty lotu pozostają bez zmian.")}</p>
+   <p>{s('Daty pobytu wybierasz niezależnie od dat lotu. Sprawdź miejscowe daty przylotu i wylotu powrotnego.')}</p>
+   {(suggestion.checkin||suggestion.checkout)&&<aside className={styles.schedule} aria-label={s('Miejscowe daty według rozkładu:')}>
+    <p><strong>{s('Miejscowe daty według rozkładu:')}</strong>{' '}
+     {suggestion.checkin&&<>{s('przylot')} <time dateTime={suggestion.checkin}>{date(suggestion.checkin,locale)}</time></>}
+     {suggestion.checkin&&suggestion.checkout&&' · '}
+     {suggestion.checkout&&<>{s('wylot powrotny')} <time dateTime={suggestion.checkout}>{date(suggestion.checkout,locale)}</time></>}
+    </p>
+    {suggestion.estimated&&<p>{s('Przylot obliczono z czasu lotu. Potwierdź datę i rozkład u partnera.')}</p>}
+    <p>{s('Daty możesz zmienić; sprawdź dojazd i godzinę zameldowania.')}</p>
+    {canApply&&<button className="button button-secondary" type="button" disabled={!ready} onClick={()=>save(applyStaySuggestion(draft,suggestion))}>{s('Użyj tych dat pobytu')}</button>}
+   </aside>}
    <details id="stay-schedule"><summary>{t("Jak dobrać daty noclegu do lotu?")}</summary>
     {arrival ? <p>{t("Zapisany przylot:")} {arrival}{deal.flight_facts?.outbound_arrival_calculated && ` · ${t("obliczony z czasu lotu")}`}.</p> : <p>{t("Brak danych o godzinie przylotu. Sprawdź lokalną datę przyjazdu przed wyborem noclegu.")}</p>}
     {departure && <p>{t("Zapisany wylot powrotny:")} {departure}.</p>}
@@ -56,10 +72,12 @@ export function TripAccommodation({deal}:{deal:Deal}) {
    {!draft.adultsOnly && <p>{t("Potwierdź w kalkulatorze, że wszyscy podróżni są dorośli, lub wpisz tutaj liczbę dorosłych dla całej grupy. Zaktualizuje ona także budżet. Dzieci nie są automatycznie zamieniane na dorosłych.")}</p>}
    {draft.review && <p>{t("Sprawdź ponownie ceny noclegu i lotu dla zmienionego planu. Wpisane kwoty pozostają w budżecie.")}</p>}
    <div className={styles.search}>
-   {href && <p id="stay-summary" aria-live="polite"><strong>{city}</strong>: {date(checkin,locale)} – {date(checkout,locale)} · {tripNights({trip_type:"ROUND_TRIP",trip_start:checkin,trip_end:checkout},locale)} · {t("dorośli:")} {adults}.</p>}
-   {href && <a className="button button-secondary" href={href} target="_blank" aria-describedby="stay-summary" onClick={record} onAuxClick={event=>{if(event.button===1)record();}}
+   {ready && <p id="stay-summary" aria-live="polite"><strong>{city}</strong>: {validCalendarDate(checkin)?date(checkin,locale):s('Wybierz datę')} – {validCalendarDate(checkout)?date(checkout,locale):s('Wybierz datę')}
+     {datesValid&&<> · {tripNights({trip_type:"ROUND_TRIP",trip_start:checkin,trip_end:checkout},locale)}</>} · {t("dorośli:")} {adultsValid?adults:s('Potwierdź dorosłych')}.</p>}
+   {href && <a className="button button-secondary" href={href} target="_blank" aria-describedby="stay-summary stay-price-note" onClick={record} onAuxClick={event=>{if(event.button===1)record();}}
     rel="sponsored noopener noreferrer">{t("Znajdź nocleg przez Stay22 (nowa karta)")}</a>}
    </div>
+   <p id="stay-price-note" className={styles.priceNote}>{s('Cenę i dostępność noclegu sprawdź w Stay22. HopTrip nie pobiera wyceny; kwoty w budżecie wpisujesz ręcznie.')}</p>
    <p className="muted">{t("Link afiliacyjny — możemy otrzymać prowizję. Przekazujemy tylko dorosłych; dzieci i ich wiek ustaw u partnera. Sprawdź daty, gości, cenę i warunki anulowania.")}</p>
    <details><summary>{t("Jak dodać cenę noclegu do planu?")}</summary>
    <p>{t("Wpisz cenę w PLN za noc albo za cały pobyt, dla wszystkich gości i pokoi, z podatkami i opłatami. Ceny nie pobieramy automatycznie od partnera.")}</p></details>

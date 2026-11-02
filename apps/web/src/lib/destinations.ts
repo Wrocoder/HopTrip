@@ -17,5 +17,12 @@ export function matchingDestinations(destinations:Destination[],value:string):De
 }
 export function destinationSuggestions(destinations:Destination[],value:string):Destination[] {
  const normalized=normalizeDestination(value);
- return destinations.filter(d=>d.is_active && terms(d).some(term=>term.includes(normalized))).slice(0,12);
+ const suggestions:Destination[]=[];
+ for(const destination of destinations){
+  if(destination.is_active&&(!normalized||terms(destination).some(term=>term.includes(normalized)))){
+   suggestions.push(destination);
+   if(suggestions.length===12)break;
+  }
+ }
+ return suggestions;
 }

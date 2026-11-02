@@ -1,0 +1,534 @@
+diff --git a/apps/web/src/lib/session.ts b/apps/web/src/lib/session.ts
+index 7eb3c68..d118d72 100644
+--- a/apps/web/src/lib/session.ts
++++ b/apps/web/src/lib/session.ts
+@@ -1,5 +1,5 @@
+ import {localizedHref} from "./i18n/routing.ts";
+-import {analyticsPageType,campaignLabel,sourceLabel,type EventContext} from "./analytics-context.ts";
++import {analyticsPageType,campaignLabel,sourceLabel,type AnalyticsEventName,type EventContext} from "./analytics-context.ts";
+ import {analyticsAllowed} from "./consent.ts";
+ const KEY = "hoptrip.session.v2";
+ const TIMEOUT = 30 * 60 * 1000;
+@@ -33,14 +33,15 @@ const sent=new Map<string,number>();
+ const viewEvents=new Set<string>();
+ let visit="";
+ export type ActivityContext={city:string;activity_id:string;page:string;link_kind:"affiliate"|"official"};
+-function sendEvent(event_name:string,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {
++function sendEvent(event_name:AnalyticsEventName,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {
+  const route=location.pathname+location.search;
+  if(visit!==route){visit=route;viewEvents.clear();}
+- if(localizedHref(location.pathname,"pl").startsWith("/alerts") && event_name!=="ALERT_CONFIRMED")return;
++ const path=localizedHref(location.pathname,"pl");
++ if(path.startsWith("/alerts") && event_name!=="ALERT_CONFIRMED" && !(path==="/alerts" && event_name==="ALERT_STARTED"))return;
+  if(!analyticsAllowed()) return;
+  const session=sessionContext();
+  const key=[event_name,deal_slug,activity?.activity_id,JSON.stringify(context),location.pathname,location.search,session.id].join("|");
+- const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED"].includes(event_name);
++ const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED","ALERT_STARTED"].includes(event_name);
+  if(view && viewEvents.has(key))return;
+  if(view)viewEvents.add(key);
+  const now=Date.now();
+@@ -53,6 +54,6 @@ function sendEvent(event_name:string,deal_slug?:string,activity?:ActivityContext
+      anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign,page_type:analyticsPageType(location.pathname)}}),
+  }).catch(()=>undefined);
+ }
+-export function track(event_name:string,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {
++export function track(event_name:AnalyticsEventName,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {
+  try {sendEvent(event_name,deal_slug,activity,context);} catch { /* Analytics must not block navigation. */ }
+ }
+diff --git a/apps/web/src/lib/analytics-context.ts b/apps/web/src/lib/analytics-context.ts
+index 50fa9f2..741886c 100644
+--- a/apps/web/src/lib/analytics-context.ts
++++ b/apps/web/src/lib/analytics-context.ts
+@@ -6,7 +6,10 @@ export const campaignLabel=(value:string|null|undefined)=>campaigns.includes(val
+ export const sourceLabel=(value:string|null|undefined)=>sources.includes(value??"") ? value! : undefined;
+ export type SearchContext={filters:Filters;result_count?:number;error?:"invalid_filters"|"unavailable"};
+ export type PartnerContext={category:"flight"|"stay"|"activity";provider:"catalog"|"stay22"|"tiqets"};
+-export type EventContext={search?:SearchContext;partner?:PartnerContext};
++export type FilterContext={action:"apply"|"remove"|"reset"};
++export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED"] as const;
++export type AnalyticsEventName=typeof analyticsEvents[number];
++export type EventContext={search?:SearchContext;partner?:PartnerContext;filter?:FilterContext};
+ export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
+  const result:Filters={};
+  if(filters.origin==="WAW,WMI" || airports.some(a=>a.iata_code===filters.origin))result.origin=filters.origin;
+@@ -36,6 +39,7 @@ export function analyticsPageType(path:string):string|undefined {
+  if(path.startsWith("/routes/"))return "route";
+  if(path==="/info/trip-budget")return "budget";
+  if(path==="/trip")return "saved_trip";
++ if(path==="/saved")return "saved";
+  if(path.startsWith("/alerts"))return "alerts";
+  if(path.startsWith("/info/"))return "guide";
+ }
+diff --git a/apps/web/src/app/components/filters.tsx b/apps/web/src/app/components/filters.tsx
+index e3dd8be..063323b 100644
+--- a/apps/web/src/app/components/filters.tsx
++++ b/apps/web/src/app/components/filters.tsx
+@@ -108,7 +108,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false,path=
+     // A validated full search owns navigation; an earlier origin save must not
+     // push/refresh the home route after this search action redirects.
+     originSelection?.onSearch?.();
+-    setError(null);track("FILTER_USE");
++    setError(null);track("FILTER_USE",undefined,undefined,{filter:{action:"apply"}});
+     track("SEARCH",undefined,undefined,{search:{filters:analyticsFilters(Object.fromEntries(query),airports,destinations)}});
+     const href=url(basePath,Object.fromEntries(query));
+     startTransition(()=>searchWithOrigin(query.get("origin") ?? "",href));
+@@ -183,10 +183,10 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false,path=
+    {!hero && <div className="active-filters"><p>{t("Zastosowane filtry")} ({active.length})</p>
+     {active.length===0 && <p className="field-hint">{t('Brak dodatkowych filtrów.')}</p>}
+     {active.length>0 && <nav className="filter-chips" aria-label={t("Zastosowane filtry")}>{active.map(key=>
+-     <Link className="filter-chip" key={key} href={withoutFilter(key)} aria-label={`${t("Usuń filtr:")} ${filterLabels[key]}: ${filterValue(key)}`} onClick={()=>track("FILTER_USE")} onNavigate={event=>{if(key==="origin"){event.preventDefault();startTransition(()=>clearOriginAndNavigate(withoutFilter(key)));}}}>
++     <Link className="filter-chip" key={key} href={withoutFilter(key)} aria-label={`${t("Usuń filtr:")} ${filterLabels[key]}: ${filterValue(key)}`} onClick={()=>track("FILTER_USE",undefined,undefined,{filter:{action:"remove"}})} onNavigate={event=>{if(key==="origin"){event.preventDefault();startTransition(()=>clearOriginAndNavigate(withoutFilter(key)));}}}>
+       <span>{filterLabels[key]}: <strong>{filterValue(key)}</strong></span><span aria-hidden="true">×</span>
+      </Link>
+-    )}</nav>}{active.length>0 && <><Link className="filter-reset" href={resetUrl} onClick={()=>track("FILTER_USE")} onNavigate={event=>{event.preventDefault();startTransition(()=>clearOriginAndNavigate(resetUrl));}}>{t("Wyczyść wszystkie filtry")}</Link><span className="field-hint">{t('Reset usuwa filtry. Wybrane sortowanie pozostaje bez zmian.')}</span></>}
++    )}</nav>}{active.length>0 && <><Link className="filter-reset" href={resetUrl} onClick={()=>track("FILTER_USE",undefined,undefined,{filter:{action:"reset"}})} onNavigate={event=>{event.preventDefault();startTransition(()=>clearOriginAndNavigate(resetUrl));}}>{t("Wyczyść wszystkie filtry")}</Link><span className="field-hint">{t('Reset usuwa filtry. Wybrane sortowanie pozostaje bez zmian.')}</span></>}
+    </div>}
+   </section>;
+ }
+diff --git a/apps/web/src/app/components/saved-trips.tsx b/apps/web/src/app/components/saved-trips.tsx
+index 7bfd1e1..3778da1 100644
+--- a/apps/web/src/app/components/saved-trips.tsx
++++ b/apps/web/src/app/components/saved-trips.tsx
+@@ -1,5 +1,6 @@
+ "use client";
+ import {useLocale} from "./locale-provider";
++import {track} from "../../lib/session";
+ import {tripText,type TripKey} from "../../lib/i18n/trip-copy";
+ import {localizedHref} from "../../lib/i18n/routing";
+ import {useRef,useState} from "react";
+@@ -22,6 +23,7 @@ export function SavedTrips(){
+  function remove(token:string){
+   const result=store.mutate(token,'remove');
+   if(result==='removed'){
++   track("TRIP_REMOVE");
+    setUndo(token);setMessage({saved:'removed'});requestAnimationFrame(()=>undoButton.current?.focus());
+   }else if(result==='absent')setMessage({saved:'absent'});
+   else if(result==='corrupt')setMessage({saved:'corrupt'});
+diff --git a/apps/web/src/app/components/alert-form.tsx b/apps/web/src/app/components/alert-form.tsx
+index c5285dc..5089fb4 100644
+--- a/apps/web/src/app/components/alert-form.tsx
++++ b/apps/web/src/app/components/alert-form.tsx
+@@ -51,6 +51,7 @@ export function AlertForm({mode,airports,destinations,initial={},deliveryEnabled
+       destination:values.destination||null,departure_from:values.departure_from||null,departure_to:values.departure_to||null,weekend:values.weekend==="true",frequency:values.frequency==="daily"?"daily":"weekly"};
+     await perform(async()=>{
+       if(mode==="signup") {
++        track("ALERT_STARTED");
+         await action("",{email:data.get("email"),consent:data.get("consent")==="on",filters});
+         setStatus("REQUESTED");setMessage("Sprawdź skrzynkę i spam. Jeśli adres może otrzymywać alerty, dostaniesz link do potwierdzenia lub zarządzania. Prośba o zapis nie oznacza potwierdzonej subskrypcji. Link wysyłamy najwyżej raz na dobę.");
+       } else {
+diff --git a/apps/web/src/app/components/trip-events.tsx b/apps/web/src/app/components/trip-events.tsx
+index 1c7f3b6..4426c5d 100644
+--- a/apps/web/src/app/components/trip-events.tsx
++++ b/apps/web/src/app/components/trip-events.tsx
+@@ -2,7 +2,7 @@
+ 
+ import {useEffect,useRef,useState,type FormEvent} from 'react';
+ import type {Deal} from '../../lib/api';
+-import {publicApi} from '../../lib/session';
++import {publicApi,track} from '../../lib/session';
+ import {intlLocales,type Locale} from '../../lib/i18n/config';
+ import {eventCopy,eventUx} from '../../lib/i18n/event-copy';
+ import {eventSearchDays,validEventDates} from '../../lib/event-dates';
+@@ -173,12 +173,12 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
+      <p className={styles.optionName}>{option.name}</p><p className={styles.price}>{price(option.price_from,option.currency)}</p>
+      {option.status!==undefined&&option.status!==item.status&&<p className={styles.sale} data-sale={eventSaleState(option.status)}>{contextCopy.sale[eventSaleState(option.status)]}</p>}
+      {eventTicketsAllowed(item.status,option.status)&&<>
+-     <a className="button button-secondary" href={option.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${option.name} (${option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}). ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a>
++     <a className="button button-secondary" href={option.url} target="_blank" rel="sponsored noopener noreferrer" onClick={()=>track("EVENT_CLICK",deal.slug)} aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${option.name} (${option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}). ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a>
+      <AddEventToPlan event={selection(item,option)} locale={locale}/>
+      </>}
+     </li>)}</ul>
+    </div>:<><p className={styles.price}>{price(item.price_from,item.currency)}</p>
+-    {eventTicketsAllowed(item.status)&&<><a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a><AddEventToPlan event={selection(item)} locale={locale}/></>}</>}
++    {eventTicketsAllowed(item.status)&&<><a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" onClick={()=>track("EVENT_CLICK",deal.slug)} aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a><AddEventToPlan event={selection(item)} locale={locale}/></>}</>}
+   </li>)}</ul>}
+   {(page>1||result?.has_more)&&<nav className={styles.pagination} aria-label={resultsCopy.pages}>
+    <button type="button" className={styles.retry} disabled={busy||page===1} onClick={()=>selectPage(page-1)}>{resultsCopy.previousPage}</button>
+diff --git a/apps/api/app/schemas/analytics.py b/apps/api/app/schemas/analytics.py
+index 9fa1260..16e9393 100644
+--- a/apps/api/app/schemas/analytics.py
++++ b/apps/api/app/schemas/analytics.py
+@@ -4,7 +4,7 @@ from typing import Any, Literal
+ 
+ from pydantic import BaseModel, Field, field_validator, model_validator
+ 
+-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED"]
++EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED"]
+ 
+ 
+ class ActivityContext(BaseModel):
+@@ -42,6 +42,10 @@ class PartnerContext(BaseModel):
+     provider: Literal["catalog", "stay22", "tiqets"]
+ 
+ 
++class FilterContext(BaseModel):
++    action: Literal["apply", "remove", "reset"]
++
++
+ class AnalyticsEventCreate(BaseModel):
+     event_id: str | None = Field(None, pattern=r"^[a-fA-F0-9-]{36}$")
+     event_name: EventName
+@@ -53,6 +57,7 @@ class AnalyticsEventCreate(BaseModel):
+     activity: ActivityContext | None = None
+     search: SearchContext | None = None
+     partner: PartnerContext | None = None
++    filter: FilterContext | None = None
+ 
+     @field_validator("source")
+     @classmethod
+@@ -70,6 +75,8 @@ class AnalyticsEventCreate(BaseModel):
+             raise ValueError("Search context only belongs to search events")
+         if (self.event_name == "PARTNER_CLICK") != (self.partner is not None):
+             raise ValueError("Partner context is required only for PARTNER_CLICK")
++        if self.filter and self.event_name != "FILTER_USE":
++            raise ValueError("Filter context only belongs to FILTER_USE")
+         return self
+ 
+ 
+diff --git a/apps/api/app/api/analytics.py b/apps/api/app/api/analytics.py
+index d5009c3..c36cea3 100644
+--- a/apps/api/app/api/analytics.py
++++ b/apps/api/app/api/analytics.py
+@@ -48,7 +48,7 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
+     metadata: dict[str, Any] = {
+         k: str(v)[:80] for k, v in payload.metadata.items() if k == "campaign" and v in ("hoptrip-launch", "wro-weekend", "test")
+     }
+-    if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "alerts", "guide"}:
++    if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "saved", "alerts", "guide"}:
+         metadata["page_type"] = payload.metadata["page_type"]
+     if payload.activity:
+         metadata["activity"] = payload.activity.model_dump()
+@@ -62,6 +62,8 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
+         metadata["search"] = search
+     if payload.partner:
+         metadata["partner"] = payload.partner.model_dump()
++    if payload.filter:
++        metadata["filter"] = payload.filter.model_dump()
+     event = AnalyticsEvent(
+         event_id=payload.event_id,
+         event_name=payload.event_name,
+diff --git a/apps/web/tests/localized-alerts.spec.ts b/apps/web/tests/localized-alerts.spec.ts
+index 3be252b..1ca0975 100644
+--- a/apps/web/tests/localized-alerts.spec.ts
++++ b/apps/web/tests/localized-alerts.spec.ts
+@@ -27,7 +27,7 @@ test("localized signup, confirmation and management preserve contracts and priva
+   await page.getByRole("button",{name:t("Wyślij link potwierdzający")}).click();
+   expect((await sent).postDataJSON()).toEqual({email,consent:true,filters:{origin:"WRO",budget:"230",duration_min:2,duration_max:4,destination:"barcelona",departure_from:null,departure_to:null,weekend:true,frequency:"weekly"}});
+   await expect(page.getByRole("status")).toContainText(t("Sprawdź skrzynkę i spam. Jeśli adres może otrzymywać alerty, dostaniesz link do potwierdzenia lub zarządzania. Prośba o zapis nie oznacza potwierdzonej subskrypcji. Link wysyłamy najwyżej raz na dobę."));
+-  expect(events).toEqual([]);
++  await expect.poll(()=>events.map(event=>event.event_name)).toEqual(["ALERT_STARTED"]);
+   const mails=await (await request.get(`http://127.0.0.1:8100/__test__/mail?email=${encodeURIComponent(email)}`)).json();
+   const confirm=new URL(mails[0].body.match(/http[^\s]+\/alerts\/confirm#token=[^\s]+/)[0]);
+   // Emails keep their existing Polish URLs; users can switch language without losing the capability.
+@@ -37,11 +37,11 @@ test("localized signup, confirmation and management preserve contracts and priva
+   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","noindex, nofollow");
+   await expect(page.locator('meta[name="referrer"]')).toHaveAttribute("content","no-referrer");
+   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/${locale}/alerts/confirm`);
+-  expect(events).toEqual([]);
++  expect(events.map(event=>event.event_name)).toEqual(["ALERT_STARTED"]);
+   await page.getByRole("button",{name:t("Potwierdzam zapis")}).click();
+   await expect(page.getByRole("status")).toHaveText(t("Alert został potwierdzony."));
+-  await expect.poll(()=>events.length).toBe(1);
+-  expect(events[0].event_name).toBe("ALERT_CONFIRMED");
++  await expect.poll(()=>events.length).toBe(2);
++  expect(events[1].event_name).toBe("ALERT_CONFIRMED");
+   expect(JSON.stringify(events)).not.toContain(email);
+   expect(JSON.stringify(events)).not.toContain(confirm.hash.slice(7));
+   await page.getByRole("link",{name:t("Zarządzaj alertem")}).click();
+@@ -60,7 +60,7 @@ test("localized signup, confirmation and management preserve contracts and priva
+   await page.locator(".alert-panel").screenshot({path:testInfo.outputPath(`alerts-${locale}.png`)});
+   await page.getByRole("button",{name:t("Wyłącz alert")}).click();
+   await expect(page.getByText(t("Ten alert jest wyłączony."))).toBeVisible();
+-  expect(events).toHaveLength(1);
++  expect(events).toHaveLength(2);
+   expect(external).toEqual([]);
+  }
+ });
+diff --git a/apps/web/tests/seo-growth.spec.ts b/apps/web/tests/seo-growth.spec.ts
+index 26249ee..661444e 100644
+--- a/apps/web/tests/seo-growth.spec.ts
++++ b/apps/web/tests/seo-growth.spec.ts
+@@ -106,12 +106,12 @@ test('only successful email confirmation emits a token-free consent-gated event'
+  await page.getByRole('checkbox',{name:/Chcę otrzymywać/}).check();
+  await page.getByRole('button',{name:'Wyślij link potwierdzający'}).click();
+  await expect(page.getByRole('status')).toContainText('Sprawdź skrzynkę');
+- expect(payloads).toHaveLength(0);
++ await expect.poll(()=>payloads.map(event=>event.event_name)).toEqual(['ALERT_STARTED']);
+  const mail=await (await request.get(`http://127.0.0.1:8100/__test__/mail?email=${encodeURIComponent(email)}`)).json();
+  await page.goto(mail[0].body.match(/http[^\s]+\/alerts\/confirm#token=[^\s]+/)[0]);
+  await page.getByRole('button',{name:'Potwierdzam zapis'}).click();
+  await expect(page.getByRole('link',{name:'Zarządzaj alertem'})).toBeVisible();
+- await expect.poll(()=>payloads.length).toBe(1);
+- expect(payloads[0].event_name).toBe('ALERT_CONFIRMED');
++ await expect.poll(()=>payloads.length).toBe(2);
++ expect(payloads[1].event_name).toBe('ALERT_CONFIRMED');
+  expect(JSON.stringify(payloads)).not.toMatch(/token|example.test|email/);
+ });
+diff --git a/apps/web/tests/product-analytics.test.mjs b/apps/web/tests/product-analytics.test.mjs
+index e69de29..8df0142 100644
+--- /dev/null
++++ b/apps/web/tests/product-analytics.test.mjs
+@@ -0,0 +1,60 @@
++import assert from 'node:assert/strict';
++import test from 'node:test';
++import {track,clearSession} from '../src/lib/session.ts';
++import {analyticsPageType} from '../src/lib/analytics-context.ts';
++import {CONSENT_KEY} from '../src/lib/consent.ts';
++import {localizedHref} from '../src/lib/i18n/routing.ts';
++
++function browser(run){
++ const saved={window:globalThis.window,localStorage:globalThis.localStorage,location:globalThis.location,fetch:globalThis.fetch};
++ const storage=new Map(),events=[];
++ globalThis.window={};
++ globalThis.localStorage={getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)};
++ globalThis.location={pathname:'/deals',search:'?email=private@example.test',hash:'#token=private-token'};
++ globalThis.fetch=async(url,options)=>{assert.equal(options.referrerPolicy,'no-referrer');events.push(JSON.parse(options.body));return {};};
++ const consent=(analytics,marketing=false)=>storage.set(CONSENT_KEY,JSON.stringify({version:1,analytics,marketing,at:Date.now()}));
++ try{clearSession();run({storage,events,consent});}finally{clearSession();Object.assign(globalThis,saved);}
++}
++
++test('new actions require analytics consent independently of marketing and stop on withdrawal',()=>browser(({events,storage,consent})=>{
++ for(const name of ['TRIP_REMOVE','EVENT_CLICK','ALERT_STARTED'])track(name);
++ assert.equal(events.length,0);
++ consent(false,true);track('TRIP_REMOVE');assert.equal(events.length,0);
++ consent(true);track('TRIP_REMOVE');track('EVENT_CLICK');track('ALERT_STARTED');
++ assert.equal(events.length,3);
++ consent(false);clearSession();track('TRIP_REMOVE');track('EVENT_CLICK');track('ALERT_STARTED');
++ assert.equal(events.length,3);assert.equal(storage.has('hoptrip.session.v2'),false);
++ assert.doesNotMatch(JSON.stringify(events),/private|email|token/);
++}));
++
++test('filter apply, remove and reset each count once without a second wire event',()=>browser(({events,consent})=>{
++ consent(true);
++ for(const action of ['apply','remove','reset']){
++  const context={filter:{action}};track('FILTER_USE',undefined,undefined,context);track('FILTER_USE',undefined,undefined,context);
++ }
++ assert.deepEqual(events.map(e=>e.filter.action),['apply','remove','reset']);
++ assert.ok(events.every(e=>e.event_name==='FILTER_USE'));
++}));
++
++test('localized signup start is explicit, once per visit and suppressed on capability pages',()=>browser(({events,consent})=>{
++ consent(true);
++ for(const locale of ['pl','en','ru','uk']){
++  clearSession();globalThis.location.pathname=localizedHref('/alerts',locale);
++  track('PAGE_VIEW');assert.equal(events.filter(e=>e.event_name==='PAGE_VIEW').length,0);
++  const before=events.length;track('ALERT_STARTED');track('ALERT_STARTED');assert.equal(events.length,before+1);
++  for(const path of ['/alerts/manage','/alerts/confirm']){
++   globalThis.location.pathname=localizedHref(path,locale);track('ALERT_STARTED');track('TRIP_REMOVE');track('EVENT_CLICK');
++   assert.equal(events.length,before+1);
++  }
++ }
++ assert.ok(events.every(e=>e.event_name==='ALERT_STARTED'&&e.metadata.page_type==='alerts'));
++ assert.doesNotMatch(JSON.stringify(events),/private|email|token/);
++}));
++
++test('saved list has a bounded locale-independent page type and analytics failure does not block actions',()=>browser(({events,consent})=>{
++ consent(true);
++ for(const locale of ['pl','en','ru','uk'])assert.equal(analyticsPageType(localizedHref('/saved',locale)),'saved');
++ globalThis.location.pathname='/ru/saved';track('TRIP_REMOVE');assert.equal(events[0].metadata.page_type,'saved');
++ globalThis.fetch=()=>{throw Error('synthetic offline');};
++ assert.doesNotThrow(()=>track('EVENT_CLICK'));
++}));
+diff --git a/apps/web/tests/product-analytics.spec.ts b/apps/web/tests/product-analytics.spec.ts
+index e69de29..36ad0da 100644
+--- /dev/null
++++ b/apps/web/tests/product-analytics.spec.ts
+@@ -0,0 +1,137 @@
++import {test,expect,type Page,type BrowserContext} from '@playwright/test';
++import {localizedHref} from '../src/lib/i18n/routing';
++import {tripText} from '../src/lib/i18n/trip-copy';
++import {alertText} from '../src/lib/i18n/alert-copy';
++import type {Locale} from '../src/lib/i18n/config';
++import type {AnalyticsEventName} from '../src/lib/analytics-context';
++
++type Event={event_name:AnalyticsEventName;deal_slug?:string;filter?:{action:string};metadata:Record<string,string>};
++const ticket='https://ticketmaster.evyy.net/synthetic?private=private-ticket-secret';
++async function setup(page:Page,context:BrowserContext,allowed=true){
++ await page.addInitScript(allowed=>{if(!localStorage.getItem('hoptrip.consent.v1'))localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:allowed,marketing:false,at:Date.now()}));},allowed);
++ // All external traffic is fulfilled locally, including popup ticket destinations.
++ await context.route('https://**',route=>route.fulfill({body:'Synthetic local destination',contentType:'text/html'}));
++ await page.route('**/api/v1/deals/*/events?**',route=>{
++  const item={id:'private-event-id',name:'Synthetic concert',category:'MUSIC',venue:'Synthetic venue',city:'Barcelona',start_date:new URL(route.request().url()).searchParams.get('start_date'),end_date:null,local_time:'20:00:00',timezone:'Europe/Madrid',status:'onsale',url:ticket,price_from:null,currency:null};
++  return route.fulfill({json:{status:'READY',events:[item,{...item,id:'variant-fixture',name:'Synthetic variants',ticket_options:[{id:'private-option',name:'Synthetic standard',ticket_kind:'STANDARD',url:ticket,price_from:null,currency:null}]},{...item,id:'cancelled-fixture',name:'Synthetic cancelled',status:'cancelled'}],partial:false,checked_at:null}});
++ });
++ const events:Event[]=[],statuses:number[]=[],externalTrackers:string[]=[];
++ page.on('request',request=>{
++  if(request.url().endsWith('/analytics/events')&&request.method()==='POST')events.push(request.postDataJSON());
++  if(/emrld\.ltd|api\.telegram\.org/.test(request.url()))externalTrackers.push(request.url());
++ });
++ page.on('response',response=>{if(response.url().endsWith('/analytics/events')&&response.request().method()==='POST')statuses.push(response.status());});
++ return {events,statuses,externalTrackers};
++}
++const count=(events:Event[],name:AnalyticsEventName)=>events.filter(e=>e.event_name===name).length;
++async function clickTicket(page:Page,variant=false){
++ const card=page.locator('#trip-events li').filter({has:page.getByRole('heading',{level:3,name:variant?'Synthetic variants':'Synthetic concert',exact:true})});
++ const link=card.locator('a[target="_blank"]');
++ await expect(link).toHaveAttribute('rel','sponsored noopener noreferrer');
++ const opened=page.waitForEvent('popup');await link.click();const popup=await opened;await popup.waitForLoadState();await popup.close();
++}
++async function signup(page:Page,locale:Locale,email:string){
++ await page.getByLabel('Email',{exact:true}).fill(email);
++ await page.locator('input[name="consent"]').check();
++ await page.getByRole('button',{name:alertText(locale,'Wyślij link potwierdzający'),exact:true}).click();
++}
++
++for(const locale of ['pl','en','ru','uk'] as const)test(`product taxonomy follows real actions without private payloads in ${locale}`,async({page,context,request})=>{
++ test.setTimeout(120000);
++ const {events,statuses,externalTrackers}=await setup(page,context);
++ const flush=async()=>{await expect.poll(()=>statuses.length).toBe(events.length);expect(statuses.every(s=>s===202)).toBe(true);};
++ await page.goto(localizedHref('/deals?origin=WRO&budget=300&sort=price',locale));
++ await page.locator('.filter-chip').last().click();
++ await expect.poll(()=>events.some(e=>e.filter?.action==='remove')).toBe(true);
++ await page.locator('.filter-reset').click();
++ await expect.poll(()=>events.some(e=>e.filter?.action==='reset')).toBe(true);
++ await expect(page).toHaveURL(/sort=price/);
++ await page.locator('input[name="budget"]').fill('1');
++ await page.locator('.filters button[type="submit"]').click();
++ await expect.poll(()=>events.some(e=>e.filter?.action==='apply')).toBe(true);
++ await expect.poll(()=>count(events,'SEARCH')).toBe(1);
++ expect(events.filter(e=>e.event_name==='FILTER_USE').map(e=>e.filter?.action)).toEqual(['remove','reset','apply']);
++ await flush();
++ await page.goto(localizedHref('/deals/browser-13',locale));
++ await page.locator('#budget-hotel').fill('200');
++ await expect.poll(()=>count(events,'BUDGET_USE')).toBe(1);
++ const save=page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true});
++ await save.click();await expect.poll(()=>count(events,'TRIP_SAVE')).toBe(1);await save.click();
++ await clickTicket(page);
++ await expect.poll(()=>count(events,'EVENT_CLICK')).toBe(1);
++ expect(events.find(e=>e.event_name==='EVENT_CLICK')?.deal_slug).toBe('browser-13');
++ await expect(page.locator('#trip-events li').filter({has:page.getByRole('heading',{name:'Synthetic cancelled',exact:true})}).locator('a')).toHaveCount(0);
++ await flush();
++ await page.goto(localizedHref('/saved',locale));
++ await page.locator('main ul li button').click();
++ await expect.poll(()=>count(events,'TRIP_REMOVE')).toBe(1);
++ expect(events.find(e=>e.event_name==='TRIP_REMOVE')?.metadata.page_type).toBe('saved');
++ expect(count(events,'TRIP_SAVE')).toBe(1);
++ await flush();
++ await page.goto(localizedHref('/alerts?origin=WRO',locale));
++ await page.getByRole('button',{name:alertText(locale,'Wyślij link potwierdzający'),exact:true}).click();
++ expect(count(events,'ALERT_STARTED')).toBe(0);
++ const email=`taxonomy-${crypto.randomUUID()}@example.test`;
++ await signup(page,locale,email);
++ await expect(page.getByRole('status')).toContainText(alertText(locale,'Sprawdź skrzynkę i spam. Jeśli adres może otrzymywać alerty, dostaniesz link do potwierdzenia lub zarządzania. Prośba o zapis nie oznacza potwierdzonej subskrypcji. Link wysyłamy najwyżej raz na dobę.'));
++ expect(count(events,'ALERT_STARTED')).toBe(1);expect(count(events,'ALERT_CONFIRMED')).toBe(0);
++ await flush();
++ const api=process.env.HOPTRIP_API_URL??'http://127.0.0.1:8100';
++ const response=await request.get(`${api}/__test__/mail?email=${encodeURIComponent(email)}`);expect(response.ok()).toBe(true);
++ const mail=await response.json(),confirm=mail[0].body.match(/http[^\s]+\/alerts\/confirm#token=[^\s]+/)[0];
++ expect(new URL(confirm).origin).toBe(new URL(page.url()).origin);
++ await page.goto(confirm);
++ await page.getByRole('button',{name:alertText('pl','Potwierdzam zapis'),exact:true}).click();
++ await expect.poll(()=>count(events,'ALERT_CONFIRMED')).toBe(1);
++ await flush();
++ expect(JSON.stringify(events)).not.toMatch(/private|taxonomy-|example\.test|email|token|plan=|Synthetic/);
++ expect(externalTrackers).toEqual([]);
++ // Withdrawal persists over a full navigation, including an explicit signup attempt.
++ await page.getByRole('button',{name:'Ustawienia prywatności',exact:true}).click();
++ await page.getByRole('button',{name:'Odrzuć opcjonalne',exact:true}).click();
++ const before=events.length;
++ await page.route('**/api/v1/alerts',route=>route.fulfill({status:503,json:{detail:'Synthetic unavailable'}}));
++ await page.goto('/alerts?origin=WRO');await signup(page,'pl','withdrawn@example.test');
++ await expect(page.getByRole('status')).toContainText('Nie udało się wykonać operacji');
++ expect(events).toHaveLength(before);expect(await page.evaluate(()=>localStorage.getItem('hoptrip.session.v2'))).toBeNull();
++});
++
++test('ticket variants emit the same minimal click and failures never block navigation',async({page,context})=>{
++ const {events}=await setup(page,context);
++ await page.route('**/analytics/events',route=>route.abort('failed'));
++ await page.goto('/deals/browser-13');await clickTicket(page,true);
++ expect(count(events,'EVENT_CLICK')).toBe(1);
++ expect(events.find(e=>e.event_name==='EVENT_CLICK')?.deal_slug).toBe('browser-13');
++ expect(JSON.stringify(events)).not.toMatch(/private|Synthetic|ticketmaster/);
++});
++
++test('denied consent suppresses filter, ticket, save, remove and signup analytics',async({page,context})=>{
++ const {events}=await setup(page,context,false);
++ await page.goto('/deals?budget=300');await page.locator('.filter-reset').click();
++ await page.goto('/deals/browser-13');await clickTicket(page);
++ await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
++ await page.goto('/saved');await page.locator('main ul li button').click();
++ await page.route('**/api/v1/alerts',route=>route.fulfill({status:503,json:{detail:'Synthetic unavailable'}}));
++ await page.goto('/alerts?origin=WRO');await signup(page,'pl','denied@example.test');
++ await expect(page.getByRole('status')).toContainText('Nie udało się wykonać operacji');
++ expect(events).toEqual([]);expect(await page.evaluate(()=>localStorage.getItem('hoptrip.session.v2'))).toBeNull();
++});
++
++test('failed saved-trip write emits no remove and leaves the plan available',async({page,context})=>{
++ const {events}=await setup(page,context);
++ await page.goto('/deals/browser-13');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
++ await page.goto('/saved');await expect(page.locator('main ul li button')).toHaveCount(1);
++ await page.evaluate(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key.includes('saved'))throw Error('Synthetic storage failure');return original.call(this,key,value);};});
++ await page.locator('main ul li button').click();
++ await expect(page.getByRole('status')).toContainText('Nie udało się usunąć planu');
++ expect(count(events,'TRIP_REMOVE')).toBe(0);await expect(page.locator('main ul li button')).toHaveCount(1);
++});
++
++test('a failed signup counts one start per visit and never reports completion',async({page,context})=>{
++ const {events}=await setup(page,context);
++ await page.route('**/api/v1/alerts',route=>route.fulfill({status:503,json:{detail:'Synthetic unavailable'}}));
++ await page.goto('/alerts?origin=WRO');await signup(page,'pl','failed@example.test');
++ await expect(page.getByRole('status')).toContainText('Nie udało się wykonać operacji');
++ await signup(page,'pl','failed@example.test');await expect(page.getByRole('status')).toContainText('Nie udało się wykonać operacji');
++ expect(events.map(e=>e.event_name)).toEqual(['ALERT_STARTED']);
++});
+diff --git a/apps/api/tests/test_product_analytics.py b/apps/api/tests/test_product_analytics.py
+index e69de29..7db8f47 100644
+--- /dev/null
++++ b/apps/api/tests/test_product_analytics.py
+@@ -0,0 +1,55 @@
++from uuid import uuid4
++
++import pytest
++from app.models.analytics import AnalyticsEvent
++from sqlalchemy import select
++
++
++@pytest.mark.parametrize("name", ["TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED"])
++def test_new_actions_are_idempotent_and_keep_only_bounded_metadata(api_client, isolated_db, name):
++    payload = {
++        "event_id": str(uuid4()), "event_name": name, "anonymous_session_id": "synthetic-session",
++        "metadata": {"page_type": "saved", "email": "private@example.test", "token": "private-token"},
++        "email": "private@example.test", "url": "/trip?plan=private-token",
++    }
++    for _ in range(2):
++        assert api_client.post("/api/v1/analytics/events", json=payload).status_code == 202
++    rows = list(isolated_db.scalars(select(AnalyticsEvent)))
++    assert len(rows) == 1
++    assert rows[0].event_name == name
++    assert rows[0].metadata_json == {"page_type": "saved"}
++    assert rows[0].deal_id is None
++
++
++@pytest.mark.parametrize("action", ["apply", "remove", "reset"])
++def test_filter_actions_are_separate_from_search_and_drop_free_text(api_client, isolated_db, action):
++    response = api_client.post("/api/v1/analytics/events", json={
++        "event_name": "FILTER_USE", "anonymous_session_id": "synthetic-session",
++        "filter": {"action": action, "value": "private@example.test"},
++    })
++    assert response.status_code == 202
++    row = isolated_db.scalar(select(AnalyticsEvent))
++    assert row.metadata_json == {"filter": {"action": action}}
++
++
++def test_legacy_filter_event_remains_compatible(api_client, isolated_db):
++    assert api_client.post("/api/v1/analytics/events", json={
++        "event_name": "FILTER_USE", "anonymous_session_id": "synthetic-session",
++    }).status_code == 202
++    assert isolated_db.scalar(select(AnalyticsEvent)).metadata_json == {}
++
++
++@pytest.mark.parametrize("extra", [
++    {"event_name": "FILTER_USE", "filter": {"action": "private@example.test"}},
++    {"event_name": "FILTER_USE", "filter": {}},
++    {"event_name": "TRIP_REMOVE", "filter": {"action": "remove"}},
++    {"event_name": "ALERT_STARTED", "search": {"filters": {"origin": "WRO"}}},
++    {"event_name": "EVENT_CLICK", "partner": {"category": "activity", "provider": "tiqets"}},
++    {"event_name": "TRIP_REMOVE", "activity": {"city": "rome", "activity_id": "tiqets-1", "page": "/info/rome", "link_kind": "affiliate"}},
++    {"event_name": "trip_removed"},
++])
++def test_new_taxonomy_rejects_wrong_contexts_and_undocumented_wire_aliases(api_client, isolated_db, extra):
++    assert api_client.post("/api/v1/analytics/events", json={
++        "anonymous_session_id": "synthetic-session", **extra,
++    }).status_code == 422
++    assert list(isolated_db.scalars(select(AnalyticsEvent))) == []

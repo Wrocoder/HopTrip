@@ -61,3 +61,7 @@ API healthy; защищённый отчёт ответил 200 с новыми 
 тестовые клики в production и Travelpayouts не записывались.
 Артефакты: `guide-activities-live-check-2026-10-03.json`,
 `guide-activities-live-2026-10-03.png`.
+
+## Локальное уточнение GROW-03 — 2026-11-02
+
+Подтверждено, что locale-prefixed ACTIVITY_CLICK.page отклонялся strict API422 и PARTNER_CLICK терял deal association. Клиент теперь убирает locale prefix только из аналитического контекста; оригинальные affiliate/official href и primary/middle native behavior сохраняются. Schema/ID/city/link-kind/consent/dedupe и исторические данные прежние. [Результаты/28unique cases/границы](grow03/README.md). Текущий выпуск не опубликован; прежний исторический production report выше не является проверкой GROW-03. Два ранних внешних test navigation incidents отдельно задокументированы; final tests используют loopback native targets.

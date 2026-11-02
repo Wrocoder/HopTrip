@@ -85,7 +85,7 @@ def ingest_offers(
     price_snapshot: bool = False,
     commit: bool = True,
 ) -> IngestionResult:
-    fetched_at = now or datetime.now(UTC)
+    fetched_at = utc(now or datetime.now(UTC))
     provider = db.scalar(select(DataProvider).where(DataProvider.code == provider_code))
     if provider is None:
         raise ValueError(f"Unknown data provider: {provider_code}")
@@ -132,11 +132,27 @@ def ingest_offers(
             # A broad cheapest-destinations feed is not authoritative for this exact trip.
             # Only another structured date-specific refresh may replace its checked quote.
             existing.fetched_at = fetched_at
+            if existing.observation_key == key:
+                observed = db.scalar(
+                    select(PriceObservation).where(PriceObservation.observation_key == key)
+                    .with_for_update().execution_options(populate_existing=True)
+                )
+                deadline = price_deadline(existing.last_verified_at, existing.depart_at)
+                for bound in (existing.expires_at, raw.expires_at,
+                              observed.expires_at if observed else None):
+                    if bound is not None:
+                        deadline = min(deadline, utc(bound))
+                # Protection against ticket overwrites must not suppress earlier expiry
+                # explicitly advertised for this very same observation.
+                existing.expires_at = deadline
+                if observed:
+                    observed.expires_at = deadline
             result.snapshot_protected += 1
             continue
         conversion = converter.to_pln(raw.price, raw.currency, fetched_at)
         observed = db.scalar(
             select(PriceObservation).where(PriceObservation.observation_key == key)
+            .with_for_update().execution_options(populate_existing=True)
         )
         # Repeated cached values with no source time retain the first-seen timestamp.
         verified_at = (
@@ -149,12 +165,14 @@ def ingest_offers(
             if raw.expires_at
             else price_deadline(verified_at, raw.depart_at)
         )
+        if observed and observed.expires_at:
+            expiry = min(expiry, utc(observed.expires_at))
         values = dict(
             product_type="FLIGHT",
             origin_airport_id=origin.id,
             destination_id=destination_id,
-            depart_at=raw.depart_at,
-            return_at=raw.return_at,
+            depart_at=utc(raw.depart_at),
+            return_at=utc(raw.return_at) if raw.return_at else None,
             original_price=raw.price,
             original_currency=raw.currency.upper(),
             price_pln=conversion[0] if conversion else None,
@@ -164,7 +182,7 @@ def ingest_offers(
             raw_payload=raw.payload,
             fetched_at=fetched_at,
             last_verified_at=verified_at,
-            source_observed_at=raw.source_observed_at,
+            source_observed_at=utc(raw.source_observed_at) if raw.source_observed_at else None,
             observation_key=key,
             departure_precision=raw.departure_precision,
             expires_at=expiry,
@@ -188,6 +206,7 @@ def ingest_offers(
         # Re-read after acquiring the row lock: another writer may have just committed.
         observed = db.scalar(
             select(PriceObservation).where(PriceObservation.observation_key == key)
+            .with_for_update().execution_options(populate_existing=True)
         )
         if not raw.source_observed_at and (observed or existing.observation_key == key):
             verified_at = utc(observed.observed_at) if observed else utc(existing.last_verified_at)
@@ -203,6 +222,19 @@ def ingest_offers(
             previous_expiry = values["expires_at"]
             assert isinstance(previous_expiry, datetime)
             values["expires_at"] = min(utc(existing.expires_at), previous_expiry)
+        # A quote may return after another price occupied the mutable offer row.
+        # Its observation retains the earliest deadline even when the feed omits it.
+        if observed:
+            effective_expiry = values["expires_at"]
+            assert isinstance(effective_expiry, datetime)
+            if observed.expires_at:
+                effective_expiry = min(effective_expiry, utc(observed.expires_at))
+            elif existing.observation_key != key:
+                # Legacy history did not retain the deadline of a displaced quote.
+                # Keep the observation for statistics, but quarantine its return until
+                # a genuinely new source observation establishes a new lifetime.
+                effective_expiry = min(effective_expiry, verified_at)
+            values["expires_at"] = observed.expires_at = effective_expiry
         # A current exact-trip snapshot may return a previously seen price; keep its
         # original first-seen age. An explicitly older source timestamp still cannot win.
         if (price_snapshot and raw.source_observed_at is None) or utc(existing.last_verified_at) <= verified_at:
@@ -226,14 +258,15 @@ def ingest_offers(
                         origin_airport_id=origin.id,
                         destination_id=destination_id,
                         product_type="FLIGHT",
-                        departure_date=raw.depart_at.date(),
-                        trip_duration_days=(raw.return_at.date() - raw.depart_at.date()).days
+                        departure_date=utc(raw.depart_at).date(),
+                        trip_duration_days=(utc(raw.return_at).date() - utc(raw.depart_at).date()).days
                         if raw.return_at
                         else None,
                         observed_price_pln=Decimal(conversion[0]),
                         original_price=raw.price,
                         original_currency=raw.currency.upper(),
                         source=raw.source,
+                        expires_at=values["expires_at"],
                         observed_at=verified_at,
                     )
                 )

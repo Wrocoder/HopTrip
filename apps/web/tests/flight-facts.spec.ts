@@ -55,7 +55,8 @@ test("round trip facts agree between card and detail without mobile overflow",as
   const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"]')});
   await expect(card.locator(".flight-schedule-compact")).toBeVisible();
   await expect(card.locator(".flight-schedule-compact")).not.toContainText("Europe/Warsaw");
-  await expect(card.locator(".flight-schedule")).toContainText("Ryanair (FR)");
+  // DEAL-01 keeps full carrier details in the disclosure; they are checked below.
+  await expect(card.locator(".flight-schedule")).not.toContainText("Ryanair (FR)");
   await expect(card.locator(".trip-details")).not.toHaveAttribute("open","");
   await expect(card.locator(".outbound-leg .flight-stops")).toHaveText("Bez przesiadek");
   await expect(card.locator(".return-leg .flight-stops")).toHaveText("Liczba przesiadek: 1");

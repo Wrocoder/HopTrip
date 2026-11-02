@@ -53,11 +53,19 @@ def offer(db, *, price='200', departure=None, nights=2, return_flight=True, **ch
     db.flush()
     departure = departure or datetime(2026, 11, 6, 9, tzinfo=UTC)  # Friday
     arrival = departure + timedelta(days=nights)
-    travel = TravelOffer(data_provider_id=provider.id, external_id=uuid4().hex, source='fixture',
+    # Synthetic, explicitly evidenced itinerary; never sourced from a live provider.
+    travel = TravelOffer(data_provider_id=provider.id, external_id=uuid4().hex,
+                         source='travelpayouts_data', departure_precision='TIME',
                          origin_airport_id=airport.id, destination_id=destination.id,
                          depart_at=departure, return_at=arrival if return_flight else None,
                          original_price=Decimal(price), original_currency='PLN', price_pln=Decimal(price),
-                         last_verified_at=NOW, fetched_at=NOW)
+                         last_verified_at=NOW, fetched_at=NOW,
+                         raw_payload={'origin_airport': 'WRO', 'destination_airport': 'MXP',
+                                      'departure_at': departure.isoformat(),
+                                      **({'return_at': arrival.isoformat(),
+                                          'return_origin_airport': 'MXP',
+                                          'return_destination_airport': 'WRO'}
+                                         if return_flight else {})})
     db.add(travel)
     db.flush()
     values = dict(slug='fixture-' + uuid4().hex, origin_airport_id=airport.id,

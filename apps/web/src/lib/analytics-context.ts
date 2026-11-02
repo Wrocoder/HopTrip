@@ -6,7 +6,10 @@ export const campaignLabel=(value:string|null|undefined)=>campaigns.includes(val
 export const sourceLabel=(value:string|null|undefined)=>sources.includes(value??"") ? value! : undefined;
 export type SearchContext={filters:Filters;result_count?:number;error?:"invalid_filters"|"unavailable"};
 export type PartnerContext={category:"flight"|"stay"|"activity";provider:"catalog"|"stay22"|"tiqets"};
-export type EventContext={search?:SearchContext;partner?:PartnerContext};
+export type FilterContext={action:"apply"|"remove"|"reset"};
+export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED"] as const;
+export type AnalyticsEventName=typeof analyticsEvents[number];
+export type EventContext={search?:SearchContext;partner?:PartnerContext;filter?:FilterContext};
 export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
  const result:Filters={};
  if(filters.origin==="WAW,WMI" || airports.some(a=>a.iata_code===filters.origin))result.origin=filters.origin;
@@ -36,6 +39,7 @@ export function analyticsPageType(path:string):string|undefined {
  if(path.startsWith("/routes/"))return "route";
  if(path==="/info/trip-budget")return "budget";
  if(path==="/trip")return "saved_trip";
+ if(path==="/saved")return "saved";
  if(path.startsWith("/alerts"))return "alerts";
  if(path.startsWith("/info/"))return "guide";
 }

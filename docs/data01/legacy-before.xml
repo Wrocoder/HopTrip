@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.422" timestamp="2026-10-30T16:21:08.654849+01:00" hostname="wave"><testcase classname="apps.api.tests.test_freshness_history" name="test_expired_cached_quote_cannot_return_as_fresh_after_another_price[True-None]" time="0.188"><failure message="assert datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) == datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc)&#10; +  where datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) = utc(datetime.datetime(2030, 9, 3, 0, 0))&#10; +    where datetime.datetime(2030, 9, 3, 0, 0) = &lt;app.models.offer.TravelOffer object at 0x000001A06482E1B0&gt;.expires_at">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x000001A06455C200&gt;
+api_client = &lt;starlette.testclient.TestClient object at 0x000001A063B053A0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001A0647659D0&gt;
+replacement_expiry = None, legacy_history = True
+
+    @pytest.mark.parametrize("replacement_expiry", [None, NOW + timedelta(days=5)])
+    @pytest.mark.parametrize("legacy_history", [False, True])
+    def test_expired_cached_quote_cannot_return_as_fresh_after_another_price(
+        isolated_db, api_client, monkeypatch, replacement_expiry, legacy_history
+    ):
+        db = isolated_db
+        offer, provider, routes, _, _ = fixtures(db, price=209)
+        original = provider._normalize(offer.raw_payload, SearchQuery(origin="WRO"))
+        original_deadline = NOW + timedelta(hours=1)
+        # Duplicate delivery shortens A's advertised lifetime, then B replaces A.
+        ingest_offers(db, provider_code=provider.code,
+                      offers=[replace(original, expires_at=original_deadline)],
+                      converter=PlnOnlyConverter(), now=NOW)
+        ingest_offers(db, provider_code=provider.code,
+                      offers=[replace(original, price=Decimal(220))],
+                      converter=PlnOnlyConverter(), now=NOW + timedelta(minutes=30))
+        offer.route_details = {**offer.route_details, "value": 220}
+        if legacy_history:
+            # Lost pre-0019 deadlines cannot be reconstructed after the offer changed price.
+            old = db.scalar(select(PriceObservation).where(PriceObservation.original_price == 209))
+            old.expires_at = None
+        db.commit()
+        deal = generate_flight_deal(db, offer, NOW + timedelta(minutes=30))
+        assert db.scalar(available_deals_query(NOW + timedelta(minutes=30))) == deal
+        if replacement_expiry is not None:
+            # The date-specific cache may now omit or extend A's old expiry.
+            transport = provider.transport
+    
+            def respond(request):
+                response = transport.handle_request(request)
+                body = response.json()
+                for row in body["data"]:
+                    row["expires_at"] = replacement_expiry.isoformat()
+                return httpx.Response(200, json=body)
+    
+            provider.transport = httpx.MockTransport(respond)
+        checked = NOW + timedelta(hours=2)
+        expected_deadline = NOW if legacy_history else original_deadline
+        result = asyncio.run(refresh_prices(db, provider, routes, checked))
+        assert result.updated == 1 and offer.price_pln == Decimal(209)
+        assert utc(offer.last_verified_at) == NOW
+&gt;       assert utc(offer.expires_at) == expected_deadline
+E       assert datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) == datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc)
+E        +  where datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) = utc(datetime.datetime(2030, 9, 3, 0, 0))
+E        +    where datetime.datetime(2030, 9, 3, 0, 0) = &lt;app.models.offer.TravelOffer object at 0x000001A06482E1B0&gt;.expires_at
+
+apps\api\tests\test_freshness_history.py:67: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_freshness_history" name="test_expired_cached_quote_cannot_return_as_fresh_after_another_price[True-replacement_expiry1]" time="0.190"><failure message="assert datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) == datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc)&#10; +  where datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) = utc(datetime.datetime(2030, 9, 3, 0, 0))&#10; +    where datetime.datetime(2030, 9, 3, 0, 0) = &lt;app.models.offer.TravelOffer object at 0x000001A0649582F0&gt;.expires_at">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x000001A06482CBF0&gt;
+api_client = &lt;starlette.testclient.TestClient object at 0x000001A064616E10&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001A0648BDCD0&gt;
+replacement_expiry = datetime.datetime(2030, 9, 6, 0, 0, tzinfo=datetime.timezone.utc)
+legacy_history = True
+
+    @pytest.mark.parametrize("replacement_expiry", [None, NOW + timedelta(days=5)])
+    @pytest.mark.parametrize("legacy_history", [False, True])
+    def test_expired_cached_quote_cannot_return_as_fresh_after_another_price(
+        isolated_db, api_client, monkeypatch, replacement_expiry, legacy_history
+    ):
+        db = isolated_db
+        offer, provider, routes, _, _ = fixtures(db, price=209)
+        original = provider._normalize(offer.raw_payload, SearchQuery(origin="WRO"))
+        original_deadline = NOW + timedelta(hours=1)
+        # Duplicate delivery shortens A's advertised lifetime, then B replaces A.
+        ingest_offers(db, provider_code=provider.code,
+                      offers=[replace(original, expires_at=original_deadline)],
+                      converter=PlnOnlyConverter(), now=NOW)
+        ingest_offers(db, provider_code=provider.code,
+                      offers=[replace(original, price=Decimal(220))],
+                      converter=PlnOnlyConverter(), now=NOW + timedelta(minutes=30))
+        offer.route_details = {**offer.route_details, "value": 220}
+        if legacy_history:
+            # Lost pre-0019 deadlines cannot be reconstructed after the offer changed price.
+            old = db.scalar(select(PriceObservation).where(PriceObservation.original_price == 209))
+            old.expires_at = None
+        db.commit()
+        deal = generate_flight_deal(db, offer, NOW + timedelta(minutes=30))
+        assert db.scalar(available_deals_query(NOW + timedelta(minutes=30))) == deal
+        if replacement_expiry is not None:
+            # The date-specific cache may now omit or extend A's old expiry.
+            transport = provider.transport
+    
+            def respond(request):
+                response = transport.handle_request(request)
+                body = response.json()
+                for row in body["data"]:
+                    row["expires_at"] = replacement_expiry.isoformat()
+                return httpx.Response(200, json=body)
+    
+            provider.transport = httpx.MockTransport(respond)
+        checked = NOW + timedelta(hours=2)
+        expected_deadline = NOW if legacy_history else original_deadline
+        result = asyncio.run(refresh_prices(db, provider, routes, checked))
+        assert result.updated == 1 and offer.price_pln == Decimal(209)
+        assert utc(offer.last_verified_at) == NOW
+&gt;       assert utc(offer.expires_at) == expected_deadline
+E       assert datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) == datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc)
+E        +  where datetime.datetime(2030, 9, 3, 0, 0, tzinfo=datetime.timezone.utc) = utc(datetime.datetime(2030, 9, 3, 0, 0))
+E        +    where datetime.datetime(2030, 9, 3, 0, 0) = &lt;app.models.offer.TravelOffer object at 0x000001A0649582F0&gt;.expires_at
+
+apps\api\tests\test_freshness_history.py:67: AssertionError</failure></testcase></testsuite></testsuites>

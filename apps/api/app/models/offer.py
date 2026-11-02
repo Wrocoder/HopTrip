@@ -78,6 +78,9 @@ class PriceObservation(Base):
     original_price: Mapped[Decimal] = mapped_column(Numeric(12, 2))
     original_currency: Mapped[str] = mapped_column(String(3))
     source: Mapped[str] = mapped_column(String(80))
+    # Earliest known effective deadline of this observation, including source expiry.
+    # NULL on legacy history means it was not recorded, not an unlimited lifetime.
+    expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     observed_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

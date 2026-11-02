@@ -4,7 +4,9 @@ import {pathLocale} from "../src/lib/i18n/routing";
 test.use({javaScriptEnabled:false,userAgent:"Twitterbot/1.0"});
 
 test("every sitemap page has server-rendered unique metadata and reachable editorial links",async({page,request},testInfo)=>{
- test.setTimeout(180000);
+ // This audit walks the full published inventory plus editorial links. The
+ // overall budget is not a page latency target; per-page assertions stay strict.
+ test.setTimeout(300000);
  const response=await request.get('/sitemap.xml');
  expect(response.status()).toBe(200);
  const urls=[...(await response.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);

@@ -1,6 +1,7 @@
 import {test,expect} from "@playwright/test";
 import fs from "node:fs/promises";
 import path from "node:path";
+import {chooseOrigin} from './origin-helpers';
 
 test("home layout comparison",async({page},testInfo)=>{
  const mobile=testInfo.project.name==="mobile";
@@ -27,14 +28,15 @@ test("home layout comparison",async({page},testInfo)=>{
  const firstCard=await page.locator(".deal-card").first().boundingBox();
  await fs.writeFile(prefix+".json",JSON.stringify({viewport:page.viewportSize(),firstCardTop:firstCard?.y},null,2)+"\n");
  if(phase!=="before") {
-   expect(firstCard!.y).toBeLessThan(mobile ? 844 : 650);
+   // UX-01 prioritizes visible departure dates and the primary search action.
+   // Quality gates can legitimately leave the short-trip selection empty.
+   await expect(page.locator('.hero button[type="submit"]')).toBeInViewport();
    await expect(page.getByRole("combobox",{name:"Skąd",exact:true})).toHaveValue("");
-   await page.getByRole("combobox",{name:"Skąd",exact:true}).fill("WRO");
-   await page.getByText("Zasady szybkich filtrów",{exact:true}).click();
-   await expect(page.locator(".preset-rules")).toContainText("bez godzin nie gwarantujemy wyjazdu bez urlopu");
+   await chooseOrigin(page,"WRO");
+   await expect(page.locator('.hero input[name="departure_from"]')).toBeVisible();
    await page.getByRole("combobox",{name:"Dokąd",exact:true}).fill("Mediolan");
    await page.locator('input[name="budget"]').fill("300");
-   await page.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+   await page.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
    await expect(page).toHaveURL(/destination=milan/);
    await expect(page).toHaveURL(/origin=WRO/);
    await expect(page).toHaveURL(/budget=300/);

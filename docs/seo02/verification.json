@@ -1,0 +1,157 @@
+{
+  "files": 571,
+  "differences": [],
+  "testsMatch": true,
+  "technicalTestsNormalizedPortsMatch": true,
+  "runs": {
+    "desktop": {
+      "stats": {
+        "startTime": "2026-11-01T22:00:17.646Z",
+        "duration": 515179.453,
+        "expected": 21,
+        "skipped": 2,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "errors": [
+        {
+          "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+        }
+      ]
+    },
+    "technical": {
+      "stats": {
+        "startTime": "2026-11-01T22:14:01.002Z",
+        "duration": 261595.19800000003,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    "mobile": {
+      "stats": {
+        "startTime": "2026-11-01T22:25:37.346Z",
+        "duration": 128316.916,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  },
+  "historicalRuns": {
+    "e2e-before.json": {
+      "startTime": "2026-11-01T21:56:15.626Z",
+      "duration": 35047.112,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "e2e-smoke.json": {
+      "startTime": "2026-11-01T21:57:21.895Z",
+      "duration": 115069.84400000001,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "e2e-technical.json": {
+      "startTime": "2026-11-01T22:09:40.640Z",
+      "duration": 203523.037,
+      "expected": 0,
+      "skipped": 2,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "e2e-mobile.json": {
+      "startTime": "2026-11-01T22:18:37.879Z",
+      "duration": 76154.49600000001,
+      "expected": 1,
+      "skipped": 6,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "e2e-mobile-final.json": {
+      "startTime": "2026-11-01T22:20:57.021Z",
+      "duration": 57727.18,
+      "expected": 1,
+      "skipped": 6,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "e2e-probe.json": {
+      "startTime": "2026-11-01T22:24:03.700Z",
+      "duration": 49476.270000000004,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "retries": 0,
+  "initialFailures": [
+    {
+      "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+      "status": "timedOut",
+      "message": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m"
+    }
+  ],
+  "initialTimeoutDocumented": true,
+  "verifiedUniqueScenarios": 32,
+  "crawl": {
+    "pages": 244,
+    "editorialLinks": 51
+  },
+  "screenshots": [
+    "docs/seo02/desktop-airport-KRK.png",
+    "docs/seo02/desktop-airport-WAW.png",
+    "docs/seo02/desktop-airport-WRO.png",
+    "docs/seo02/mobile-airport-KRK.png",
+    "docs/seo02/mobile-airport-WAW.png",
+    "docs/seo02/mobile-airport-WRO.png"
+  ],
+  "visualProbe": {
+    "stats": {
+      "startTime": "2026-11-01T22:30:22.104Z",
+      "duration": 14222.487,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": [],
+    "measurements": {
+      "text": "Lotnisko i dalszy plan",
+      "rect": {
+        "x": 41,
+        "y": 40.890625,
+        "width": 238,
+        "height": 64.5,
+        "top": 40.890625,
+        "right": 279,
+        "bottom": 105.390625,
+        "left": 41
+      },
+      "display": "block",
+      "visibility": "visible",
+      "overflow": false
+    },
+    "additionalCaptures": [
+      "mobile-KRK-viewport.png",
+      "mobile-KRK-context-verified.png"
+    ]
+  },
+  "masterUnchanged": true,
+  "nextEnvUnchanged": true,
+  "ports": {
+    "otherPortsTouched": false,
+    "ownListeners": []
+  },
+  "brokenLinks": [],
+  "addedWhitespace": [],
+  "jsonParsed": 27
+}

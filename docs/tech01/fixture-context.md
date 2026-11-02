@@ -1,0 +1,9 @@
+# Отличие данных в mobile before/main captures
+
+Основной browser set прошёл 44/44. Его PL desktop capture и before desktop capture совпали byte-for-byte. Mobile pictures различаются: baseline содержит4 airport options и pointer выбирает WAW; main mobile содержит3 и pointer выбирает WMI. Contract проверяет wrap относительно фактического числа options, selection/focus/ARIA/URL, а не постоянный состав registry.
+
+Проверена причина различия данных: [e2e_app.py](../../apps/api/tests/e2e_app.py), `short_trip_fixtures` (около строки483), всегда удаляет Airports WAW/KTW/GDN до ветки `if not enabled`. Начальный seed содержит WAW (около строки49), но disabled cleanup его не восстанавливает. [OriginSelection](../../apps/web/tests/origin-selection.spec.ts) включает fixture перед тестом и выключает после. В основном последовательном run desktop origin-selection выполняется до mobile combobox-contract, поэтому к этому моменту WAW удалён. Destination registry и normalization не менялись.
+
+Это test-only состояние SQLite fixture, не факт о production или новый отказ selector. API fixture/runtime и existing tests в TECH-01 не исправляются. Чтобы сравнить UI при одинаковом registry, после основного run запускается тот же PL contract на fresh guarded server без origin-selection. Before/fresh metadata и screenshots сопоставляются отдельно; main evidence с тремя options сохранено. Никакие assertions combobox-contract или runtime ради сравнения не ослаблялись. Fresh repeat не суммируется с44 основными cases.
+
+Fresh comparison завершился2/2,23.49s. В обоих profiles снова4 airport options, выбран WAW, destination selection/focus тоже совпали. Desktop и mobile PNG before/fresh совпали побайтно по SHA-256. Это подтверждает одинаковый результат refactor при одинаковом test registry; не исправление исходного fixture cleanup.

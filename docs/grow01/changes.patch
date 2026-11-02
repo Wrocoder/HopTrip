@@ -1,0 +1,244 @@
+diff --git a/.cache/grow01-before/apps/api/app/api/alerts.py b/apps/api/app/api/alerts.py
+index 224d2f5..f4b4fe1 100644
+--- a/.cache/grow01-before/apps/api/app/api/alerts.py
++++ b/apps/api/app/api/alerts.py
+@@ -1,3 +1,4 @@
++import logging
+ from datetime import UTC, datetime
+ 
+ from fastapi import APIRouter, Depends, HTTPException
+@@ -9,6 +10,7 @@ from app.schemas.alert import AlertSignup, AlertToken, AlertUpdate
+ from app.services import alerts
+ 
+ router = APIRouter(prefix="/api/v1/alerts", tags=["alerts"])
++logger = logging.getLogger(__name__)
+ 
+ 
+ @router.get("/status")
+@@ -41,6 +43,7 @@ def update(value: AlertUpdate, db: Session = Depends(get_db), settings: Settings
+         raise HTTPException(409, "Only confirmed active alerts can be edited")
+     alert.filters = alerts.normalized_filters(db, value.filters)
+     db.commit()
++    logger.info("Alert preferences updated")
+     return {"status": alert.status, "filters": alert.filters}
+ 
+ 
+@@ -51,4 +54,5 @@ def unsubscribe(value: AlertToken, db: Session = Depends(get_db), settings: Sett
+         alert.status = "STOPPED"
+         alert.stopped_at = datetime.now(UTC)
+         db.commit()
++        logger.info("Alert subscription stopped")
+     return {"status": "STOPPED"}
+diff --git a/.cache/grow01-before/apps/api/app/services/alerts.py b/apps/api/app/services/alerts.py
+index 7954754..995b32b 100644
+--- a/.cache/grow01-before/apps/api/app/services/alerts.py
++++ b/apps/api/app/services/alerts.py
+@@ -1,4 +1,4 @@
+-"""Subscription preferences and double opt-in; digest delivery is a separate task."""
++"""Subscription preferences and double opt-in; digest delivery runs in a separate worker."""
+ 
+ import hashlib
+ import hmac
+@@ -90,6 +90,7 @@ def signup(db: Session, settings: Settings, value: AlertSignup) -> None:
+     except IntegrityError:
+         db.rollback()  # Concurrent signup for the same email: keep the same generic response.
+         return
++    logger.info("Alert signup committed")
+     purpose = "manage" if alert.status == "ACTIVE" else "confirm"
+     body = ("Zarządzaj swoim alertem HopTrip:\n" if purpose == "manage" else
+             "Potwierdź alert HopTrip (link ważny przez 48 godzin). Bez potwierdzenia nie wyślemy ofert.\n")
+@@ -108,6 +109,7 @@ def signup(db: Session, settings: Settings, value: AlertSignup) -> None:
+     body += "Wypisanie i ustawienia: " + alert_link(settings, alert, "manage")
+     try:
+         send_alert_mail(settings, alert.email, "Twój alert lotniczy HopTrip", body)
++        logger.info("Alert confirmation mail submitted")
+     except Exception:
+         # Never log SMTP exceptions: providers may include the recipient or credentials.
+         logger.warning("Alert confirmation delivery failed")
+@@ -122,4 +124,5 @@ def confirm(db: Session, settings: Settings, token: str) -> str:
+         alert.status = "ACTIVE"
+         alert.confirmed_at = datetime.now(UTC)
+         db.commit()
++        logger.info("Alert confirmation activated")
+     return capability(settings, alert, "manage")
+diff --git a/.cache/grow01-before/apps/api/app/services/alert_digests.py b/apps/api/app/services/alert_digests.py
+index 64afcec..1d54f8c 100644
+--- a/.cache/grow01-before/apps/api/app/services/alert_digests.py
++++ b/apps/api/app/services/alert_digests.py
+@@ -35,7 +35,10 @@ def due(settings: Settings, filters: AlertFilters, last: datetime | None, now: d
+     return last is None or (local.date() - utc(last).astimezone(WARSAW).date()).days >= interval
+ 
+ 
+-def matching_deals(db: Session, alert: DealAlert, filters: AlertFilters, now: datetime) -> list[Deal]:
++def matching_deals(
++    db: Session, alert: DealAlert, filters: AlertFilters, now: datetime, *,
++    reservation: AlertDelivery | None = None,
++) -> list[Deal]:
+     airports = matching_airports(db, filters.origin)
+     if len(airports) != 1:
+         return []
+@@ -50,16 +53,19 @@ def matching_deals(db: Session, alert: DealAlert, filters: AlertFilters, now: da
+         query = query.where(Deal.trip_start >= filters.departure_from)
+     if filters.departure_to:
+         query = query.where(Deal.trip_start <= filters.departure_to)
+-    used = {deal_id for delivery in db.scalars(select(AlertDelivery).where(
+-        AlertDelivery.alert_id == alert.id
+-    )) for deal_id in delivery.deal_ids}
++    history = select(AlertDelivery).where(AlertDelivery.alert_id == alert.id)
++    if reservation is not None:
++        # Revalidate exactly this reservation without treating itself as a prior send.
++        history = history.where(AlertDelivery.id != reservation.id)
++        query = query.where(Deal.id.in_(reservation.deal_ids))
++    used = {deal_id for delivery in db.scalars(history) for deal_id in delivery.deal_ids}
+     if used:
+         query = query.where(Deal.id.not_in(used))
+     selected = []
+     for deal in db.scalars(query.order_by(Deal.price_per_person_pln, Deal.id)):
+         view = serialize_deal(db, deal)
+         # Nights cannot be promised without a known return flight, even for legacy rows.
+-        if view.trip_type != "ROUND_TRIP":
++        if view.trip_type != "ROUND_TRIP" or not view.flight_quality.recommendation_eligible:
+             continue
+         if filters.weekend and not (
+             deal.trip_start.weekday() in (4, 5) and deal.trip_end.weekday() == 6
+@@ -111,17 +117,22 @@ def cleanup(db: Session, now: datetime) -> None:
+     db.execute(delete(AlertDelivery).where(AlertDelivery.alert_id.in_(obsolete)))
+     db.execute(delete(DealAlert).where(DealAlert.id.in_(obsolete)))
+     db.commit()
++    logger.info("Alert retention cleanup completed")
+ 
+ 
+ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None) -> dict[str, int]:
+     counts = {"sent": 0, "uncertain": 0, "skipped": 0, "cancelled": 0}
+     if not settings.alerts_enabled or not settings.alerts_digest_enabled:
+         return counts
+-    now = utc(now or datetime.now(UTC))
+-    cleanup(db, now)
++    # An injected instant freezes tests; a real batch must advance its clock per send.
++    def clock() -> datetime:
++        return utc(now if now is not None else datetime.now(UTC))
++
++    cleanup(db, clock())
+     ids = list(db.scalars(select(DealAlert.id).where(DealAlert.status == "ACTIVE")))
+     db.commit()
+     for alert_id in ids:
++        checked_at = clock()
+         # PostgreSQL is the worker runtime; row locks serialize competing workers.
+         alert = db.scalar(select(DealAlert).where(DealAlert.id == alert_id)
+                           .with_for_update().execution_options(populate_existing=True))
+@@ -130,21 +141,20 @@ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None
+         except ValidationError:
+             filters = None
+         if (alert is None or alert.status != "ACTIVE" or alert.confirmed_at is None
+-                or filters is None or not due(settings, filters, alert.last_digest_at, now)):
++                or filters is None or not due(settings, filters, alert.last_digest_at, checked_at)):
+             db.rollback()
+             counts["skipped"] += 1
+             continue
+-        deals = matching_deals(db, alert, filters, now)
++        deals = matching_deals(db, alert, filters, checked_at)
+         if not deals:
+             db.rollback()
+             counts["skipped"] += 1
+             continue
+         original_filters = dict(alert.filters)
+-        body = digest_body(db, settings, alert, deals)
+         delivery = AlertDelivery(alert_id=alert_id, deal_ids=[deal.id for deal in deals],
+-                                 status="RESERVED", created_at=now)
++                                 status="RESERVED", created_at=checked_at)
+         db.add(delivery)
+-        alert.last_digest_at = now
++        alert.last_digest_at = checked_at
+         # At-most-once attempt, including a crash after SMTP accepted the message.
+         db.commit()
+         alert = db.scalar(select(DealAlert).where(DealAlert.id == alert_id)
+@@ -153,11 +163,23 @@ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None
+             delivery.status = "CANCELLED"
+             counts["cancelled"] += 1
+             db.commit()
++            logger.info("Alert digest cancelled: subscription changed")
+             continue
++        # Data may expire, be hidden, change price or lose itinerary evidence while
++        # the reservation is committed. Fail closed; do not fill it with other deals.
++        deals = matching_deals(db, alert, filters, clock(), reservation=delivery)
++        if {deal.id for deal in deals} != set(delivery.deal_ids):
++            delivery.status = "CANCELLED"
++            counts["cancelled"] += 1
++            db.commit()
++            logger.info("Alert digest cancelled: matches changed")
++            continue
++        body = digest_body(db, settings, alert, deals)
+         try:
+             send_alert_mail(settings, alert.email, "Twoja lista lotów — HopTrip", body)
+             delivery.status = "SENT"
+             counts["sent"] += 1
++            logger.info("Alert digest submitted")
+         except Exception:
+             delivery.status = "UNCERTAIN"
+             counts["uncertain"] += 1
+diff --git a/.cache/grow01-before/apps/api/app/jobs/alert_scheduler.py b/apps/api/app/jobs/alert_scheduler.py
+index db9f5b9..5d21b46 100644
+--- a/.cache/grow01-before/apps/api/app/jobs/alert_scheduler.py
++++ b/apps/api/app/jobs/alert_scheduler.py
+@@ -1,11 +1,13 @@
+ """Separate opt-in worker; calendar eligibility is persisted per subscription."""
+ 
++import argparse
+ import logging
+ import time
++from datetime import UTC, datetime
+ 
+ from app.config import get_settings
+ from app.db.session import SessionLocal
+-from app.services.alert_digests import deliver_digests
++from app.services.alert_digests import cleanup, deliver_digests
+ 
+ logger = logging.getLogger(__name__)
+ 
+@@ -29,6 +31,18 @@ def run_scheduler() -> None:
+         time.sleep(60)
+ 
+ 
+-if __name__ == "__main__":
++def main(argv: list[str] | None = None) -> None:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--cleanup-only", action="store_true",
++                        help="Apply subscription retention once, without sending email")
++    args = parser.parse_args(argv)
+     logging.basicConfig(level=get_settings().log_level)
+-    run_scheduler()
++    if args.cleanup_only:
++        with SessionLocal() as db:
++            cleanup(db, datetime.now(UTC))
++    else:
++        run_scheduler()
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/.cache/grow01-before/apps/api/tests/test_alert_digests.py b/apps/api/tests/test_alert_digests.py
+index 51b37ca..08b0aa7 100644
+--- a/.cache/grow01-before/apps/api/tests/test_alert_digests.py
++++ b/apps/api/tests/test_alert_digests.py
+@@ -53,11 +53,19 @@ def offer(db, *, price='200', departure=None, nights=2, return_flight=True, **ch
+     db.flush()
+     departure = departure or datetime(2026, 11, 6, 9, tzinfo=UTC)  # Friday
+     arrival = departure + timedelta(days=nights)
+-    travel = TravelOffer(data_provider_id=provider.id, external_id=uuid4().hex, source='fixture',
++    # Synthetic, explicitly evidenced itinerary; never sourced from a live provider.
++    travel = TravelOffer(data_provider_id=provider.id, external_id=uuid4().hex,
++                         source='travelpayouts_data', departure_precision='TIME',
+                          origin_airport_id=airport.id, destination_id=destination.id,
+                          depart_at=departure, return_at=arrival if return_flight else None,
+                          original_price=Decimal(price), original_currency='PLN', price_pln=Decimal(price),
+-                         last_verified_at=NOW, fetched_at=NOW)
++                         last_verified_at=NOW, fetched_at=NOW,
++                         raw_payload={'origin_airport': 'WRO', 'destination_airport': 'MXP',
++                                      'departure_at': departure.isoformat(),
++                                      **({'return_at': arrival.isoformat(),
++                                          'return_origin_airport': 'MXP',
++                                          'return_destination_airport': 'WRO'}
++                                         if return_flight else {})})
+     db.add(travel)
+     db.flush()
+     values = dict(slug='fixture-' + uuid4().hex, origin_airport_id=airport.id,

@@ -4,7 +4,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-EventCategory = Literal["ALL", "MUSIC", "SPORTS", "CULTURE"]
+EventCategory = Literal["ALL", "MUSIC", "SPORTS", "CULTURE", "OTHER"]
 
 FitReason = Literal[
     "BEFORE_ARRIVAL", "AFTER_RETURN", "ENDS_AFTER_RETURN", "ARRIVAL_BUFFER", "RETURN_BUFFER",

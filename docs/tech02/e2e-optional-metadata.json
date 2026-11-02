@@ -1,0 +1,1383 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)api-contract-recovery\\.spec\\.ts$",
+      "(^|/)offer-states\\.spec\\.ts$",
+      "(^|/)event-context\\.spec\\.ts$",
+      "(^|/)alerts\\.spec\\.ts$",
+      "(^|/)localized-alerts\\.spec\\.ts$",
+      "--max-failures=1",
+      "--output=test-results-tech02-acceptance",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-tech02/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-tech02/apps/web/test-results-tech02-acceptance",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-tech02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-tech02/apps/web/test-results-tech02-acceptance",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-tech02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "alerts.spec.ts",
+      "file": "alerts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "subscription preserves filters, confirms email, updates and stops",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8483,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:31:56.032Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-742f4e02ed3b0eaf399e",
+          "file": "alerts.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "disabled registration has no email form or nonworking submit button",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1061,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:04.842Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-8753769ee4e96db5e36d",
+          "file": "alerts.spec.ts",
+          "line": 49,
+          "column": 5
+        },
+        {
+          "title": "invalid confirmation does not report success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1026,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:05.924Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-f5c684f9916c10eeaa85",
+          "file": "alerts.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "catalog subscription keeps filters and delivery status follows configuration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2497,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:06.964Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-522155b6305815c28209",
+          "file": "alerts.spec.ts",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "title": "delivery error never reports accepted signup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1205,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:09.480Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-b1187d920db98347d131",
+          "file": "alerts.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "email and capability pages never start tracking after saved consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1285,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:10.705Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-ab4a28b537b1e6e888f1",
+          "file": "alerts.spec.ts",
+          "line": 95,
+          "column": 5
+        },
+        {
+          "title": "subscription preserves filters, confirms email, updates and stops",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-2ee2e7ff45bd2438835e",
+          "file": "alerts.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "disabled registration has no email form or nonworking submit button",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-c845104aa6c9ef1ae72a",
+          "file": "alerts.spec.ts",
+          "line": 49,
+          "column": 5
+        },
+        {
+          "title": "invalid confirmation does not report success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-2a4df29a521935102616",
+          "file": "alerts.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "catalog subscription keeps filters and delivery status follows configuration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-e6fceeca8f2409fcf539",
+          "file": "alerts.spec.ts",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "title": "delivery error never reports accepted signup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-ed0c5eac88cbf8f81681",
+          "file": "alerts.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "email and capability pages never start tracking after saved consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ace1c4120cace0e80d20-8245979e79c2eb2266f1",
+          "file": "alerts.spec.ts",
+          "line": 95,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "api-contract-recovery.spec.ts",
+      "file": "api-contract-recovery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "API contract failures recover without broken UI in pl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12473,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:12.064Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-3deb55ecadd02bc6618a",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12374,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:24.569Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-e2448a9486970fe3ddb3",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12601,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:36.964Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-399b6a3890018956060b",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10486,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:32:49.625Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-1df94ab51dd1d1eed675",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in pl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-16fedfb529f4de23c5eb",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-5fc3b4a1a61988cb752f",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-c4756075632dfa443026",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "API contract failures recover without broken UI in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bb5b8199afe1baf4919c-6d2d80bf4c993c28786b",
+          "file": "api-contract-recovery.spec.ts",
+          "line": 14,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "event-context.spec.ts",
+      "file": "event-context.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "event context and OTHER filter preserve the plan in pl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6084,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:33:00.153Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-c297d4aebd17938b75e7",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:33:06.257Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-eeba8e84941c8d008502",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6942,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:33:12.440Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-07275d147264ef90c539",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6611,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:33:19.398Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-83c42592481959f83c96",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "inactive and unknown sales have no booking or add action; mixed options keep their own status",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6727,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) })\nExpected substring: \u001b[32m\"Sprzedaż nieaktywna — brak potwierdzonej dostępności\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) })\nExpected substring: \u001b[32m\"Sprzedaż nieaktywna — brak potwierdzonej dostępności\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\tests\\event-context.spec.ts:86:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\tests\\event-context.spec.ts",
+                      "column": 28,
+                      "line": 86
+                    },
+                    "snippet": "  84 |  const card=(name:string)=>events.locator(':scope > ul > li').filter({has:page.getByRole('heading',{name,exact:true})});\n  85 |  for(const [name,label] of [['Inactive sale fixture',eventContextCopy.pl.sale.offsale],['Unknown sale fixture',eventContextCopy.pl.sale.unknown]]){\n> 86 |   await expect(card(name)).toContainText(label);\n     |                            ^\n  87 |   await expect(card(name).getByRole('link')).toHaveCount(0);\n  88 |   await expect(card(name).getByRole('button')).toHaveCount(0);\n  89 |  }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\tests\\event-context.spec.ts",
+                        "column": 28,
+                        "line": 86
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) })\nExpected substring: \u001b[32m\"Sprzedaż nieaktywna — brak potwierdzonej dostępności\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-events').locator(':scope > ul > li').filter({ has: getByRole('heading', { name: 'Inactive sale fixture', exact: true }) })\u001b[22m\n\n\n  84 |  const card=(name:string)=>events.locator(':scope > ul > li').filter({has:page.getByRole('heading',{name,exact:true})});\n  85 |  for(const [name,label] of [['Inactive sale fixture',eventContextCopy.pl.sale.offsale],['Unknown sale fixture',eventContextCopy.pl.sale.unknown]]){\n> 86 |   await expect(card(name)).toContainText(label);\n     |                            ^\n  87 |   await expect(card(name).getByRole('link')).toHaveCount(0);\n  88 |   await expect(card(name).getByRole('button')).toHaveCount(0);\n  89 |  }\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\tests\\event-context.spec.ts:86:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T12:33:26.031Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\test-results-tech02-acceptance\\event-context-inactive-and-85502-tions-keep-their-own-status-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\test-results-tech02-acceptance\\event-context-inactive-and-85502-tions-keep-their-own-status-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-tech02\\apps\\web\\tests\\event-context.spec.ts",
+                    "column": 28,
+                    "line": 86
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-d8a0570c2d17dc8b7c37",
+          "file": "event-context.spec.ts",
+          "line": 65,
+          "column": 5
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in pl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-2a50de2b511e82b1a93c",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-a2fc4f3653f5d2b9843c",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-5a7bae637147a4cf8b88",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "event context and OTHER filter preserve the plan in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-0b822df2dd46c33eac5a",
+          "file": "event-context.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "inactive and unknown sales have no booking or add action; mixed options keep their own status",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "8b80ea1c2c32fd77777d-608e8914ebbbb5f52274",
+          "file": "event-context.spec.ts",
+          "line": 65,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "localized-alerts.spec.ts",
+      "file": "localized-alerts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "localized signup, confirmation and management preserve contracts and private tokens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3432c75cb4b02f141dc5-0fadf0c23670b0d19e4a",
+          "file": "localized-alerts.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "localized errors never confirm a subscription and disabled signup stays honest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3432c75cb4b02f141dc5-771de65e4c8be1a03ec2",
+          "file": "localized-alerts.spec.ts",
+          "line": 68,
+          "column": 5
+        },
+        {
+          "title": "catalog filters, locale switches and private route SEO stay consistent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3432c75cb4b02f141dc5-dfd3a45b434fbdd8ce32",
+          "file": "localized-alerts.spec.ts",
+          "line": 89,
+          "column": 5
+        },
+        {
+          "title": "localized signup, confirmation and management preserve contracts and private tokens",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3432c75cb4b02f141dc5-de1418294f968be546af",
+          "file": "localized-alerts.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "localized errors never confirm a subscription and disabled signup stays honest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3432c75cb4b02f141dc5-faac9b59f28a61e6a041",
+          "file": "localized-alerts.spec.ts",
+          "line": 68,
+          "column": 5
+        },
+        {
+          "title": "catalog filters, locale switches and private route SEO stay consistent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3432c75cb4b02f141dc5-b0c6da6225ef1182bdc1",
+          "file": "localized-alerts.spec.ts",
+          "line": 89,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "offer-states.spec.ts",
+      "file": "offer-states.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-32d31e8aa6662a0889aa",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "en: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-21efb89badce717bd361",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "ru: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-66c66fd16d3622be1837",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "uk: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-2200e91489a120321b29",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "initial loading and a delayed filter update do not fabricate new results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-6ccb384e81d631b4426d",
+          "file": "offer-states.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "a blocked partner offers recovery without a booking link",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-77b538cfe4c0874a4dc5",
+          "file": "offer-states.spec.ts",
+          "line": 81,
+          "column": 5
+        },
+        {
+          "title": "home failure can retry without losing airport or search drafts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-e7bb8636e571527638fe",
+          "file": "offer-states.spec.ts",
+          "line": 89,
+          "column": 5
+        },
+        {
+          "title": "pl: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-5a0f96ee87dcb22b08bd",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "en: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-3eea622161f2711396fc",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "ru: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-ae5d17d85f58162da336",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "uk: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-e053e85f315bb6ee726b",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "initial loading and a delayed filter update do not fabricate new results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-98633c3a1b4bdaba3502",
+          "file": "offer-states.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "a blocked partner offers recovery without a booking link",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-ea32a0ffd47682f6666b",
+          "file": "offer-states.spec.ts",
+          "line": 81,
+          "column": 5
+        },
+        {
+          "title": "home failure can retry without losing airport or search drafts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-b8f2ebfd16463a1a943c",
+          "file": "offer-states.spec.ts",
+          "line": 89,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-01T12:31:49.514Z",
+    "duration": 105030.222,
+    "expected": 14,
+    "skipped": 35,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

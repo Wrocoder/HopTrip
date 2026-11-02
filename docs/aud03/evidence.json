@@ -1,0 +1,787 @@
+{
+  "at": "2026-10-30T10:36:36.789Z",
+  "base": "http://127.0.0.1:3100",
+  "fixture": "apps/api/tests/e2e_app.py; synthetic data",
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scrollWidth": 320,
+        "height": 4105,
+        "headings": [
+          "Znajdź lot. Zaplanuj krótki wyjazd.",
+          "Krótkie wyjazdy · 2–4 noce",
+          "Barcelona",
+          "Cena na tle historii",
+          "Lotniska wylotu",
+          "Kierunki"
+        ],
+        "firstCardY": 1160.78125,
+        "cardHeights": [
+          779
+        ],
+        "smallTargets": [
+          {
+            "tag": "SELECT",
+            "type": "select-one",
+            "id": "short-trip-origin",
+            "height": 19
+          }
+        ]
+      },
+      "screenshot": "home-320.png"
+    },
+    {
+      "name": "catalog",
+      "route": "/deals?origin=WRO&sort=price&budget=220",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scrollWidth": 320,
+        "height": 9400,
+        "headings": [
+          "Aktualne okazje",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii"
+        ],
+        "firstCardY": 1417.40625,
+        "cardHeights": [
+          586,
+          586,
+          586,
+          586,
+          586,
+          586,
+          586,
+          586,
+          586,
+          586,
+          586,
+          586
+        ],
+        "smallTargets": []
+      },
+      "screenshot": "catalog-320.png"
+    },
+    {
+      "name": "deal",
+      "route": "/deals/browser-13",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scrollWidth": 320,
+        "height": 12417,
+        "headings": [
+          "Wrocław (WRO) → Barcelona",
+          "Znajdź nocleg — Barcelona",
+          "Kalkulator budżetu podróży",
+          "Cena na tle historii",
+          "Muzea i atrakcje",
+          "Wydarzenia w terminie podróży",
+          "Zaplanuj pobyt"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      }
+    },
+    {
+      "name": "budget",
+      "route": "/info/trip-budget",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scrollWidth": 320,
+        "height": 9134,
+        "headings": [
+          "Jak policzyć budżet całej podróży",
+          "Kalkulator budżetu podróży",
+          "Oddziel koszty na osobę od wspólnych",
+          "Przykład rachunku, nie oferta",
+          "Nie zamieniaj brakującej ceny w zero",
+          "Porównaj czas i koszty razem",
+          "Czytaj dalej"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      }
+    },
+    {
+      "name": "saved",
+      "route": "/saved",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scrollWidth": 320,
+        "height": 1239,
+        "headings": [
+          "Zapisane wyjazdy"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      }
+    },
+    {
+      "name": "empty",
+      "route": "/deals?budget=1",
+      "width": 320,
+      "metrics": {
+        "width": 320,
+        "scrollWidth": 320,
+        "height": 2322,
+        "headings": [
+          "Aktualne okazje",
+          "Brak aktualnych ofert"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      }
+    },
+    {
+      "name": "home",
+      "route": "/",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 3681,
+        "headings": [
+          "Znajdź lot. Zaplanuj krótki wyjazd.",
+          "Krótkie wyjazdy · 2–4 noce",
+          "Barcelona",
+          "Cena na tle historii",
+          "Lotniska wylotu",
+          "Kierunki"
+        ],
+        "firstCardY": 973.1875,
+        "cardHeights": [
+          716
+        ],
+        "smallTargets": [
+          {
+            "tag": "SELECT",
+            "type": "select-one",
+            "id": "short-trip-origin",
+            "height": 19
+          }
+        ]
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      "screenshot": "home-390.png"
+    },
+    {
+      "name": "catalog",
+      "route": "/deals?origin=WRO&sort=price&budget=220",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 8782,
+        "headings": [
+          "Aktualne okazje",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii"
+        ],
+        "firstCardY": 1130.953125,
+        "cardHeights": [
+          566,
+          566,
+          566,
+          566,
+          566,
+          566,
+          566,
+          566,
+          566,
+          566,
+          566,
+          566
+        ],
+        "smallTargets": []
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      "screenshot": "catalog-390.png"
+    },
+    {
+      "name": "deal",
+      "route": "/deals/browser-13",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 11230,
+        "headings": [
+          "Wrocław (WRO) → Barcelona",
+          "Znajdź nocleg — Barcelona",
+          "Kalkulator budżetu podróży",
+          "Cena na tle historii",
+          "Muzea i atrakcje",
+          "Wydarzenia w terminie podróży",
+          "Zaplanuj pobyt"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr",
+          "color-contrast"
+        ]
+      },
+      "screenshot": "deal-390.png"
+    },
+    {
+      "name": "budget",
+      "route": "/info/trip-budget",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 7574,
+        "headings": [
+          "Jak policzyć budżet całej podróży",
+          "Kalkulator budżetu podróży",
+          "Oddziel koszty na osobę od wspólnych",
+          "Przykład rachunku, nie oferta",
+          "Nie zamieniaj brakującej ceny w zero",
+          "Porównaj czas i koszty razem",
+          "Czytaj dalej"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      "screenshot": "budget-390.png"
+    },
+    {
+      "name": "saved",
+      "route": "/saved",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 1122,
+        "headings": [
+          "Zapisane wyjazdy"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": []
+      },
+      "screenshot": "saved-390.png"
+    },
+    {
+      "name": "empty",
+      "route": "/deals?budget=1",
+      "width": 390,
+      "metrics": {
+        "width": 390,
+        "scrollWidth": 390,
+        "height": 1910,
+        "headings": [
+          "Aktualne okazje",
+          "Brak aktualnych ofert"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": []
+      },
+      "screenshot": "empty-390.png"
+    },
+    {
+      "name": "home",
+      "route": "/",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scrollWidth": 768,
+        "height": 2906,
+        "headings": [
+          "Znajdź lot. Zaplanuj krótki wyjazd.",
+          "Krótkie wyjazdy · 2–4 noce",
+          "Barcelona",
+          "Cena na tle historii",
+          "Lotniska wylotu",
+          "Kierunki"
+        ],
+        "firstCardY": 795.84375,
+        "cardHeights": [
+          734
+        ],
+        "smallTargets": [
+          {
+            "tag": "SELECT",
+            "type": "select-one",
+            "id": "short-trip-origin",
+            "height": 19
+          }
+        ]
+      }
+    },
+    {
+      "name": "catalog",
+      "route": "/deals?origin=WRO&sort=price&budget=220",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scrollWidth": 768,
+        "height": 4821,
+        "headings": [
+          "Aktualne okazje",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii"
+        ],
+        "firstCardY": 823.109375,
+        "cardHeights": [
+          561,
+          561,
+          561,
+          561,
+          561,
+          561,
+          561,
+          561,
+          561,
+          561,
+          561,
+          561
+        ],
+        "smallTargets": []
+      }
+    },
+    {
+      "name": "deal",
+      "route": "/deals/browser-13",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scrollWidth": 768,
+        "height": 8123,
+        "headings": [
+          "Wrocław (WRO) → Barcelona",
+          "Znajdź nocleg — Barcelona",
+          "Kalkulator budżetu podróży",
+          "Cena na tle historii",
+          "Muzea i atrakcje",
+          "Wydarzenia w terminie podróży",
+          "Zaplanuj pobyt"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      }
+    },
+    {
+      "name": "budget",
+      "route": "/info/trip-budget",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scrollWidth": 768,
+        "height": 5045,
+        "headings": [
+          "Jak policzyć budżet całej podróży",
+          "Kalkulator budżetu podróży",
+          "Oddziel koszty na osobę od wspólnych",
+          "Przykład rachunku, nie oferta",
+          "Nie zamieniaj brakującej ceny w zero",
+          "Porównaj czas i koszty razem",
+          "Czytaj dalej"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      }
+    },
+    {
+      "name": "saved",
+      "route": "/saved",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scrollWidth": 768,
+        "height": 971,
+        "headings": [
+          "Zapisane wyjazdy"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      }
+    },
+    {
+      "name": "empty",
+      "route": "/deals?budget=1",
+      "width": 768,
+      "metrics": {
+        "width": 768,
+        "scrollWidth": 768,
+        "height": 1418,
+        "headings": [
+          "Aktualne okazje",
+          "Brak aktualnych ofert"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      }
+    },
+    {
+      "name": "home",
+      "route": "/",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "height": 2675,
+        "headings": [
+          "Znajdź lot. Zaplanuj krótki wyjazd.",
+          "Krótkie wyjazdy · 2–4 noce",
+          "Barcelona",
+          "Cena na tle historii",
+          "Lotniska wylotu",
+          "Kierunki"
+        ],
+        "firstCardY": 728.390625,
+        "cardHeights": [
+          725
+        ],
+        "smallTargets": [
+          {
+            "tag": "SELECT",
+            "type": "select-one",
+            "id": "short-trip-origin",
+            "height": 19
+          }
+        ]
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      "screenshot": "home-1440.png"
+    },
+    {
+      "name": "catalog",
+      "route": "/deals?origin=WRO&sort=price&budget=220",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "height": 3525,
+        "headings": [
+          "Aktualne okazje",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii",
+          "Barcelona",
+          "Cena na tle historii"
+        ],
+        "firstCardY": 640.4375,
+        "cardHeights": [
+          575,
+          575,
+          575,
+          575,
+          575,
+          575,
+          575,
+          575,
+          575,
+          575,
+          575,
+          575
+        ],
+        "smallTargets": []
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      "screenshot": "catalog-1440.png"
+    },
+    {
+      "name": "deal",
+      "route": "/deals/browser-13",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "height": 7326,
+        "headings": [
+          "Wrocław (WRO) → Barcelona",
+          "Znajdź nocleg — Barcelona",
+          "Kalkulator budżetu podróży",
+          "Cena na tle historii",
+          "Muzea i atrakcje",
+          "Wydarzenia w terminie podróży",
+          "Zaplanuj pobyt"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr",
+          "color-contrast"
+        ]
+      },
+      "screenshot": "deal-1440.png"
+    },
+    {
+      "name": "budget",
+      "route": "/info/trip-budget",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "height": 4980,
+        "headings": [
+          "Jak policzyć budżet całej podróży",
+          "Kalkulator budżetu podróży",
+          "Oddziel koszty na osobę od wspólnych",
+          "Przykład rachunku, nie oferta",
+          "Nie zamieniaj brakującej ceny w zero",
+          "Porównaj czas i koszty razem",
+          "Czytaj dalej"
+        ],
+        "cardHeights": [],
+        "smallTargets": [
+          {
+            "tag": "INPUT",
+            "type": "checkbox",
+            "id": "",
+            "height": 13
+          }
+        ]
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      "screenshot": "budget-1440.png"
+    },
+    {
+      "name": "saved",
+      "route": "/saved",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "height": 909,
+        "headings": [
+          "Zapisane wyjazdy"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": []
+      },
+      "screenshot": "saved-1440.png"
+    },
+    {
+      "name": "empty",
+      "route": "/deals?budget=1",
+      "width": 1440,
+      "metrics": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "height": 1300,
+        "headings": [
+          "Aktualne okazje",
+          "Brak aktualnych ofert"
+        ],
+        "cardHeights": [],
+        "smallTargets": []
+      },
+      "axe": {
+        "violations": [],
+        "incomplete": []
+      },
+      "screenshot": "empty-1440.png"
+    }
+  ],
+  "checks": {
+    "detailBackHref": "/deals",
+    "afterDetailBack": {
+      "url": "http://127.0.0.1:3100/deals",
+      "origin": "",
+      "budget": "",
+      "sort": "score"
+    },
+    "afterReset": {
+      "url": "http://127.0.0.1:3100/deals?sort=price",
+      "sort": "price"
+    },
+    "firstTab": "Przejdź do treści",
+    "skipFocus": "content",
+    "scoreFocusReturned": true,
+    "invalid": "Sprawdź parametry wyszukiwaniaSprawdź lotnisko, kierunek oraz zakres dat, budżetu i długości pobytu.Wyczyść parametry wyszukiwania",
+    "apiFailure": "Nie udało się pobrać ofertNie udało się pobrać ofert. Spróbuj ponownie za chwilę.Spróbuj ponownie",
+    "loading": true
+  },
+  "errors": []
+}

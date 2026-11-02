@@ -1,0 +1,46 @@
+import {test,expect} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import {localizedHref} from '../src/lib/i18n/routing';
+import {serviceLabels} from '../src/lib/i18n/service-content';
+
+const unknownCosts={pl:'Nieznane koszty nie oznaczają zera.',en:'Unknown costs do not mean zero.',ru:'Неизвестные расходы не означают ноль.',uk:'Невідомі витрати не означають нуль.'};
+const technicalUpdate={pl:'Opis funkcji powiadomień zaktualizowano 2 listopada 2026 r.',en:'The notification feature description was updated on 2 November 2026.',ru:'Описание функций уведомлений обновлено 2 ноября 2026 года.',uk:'Опис функцій сповіщень оновлено 2 листопада 2026 року.'};
+
+for(const locale of ['pl','en','ru','uk'] as const)test(`trust explanations match the product in ${locale}`,async({page},info)=>{
+ test.setTimeout(90000);
+ await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+ const requests:string[]=[];
+ page.on('request',r=>{if(/emrld\.ltd|api\.telegram\.org|\/analytics\/events/.test(r.url()))requests.push(r.url());});
+ const about=localizedHref('/info/about',locale);
+ await page.goto(about);
+ await expect(page.locator('html')).toHaveAttribute('lang',locale);
+ await expect(page.locator('main h1')).toHaveCount(1);
+ await expect(page.locator('main article > p').filter({hasText:'Travelpayouts'})).toHaveCount(1);
+ await expect(page.getByRole('main')).toContainText(unknownCosts[locale]);
+ await expect(page.getByRole('main')).not.toContainText(/neutral value|neutralny wynik|нейтральное значение|нейтральне значення/);
+ for(const slug of ['price-comparison','price-freshness','price-history','partners','contact','privacy'])await expect(page.locator(`main a[href="${localizedHref('/info/'+slug,locale)}"]`)).toHaveCount(1);
+ await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',new URL(about,page.url()).href);
+ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','index, follow');
+ expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.getByRole('main').screenshot({path:info.outputPath('about.png')});
+ await page.locator(`main a[href="${localizedHref('/info/privacy',locale)}"]`).click();
+ await expect(page.getByRole('main')).toContainText(technicalUpdate[locale]);
+ for(const command of ['/start','/confirm','/settings','/set','/stop'])await expect(page.getByRole('main')).toContainText(command);
+ await expect(page.getByRole('main')).not.toContainText(/Flight summaries are not yet being sent|Podsumowania lotów nie są jeszcze wysyłane|Подборки перелётов пока не отправляются|Добірки перельотів поки не надсилаються/);
+ const paragraphs=page.locator('main article > section p');
+ await expect(paragraphs.filter({hasText:/7/}).filter({hasText:/30/})).toHaveCount(1);
+ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
+ const region=page.getByRole('region',{name:serviceLabels[locale].contact});
+ await expect(region).toHaveAttribute('data-nosnippet');
+ await expect(region.getByRole('link')).toHaveAttribute('href','mailto:contact@example.test');
+ await expect(page.locator('.legal-sources a[href="https://telegram.org/privacy"]')).toHaveCount(1);
+ expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await paragraphs.filter({hasText:'/confirm'}).screenshot({path:info.outputPath('telegram-disclosure.png')});
+ await page.locator(`main a[href="${localizedHref('/info/price-freshness',locale)}"]`).click();
+ for(const hours of ['6','24','48'])await expect(page.getByRole('main')).toContainText(hours);
+ await page.locator(`main a[href="${localizedHref('/info/contact',locale)}"]`).click();
+ await expect(page.getByRole('region',{name:serviceLabels[locale].contact}).getByRole('link')).toHaveAttribute('href','mailto:contact@example.test');
+ expect(requests).toEqual([]);
+});

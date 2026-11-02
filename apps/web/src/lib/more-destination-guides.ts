@@ -15,7 +15,7 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Madrid Turismo — metro i bilety lotniskowe",href:"https://www.esmadrid.com/en/getting-around-madrid-metro"},
    {label:"Spain.info — dojazd do Madrid-Barajas",href:"https://www.spain.info/en/aeroplane/adolfo-suarez-madrid-barajas-airport/"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["barcelona-airports","valencia-airport","baggage"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=madrid"}],related:["barcelona-airports","valencia-airport","baggage"],
  },
  "valencia-airport":{
   title:"Walencja: z VLC do centrum i nad morze",
@@ -30,7 +30,7 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Aena Valencia — linie metra",href:"https://www.aena.es/es/valencia/como-llegar/metro.html"},
    {label:"Visit València — dojazd z lotniska",href:"https://www.visitvalencia.com/en/plan-your-trip-to-valencia/to-get-to-valencia/airport"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["alicante-airport","madrid-airport","baggage"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=valencia"}],related:["alicante-airport","madrid-airport","baggage"],
  },
  "alicante-airport":{
   title:"Alicante: autobus C6 i dalsza droga po Costa Blanca",
@@ -75,7 +75,7 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Porto Airport — metro i transport publiczny",href:"https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation"},
    {label:"Andante — strefy, karty i walidacja",href:"https://andante.pt/perguntas-frequentes/"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["lisbon-airport","baggage","one-way-round-trip"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=porto"}],related:["lisbon-airport","baggage","one-way-round-trip"],
  },
  "vienna-airport":{
   title:"Wiedeń: dojazd z VIE podczas zmian na kolei",
@@ -88,9 +88,9 @@ export const moreDestinationGuides:Record<string,InfoContent>={
    {title:"Hauptbahnhof albo S7 do St. Marx",paragraphs:["Komunikat CAT wskazuje połączenia kolejowe między lotniskiem a Wien Hauptbahnhof oraz skróconą S7 do St. Marx, skąd dalsza droga wymaga przesiadki. Wybierz wariant według adresu noclegu lub dworca dalszego pociągu. Bilet na jedną usługę nie potwierdza ważności w pozostałych."],sourceIds:[1]},
    {title:"Dwa plany: przylot i powrót",paragraphs:["Sprawdź osobno dojazd po lądowaniu i kurs na lot powrotny, szczególnie przy późnym przylocie lub święcie. Jeśli dalej jedziesz koleją, pozostaw zapas na zmianę środka transportu i znalezienie peronu. Oszczędność na noclegu poza centrum porównaj z liczbą przesiadek podczas prac."]},
   ],sources:[
-   {label:"WienTourismus — aktualne połączenia lotniskowe",href:"https://www.wien.info/en/travel-info/arrival-departure/airport-to-center"},
+   {label:"WienTourismus — aktualne połączenia lotniskowe",href:"https://www.wien.info/en/travel-info/arrival-departure/airport-to-center/important-information-for-airport-travellers-2026-2027-1118558"},
    {label:"City Airport Train — zamknięcie linii i alternatywy",href:"https://www.cityairporttrain.com/en/info-service/main-line-closure/"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["prague-airport","budapest-airport","baggage"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=vienna"}],related:["prague-airport","budapest-airport","baggage"],
  },
  "prague-airport":{
   title:"Praga: trolejbus 59 czy Airport Express",
@@ -105,7 +105,7 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Prague Airport — trolejbus i autobusy miejskie",href:"https://www.prg.aero/en/public-transport-buses"},
    {label:"Prague Airport — Airport Express i bilety",href:"https://www.prg.aero/en/airport-express"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["vienna-airport","budapest-airport","one-way-round-trip"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=prague"}],related:["vienna-airport","budapest-airport","one-way-round-trip"],
  },
  "amsterdam-airport":{
   title:"Amsterdam: Schiphol, pociąg i autobus 397",
@@ -135,7 +135,7 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Copenhagen Airport — metro",href:"https://www.cph.dk/en/parking-transport/bus-train-metro-taxi/metro"},
    {label:"Copenhagen Airport — pociągi",href:"https://www.cph.dk/en/parking-transport/bus-train-metro-taxi/train"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["stockholm-airports","baggage","one-way-round-trip"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=copenhagen"}],related:["stockholm-airports","baggage","one-way-round-trip"],
  },
  "stockholm-airports":{
   title:"Sztokholm: Arlanda i Skavsta to różne transfery",
@@ -150,6 +150,6 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Swedavia Arlanda — pociągi i opłata stacyjna",href:"https://www.swedavia.com/arlanda/trains/"},
    {label:"Stockholm Skavsta — autobus, kolej i taxi",href:"https://www.skavsta.se/en/getting-to-and-from/bus-train-taxi/"},
-  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals"}],related:["copenhagen-airport","baggage","one-way-round-trip"],
+  ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=stockholm"}],related:["copenhagen-airport","baggage","one-way-round-trip"],
  },
 };

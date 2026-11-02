@@ -14,7 +14,7 @@ import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
 import {DestinationActivities} from "../../components/destination-activities";
 import {AirportTransfer} from "../../components/airport-transfer";
 import {isServiceSlug} from "../../../lib/i18n/service-content";
-import {serviceMetadata} from "../../components/service-info";
+import {ServiceLinks,serviceMetadata} from "../../components/service-info";
 import {LegalSources} from "../../components/legal-sources";
 import {hasGuideTranslation} from '../../../lib/i18n/guide-slugs';
 type Props={params:Promise<{slug:string}>};
@@ -86,6 +86,7 @@ export default async function InfoPage({params}:Props) {
  {related.length>0 && <nav aria-label="Powiązane poradniki"><h2>Czytaj dalej</h2><ul>{related.map(({slug,page,reason})=>
   <li key={slug}><Link href={`/info/${slug}`}>{page.title}</Link>{reason && <p className="related-reason">{reason}</p>}</li>
  )}</ul><Link href="/deals">{pl.deals}</Link></nav>}
+ {isServiceSlug(slug) && <ServiceLinks slug={slug} locale="pl"/>}
  </article>
  {destination && <Suspense fallback={<p role="status">Sprawdzamy loty: {destination.name}…</p>}>
   <GuideFlights destination={destination}/>

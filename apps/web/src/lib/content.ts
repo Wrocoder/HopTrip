@@ -1,4 +1,5 @@
 import type {InfoContent} from "./info-types";
+import {scoreText} from "./i18n/score-copy.ts";
 import {legalContent} from "./legal-content";
 import {travelGuides} from "./travel-guides";
 import {airportGuides} from "./airport-guides";
@@ -68,7 +69,7 @@ export const content:Record<string,InfoContent> = {
   paragraphs:["Niska cena i dobry wybór podróży nie zawsze oznaczają to samo. HopTrip porównuje zapisane ceny lotów, ale decyzja wymaga też sprawdzenia dat, lotnisk i warunków biletu. Oto jak czytać nasze porównanie."],
   sections:[
    {title:"Co trafia do porównania",paragraphs:[
-    "Grupujemy obserwacje od tego samego dostawcy dla lotniska wylotu, kierunku, miesiąca i roku wyjazdu oraz długości pobytu. Loty bez daty powrotu mają osobną grupę. Cena weekendowego wyjazdu nie jest więc porównywana z pobytem trwającym dwa tygodnie.",
+    scoreText("pl","grouping"),
     "Porównujemy ceny lotu na osobę w PLN. Taka grupa nie gwarantuje jednak tego samego lotniska docelowego, identycznego bagażu, godzin lotu, przewoźnika ani warunków zmiany rezerwacji. Przed zakupem sprawdź te elementy u sprzedawcy; historyczne porównanie ich nie wyrównuje.",
    ]},
    {title:"Jak rozumieć procent poniżej mediany",paragraphs:[
@@ -127,10 +128,11 @@ export const content:Record<string,InfoContent> = {
   ],related:["price-comparison","price-freshness"],
  },
  about:{title:"O HopTrip",draft:false,paragraphs:[
-   "HopTrip pomaga porównywać ceny lotów z Polski. Publikujemy zapisane obserwacje cen, a nie gwarancję dostępności miejsca.",
-   "Porównujemy cenę z historią tej samej trasy, miesiąca wyjazdu i długości pobytu. Mała liczba obserwacji obniża pewność porównania. Pamięć podręczna dostawcy może zawierać nieaktualne dane.",
-   "Ocena uwzględnia cenę, różnicę wobec mediany, świeżość i pokrycie historii. Gdy nie znamy wygody lotu, przyjmujemy neutralny wynik. Sam wynik nie zastępuje sprawdzenia bagażu, przesiadek i warunków biletu.",
-   "Cena lotu jest ceną na osobę. Noclegi i dojazdy wymagają osobnego sprawdzenia; nie dodajemy szacunków bez potwierdzonej oferty.",
+   "HopTrip pomaga wybrać lot i zaplanować krótki wyjazd z Polski. Publikujemy zapisane obserwacje cen, a nie gwarancję dostępności miejsca.",
+   "Wybierz lotnisko i daty, porównaj loty, a potem otwórz szczegóły: sprawdź lotniska, godziny oraz czas obserwacji ceny. Nocleg, dojazdy i plan pobytu dopasuj do konkretnego lotu.",
+   "Ceny lotów pochodzą z pamięci podręcznej Travelpayouts. Pobranie danych ani otwarcie karty nie jest potwierdzeniem ceny lub wolnego miejsca u sprzedawcy. Końcowe warunki sprawdź po przejściu do partnera.",
+   "Obecna metoda oceny opisuje cenę na tle zapisanej historii kierunku, liczbę obserwacji i świeżość danych. Nie ocenia wygody lotu, bagażu ani przewoźnika i nie gwarantuje najniższej ceny na rynku. Zakres oraz ograniczenia porównania wyjaśniamy na stronie „Jak porównujemy ceny lotów”.",
+   "Cena lotu dotyczy jednej osoby. Nocleg, transfery i inne wydatki liczysz osobno w kalkulatorze; wpisane przez Ciebie kwoty są planem, nie potwierdzoną ofertą. Nieznane koszty nie oznaczają zera. HopTrip nie przyjmuje płatności ani nie wystawia biletów.",
  ]},
  partners:{title:"Współpraca partnerska",draft:false,paragraphs:[
    "Niektóre przyciski prowadzą przez link partnerski. Po rezerwacji możemy otrzymać prowizję. Dostępność linku zależy od aktywnej, zatwierdzonej współpracy z programem.",

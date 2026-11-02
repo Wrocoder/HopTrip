@@ -1,0 +1,781 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)detail-layout\\.spec\\.ts$",
+      "(^|/)price-freshness\\.spec\\.ts$",
+      "(^|/)flight-facts\\.spec\\.ts$",
+      "(^|/)price-assessment\\.spec\\.ts$",
+      "(^|/)catalog\\.spec\\.ts$",
+      "--grep",
+      "flight decision precedes|delivery time|observation and seller|airport to deal to partner|round trip facts|trip details reveal",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01-final/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01-final/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01-final/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01-final/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01-final/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "catalog.spec.ts",
+      "file": "catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "airport to deal to partner keeps one session and records click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12058,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:12:06.711Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "30aa42b97d8966d0c2dc-c3c0b1ff27f0eed6ac1e",
+          "file": "catalog.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "airport to deal to partner keeps one session and records click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7599,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:35.792Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "30aa42b97d8966d0c2dc-7b12ad1f67616a06c403",
+          "file": "catalog.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "detail-layout.spec.ts",
+      "file": "detail-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16330,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:12:19.344Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8ce058e6b95363de41c4",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13198,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:12:35.696Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8bffa2e52a583b862558",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12652,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nReceived: viewport ratio 0.7542273998260498\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\u001b[2m    13 × locator resolved to <a class=\"cta\" rel=\"sponsored noopener\" href=\"http://127.0.0.1:8125/go/browser-deal/flight\">Посмотреть перелёт — Fixture program</a>\u001b[22m\n\u001b[2m       - unexpected value \"viewport ratio 0.7542273998260498\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nReceived: viewport ratio 0.7542273998260498\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\u001b[2m    13 × locator resolved to <a class=\"cta\" rel=\"sponsored noopener\" href=\"http://127.0.0.1:8125/go/browser-deal/flight\">Посмотреть перелёт — Fixture program</a>\u001b[22m\n\u001b[2m       - unexpected value \"viewport ratio 0.7542273998260498\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\tests\\detail-layout.spec.ts:68:74",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 74,
+                      "line": 68
+                    },
+                    "snippet": "  66 |  await page.evaluate(()=>scrollTo(0,0));\n  67 |  if(locale==='pl')await expect(summary.locator('.deal-price')).toBeInViewport({ratio:1});\n> 68 |  if(info.project.name==='desktop')await expect(booking.locator('a.cta')).toBeInViewport({ratio:1});\n     |                                                                          ^\n  69 |  if(locale==='pl'){\n  70 |   await page.screenshot({path:info.outputPath('available-first-screen.png'),scale:'css'});\n  71 |   await page.locator('.detail-layout').screenshot({path:info.outputPath('available-flight-decision.png'),scale:'css'});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 74,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nReceived: viewport ratio 0.7542273998260498\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\u001b[2m    13 × locator resolved to <a class=\"cta\" rel=\"sponsored noopener\" href=\"http://127.0.0.1:8125/go/browser-deal/flight\">Посмотреть перелёт — Fixture program</a>\u001b[22m\n\u001b[2m       - unexpected value \"viewport ratio 0.7542273998260498\"\u001b[22m\n\n\n  66 |  await page.evaluate(()=>scrollTo(0,0));\n  67 |  if(locale==='pl')await expect(summary.locator('.deal-price')).toBeInViewport({ratio:1});\n> 68 |  if(info.project.name==='desktop')await expect(booking.locator('a.cta')).toBeInViewport({ratio:1});\n     |                                                                          ^\n  69 |  if(locale==='pl'){\n  70 |   await page.screenshot({path:info.outputPath('available-first-screen.png'),scale:'css'});\n  71 |   await page.locator('.detail-layout').screenshot({path:info.outputPath('available-flight-decision.png'),scale:'css'});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\tests\\detail-layout.spec.ts:68:74"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:12:48.910Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\test-results\\detail-layout-ru-flight-de-2fb25-s-or-losing-the-shared-plan-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\test-results\\detail-layout-ru-flight-de-2fb25-s-or-losing-the-shared-plan-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01-final\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 74,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-cf80001c64bb78de1951",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12998,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:03.348Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-ac6a2e36831f7e9d66a9",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19557,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:44.343Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-5fd41c2594441af02f3d",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12287,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:04.154Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-57b98f2c97cf62045d3f",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12105,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:16.460Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8d51dde76fd622cd0f50",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14343,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:28.584Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-685f557859cb07502eac",
+          "file": "detail-layout.spec.ts",
+          "line": 17,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "flight-facts.spec.ts",
+      "file": "flight-facts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "round trip facts agree between card and detail without mobile overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4786,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:16.659Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-88ef9c15e251b72e6a07",
+          "file": "flight-facts.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "round trip facts agree between card and detail without mobile overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4309,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:42.953Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-2dcba113e7062cb968b9",
+          "file": "flight-facts.spec.ts",
+          "line": 52,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "price-assessment.spec.ts",
+      "file": "price-assessment.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "trip details reveal comparison on demand without navigating or opening other cards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7150,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:21.473Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-0c79e2a2c7a836eeccf6",
+          "file": "price-assessment.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "trip details reveal comparison on demand without navigating or opening other cards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7041,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:47.291Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-aece0c182ff0f8214175",
+          "file": "price-assessment.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "price-freshness.spec.ts",
+      "file": "price-freshness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3713,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:28.648Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-01a103906105a3e529fc",
+          "file": "price-freshness.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:13:32.380Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-0a49966619700448c2a4",
+          "file": "price-freshness.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3784,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:54.370Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-6cdc8dedc666bef22564",
+          "file": "price-freshness.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2250,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:14:58.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-036e25ee3898819aa814",
+          "file": "price-freshness.spec.ts",
+          "line": 29,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T17:11:56.670Z",
+    "duration": 185418.55299999999,
+    "expected": 17,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -6,6 +6,8 @@
 
 Обновление 2026-10-16: добавлены события бюджета, сохранения и подтверждённой подписки; определения и приёмка — [seo-growth-plan.md](seo-growth-plan.md).
 
+Обновление 2026-11-02 (ANALYTICS-01): [текущий словарь и соответствие мастер-плану](analytics01/TAXONOMY.md). Добавлены TRIP_REMOVE, EVENT_CLICK, ALERT_STARTED и необязательный filter.action у FILTER_USE. Existing имена/партнёрские параметры сохранены; новый словарь уточняет семантику и ограничения, старые события без action остаются unclassified.
+
 ## События и определения
 
 | Событие | Когда | Контекст |
@@ -15,12 +17,15 @@
 | DEAL_VIEW | Открыта страница предложения | deal_slug → deal_id |
 | SEARCH | Валидная отправка формы поиска или применение пресета | search.filters |
 | SEARCH_RESULT | Отображена выдача каталога или постоянной подборки | search.filters и либо result_count, либо error |
-| FILTER_USE | Существующая метрика применения/удаления фильтров | Не суммировать с SEARCH как отдельные поиски |
+| FILTER_USE | Применение/удаление/сброс фильтров | filter.action=apply/remove/reset для новых клиентов; legacy без action допустим. Не суммировать с SEARCH как отдельные поиски |
 | PARTNER_CLICK | Активация партнёрской ссылки | partner.category, partner.provider, deal_slug при наличии |
 | BUDGET_USE | Первое валидное непустое изменение поля расчёта за посещение | page_type; без сумм |
 | TRIP_SAVE | Новый снимок плана успешно записан локально | page_type; без содержимого плана |
 | ALERT_CONFIRMED | Успешный ответ подтверждения email, при согласии аналитики | page_type=alerts; без email/token |
 | ACTIVITY_CLICK | Существующая детализация кликов по достопримечательностям | city, activity_id, page без query, link_kind |
+| TRIP_REMOVE | Успешное удаление сохранённого снимка из браузера | page_type=saved; без токена или содержимого плана |
+| EVENT_CLICK | Активация доступной ticket link в TripEvents, включая вариант билета | Только связанный deal_slug и общий контекст; без URL/event ID/name/date/price |
+| ALERT_STARTED | Явная browser-valid отправка signup-формы, один раз за посещение | page_type=alerts; без email/preferences/token; API failure тоже считается началом |
 
 SEARCH не регистрирует заблокированный клиентской валидацией ввод. SEARCH_RESULT
 также возникает при прямом открытии /deals и пагинации, поэтому его количество
@@ -57,7 +62,7 @@ ACTIVITY_CLICK и PARTNER_CLICK для одной партнёрской дос�
   POST аналитики использует referrerPolicy=no-referrer.
 
 Отказ/отзыв согласия прекращает отправку браузерной аналитики и очищает идентификатор
-сессии. На /alerts разрешён только ALERT_CONFIRMED после успешного подтверждения; остальные события исключены. Исторические записи при отзыве не удаляются.
+сессии. На signup /alerts разрешён явный ALERT_STARTED, а existing ALERT_CONFIRMED остаётся после успешного подтверждения. ALERT_STARTED запрещён на confirm/manage; автоматические и остальные события на alert pages исключены. Исторические записи при отзыве не удаляются.
 Публичный endpoint не является доказательством браузерного согласия: он принимает
 валидные запросы, а проверка согласия выполняется в клиенте. Не использовать
 клиентскую аналитику как доверенный журнал финансовых операций.
@@ -113,3 +118,13 @@ Unit: analytics-context.test.mjs — приватность, согласие, �
 E2E: funnel-analytics.spec.ts — поиск, пустая выдача, ошибка, открытие предложения,
 три категории, отказ и отзыв согласия. Внешние переходы перехватываются локально;
 реальные бронирования и партнёрские клики тест не создаёт.
+
+ANALYTICS-01: test_product_analytics.py, product-analytics.test.mjs и product-analytics.spec.ts добавляют новые actions, bounded filter.action, consent/дедупликацию/ошибки записи/варианты билетов/failed signup. Существующие localized-alerts и seo-growth assertions учитывают намеренно добавленный START до CONFIRMED; privacy/token/negative assertions сохранены. [Результаты и ограничения](analytics01/README.md). Это локальная реализация; production activation и поступление реальных событий не подтверждены.
+
+## Уточнение GROW-03 — 2026-11-02
+
+ActivityLink нормализует locale prefix только в analytics page/deal association через existing localizedHref(path,'pl'); actual affiliate/official href не меняется. ACTIVITY_CLICK по-прежнему содержит bounded /info|deals path без query/hash, PARTNER_CLICK на локализованном detail получает правильный deal_slug. EVENT_CLICK также отправляется для middle auxclick1 обеих ticket branches; right aux ignored, consent/dedupe прежние. Flight/context-menu и best-effort ограничения захвата не превращаются в гарантию полного учёта. [Review/actual tests/два isolation incidents](grow03/README.md).
+
+## ANALYTICS-02 — usage dashboard, 2026-11-02
+
+Protected GET /api/v1/admin/analytics/usage и /dashboard переиспользуют X-Admin-Token. Actual stored14 product event names, без server AFFILIATE_CLICK/unknown/placeholders. Default7/max31days UTC [start,end), более20000rows→413 без усечения. [Все определения/знаменатели](analytics02/METRICS.md):ordered same-deal CTR, received result success proxy, empty≠error, distinct session usage; denominator0→null, returning/device unavailable, first-observed-page-type landing proxy. Никаких новых fields/tracking/IDs, revenue/booking metrics не переопределены. HTML4locales/script-free/noindex/CSP/no raw identifiers; POST и существующий summary прежние. [Проверки/доступ/rollback](analytics02/README.md), [что осталось](analytics02/REMAINING.md). Production baseline не получен.

@@ -1,0 +1,374 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)guide-optimization\\.spec\\.ts$",
+      "(^|/)technical-seo\\.spec\\.ts$",
+      "(^|/)guide-mobile-layout\\.spec\\.ts$",
+      "--project=desktop",
+      "--max-failures=1",
+      "--output=test-results-seo04-desktop",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/test-results-seo04-desktop",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/test-results-seo04-desktop",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "guide-mobile-layout.spec.ts",
+      "file": "guide-mobile-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Russian guides fit 320px",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1300,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T23:19:58.041Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2fe34bd59ea5643012bd-2bb17860cb1d84ff3850",
+          "file": "guide-mobile-layout.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "guide-optimization.spec.ts",
+      "file": "guide-optimization.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "guide search CTAs keep the city in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9709,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts:24:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts",
+                      "column": 39,
+                      "line": 24
+                    },
+                    "snippet": "  22 |   expect((await page.goto(path))?.status()).toBe(200);\n  23 |   const nav=page.getByRole('navigation',{name:guideUi(locale,'routes'),exact:true});\n> 24 |   await expect(nav.getByRole('link')).toHaveCount(1);\n     |                                       ^\n  25 |   await expect(nav.getByRole('link')).toHaveAttribute('href',expected);\n  26 |   await expect(page.locator('main h1')).toHaveCount(1);\n  27 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',new URL(path,info.project.use.baseURL).href);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts",
+                        "column": 39,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m2\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\u001b[22m\n\u001b[2m    14 × locator resolved to 2 elements\u001b[22m\n\u001b[2m       - unexpected value \"2\"\u001b[22m\n\n\n  22 |   expect((await page.goto(path))?.status()).toBe(200);\n  23 |   const nav=page.getByRole('navigation',{name:guideUi(locale,'routes'),exact:true});\n> 24 |   await expect(nav.getByRole('link')).toHaveCount(1);\n     |                                       ^\n  25 |   await expect(nav.getByRole('link')).toHaveAttribute('href',expected);\n  26 |   await expect(page.locator('main h1')).toHaveCount(1);\n  27 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',new URL(path,info.project.use.baseURL).href);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts:24:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T23:19:59.704Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\test-results-seo04-desktop\\guide-optimization-guide-search-CTAs-keep-the-city-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\test-results-seo04-desktop\\guide-optimization-guide-search-CTAs-keep-the-city-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts",
+                    "column": 39,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3fbb140b1cf051c66796-9bcb9314834008174088",
+          "file": "guide-optimization.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "guide search CTAs keep the city in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3fbb140b1cf051c66796-6685d06095237c3257df",
+          "file": "guide-optimization.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "guide search CTAs keep the city in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3fbb140b1cf051c66796-26e679dd35c828238e79",
+          "file": "guide-optimization.spec.ts",
+          "line": 14,
+          "column": 56
+        },
+        {
+          "title": "guide search CTAs keep the city in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3fbb140b1cf051c66796-fed15e9a4b03731e7af7",
+          "file": "guide-optimization.spec.ts",
+          "line": 14,
+          "column": 56
+        }
+      ],
+      "suites": [
+        {
+          "title": "ordinary browser without JavaScript",
+          "file": "guide-optimization.spec.ts",
+          "line": 48,
+          "column": 6,
+          "specs": [
+            {
+              "title": "city guide CTA opens that city even when no observations exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3fbb140b1cf051c66796-68f4a45884773bcb92a0",
+              "file": "guide-optimization.spec.ts",
+              "line": 50,
+              "column": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "technical-seo.spec.ts",
+      "file": "technical-seo.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd863fca043a29490924-acb3507ebb925645780c",
+          "file": "technical-seo.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "robots allows crawlers to see noindex while excluding redirects and API",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd863fca043a29490924-508c4a4f4b1a3abf878a",
+          "file": "technical-seo.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "expired and nonexistent pages are noindex without a bookable price",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd863fca043a29490924-f36456ca2352863d0867",
+          "file": "technical-seo.spec.ts",
+          "line": 60,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-01T23:19:53.666Z",
+    "duration": 17380.700999999997,
+    "expected": 1,
+    "skipped": 7,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

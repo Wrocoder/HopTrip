@@ -2,6 +2,9 @@ import type {Locale} from "./config.ts";
 
 // Same source-key convention as budget/filter copy. No mutable request language.
 export const catalogCopy={
+ "Pełne dane lotu i bagaż":["Full flight details and baggage","Полные данные рейса и багаж","Повні дані рейсу та багаж"],
+ "Zobacz szczegóły lotu":["View flight details","Посмотреть детали перелёта","Переглянути деталі перельоту"],
+ "Bez noclegu · bagaż do sprawdzenia":["Accommodation excluded · check baggage","Без жилья · багаж нужно уточнить","Без житла · багаж слід уточнити"],
  "Loty z Polski":["Flights from Poland","Перелёты из Польши","Перельоти з Польщі"],
  "Wyniki wyszukiwania lotów | HopTrip":["Flight search results | HopTrip","Результаты поиска перелётов | HopTrip","Результати пошуку перельотів | HopTrip"],
  "Sprawdź parametry wyszukiwania":["Check your search parameters","Проверьте параметры поиска","Перевірте параметри пошуку"],

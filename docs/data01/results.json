@@ -1,0 +1,41 @@
+{
+  "task": "DATA-01",
+  "at": "2026-10-30T15:25:39.084Z",
+  "nonPostgres": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 703,
+    "time": 87.312
+  },
+  "postgres": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 13,
+    "time": 42.591
+  },
+  "newCases": {
+    "nonPostgres": 7,
+    "postgres": 2
+  },
+  "webUnitPassed": 111,
+  "e2e": {
+    "startTime": "2026-10-30T15:22:04.952Z",
+    "duration": 47058.737,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "e2eErrors": [],
+  "ruff": "All checks passed!",
+  "mypy": "Success: no issues found in 100 source files",
+  "migration": "0019_observation_expiry",
+  "migrationScope": "disposable hoptrip_test only; nullable addition; no backfill",
+  "webLintBuild": "not run; no frontend runtime changes",
+  "productionChanged": false,
+  "nextTask": "DATA-02",
+  "nextTaskStarted": false,
+  "distinctBackendPassed": 716
+}

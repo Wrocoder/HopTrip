@@ -1,0 +1,201 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "scoring.spec.ts",
+      "--grep",
+      "score link can open",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01-final/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01-final/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01-final/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01-final/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01-final/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "scoring.spec.ts",
+      "file": "scoring.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "score link can open the full explanation in a separate tab",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5111,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:25:11.296Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "055cda33e5bb3062858b-69cb60e6cdf771882c86",
+          "file": "scoring.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "score link can open the full explanation in a separate tab",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 30126,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\tests\\scoring.spec.ts",
+                        "column": 71,
+                        "line": 65
+                      },
+                      "message": "Error: locator.click: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a.score-trigger[href^=\"/deals/browser-deal?\"]')\u001b[22m\n\n\n  63 |   await page.goto(\"/deals?origin=WRO&budget=220&sort=price\");\n  64 |   const opened=context.waitForEvent(\"page\");\n> 65 |   await page.locator('a.score-trigger[href^=\"/deals/browser-deal?\"]').click({modifiers:[\"Control\"]});\n     |                                                                       ^\n  66 |   const detail=await opened;\n  67 |   await expect(detail).toHaveURL(/\\/deals\\/browser-deal\\?returnTo=.*#score$/);\n  68 |   await expect(detail.locator('.back-link')).toHaveAttribute('href','/deals?origin=WRO&budget=220&sort=price');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\tests\\scoring.spec.ts:65:71"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\tests\\scoring.spec.ts",
+                        "column": 24,
+                        "line": 64
+                      },
+                      "message": "Error: browserContext.waitForEvent: Test timeout of 30000ms exceeded.\n\n  62 | test(\"score link can open the full explanation in a separate tab\",async({page,context})=>{\n  63 |   await page.goto(\"/deals?origin=WRO&budget=220&sort=price\");\n> 64 |   const opened=context.waitForEvent(\"page\");\n     |                        ^\n  65 |   await page.locator('a.score-trigger[href^=\"/deals/browser-deal?\"]').click({modifiers:[\"Control\"]});\n  66 |   const detail=await opened;\n  67 |   await expect(detail).toHaveURL(/\\/deals\\/browser-deal\\?returnTo=.*#score$/);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\tests\\scoring.spec.ts:64:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:25:17.815Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\test-results\\scoring-score-link-can-ope-959c5-planation-in-a-separate-tab-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01-final\\apps\\web\\test-results\\scoring-score-link-can-ope-959c5-planation-in-a-separate-tab-mobile\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "055cda33e5bb3062858b-41a3590c26fa9ae62a8e",
+          "file": "scoring.spec.ts",
+          "line": 62,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T18:25:03.307Z",
+    "duration": 46722.472,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

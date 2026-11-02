@@ -1,0 +1,174 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)airport-landings\\.spec\\.ts$",
+      "--project=desktop",
+      "--grep",
+      "discovery and search preserve origin in pl",
+      "--max-failures=1",
+      "--output=test-results-seo02-smoke",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/test-results-seo02-smoke",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/test-results-seo02-smoke",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "airport-landings.spec.ts",
+      "file": "airport-landings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "airport discovery and search preserve origin in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 81185,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://127.0.0.1:3125/deals?origin=WAW%2CWMI\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    - waiting for \"http://127.0.0.1:3125/deals?origin=WAW%2CWMI\" navigation to finish...\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://127.0.0.1:3125/deals?origin=WAW%2CWMI\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    - waiting for \"http://127.0.0.1:3125/deals?origin=WAW%2CWMI\" navigation to finish...\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts:46:22",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts",
+                      "column": 22,
+                      "line": 46
+                    },
+                    "snippet": "  44 |   evidence.push({path,origin,destinations:expected,links:hrefs});\n  45 |   await context.locator('[data-airport-search]').focus();await page.keyboard.press('Enter');\n> 46 |   await expect(page).toHaveURL(new URL(localizedHref(`/deals?origin=${encodeURIComponent(origin)}`,locale),info.project.use.baseURL).href);\n     |                      ^\n  47 |   await expect(page.locator('.result-count')).toBeVisible();\n  48 |   await page.goto(hrefs[0]);await expect(page.locator('.deal-card').first()).toBeVisible();\n  49 |   for(const text of await page.locator('.deal-origin').allTextContents())expect(origin.split(',').some(code=>text.includes(code))).toBe(true);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts",
+                        "column": 22,
+                        "line": 46
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://127.0.0.1:3125/deals?origin=WAW%2CWMI\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    - waiting for \"http://127.0.0.1:3125/deals?origin=WAW%2CWMI\" navigation to finish...\u001b[22m\n\n\n  44 |   evidence.push({path,origin,destinations:expected,links:hrefs});\n  45 |   await context.locator('[data-airport-search]').focus();await page.keyboard.press('Enter');\n> 46 |   await expect(page).toHaveURL(new URL(localizedHref(`/deals?origin=${encodeURIComponent(origin)}`,locale),info.project.use.baseURL).href);\n     |                      ^\n  47 |   await expect(page.locator('.result-count')).toBeVisible();\n  48 |   await page.goto(hrefs[0]);await expect(page.locator('.deal-card').first()).toBeVisible();\n  49 |   for(const text of await page.locator('.deal-origin').allTextContents())expect(origin.split(',').some(code=>text.includes(code))).toBe(true);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts:46:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T21:57:48.652Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\test-results-seo02-smoke\\airport-landings-airport-d-bb06a-earch-preserve-origin-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\test-results-seo02-smoke\\airport-landings-airport-d-bb06a-earch-preserve-origin-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts",
+                    "column": 22,
+                    "line": 46
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a23587e900ae20011181-c49461986c5fecd0b614",
+          "file": "airport-landings.spec.ts",
+          "line": 16,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-01T21:57:21.895Z",
+    "duration": 115069.84400000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

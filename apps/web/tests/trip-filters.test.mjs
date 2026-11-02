@@ -4,7 +4,7 @@ import {presetActive,togglePreset} from "../src/lib/trip-filters.ts";
 
 for(const [preset,values] of Object.entries({weekend:{weekend:"true"},nights:{duration_min:"2",duration_max:"3"},budget:{budget:"300"}})) {
  test(`${preset} toggles, resets pagination and preserves unrelated conditions`,()=>{
-  const query=new URLSearchParams({origin:"WRO",destination:"milan",departure_from:"2030-05-01",departure_to:"2030-05-31",offset:"12"});
+  const query=new URLSearchParams({origin:"WRO",destination:"milan",departure_from:"2030-05-01",departure_to:"2030-05-31",sort:'price',offset:"12"});
   const initial=Object.fromEntries(query);delete initial.offset;
   togglePreset(query,preset);
   assert.equal(presetActive(Object.fromEntries(query),preset),true);

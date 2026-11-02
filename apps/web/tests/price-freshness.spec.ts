@@ -41,5 +41,8 @@ test('delivery time is separate and an open tab removes the partner link at the 
  await expect(notice.getByRole('status')).toContainText('Upłynął czas');
  await expect(page.getByRole('link',{name:'Sprawdź lot — Fixture program'})).toHaveCount(0);
  await expect(page.getByRole('button',{name:'Odśwież stronę'})).toBeVisible();
+ const fresh=notice.getByRole('link',{name:'Sprawdź aktualne loty',exact:true});
+ expect(Object.fromEntries(new URL((await fresh.getAttribute('href'))!,'http://127.0.0.1:3100').searchParams)).toEqual({origin:'WRO',destination:'barcelona'});
+ await expect(page.locator('.booking-card').getByRole('link',{name:'Wróć do katalogu lotów',exact:true})).toHaveAttribute('href','/deals');
  expect((await new AxeBuilder({page}).include('.detail-layout').analyze()).violations).toEqual([]);
 });

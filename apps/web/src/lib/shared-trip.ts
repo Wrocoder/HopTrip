@@ -36,5 +36,31 @@ export function decodeTrip(token:unknown):SharedTrip|null {
 }
 export const tripPath=(token:string)=>`/trip?plan=${token}`;
 export function readSavedTrips(raw:string|null):string[] {
- try {const v=JSON.parse(raw??"[]");return Array.isArray(v) ? v.slice(0,20).filter((s):s is string=>typeof s==="string" && decodeTrip(s)!==null) : [];}catch{return [];}
+ return readSavedTripsState(raw).tokens;
+}
+
+export function readSavedTripsState(raw:string|null):{tokens:string[];corrupt:boolean}{
+ if(raw===null)return {tokens:[],corrupt:false};
+ if(raw.length>140000)return {tokens:[],corrupt:true};
+ try{
+  const values:unknown=JSON.parse(raw);
+  if(!Array.isArray(values))return {tokens:[],corrupt:true};
+  const tokens:string[]=[];
+  let corrupt=values.length>20;
+  for(const value of values.slice(0,20)){
+   if(typeof value!=='string'||!decodeTrip(value)){corrupt=true;continue;}
+   if(!tokens.includes(value))tokens.push(value);
+  }
+  return {tokens,corrupt};
+ }catch{return {tokens:[],corrupt:true};}
+}
+
+export function changeSavedTrips(raw:string|null,token:string,action:'save'|'remove'):{tokens:string[];status:'saved'|'already'|'full'|'corrupt'|'invalid'|'removed'|'absent'}{
+ const {tokens,corrupt}=readSavedTripsState(raw);
+ if(corrupt)return {tokens,status:'corrupt'};
+ if(!decodeTrip(token))return {tokens,status:'invalid'};
+ if(action==='remove')return {tokens:tokens.filter(item=>item!==token),status:tokens.includes(token)?'removed':'absent'};
+ if(tokens.includes(token))return {tokens,status:'already'};
+ if(tokens.length>=20)return {tokens,status:'full'};
+ return {tokens:[token,...tokens],status:'saved'};
 }

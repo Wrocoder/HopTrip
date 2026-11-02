@@ -2,6 +2,7 @@ import {test,expect as baseExpect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {homeText} from '../src/lib/i18n/home-copy';
 import {localeNames} from '../src/lib/i18n/config';
+import {chooseOrigin} from './origin-helpers';
 const expect=baseExpect.configure({timeout:15000});
 
 test.beforeEach(async({page})=>{
@@ -17,31 +18,31 @@ for(const locale of ['en','ru','uk'] as const){
   await page.goto(`/${locale}?origin=WRO#current-deals`);
   const consent=await page.evaluate(()=>localStorage.getItem('hoptrip.consent.v1'));
   await expect(page.locator('html')).toHaveAttribute('lang',locale);
-  await expect(page.getByRole('heading',{level:1})).toHaveText(homeText(locale,'Znajdź lot. Zaplanuj krótki wyjazd.'));
+  await expect(page.getByRole('heading',{level:1})).toHaveText(homeText(locale,'Tanie podróże zaczynają się tutaj.'));
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',`http://127.0.0.1:3100/${locale}`);
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(5);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/^index,/);
-  await page.locator('.short-trip-airport > summary').click();
-  await page.locator('#short-trip-origin').selectOption('KRK');
-  await page.getByRole('button',{name:homeText(locale,'Pokaż krótkie wyjazdy'),exact:true}).click();
-  await expect(page).toHaveURL(new RegExp(`/${locale}\\?origin=KRK$`));
+
+  await chooseOrigin(page,'KRK');
+
+  await expect(page).toHaveURL(new RegExp(`/${locale}\\?origin=KRK#current-deals$`));
   await page.goto(`/${locale}`);
-  await expect(page.locator('#short-trip-origin')).toHaveValue('KRK');
+  await expect(page.locator('#home-origin')).toHaveValue(/KRK/);
   // The fixture has no short KRK trips; use its WRO offers for the card journey.
-  await page.locator('.short-trip-airport > summary').click();
-  await page.locator('#short-trip-origin').selectOption('WRO');
-  await page.getByRole('button',{name:homeText(locale,'Pokaż krótkie wyjazdy'),exact:true}).click();
+
+  await chooseOrigin(page,'WRO');
+
   await expect(page).toHaveURL(new RegExp(`/${locale}\\?origin=WRO$`));
   await page.getByRole('link',{name:homeText(locale,'Zobacz wszystkie loty na 2–4 noce →'),exact:true}).click();
   await expect(page).toHaveURL(new RegExp(`/${locale}/deals\\?origin=WRO&duration_min=2&duration_max=4$`));
   await page.locator('.deal-card-link').first().click();
-  await expect(page).toHaveURL(new RegExp(`/${locale}/deals/browser[^/?]*$`));
+  await expect(page).toHaveURL(new RegExp(`/${locale}/deals/browser[^/?]*\\?returnTo=`));
   const flight=page.url();
   await expect(page.locator('html')).toHaveAttribute('lang',locale);
   await page.locator('#budget-hotel').fill('321');
   await page.locator('.site-header .brand').click();
   await expect(page).toHaveURL(new RegExp(`/${locale}$`));
-  await expect(page.getByRole('heading',{level:1})).toHaveText(homeText(locale,'Znajdź lot. Zaplanuj krótki wyjazd.'));
+  await expect(page.getByRole('heading',{level:1})).toHaveText(homeText(locale,'Tanie podróże zaczynają się tutaj.'));
   expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
   await page.setViewportSize({width:320,height:850});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

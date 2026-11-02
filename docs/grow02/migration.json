@@ -1,0 +1,19 @@
+{
+  "database": "hoptrip_test",
+  "loopbackOnly": true,
+  "steps": [
+    "upgrade0020",
+    "insert synthetic email",
+    "upgrade0021",
+    "insert synthetic Telegram",
+    "downgrade0020",
+    "upgrade0021"
+  ],
+  "emailPreserved": true,
+  "telegramTablesAdditive": [
+    "telegram_deliveries",
+    "telegram_subscriptions",
+    "telegram_updates"
+  ],
+  "rollbackRemovesOnlyTelegramTables": true
+}

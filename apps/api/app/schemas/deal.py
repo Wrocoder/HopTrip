@@ -3,7 +3,30 @@ from decimal import Decimal
 from typing import Literal
 
 from app.schemas.score import ScoreExplanation
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, computed_field
+
+FlightQualityReason = Literal[
+    "UNVERIFIED_SOURCE", "MISSING_ORIGIN", "MISSING_DESTINATION", "MISSING_RETURN_AIRPORTS",
+    "MISSING_DATES", "INVALID_DATES", "AIRPORT_MISMATCH", "INVALID_DURATION",
+    "CONFLICTING_METADATA", "MISSING_TIMES", "ESTIMATED_TIMES", "UNKNOWN_TIMEZONE",
+    "UNKNOWN_STOPS", "UNKNOWN_CARRIER",
+]
+
+
+def _unknown_quality_reasons() -> list[FlightQualityReason]:
+    return ["UNVERIFIED_SOURCE"]
+
+
+class FlightQuality(BaseModel):
+    version: Literal["flight-quality-v1"] = "flight-quality-v1"
+    status: Literal["COMPLETE", "PARTIAL", "CRITICAL_INCOMPLETE"] = "CRITICAL_INCOMPLETE"
+    reasons: list[FlightQualityReason] = Field(default_factory=_unknown_quality_reasons)
+
+    @computed_field  # type: ignore[prop-decorator]  # Pydantic supports this property decorator stack.
+    @property
+    def recommendation_eligible(self) -> bool:
+        """Quality prerequisite only; freshness and link availability are checked separately."""
+        return self.status != "CRITICAL_INCOMPLETE"
 
 
 class ComponentRead(BaseModel):
@@ -76,6 +99,7 @@ class DealRead(BaseModel):
     trip_type: str = "ONE_WAY"
     price_basis: str = "FLIGHT_PER_PERSON"
     flight_facts: FlightFacts = Field(default_factory=FlightFacts)
+    flight_quality: FlightQuality = Field(default_factory=FlightQuality)
     components: list[ComponentRead] = Field(default_factory=list)
     explanation_codes: list[str] = Field(default_factory=list)
     score_version: str = "legacy"

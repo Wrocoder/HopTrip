@@ -1,4 +1,5 @@
 "use client";
+import {useEffect,useRef} from 'react';
 import type {Locale} from '../../lib/i18n/config';
 import {intlLocales} from '../../lib/i18n/config';
 import {plannedEventsCopy} from '../../lib/i18n/planned-events-copy';
@@ -24,6 +25,16 @@ export function AddEventToPlan({event,locale='pl'}:{event:PlannedEvent;locale?:L
 export function PlannedEvents({locale='pl'}:{locale?:Locale}){
  const {draft,save,ready}=useTripDraft()!;
  const events=draft.events??[],t=plannedEventsCopy[locale];
+ const focusAfterRemoval=useRef(false);
+ useEffect(()=>{
+  if(!focusAfterRemoval.current)return;
+  focusAfterRemoval.current=false;
+  document.getElementById(events.length?'planned-events':'calculator')?.focus();
+ },[events.length]);
+ const remove=(id:string)=>{
+  focusAfterRemoval.current=true;
+  save({...draft,events:events.filter(item=>item.id!==id)});
+ };
  if(!events.length)return null;
  const money=(grosz:number)=>new Intl.NumberFormat(intlLocales[locale],{style:'currency',currency:'PLN'}).format(grosz/100);
  const update=(id:string,key:'quantity'|'unitPricePln',value:string)=>save({...draft,events:events.map(item=>item.id===id?{...item,[key]:value}:item)});
@@ -47,7 +58,7 @@ export function PlannedEvents({locale='pl'}:{locale?:Locale}){
     </fieldset>
     <p className={styles.subtotal} role="status">{t.subtotal}: {cost.valid?(cost.total===null?t.unknown:money(cost.total)):t.invalid}</p>
     <div className={styles.actions}><a href={event.url} target="_blank" rel="sponsored noopener noreferrer">{t.ticket} <span aria-hidden="true">↗</span></a>
-     <button type="button" disabled={!ready} onClick={()=>save({...draft,events:events.filter(item=>item.id!==event.id)})} aria-label={`${t.remove}: ${event.name}`}>{t.remove}</button></div>
+     <button type="button" disabled={!ready} onClick={()=>remove(event.id)} aria-label={`${t.remove}: ${event.name}`}>{t.remove}</button></div>
    </li>;
   })}</ul>
  </section>;

@@ -1,10 +1,41 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
 import {priceAssessment,priceObservation} from "../src/lib/price-assessment.ts";
+import {scoreText} from "../src/lib/i18n/score-copy.ts";
+
+test("every locale discloses UTC cohort dates and the currency",()=>{
+ for(const locale of ["pl","en","ru","uk"]){
+  const text=scoreText(locale,"grouping");
+  assert.match(text,/UTC/);assert.match(text,/PLN/);
+ }
+});
 
 const deal={flight_price_pln:"200.25",price_per_person_pln:"200.25",last_verified_at:"2026-10-11T10:00:00Z",
   score_explanation:{status:"CURRENT",sample_count:24,current_price_pln:"200.25",median_price_pln:"250",
     price_difference_percent:"19.90",observed_at:"2026-10-10T10:00:00Z",observation_basis:"FIRST_SEEN"}};
+
+test('visible sample context uses the validated comparison count in all locales',()=>{
+ for(const locale of ['pl','en','ru','uk'])for(const count of [5,24,30,107]){
+  const result=priceAssessment({...deal,score_explanation:{...deal.score_explanation,sample_count:count}},locale);
+  assert.equal(result.scope,scoreText(locale,'sampleScope',{count}));
+  assert.ok(result.scope.includes(String(count)));
+ }
+});
+
+test('untrusted and non-current comparisons do not gain a current sample label',()=>{
+ for(const patch of [{status:'PROVISIONAL'},{status:'LEGACY'},{status:'UNAVAILABLE'},{sample_count:4},{sample_count:null},{sample_count:5.5},{price_difference_percent:'99'}]){
+  assert.equal(priceAssessment({...deal,score_explanation:{...deal.score_explanation,...patch}}).scope,null);
+ }
+ assert.equal(priceAssessment({...deal,flight_price_pln:'201'}).scope,null);
+});
+
+test('comparison entry and collapsed methodology do not expose a numerical rating',()=>{
+ for(const locale of ['pl','en','ru','uk']){
+  assert.doesNotMatch(scoreText(locale,'calculation',{score:76}),/76|100/);
+  assert.doesNotMatch(scoreText(locale,'triggerLabel',{destination:'Barcelona'}),/\d/);
+  assert.ok(scoreText(locale,'triggerLabel',{destination:'Barcelona'}).includes('Barcelona'));
+ }
+});
 
 test("saved below, equal and above-median comparisons retain their direction",()=>{
   const original=JSON.stringify(deal);

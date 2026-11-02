@@ -1,0 +1,1987 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)budget-modes\\.spec\\.ts$",
+      "(^|/)trip-budget\\.spec\\.ts$",
+      "(^|/)trip-parameters\\.spec\\.ts$",
+      "(^|/)planned-events\\.spec\\.ts$",
+      "(^|/)localized-budget\\.spec\\.ts$",
+      "(^|/)budget-recovery\\.spec\\.ts$",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip03/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip03/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip03/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "budget-modes.spec.ts",
+      "file": "budget-modes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "quick and detailed budgets retain all costs in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12752,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:11:21.853Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-530e5-gets-retain-all-costs-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-530e5-gets-retain-all-costs-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-344d96302bf8f6a26207",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in en",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 17927,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:11:36.918Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-1bde8-gets-retain-all-costs-in-en-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-1bde8-gets-retain-all-costs-in-en-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-7d8a2dad5e65460aed1e",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in ru",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7798,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:11:56.889Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-c8b26-gets-retain-all-costs-in-ru-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-c8b26-gets-retain-all-costs-in-ru-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-94ff066edf04a219f49c",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in uk",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10528,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:12:09.964Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-2f519-gets-retain-all-costs-in-uk-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-2f519-gets-retain-all-costs-in-uk-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-6c3a7e47e9ca4618bec3",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "hidden invalid detailed costs can be reached and corrected from quick budget",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6827,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:12:22.321Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-c2c433de88405a9f5959",
+          "file": "budget-modes.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "legacy plan and new taxes/buffer survive save/share without reallocating old contingency",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8376,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:12:29.501Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-72ccb9196db9c2c83d0e",
+          "file": "budget-modes.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7313,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:35.962Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-530e5-gets-retain-all-costs-in-pl-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-530e5-gets-retain-all-costs-in-pl-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-fd3299d9a7baff7bac28",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in en",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9366,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:44.557Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-1bde8-gets-retain-all-costs-in-en-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-1bde8-gets-retain-all-costs-in-en-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-c6f31510e5596c4ba32a",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in ru",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8932,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:56.596Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-c8b26-gets-retain-all-costs-in-ru-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-c8b26-gets-retain-all-costs-in-ru-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-4bcd1042b6647d013523",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "quick and detailed budgets retain all costs in uk",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7509,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                      "column": 49,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                        "column": 49,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected pattern: \u001b[32m/1\\D?640[,.]50/\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n  21 |  await page.locator('#budget-hotel-basis').selectOption('stay');\n  22 |  for(const [key,value] of Object.entries({hotel_total:'900',transfers:'100',food:'40'}))await page.locator(`#budget-${key}`).fill(value);\n> 23 |  await expect(page.getByTestId('budget-total')).toContainText(/1\\D?640[,.]50/);\n     |                                                 ^\n  24 |  await expect(page.locator('#calculator').getByRole('status')).toContainText(t('Budżet niepełny. Do uzupełnienia:'));\n  25 |  await page.locator('#calculator').screenshot({path:testInfo.outputPath(`quick-${locale}.png`)});\n  26 |  await detailed.focus();await page.keyboard.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts:23:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:15:07.789Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-2f519-gets-retain-all-costs-in-uk-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\budget-modes-quick-and-det-2f519-gets-retain-all-costs-in-uk-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\budget-modes.spec.ts",
+                    "column": 49,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-ab7e19582bc162a77f1c",
+          "file": "budget-modes.spec.ts",
+          "line": 10,
+          "column": 56
+        },
+        {
+          "title": "hidden invalid detailed costs can be reached and corrected from quick budget",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5025,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:15:16.929Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-58d7071f907a21378991",
+          "file": "budget-modes.spec.ts",
+          "line": 44,
+          "column": 5
+        },
+        {
+          "title": "legacy plan and new taxes/buffer survive save/share without reallocating old contingency",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9063,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:15:22.299Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9b19207183370d9dfd70-c1e9ab5e125b4540345c",
+          "file": "budget-modes.spec.ts",
+          "line": 62,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "budget-recovery.spec.ts",
+      "file": "budget-recovery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "321 PLN, travellers and selected tickets survive an invalid date, reload and language changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10193,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:12:37.932Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "579b522a078edcd9325c-d663a3b97fcad332b153",
+          "file": "budget-recovery.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "321 PLN, travellers and selected tickets survive an invalid date, reload and language changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7619,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:15:31.403Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "579b522a078edcd9325c-5bbe95fbdc8d18a1755c",
+          "file": "budget-recovery.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "localized-budget.spec.ts",
+      "file": "localized-budget.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "budget language switch preserves drafts, query, hash and consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16133,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:12:48.162Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9052681f977e8f90d69b-c3dea914fd44f4df8b16",
+          "file": "localized-budget.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "only translated pages exist and locale headers cannot override Polish URLs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14607,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:13:04.313Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9052681f977e8f90d69b-54fb957d5b7c8e82784a",
+          "file": "localized-budget.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "budget language switch preserves drafts, query, hash and consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20421,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:15:39.047Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9052681f977e8f90d69b-1a1e627a914b1f42b55d",
+          "file": "localized-budget.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "only translated pages exist and locale headers cannot override Polish URLs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1216,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:15:59.485Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9052681f977e8f90d69b-a6fce290b052c2beacf5",
+          "file": "localized-budget.spec.ts",
+          "line": 48,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "planned-events.spec.ts",
+      "file": "planned-events.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "selected ticket variants persist and share with independent costs, without double counting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22040,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:13:19.009Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b47cc865df9a80c29bd6-127e318b0404a310a5a5",
+          "file": "planned-events.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "different sessions, unknown and zero prices, invalid input and removal keep an honest budget",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5730,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:13:41.110Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b47cc865df9a80c29bd6-329cc114f06f22e7fe2c",
+          "file": "planned-events.spec.ts",
+          "line": 74,
+          "column": 5
+        },
+        {
+          "title": "a saved event remains editable when its flight and catalogue no longer exist",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2180,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:13:46.859Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b47cc865df9a80c29bd6-e3bf7887a078cdb4185d",
+          "file": "planned-events.spec.ts",
+          "line": 101,
+          "column": 5
+        },
+        {
+          "title": "selected ticket variants persist and share with independent costs, without double counting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18450,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:00.736Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b47cc865df9a80c29bd6-2c86407a6be019ba4e98",
+          "file": "planned-events.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "different sessions, unknown and zero prices, invalid input and removal keep an honest budget",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6203,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:19.209Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b47cc865df9a80c29bd6-9a6b306727b6ff1ef3b4",
+          "file": "planned-events.spec.ts",
+          "line": 74,
+          "column": 5
+        },
+        {
+          "title": "a saved event remains editable when its flight and catalogue no longer exist",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1809,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:25.429Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b47cc865df9a80c29bd6-79b0173b96b28c8685cd",
+          "file": "planned-events.spec.ts",
+          "line": 101,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "trip-budget.spec.ts",
+      "file": "trip-budget.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "budget calculates shared costs, validates input and resets accessibly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3103,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:13:49.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-7bc3bab471c8a723f922",
+          "file": "trip-budget.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "draft survives reload, stays separate per offer and reset persists",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8562,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:13:52.190Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-c2f3b7c5cc06c8d0a92f",
+          "file": "trip-budget.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "date and party edits flag prices and keep whole-stay costs unchanged",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4724,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:00.767Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-f45aa7c53246f7efe39a",
+          "file": "trip-budget.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "unavailable or corrupt storage never prevents calculation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1488,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:05.505Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-aa0524311784dcbe83ac",
+          "file": "trip-budget.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "invalid draft and changed offer metadata are handled explicitly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3006,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:07.007Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-474c8ce88221614acda7",
+          "file": "trip-budget.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "flight links to the budget calculator",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6558,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/deals\\/browser-deal#calculator$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/deals/browser-deal\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__HxCUtq__variable headingfont_80a9613f-module__yIfleW__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals/browser-deal\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/deals\\/browser-deal#calculator$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/deals/browser-deal\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__HxCUtq__variable headingfont_80a9613f-module__yIfleW__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals/browser-deal\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts:107:21",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts",
+                      "column": 21,
+                      "line": 107
+                    },
+                    "snippet": "  105 |  await page.goto(\"/deals/browser-deal\");\n  106 |  await page.locator('.trip-navigation a[href=\"#calculator\"]').click();\n> 107 |  await expect(page).toHaveURL(/\\/deals\\/browser-deal#calculator$/);\n      |                     ^\n  108 |  await expect(page.getByRole(\"heading\",{name:\"Kalkulator budżetu podróży\"})).toBeVisible();\n  109 |  await expect(page.locator(\"#budget-flight\")).toHaveValue(\"200.25\");\n  110 |  await expect(page.locator(\"#budget-people\")).toHaveValue(\"1\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts",
+                        "column": 21,
+                        "line": 107
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/deals\\/browser-deal#calculator$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/deals/browser-deal\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__HxCUtq__variable headingfont_80a9613f-module__yIfleW__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals/browser-deal\"\u001b[22m\n\n\n  105 |  await page.goto(\"/deals/browser-deal\");\n  106 |  await page.locator('.trip-navigation a[href=\"#calculator\"]').click();\n> 107 |  await expect(page).toHaveURL(/\\/deals\\/browser-deal#calculator$/);\n      |                     ^\n  108 |  await expect(page.getByRole(\"heading\",{name:\"Kalkulator budżetu podróży\"})).toBeVisible();\n  109 |  await expect(page.locator(\"#budget-flight\")).toHaveValue(\"200.25\");\n  110 |  await expect(page.locator(\"#budget-people\")).toHaveValue(\"1\");\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts:107:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:10.032Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\trip-budget-flight-links-to-the-budget-calculator-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\trip-budget-flight-links-to-the-budget-calculator-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts",
+                    "column": 21,
+                    "line": 107
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-2f70c109c23978fc6346",
+          "file": "trip-budget.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "reference fare fills only local transport and preserves manual amounts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4340,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:17.977Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-7b15c006d1d0bc059864",
+          "file": "trip-budget.spec.ts",
+          "line": 112,
+          "column": 5
+        },
+        {
+          "title": "lodging total survives mode changes and is counted only once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:22.647Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-fdff2bfebf04abed1a88",
+          "file": "trip-budget.spec.ts",
+          "line": 124,
+          "column": 5
+        },
+        {
+          "title": "budget calculates shared costs, validates input and resets accessibly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:27.270Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-420800a7204251aae69c",
+          "file": "trip-budget.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "draft survives reload, stays separate per offer and reset persists",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10656,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:31.976Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-f2ec0da8b833cdc58b0a",
+          "file": "trip-budget.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "date and party edits flag prices and keep whole-stay costs unchanged",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5290,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:42.649Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-f4a22891891f09cb6346",
+          "file": "trip-budget.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "unavailable or corrupt storage never prevents calculation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1926,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:47.963Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-ad6909273cc7097c88d7",
+          "file": "trip-budget.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "invalid draft and changed offer metadata are handled explicitly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3269,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:49.906Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-8d8d2b84bc0416e520a6",
+          "file": "trip-budget.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "flight links to the budget calculator",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7153,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/deals\\/browser-deal#calculator$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/deals/browser-deal\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__HxCUtq__variable headingfont_80a9613f-module__yIfleW__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals/browser-deal\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/deals\\/browser-deal#calculator$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/deals/browser-deal\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__HxCUtq__variable headingfont_80a9613f-module__yIfleW__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals/browser-deal\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts:107:21",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts",
+                      "column": 21,
+                      "line": 107
+                    },
+                    "snippet": "  105 |  await page.goto(\"/deals/browser-deal\");\n  106 |  await page.locator('.trip-navigation a[href=\"#calculator\"]').click();\n> 107 |  await expect(page).toHaveURL(/\\/deals\\/browser-deal#calculator$/);\n      |                     ^\n  108 |  await expect(page.getByRole(\"heading\",{name:\"Kalkulator budżetu podróży\"})).toBeVisible();\n  109 |  await expect(page.locator(\"#budget-flight\")).toHaveValue(\"200.25\");\n  110 |  await expect(page.locator(\"#budget-people\")).toHaveValue(\"1\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts",
+                        "column": 21,
+                        "line": 107
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/deals\\/browser-deal#calculator$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/deals/browser-deal\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__HxCUtq__variable headingfont_80a9613f-module__yIfleW__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals/browser-deal\"\u001b[22m\n\n\n  105 |  await page.goto(\"/deals/browser-deal\");\n  106 |  await page.locator('.trip-navigation a[href=\"#calculator\"]').click();\n> 107 |  await expect(page).toHaveURL(/\\/deals\\/browser-deal#calculator$/);\n      |                     ^\n  108 |  await expect(page.getByRole(\"heading\",{name:\"Kalkulator budżetu podróży\"})).toBeVisible();\n  109 |  await expect(page.locator(\"#budget-flight\")).toHaveValue(\"200.25\");\n  110 |  await expect(page.locator(\"#budget-people\")).toHaveValue(\"1\");\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts:107:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:16:53.189Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\trip-budget-flight-links-to-the-budget-calculator-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\test-results\\trip-budget-flight-links-to-the-budget-calculator-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip03\\apps\\web\\tests\\trip-budget.spec.ts",
+                    "column": 21,
+                    "line": 107
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-1048333cc32d1d5cfeee",
+          "file": "trip-budget.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "reference fare fills only local transport and preserves manual amounts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1959,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:17:01.706Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-085cf7766d39819ba9b2",
+          "file": "trip-budget.spec.ts",
+          "line": 112,
+          "column": 5
+        },
+        {
+          "title": "lodging total survives mode changes and is counted only once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2619,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:17:03.991Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-7c7c6972b69a28aacdd7",
+          "file": "trip-budget.spec.ts",
+          "line": 124,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "trip-parameters.spec.ts",
+      "file": "trip-parameters.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "one to two adults share stay dates, costs and saved search parameters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5475,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:26.967Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-0b5d6f442b8a59155e70",
+          "file": "trip-parameters.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "old drafts and shared plans preserve people without declaring children adults",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2445,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:14:32.460Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-b36707e0feee3a50ae02",
+          "file": "trip-parameters.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "one to two adults share stay dates, costs and saved search parameters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3942,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:17:06.652Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-4ecf70af27847e5485aa",
+          "file": "trip-parameters.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "old drafts and shared plans preserve people without declaring children adults",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1968,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T21:17:10.611Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-6c74d590f6492172ab48",
+          "file": "trip-parameters.spec.ts",
+          "line": 48,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T21:11:10.250Z",
+    "duration": 363780.399,
+    "expected": 34,
+    "skipped": 0,
+    "unexpected": 10,
+    "flaky": 0
+  }
+}

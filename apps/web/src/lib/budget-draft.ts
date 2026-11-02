@@ -29,6 +29,8 @@ function parseBudgetDraft(raw:string|null,local:boolean):BudgetDraft|null {
   const input={...emptyBudget};
   for(const key of Object.keys(input) as (keyof BudgetInput)[]) {
    const value=draft.input[key];
+   // Additive v1 fields: legacy drafts/links retain their amounts; missing is unknown.
+   if((key==="taxes" || key==="buffer") && value===undefined)continue;
    if(typeof value!=="string" || value.length>32) return null;
    if(key==="hotel_basis") {
     if(value!=="night" && value!=="stay") return null;

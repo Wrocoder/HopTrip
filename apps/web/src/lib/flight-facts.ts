@@ -2,6 +2,7 @@ import {intlLocales,type Locale} from "./i18n/config.ts";
 import {catalogText} from "./i18n/catalog-copy.ts";
 import type {Deal} from "./api";
 import {flightRouteCopy} from './i18n/flight-route-copy.ts';
+import {validCalendarDate} from './calendar-date.ts';
 
 export function returnAirportNotice(facts:Deal['flight_facts'],locale:Locale='pl'):string|null {
  const t=flightRouteCopy[locale];
@@ -34,13 +35,24 @@ export function flightPriceBasis(deal:Pick<Deal,"trip_type">,locale:Locale="pl")
 
 // Only instants with explicit offsets are clocks. Date-only/naive values stay unknown.
 function instantDate(value:string|null|undefined):Date|null {
-  if (!value || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)) return null;
+  if (!value || !/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.test(value)
+    || !validCalendarDate(value.slice(0,10))) return null;
   const instant=new Date(value);
   return Number.isFinite(instant.getTime()) ? instant : null;
 }
 export function validFlightZone(zone:string|null|undefined):zone is string {
   if(!zone)return false;
   try {new Intl.DateTimeFormat("en-GB",{timeZone:zone});return true;}catch{return false;}
+}
+// Calendar date at the actual airport. Unknown zones never become a UTC guess.
+export function flightLocalCalendarDate(value:string|null|undefined,zone:string|null|undefined):string|null {
+  const instant=instantDate(value);
+  if(!instant || !validFlightZone(zone))return null;
+  const parts=new Intl.DateTimeFormat('en-US',{timeZone:zone,calendar:'gregory',numberingSystem:'latn',year:'numeric',month:'2-digit',day:'2-digit',era:'short'}).formatToParts(instant);
+  const part=(type:string)=>parts.find(item=>item.type===type)?.value??'';
+  if(part('era')!=='AD')return null;
+  const date=`${part('year').padStart(4,'0')}-${part('month')}-${part('day')}`;
+  return validCalendarDate(date)?date:null;
 }
 export function flightTime(value:string|null|undefined,zone?:string|null,locale:Locale="pl"):string|null {
   const instant=instantDate(value);

@@ -9,12 +9,15 @@ export const costFields = [
  {key:"food",label:"Jedzenie i wydatki dzienne",hint:"Na osobę dziennie",basis:"day"},
  {key:"activities",label:"Atrakcje i bilety wstępu",hint:"Na osobę za cały pobyt",basis:"person"},
  {key:"other",label:"Inne koszty i rezerwa",hint:"Łącznie dla całej grupy",basis:"group"},
+ {key:"taxes",label:"Podatki i opłaty",hint:"Łącznie dla grupy, tylko kwoty nieuwzględnione w lotach, noclegu i innych pozycjach",basis:"group"},
+ {key:"buffer",label:"Rezerwa awaryjna",hint:"Łącznie dla grupy; nie powtarzaj rezerwy wpisanej w innych kosztach",basis:"group"},
 ] as const;
 export type CostKey = typeof costFields[number]["key"];
 export type BudgetInput = Record<CostKey | "people" | "nights" | "days" | "hotel_total",string> & {hotel_basis:"night"|"stay"};
 export const emptyBudget:BudgetInput = {
  people:"2",nights:"2",days:"3",flight:"",baggage:"",hotel:"",transfers:"",local_transport:"",food:"",activities:"",other:"",
  hotel_basis:"night",hotel_total:"",
+ taxes:"",buffer:"",
 };
 
 export function budgetForTrip(trip:{trip_type:string;trip_start:string;trip_end:string;flight_price_pln:string|null}):Partial<BudgetInput> {

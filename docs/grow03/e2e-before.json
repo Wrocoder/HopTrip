@@ -1,0 +1,174 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)affiliate-context\\.spec\\.ts$",
+      "--grep",
+      "accepted tracking in en",
+      "--project=desktop",
+      "--max-failures=1",
+      "--output=test-results-grow03-before",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/test-results-grow03-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/test-results-grow03-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "affiliate-context.spec.ts",
+      "file": "affiliate-context.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "affiliate context preserves destination and accepted tracking in en",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1646,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    202,\u001b[22m\n\u001b[32m-   202,\u001b[39m\n\u001b[31m+   422,\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    202,\u001b[22m\n\u001b[32m-   202,\u001b[39m\n\u001b[31m+   422,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts:41:40",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts",
+                      "column": 40,
+                      "line": 41
+                    },
+                    "snippet": "  39 |   await expect.poll(()=>rows.length).toBe(start+2);\n  40 |   const current=rows.slice(start);\n> 41 |   expect(current.map(row=>row.status)).toEqual([202,202]);\n     |                                        ^\n  42 |   const click=current.find(row=>row.event.event_name==='PARTNER_CLICK')!.event;\n  43 |   expect(click.partner).toEqual({category:'activity',provider:'tiqets'});\n  44 |   expect(click.deal_slug).toBe(index===0?'browser-deal':undefined);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts",
+                        "column": 40,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    202,\u001b[22m\n\u001b[32m-   202,\u001b[39m\n\u001b[31m+   422,\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  39 |   await expect.poll(()=>rows.length).toBe(start+2);\n  40 |   const current=rows.slice(start);\n> 41 |   expect(current.map(row=>row.status)).toEqual([202,202]);\n     |                                        ^\n  42 |   const click=current.find(row=>row.event.event_name==='PARTNER_CLICK')!.event;\n  43 |   expect(click.partner).toEqual({category:'activity',provider:'tiqets'});\n  44 |   expect(click.deal_slug).toBe(index===0?'browser-deal':undefined);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts:41:40"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T14:00:14.567Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\test-results-grow03-before\\affiliate-context-affiliat-69ff5-and-accepted-tracking-in-en-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\test-results-grow03-before\\affiliate-context-affiliat-69ff5-and-accepted-tracking-in-en-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts",
+                    "column": 40,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-400f564ae98c47a1ebfd",
+          "file": "affiliate-context.spec.ts",
+          "line": 29,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-02T14:00:07.193Z",
+    "duration": 11161.179,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

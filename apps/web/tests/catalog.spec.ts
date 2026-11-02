@@ -18,9 +18,10 @@ test("airport to deal to partner keeps one session and records click",async({pag
  });
  await page.goto("/");
  await page.getByRole("button",{name:"Akceptuj wszystkie",exact:true}).click();
+ await page.locator(".home-airports > summary").click();
  await page.getByRole("link",{name:"Wrocław — WRO",exact:true}).click();
  await expect(page.locator(".deal-card")).toHaveCount(14);
- await page.locator('a[href="/deals/browser-deal"]').click();
+ await page.locator('a.deal-card-link[href="/deals/browser-deal"],a.deal-card-link[href^="/deals/browser-deal?"]').click();
  await expect(page.getByRole("heading",{level:1})).toContainText("Barcelona");
  await expect(page.getByText("200,25",{exact:false}).first()).toBeVisible();
  const sid=await page.evaluate(()=>JSON.parse(localStorage.getItem("hoptrip.session.v2")!).id);

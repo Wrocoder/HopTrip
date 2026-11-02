@@ -6,6 +6,7 @@ export const tripPresets = [
   {id:"budget", label:"Loty do 300 zł", rule:"Cena lotu do 300 zł na osobę włącznie. Zastępuje limit ceny; nie obejmuje noclegu ani innych kosztów."},
 ] as const;
 export type TripPreset = typeof tripPresets[number]["id"];
+export const presetValues={weekend:{weekend:'true'},nights:{duration_min:'2',duration_max:'3'},budget:{budget:'300'}} as const;
 export function presetActive(filters:Filters, preset:TripPreset):boolean {
   if(preset==="weekend") return ["true","1","on","yes"].includes((filters.weekend??"").toLowerCase());
   if(preset==="nights") return filters.duration_min==="2" && filters.duration_max==="3";
@@ -13,8 +14,7 @@ export function presetActive(filters:Filters, preset:TripPreset):boolean {
 }
 export function togglePreset(query:URLSearchParams, preset:TripPreset):void {
   const remove=presetActive(Object.fromEntries(query),preset);
-  const values=preset==="weekend" ? {weekend:"true"} :
-    preset==="nights" ? {duration_min:"2",duration_max:"3"} : {budget:"300"};
+  const values=presetValues[preset];
   for(const [key,value] of Object.entries(values)) {
     if(remove) query.delete(key);
     else query.set(key,value);

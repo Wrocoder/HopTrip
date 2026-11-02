@@ -1,0 +1,1727 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)detail-layout\\.spec\\.ts$",
+      "(^|/)flight-facts\\.spec\\.ts$",
+      "(^|/)price-assessment\\.spec\\.ts$",
+      "(^|/)price-freshness\\.spec\\.ts$",
+      "(^|/)trip-parameters\\.spec\\.ts$",
+      "(^|/)trip-budget\\.spec\\.ts$",
+      "(^|/)catalog\\.spec\\.ts$",
+      "(^|/)planned-events\\.spec\\.ts$",
+      "--grep",
+      "flight decision precedes|structured return|unknown flight details|round trip facts|different return airports|missing return airports|trip details reveal|insufficient and historical|methodology explains|observation and seller|delivery time|one to two adults|old drafts and shared|flight links to the budget|airport to deal to partner|selected event",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-trip01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "catalog.spec.ts",
+      "file": "catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "airport to deal to partner keeps one session and records click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6643,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:08.828Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "30aa42b97d8966d0c2dc-c3c0b1ff27f0eed6ac1e",
+          "file": "catalog.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "airport to deal to partner keeps one session and records click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:46.363Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "30aa42b97d8966d0c2dc-7b12ad1f67616a06c403",
+          "file": "catalog.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "detail-layout.spec.ts",
+      "file": "detail-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6948,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:15.977Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-pl-flight-de-04803-s-or-losing-the-shared-plan-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-pl-flight-de-04803-s-or-losing-the-shared-plan-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8ce058e6b95363de41c4",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8207,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:23.782Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-en-flight-de-2e170-s-or-losing-the-shared-plan-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-en-flight-de-2e170-s-or-losing-the-shared-plan-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8bffa2e52a583b862558",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9467,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:33.105Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-ru-flight-de-2fb25-s-or-losing-the-shared-plan-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-ru-flight-de-2fb25-s-or-losing-the-shared-plan-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-cf80001c64bb78de1951",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7122,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:44.240Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-uk-flight-de-5edfc-s-or-losing-the-shared-plan-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-uk-flight-de-5edfc-s-or-losing-the-shared-plan-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-ac6a2e36831f7e9d66a9",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7079,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:50.431Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-pl-flight-de-04803-s-or-losing-the-shared-plan-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-pl-flight-de-04803-s-or-losing-the-shared-plan-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-5fd41c2594441af02f3d",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7481,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:58.446Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-en-flight-de-2e170-s-or-losing-the-shared-plan-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-en-flight-de-2e170-s-or-losing-the-shared-plan-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-57b98f2c97cf62045d3f",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8129,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:07.586Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-ru-flight-de-2fb25-s-or-losing-the-shared-plan-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-ru-flight-de-2fb25-s-or-losing-the-shared-plan-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8d51dde76fd622cd0f50",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7393,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 78,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 78,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeInViewport\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-booking').locator('a.cta')\nExpected: in viewport\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeInViewport\" locator('#trip-booking').locator('a.cta') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-booking').locator('a.cta')\u001b[22m\n\n\n  47 |   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}\n  48 |   await nav.locator('a[href=\"#trip-booking\"]').focus();await page.keyboard.press('Enter');\n> 49 |   await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n     |                                                                              ^\n  50 |   expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);\n  51 |   if(locale==='pl'&&scenario==='complete'){\n  52 |    await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>scrollTo(0,0));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts:49:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:17.554Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-uk-flight-de-5edfc-s-or-losing-the-shared-plan-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\detail-layout-uk-flight-de-5edfc-s-or-losing-the-shared-plan-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 78,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-685f557859cb07502eac",
+          "file": "detail-layout.spec.ts",
+          "line": 16,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "flight-facts.spec.ts",
+      "file": "flight-facts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "structured return shows the actual airports, clocks and connecting flights",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1903,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:52.471Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-308075d2cebeeddc7e0c",
+          "file": "flight-facts.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "unknown flight details remain explicit before the partner click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2964,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:54.679Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-e38c3cbcaf143c6e0a2a",
+          "file": "flight-facts.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "round trip facts agree between card and detail without mobile overflow",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6860,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\nExpected substring: \u001b[32m\"Ryanair (FR)\"\u001b[39m\nReceived string:    \u001b[31m\"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"flight-schedule flight-schedule-compact\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\nExpected substring: \u001b[32m\"Ryanair (FR)\"\u001b[39m\nReceived string:    \u001b[31m\"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"flight-schedule flight-schedule-compact\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts:58:50",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts",
+                      "column": 50,
+                      "line": 58
+                    },
+                    "snippet": "  56 |   await expect(card.locator(\".flight-schedule-compact\")).toBeVisible();\n  57 |   await expect(card.locator(\".flight-schedule-compact\")).not.toContainText(\"Europe/Warsaw\");\n> 58 |   await expect(card.locator(\".flight-schedule\")).toContainText(\"Ryanair (FR)\");\n     |                                                  ^\n  59 |   await expect(card.locator(\".trip-details\")).not.toHaveAttribute(\"open\",\"\");\n  60 |   await expect(card.locator(\".outbound-leg .flight-stops\")).toHaveText(\"Bez przesiadek\");\n  61 |   await expect(card.locator(\".return-leg .flight-stops\")).toHaveText(\"Liczba przesiadek: 1\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts",
+                        "column": 50,
+                        "line": 58
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\nExpected substring: \u001b[32m\"Ryanair (FR)\"\u001b[39m\nReceived string:    \u001b[31m\"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"flight-schedule flight-schedule-compact\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[22m\n\n\n  56 |   await expect(card.locator(\".flight-schedule-compact\")).toBeVisible();\n  57 |   await expect(card.locator(\".flight-schedule-compact\")).not.toContainText(\"Europe/Warsaw\");\n> 58 |   await expect(card.locator(\".flight-schedule\")).toContainText(\"Ryanair (FR)\");\n     |                                                  ^\n  59 |   await expect(card.locator(\".trip-details\")).not.toHaveAttribute(\"open\",\"\");\n  60 |   await expect(card.locator(\".outbound-leg .flight-stops\")).toHaveText(\"Bez przesiadek\");\n  61 |   await expect(card.locator(\".return-leg .flight-stops\")).toHaveText(\"Liczba przesiadek: 1\");\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts:58:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:03:57.660Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\flight-facts-round-trip-fa-490b9-ail-without-mobile-overflow-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\flight-facts-round-trip-fa-490b9-ail-without-mobile-overflow-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts",
+                    "column": 50,
+                    "line": 58
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "53b4a440288a84584730-88ef9c15e251b72e6a07",
+          "file": "flight-facts.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "different return airports stay independent on cards and details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4979,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:05.207Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-e57e5e540210e66a5a17",
+          "file": "flight-facts.spec.ts",
+          "line": 81,
+          "column": 5
+        },
+        {
+          "title": "missing return airports use explicit unknowns and UTC without copying outbound airports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:10.461Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-ec40df1387046a6b9f43",
+          "file": "flight-facts.spec.ts",
+          "line": 103,
+          "column": 5
+        },
+        {
+          "title": "structured return shows the actual airports, clocks and connecting flights",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2007,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:26.115Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-0ab290b1b80d6be3efdf",
+          "file": "flight-facts.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "unknown flight details remain explicit before the partner click",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2680,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:28.410Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-6fa8c5e027122e014362",
+          "file": "flight-facts.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "round trip facts agree between card and detail without mobile overflow",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7568,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\nExpected substring: \u001b[32m\"Ryanair (FR)\"\u001b[39m\nReceived string:    \u001b[31m\"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"flight-schedule flight-schedule-compact\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\nExpected substring: \u001b[32m\"Ryanair (FR)\"\u001b[39m\nReceived string:    \u001b[31m\"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"flight-schedule flight-schedule-compact\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts:58:50",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts",
+                      "column": 50,
+                      "line": 58
+                    },
+                    "snippet": "  56 |   await expect(card.locator(\".flight-schedule-compact\")).toBeVisible();\n  57 |   await expect(card.locator(\".flight-schedule-compact\")).not.toContainText(\"Europe/Warsaw\");\n> 58 |   await expect(card.locator(\".flight-schedule\")).toContainText(\"Ryanair (FR)\");\n     |                                                  ^\n  59 |   await expect(card.locator(\".trip-details\")).not.toHaveAttribute(\"open\",\"\");\n  60 |   await expect(card.locator(\".outbound-leg .flight-stops\")).toHaveText(\"Bez przesiadek\");\n  61 |   await expect(card.locator(\".return-leg .flight-stops\")).toHaveText(\"Liczba przesiadek: 1\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts",
+                        "column": 50,
+                        "line": 58
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\nExpected substring: \u001b[32m\"Ryanair (FR)\"\u001b[39m\nReceived string:    \u001b[31m\"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a[href=\"/deals/browser-13\"]') }).locator('.flight-schedule')\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"flight-schedule flight-schedule-compact\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"Niepełne dane lotuWylot · WRO → BCNBez przesiadekPowrót · BCN → WROLiczba przesiadek: 1brak godzinyPrzylot szacowany\"\u001b[22m\n\n\n  56 |   await expect(card.locator(\".flight-schedule-compact\")).toBeVisible();\n  57 |   await expect(card.locator(\".flight-schedule-compact\")).not.toContainText(\"Europe/Warsaw\");\n> 58 |   await expect(card.locator(\".flight-schedule\")).toContainText(\"Ryanair (FR)\");\n     |                                                  ^\n  59 |   await expect(card.locator(\".trip-details\")).not.toHaveAttribute(\"open\",\"\");\n  60 |   await expect(card.locator(\".outbound-leg .flight-stops\")).toHaveText(\"Bez przesiadek\");\n  61 |   await expect(card.locator(\".return-leg .flight-stops\")).toHaveText(\"Liczba przesiadek: 1\");\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts:58:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:31.108Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\flight-facts-round-trip-fa-490b9-ail-without-mobile-overflow-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\test-results\\flight-facts-round-trip-fa-490b9-ail-without-mobile-overflow-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-trip01\\apps\\web\\tests\\flight-facts.spec.ts",
+                    "column": 50,
+                    "line": 58
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "53b4a440288a84584730-2dcba113e7062cb968b9",
+          "file": "flight-facts.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "different return airports stay independent on cards and details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2902,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:39.427Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-d7ef0ed0676559519568",
+          "file": "flight-facts.spec.ts",
+          "line": 81,
+          "column": 5
+        },
+        {
+          "title": "missing return airports use explicit unknowns and UTC without copying outbound airports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2261,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:42.622Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "53b4a440288a84584730-0c7e33c574f2c3613f0e",
+          "file": "flight-facts.spec.ts",
+          "line": 103,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "price-assessment.spec.ts",
+      "file": "price-assessment.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "trip details reveal comparison on demand without navigating or opening other cards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7239,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:13.268Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-0c79e2a2c7a836eeccf6",
+          "file": "price-assessment.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "insufficient and historical data never advertise a price advantage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2974,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:20.526Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-bf35767560448ad231b3",
+          "file": "price-assessment.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "methodology explains the UTC cohort in every supported locale",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6158,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:23.517Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-5086e7f901d05b33bdb4",
+          "file": "price-assessment.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "trip details reveal comparison on demand without navigating or opening other cards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5434,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:44.973Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-aece0c182ff0f8214175",
+          "file": "price-assessment.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "insufficient and historical data never advertise a price advantage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2467,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:50.419Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-0283058cbfaf2e1b94d6",
+          "file": "price-assessment.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "methodology explains the UTC cohort in every supported locale",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2118,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:52.898Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-b9586e9f09ede2c1f6da",
+          "file": "price-assessment.spec.ts",
+          "line": 72,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "price-freshness.spec.ts",
+      "file": "price-freshness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3427,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:29.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-01a103906105a3e529fc",
+          "file": "price-freshness.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2204,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:33.144Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-0a49966619700448c2a4",
+          "file": "price-freshness.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3184,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:55.044Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-6cdc8dedc666bef22564",
+          "file": "price-freshness.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2186,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:05:58.242Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-036e25ee3898819aa814",
+          "file": "price-freshness.spec.ts",
+          "line": 29,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "trip-budget.spec.ts",
+      "file": "trip-budget.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "flight links to the budget calculator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1399,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:35.375Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-2f70c109c23978fc6346",
+          "file": "trip-budget.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "flight links to the budget calculator",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2109,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:06:00.455Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "bba4148ccba640b217b7-1048333cc32d1d5cfeee",
+          "file": "trip-budget.spec.ts",
+          "line": 104,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "trip-parameters.spec.ts",
+      "file": "trip-parameters.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "one to two adults share stay dates, costs and saved search parameters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6149,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:36.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-0b5d6f442b8a59155e70",
+          "file": "trip-parameters.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "old drafts and shared plans preserve people without declaring children adults",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2528,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:04:42.981Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-b36707e0feee3a50ae02",
+          "file": "trip-parameters.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "one to two adults share stay dates, costs and saved search parameters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5690,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:06:02.636Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-4ecf70af27847e5485aa",
+          "file": "trip-parameters.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "old drafts and shared plans preserve people without declaring children adults",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2107,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T17:06:08.349Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "50d8bf3a4f09c2315717-6c74d590f6492172ab48",
+          "file": "trip-parameters.spec.ts",
+          "line": 48,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T17:02:57.201Z",
+    "duration": 194668.91,
+    "expected": 26,
+    "skipped": 0,
+    "unexpected": 10,
+    "flaky": 0
+  }
+}

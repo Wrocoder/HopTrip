@@ -1,0 +1,236 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)ui04-audit\\.spec\\.ts$",
+      "--project=desktop",
+      "--output=test-results-ui04-audit",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui04/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui04/apps/web/test-results-ui04-audit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui04/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui04/apps/web/test-results-ui04-audit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui04/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui04-audit.spec.ts",
+      "file": "ui04-audit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UI-04 baseline pl/1440",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 82380,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.consent-panel')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.consent-panel') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.consent-panel')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.consent-panel')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.consent-panel') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.consent-panel')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts:46:47",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts",
+                      "column": 47,
+                      "line": 46
+                    },
+                    "snippet": "  44 |  await expect(page.locator('.filters [role=\"alert\"]')).toBeVisible();await scan('filter-error');\n  45 |  await page.evaluate(()=>localStorage.removeItem('hoptrip.consent.v1'));await page.reload();\n> 46 |  await expect(page.locator('.consent-panel')).toBeVisible();await scan('consent');\n     |                                               ^\n  47 |  writeFileSync(info.outputPath(`aria-${locale}.txt`),await page.locator('.consent-panel').ariaSnapshot());\n  48 | });\n  49 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts",
+                        "column": 47,
+                        "line": 46
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.consent-panel')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.consent-panel') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.consent-panel')\u001b[22m\n\n\n  44 |  await expect(page.locator('.filters [role=\"alert\"]')).toBeVisible();await scan('filter-error');\n  45 |  await page.evaluate(()=>localStorage.removeItem('hoptrip.consent.v1'));await page.reload();\n> 46 |  await expect(page.locator('.consent-panel')).toBeVisible();await scan('consent');\n     |                                               ^\n  47 |  writeFileSync(info.outputPath(`aria-${locale}.txt`),await page.locator('.consent-panel').ariaSnapshot());\n  48 | });\n  49 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts:46:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T10:54:06.293Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\test-results-ui04-audit\\ui04-audit-UI-04-baseline-pl-1440-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\test-results-ui04-audit\\ui04-audit-UI-04-baseline-pl-1440-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts",
+                    "column": 47,
+                    "line": 46
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "512f83c64bb69677b975-280ba93953d00a5f2048",
+          "file": "ui04-audit.spec.ts",
+          "line": 5,
+          "column": 67
+        },
+        {
+          "title": "UI-04 baseline ru/320",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 46856,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.consent-panel')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.consent-panel') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.consent-panel')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.consent-panel')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.consent-panel') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.consent-panel')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts:46:47",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts",
+                      "column": 47,
+                      "line": 46
+                    },
+                    "snippet": "  44 |  await expect(page.locator('.filters [role=\"alert\"]')).toBeVisible();await scan('filter-error');\n  45 |  await page.evaluate(()=>localStorage.removeItem('hoptrip.consent.v1'));await page.reload();\n> 46 |  await expect(page.locator('.consent-panel')).toBeVisible();await scan('consent');\n     |                                               ^\n  47 |  writeFileSync(info.outputPath(`aria-${locale}.txt`),await page.locator('.consent-panel').ariaSnapshot());\n  48 | });\n  49 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts",
+                        "column": 47,
+                        "line": 46
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.consent-panel')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.consent-panel') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.consent-panel')\u001b[22m\n\n\n  44 |  await expect(page.locator('.filters [role=\"alert\"]')).toBeVisible();await scan('filter-error');\n  45 |  await page.evaluate(()=>localStorage.removeItem('hoptrip.consent.v1'));await page.reload();\n> 46 |  await expect(page.locator('.consent-panel')).toBeVisible();await scan('consent');\n     |                                               ^\n  47 |  writeFileSync(info.outputPath(`aria-${locale}.txt`),await page.locator('.consent-panel').ariaSnapshot());\n  48 | });\n  49 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts:46:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T10:55:32.423Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\test-results-ui04-audit\\ui04-audit-UI-04-baseline-ru-320-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\test-results-ui04-audit\\ui04-audit-UI-04-baseline-ru-320-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui04\\apps\\web\\tests\\ui04-audit.spec.ts",
+                    "column": 47,
+                    "line": 46
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "512f83c64bb69677b975-d8fcc7653b105b5c7c02",
+          "file": "ui04-audit.spec.ts",
+          "line": 5,
+          "column": 67
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-01T10:53:56.025Z",
+    "duration": 156176.834,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

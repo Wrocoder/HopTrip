@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="13" time="32.054" timestamp="2026-10-30T16:17:05.661098+01:00" hostname="wave"><testcase classname="apps.api.tests.test_postgres" name="test_concurrent_digest_workers_send_one_message" time="1.245" /><testcase classname="apps.api.tests.test_postgres" name="test_migration_head" time="0.038" /><testcase classname="apps.api.tests.test_postgres" name="test_observation_deadline_survives_concurrent_quote_reappearance" time="1.044" /><testcase classname="apps.api.tests.test_postgres" name="test_observation_expiry_migration_preserves_populated_history" time="2.115" /><testcase classname="apps.api.tests.test_postgres" name="test_concurrent_ingestion_and_null_duration_uniqueness" time="1.658" /><testcase classname="apps.api.tests.test_postgres" name="test_lock_across_processes_and_release" time="3.795" /><testcase classname="apps.api.tests.test_postgres" name="test_logical_retry_and_interrupted_recovery" time="0.923" /><testcase classname="apps.api.tests.test_postgres" name="test_legacy_duplicate_migration_fails_without_removing_history" time="3.654" /><testcase classname="apps.api.tests.test_postgres" name="test_events_lock_and_catalogue_upsert" time="0.912" /><testcase classname="apps.api.tests.test_postgres" name="test_editor_concurrent_revisions_have_one_winner" time="1.118" /><testcase classname="apps.api.tests.test_postgres" name="test_editor_upgrade_preserves_existing_catalogue" time="7.094"><failure message="AssertionError: assert '0019_observation_expiry' == '0018_editorial_rehearsal'&#10;  &#10;  - 0018_editorial_rehearsal&#10;  + 0019_observation_expiry">def test_editor_upgrade_preserves_existing_catalogue():
+        import subprocess
+        import sys
+        from pathlib import Path
+    
+        url = os.getenv("TEST_DATABASE_URL")
+        if not url:
+            pytest.skip("Set TEST_DATABASE_URL")
+        assert make_url(url).database == "hoptrip_test"
+        schema = "test_editor_upgrade_" + uuid4().hex
+        engine = create_engine(url)
+        with engine.begin() as db:
+            db.execute(text(f'CREATE SCHEMA "{schema}"'))
+        scoped_url = make_url(url).update_query_dict({"options": f"-csearch_path={schema}"})
+        scoped = create_engine(scoped_url)
+        env = {**os.environ, "DATABASE_URL": scoped_url.render_as_string(hide_password=False)}
+        try:
+            for revision in ["0016_flight_route_details", "0017_routes_editorial_merge", "head"]:
+                result = subprocess.run([sys.executable, "-m", "alembic", "upgrade", revision],
+                                        cwd=Path(__file__).parents[1], env=env,
+                                        capture_output=True, text=True, timeout=60)
+                assert result.returncode == 0, result.stderr
+                with scoped.begin() as db:
+                    if revision == "0016_flight_route_details":
+                        db.execute(text("INSERT INTO data_providers (code, name) "
+                                        "VALUES ('editor-upgrade-sentinel', 'Existing catalogue')"))
+                    elif revision == "0017_routes_editorial_merge":
+                        item_id = db.scalar(text("INSERT INTO editorial_items "
+                            "(kind, source, version, status, created_at) VALUES "
+                            "('guide', '{}', 1, 'APPROVED', now()) RETURNING id"))
+                        db.execute(text("INSERT INTO editorial_revisions "
+                            "(item_id, version, snapshot, variants, artifacts, checksum, owner, created_at) "
+                            "VALUES (:id, 1, '{}', '{\"telegram\":\"Existing text\"}', '{}', :checksum, 'fixture', now())"),
+                            {"id": item_id, "checksum": "a" * 64})
+                        db.execute(text("INSERT INTO editorial_approvals "
+                            "(item_id, version, channels, checksum, owner, created_at, expires_at) "
+                            "VALUES (:id, 1, '[\"telegram\"]', :checksum, 'fixture', now(), now()+interval '1 day')"),
+                            {"id": item_id, "checksum": "a" * 64})
+                    else:
+                        assert db.scalar(text("SELECT name FROM data_providers "
+                                              "WHERE code='editor-upgrade-sentinel'")) == "Existing catalogue"
+&gt;                       assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0018_editorial_rehearsal"
+E                       AssertionError: assert '0019_observation_expiry' == '0018_editorial_rehearsal'
+E                         
+E                         - 0018_editorial_rehearsal
+E                         + 0019_observation_expiry
+
+apps\api\tests\test_postgres.py:433: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_postgres" name="test_rehearsal_workers_skip_locked_and_prepare_once" time="2.173" /><testcase classname="apps.api.tests.test_postgres" name="test_rehearsal_concurrent_scheduling_is_idempotent" time="4.382" /></testsuite></testsuites>

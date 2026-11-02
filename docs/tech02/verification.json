@@ -1,0 +1,32 @@
+{
+  "runtimeFiles": 569,
+  "differences": [],
+  "stats": {
+    "startTime": "2026-11-01T15:45:15.396Z",
+    "duration": 428238.167,
+    "expected": 50,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "errors": [],
+  "failures": [],
+  "screenshots": [
+    "recovered-desktop.png",
+    "recovered-mobile.png"
+  ],
+  "masterUnchanged": true,
+  "nextEnvUnchanged": true,
+  "foreignControlRequests": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8100/__test__/catalog-state?unavailable=true",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:8100/__test__/catalog-state?unavailable=false",
+      "status": 404
+    }
+  ]
+}

@@ -8,7 +8,7 @@ from app.schemas.score import ScoreExplanation, ScorePart
 from app.services.availability import DEAL_FRESHNESS
 from app.services.time import utc
 
-SCORE_VERSION = "flight-v3"
+SCORE_VERSION = "flight-v4"
 MIN_PRICE_SAMPLES = 5
 FULL_HISTORY_SAMPLES = 30
 MAX_POINTS = {"price": 60, "history": 25, "freshness": 15}
@@ -76,14 +76,15 @@ def score_flight_deal(
         sample_count=sample_count,
         current_price_pln=current_price,
         median_price_pln=baseline_price if baseline_valid else None,
-        price_difference_percent=difference.quantize(Decimal("0.01")) if difference is not None else None,
+        price_difference_percent=difference.quantize(Decimal("0.01")) if sufficient and difference is not None else None,
         observed_at=observed,
         calculated_at=checked_at,
         observation_basis="SOURCE" if source_observed_at else "FIRST_SEEN",
     )
     return DealScore(
         deal_score=int(total.quantize(Decimal(1), rounding=ROUND_HALF_UP)),
-        discount_percent=max(Decimal(0), difference or Decimal(0)).quantize(Decimal("0.01")),
+        discount_percent=(max(Decimal(0), difference or Decimal(0)).quantize(Decimal("0.01"))
+                          if sufficient else Decimal(0)),
         explanation=codes,
         breakdown=breakdown,
     )

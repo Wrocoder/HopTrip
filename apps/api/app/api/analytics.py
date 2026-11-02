@@ -2,7 +2,8 @@ from datetime import UTC, datetime, timedelta
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi.responses import HTMLResponse
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -21,8 +22,40 @@ from app.schemas.analytics import (
     AnalyticsEventCreate,
     AnalyticsSummary,
 )
+from app.schemas.usage import UsageReport
+from app.services.usage_dashboard import DashboardLocale, render_usage
+from app.services.usage_metrics import UsageLimitExceeded, usage_report, usage_window
 
 router = APIRouter(prefix="/api/v1", tags=["analytics"])
+
+
+def _usage(db: Session, start: datetime | None, end: datetime | None) -> UsageReport:
+    try:
+        start, end = usage_window(start, end)
+        return usage_report(db, start, end)
+    except UsageLimitExceeded as exc:
+        raise HTTPException(413, str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+
+
+@router.get("/admin/analytics/usage", response_model=UsageReport,
+            dependencies=[Depends(require_admin)])
+def product_usage(response: Response, start: datetime | None = None,
+                  end: datetime | None = None, db: Session = Depends(get_db)) -> UsageReport:
+    response.headers["X-Robots-Tag"] = "noindex, nofollow, nosnippet"
+    return _usage(db, start, end)
+
+
+@router.get("/admin/analytics/dashboard", response_class=HTMLResponse,
+            dependencies=[Depends(require_admin)])
+def usage_dashboard(start: datetime | None = None, end: datetime | None = None,
+                    locale: DashboardLocale = "pl", db: Session = Depends(get_db)) -> HTMLResponse:
+    return HTMLResponse(render_usage(_usage(db, start, end), locale), headers={
+        "X-Robots-Tag": "noindex, nofollow, nosnippet",
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; "
+                                   "frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+    })
 
 
 def _money(value) -> Decimal:
@@ -48,7 +81,7 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     metadata: dict[str, Any] = {
         k: str(v)[:80] for k, v in payload.metadata.items() if k == "campaign" and v in ("hoptrip-launch", "wro-weekend", "test")
     }
-    if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "alerts", "guide"}:
+    if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "saved", "alerts", "guide"}:
         metadata["page_type"] = payload.metadata["page_type"]
     if payload.activity:
         metadata["activity"] = payload.activity.model_dump()
@@ -62,6 +95,8 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
         metadata["search"] = search
     if payload.partner:
         metadata["partner"] = payload.partner.model_dump()
+    if payload.filter:
+        metadata["filter"] = payload.filter.model_dump()
     event = AnalyticsEvent(
         event_id=payload.event_id,
         event_name=payload.event_name,

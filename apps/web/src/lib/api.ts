@@ -1,3 +1,5 @@
+import {isAirports,isAlertStatus,isDeal,isDealResults,isDeals,isDestinations} from './api-contract';
+
 export type Component = {id:number; component_type:string; price_pln:string|null; available:boolean; reason:string; redirect_path:string|null; partner_name?:string|null};
 export type ScoreExplanation = {
   status:"CURRENT"|"PROVISIONAL"|"LEGACY"|"UNAVAILABLE";
@@ -24,7 +26,13 @@ export type FlightFacts = {
   return_departure:string|null; return_arrival:string|null;
   destination_interval_minutes:number|null;
 };
+export type FlightQualityReason = "UNVERIFIED_SOURCE"|"MISSING_ORIGIN"|"MISSING_DESTINATION"|"MISSING_RETURN_AIRPORTS"|
+  "MISSING_DATES"|"INVALID_DATES"|"AIRPORT_MISMATCH"|"INVALID_DURATION"|"CONFLICTING_METADATA"|
+  "MISSING_TIMES"|"ESTIMATED_TIMES"|"UNKNOWN_TIMEZONE"|"UNKNOWN_STOPS"|"UNKNOWN_CARRIER";
+export type FlightQuality = {version:"flight-quality-v1";status:"COMPLETE"|"PARTIAL"|"CRITICAL_INCOMPLETE";
+  reasons:FlightQualityReason[];recommendation_eligible:boolean};
 export type Deal = {
+  flight_quality?:FlightQuality;
   price_freshness?:PriceFreshness;
   flight_facts?:FlightFacts;
   id:number; slug:string; trip_start:string; trip_end:string; origin_airport_id:number; destination_id:number;
@@ -47,13 +55,21 @@ export class ApiError extends Error { constructor(public status:number,public co
 function apiUrl(path:string) {
   return (process.env.HOPTRIP_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000").replace(/\/$/,"") + path;
 }
-async function getJson<T>(path:string):Promise<T> {
-  const response = await fetch(apiUrl(path), {cache:"no-store", signal:AbortSignal.timeout(8000)});
+async function getJson<T>(path:string,valid:(value:unknown)=>value is T):Promise<T> {
+  let response:Response;
+  try {response=await fetch(apiUrl(path), {cache:"no-store", signal:AbortSignal.timeout(8000)});}
+  catch(error){const timeout=error instanceof Error&&['TimeoutError','AbortError'].includes(error.name);
+    throw new ApiError(timeout?504:0,timeout?'TIMEOUT':'NETWORK_ERROR');}
   if (!response.ok) {
     const body=await response.json().catch(()=>null);
     throw new ApiError(response.status,typeof body?.detail?.code === "string" ? body.detail.code : undefined);
   }
-  return response.json() as Promise<T>;
+  let body:unknown;
+  try {body=await response.json();}
+  catch(error){const timeout=error instanceof Error&&['TimeoutError','AbortError'].includes(error.name);
+    throw new ApiError(timeout?504:502,timeout?'TIMEOUT':'INVALID_RESPONSE');}
+  if(!valid(body))throw new ApiError(502,'INVALID_RESPONSE');
+  return body;
 }
 function dealParams(filters:Filters):URLSearchParams {
   const params = new URLSearchParams();
@@ -64,24 +80,26 @@ function dealParams(filters:Filters):URLSearchParams {
   return params;
 }
 export async function getDeals(filters:Filters = {}):Promise<Deal[]> {
-  return getJson("/api/v1/deals?" + dealParams(filters));
+  return getJson("/api/v1/deals?" + dealParams(filters),isDeals);
 }
 export type DealResults = {items:Deal[];total:number;offset:number;limit:number};
 export async function getDealResults(filters:Filters = {}):Promise<DealResults> {
   const params=dealParams(filters);
   params.set("include_total","true");
-  return getJson("/api/v1/deals?" + params);
+  const result=await getJson("/api/v1/deals?" + params,isDealResults);
+  if(result.offset!==Number(filters.offset??0)||(filters.limit&&result.limit!==Number(filters.limit)))throw new ApiError(502,'INVALID_RESPONSE');
+  return result;
 }
 export async function getDeal(slug:string):Promise<Deal|null> {
-  try { return await getJson<Deal>("/api/v1/deals/" + encodeURIComponent(slug)); }
+  try { return await getJson("/api/v1/deals/" + encodeURIComponent(slug),isDeal); }
   catch(error) {if (error instanceof ApiError && error.status === 404) return null; throw error;}
 }
-export const getAirports = () => getJson<Airport[]>("/api/v1/airports");
+export const getAirports = () => getJson("/api/v1/airports",isAirports);
 export const alertStatus = async () => {
-  try {return await getJson<{enabled:boolean;delivery_enabled?:boolean}>("/api/v1/alerts/status");}
+  try {return await getJson("/api/v1/alerts/status",isAlertStatus);}
   catch {return {enabled:false,delivery_enabled:false};}
 };
 export const alertsEnabled = async () => (await alertStatus()).enabled;
-export const getDestinations = () => getJson<Destination[]>("/api/v1/destinations");
+export const getDestinations = () => getJson("/api/v1/destinations",isDestinations);
 export const getDepartureDeals = (code:string) => getDeals({origin:code});
 export const getDestinationDeals = (slug:string) => getDeals({destination:slug});

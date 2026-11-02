@@ -7,7 +7,7 @@ from decimal import Decimal, InvalidOperation
 from urllib.parse import parse_qs, urlsplit
 
 from app.models.offer import TravelOffer
-from app.services.time import utc
+from app.services.time import offset_datetime, utc
 
 
 def ticket_key(link: object) -> str | None:
@@ -28,13 +28,8 @@ def ticket_key(link: object) -> str | None:
 
 
 def instant(value: object) -> datetime | None:
-    if not isinstance(value, str) or "T" not in value:
-        return None
-    try:
-        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-        return parsed.astimezone(UTC) if parsed.tzinfo else None
-    except (ValueError, OverflowError):
-        return None
+    parsed = offset_datetime(value)
+    return parsed.astimezone(UTC) if parsed else None
 
 
 def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]] | None:
@@ -76,6 +71,7 @@ def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]]
             return None
         previous_end = end
         last_arrival = None
+        last_airport = None
         airborne = 0.0
         for leg in legs:
             if not isinstance(leg, dict):
@@ -83,11 +79,16 @@ def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]]
             if not all(isinstance(leg.get(k), str) and re.fullmatch(r"[A-Z]{3}", leg[k])
                        for k in ("origin", "destination")):
                 return None
+            # We have flight legs, not evidence of a surface transfer between airports.
+            if (leg["origin"] == leg["destination"]
+                    or (last_airport is not None and leg["origin"] != last_airport)):
+                return None
             departure, arrival = instant(leg.get("departure_at")), instant(leg.get("arrival_at"))
             if (not departure or not arrival or arrival <= departure
                     or (last_arrival and departure < last_arrival)):
                 return None
             last_arrival = arrival
+            last_airport = leg["destination"]
             airborne += (arrival - departure).total_seconds() / 60
         if instant(legs[0]["departure_at"]) != start or last_arrival != end:
             return None

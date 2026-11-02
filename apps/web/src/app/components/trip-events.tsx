@@ -2,7 +2,7 @@
 
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import type {Deal} from '../../lib/api';
-import {publicApi} from '../../lib/session';
+import {publicApi,track} from '../../lib/session';
 import {intlLocales,type Locale} from '../../lib/i18n/config';
 import {eventCopy,eventUx} from '../../lib/i18n/event-copy';
 import {eventSearchDays,validEventDates} from '../../lib/event-dates';
@@ -11,26 +11,24 @@ import {formatCalendarDate,validCalendarDate} from '../../lib/calendar-date';
 import {dateCopy} from '../../lib/i18n/date-copy';
 import {useTripDraft} from './trip-draft';
 import {EventFlightNotice} from './event-flight-notice';
-import type {EventFlightFit} from '../../lib/event-flight-fit';
+import {isEventResults,type EventItem,type TicketOption,type EventResults} from '../../lib/api-contract';
 import {eventFitCopy} from '../../lib/i18n/event-fit-copy';
 import {cityLabel,eventCityLabel} from '../../lib/cities';
 import {eventResultsCopy} from '../../lib/i18n/event-results-copy';
+import {eventContextCopy} from '../../lib/i18n/event-context-copy';
+import {eventCheckedAt,eventSaleState,eventTicketsAllowed,eventTimeZone} from '../../lib/event-presentation';
 import {AddEventToPlan} from './planned-events';
 import type {PlannedEvent} from '../../lib/planned-events';
 import styles from './trip-events.module.css';
 
-type Category='ALL'|'MUSIC'|'SPORTS'|'CULTURE';
-type TicketOption={id:string;name:string;ticket_kind:'STANDARD'|'PREMIUM';url:string;price_from:string|null;currency:string|null};
-type EventItem={id:string;name:string;category:Exclude<Category,'ALL'>|'OTHER';venue:string;city:string;
- start_date:string;end_date:string|null;local_time:string|null;timezone:string;status:string;
- url:string;price_from:string|null;currency:string|null;ticket_options?:TicketOption[]};
-type Results={status:string;events:EventItem[];checked_at:string|null;partial:boolean;flight_fit?:Record<string,EventFlightFit>;
- total?:number;page?:number;page_size?:number;has_more?:boolean};
-type FetchState={key:string;kind:'ready'|'error'|'invalid';result?:Results};
+type Category='ALL'|'MUSIC'|'SPORTS'|'CULTURE'|'OTHER';
+type FetchState={key:string;kind:'ready'|'error'|'invalid';result?:EventResults};
 export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:Locale;activitiesHref?:string}){
  const t=eventCopy[locale],intl=intlLocales[locale];
  const ux=eventUx[locale];
  const resultsCopy=eventResultsCopy[locale];
+ const contextCopy=eventContextCopy[locale];
+ const record=()=>track("EVENT_CLICK",deal.slug);
  const startInput=useRef<HTMLInputElement>(null);
  const {draft,save,ready}=useTripDraft()!;
  const [mode,setMode]=useState<'stay'|'other'>('stay');
@@ -52,6 +50,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
  const requestKey=ready&&deal.events_supported&&valid&&(mode==='stay'||applied===query)?`${url}#${refresh}`:'';
  const current=state?.key===requestKey?state:null;
  const result=current?.result;
+ const checked=eventCheckedAt(result?.checked_at);
  const busy=Boolean(requestKey&&!current);
  const malformed=[start,end].some(value=>value!==''&&!validCalendarDate(value));
  const error=ready&&malformed?dateCopy[locale].invalid:(ready&&(start||end)&&!valid)||current?.kind==='invalid'?t.dates:current?.kind==='error'?t.unavailable:'';
@@ -66,7 +65,8 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
    try{
     const response=await fetch(url,{signal:controller.signal,cache:'no-store'});
     if(!response.ok){if(active)setState({key:requestKey,kind:response.status===422?'invalid':'error'});return;}
-    const data:Results=await response.json();
+    const data:unknown=await response.json();
+    if(!isEventResults(data))throw new Error('Invalid event response');
     if(active)setState({key:requestKey,kind:'ready',result:data});
    }catch{if(active)setState({key:requestKey,kind:'error'});}
    finally{clearTimeout(timeout);}
@@ -120,7 +120,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
    <label>{t.from}<input ref={startInput} type="date" min="0001-01-01" max="9999-12-31" required disabled={!ready} value={start} aria-invalid={!valid} aria-describedby={error?'event-dates-error':undefined} onChange={e=>changeDate('start',e.target.value)}/></label>
    <label>{t.to}<input type="date" max="9999-12-31" required disabled={!ready} value={end} min={validCalendarDate(start)?start:'0001-01-01'} aria-invalid={!valid} aria-describedby={error?'event-dates-error':undefined} onChange={e=>changeDate('end',e.target.value)}/></label>
    <label>{t.category}<select value={category} disabled={!ready} onChange={e=>setCategory(e.target.value as Category)}>
-    {(['ALL','MUSIC','SPORTS','CULTURE'] as const).map(c=><option key={c} value={c}>{labels[c]}</option>)}
+    {(['ALL','MUSIC','SPORTS','CULTURE','OTHER'] as const).map(c=><option key={c} value={c}>{labels[c]}</option>)}
    </select></label><button className="button" disabled={!ready||busy} type="submit">{busy?t.loading:t.search}</button>
   </form>
   {ready&&valid&&(mode==='stay'||applied===query)&&<div className={styles.dayNavigation}>
@@ -160,29 +160,34 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   {!!result?.events.length&&<ul className={styles.grid}>{result.events.map(item=><li className={styles.card} key={item.id}>
    <div className={styles.cardTop}><span className={styles.category}>{labels[item.category]}</span>
     <span className={styles.day} aria-hidden="true">{date(item.start_date,{day:'numeric',month:'short'})}</span></div>
-   <h3>{item.name}</h3><p className={styles.venue}>{item.venue} · {eventCityLabel(item.city,locale)}</p>
+   <h3>{item.name}</h3><p className={styles.venue}>{item.venue?.trim()||contextCopy.unknownVenue} · {item.city?.trim()?eventCityLabel(item.city,locale):contextCopy.unknownCity}</p>
    <p><time dateTime={item.start_date}>{date(item.start_date)}</time>
     {item.end_date&&item.end_date!==item.start_date&&<> – {date(item.end_date)}</>}
     {' · '}{item.local_time?.slice(0,5)||t.unknownTime}</p>
-   {item.status==='rescheduled'&&<p>{t.rescheduled}</p>}
+   <p className={styles.timeZone}>{contextCopy.zone}: {eventTimeZone(item.timezone)??contextCopy.unknownZone}</p>
+   <p className={styles.sale} data-sale={eventSaleState(item.status)}>{contextCopy.sale[eventSaleState(item.status)]}</p>
    {!!item.ticket_options?.length&&<p className={styles.variantHint}>{resultsCopy.variantHint}</p>}
    <EventFlightNotice id={`event-fit-${encodeURIComponent(item.id)}`} fit={result.flight_fit?.[item.id]} locale={locale}/>
    {item.ticket_options?.length?<div className={styles.variants}>
     <h4>{resultsCopy.variants}</h4><ul>{item.ticket_options.map(option=><li key={option.id}>
      <p><strong>{option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}</strong></p>
      <p className={styles.optionName}>{option.name}</p><p className={styles.price}>{price(option.price_from,option.currency)}</p>
-     <a className="button button-secondary" href={option.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${option.name} (${option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}). ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a>
+     {option.status!==undefined&&option.status!==item.status&&<p className={styles.sale} data-sale={eventSaleState(option.status)}>{contextCopy.sale[eventSaleState(option.status)]}</p>}
+     {eventTicketsAllowed(item.status,option.status)&&<>
+     <a className="button button-secondary" href={option.url} target="_blank" rel="sponsored noopener noreferrer" onClick={record} onAuxClick={event=>{if(event.button===1)record();}} aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${option.name} (${option.ticket_kind==='PREMIUM'?resultsCopy.premium:resultsCopy.standard}). ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a>
      <AddEventToPlan event={selection(item,option)} locale={locale}/>
+     </>}
     </li>)}</ul>
    </div>:<><p className={styles.price}>{price(item.price_from,item.currency)}</p>
-    <a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a><AddEventToPlan event={selection(item)} locale={locale}/></>}
+    {eventTicketsAllowed(item.status)&&<><a className="button button-secondary" href={item.url} target="_blank" rel="sponsored noopener noreferrer" onClick={record} onAuxClick={event=>{if(event.button===1)record();}} aria-describedby={`event-fit-${encodeURIComponent(item.id)}`} aria-label={`${t.buy}: ${item.name}. ${ux.newTab}`}>{t.buy} <span aria-hidden="true">↗</span></a><AddEventToPlan event={selection(item)} locale={locale}/></>}</>}
   </li>)}</ul>}
   {(page>1||result?.has_more)&&<nav className={styles.pagination} aria-label={resultsCopy.pages}>
    <button type="button" className={styles.retry} disabled={busy||page===1} onClick={()=>selectPage(page-1)}>{resultsCopy.previousPage}</button>
    <span>{resultsCopy.page} {page}{result?.total!=null&&<> {resultsCopy.of} {Math.max(1,Math.ceil(result.total/(result.page_size??12)))}</>}</span>
    <button type="button" className={styles.retry} disabled={busy||!result?.has_more} onClick={()=>selectPage(page+1)}>{resultsCopy.nextPage}</button>
   </nav>}
-  {result?.checked_at&&<p className="muted">{t.source} · {t.checked}: {new Intl.DateTimeFormat(intl,{dateStyle:'short',timeStyle:'short'}).format(new Date(result.checked_at))}</p>}
+  {result&&<p className="muted">{t.source} · {checked?<>{t.checked}: <time dateTime={checked.toISOString()}>{new Intl.DateTimeFormat(intl,{dateStyle:'short',timeStyle:'short'}).format(checked)}</time></>:contextCopy.unknownCheck}</p>}
+  {result&&<p className={styles.hint}>{contextCopy.availability}</p>}
   <details className={styles.details}><summary>{ux.before}</summary><p>{t.warning}</p></details>
   <p className={styles.disclosure}>{t.disclosure}</p>
  </section>;

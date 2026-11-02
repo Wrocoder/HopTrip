@@ -1,0 +1,508 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "origin-selection.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux02-final/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux02-final/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux02-final/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux02-final/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux02-final/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "origin-selection.spec.ts",
+      "file": "origin-selection.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "one origin updates search, recommendations, URL and preference without a second picker",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20325,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Skąd', exact: true })\nExpected pattern: \u001b[32m/KTW/\u001b[39m\nReceived string:  \u001b[31m\"Gdańsk — GDN\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Skąd', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Skąd', exact: true })\u001b[22m\n\u001b[2m    33 × locator resolved to <input name=\"origin\" maxlength=\"240\" role=\"combobox\" id=\"home-origin\" autocomplete=\"off\" aria-invalid=\"false\" value=\"Gdańsk — GDN\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"home-origin-options\" aria-describedby=\"home-origin-hint\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Gdańsk — GDN\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Skąd', exact: true })\nExpected pattern: \u001b[32m/KTW/\u001b[39m\nReceived string:  \u001b[31m\"Gdańsk — GDN\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Skąd', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Skąd', exact: true })\u001b[22m\n\u001b[2m    33 × locator resolved to <input name=\"origin\" maxlength=\"240\" role=\"combobox\" id=\"home-origin\" autocomplete=\"off\" aria-invalid=\"false\" value=\"Gdańsk — GDN\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"home-origin-options\" aria-describedby=\"home-origin-hint\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Gdańsk — GDN\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:25:43",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                      "column": 43,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  24 |  await expect(page.locator('.catalog-section')).toContainText('Brak aktualnych lotów');\n> 25 |  await page.goBack();await expect(origin).toHaveValue(/KTW/);\n     |                                           ^\n  26 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(2);\n  27 |  await page.goBack();await expect(origin).toHaveValue('');\n  28 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                        "column": 43,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Skąd', exact: true })\nExpected pattern: \u001b[32m/KTW/\u001b[39m\nReceived string:  \u001b[31m\"Gdańsk — GDN\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Skąd', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Skąd', exact: true })\u001b[22m\n\u001b[2m    33 × locator resolved to <input name=\"origin\" maxlength=\"240\" role=\"combobox\" id=\"home-origin\" autocomplete=\"off\" aria-invalid=\"false\" value=\"Gdańsk — GDN\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"home-origin-options\" aria-describedby=\"home-origin-hint\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Gdańsk — GDN\"\u001b[22m\n\n\n  23 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  24 |  await expect(page.locator('.catalog-section')).toContainText('Brak aktualnych lotów');\n> 25 |  await page.goBack();await expect(origin).toHaveValue(/KTW/);\n     |                                           ^\n  26 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(2);\n  27 |  await page.goBack();await expect(origin).toHaveValue('');\n  28 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:25:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:19:29.689Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-one-origi-36ce6-nce-without-a-second-picker-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-one-origi-36ce6-nce-without-a-second-picker-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                    "column": 43,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-0c14bfbe7bf68b552439",
+          "file": "origin-selection.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "origin changes preserve destination, date and budget drafts and clear without resurrecting the cookie",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7816,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:19:51.993Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-05fa37828c85ea7de3e0",
+          "file": "origin-selection.spec.ts",
+          "line": 30,
+          "column": 5
+        },
+        {
+          "title": "a delayed earlier recommendation response cannot replace the current origin, even without cookie storage",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 18494,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.catalog-section')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.catalog-section') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.catalog-section')\u001b[22m\n\u001b[2m    33 × locator resolved to <section aria-busy=\"true\" class=\"catalog-section\" aria-labelledby=\"current-deals\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.catalog-section')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.catalog-section') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.catalog-section')\u001b[22m\n\u001b[2m    33 × locator resolved to <section aria-busy=\"true\" class=\"catalog-section\" aria-labelledby=\"current-deals\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:70:50",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                      "column": 50,
+                      "line": 70
+                    },
+                    "snippet": "  68 |   await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  69 |   await select('GDN');\n> 70 |   await expect(page.locator('.catalog-section')).toHaveAttribute('aria-busy','false');\n     |                                                  ^\n  71 |   release();\n  72 |   await expect.poll(()=>delivered).toBe(true);\n  73 |   await expect(page.locator('.catalog-section .section-heading .eyebrow')).toContainText('GDN');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                        "column": 50,
+                        "line": 70
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.catalog-section')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.catalog-section') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.catalog-section')\u001b[22m\n\u001b[2m    33 × locator resolved to <section aria-busy=\"true\" class=\"catalog-section\" aria-labelledby=\"current-deals\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n\n\n  68 |   await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  69 |   await select('GDN');\n> 70 |   await expect(page.locator('.catalog-section')).toHaveAttribute('aria-busy','false');\n     |                                                  ^\n  71 |   release();\n  72 |   await expect.poll(()=>delivered).toBe(true);\n  73 |   await expect(page.locator('.catalog-section .section-heading .eyebrow')).toContainText('GDN');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:70:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:20:00.188Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-a-delayed-9dad5-even-without-cookie-storage-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-a-delayed-9dad5-even-without-cookie-storage-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                    "column": 50,
+                    "line": 70
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-9112dc11d1635bc147b1",
+          "file": "origin-selection.spec.ts",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "title": "an invalid airport draft does not change the committed origin or recommendations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3434,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:20:20.634Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-d95f3e2c8230236d7bcb",
+          "file": "origin-selection.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "one origin updates search, recommendations, URL and preference without a second picker",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 22211,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Skąd', exact: true })\nExpected pattern: \u001b[32m/KTW/\u001b[39m\nReceived string:  \u001b[31m\"Gdańsk — GDN\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Skąd', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Skąd', exact: true })\u001b[22m\n\u001b[2m    33 × locator resolved to <input name=\"origin\" maxlength=\"240\" role=\"combobox\" id=\"home-origin\" autocomplete=\"off\" aria-invalid=\"false\" value=\"Gdańsk — GDN\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"home-origin-options\" aria-describedby=\"home-origin-hint\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Gdańsk — GDN\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Skąd', exact: true })\nExpected pattern: \u001b[32m/KTW/\u001b[39m\nReceived string:  \u001b[31m\"Gdańsk — GDN\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Skąd', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Skąd', exact: true })\u001b[22m\n\u001b[2m    33 × locator resolved to <input name=\"origin\" maxlength=\"240\" role=\"combobox\" id=\"home-origin\" autocomplete=\"off\" aria-invalid=\"false\" value=\"Gdańsk — GDN\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"home-origin-options\" aria-describedby=\"home-origin-hint\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Gdańsk — GDN\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:25:43",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                      "column": 43,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  24 |  await expect(page.locator('.catalog-section')).toContainText('Brak aktualnych lotów');\n> 25 |  await page.goBack();await expect(origin).toHaveValue(/KTW/);\n     |                                           ^\n  26 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(2);\n  27 |  await page.goBack();await expect(origin).toHaveValue('');\n  28 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                        "column": 43,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('combobox', { name: 'Skąd', exact: true })\nExpected pattern: \u001b[32m/KTW/\u001b[39m\nReceived string:  \u001b[31m\"Gdańsk — GDN\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" getByRole('combobox', { name: 'Skąd', exact: true }) with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('combobox', { name: 'Skąd', exact: true })\u001b[22m\n\u001b[2m    33 × locator resolved to <input name=\"origin\" maxlength=\"240\" role=\"combobox\" id=\"home-origin\" autocomplete=\"off\" aria-invalid=\"false\" value=\"Gdańsk — GDN\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"home-origin-options\" aria-describedby=\"home-origin-hint\"/>\u001b[22m\n\u001b[2m       - unexpected value \"Gdańsk — GDN\"\u001b[22m\n\n\n  23 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  24 |  await expect(page.locator('.catalog-section')).toContainText('Brak aktualnych lotów');\n> 25 |  await page.goBack();await expect(origin).toHaveValue(/KTW/);\n     |                                           ^\n  26 |  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(2);\n  27 |  await page.goBack();await expect(origin).toHaveValue('');\n  28 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:25:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:20:26.549Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-one-origi-36ce6-nce-without-a-second-picker-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-one-origi-36ce6-nce-without-a-second-picker-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                    "column": 43,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-a05cb7e83ee17d06b94b",
+          "file": "origin-selection.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "origin changes preserve destination, date and budget drafts and clear without resurrecting the cookie",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8584,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:20:50.189Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-e9c8ec43f90d492c3294",
+          "file": "origin-selection.spec.ts",
+          "line": 30,
+          "column": 5
+        },
+        {
+          "title": "a delayed earlier recommendation response cannot replace the current origin, even without cookie storage",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 18832,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.catalog-section')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.catalog-section') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.catalog-section')\u001b[22m\n\u001b[2m    33 × locator resolved to <section aria-busy=\"true\" class=\"catalog-section\" aria-labelledby=\"current-deals\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.catalog-section')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.catalog-section') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.catalog-section')\u001b[22m\n\u001b[2m    33 × locator resolved to <section aria-busy=\"true\" class=\"catalog-section\" aria-labelledby=\"current-deals\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:70:50",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                      "column": 50,
+                      "line": 70
+                    },
+                    "snippet": "  68 |   await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  69 |   await select('GDN');\n> 70 |   await expect(page.locator('.catalog-section')).toHaveAttribute('aria-busy','false');\n     |                                                  ^\n  71 |   release();\n  72 |   await expect.poll(()=>delivered).toBe(true);\n  73 |   await expect(page.locator('.catalog-section .section-heading .eyebrow')).toContainText('GDN');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                        "column": 50,
+                        "line": 70
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.catalog-section')\nExpected: \u001b[32m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.catalog-section') with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.catalog-section')\u001b[22m\n\u001b[2m    33 × locator resolved to <section aria-busy=\"true\" class=\"catalog-section\" aria-labelledby=\"current-deals\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"true\"\u001b[22m\n\n\n  68 |   await expect(page.locator('.catalog-section .deal-card')).toHaveCount(0);\n  69 |   await select('GDN');\n> 70 |   await expect(page.locator('.catalog-section')).toHaveAttribute('aria-busy','false');\n     |                                                  ^\n  71 |   release();\n  72 |   await expect.poll(()=>delivered).toBe(true);\n  73 |   await expect(page.locator('.catalog-section .section-heading .eyebrow')).toContainText('GDN');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts:70:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:20:59.060Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-a-delayed-9dad5-even-without-cookie-storage-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\test-results\\origin-selection-a-delayed-9dad5-even-without-cookie-storage-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux02-final\\apps\\web\\tests\\origin-selection.spec.ts",
+                    "column": 50,
+                    "line": 70
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-9f856df3372e7e8d17e5",
+          "file": "origin-selection.spec.ts",
+          "line": 47,
+          "column": 5
+        },
+        {
+          "title": "an invalid airport draft does not change the committed origin or recommendations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1808,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:21:19.110Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "65615f2ee9631b313e30-a85bfa5add1ee6363db4",
+          "file": "origin-selection.spec.ts",
+          "line": 79,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T07:19:19.958Z",
+    "duration": 122640.394,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

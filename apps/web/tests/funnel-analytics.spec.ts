@@ -1,13 +1,18 @@
+import {localOutbound} from './local-outbound';
 import {test,expect} from "@playwright/test";
 
 test("search funnel respects consent, validates payloads and categorizes partner clicks",async({page,context})=>{
- // Every external navigation is fulfilled locally: no real partner traffic.
- await context.route("https://**",route=>route.fulfill({body:"Local partner fixture",contentType:"text/html"}));
+ // Native popups can bypass routing. Use loopback targets and the fixture
+ // HOPTRIP_E2E_LOCAL_PARTNERS boundary as documented in docs/grow03/README.md.
+ await context.route(/^https:\/\//,route=>route.fulfill({body:"Local partner fixture",contentType:"text/html"}));
  const events:{event_name:string;search?:{filters:Record<string,string>;result_count?:number;error?:string};partner?:{category:string};deal_slug?:string;metadata?:Record<string,string>}[]=[];
  const statuses:number[]=[];
+ page.on("request",request=>{
+  if(request.url().endsWith("/analytics/events") && request.method()==="POST")events.push(request.postDataJSON());
+ });
  page.on("response",response=>{
   if(response.url().endsWith("/analytics/events") && response.request().method()==="POST") {
-   events.push(response.request().postDataJSON());statuses.push(response.status());
+   statuses.push(response.status());
   }
  });
  await page.goto("/deals");
@@ -32,7 +37,7 @@ test("search funnel respects consent, validates payloads and categorizes partner
  await page.locator('#stay-checkin').fill("2030-05-03");
  await page.locator('#stay-checkout').fill("2030-05-05");
  async function openPopup(link:ReturnType<typeof page.getByRole>) {
-  const opened=page.waitForEvent("popup");await link.click();const popup=await opened;await popup.waitForLoadState();await popup.close();
+  const restore=await localOutbound(link);const opened=page.waitForEvent("popup");await link.click();const popup=await opened;await popup.waitForLoadState();await popup.close();await restore();
  }
  await openPopup(page.getByRole("link",{name:"Znajdź nocleg przez Stay22 (nowa karta)",exact:true}));
  await openPopup(page.getByRole("link",{name:/Sprawdź daty i cenę w Tiqets: Casa/}));

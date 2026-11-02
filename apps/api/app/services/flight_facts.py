@@ -7,6 +7,7 @@ from app.models.offer import TravelOffer
 from app.schemas.deal import FlightFacts, FlightLeg
 from app.services.flight_reference import airline_name, airport_timezone
 from app.services.flight_routes import validated_segments
+from app.services.time import offset_datetime
 
 
 def _code(value: object, pattern: str = r"[A-Z]{3}") -> str | None:
@@ -19,13 +20,7 @@ def _count(value: object, maximum: int) -> int | None:
 
 
 def _time(value: object) -> datetime | None:
-    if not isinstance(value, str) or "T" not in value:
-        return None
-    try:
-        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-        return parsed if parsed.tzinfo is not None else None
-    except ValueError:
-        return None
+    return offset_datetime(value)
 
 
 def _arrival(departure: datetime | None, duration: object) -> datetime | None:
@@ -44,6 +39,8 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
     if offer.source != "travelpayouts_data" or offer.product_type != "FLIGHT":
         return facts
     payload = offer.raw_payload or {}
+    if not isinstance(payload, dict):
+        return facts
     facts.origin_airport = _code(payload.get("origin_airport"))
     facts.destination_airport = _code(payload.get("destination_airport"))
     facts.destination_code = _code(payload.get("destination"))
@@ -90,8 +87,10 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
                 ))
             if name == "outbound":
                 facts.outbound_legs = public
+                facts.outbound_departure = public[0].departure
                 facts.outbound_arrival = public[-1].arrival
                 facts.outbound_arrival_calculated = False
+                facts.outbound_stops = len(public) - 1
             else:
                 facts.return_legs = public
                 facts.return_origin_airport, facts.return_destination_airport = public[0].origin_airport, public[-1].destination_airport

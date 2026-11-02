@@ -1,0 +1,31 @@
+{
+  "asOf": "2026-11-02",
+  "run": "e2e-before-isolation.json",
+  "stats": {
+    "startTime": "2026-11-02T13:56:38.202Z",
+    "duration": 16412.274999999998,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "observed": "First EN affiliate popup reached a real Tiqets product page instead of the synthetic destination",
+  "cause": "The https://** glob did not intercept the shortlink URL",
+  "scope": "One user-level test navigation plus any redirects and page resources; request count and partner attribution not established",
+  "possiblePartnerClick": true,
+  "purchaseActionsPerformed": false,
+  "productionDatabaseModified": false,
+  "correction": "Universal non-loopback route interception and blocked service workers; isolated legacy specs guarded too",
+  "originalTemporaryTraceArchived": false,
+  "additionalPopupAttempt": {
+    "run": "e2e-desktop-popup-isolation.json",
+    "observed": "WAF 403 in a native popup instead of the synthetic page",
+    "partnerReceiptOrAttribution": "not established"
+  },
+  "localOnlySetupFailure": {
+    "run": "e2e-desktop-loopback-initial.json",
+    "observed": "Loopback Next URL returned 404 when native popup bypassed routing",
+    "externalTraffic": false
+  },
+  "finalBoundary": "Source URL assertions, native href substitution to guarded API fixture, optional server-only test /go Location rewrite, universal routing as additional guard"
+}

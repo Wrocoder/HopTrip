@@ -3,6 +3,10 @@ import {catalogCopy} from "./catalog-copy.ts";
 
 export const tripCopy={
  ...catalogCopy,
+ "Do partnera":["To partner","К партнёру","До партнера"],
+ "Atrakcje":["Attractions","Достопримечательности","Пам’ятки"],
+ "Porównanie ceny":["Price comparison","Сравнение цены","Порівняння ціни"],
+ "Szczegóły lotu":["Flight details","Детали перелёта","Деталі перельоту"],
  "Sekcje planu podróży":["Trip plan sections","Разделы плана поездки","Розділи плану подорожі"],
  "Lot":["Flight","Перелёт","Переліт"],
  "Wydarzenia":["Events","События","Події"],

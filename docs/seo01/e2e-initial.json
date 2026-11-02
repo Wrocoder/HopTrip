@@ -1,0 +1,527 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)seo-rendering\\.spec\\.ts$",
+      "(^|/)technical-seo\\.spec\\.ts$",
+      "(^|/)catalog-seo\\.spec\\.ts$",
+      "(^|/)offer-states\\.spec\\.ts$",
+      "--project=desktop",
+      "--max-failures=1",
+      "--output=test-results-seo01",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo01/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo01/apps/web/test-results-seo01",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo01/apps/web/test-results-seo01",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "catalog-seo.spec.ts",
+      "file": "catalog-seo.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "only reviewed permanent catalog pages are indexable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15962,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T16:17:26.535Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6985900258a5911ab372-d0f5b75f12fa6c7bcfe6",
+          "file": "catalog-seo.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "previews are real images and unavailable trips have no preview",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T16:17:42.779Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6985900258a5911ab372-9f4ab8c3ad28764cc1b1",
+          "file": "catalog-seo.spec.ts",
+          "line": 12,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "offer-states.spec.ts",
+      "file": "offer-states.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 14848,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.result-count')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.result-count') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.result-count')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.result-count')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.result-count') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.result-count')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\tests\\offer-states.spec.ts:45:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\tests\\offer-states.spec.ts",
+                      "column": 46,
+                      "line": 45
+                    },
+                    "snippet": "  43 |  await expect(page.locator('#search-filters')).toBeFocused();\n  44 |  await error.getByRole('link',{name:c('Wyczyść parametry wyszukiwania'),exact:true}).click();\n> 45 |  await expect(page.locator('.result-count')).toBeVisible();\n     |                                              ^\n  46 |  const back=searchReturnPath('/deals?origin=WRO&budget=210&offset=12&sort=price');\n  47 |  await page.goto(localizedHref('/deals/unavailable-fixture?returnTo='+encodeURIComponent(back),locale));\n  48 |  await expect(error.getByRole('heading',{level:1})).toHaveText(t('Nie możemy teraz wczytać tej oferty.'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\tests\\offer-states.spec.ts",
+                        "column": 46,
+                        "line": 45
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.result-count')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.result-count') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.result-count')\u001b[22m\n\n\n  43 |  await expect(page.locator('#search-filters')).toBeFocused();\n  44 |  await error.getByRole('link',{name:c('Wyczyść parametry wyszukiwania'),exact:true}).click();\n> 45 |  await expect(page.locator('.result-count')).toBeVisible();\n     |                                              ^\n  46 |  const back=searchReturnPath('/deals?origin=WRO&budget=210&offset=12&sort=price');\n  47 |  await page.goto(localizedHref('/deals/unavailable-fixture?returnTo='+encodeURIComponent(back),locale));\n  48 |  await expect(error.getByRole('heading',{level:1})).toHaveText(t('Nie możemy teraz wczytać tej oferty.'));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\tests\\offer-states.spec.ts:45:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T16:17:47.679Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\test-results-seo01\\offer-states-pl-empty-API--25f38-detail-have-honest-recovery-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\test-results-seo01\\offer-states-pl-empty-API--25f38-detail-have-honest-recovery-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo01\\apps\\web\\tests\\offer-states.spec.ts",
+                    "column": 46,
+                    "line": 45
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "87121561b01870f21e32-32d31e8aa6662a0889aa",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "en: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-21efb89badce717bd361",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "ru: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-66c66fd16d3622be1837",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "uk: empty, API failure, invalid search and unavailable detail have honest recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-2200e91489a120321b29",
+          "file": "offer-states.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "initial server results and a delayed filter update do not fabricate new results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-355a88399e871da9fcf0",
+          "file": "offer-states.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "a blocked partner offers recovery without a booking link",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-77b538cfe4c0874a4dc5",
+          "file": "offer-states.spec.ts",
+          "line": 80,
+          "column": 5
+        },
+        {
+          "title": "home failure can retry without losing airport or search drafts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "87121561b01870f21e32-e7bb8636e571527638fe",
+          "file": "offer-states.spec.ts",
+          "line": 88,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "seo-rendering.spec.ts",
+      "file": "seo-rendering.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "catalog is visible without script in pl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f7c639388721b983fff7-1f6a712df416c410a6db",
+          "file": "seo-rendering.spec.ts",
+          "line": 4,
+          "column": 56
+        },
+        {
+          "title": "catalog is visible without script in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f7c639388721b983fff7-933925ade4750e3b4889",
+          "file": "seo-rendering.spec.ts",
+          "line": 4,
+          "column": 56
+        },
+        {
+          "title": "catalog is visible without script in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f7c639388721b983fff7-ee5128f14d816a7ee43a",
+          "file": "seo-rendering.spec.ts",
+          "line": 4,
+          "column": 56
+        },
+        {
+          "title": "catalog is visible without script in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f7c639388721b983fff7-02cf17e48a0029e952f6",
+          "file": "seo-rendering.spec.ts",
+          "line": 4,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "technical-seo.spec.ts",
+      "file": "technical-seo.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd863fca043a29490924-acb3507ebb925645780c",
+          "file": "technical-seo.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "robots allows crawlers to see noindex while excluding redirects and API",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd863fca043a29490924-508c4a4f4b1a3abf878a",
+          "file": "technical-seo.spec.ts",
+          "line": 42,
+          "column": 5
+        },
+        {
+          "title": "expired and nonexistent pages are noindex without a bookable price",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd863fca043a29490924-f36456ca2352863d0867",
+          "file": "technical-seo.spec.ts",
+          "line": 58,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-01T16:17:18.915Z",
+    "duration": 60641.252,
+    "expected": 2,
+    "skipped": 13,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -73,6 +73,32 @@ class Settings(BaseSettings):
     smtp_user: str = ""
     smtp_password: SecretStr = SecretStr("")
     smtp_sender: str = ""
+    telegram_enabled: bool = False
+    telegram_delivery_enabled: bool = False
+    telegram_bot_token: SecretStr = SecretStr("")
+    telegram_webhook_secret: SecretStr = SecretStr("")
+    telegram_bot_username: str = ""
+    telegram_site_url: str = "https://hoptrip.pl"
+    telegram_commands_per_minute: int = Field(default=10, ge=1, le=60)
+    telegram_send_interval_seconds: float = Field(default=1.1, ge=1, le=60)
+
+    @model_validator(mode="after")
+    def telegram_configuration(self):
+        if self.telegram_delivery_enabled and not self.telegram_enabled:
+            raise ValueError("Telegram delivery requires enabled Telegram subscriptions")
+        if self.telegram_enabled:
+            if (not re.fullmatch(r"[0-9]+:[A-Za-z0-9_-]{20,200}",
+                                 self.telegram_bot_token.get_secret_value())
+                    or not re.fullmatch(r"[A-Za-z0-9_-]{32,256}",
+                                        self.telegram_webhook_secret.get_secret_value())
+                    or not re.fullmatch(r"[A-Za-z0-9_]{5,32}", self.telegram_bot_username)):
+                raise ValueError("Enabled Telegram requires a separate bot and webhook secret")
+            url = urlsplit(self.telegram_site_url)
+            if (url.scheme not in {"https", "http"} or not url.hostname or url.username
+                    or url.password or url.query or url.fragment or url.path not in {"", "/"}
+                    or (url.scheme != "https" and url.hostname not in {"localhost", "127.0.0.1"})):
+                raise ValueError("TELEGRAM_SITE_URL must be an HTTPS origin")
+        return self
 
     @model_validator(mode="after")
     def alert_configuration(self):
@@ -112,7 +138,9 @@ class Settings(BaseSettings):
                 raise ValueError("Production DATABASE_URL must use a non-default database password")
         return self
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=".env", env_file_encoding="utf-8", extra="ignore", hide_input_in_errors=True
+    )
 
 
 @lru_cache

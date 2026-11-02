@@ -1,0 +1,51 @@
+I001 [*] Import block is un-sorted or un-formatted
+ --> apps\api\app\api\telegram.py:1:1
+  |
+1 | / import hmac
+2 | |
+3 | | from app.config import Settings, get_settings
+4 | | from app.db.session import get_db
+5 | | from app.services.telegram_subscriptions import receive_update
+6 | | from fastapi import APIRouter, Depends, Header, HTTPException
+7 | | from sqlalchemy.orm import Session
+  | |__________________________________^
+8 |
+9 |   router = APIRouter(prefix='/api/v1/telegram', tags=['telegram'])
+  |
+help: Organize imports
+  |
+2 |
+3 + from fastapi import APIRouter, Depends, Header, HTTPException
+4 + from sqlalchemy.orm import Session
+5 +
+6 | from app.config import Settings, get_settings
+7 | from app.db.session import get_db
+8 | from app.services.telegram_subscriptions import receive_update
+  - from fastapi import APIRouter, Depends, Header, HTTPException
+  - from sqlalchemy.orm import Session
+9 |
+  |
+
+I001 [*] Import block is un-sorted or un-formatted
+ --> apps\api\app\models\telegram.py:1:1
+  |
+1 | / from datetime import datetime
+2 | |
+3 | | from app.db.base import Base
+4 | | from sqlalchemy import JSON, BigInteger, DateTime, ForeignKey, String, Text
+5 | | from sqlalchemy.orm import Mapped, mapped_column
+  | |________________________________________________^
+help: Organize imports
+  |
+2 |
+  - from app.db.base import Base
+3 | from sqlalchemy import JSON, BigInteger, DateTime, ForeignKey, String, Text
+4 | from sqlalchemy.orm import Mapped, mapped_column
+5 |
+6 + from app.db.base import Base
+7 +
+8 |
+  |
+
+Found 2 errors.
+[*] 2 fixable with the `--fix` option.

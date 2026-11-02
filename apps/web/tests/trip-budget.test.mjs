@@ -16,7 +16,7 @@ test("one-way and invalid dates do not claim a known stay, unknown flight stays 
 });
 
 test("shared hotel and transport are not multiplied by people",()=>{
- const result=calculateBudget({...emptyBudget,flight:"300",baggage:"50",hotel:"200",transfers:"100",local_transport:"0",food:"40",activities:"30",other:"100"});
+ const result=calculateBudget({...emptyBudget,flight:"300",baggage:"50",hotel:"200",transfers:"100",local_transport:"0",food:"40",activities:"30",other:"100",taxes:"0",buffer:"0"});
  assert.equal(result.total,160000);
  assert.equal(result.perPerson,80000);
  assert.deepEqual(result.missing,[]);
@@ -24,7 +24,7 @@ test("shared hotel and transport are not multiplied by people",()=>{
 test("unknown expenses remain incomplete while explicit zero is known",()=>{
  const result=calculateBudget({...emptyBudget,flight:"0"});
  assert.equal(result.total,0);
- assert.equal(result.missing.length,7);
+ assert.equal(result.missing.length,9);
  assert.equal(result.lines.find(line=>line.key==="hotel").total,null);
 });
 test("comma input uses integer grosz and per-person rounding",()=>{

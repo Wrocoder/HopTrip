@@ -1,0 +1,450 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)affiliate-context\\.spec\\.ts$",
+      "(^|/)funnel-analytics\\.spec\\.ts$",
+      "(^|/)stay-context\\.spec\\.ts$",
+      "--project=desktop",
+      "--max-failures=1",
+      "--output=test-results-grow03-desktop",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/test-results-grow03-desktop",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/test-results-grow03-desktop",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-grow03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "affiliate-context.spec.ts",
+      "file": "affiliate-context.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "affiliate context preserves destination and accepted tracking in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7907,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading')\nExpected: \u001b[32m\"Synthetic external destination\"\u001b[39m\nReceived: \u001b[31m\"Request filtered by WAF. (403)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByRole('heading') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading')\u001b[22m\n\u001b[2m    14 × locator resolved to <h1 class=\"blocked_heading\">Request filtered by WAF. (403)</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Request filtered by WAF. (403)\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading')\nExpected: \u001b[32m\"Synthetic external destination\"\u001b[39m\nReceived: \u001b[31m\"Request filtered by WAF. (403)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByRole('heading') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading')\u001b[22m\n\u001b[2m    14 × locator resolved to <h1 class=\"blocked_heading\">Request filtered by WAF. (403)</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Request filtered by WAF. (403)\"\u001b[22m\n\n    at open (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts:25:43)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts:38:3",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts",
+                      "column": 43,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  const expected=await link.getAttribute('href');\n  24 |  const opened=context.waitForEvent('page');await link.click({button:middle?'middle':'left'});const popup=await opened;\n> 25 |  await expect(popup.getByRole('heading')).toHaveText('Synthetic external destination');\n     |                                           ^\n  26 |  expect(popup.url()).toBe(expected);await popup.close();\n  27 | }\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts",
+                        "column": 43,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading')\nExpected: \u001b[32m\"Synthetic external destination\"\u001b[39m\nReceived: \u001b[31m\"Request filtered by WAF. (403)\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByRole('heading') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading')\u001b[22m\n\u001b[2m    14 × locator resolved to <h1 class=\"blocked_heading\">Request filtered by WAF. (403)</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Request filtered by WAF. (403)\"\u001b[22m\n\n\n  23 |  const expected=await link.getAttribute('href');\n  24 |  const opened=context.waitForEvent('page');await link.click({button:middle?'middle':'left'});const popup=await opened;\n> 25 |  await expect(popup.getByRole('heading')).toHaveText('Synthetic external destination');\n     |                                           ^\n  26 |  expect(popup.url()).toBe(expected);await popup.close();\n  27 | }\n  28 |\n    at open (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts:25:43)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts:38:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T14:02:06.323Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\test-results-grow03-desktop\\affiliate-context-affiliat-4ddc1-and-accepted-tracking-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\test-results-grow03-desktop\\affiliate-context-affiliat-4ddc1-and-accepted-tracking-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-grow03\\apps\\web\\tests\\affiliate-context.spec.ts",
+                    "column": 43,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-26f55fea1895b4fcd42a",
+          "file": "affiliate-context.spec.ts",
+          "line": 29,
+          "column": 56
+        },
+        {
+          "title": "affiliate context preserves destination and accepted tracking in en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-400f564ae98c47a1ebfd",
+          "file": "affiliate-context.spec.ts",
+          "line": 29,
+          "column": 56
+        },
+        {
+          "title": "affiliate context preserves destination and accepted tracking in ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-4c8d2da8de42302afab7",
+          "file": "affiliate-context.spec.ts",
+          "line": 29,
+          "column": 56
+        },
+        {
+          "title": "affiliate context preserves destination and accepted tracking in uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-7e8493b002552f3574e9",
+          "file": "affiliate-context.spec.ts",
+          "line": 29,
+          "column": 56
+        },
+        {
+          "title": "middle click on single event ticket is consent-gated and opens unchanged URL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-e64e1971de96e7338b34",
+          "file": "affiliate-context.spec.ts",
+          "line": 59,
+          "column": 39
+        },
+        {
+          "title": "middle click on variant event ticket is consent-gated and opens unchanged URL",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-b8826080e08856b91a8d",
+          "file": "affiliate-context.spec.ts",
+          "line": 59,
+          "column": 39
+        },
+        {
+          "title": "declining analytics keeps localized affiliate and official navigation without events",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-dbe971fcef020c428fc7",
+          "file": "affiliate-context.spec.ts",
+          "line": 75,
+          "column": 5
+        },
+        {
+          "title": "analytics network failure preserves localized affiliate navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1026229c5a186299a3cb-da78f342467a5e63adfe",
+          "file": "affiliate-context.spec.ts",
+          "line": 82,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "funnel-analytics.spec.ts",
+      "file": "funnel-analytics.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "search funnel respects consent, validates payloads and categorizes partner clicks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "80c62227ccaa7ab9ed6a-6b611597f7f7ee213016",
+          "file": "funnel-analytics.spec.ts",
+          "line": 12,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "stay-context.spec.ts",
+      "file": "stay-context.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: local stay dates are explicit and preserve people, money and the outbound context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a08e72103d503d5c2aa2-2d87609a452fc3e3da0d",
+          "file": "stay-context.spec.ts",
+          "line": 20,
+          "column": 56
+        },
+        {
+          "title": "en: local stay dates are explicit and preserve people, money and the outbound context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a08e72103d503d5c2aa2-d6d8a03284f261763b9b",
+          "file": "stay-context.spec.ts",
+          "line": 20,
+          "column": 56
+        },
+        {
+          "title": "ru: local stay dates are explicit and preserve people, money and the outbound context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a08e72103d503d5c2aa2-dd8696f54fca5cf3b3b7",
+          "file": "stay-context.spec.ts",
+          "line": 20,
+          "column": 56
+        },
+        {
+          "title": "uk: local stay dates are explicit and preserve people, money and the outbound context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a08e72103d503d5c2aa2-ebd0d6dd683f31b57aef",
+          "file": "stay-context.spec.ts",
+          "line": 20,
+          "column": 56
+        },
+        {
+          "title": "unknown zones, one-way travel and same-day return never invent a searchable hotel night",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a08e72103d503d5c2aa2-8f62dfdf0aeb2f8b09ca",
+          "file": "stay-context.spec.ts",
+          "line": 69,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-02T14:02:02.405Z",
+    "duration": 13965.077,
+    "expected": 0,
+    "skipped": 13,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

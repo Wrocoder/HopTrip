@@ -16,7 +16,7 @@ export const cityBreakGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"YesMilano — trasa na dwa dni",href:"https://www.yesmilano.it/en/see-and-do/itineraries/two-days-milano"},
    {label:"Duomo di Milano — tarasy i ich układ",href:"https://www.duomomilano.it/en/art-and-culture/the-terraces/"},
-  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals"}],related:["milan-airports","concert-trip","city-break-planning"],
+  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals?destination=milan"}],related:["milan-airports","concert-trip","city-break-planning"],
  },
  "paris-weekend":{
   title:"Paryż na weekend: plan zwiedzania na 2 dni",
@@ -31,7 +31,7 @@ export const cityBreakGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"Musée du Louvre — godziny i rezerwacje",href:"https://www.louvre.fr/en/visit/hours-admission"},
    {label:"Paris je t’aime — spacer po Montmartre",href:"https://parisjetaime.com/eng/article/village-paris-a922"},
-  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals"}],related:["paris-airports","city-break-planning","concert-trip"],
+  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals?destination=paris"}],related:["paris-airports","city-break-planning","concert-trip"],
  },
  "stockholm-weekend":{
   title:"Sztokholm w 2 dni: Gamla Stan i Djurgården",
@@ -47,7 +47,7 @@ export const cityBreakGuides:Record<string,InfoContent>={
    {label:"Visit Stockholm — Gamla Stan",href:"https://www.visitstockholm.com/stockholms-districts/gamla-stan/"},
    {label:"Visit Stockholm — atrakcje Djurgården",href:"https://www.visitstockholm.com/see-do/attractions/district-guide-djurgarden/"},
    {label:"Vasamuseet — zaplanuj wizytę",href:"https://www.vasamuseet.se/en/visit"},
-  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals"}],related:["stockholm-airports","oslo-weekend","concert-trip"],
+  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals?destination=stockholm"}],related:["stockholm-airports","oslo-weekend","concert-trip"],
  },
  "oslo-weekend":{
   title:"Oslo na weekend: fiord, opera i muzea w 2 dni",
@@ -62,7 +62,7 @@ export const cityBreakGuides:Record<string,InfoContent>={
   ],sources:[
    {label:"VisitOSLO — promenada portowa",href:"https://www.visitoslo.com/articles/the-harbour-promenade"},
    {label:"MUNCH — informacje dla odwiedzających",href:"https://www.munch.no/en/visit-us/"},
-  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals"}],related:["norwegia-wieloryby-lodowce-fiordy","islandia-wieloryby-lodowce-atrakcje","stockholm-weekend","city-break-planning","concert-trip"],
+  ],routes:[{label:"Sprawdź aktualne loty",href:"/deals?destination=oslo"}],related:["norwegia-wieloryby-lodowce-fiordy","islandia-wieloryby-lodowce-atrakcje","stockholm-weekend","city-break-planning","concert-trip"],
  },
  "concert-trip":{
   title:"Wyjazd na koncert za granicę: lot, nocleg i bilety",

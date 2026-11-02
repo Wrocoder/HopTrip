@@ -1,0 +1,65 @@
+{
+  "task": "DEAL-01",
+  "status": "DONE",
+  "date": "2026-10-31",
+  "unit": {
+    "passed": 145,
+    "newUnitCases": 0
+  },
+  "lint": "passed",
+  "build": {
+    "status": "passed",
+    "typescript": "passed",
+    "staticPages": 61
+  },
+  "browser": {
+    "initial": {
+      "startTime": "2026-10-31T08:40:36.389Z",
+      "duration": 179786.282,
+      "expected": 23,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "layout": {
+      "startTime": "2026-10-31T08:46:31.076Z",
+      "duration": 207029.915,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "final": {
+      "startTime": "2026-10-31T08:51:21.963Z",
+      "duration": 164173.44999999998,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "finalErrors": [],
+    "fullSuiteClaimed": false
+  },
+  "sourceParity": {
+    "files": 546,
+    "workspace": ".cache/aud05-deal01-card-final",
+    "mismatches": []
+  },
+  "backendRun": false,
+  "safety": {
+    "productionChanged": false,
+    "apiChanged": false,
+    "dbChanged": false,
+    "fixtureChanged": false,
+    "credentialsChanged": false,
+    "campaignsEnabled": false,
+    "testServersStopped": true,
+    "nextTaskStarted": false
+  },
+  "limitations": [
+    "Chrome headless fixtures, no device/WCAG/performance/conversion certification",
+    "Critical cards may grow to expose every material warning; no clipping",
+    "PLN contract and optional approximate EUR only; no new currency support",
+    "Cold API/pending-origin observations remain open; broader26 not repeated after final PARTIAL disclosure change"
+  ]
+}

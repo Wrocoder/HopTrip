@@ -27,7 +27,7 @@ test("localized signup, confirmation and management preserve contracts and priva
   await page.getByRole("button",{name:t("Wyślij link potwierdzający")}).click();
   expect((await sent).postDataJSON()).toEqual({email,consent:true,filters:{origin:"WRO",budget:"230",duration_min:2,duration_max:4,destination:"barcelona",departure_from:null,departure_to:null,weekend:true,frequency:"weekly"}});
   await expect(page.getByRole("status")).toContainText(t("Sprawdź skrzynkę i spam. Jeśli adres może otrzymywać alerty, dostaniesz link do potwierdzenia lub zarządzania. Prośba o zapis nie oznacza potwierdzonej subskrypcji. Link wysyłamy najwyżej raz na dobę."));
-  expect(events).toEqual([]);
+  await expect.poll(()=>events.map(event=>event.event_name)).toEqual(["ALERT_STARTED"]);
   const mails=await (await request.get(`http://127.0.0.1:8100/__test__/mail?email=${encodeURIComponent(email)}`)).json();
   const confirm=new URL(mails[0].body.match(/http[^\s]+\/alerts\/confirm#token=[^\s]+/)[0]);
   // Emails keep their existing Polish URLs; users can switch language without losing the capability.
@@ -37,11 +37,11 @@ test("localized signup, confirmation and management preserve contracts and priva
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","noindex, nofollow");
   await expect(page.locator('meta[name="referrer"]')).toHaveAttribute("content","no-referrer");
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/${locale}/alerts/confirm`);
-  expect(events).toEqual([]);
+  expect(events.map(event=>event.event_name)).toEqual(["ALERT_STARTED"]);
   await page.getByRole("button",{name:t("Potwierdzam zapis")}).click();
   await expect(page.getByRole("status")).toHaveText(t("Alert został potwierdzony."));
-  await expect.poll(()=>events.length).toBe(1);
-  expect(events[0].event_name).toBe("ALERT_CONFIRMED");
+  await expect.poll(()=>events.length).toBe(2);
+  expect(events[1].event_name).toBe("ALERT_CONFIRMED");
   expect(JSON.stringify(events)).not.toContain(email);
   expect(JSON.stringify(events)).not.toContain(confirm.hash.slice(7));
   await page.getByRole("link",{name:t("Zarządzaj alertem")}).click();
@@ -60,7 +60,7 @@ test("localized signup, confirmation and management preserve contracts and priva
   await page.locator(".alert-panel").screenshot({path:testInfo.outputPath(`alerts-${locale}.png`)});
   await page.getByRole("button",{name:t("Wyłącz alert")}).click();
   await expect(page.getByText(t("Ten alert jest wyłączony."))).toBeVisible();
-  expect(events).toHaveLength(1);
+  expect(events).toHaveLength(2);
   expect(external).toEqual([]);
  }
 });

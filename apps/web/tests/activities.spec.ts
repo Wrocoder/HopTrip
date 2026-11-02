@@ -1,3 +1,4 @@
+import {localOutbound} from './local-outbound';
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import {activitySelections,activitiesForDestination} from "../src/lib/destination-activities";
@@ -31,11 +32,11 @@ for(const [guide,city,id,kind] of [
     const panel=page.getByRole("region",{name:/Muzea i atrakcje|Wycieczki i atrakcje/});
     const link=panel.getByRole("link").first();
     async function openLink() {
-      const popupPromise=page.waitForEvent("popup");
+      const restore=await localOutbound(link);const popupPromise=page.waitForEvent("popup");
       await link.click();
       const popup=await popupPromise;
       await popup.waitForLoadState();
-      await popup.close();
+      await popup.close();await restore();
     }
     await openLink();
     expect(events).toEqual([]);
@@ -174,11 +175,11 @@ test("free Barcelona visit records an official click without affiliate event",as
  await page.getByRole("button",{name:"Ustawienia prywatności",exact:true}).click();
  await page.getByRole("checkbox",{name:/Analityka HopTrip/}).check();
  await page.getByRole("button",{name:"Zapisz wybór",exact:true}).click();
- const popupPromise=page.waitForEvent("popup");
+ const officialLink=page.getByRole('link',{name:/Sprawdź zasady wizyty: Hivernacle/});const restore=await localOutbound(officialLink);const popupPromise=page.waitForEvent("popup");
  const response=page.waitForResponse(r=>r.url().endsWith("/analytics/events") && r.request().postDataJSON()?.event_name==="ACTIVITY_CLICK");
  await page.getByRole("link",{name:/Sprawdź zasady wizyty: Hivernacle/}).click();
  const popup=await popupPromise;
- await popup.waitForLoadState();await popup.close();
+ await popup.waitForLoadState();await popup.close();await restore();
  expect((await response).status()).toBe(202);
  expect(events.filter(e=>e.event_name==="ACTIVITY_CLICK").map(e=>e.activity)).toEqual([
   expect.objectContaining({activity_id:"official-hivernacle",link_kind:"official"}),

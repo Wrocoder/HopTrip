@@ -1,3 +1,4 @@
+import logging
 from datetime import UTC, datetime
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -9,6 +10,7 @@ from app.schemas.alert import AlertSignup, AlertToken, AlertUpdate
 from app.services import alerts
 
 router = APIRouter(prefix="/api/v1/alerts", tags=["alerts"])
+logger = logging.getLogger(__name__)
 
 
 @router.get("/status")
@@ -41,6 +43,7 @@ def update(value: AlertUpdate, db: Session = Depends(get_db), settings: Settings
         raise HTTPException(409, "Only confirmed active alerts can be edited")
     alert.filters = alerts.normalized_filters(db, value.filters)
     db.commit()
+    logger.info("Alert preferences updated")
     return {"status": alert.status, "filters": alert.filters}
 
 
@@ -51,4 +54,5 @@ def unsubscribe(value: AlertToken, db: Session = Depends(get_db), settings: Sett
         alert.status = "STOPPED"
         alert.stopped_at = datetime.now(UTC)
         db.commit()
+        logger.info("Alert subscription stopped")
     return {"status": "STOPPED"}

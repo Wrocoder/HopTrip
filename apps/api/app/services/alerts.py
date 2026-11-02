@@ -1,4 +1,4 @@
-"""Subscription preferences and double opt-in; digest delivery is a separate task."""
+"""Subscription preferences and double opt-in; digest delivery runs in a separate worker."""
 
 import hashlib
 import hmac
@@ -90,6 +90,7 @@ def signup(db: Session, settings: Settings, value: AlertSignup) -> None:
     except IntegrityError:
         db.rollback()  # Concurrent signup for the same email: keep the same generic response.
         return
+    logger.info("Alert signup committed")
     purpose = "manage" if alert.status == "ACTIVE" else "confirm"
     body = ("Zarządzaj swoim alertem HopTrip:\n" if purpose == "manage" else
             "Potwierdź alert HopTrip (link ważny przez 48 godzin). Bez potwierdzenia nie wyślemy ofert.\n")
@@ -108,6 +109,7 @@ def signup(db: Session, settings: Settings, value: AlertSignup) -> None:
     body += "Wypisanie i ustawienia: " + alert_link(settings, alert, "manage")
     try:
         send_alert_mail(settings, alert.email, "Twój alert lotniczy HopTrip", body)
+        logger.info("Alert confirmation mail submitted")
     except Exception:
         # Never log SMTP exceptions: providers may include the recipient or credentials.
         logger.warning("Alert confirmation delivery failed")
@@ -122,4 +124,5 @@ def confirm(db: Session, settings: Settings, token: str) -> str:
         alert.status = "ACTIVE"
         alert.confirmed_at = datetime.now(UTC)
         db.commit()
+        logger.info("Alert confirmation activated")
     return capability(settings, alert, "manage")

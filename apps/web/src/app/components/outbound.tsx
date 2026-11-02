@@ -9,13 +9,16 @@ import {useTripDraft} from "./trip-draft";
 import {passengerInstruction} from "../../lib/passenger-label";
 import {useOfferExpired} from './use-offer-expired';
 import {freshnessCopy} from '../../lib/i18n/freshness-copy';
+import Link from 'next/link';
+import {stateText} from '../../lib/i18n/state-copy';
+import {localizedHref} from '../../lib/i18n/routing';
 export function Outbound({component,dealSlug,hiddenAfter}:{component:Component;dealSlug?:string;hiddenAfter?:string|null}) {
  const {locale,messages:pl}=useLocale();
  const t=(source:TripKey)=>tripText(locale,source);
   const plan=useTripDraft();
   const expired=useOfferExpired(hiddenAfter);
-  if(expired)return <div className="price-expired"><p>{freshnessCopy[locale].expired}</p><button className="button button-secondary" onClick={()=>window.location.reload()}>{freshnessCopy[locale].refresh}</button></div>;
-  if (!component.available || !component.redirect_path) return <p>{component.reason==="PROGRAM_UNAVAILABLE" ? t("Oferta partnera jest obecnie niedostępna. Spróbuj ponownie później.") : pl.noLink}</p>;
+  if(expired)return <div className="price-expired"><p>{freshnessCopy[locale].expired}</p><button className="button button-secondary" onClick={()=>window.location.reload()}>{freshnessCopy[locale].refresh}</button><p><Link prefetch={false} href={localizedHref('/deals',locale)}>{stateText(locale,'Wróć do katalogu lotów')}</Link></p></div>;
+  if (!component.available || !component.redirect_path) return <div className="partner-unavailable" role="status"><p>{component.reason==="PROGRAM_UNAVAILABLE" ? t("Oferta partnera jest obecnie niedostępna. Spróbuj ponownie później.") : pl.noLink}</p><Link prefetch={false} href={localizedHref('/deals',locale)}>{stateText(locale,'Wróć do katalogu lotów')}</Link></div>;
   const path=component.redirect_path;
   return <>{component.component_type==="FLIGHT" && plan && <p className="partner-limitation" data-testid="flight-search-limitation">
     <strong>{plan.ready ? passengerInstruction(plan.draft.input.people,plan.draft.adultsOnly===true,locale) : t("U partnera ustaw skład grupy.")}</strong>{" "}

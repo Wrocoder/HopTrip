@@ -3,6 +3,16 @@ import test from "node:test";
 import {compactFlightTime,flightPriceBasis,flightTime,flightDayShift,stopsLabel,destinationInterval,flightLegs} from "../src/lib/flight-facts.ts";
 import {budgetForTrip} from "../src/lib/trip-budget.ts";
 
+test("impossible calendar dates and clocks cannot silently roll into another flight day",()=>{
+ for(const value of ["2030-02-30T12:00:00Z","2027-02-29T12:00:00+01:00",
+  "2030-04-31T12:00:00Z","2030-01-01T24:00:00Z","0000-01-01T12:00:00Z"]){
+  assert.equal(flightTime(value,"Europe/Warsaw"),null,value);
+  assert.equal(compactFlightTime(value,"Europe/Warsaw"),null,value);
+  assert.equal(flightDayShift(value,"2030-03-02T12:00:00Z","UTC","UTC"),null,value);
+ }
+ assert.match(flightTime("2028-02-29T12:00:00.123Z","Europe/Warsaw"),/29\.02\.2028.*13:00/);
+});
+
 test("compact clocks retain local rollover and explicit UTC for unknown zones",()=>{
  const local=compactFlightTime("2026-10-24T22:40:00Z","Europe/Warsaw");
  assert.equal(local.time,"00:40");

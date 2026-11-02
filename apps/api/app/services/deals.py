@@ -6,6 +6,7 @@ from app.models.offer import TravelOffer
 from app.models.statistics import RouteStatistics
 from app.services.price_lifetime import fresh_price_clause, price_deadline
 from app.services.scoring import SCORE_VERSION, score_flight_deal
+from app.services.statistics import STATISTICS_VERSION
 from app.services.time import utc
 from app.services.trip_dates import trip_dates
 from sqlalchemy import select
@@ -25,15 +26,18 @@ def generate_flight_deal(
     checked_at = now or datetime.now(UTC)
     if utc(offer.depart_at) <= checked_at:
         return None
-    duration = (offer.return_at.date() - offer.depart_at.date()).days if offer.return_at else None
+    duration = (utc(offer.return_at).date() - utc(offer.depart_at).date()).days if offer.return_at else None
     stats = db.scalar(
         select(RouteStatistics).where(
             RouteStatistics.data_provider_id == offer.data_provider_id,
             RouteStatistics.origin_airport_id == offer.origin_airport_id,
             RouteStatistics.destination_id == offer.destination_id,
             RouteStatistics.product_type == offer.product_type,
-            RouteStatistics.departure_month == offer.depart_at.strftime("%Y-%m"),
+            RouteStatistics.departure_month == utc(offer.depart_at).strftime("%Y-%m"),
             RouteStatistics.trip_duration_days == duration,
+            RouteStatistics.methodology_version == STATISTICS_VERSION,
+            RouteStatistics.sample_count > 0,
+            RouteStatistics.calculated_at <= checked_at,
         )
     )
     score = score_flight_deal(

@@ -1,0 +1,179 @@
+✖ malformed 200 catalog page is an unavailable response, never an empty result (17.193ms)
+✖ 200 null detail is not confused with a genuine 404 (1.5429ms)
+✖ malformed airport registry is rejected before a selector can use it (4.5621ms)
+✖ malformed alert status fails closed instead of accepting a truthy string (6.2447ms)
+✖ invalid JSON is classified without leaking its body (1.8027ms)
+✖ network rejection has a stable API error and is attempted only once (0.9436ms)
+✖ timeout rejection has a stable API error and is not retried (1.0924ms)
+✔ HTTP errors preserve status/code and genuine 404 detail remains null (1.7068ms)
+✔ valid empty pages beyond total keep offset and do not invent results (1.237ms)
+✖ invalid pagination metadata is rejected before rendering (1.8608ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 2
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 460.9024
+
+✖ failing tests:
+
+test at tests\api-client-contract.test.mjs:21:1
+✖ malformed 200 catalog page is an unavailable response, never an empty result (17.193ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:22:2
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:24:1
+✖ 200 null detail is not confused with a genuine 404 (1.5429ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:25:2
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:27:1
+✖ malformed airport registry is rejected before a selector can use it (4.5621ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:28:2
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:30:1
+✖ malformed alert status fails closed instead of accepting a truthy string (6.2447ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+  +   enabled: 'false'
+  -   delivery_enabled: false,
+  -   enabled: false
+    }
+  
+      at file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:31:9
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { enabled: 'false' },
+    expected: { enabled: false, delivery_enabled: false },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:33:1
+✖ invalid JSON is classified without leaking its body (1.8027ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  SyntaxError: Unexpected token '<', "<private u"... is not valid JSON
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:34:2
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: SyntaxError: Unexpected token '<', "<private u"... is not valid JSON
+        at JSON.parse (<anonymous>)
+        at parseJSONFromBytes (node:internal/deps/undici/undici:4259:19)
+        at successSteps (node:internal/deps/undici/undici:6882:27)
+        at readAllBytes (node:internal/deps/undici/undici:5807:13),
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:36:1
+✖ network rejection has a stable API error and is attempted only once (0.9436ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  TypeError: private upstream URL
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:38:3
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async TestContext.<anonymous> (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:37:14)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TypeError: private upstream URL
+        at file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:37:54
+        at getJson (evalmachine.<anonymous>:21:28)
+        at Object.getDeals (evalmachine.<anonymous>:38:12)
+        at file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:38:28
+        at withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:106)
+        at TestContext.<anonymous> (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:37:20)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1106:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+        at Test.postRun (node:internal/test_runner/test:1235:19),
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:41:1
+✖ timeout rejection has a stable API error and is not retried (1.0924ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  TimeoutError: Synthetic deadline
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:42:2
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: TimeoutError: Synthetic deadline
+        at new DOMException (node:internal/per_context/domexception:76:18)
+        at file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:41:98
+        at getJson (evalmachine.<anonymous>:21:28)
+        at Object.getDeals (evalmachine.<anonymous>:38:12)
+        at file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:42:27
+        at withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:106)
+        at TestContext.<anonymous> (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:41:72)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1106:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:788:18),
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\api-client-contract.test.mjs:53:1
+✖ invalid pagination metadata is rejected before rendering (1.8608ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:55:3
+      at async withFetch (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:18:100)
+      at async TestContext.<anonymous> (file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests/api-client-contract.test.mjs:54:112)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }

@@ -10,10 +10,9 @@ from app.models.alert import AlertDelivery, DealAlert
 from app.models.deal import Deal
 from app.models.location import Destination
 from app.schemas.alert import AlertFilters
-from app.services.airports import matching_airports
 from app.services.alert_mail import send_alert_mail
+from app.services.alert_matching import candidate_deals
 from app.services.alerts import alert_link, utc
-from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.destination_search import destination_search_fields
 from pydantic import ValidationError
@@ -35,41 +34,17 @@ def due(settings: Settings, filters: AlertFilters, last: datetime | None, now: d
     return last is None or (local.date() - utc(last).astimezone(WARSAW).date()).days >= interval
 
 
-def matching_deals(db: Session, alert: DealAlert, filters: AlertFilters, now: datetime) -> list[Deal]:
-    airports = matching_airports(db, filters.origin)
-    if len(airports) != 1:
-        return []
-    query = available_deals_query(now).join(Destination).where(
-        Destination.is_active.is_(True), Deal.origin_airport_id == airports[0].id,
-        Deal.price_per_person_pln <= filters.budget,
-        Deal.nights >= filters.duration_min, Deal.nights <= filters.duration_max,
-    )
-    if filters.destination:
-        query = query.where(Destination.slug == filters.destination)
-    if filters.departure_from:
-        query = query.where(Deal.trip_start >= filters.departure_from)
-    if filters.departure_to:
-        query = query.where(Deal.trip_start <= filters.departure_to)
-    used = {deal_id for delivery in db.scalars(select(AlertDelivery).where(
-        AlertDelivery.alert_id == alert.id
-    )) for deal_id in delivery.deal_ids}
-    if used:
-        query = query.where(Deal.id.not_in(used))
-    selected = []
-    for deal in db.scalars(query.order_by(Deal.price_per_person_pln, Deal.id)):
-        view = serialize_deal(db, deal)
-        # Nights cannot be promised without a known return flight, even for legacy rows.
-        if view.trip_type != "ROUND_TRIP":
-            continue
-        if filters.weekend and not (
-            deal.trip_start.weekday() in (4, 5) and deal.trip_end.weekday() == 6
-            and (deal.trip_end - deal.trip_start).days in (1, 2)
-        ):
-            continue
-        selected.append(deal)
-        if len(selected) == 5:
-            break
-    return selected
+def matching_deals(
+    db: Session, alert: DealAlert, filters: AlertFilters, now: datetime, *,
+    reservation: AlertDelivery | None = None,
+) -> list[Deal]:
+    history = select(AlertDelivery).where(AlertDelivery.alert_id == alert.id)
+    if reservation is not None:
+        # Revalidate exactly this reservation without treating itself as a prior send.
+        history = history.where(AlertDelivery.id != reservation.id)
+    used = {deal_id for delivery in db.scalars(history) for deal_id in delivery.deal_ids}
+    return candidate_deals(db, filters, now, excluded=used,
+                           included=reservation.deal_ids if reservation else None)
 
 
 def digest_body(db: Session, settings: Settings, alert: DealAlert, deals: list[Deal]) -> str:
@@ -111,17 +86,22 @@ def cleanup(db: Session, now: datetime) -> None:
     db.execute(delete(AlertDelivery).where(AlertDelivery.alert_id.in_(obsolete)))
     db.execute(delete(DealAlert).where(DealAlert.id.in_(obsolete)))
     db.commit()
+    logger.info("Alert retention cleanup completed")
 
 
 def deliver_digests(db: Session, settings: Settings, now: datetime | None = None) -> dict[str, int]:
     counts = {"sent": 0, "uncertain": 0, "skipped": 0, "cancelled": 0}
     if not settings.alerts_enabled or not settings.alerts_digest_enabled:
         return counts
-    now = utc(now or datetime.now(UTC))
-    cleanup(db, now)
+    # An injected instant freezes tests; a real batch must advance its clock per send.
+    def clock() -> datetime:
+        return utc(now if now is not None else datetime.now(UTC))
+
+    cleanup(db, clock())
     ids = list(db.scalars(select(DealAlert.id).where(DealAlert.status == "ACTIVE")))
     db.commit()
     for alert_id in ids:
+        checked_at = clock()
         # PostgreSQL is the worker runtime; row locks serialize competing workers.
         alert = db.scalar(select(DealAlert).where(DealAlert.id == alert_id)
                           .with_for_update().execution_options(populate_existing=True))
@@ -130,21 +110,20 @@ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None
         except ValidationError:
             filters = None
         if (alert is None or alert.status != "ACTIVE" or alert.confirmed_at is None
-                or filters is None or not due(settings, filters, alert.last_digest_at, now)):
+                or filters is None or not due(settings, filters, alert.last_digest_at, checked_at)):
             db.rollback()
             counts["skipped"] += 1
             continue
-        deals = matching_deals(db, alert, filters, now)
+        deals = matching_deals(db, alert, filters, checked_at)
         if not deals:
             db.rollback()
             counts["skipped"] += 1
             continue
         original_filters = dict(alert.filters)
-        body = digest_body(db, settings, alert, deals)
         delivery = AlertDelivery(alert_id=alert_id, deal_ids=[deal.id for deal in deals],
-                                 status="RESERVED", created_at=now)
+                                 status="RESERVED", created_at=checked_at)
         db.add(delivery)
-        alert.last_digest_at = now
+        alert.last_digest_at = checked_at
         # At-most-once attempt, including a crash after SMTP accepted the message.
         db.commit()
         alert = db.scalar(select(DealAlert).where(DealAlert.id == alert_id)
@@ -153,11 +132,23 @@ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None
             delivery.status = "CANCELLED"
             counts["cancelled"] += 1
             db.commit()
+            logger.info("Alert digest cancelled: subscription changed")
             continue
+        # Data may expire, be hidden, change price or lose itinerary evidence while
+        # the reservation is committed. Fail closed; do not fill it with other deals.
+        deals = matching_deals(db, alert, filters, clock(), reservation=delivery)
+        if {deal.id for deal in deals} != set(delivery.deal_ids):
+            delivery.status = "CANCELLED"
+            counts["cancelled"] += 1
+            db.commit()
+            logger.info("Alert digest cancelled: matches changed")
+            continue
+        body = digest_body(db, settings, alert, deals)
         try:
             send_alert_mail(settings, alert.email, "Twoja lista lotów — HopTrip", body)
             delivery.status = "SENT"
             counts["sent"] += 1
+            logger.info("Alert digest submitted")
         except Exception:
             delivery.status = "UNCERTAIN"
             counts["uncertain"] += 1

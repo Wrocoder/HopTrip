@@ -18,7 +18,7 @@ import {tripPresets} from "../src/lib/trip-filters.ts";
 // actions and analytics are stubbed; dictionaries, fields and selectors are real.
 const require=createRequire(import.meta.url),cache=new Map();
 function load(file){
- if(file.endsWith('/actions/origin-preference'))return {rememberOrigin:async()=>{}};
+ if(file.endsWith('/actions/origin-preference'))return {searchWithOrigin:async()=>{}};
  if(file.endsWith('/lib/session'))return {track:()=>{}};
  const resolved=[file,file+'.tsx',file+'.ts'].find(p=>fs.existsSync(p)&&fs.statSync(p).isFile());
  if(!resolved)throw new Error(file);
@@ -62,4 +62,25 @@ test('localized search resolves original IATA and slugs, preserving unknown and 
  assert.equal(matchingDestinations([...destinations,duplicate],'Milan').length,2);
  assert.equal(destinationLabel({...destinations[0],slug:'unknown-city',city:'Local name'},'uk'),'Local name');
  for(const source of Object.keys(filterCopy))for(const locale of locales)assert.ok(filterText(locale,source).trim());
+});
+
+test('sorting describes the applied URL and connects its rule to the selector in every locale',()=>{
+ for(const locale of locales)for(const sort of ['score','price','departure']){
+  const html=renderToStaticMarkup(React.createElement(LocaleProvider,{locale,messages:getMessages(locale)},React.createElement(FilterForm,{airports,destinations,filters:{sort}})));
+  const rule=html.match(/<p class="sort-explanation field-hint" id="([^"]+)">([\s\S]*?)<\/p>/);
+  assert.ok(rule);
+  assert.ok(html.includes(`aria-describedby="${rule[1]}"`));
+  assert.ok(rule[2].includes(filterText(locale,'Zastosowane sortowanie:')));
+  assert.equal(rule[2].includes('/info/price-comparison'),sort==='score');
+ }
+});
+
+test('invalid sort has no invented applied order and the hero does not gain sorting controls',()=>{
+ for(const locale of locales){
+  const render=props=>renderToStaticMarkup(React.createElement(LocaleProvider,{locale,messages:getMessages(locale)},React.createElement(FilterForm,{airports,destinations,...props})));
+  const invalid=render({filters:{sort:'duration'}});
+  assert.ok(invalid.includes(filterText(locale,'Wybierz poprawne sortowanie, aby uporządkować wyniki.')));
+  assert.ok(!invalid.includes(filterText(locale,'Zastosowane sortowanie:')));
+  assert.ok(!render({filters:{},hero:true}).includes('name="sort"'));
+ }
 });

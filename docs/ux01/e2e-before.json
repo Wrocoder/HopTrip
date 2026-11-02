@@ -1,0 +1,236 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "hero-search.spec.ts",
+      "--grep",
+      "one primary search",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ux01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "hero-search.spec.ts",
+      "file": "hero-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "hero has one primary search, visible flexible dates and an explicit anywhere choice",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6861,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hero').getByRole('heading', { level: 1 })\nExpected: \u001b[32m\"\u001b[7mTanie podróże zaczynają się tutaj\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mZnajdź lot. Zaplanuj krótki wyjazd\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.hero').getByRole('heading', { level: 1 }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hero').getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    14 × locator resolved to <h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Znajdź lot. Zaplanuj krótki wyjazd.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hero').getByRole('heading', { level: 1 })\nExpected: \u001b[32m\"\u001b[7mTanie podróże zaczynają się tutaj\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mZnajdź lot. Zaplanuj krótki wyjazd\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.hero').getByRole('heading', { level: 1 }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hero').getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    14 × locator resolved to <h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Znajdź lot. Zaplanuj krótki wyjazd.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts:12:52",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts",
+                      "column": 52,
+                      "line": 12
+                    },
+                    "snippet": "  10 |  await page.screenshot({path:testInfo.outputPath('hero.png'),fullPage:false});\n  11 |  const hero=page.locator('.hero');\n> 12 |  await expect(hero.getByRole('heading',{level:1})).toHaveText('Tanie podróże zaczynają się tutaj.');\n     |                                                    ^\n  13 |  await expect(hero.locator('form')).toHaveCount(1);\n  14 |  await expect(hero.locator('button[type=\"submit\"]')).toHaveCount(1);\n  15 |  await expect(hero.locator('.trip-presets')).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts",
+                        "column": 52,
+                        "line": 12
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hero').getByRole('heading', { level: 1 })\nExpected: \u001b[32m\"\u001b[7mTanie podróże zaczynają się tutaj\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mZnajdź lot. Zaplanuj krótki wyjazd\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.hero').getByRole('heading', { level: 1 }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hero').getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    14 × locator resolved to <h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Znajdź lot. Zaplanuj krótki wyjazd.\"\u001b[22m\n\n\n  10 |  await page.screenshot({path:testInfo.outputPath('hero.png'),fullPage:false});\n  11 |  const hero=page.locator('.hero');\n> 12 |  await expect(hero.getByRole('heading',{level:1})).toHaveText('Tanie podróże zaczynają się tutaj.');\n     |                                                    ^\n  13 |  await expect(hero.locator('form')).toHaveCount(1);\n  14 |  await expect(hero.locator('button[type=\"submit\"]')).toHaveCount(1);\n  15 |  await expect(hero.locator('.trip-presets')).toHaveCount(0);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts:12:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T17:44:06.796Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\test-results\\hero-search-hero-has-one-p-eebcd-an-explicit-anywhere-choice-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\test-results\\hero-search-hero-has-one-p-eebcd-an-explicit-anywhere-choice-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts",
+                    "column": 52,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c4387171f6fbd48141b-d54f7c18869c99b97077",
+          "file": "hero-search.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "hero has one primary search, visible flexible dates and an explicit anywhere choice",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8068,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hero').getByRole('heading', { level: 1 })\nExpected: \u001b[32m\"\u001b[7mTanie podróże zaczynają się tutaj\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mZnajdź lot. Zaplanuj krótki wyjazd\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.hero').getByRole('heading', { level: 1 }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hero').getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    14 × locator resolved to <h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Znajdź lot. Zaplanuj krótki wyjazd.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hero').getByRole('heading', { level: 1 })\nExpected: \u001b[32m\"\u001b[7mTanie podróże zaczynają się tutaj\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mZnajdź lot. Zaplanuj krótki wyjazd\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.hero').getByRole('heading', { level: 1 }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hero').getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    14 × locator resolved to <h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Znajdź lot. Zaplanuj krótki wyjazd.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts:12:52",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts",
+                      "column": 52,
+                      "line": 12
+                    },
+                    "snippet": "  10 |  await page.screenshot({path:testInfo.outputPath('hero.png'),fullPage:false});\n  11 |  const hero=page.locator('.hero');\n> 12 |  await expect(hero.getByRole('heading',{level:1})).toHaveText('Tanie podróże zaczynają się tutaj.');\n     |                                                    ^\n  13 |  await expect(hero.locator('form')).toHaveCount(1);\n  14 |  await expect(hero.locator('button[type=\"submit\"]')).toHaveCount(1);\n  15 |  await expect(hero.locator('.trip-presets')).toHaveCount(0);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts",
+                        "column": 52,
+                        "line": 12
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.hero').getByRole('heading', { level: 1 })\nExpected: \u001b[32m\"\u001b[7mTanie podróże zaczynają się tutaj\u001b[27m.\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mZnajdź lot. Zaplanuj krótki wyjazd\u001b[27m.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.hero').getByRole('heading', { level: 1 }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.hero').getByRole('heading', { level: 1 })\u001b[22m\n\u001b[2m    14 × locator resolved to <h1>Znajdź lot. Zaplanuj krótki wyjazd.</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Znajdź lot. Zaplanuj krótki wyjazd.\"\u001b[22m\n\n\n  10 |  await page.screenshot({path:testInfo.outputPath('hero.png'),fullPage:false});\n  11 |  const hero=page.locator('.hero');\n> 12 |  await expect(hero.getByRole('heading',{level:1})).toHaveText('Tanie podróże zaczynają się tutaj.');\n     |                                                    ^\n  13 |  await expect(hero.locator('form')).toHaveCount(1);\n  14 |  await expect(hero.locator('button[type=\"submit\"]')).toHaveCount(1);\n  15 |  await expect(hero.locator('.trip-presets')).toHaveCount(0);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts:12:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T17:44:15.101Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\test-results\\hero-search-hero-has-one-p-eebcd-an-explicit-anywhere-choice-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\test-results\\hero-search-hero-has-one-p-eebcd-an-explicit-anywhere-choice-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ux01\\apps\\web\\tests\\hero-search.spec.ts",
+                    "column": 52,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2c4387171f6fbd48141b-8cdb3cbec5f4d7c38771",
+          "file": "hero-search.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T17:43:55.786Z",
+    "duration": 29379.714,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

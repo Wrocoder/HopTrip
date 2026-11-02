@@ -1,0 +1,182 @@
+{
+  "task": "GROW-02",
+  "asOf": "2026-11-02",
+  "tests": {
+    "initialFocused": {
+      "tests": 114,
+      "failures": 0
+    },
+    "initialBackend": {
+      "tests": 857,
+      "failures": 1
+    },
+    "initialPostgres": {
+      "tests": 17,
+      "failures": 3
+    },
+    "finalBackend": {
+      "tests": 861,
+      "failures": 0
+    },
+    "finalPostgres": {
+      "tests": 18,
+      "failures": 0
+    }
+  },
+  "backendUnique": 879,
+  "telegramNewCases": 72,
+  "postgresNewCases": 3,
+  "runs": {
+    "desktop": {
+      "stats": {
+        "startTime": "2026-11-02T08:36:28.385Z",
+        "duration": 32206.707,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    "mobile": {
+      "stats": {
+        "startTime": "2026-11-02T08:38:11.177Z",
+        "duration": 41797.436,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  },
+  "uniqueBrowserScenarios": 18,
+  "retries": 0,
+  "parityFiles": 581,
+  "parityDifferences": [
+    "apps/api/app/services/telegram_subscriptions.py"
+  ],
+  "parityExplanation": "Only Telegram receipt epoch handling added after browser runs; separately covered by final Python/PG acceptance. Shared email/web sources match.",
+  "testParity": {
+    "alerts.spec.ts": true,
+    "localized-alerts.spec.ts": true
+  },
+  "scope": {
+    "baselineFiles": 2056,
+    "modifiedBaseline": [
+      "docs/HOPTRIP_AUDIT.md",
+      "docs/HOPTRIP_DECISIONS.md",
+      "docs/HOPTRIP_PROGRESS.md",
+      "docs/HOPTRIP_TEST_PLAN.md",
+      "apps/api/app/config.py",
+      "apps/api/app/main.py",
+      "apps/api/app/models/__init__.py",
+      "apps/api/app/services/alert_digests.py",
+      "apps/api/tests/test_postgres.py"
+    ],
+    "newFiles": [
+      "apps/api/alembic/versions/0021_telegram_alerts.py",
+      "apps/api/app/api/telegram.py",
+      "apps/api/app/jobs/telegram_scheduler.py",
+      "apps/api/app/models/telegram.py",
+      "apps/api/app/schemas/telegram.py",
+      "apps/api/app/services/alert_matching.py",
+      "apps/api/app/services/telegram_delivery.py",
+      "apps/api/app/services/telegram_subscriptions.py",
+      "apps/api/app/services/telegram_text.py",
+      "apps/api/app/services/telegram_transport.py",
+      "apps/api/tests/test_telegram.py",
+      "docs/grow02/README.md",
+      "docs/grow02/api-journey.txt",
+      "docs/grow02/api-journey.xml",
+      "docs/grow02/backend-acceptance.txt",
+      "docs/grow02/backend-acceptance.xml",
+      "docs/grow02/backend-final.txt",
+      "docs/grow02/backend-final.xml",
+      "docs/grow02/backend.txt",
+      "docs/grow02/backend.xml",
+      "docs/grow02/build-stderr.txt",
+      "docs/grow02/build.txt",
+      "docs/grow02/changes.patch",
+      "docs/grow02/desktop-stderr.txt",
+      "docs/grow02/e2e-desktop-before-flush.json",
+      "docs/grow02/e2e-desktop.json",
+      "docs/grow02/e2e-mobile.json",
+      "docs/grow02/focused-initial.txt",
+      "docs/grow02/focused-initial.xml",
+      "docs/grow02/git-check.json",
+      "docs/grow02/migration-epoch.txt",
+      "docs/grow02/migration.json",
+      "docs/grow02/migration.txt",
+      "docs/grow02/mobile-stderr.txt",
+      "docs/grow02/mypy-acceptance.txt",
+      "docs/grow02/mypy-final.txt",
+      "docs/grow02/mypy-initial.txt",
+      "docs/grow02/mypy.txt",
+      "docs/grow02/ports.json",
+      "docs/grow02/postgres-acceptance.txt",
+      "docs/grow02/postgres-acceptance.xml",
+      "docs/grow02/postgres-epoch-instance.json",
+      "docs/grow02/postgres-epoch-stopped.json",
+      "docs/grow02/postgres-final.txt",
+      "docs/grow02/postgres-final.xml",
+      "docs/grow02/postgres-instance.json",
+      "docs/grow02/postgres-stopped.json",
+      "docs/grow02/postgres.txt",
+      "docs/grow02/postgres.xml",
+      "docs/grow02/ruff-acceptance.txt",
+      "docs/grow02/ruff-fix.txt",
+      "docs/grow02/ruff-initial.txt",
+      "docs/grow02/ruff-stage2.txt",
+      "docs/grow02/ruff.txt",
+      "docs/grow02/telegram-final.txt",
+      "docs/grow02/telegram-final.xml",
+      "docs/grow02/verification.json",
+      "docs/grow02/verify.cjs"
+    ],
+    "unexpected": [],
+    "masterUnchanged": true,
+    "webAndMonitorUnchanged": true
+  },
+  "migration": {
+    "database": "hoptrip_test",
+    "loopbackOnly": true,
+    "steps": [
+      "upgrade0020",
+      "insert synthetic email",
+      "upgrade0021",
+      "insert synthetic Telegram",
+      "downgrade0020",
+      "upgrade0021"
+    ],
+    "emailPreserved": true,
+    "telegramTablesAdditive": [
+      "telegram_deliveries",
+      "telegram_subscriptions",
+      "telegram_updates"
+    ],
+    "rollbackRemovesOnlyTelegramTables": true
+  },
+  "ports": {
+    "otherServersNotStopped": true,
+    "checkedPorts": [
+      3125,
+      8125
+    ],
+    "ownListeners": []
+  },
+  "localLinks": 41,
+  "brokenLinks": [],
+  "addedWhitespace": [],
+  "globalGitCheck": {
+    "exitCode": 2,
+    "preExistingMasterWhitespace": 97
+  },
+  "realTelegramCalls": false,
+  "productionActivated": false,
+  "limitations": [
+    "Mock Telegram transport; no live bot/webhook/GUI verification",
+    "Dedicated bot and privacy/vendor/retention review required before activation",
+    "Browser scenarios are existing email regressions, not Telegram UI"
+  ]
+}

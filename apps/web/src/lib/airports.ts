@@ -26,5 +26,12 @@ export function matchingAirports(airports:Airport[],value:string):Airport[] {
 
 export function airportSuggestions(airports:Airport[],value:string):Airport[] {
   const normalized=normalizeAirport(value);
-  return airports.filter(a=>a.is_active && terms(a).some(term=>term.includes(normalized))).slice(0,12);
+  const suggestions:Airport[]=[];
+  for(const airport of airports){
+    if(airport.is_active&&(!normalized||terms(airport).some(term=>term.includes(normalized)))){
+      suggestions.push(airport);
+      if(suggestions.length===12)break;
+    }
+  }
+  return suggestions;
 }

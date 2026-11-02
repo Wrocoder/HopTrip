@@ -1,0 +1,252 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)seo-growth\\.spec\\.ts$",
+      "--project=desktop",
+      "--max-failures=1",
+      "--output=test-results-analytics01-seo-desktop",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-analytics01/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-analytics01/apps/web/test-results-analytics01-seo-desktop",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-analytics01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-analytics01/apps/web/test-results-analytics01-seo-desktop",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-analytics01/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "seo-growth.spec.ts",
+      "file": "seo-growth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "city break keeps dates, origin, sorting, pagination and back; empty state is explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13437,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/city-break\\?origin=KRK&departure_from=2030-05-03&departure_to=2030-05-03&sort=price/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/city-break?origin=KRK\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    7 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"_17SeNW_variable QYHyCG_variable\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://127.0.0.1:3125/city-break?origin=KRK\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/city-break\\?origin=KRK&departure_from=2030-05-03&departure_to=2030-05-03&sort=price/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/city-break?origin=KRK\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    7 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"_17SeNW_variable QYHyCG_variable\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://127.0.0.1:3125/city-break?origin=KRK\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\tests\\seo-growth.spec.ts:16:21",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\tests\\seo-growth.spec.ts",
+                      "column": 21,
+                      "line": 16
+                    },
+                    "snippet": "  14 |  await page.locator('[name=\"departure_to\"]').fill('2030-05-03');\n  15 |  await page.locator('[name=\"sort\"]').selectOption('price');\n> 16 |  await expect(page).toHaveURL(/city-break\\?origin=KRK&departure_from=2030-05-03&departure_to=2030-05-03&sort=price/);\n     |                     ^\n  17 |  await page.locator('.pagination a').filter({hasText:'Następna'}).click();\n  18 |  await expect(page).toHaveURL(/offset=12/);\n  19 |  await expect(page.locator('.deal-card')).toHaveCount(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\tests\\seo-growth.spec.ts",
+                        "column": 21,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/city-break\\?origin=KRK&departure_from=2030-05-03&departure_to=2030-05-03&sort=price/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3125/city-break?origin=KRK\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    7 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"_17SeNW_variable QYHyCG_variable\">…</html>\u001b[22m\n\u001b[2m      - unexpected value \"http://127.0.0.1:3125/city-break?origin=KRK\"\u001b[22m\n\n\n  14 |  await page.locator('[name=\"departure_to\"]').fill('2030-05-03');\n  15 |  await page.locator('[name=\"sort\"]').selectOption('price');\n> 16 |  await expect(page).toHaveURL(/city-break\\?origin=KRK&departure_from=2030-05-03&departure_to=2030-05-03&sort=price/);\n     |                     ^\n  17 |  await page.locator('.pagination a').filter({hasText:'Następna'}).click();\n  18 |  await expect(page).toHaveURL(/offset=12/);\n  19 |  await expect(page.locator('.deal-card')).toHaveCount(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\tests\\seo-growth.spec.ts:16:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T12:13:27.518Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\test-results-analytics01-seo-desktop\\seo-growth-city-break-keep-92829-ack-empty-state-is-explicit-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\test-results-analytics01-seo-desktop\\seo-growth-city-break-keep-92829-ack-empty-state-is-explicit-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-analytics01\\apps\\web\\tests\\seo-growth.spec.ts",
+                    "column": 21,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fd09dcdfe82db2fd0116-e8a10fc6e0eea1604270",
+          "file": "seo-growth.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "Warsaw union, individual airports, weekend and route constraints",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fd09dcdfe82db2fd0116-70ac915dddd6d870ce5d",
+          "file": "seo-growth.spec.ts",
+          "line": 39,
+          "column": 5
+        },
+        {
+          "title": "new landing metadata, real HTTP 404 and normalized canonical",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fd09dcdfe82db2fd0116-167c1513edbc577195cb",
+          "file": "seo-growth.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "budget and successful save count once; storage failure and rejected confirmation do not count",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fd09dcdfe82db2fd0116-7bf5bcb1ce143435a2c3",
+          "file": "seo-growth.spec.ts",
+          "line": 75,
+          "column": 5
+        },
+        {
+          "title": "only successful email confirmation emits a token-free consent-gated event",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fd09dcdfe82db2fd0116-8c8e065a9be5655cbbdf",
+          "file": "seo-growth.spec.ts",
+          "line": 99,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-02T12:13:17.571Z",
+    "duration": 26629.537999999997,
+    "expected": 0,
+    "skipped": 4,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

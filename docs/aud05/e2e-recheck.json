@@ -1,0 +1,303 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "roadmap-baseline.spec.ts",
+      "airport-search.spec.ts",
+      "catalog-results.spec.ts",
+      "--project=desktop",
+      "--grep",
+      "airport preference survives|AUD-03 F01|editing a selected airport|empty, invalid",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-isolated/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-isolated/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-isolated/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-isolated/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-isolated/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "airport-search.spec.ts",
+      "file": "airport-search.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "editing a selected airport never submits a stale code",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2944,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T11:29:32.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "828546fcd3355198afee-856286d69b46ec57cad7",
+          "file": "airport-search.spec.ts",
+          "line": 42,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "catalog-results.spec.ts",
+      "file": "catalog-results.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "empty, invalid, unavailable and loading states are distinct",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7043,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T11:29:36.037Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fcd8021f1c1f91a84ad9-011509f63ad4c2f9f925",
+          "file": "catalog-results.spec.ts",
+          "line": 36,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "roadmap-baseline.spec.ts",
+      "file": "roadmap-baseline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "airport preference survives navigation, both home controls and reload, then reset clears it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4393,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T11:29:43.100Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d4eaa58eaa716b887989-6aa3ec8f9522104c01aa",
+          "file": "roadmap-baseline.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "[AUD-03 F01] detail back link preserves the selected search",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "fail",
+                  "description": "Known AUD-03 F01: fixed /deals link drops filters; remove this annotation when fixed.",
+                  "location": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts",
+                    "line": 41,
+                    "column": 7
+                  }
+                }
+              ],
+              "expectedStatus": "failed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8128,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://127.0.0.1:3125/deals\u001b[7m?origin=WRO&budget=220&sort=price\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125/deals\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__e_diZW__variable headingfont_80a9613f-module__2J3Wlq__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://127.0.0.1:3125/deals\u001b[7m?origin=WRO&budget=220&sort=price\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125/deals\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__e_diZW__variable headingfont_80a9613f-module__2J3Wlq__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts:42:21",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts",
+                      "column": 21,
+                      "line": 42
+                    },
+                    "snippet": "  40 |  await expect(page).toHaveURL(/\\/deals(?:\\?|$)/);\n  41 |  test.fail(true,'Known AUD-03 F01: fixed /deals link drops filters; remove this annotation when fixed.');\n> 42 |  await expect(page).toHaveURL(new URL(search,test.info().project.use.baseURL).href);\n     |                     ^\n  43 | });\n  44 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts",
+                        "column": 21,
+                        "line": 42
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected: \u001b[32m\"http://127.0.0.1:3125/deals\u001b[7m?origin=WRO&budget=220&sort=price\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125/deals\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    13 × locator resolved to <html lang=\"pl\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__e_diZW__variable headingfont_80a9613f-module__2J3Wlq__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125/deals\"\u001b[22m\n\n\n  40 |  await expect(page).toHaveURL(/\\/deals(?:\\?|$)/);\n  41 |  test.fail(true,'Known AUD-03 F01: fixed /deals link drops filters; remove this annotation when fixed.');\n> 42 |  await expect(page).toHaveURL(new URL(search,test.info().project.use.baseURL).href);\n     |                     ^\n  43 | });\n  44 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts:42:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T11:29:47.506Z",
+                  "annotations": [
+                    {
+                      "type": "fail",
+                      "description": "Known AUD-03 F01: fixed /deals link drops filters; remove this annotation when fixed.",
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts",
+                        "line": 41,
+                        "column": 7
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\test-results\\roadmap-baseline--AUD-03-F-c4b26-eserves-the-selected-search-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-isolated\\apps\\web\\tests\\roadmap-baseline.spec.ts",
+                    "column": 21,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d4eaa58eaa716b887989-48358f62067ff32a4e0b",
+          "file": "roadmap-baseline.spec.ts",
+          "line": 33,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T11:29:25.644Z",
+    "duration": 32923.196,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

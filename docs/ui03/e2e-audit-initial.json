@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)ui03-audit\\.spec\\.ts$",
+      "--project=desktop",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui03/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui03/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui03/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui03/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "ui03-audit.spec.ts",
+      "file": "ui03-audit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UI-03 before-change viewport measurements",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 50368,
+                  "error": {
+                    "message": "Error: locator.fill: Error: strict mode violation: locator('.airport-select input') resolved to 2 elements:\n    1) <input value=\"\" name=\"origin\" maxlength=\"240\" role=\"combobox\" autocomplete=\"off\" id=\"_R_14rpbn5rmlb_\" aria-invalid=\"false\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"_R_14rpbn5rmlb_-options\" aria-describedby=\"_R_14rpbn5rmlb_-hint\"/> aka getByRole('combobox', { name: 'Skąd' })\n    2) <input value=\"\" maxlength=\"240\" role=\"combobox\" autocomplete=\"off\" name=\"destination\" id=\"_R_24rpbn5rmlb_\" aria-invalid=\"false\" aria-expanded=\"false\" data-destination-slug=\"\" aria-autocomplete=\"list\" placeholder=\"Mediolan lub MIL\" aria-controls=\"_R_24rpbn5rmlb_-options\" aria-describedby=\"_R_24rpbn5rmlb_-hint\"/> aka getByRole('combobox', { name: 'Dokąd' })\n\nCall log:\n\u001b[2m  - waiting for locator('.airport-select input')\u001b[22m\n",
+                    "stack": "Error: locator.fill: Error: strict mode violation: locator('.airport-select input') resolved to 2 elements:\n    1) <input value=\"\" name=\"origin\" maxlength=\"240\" role=\"combobox\" autocomplete=\"off\" id=\"_R_14rpbn5rmlb_\" aria-invalid=\"false\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"_R_14rpbn5rmlb_-options\" aria-describedby=\"_R_14rpbn5rmlb_-hint\"/> aka getByRole('combobox', { name: 'Skąd' })\n    2) <input value=\"\" maxlength=\"240\" role=\"combobox\" autocomplete=\"off\" name=\"destination\" id=\"_R_24rpbn5rmlb_\" aria-invalid=\"false\" aria-expanded=\"false\" data-destination-slug=\"\" aria-autocomplete=\"list\" placeholder=\"Mediolan lub MIL\" aria-controls=\"_R_24rpbn5rmlb_-options\" aria-describedby=\"_R_24rpbn5rmlb_-hint\"/> aka getByRole('combobox', { name: 'Dokąd' })\n\nCall log:\n\u001b[2m  - waiting for locator('.airport-select input')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\tests\\ui03-audit.spec.ts:23:68",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\tests\\ui03-audit.spec.ts",
+                      "column": 68,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  }\n  22 |  await page.setViewportSize({width:375,height:400});await page.goto('/deals');\n> 23 |  const airport=page.locator('.airport-select input');await airport.fill('');await airport.focus();await airport.press('ArrowUp');\n     |                                                                    ^\n  24 |  const listbox=page.locator('.airport-select [role=\"listbox\"]');\n  25 |  const combo=await listbox.evaluate(list=>{\n  26 |   const active=list.querySelector('[aria-selected=\"true\"]')!,lr=list.getBoundingClientRect(),ar=active.getBoundingClientRect();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\tests\\ui03-audit.spec.ts",
+                        "column": 68,
+                        "line": 23
+                      },
+                      "message": "Error: locator.fill: Error: strict mode violation: locator('.airport-select input') resolved to 2 elements:\n    1) <input value=\"\" name=\"origin\" maxlength=\"240\" role=\"combobox\" autocomplete=\"off\" id=\"_R_14rpbn5rmlb_\" aria-invalid=\"false\" aria-expanded=\"false\" aria-autocomplete=\"list\" placeholder=\"Dowolne lotnisko\" aria-controls=\"_R_14rpbn5rmlb_-options\" aria-describedby=\"_R_14rpbn5rmlb_-hint\"/> aka getByRole('combobox', { name: 'Skąd' })\n    2) <input value=\"\" maxlength=\"240\" role=\"combobox\" autocomplete=\"off\" name=\"destination\" id=\"_R_24rpbn5rmlb_\" aria-invalid=\"false\" aria-expanded=\"false\" data-destination-slug=\"\" aria-autocomplete=\"list\" placeholder=\"Mediolan lub MIL\" aria-controls=\"_R_24rpbn5rmlb_-options\" aria-describedby=\"_R_24rpbn5rmlb_-hint\"/> aka getByRole('combobox', { name: 'Dokąd' })\n\nCall log:\n\u001b[2m  - waiting for locator('.airport-select input')\u001b[22m\n\n\n  21 |  }\n  22 |  await page.setViewportSize({width:375,height:400});await page.goto('/deals');\n> 23 |  const airport=page.locator('.airport-select input');await airport.fill('');await airport.focus();await airport.press('ArrowUp');\n     |                                                                    ^\n  24 |  const listbox=page.locator('.airport-select [role=\"listbox\"]');\n  25 |  const combo=await listbox.evaluate(list=>{\n  26 |   const active=list.querySelector('[aria-selected=\"true\"]')!,lr=list.getBoundingClientRect(),ar=active.getBoundingClientRect();\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\tests\\ui03-audit.spec.ts:23:68"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T10:19:18.262Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\test-results\\ui03-audit-UI-03-before-change-viewport-measurements-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\test-results\\ui03-audit-UI-03-before-change-viewport-measurements-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui03\\apps\\web\\tests\\ui03-audit.spec.ts",
+                    "column": 68,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5586be7e1372d536ae49-7b51772d9e94ffebd745",
+          "file": "ui03-audit.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-01T10:19:04.008Z",
+    "duration": 67140.73899999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

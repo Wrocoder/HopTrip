@@ -10,7 +10,7 @@ async function EuroPrice({value,locale="pl"}:{value:string|null;locale?:Locale})
   const euro = approximateEuro(value, rate,locale);
   if (!rate || !euro) return null;
   const explanation = catalogTemplate(locale,"Orientacyjnie {euro}. Średni kurs NBP z {date}: 1 EUR = {rate} PLN. Kurs płatności może się różnić.",{euro,date:date(rate.date,locale),rate:rate.plnPerEuro.toLocaleString(intlLocales[locale],{maximumFractionDigits:4})});
-  return <small className="price-eur" title={explanation} aria-label={explanation}>≈ {euro}</small>;
+  return <small className="price-eur" title={explanation}><span aria-hidden="true">≈ {euro}</span><span className="sr-only">{explanation}</span></small>;
 }
 
 export function Price({value,locale="pl"}:{value:string|null;locale?:Locale}) {

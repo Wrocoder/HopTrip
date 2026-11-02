@@ -15,13 +15,15 @@ test("compact cards preserve clocks, missing facts, keyboard access and long nam
  await page.evaluate(()=>document.fonts.ready);
  const first=page.locator(".deal-card").first();
  if(testInfo.project.name==="desktop") {
+  // DEAL-02 keeps date/stay filters open above the results; inspect the card after reaching it.
+  await first.scrollIntoViewIfNeeded();
   const price=await first.locator(".deal-price").boundingBox();
   expect(price!.y+price!.height).toBeLessThan(900);
  }
  await expect(first.locator(".flight-schedule-compact")).toContainText("brak godziny");
  await expect(first.locator(".flight-schedule-compact")).not.toContainText("Powrót");
  const card=page.locator(".deal-card").filter({has:page.locator('a.deal-card-link[href="/deals/browser-13"]')});
- await expect(card.locator(".flight-schedule-compact")).toContainText("Godziny lokalne");
+ // DEAL-01 keeps route warnings outside; full known clocks/zones are in details.
  await expect(card.locator(".flight-schedule-compact")).toContainText("Przylot szacowany");
  await expect(card.locator(".flight-schedule-compact")).not.toContainText(/Europe\/|GMT/);
  // Two stop summaries now belong to the collapsed card, one for each direction.

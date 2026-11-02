@@ -7,6 +7,7 @@ import {openGraphLocales} from "../lib/i18n/config";
 import {localizedHref,availableHref,pageLocales} from "../lib/i18n/routing";
 import {requestLocale} from "../lib/i18n/server";
 import {shell} from "../lib/i18n/shell";
+import {navigation} from '../lib/i18n/navigation';
 import {LanguageSwitcher} from "./components/language-switcher";
 import {getMessages} from "../lib/i18n/messages";
 import {LocaleProvider} from "./components/locale-provider";
@@ -46,6 +47,7 @@ export default async function RootLayout({children}:Readonly<{children:React.Rea
     <div id="privacy-panel" className="page-shell"/>
     <Suspense fallback={null}><PageTracker/></Suspense><div id="content" tabIndex={-1}>{children}</div>
     <footer className="page-shell site-footer"><div className="footer-intro"><span className="brand">HopTrip.</span><p>{text.disclosure}</p></div><nav className="footer-nav" aria-label={labels.info}>
+      <NavLink href={localizedHref('/info',locale)}>{navigation[locale].howItWorks}</NavLink>
       <NavLink href={localizedHref("/city-break",locale)}>City break</NavLink><NavLink href={localizedHref("/tanie-loty-na-weekend",locale)}>{labels.weekend}</NavLink><NavLink href={localizedHref("/from/warszawa",locale)}>{labels.warsaw}</NavLink>
       <NavLink href={localizedHref("/saved",locale)}>{labels.saved}</NavLink>
       <NavLink href={localizedHref("/alerts",locale)}>{labels.alerts}</NavLink>

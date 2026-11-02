@@ -1,0 +1,128 @@
+{
+  "task": "ANALYTICS-02",
+  "asOf": "2026-11-02",
+  "checks": {
+    "api": {
+      "phase": "api",
+      "exit": 0
+    },
+    "ruff": {
+      "phase": "ruff",
+      "exit": 0
+    },
+    "mypy": {
+      "phase": "mypy",
+      "exit": 0
+    }
+  },
+  "apiTests": 68,
+  "newCases": 32,
+  "existingCases": 36,
+  "initialFocused": 30,
+  "initialProfile": 66,
+  "initialMypy": "6 missing optional-field arguments, corrected explicit default=None",
+  "mypySourceFiles": 113,
+  "browser": {
+    "renderCases": 9,
+    "fullPageAxeScans": 9,
+    "violations": 0,
+    "localeCases": 8,
+    "emptyCases": 1,
+    "selectedCapturesViewed": 2,
+    "mode": "TestClient response body setContent; HTTP auth/headers separately API-tested",
+    "bypassCSP": "Test-only axe injection",
+    "externalNavigations": false
+  },
+  "metrics": {
+    "cards": 11,
+    "orderedSameOfferPairs": true,
+    "entryCohorts": "first received page type proxy, not landing URL",
+    "returningAndDevice": "unavailable",
+    "zeroDenominator": "null/no_data",
+    "realBaselineReceived": false
+  },
+  "limits": {
+    "defaultDays": 7,
+    "maxDays": 31,
+    "maxRows": 20000,
+    "overflow": "413, no partial data"
+  },
+  "scope": {
+    "baselineFiles": 2226,
+    "modifiedBaseline": [
+      "docs/HOPTRIP_AUDIT.md",
+      "docs/HOPTRIP_DECISIONS.md",
+      "docs/HOPTRIP_PROGRESS.md",
+      "docs/HOPTRIP_TEST_PLAN.md",
+      "apps/api/app/api/analytics.py",
+      "docs/hoptrip-analytics-contract.md"
+    ],
+    "newFiles": [
+      "apps/api/app/schemas/usage.py",
+      "apps/api/app/services/usage_dashboard.py",
+      "apps/api/app/services/usage_metrics.py",
+      "apps/api/tests/test_usage_dashboard.py",
+      "docs/analytics02/METRICS.md",
+      "docs/analytics02/README.md",
+      "docs/analytics02/REMAINING.md",
+      "docs/analytics02/api-initial.txt",
+      "docs/analytics02/api-initial.xml",
+      "docs/analytics02/api-result.json",
+      "docs/analytics02/api.txt",
+      "docs/analytics02/api.xml",
+      "docs/analytics02/browser.cjs",
+      "docs/analytics02/browser.json",
+      "docs/analytics02/changes.patch",
+      "docs/analytics02/fixture-pl-1280.png",
+      "docs/analytics02/fixture-ru-320.png",
+      "docs/analytics02/fixtures/README.md",
+      "docs/analytics02/fixtures/fixture-empty.html",
+      "docs/analytics02/fixtures/fixture-en.html",
+      "docs/analytics02/fixtures/fixture-pl.html",
+      "docs/analytics02/fixtures/fixture-ru.html",
+      "docs/analytics02/fixtures/fixture-uk.html",
+      "docs/analytics02/fixtures/fixture-usage.json",
+      "docs/analytics02/focused-result.json",
+      "docs/analytics02/focused.txt",
+      "docs/analytics02/focused.xml",
+      "docs/analytics02/git-check.json",
+      "docs/analytics02/mypy-initial.txt",
+      "docs/analytics02/mypy-result.json",
+      "docs/analytics02/mypy.txt",
+      "docs/analytics02/roadmap-state.json",
+      "docs/analytics02/ruff-result.json",
+      "docs/analytics02/ruff.txt",
+      "docs/analytics02/verification.json",
+      "docs/analytics02/verify.cjs"
+    ],
+    "unexpected": [],
+    "existingPostAndSummaryUnchanged": true,
+    "publicWebBackendModelsSchemaConfigDependenciesAffiliateConsentAndPreviousTasksUnchanged": true,
+    "masterUnchanged": true
+  },
+  "roadmap": {
+    "total": 43,
+    "done": 43,
+    "incomplete": [],
+    "nextTask": null
+  },
+  "localLinks": 44,
+  "brokenLinks": [],
+  "addedWhitespace": [],
+  "globalGitCheck": {
+    "exitCode": 2,
+    "preExistingMasterWhitespace": 97
+  },
+  "productionDataRead": false,
+  "productionDatabaseOrInfrastructureModified": false,
+  "realCampaignsActivated": false,
+  "externalPartnerNavigation": false,
+  "serversStarted": false,
+  "limitations": [
+    "Synthetic test evidence is not a production baseline",
+    "Browser render checks do not exercise HTTP authentication; API tests do",
+    "Returning visitor/device data absent, landing is a documented proxy",
+    "No web/Next build/Node/PG/Docker/full regression run for unchanged areas",
+    "Operational/release/known SEO test follow-ups in REMAINING.md"
+  ]
+}

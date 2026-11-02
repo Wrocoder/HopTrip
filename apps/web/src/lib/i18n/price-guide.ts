@@ -1,12 +1,13 @@
 import type {Locale} from "./config";
 import type {InfoContent} from "../info-types";
+import {scoreText} from "./score-copy.ts";
 type Translation=Pick<InfoContent,"title"|"description"|"paragraphs"|"sections">;
 export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
  en:{title:"How we compare flight prices",description:"What comparison with the median means in HopTrip and what to check before choosing a flight.",paragraphs:[
   "A low price and a good travel choice are not always the same thing. HopTrip compares recorded flight prices, but choosing also requires checking dates, airports and ticket conditions. Here is how to read our comparison.",
  ],sections:[
   {title:"What enters the comparison",paragraphs:[
-   "We group observations from the same provider by departure airport, destination, departure month and year, and length of stay. Flights without a return date have their own group. A weekend trip price is therefore not compared with a two-week stay.",
+   scoreText("en","grouping"),
    "We compare flight prices per person in PLN. However, a group does not guarantee the same destination airport, baggage, flight times, airline or booking change conditions. Check these with the seller before purchase; the historical comparison does not make them equivalent.",
   ]},
   {title:"Understanding the percentage below the median",paragraphs:[
@@ -26,7 +27,7 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
   "Низкая цена и удачный выбор поездки не всегда означают одно и то же. HopTrip сравнивает сохранённые цены на перелёты, но для решения нужно также проверить даты, аэропорты и условия билета. Вот как читать наше сравнение.",
  ],sections:[
   {title:"Что входит в сравнение",paragraphs:[
-   "Мы группируем наблюдения одного поставщика по аэропорту вылета, направлению, месяцу и году вылета и длительности пребывания. Перелёты без даты возвращения имеют отдельную группу. Поэтому цена поездки на выходные не сравнивается с двухнедельным пребыванием.",
+   scoreText("ru","grouping"),
    "Мы сравниваем цены перелёта на человека в PLN. Однако группа не гарантирует одинаковый аэропорт назначения, багаж, время перелёта, перевозчика или условия изменения бронирования. Перед покупкой проверьте это у продавца; историческое сравнение не делает эти условия одинаковыми.",
   ]},
   {title:"Как понимать процент ниже медианы",paragraphs:[
@@ -46,7 +47,7 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
   "Низька ціна та вдалий вибір подорожі не завжди означають те саме. HopTrip порівнює збережені ціни на перельоти, але для рішення потрібно також перевірити дати, аеропорти й умови квитка. Ось як читати наше порівняння.",
  ],sections:[
   {title:"Що входить до порівняння",paragraphs:[
-   "Ми групуємо спостереження одного постачальника за аеропортом вильоту, напрямком, місяцем і роком вильоту та тривалістю перебування. Перельоти без дати повернення мають окрему групу. Тому ціна подорожі на вихідні не порівнюється з двотижневим перебуванням.",
+   scoreText("uk","grouping"),
    "Ми порівнюємо ціни перельоту на людину в PLN. Однак група не гарантує однакового аеропорту призначення, багажу, часу перельоту, перевізника чи умов зміни бронювання. Перед купівлею перевірте це в продавця; історичне порівняння не робить ці умови однаковими.",
   ]},
   {title:"Як розуміти відсоток нижче медіани",paragraphs:[

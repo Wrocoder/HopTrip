@@ -4,7 +4,7 @@ from decimal import ROUND_HALF_UP, Decimal, InvalidOperation
 
 from app.models.deal import Deal
 from app.schemas.score import ScoreExplanation, ScorePart
-from app.services.scoring import MAX_POINTS, SCORE_VERSION
+from app.services.scoring import MAX_POINTS, SCORE_VERSION, score_flight_deal
 from pydantic import ValidationError
 
 LEGACY_WEIGHTS = {
@@ -21,6 +21,19 @@ def explain_score(deal: Deal) -> ScoreExplanation:
     if deal.score_version == SCORE_VERSION:
         try:
             result = ScoreExplanation.model_validate(data.get("breakdown"))
+            if (result.current_price_pln is None or result.sample_count is None
+                    or result.calculated_at is None
+                    or (deal.flight_price_pln is not None and deal.flight_price_pln != result.current_price_pln)
+                    or (deal.historical_baseline_pln is not None and deal.historical_baseline_pln != result.median_price_pln)
+                    or ("sample_count" in data and data["sample_count"] != result.sample_count)):
+                return ScoreExplanation()
+            # Replay only the saved calculation time/inputs, never today's clock.
+            expected = score_flight_deal(
+                current_price=result.current_price_pln, baseline_price=result.median_price_pln,
+                sample_count=result.sample_count, observed_at=result.observed_at,
+                source_observed_at=result.observed_at if result.observation_basis == "SOURCE" else None,
+                expires_at=deal.expires_at, now=result.calculated_at,
+            ).breakdown
             total = sum((part.points for part in result.parts), Decimal(0))
             if (
                 result.status in {"CURRENT", "PROVISIONAL"}
@@ -29,6 +42,10 @@ def explain_score(deal: Deal) -> ScoreExplanation:
                 and all(part.points <= part.max_points for part in result.parts)
                 and total == result.total_before_rounding
                 and int(total.quantize(Decimal(1), rounding=ROUND_HALF_UP)) == deal.deal_score
+                and result.status == expected.status
+                and result.parts == expected.parts
+                and result.price_difference_percent == expected.price_difference_percent
+                and result.observation_basis == expected.observation_basis
             ):
                 return result
         except (ValidationError, InvalidOperation, ValueError):

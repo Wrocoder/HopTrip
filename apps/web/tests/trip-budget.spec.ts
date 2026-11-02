@@ -8,7 +8,7 @@ test("budget calculates shared costs, validates input and resets accessibly",asy
  const calculator=page.getByRole("region",{name:"Kalkulator budżetu podróży"});
  await expect(calculator.getByRole("status")).toContainText("Budżet niepełny");
  await calculator.getByText("Dodatkowe koszty: bagaż, transport miejski, atrakcje i rezerwa",{exact:true}).click();
- for(const [id,value] of Object.entries({flight:"300",baggage:"50",hotel:"200",transfers:"100",local_transport:"0",food:"40",activities:"30",other:"100"}))
+ for(const [id,value] of Object.entries({flight:"300",baggage:"50",hotel:"200",transfers:"100",local_transport:"0",food:"40",activities:"30",other:"100",taxes:"0",buffer:"0"}))
   await page.locator(`#budget-${id}`).fill(value);
  await expect(page.getByTestId("budget-total")).toHaveText(/1\s*600,00\s*zł/);
  await expect(page.getByTestId("budget-person")).toHaveText(/800,00\s*zł/);
@@ -103,7 +103,9 @@ test("invalid draft and changed offer metadata are handled explicitly",async({pa
 
 test("flight links to the budget calculator",async({page})=>{
  await page.goto("/deals/browser-deal");
- await page.getByRole("link",{name:"Policz budżet całej podróży"}).click();
+ await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
+ await expect(page.locator("#budget-flight")).toBeEnabled();
+ await page.locator('.trip-navigation a[href="#calculator"]').click();
  await expect(page).toHaveURL(/\/deals\/browser-deal#calculator$/);
  await expect(page.getByRole("heading",{name:"Kalkulator budżetu podróży"})).toBeVisible();
  await expect(page.locator("#budget-flight")).toHaveValue("200.25");

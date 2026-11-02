@@ -4,7 +4,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED"]
+EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED"]
 
 
 class ActivityContext(BaseModel):
@@ -42,6 +42,10 @@ class PartnerContext(BaseModel):
     provider: Literal["catalog", "stay22", "tiqets"]
 
 
+class FilterContext(BaseModel):
+    action: Literal["apply", "remove", "reset"]
+
+
 class AnalyticsEventCreate(BaseModel):
     event_id: str | None = Field(None, pattern=r"^[a-fA-F0-9-]{36}$")
     event_name: EventName
@@ -53,6 +57,7 @@ class AnalyticsEventCreate(BaseModel):
     activity: ActivityContext | None = None
     search: SearchContext | None = None
     partner: PartnerContext | None = None
+    filter: FilterContext | None = None
 
     @field_validator("source")
     @classmethod
@@ -70,6 +75,8 @@ class AnalyticsEventCreate(BaseModel):
             raise ValueError("Search context only belongs to search events")
         if (self.event_name == "PARTNER_CLICK") != (self.partner is not None):
             raise ValueError("Partner context is required only for PARTNER_CLICK")
+        if self.filter and self.event_name != "FILTER_USE":
+            raise ValueError("Filter context only belongs to FILTER_USE")
         return self
 
 

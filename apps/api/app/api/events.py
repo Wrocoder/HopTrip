@@ -13,7 +13,7 @@ from app.schemas.event import EventCategory, EventResults
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.event_destinations import event_city
-from app.services.event_flight_fit import combined_flight_fit, event_instants
+from app.services.event_flight_fit import combined_flight_fit, event_end_instant, event_instants
 from app.services.event_grouping import group_events
 from app.services.events import event_service
 
@@ -88,8 +88,11 @@ def deal_events(
     for event in result.events:
         if (event.end_date or event.start_date) < search_start or event.start_date > search_end:
             continue
+        instants = event_instants(event, zone)
+        known_end = event_end_instant(event, zone, instants)
+        if known_end is not None and known_end <= now:
+            continue
         if (event.local_time or event.start_at) and (not event.end_date or event.end_date == event.start_date):
-            instants = event_instants(event, zone)
             if instants and all(t < now or (date_mode == "flight" and (
                 (arrival is not None and t < arrival) or (departure is not None and t >= departure)
             )) for t in instants):

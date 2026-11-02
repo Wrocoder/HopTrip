@@ -76,7 +76,7 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  const destination=form.locator('[name="destination"]');
  await destination.fill("NieistniejąceMiasto".repeat(10));
  await noOverflow(page);
- await form.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+ await form.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
  await expect(destination).toBeFocused();
  await expect(form.getByRole("alert")).toContainText("Nie znaleziono kierunku");
  await expect(destination).toHaveAttribute("aria-invalid","true");
@@ -85,10 +85,11 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  const summary=form.locator(".advanced-filters summary");
  await summary.focus();await page.keyboard.press("Space");
  await page.keyboard.press("Tab");
- await expect(form.locator('[name="departure_from"]')).toBeFocused();
+ await expect(form.locator('[name="duration_min"]')).toBeFocused();
+ await form.locator('[name="departure_from"]').focus();
  await form.locator('[name="departure_from"]').fill("2027-02-02");
  await form.locator('[name="departure_to"]').fill("2027-02-01");
- await form.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+ await form.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
  const end=form.locator('[name="departure_to"]');
  await expect(end).toBeFocused();
  await expect(end).toHaveAttribute("aria-invalid","true");
@@ -96,7 +97,7 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await form.locator('[name="departure_from"]').fill("");await end.fill("");
  await expect(end).toHaveAttribute("aria-invalid","false");
  await form.locator('[name="budget"]').fill("220");
- await form.getByRole("button",{name:"Szukaj lotów",exact:true}).click();
+ await form.getByRole("button",{name:"Znajdź tani lot",exact:true}).click();
  await expect(page).toHaveURL(/origin=WRO/);
  await expect(page.locator(".deal-card")).toHaveCount(12);
  await noOverflow(page);
@@ -114,7 +115,7 @@ for(const width of [320,375,390,430,768,1366]) test(`complete journey at ${width
  await expect(page.getByRole("heading",{name:"Brak aktualnych ofert"})).toBeVisible();
  await noOverflow(page);
  await page.getByRole("link",{name:/Usuń filtr: Budżet/}).click();
- const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"]')});
+ const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"],a[href^="/deals/browser-13?"]')});
  if(await card.count()===0)await page.getByRole("link",{name:/Następ/}).click();
  await expect(card.locator(".home-arrival")).toContainText("+1 dzień");
  await capture("midnight",card);

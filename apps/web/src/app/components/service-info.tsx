@@ -21,6 +21,15 @@ export function serviceMetadata(slug:ServiceSlug,locale:Locale):Metadata {
   twitter:{card:images.length ? "summary_large_image" : "summary",title:page.title,description,images}};
 }
 
+export function ServiceLinks({slug,locale}:{slug:ServiceSlug;locale:Locale}) {
+ const labels=serviceLabels[locale];
+ return <nav aria-label={labels.links}><ul>
+  {serviceSlugs.filter(item=>item!==slug).map(item=><li key={item}><a href={localizedHref(`/info/${item}`,locale)}>{serviceContent(item,locale).title}</a></li>)}
+  <li><Link href={localizedHref("/deals",locale)}>{labels.catalog}</Link></li>
+  {slug.startsWith("price-") && <li><a href={localizedHref("/info",locale)}>{editorialCopy[locale].title}</a></li>}
+ </ul></nav>;
+}
+
 export async function ServiceInfo({slug,locale}:{slug:ServiceSlug;locale:Locale}) {
  const page=serviceContent(slug,locale),labels=serviceLabels[locale];
  const legal=isLegalPage(slug),operator=legal ? await readOperator() : null;
@@ -41,10 +50,6 @@ export async function ServiceInfo({slug,locale}:{slug:ServiceSlug;locale:Locale}
    const card=editorialCard(item,related,locale),RelatedLink="a";
    return <li key={item}><RelatedLink href={localizedHref(`/info/${item}`,card.translated ? locale : "pl")} hrefLang={card.translated ? locale : "pl"}><span lang={card.translated ? locale : "pl"}>{card.title}</span>{!card.translated && ` (${editorialCopy[locale].polish})`}</RelatedLink></li>;
   })}</ul></nav>}
-  <nav aria-label={labels.links}><ul>
-   {serviceSlugs.filter(item=>item!==slug).map(item=><li key={item}><a href={localizedHref(`/info/${item}`,locale)}>{serviceContent(item,locale).title}</a></li>)}
-   <li><Link href={localizedHref("/deals",locale)}>{labels.catalog}</Link></li>
-   {slug.startsWith("price-") && <li><a href={localizedHref("/info",locale)}>{editorialCopy[locale].title}</a></li>}
-  </ul></nav>
+  <ServiceLinks slug={slug} locale={locale}/>
  </article></main>;
 }

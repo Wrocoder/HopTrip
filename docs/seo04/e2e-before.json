@@ -1,0 +1,174 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)guide-optimization\\.spec\\.ts$",
+      "--project=desktop",
+      "--grep",
+      "city in pl$",
+      "--max-failures=1",
+      "--output=test-results-seo04-before",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/test-results-seo04-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/test-results-seo04-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo04/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "guide-optimization.spec.ts",
+      "file": "guide-optimization.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "guide search CTAs keep the city in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10172,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\nExpected: \u001b[32m\"/deals\u001b[7m?destination=madrid\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"/deals\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\u001b[22m\n\u001b[2m    14 × locator resolved to <a href=\"/deals\">Sprawdź aktualny katalog lotów</a>\u001b[22m\n\u001b[2m       - unexpected value \"/deals\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\nExpected: \u001b[32m\"/deals\u001b[7m?destination=madrid\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"/deals\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\u001b[22m\n\u001b[2m    14 × locator resolved to <a href=\"/deals\">Sprawdź aktualny katalog lotów</a>\u001b[22m\n\u001b[2m       - unexpected value \"/deals\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts:25:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts",
+                      "column": 39,
+                      "line": 25
+                    },
+                    "snippet": "  23 |   const nav=page.getByRole('navigation',{name:guideUi(locale,'routes'),exact:true});\n  24 |   await expect(nav.getByRole('link')).toHaveCount(1);\n> 25 |   await expect(nav.getByRole('link')).toHaveAttribute('href',expected);\n     |                                       ^\n  26 |   await expect(page.locator('main h1')).toHaveCount(1);\n  27 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',new URL(path,info.project.use.baseURL).href);\n  28 |   await expect(page.locator('meta[name=\"robots\"]')).toHaveAttribute('content','index, follow');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts",
+                        "column": 39,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\nExpected: \u001b[32m\"/deals\u001b[7m?destination=madrid\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"/deals\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('navigation', { name: 'Powiązane trasy', exact: true }).getByRole('link')\u001b[22m\n\u001b[2m    14 × locator resolved to <a href=\"/deals\">Sprawdź aktualny katalog lotów</a>\u001b[22m\n\u001b[2m       - unexpected value \"/deals\"\u001b[22m\n\n\n  23 |   const nav=page.getByRole('navigation',{name:guideUi(locale,'routes'),exact:true});\n  24 |   await expect(nav.getByRole('link')).toHaveCount(1);\n> 25 |   await expect(nav.getByRole('link')).toHaveAttribute('href',expected);\n     |                                       ^\n  26 |   await expect(page.locator('main h1')).toHaveCount(1);\n  27 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',new URL(path,info.project.use.baseURL).href);\n  28 |   await expect(page.locator('meta[name=\"robots\"]')).toHaveAttribute('content','index, follow');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts:25:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T23:15:59.088Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\test-results-seo04-before\\guide-optimization-guide-search-CTAs-keep-the-city-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\test-results-seo04-before\\guide-optimization-guide-search-CTAs-keep-the-city-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo04\\apps\\web\\tests\\guide-optimization.spec.ts",
+                    "column": 39,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3fbb140b1cf051c66796-9bcb9314834008174088",
+          "file": "guide-optimization.spec.ts",
+          "line": 14,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-01T23:15:45.210Z",
+    "duration": 26374.852,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

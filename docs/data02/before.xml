@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="13" skipped="0" tests="18" time="2.897" timestamp="2026-10-30T17:16:50.274939+01:00" hostname="wave"><testcase classname="apps.api.tests.test_historical_comparison" name="test_median_and_interpolated_quartiles_with_grosz_rounding[prices0-200-200-200]" time="0.114" /><testcase classname="apps.api.tests.test_historical_comparison" name="test_median_and_interpolated_quartiles_with_grosz_rounding[prices1-300-200-400]" time="0.063" /><testcase classname="apps.api.tests.test_historical_comparison" name="test_median_and_interpolated_quartiles_with_grosz_rounding[prices2-250-175-325]" time="0.054" /><testcase classname="apps.api.tests.test_historical_comparison" name="test_median_and_interpolated_quartiles_with_grosz_rounding[prices3-100-100-100]" time="0.037" /><testcase classname="apps.api.tests.test_historical_comparison" name="test_median_and_interpolated_quartiles_with_grosz_rounding[prices4-1.01-1.00-1.01]" time="0.034" /><testcase classname="apps.api.tests.test_historical_comparison" name="test_invalid_history_does_not_inflate_the_comparison[zero]" time="0.039"><failure message="assert (2 == 1)&#10; +  where 2 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D2263A1E0&gt;.sample_count">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000019D225CDAC0&gt;
+bad = 'zero'
+
+    @pytest.mark.parametrize("bad", ["zero", "negative", "future", "missing_route", "negative_duration"])
+    def test_invalid_history_does_not_inflate_the_comparison(isolated_db, bad):
+        db = isolated_db
+        setup(db)
+        observation(db, 200)
+        patch = {"observed_price_pln": Decimal(0)} if bad == "zero" else {
+            "observed_price_pln": Decimal(-100)} if bad == "negative" else {
+            "observed_at": NOW + timedelta(seconds=1)} if bad == "future" else {
+            "origin_airport_id": None} if bad == "missing_route" else {"trip_duration_days": -1}
+        observation(db, 10000, **patch)
+        db.commit()
+        assert recalculate_route_statistics(db, now=NOW) == 1
+        stats = db.scalar(select(RouteStatistics))
+&gt;       assert stats.sample_count == 1 and stats.median_price_pln == 200
+E       assert (2 == 1)
+E        +  where 2 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D2263A1E0&gt;.sample_count
+
+apps\api\tests\test_historical_comparison.py:60: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_invalid_history_does_not_inflate_the_comparison[negative]" time="0.054"><failure message="assert (2 == 1)&#10; +  where 2 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D2263ADE0&gt;.sample_count">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000019D222BCBC0&gt;
+bad = 'negative'
+
+    @pytest.mark.parametrize("bad", ["zero", "negative", "future", "missing_route", "negative_duration"])
+    def test_invalid_history_does_not_inflate_the_comparison(isolated_db, bad):
+        db = isolated_db
+        setup(db)
+        observation(db, 200)
+        patch = {"observed_price_pln": Decimal(0)} if bad == "zero" else {
+            "observed_price_pln": Decimal(-100)} if bad == "negative" else {
+            "observed_at": NOW + timedelta(seconds=1)} if bad == "future" else {
+            "origin_airport_id": None} if bad == "missing_route" else {"trip_duration_days": -1}
+        observation(db, 10000, **patch)
+        db.commit()
+        assert recalculate_route_statistics(db, now=NOW) == 1
+        stats = db.scalar(select(RouteStatistics))
+&gt;       assert stats.sample_count == 1 and stats.median_price_pln == 200
+E       assert (2 == 1)
+E        +  where 2 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D2263ADE0&gt;.sample_count
+
+apps\api\tests\test_historical_comparison.py:60: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_invalid_history_does_not_inflate_the_comparison[future]" time="0.065"><failure message="assert (2 == 1)&#10; +  where 2 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D226A7470&gt;.sample_count">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000019D225A1F10&gt;
+bad = 'future'
+
+    @pytest.mark.parametrize("bad", ["zero", "negative", "future", "missing_route", "negative_duration"])
+    def test_invalid_history_does_not_inflate_the_comparison(isolated_db, bad):
+        db = isolated_db
+        setup(db)
+        observation(db, 200)
+        patch = {"observed_price_pln": Decimal(0)} if bad == "zero" else {
+            "observed_price_pln": Decimal(-100)} if bad == "negative" else {
+            "observed_at": NOW + timedelta(seconds=1)} if bad == "future" else {
+            "origin_airport_id": None} if bad == "missing_route" else {"trip_duration_days": -1}
+        observation(db, 10000, **patch)
+        db.commit()
+        assert recalculate_route_statistics(db, now=NOW) == 1
+        stats = db.scalar(select(RouteStatistics))
+&gt;       assert stats.sample_count == 1 and stats.median_price_pln == 200
+E       assert (2 == 1)
+E        +  where 2 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D226A7470&gt;.sample_count
+
+apps\api\tests\test_historical_comparison.py:60: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_invalid_history_does_not_inflate_the_comparison[missing_route]" time="0.117"><failure message="sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint failed: route_statistics.origin_airport_id&#10;[SQL: INSERT INTO route_statistics (data_provider_id, origin_airport_id, destination_id, product_type, departure_month, trip_duration_days, sample_count, min_price_pln, p25_price_pln, median_price_pln, p75_price_pln, max_price_pln, confidence, calculated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]&#10;[parameters: (1, None, 1, 'FLIGHT', '2030-09', 3, 1, 10000.0, 10000.0, 10000.0, 10000.0, 10000.0, 0.0333, '2030-09-01 00:00:00.000000')]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">self = &lt;sqlalchemy.engine.base.Connection object at 0x0000019D2263B5C0&gt;
+dialect = &lt;sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x0000019D2263B3E0&gt;
+context = &lt;sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000019D2270C3E0&gt;
+statement = &lt;sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x0000019D226DB500&gt;
+parameters = [(1, None, 1, 'FLIGHT', '2030-09', 3, ...)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -&gt; CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+&gt;                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x0000019D2263B3E0&gt;
+cursor = &lt;sqlite3.Cursor object at 0x0000019D226D75C0&gt;
+statement = 'INSERT INTO route_statistics (data_provider_id, origin_airport_id, destination_id, product_type, departure_month, tri..._price_pln, p75_price_pln, max_price_pln, confidence, calculated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+parameters = (1, None, 1, 'FLIGHT', '2030-09', 3, ...)
+context = &lt;sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000019D2270C3E0&gt;
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+&gt;       cursor.execute(statement, parameters)
+E       sqlite3.IntegrityError: NOT NULL constraint failed: route_statistics.origin_airport_id
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: IntegrityError
+
+The above exception was the direct cause of the following exception:
+
+isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000019D22535670&gt;
+bad = 'missing_route'
+
+    @pytest.mark.parametrize("bad", ["zero", "negative", "future", "missing_route", "negative_duration"])
+    def test_invalid_history_does_not_inflate_the_comparison(isolated_db, bad):
+        db = isolated_db
+        setup(db)
+        observation(db, 200)
+        patch = {"observed_price_pln": Decimal(0)} if bad == "zero" else {
+            "observed_price_pln": Decimal(-100)} if bad == "negative" else {
+            "observed_at": NOW + timedelta(seconds=1)} if bad == "future" else {
+            "origin_airport_id": None} if bad == "missing_route" else {"trip_duration_days": -1}
+        observation(db, 10000, **patch)
+        db.commit()
+&gt;       assert recalculate_route_statistics(db, now=NOW) == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_historical_comparison.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\statistics.py:63: in recalculate_route_statistics
+    db.commit()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2035: in commit
+    trans.commit(_to_root=True)
+&lt;string&gt;:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+&lt;string&gt;:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1643: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x0000019D2263B3E0&gt;
+cursor = &lt;sqlite3.Cursor object at 0x0000019D226D75C0&gt;
+statement = 'INSERT INTO route_statistics (data_provider_id, origin_airport_id, destination_id, product_type, departure_month, tri..._price_pln, p75_price_pln, max_price_pln, confidence, calculated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+parameters = (1, None, 1, 'FLIGHT', '2030-09', 3, ...)
+context = &lt;sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000019D2270C3E0&gt;
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+&gt;       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) NOT NULL constraint failed: route_statistics.origin_airport_id
+E       [SQL: INSERT INTO route_statistics (data_provider_id, origin_airport_id, destination_id, product_type, departure_month, trip_duration_days, sample_count, min_price_pln, p25_price_pln, median_price_pln, p75_price_pln, max_price_pln, confidence, calculated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+E       [parameters: (1, None, 1, 'FLIGHT', '2030-09', 3, 1, 10000.0, 10000.0, 10000.0, 10000.0, 10000.0, 0.0333, '2030-09-01 00:00:00.000000')]
+E       (Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: IntegrityError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_invalid_history_does_not_inflate_the_comparison[negative_duration]" time="0.043"><failure message="assert 2 == 1&#10; +  where 2 = recalculate_route_statistics(&lt;sqlalchemy.orm.session.Session object at 0x0000019D225CC2F0&gt;, now=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc))">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000019D225CC2F0&gt;
+bad = 'negative_duration'
+
+    @pytest.mark.parametrize("bad", ["zero", "negative", "future", "missing_route", "negative_duration"])
+    def test_invalid_history_does_not_inflate_the_comparison(isolated_db, bad):
+        db = isolated_db
+        setup(db)
+        observation(db, 200)
+        patch = {"observed_price_pln": Decimal(0)} if bad == "zero" else {
+            "observed_price_pln": Decimal(-100)} if bad == "negative" else {
+            "observed_at": NOW + timedelta(seconds=1)} if bad == "future" else {
+            "origin_airport_id": None} if bad == "missing_route" else {"trip_duration_days": -1}
+        observation(db, 10000, **patch)
+        db.commit()
+&gt;       assert recalculate_route_statistics(db, now=NOW) == 1
+E       assert 2 == 1
+E        +  where 2 = recalculate_route_statistics(&lt;sqlalchemy.orm.session.Session object at 0x0000019D225CC2F0&gt;, now=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc))
+
+apps\api\tests\test_historical_comparison.py:58: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_empty_eligible_cohort_invalidates_its_derived_cache" time="0.066"><failure message="assert (1 == 0)&#10; +  where 1 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D225CCC20&gt;.sample_count">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000019D222DECC0&gt;
+
+    def test_empty_eligible_cohort_invalidates_its_derived_cache(isolated_db):
+        db = isolated_db
+        setup(db)
+        observation(db, 1000)
+        db.commit()
+        recalculate_route_statistics(db, now=NOW)
+        db.scalar(select(PriceObservation)).observed_at = NOW + timedelta(days=1)
+        db.commit()
+        recalculate_route_statistics(db, now=NOW)
+        stats = db.scalar(select(RouteStatistics))
+&gt;       assert stats.sample_count == 0 and stats.confidence == 0
+E       assert (1 == 0)
+E        +  where 1 = &lt;app.models.statistics.RouteStatistics object at 0x0000019D225CCC20&gt;.sample_count
+
+apps\api\tests\test_historical_comparison.py:74: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_insufficient_history_has_no_discount_claim_even_in_legacy_api_fields[0]" time="0.004"><failure message="AssertionError: assert (Decimal('99.90') == 0)&#10; +  where Decimal('99.90') = DealScore(deal_score=45, discount_percent=Decimal('99.90'), explanation=['CACHED_PRICE', 'LIMITED_HISTORY'], breakdown...utc), calculated_at=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc), observation_basis='FIRST_SEEN')).discount_percent">count = 0
+
+    @pytest.mark.parametrize("count", [0, 1, 4])
+    def test_insufficient_history_has_no_discount_claim_even_in_legacy_api_fields(count):
+        score = score_flight_deal(current_price=Decimal(1), baseline_price=Decimal(1000),
+            sample_count=count, observed_at=NOW, expires_at=None, now=NOW)
+        assert score.breakdown.status == "PROVISIONAL"
+&gt;       assert score.discount_percent == 0 and score.breakdown.price_difference_percent is None
+E       AssertionError: assert (Decimal('99.90') == 0)
+E        +  where Decimal('99.90') = DealScore(deal_score=45, discount_percent=Decimal('99.90'), explanation=['CACHED_PRICE', 'LIMITED_HISTORY'], breakdown...utc), calculated_at=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc), observation_basis='FIRST_SEEN')).discount_percent
+
+apps\api\tests\test_historical_comparison.py:83: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_insufficient_history_has_no_discount_claim_even_in_legacy_api_fields[1]" time="0.004"><failure message="AssertionError: assert (Decimal('99.90') == 0)&#10; +  where Decimal('99.90') = DealScore(deal_score=46, discount_percent=Decimal('99.90'), explanation=['CACHED_PRICE', 'LIMITED_HISTORY'], breakdown...utc), calculated_at=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc), observation_basis='FIRST_SEEN')).discount_percent">count = 1
+
+    @pytest.mark.parametrize("count", [0, 1, 4])
+    def test_insufficient_history_has_no_discount_claim_even_in_legacy_api_fields(count):
+        score = score_flight_deal(current_price=Decimal(1), baseline_price=Decimal(1000),
+            sample_count=count, observed_at=NOW, expires_at=None, now=NOW)
+        assert score.breakdown.status == "PROVISIONAL"
+&gt;       assert score.discount_percent == 0 and score.breakdown.price_difference_percent is None
+E       AssertionError: assert (Decimal('99.90') == 0)
+E        +  where Decimal('99.90') = DealScore(deal_score=46, discount_percent=Decimal('99.90'), explanation=['CACHED_PRICE', 'LIMITED_HISTORY'], breakdown...utc), calculated_at=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc), observation_basis='FIRST_SEEN')).discount_percent
+
+apps\api\tests\test_historical_comparison.py:83: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_insufficient_history_has_no_discount_claim_even_in_legacy_api_fields[4]" time="0.006"><failure message="AssertionError: assert (Decimal('99.90') == 0)&#10; +  where Decimal('99.90') = DealScore(deal_score=48, discount_percent=Decimal('99.90'), explanation=['CACHED_PRICE', 'LIMITED_HISTORY'], breakdown...utc), calculated_at=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc), observation_basis='FIRST_SEEN')).discount_percent">count = 4
+
+    @pytest.mark.parametrize("count", [0, 1, 4])
+    def test_insufficient_history_has_no_discount_claim_even_in_legacy_api_fields(count):
+        score = score_flight_deal(current_price=Decimal(1), baseline_price=Decimal(1000),
+            sample_count=count, observed_at=NOW, expires_at=None, now=NOW)
+        assert score.breakdown.status == "PROVISIONAL"
+&gt;       assert score.discount_percent == 0 and score.breakdown.price_difference_percent is None
+E       AssertionError: assert (Decimal('99.90') == 0)
+E        +  where Decimal('99.90') = DealScore(deal_score=48, discount_percent=Decimal('99.90'), explanation=['CACHED_PRICE', 'LIMITED_HISTORY'], breakdown...utc), calculated_at=datetime.datetime(2030, 9, 1, 0, 0, tzinfo=datetime.timezone.utc), observation_basis='FIRST_SEEN')).discount_percent
+
+apps\api\tests\test_historical_comparison.py:83: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_internally_consistent_but_false_snapshot_is_not_explained_as_current[points]" time="0.010"><failure message="AssertionError: assert 'CURRENT' == 'UNAVAILABLE'&#10;  &#10;  - UNAVAILABLE&#10;  + CURRENT">corrupt = 'points'
+
+    @pytest.mark.parametrize("corrupt", ["points", "percentage", "sample_status", "snapshot_price"])
+    def test_internally_consistent_but_false_snapshot_is_not_explained_as_current(corrupt):
+        score = score_flight_deal(current_price=Decimal(200), baseline_price=Decimal(400),
+            sample_count=30, observed_at=NOW, expires_at=None, now=NOW)
+        data = score.breakdown.model_dump(mode="json")
+        number = score.deal_score
+        price = Decimal(200)
+        if corrupt == "points":
+            data["parts"][0]["points"] = "59"
+            data["total_before_rounding"] = "99"
+            number = 99
+        elif corrupt == "percentage":
+            data["price_difference_percent"] = "90"
+        elif corrupt == "sample_status":
+            data["sample_count"] = 4
+        else:
+            price = Decimal(300)
+        deal = Deal(deal_score=number, score_version=SCORE_VERSION, flight_price_pln=price,
+                    historical_baseline_pln=400, score_components={"breakdown": data})
+&gt;       assert explain_score(deal).status == "UNAVAILABLE"
+E       AssertionError: assert 'CURRENT' == 'UNAVAILABLE'
+E         
+E         - UNAVAILABLE
+E         + CURRENT
+
+apps\api\tests\test_historical_comparison.py:105: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_internally_consistent_but_false_snapshot_is_not_explained_as_current[percentage]" time="0.005"><failure message="AssertionError: assert 'CURRENT' == 'UNAVAILABLE'&#10;  &#10;  - UNAVAILABLE&#10;  + CURRENT">corrupt = 'percentage'
+
+    @pytest.mark.parametrize("corrupt", ["points", "percentage", "sample_status", "snapshot_price"])
+    def test_internally_consistent_but_false_snapshot_is_not_explained_as_current(corrupt):
+        score = score_flight_deal(current_price=Decimal(200), baseline_price=Decimal(400),
+            sample_count=30, observed_at=NOW, expires_at=None, now=NOW)
+        data = score.breakdown.model_dump(mode="json")
+        number = score.deal_score
+        price = Decimal(200)
+        if corrupt == "points":
+            data["parts"][0]["points"] = "59"
+            data["total_before_rounding"] = "99"
+            number = 99
+        elif corrupt == "percentage":
+            data["price_difference_percent"] = "90"
+        elif corrupt == "sample_status":
+            data["sample_count"] = 4
+        else:
+            price = Decimal(300)
+        deal = Deal(deal_score=number, score_version=SCORE_VERSION, flight_price_pln=price,
+                    historical_baseline_pln=400, score_components={"breakdown": data})
+&gt;       assert explain_score(deal).status == "UNAVAILABLE"
+E       AssertionError: assert 'CURRENT' == 'UNAVAILABLE'
+E         
+E         - UNAVAILABLE
+E         + CURRENT
+
+apps\api\tests\test_historical_comparison.py:105: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_internally_consistent_but_false_snapshot_is_not_explained_as_current[sample_status]" time="0.005"><failure message="AssertionError: assert 'CURRENT' == 'UNAVAILABLE'&#10;  &#10;  - UNAVAILABLE&#10;  + CURRENT">corrupt = 'sample_status'
+
+    @pytest.mark.parametrize("corrupt", ["points", "percentage", "sample_status", "snapshot_price"])
+    def test_internally_consistent_but_false_snapshot_is_not_explained_as_current(corrupt):
+        score = score_flight_deal(current_price=Decimal(200), baseline_price=Decimal(400),
+            sample_count=30, observed_at=NOW, expires_at=None, now=NOW)
+        data = score.breakdown.model_dump(mode="json")
+        number = score.deal_score
+        price = Decimal(200)
+        if corrupt == "points":
+            data["parts"][0]["points"] = "59"
+            data["total_before_rounding"] = "99"
+            number = 99
+        elif corrupt == "percentage":
+            data["price_difference_percent"] = "90"
+        elif corrupt == "sample_status":
+            data["sample_count"] = 4
+        else:
+            price = Decimal(300)
+        deal = Deal(deal_score=number, score_version=SCORE_VERSION, flight_price_pln=price,
+                    historical_baseline_pln=400, score_components={"breakdown": data})
+&gt;       assert explain_score(deal).status == "UNAVAILABLE"
+E       AssertionError: assert 'CURRENT' == 'UNAVAILABLE'
+E         
+E         - UNAVAILABLE
+E         + CURRENT
+
+apps\api\tests\test_historical_comparison.py:105: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_historical_comparison" name="test_internally_consistent_but_false_snapshot_is_not_explained_as_current[snapshot_price]" time="0.004"><failure message="AssertionError: assert 'CURRENT' == 'UNAVAILABLE'&#10;  &#10;  - UNAVAILABLE&#10;  + CURRENT">corrupt = 'snapshot_price'
+
+    @pytest.mark.parametrize("corrupt", ["points", "percentage", "sample_status", "snapshot_price"])
+    def test_internally_consistent_but_false_snapshot_is_not_explained_as_current(corrupt):
+        score = score_flight_deal(current_price=Decimal(200), baseline_price=Decimal(400),
+            sample_count=30, observed_at=NOW, expires_at=None, now=NOW)
+        data = score.breakdown.model_dump(mode="json")
+        number = score.deal_score
+        price = Decimal(200)
+        if corrupt == "points":
+            data["parts"][0]["points"] = "59"
+            data["total_before_rounding"] = "99"
+            number = 99
+        elif corrupt == "percentage":
+            data["price_difference_percent"] = "90"
+        elif corrupt == "sample_status":
+            data["sample_count"] = 4
+        else:
+            price = Decimal(300)
+        deal = Deal(deal_score=number, score_version=SCORE_VERSION, flight_price_pln=price,
+                    historical_baseline_pln=400, score_components={"breakdown": data})
+&gt;       assert explain_score(deal).status == "UNAVAILABLE"
+E       AssertionError: assert 'CURRENT' == 'UNAVAILABLE'
+E         
+E         - UNAVAILABLE
+E         + CURRENT
+
+apps\api\tests\test_historical_comparison.py:105: AssertionError</failure></testcase></testsuite></testsuites>

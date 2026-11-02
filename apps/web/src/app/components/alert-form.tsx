@@ -6,15 +6,17 @@ import {useState,useSyncExternalStore,type FormEvent} from "react";
 import type {Airport,Destination,Filters} from "../../lib/api";
 import {publicApi,track} from "../../lib/session";
 import {cityLabel,originLabel} from "../../lib/cities";
+import {isAlertReply,type AlertSettings} from '../../lib/api-contract';
 
-type AlertSettings={origin:string;budget:string;duration_min:number;duration_max:number;destination:string|null;departure_from:string|null;departure_to:string|null;weekend:boolean;frequency:"weekly"|"daily"};
 class AlertError extends Error { constructor(readonly key:AlertKey){super(key);} }
 async function action(path:string,body:unknown,method="POST") {
   const response=await fetch(publicApi(`/api/v1/alerts${path}`),{method,headers:{"Content-Type":"application/json"},body:JSON.stringify(body),signal:AbortSignal.timeout(20000)});
   if(!response.ok)throw new AlertError(response.status===410 ? "Link wygasł. Zapisz się ponownie, aby otrzymać nowy." :
     response.status===404 ? "Link jest nieprawidłowy lub wygasł." : response.status===422 ? "Sprawdź lotnisko, email i zakres dat oraz długości pobytu." :
     response.status===429 ? "Limit prób został osiągnięty. Spróbuj później." : "Nie udało się wykonać operacji. Spróbuj ponownie później.");
-  return response.json();
+  const value=await response.json();
+  if(!isAlertReply(path,value))throw new AlertError('Nie udało się wykonać operacji. Spróbuj ponownie później.');
+  return value;
 }
 const subscribeHydration=()=>()=>{};
 const clientHydrated=()=>true;
@@ -49,6 +51,7 @@ export function AlertForm({mode,airports,destinations,initial={},deliveryEnabled
       destination:values.destination||null,departure_from:values.departure_from||null,departure_to:values.departure_to||null,weekend:values.weekend==="true",frequency:values.frequency==="daily"?"daily":"weekly"};
     await perform(async()=>{
       if(mode==="signup") {
+        track("ALERT_STARTED");
         await action("",{email:data.get("email"),consent:data.get("consent")==="on",filters});
         setStatus("REQUESTED");setMessage("Sprawdź skrzynkę i spam. Jeśli adres może otrzymywać alerty, dostaniesz link do potwierdzenia lub zarządzania. Prośba o zapis nie oznacza potwierdzonej subskrypcji. Link wysyłamy najwyżej raz na dobę.");
       } else {

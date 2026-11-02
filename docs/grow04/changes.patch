@@ -1,0 +1,390 @@
+diff --git a/apps/web/src/lib/content.ts b/apps/web/src/lib/content.ts
+index 374834c..5854137 100644
+--- a/apps/web/src/lib/content.ts
++++ b/apps/web/src/lib/content.ts
+@@ -128,10 +128,11 @@ export const content:Record<string,InfoContent> = {
+   ],related:["price-comparison","price-freshness"],
+  },
+  about:{title:"O HopTrip",draft:false,paragraphs:[
+-   "HopTrip pomaga porównywać ceny lotów z Polski. Publikujemy zapisane obserwacje cen, a nie gwarancję dostępności miejsca.",
+-   "Porównujemy cenę z historią tej samej trasy, miesiąca wyjazdu i długości pobytu. Mała liczba obserwacji obniża pewność porównania. Pamięć podręczna dostawcy może zawierać nieaktualne dane.",
+-   "Ocena uwzględnia cenę, różnicę wobec mediany, świeżość i pokrycie historii. Gdy nie znamy wygody lotu, przyjmujemy neutralny wynik. Sam wynik nie zastępuje sprawdzenia bagażu, przesiadek i warunków biletu.",
+-   "Cena lotu jest ceną na osobę. Noclegi i dojazdy wymagają osobnego sprawdzenia; nie dodajemy szacunków bez potwierdzonej oferty.",
++   "HopTrip pomaga wybrać lot i zaplanować krótki wyjazd z Polski. Publikujemy zapisane obserwacje cen, a nie gwarancję dostępności miejsca.",
++   "Wybierz lotnisko i daty, porównaj loty, a potem otwórz szczegóły: sprawdź lotniska, godziny oraz czas obserwacji ceny. Nocleg, dojazdy i plan pobytu dopasuj do konkretnego lotu.",
++   "Ceny lotów pochodzą z pamięci podręcznej Travelpayouts. Pobranie danych ani otwarcie karty nie jest potwierdzeniem ceny lub wolnego miejsca u sprzedawcy. Końcowe warunki sprawdź po przejściu do partnera.",
++   "Obecna metoda oceny opisuje cenę na tle zapisanej historii kierunku, liczbę obserwacji i świeżość danych. Nie ocenia wygody lotu, bagażu ani przewoźnika i nie gwarantuje najniższej ceny na rynku. Zakres oraz ograniczenia porównania wyjaśniamy na stronie „Jak porównujemy ceny lotów”.",
++   "Cena lotu dotyczy jednej osoby. Nocleg, transfery i inne wydatki liczysz osobno w kalkulatorze; wpisane przez Ciebie kwoty są planem, nie potwierdzoną ofertą. Nieznane koszty nie oznaczają zera. HopTrip nie przyjmuje płatności ani nie wystawia biletów.",
+  ]},
+  partners:{title:"Współpraca partnerska",draft:false,paragraphs:[
+    "Niektóre przyciski prowadzą przez link partnerski. Po rezerwacji możemy otrzymać prowizję. Dostępność linku zależy od aktywnej, zatwierdzonej współpracy z programem.",
+diff --git a/apps/web/src/lib/i18n/service-content.ts b/apps/web/src/lib/i18n/service-content.ts
+index 22c365b..c6909c5 100644
+--- a/apps/web/src/lib/i18n/service-content.ts
++++ b/apps/web/src/lib/i18n/service-content.ts
+@@ -14,54 +14,57 @@ type Translation={title:string;paragraphs:string[]};
+ const translations:Record<Exclude<Locale,"pl">,Record<Exclude<ServiceSlug,"privacy"|"terms"|"price-comparison"|"price-freshness"|"price-history">,Translation>>={
+  en:{
+   about:{title:"About HopTrip",paragraphs:[
+-   "HopTrip helps you compare flight prices from Poland. We publish recorded price observations, not a guarantee that seats are available.",
+-   "We compare a price with the history for the same route, departure month and length of stay. A small number of observations reduces confidence in the comparison. The provider's cache may contain outdated data.",
+-   "The score considers price, the difference from the median, freshness and history coverage. When flight convenience is unknown, we use a neutral value. The score alone does not replace checking baggage, connections and ticket conditions.",
+-   "Flight prices are per person. Accommodation and transfers need to be checked separately; we do not add estimates without a confirmed offer.",
+-  ]},
++   "HopTrip helps you choose a flight and plan a short trip from Poland. We publish recorded price observations, not a guarantee that seats are available.",
++   "Choose an airport and dates, compare flights, then open the details: check airports, times and when the price was observed. Match accommodation, transfers and your itinerary to the specific flight.",
++   "Flight prices come from the Travelpayouts cache. Fetching data or opening a card does not confirm the price or available seats with the seller. Check final terms after visiting the partner.",
++   "The current score describes price against recorded destination history, observation count and data freshness. It does not rate flight convenience, baggage or the airline, and does not guarantee the lowest market price. The “How we compare flight prices” page explains the comparison scope and limitations.",
++   "Flight prices are per person. Calculate accommodation, transfers and other expenses separately; amounts you enter in the calculator are a plan, not a confirmed offer. Unknown costs do not mean zero. HopTrip does not accept payments or issue tickets.",
++ ]},
+   partners:{title:"Affiliate partnerships",paragraphs:[
+    "Some buttons use affiliate links. We may receive a commission after a booking. A link is available only when the partnership with the programme is active and approved.",
+    "HopTrip does not accept payments or issue tickets. Check the final price, seller and contract terms on the website you visit.",
+    "Price data and the affiliate programme are separate integrations. A price in the catalog does not mean a purchase link is available. An inactive partnership disables the button.",
+   ]},
+   contact:{title:"Contact",paragraphs:[
+-   "Contact us about an incorrect offer, the service or your personal data. The contact email address is shown below.",
++   "Contact us about an incorrect offer, the service or your personal data. Use the email address if it is visible in the contact block. If the address is temporarily unavailable, try again later.",
+    "When reporting an error, include the page address, date and a description of the problem. Do not send card numbers, identity documents or passenger details that we do not need to reply.",
+    "HopTrip does not sell tickets, accept payments or manage bookings. Contact the seller named in your booking confirmation about ticket changes, refunds and purchase complaints.",
+   ]},
+  },
+  ru:{
+   about:{title:"О HopTrip",paragraphs:[
+-   "HopTrip помогает сравнивать цены на перелёты из Польши. Мы публикуем сохранённые наблюдения цен, а не гарантию наличия мест.",
+-   "Мы сравниваем цену с историей того же маршрута, месяца вылета и длительности поездки. Небольшое число наблюдений снижает надёжность сравнения. Кеш поставщика может содержать устаревшие данные.",
+-   "Оценка учитывает цену, разницу с медианой, свежесть и полноту истории. Если удобство перелёта неизвестно, используем нейтральное значение. Сама оценка не заменяет проверку багажа, пересадок и условий билета.",
+-   "Цена перелёта указана на человека. Жильё и трансферы нужно проверять отдельно; мы не добавляем оценки расходов без подтверждённого предложения.",
+-  ]},
++   "HopTrip помогает выбрать перелёт и спланировать короткую поездку из Польши. Мы публикуем сохранённые наблюдения цен, а не гарантию наличия мест.",
++   "Выберите аэропорт и даты, сравните перелёты и откройте подробности: проверьте аэропорты, время рейсов и момент наблюдения цены. Подберите проживание, трансферы и план поездки под конкретный перелёт.",
++   "Цены перелётов поступают из кеша Travelpayouts. Загрузка данных или открытие карточки не подтверждает цену и наличие мест у продавца. Окончательные условия проверьте после перехода к партнёру.",
++   "Текущая методика оценки описывает цену на фоне сохранённой истории направления, число наблюдений и свежесть данных. Она не оценивает удобство перелёта, багаж или авиакомпанию и не гарантирует минимальную цену на рынке. Раздел «Как мы сравниваем цены на перелёты» объясняет границы и ограничения сравнения.",
++   "Цена перелёта указана на человека. Проживание, трансферы и другие расходы считайте отдельно в калькуляторе; введённые вами суммы — план, а не подтверждённое предложение. Неизвестные расходы не означают ноль. HopTrip не принимает платежи и не выдаёт билеты.",
++ ]},
+   partners:{title:"Партнёрство",paragraphs:[
+    "Некоторые кнопки ведут по партнёрским ссылкам. После бронирования мы можем получить комиссию. Доступность ссылки зависит от действующего и одобренного сотрудничества с программой.",
+    "HopTrip не принимает платежи и не выдаёт билеты. Окончательную цену, продавца и условия договора проверяйте на сайте, на который переходите.",
+    "Данные о ценах и партнёрская программа — отдельные интеграции. Наличие цены в каталоге не означает, что ссылка на покупку доступна. Если сотрудничество неактивно, кнопка отключается.",
+   ]},
+   contact:{title:"Контакты",paragraphs:[
+-   "Напишите нам о неверном предложении, работе сервиса или своих персональных данных. Контактный email указан ниже.",
++   "Напишите нам о неверном предложении, работе сервиса или своих персональных данных. Используйте email, если он показан в контактном блоке. Если адрес временно недоступен, попробуйте позже.",
+    "Сообщая об ошибке, укажите адрес страницы, дату и описание проблемы. Не отправляйте номера карт, документы, удостоверяющие личность, или данные пассажиров, которые не нужны для ответа.",
+    "HopTrip не продаёт билеты, не принимает платежи и не обслуживает бронирования. По вопросам изменения билета, возвратов и претензий к покупке обращайтесь к продавцу, указанному в подтверждении бронирования.",
+   ]},
+  },
+  uk:{
+   about:{title:"Про HopTrip",paragraphs:[
+-   "HopTrip допомагає порівнювати ціни на перельоти з Польщі. Ми публікуємо збережені спостереження цін, а не гарантію наявності місць.",
+-   "Ми порівнюємо ціну з історією того самого маршруту, місяця вильоту й тривалості подорожі. Невелика кількість спостережень знижує надійність порівняння. Кеш постачальника може містити застарілі дані.",
+-   "Оцінка враховує ціну, різницю з медіаною, свіжість і повноту історії. Якщо зручність перельоту невідома, використовуємо нейтральне значення. Сама оцінка не замінює перевірку багажу, пересадок та умов квитка.",
+-   "Ціну перельоту вказано на людину. Житло й трансфери потрібно перевіряти окремо; ми не додаємо оцінок витрат без підтвердженої пропозиції.",
+-  ]},
++   "HopTrip допомагає вибрати переліт і спланувати коротку подорож із Польщі. Ми публікуємо збережені спостереження цін, а не гарантію наявності місць.",
++   "Виберіть аеропорт і дати, порівняйте перельоти та відкрийте подробиці: перевірте аеропорти, час рейсів і момент спостереження ціни. Доберіть проживання, трансфери й план подорожі під конкретний переліт.",
++   "Ціни перельотів надходять із кешу Travelpayouts. Завантаження даних або відкриття картки не підтверджує ціну й наявність місць у продавця. Остаточні умови перевірте після переходу до партнера.",
++   "Поточна методика оцінки описує ціну на тлі збереженої історії напрямку, кількість спостережень і свіжість даних. Вона не оцінює зручність перельоту, багаж або авіакомпанію й не гарантує найнижчої ціни на ринку. Розділ «Як ми порівнюємо ціни на перельоти» пояснює межі й обмеження порівняння.",
++   "Ціну перельоту вказано на людину. Проживання, трансфери та інші витрати рахуйте окремо в калькуляторі; введені вами суми — план, а не підтверджена пропозиція. Невідомі витрати не означають нуль. HopTrip не приймає платежів і не видає квитків.",
++ ]},
+   partners:{title:"Партнерство",paragraphs:[
+    "Деякі кнопки ведуть за партнерськими посиланнями. Після бронювання ми можемо отримати комісію. Доступність посилання залежить від чинної та схваленої співпраці з програмою.",
+    "HopTrip не приймає платежів і не видає квитків. Остаточну ціну, продавця й умови договору перевіряйте на сайті, на який переходите.",
+    "Дані про ціни й партнерська програма — окремі інтеграції. Наявність ціни в каталозі не означає, що посилання на купівлю доступне. Якщо співпраця неактивна, кнопка вимикається.",
+   ]},
+   contact:{title:"Контакти",paragraphs:[
+-   "Напишіть нам про неправильну пропозицію, роботу сервісу або свої персональні дані. Контактний email наведено нижче.",
++   "Напишіть нам про неправильну пропозицію, роботу сервісу або свої персональні дані. Скористайтеся email, якщо він показаний у контактному блоці. Якщо адреса тимчасово недоступна, спробуйте пізніше.",
+    "Повідомляючи про помилку, вкажіть адресу сторінки, дату й опис проблеми. Не надсилайте номери карток, документи, що посвідчують особу, або дані пасажирів, які не потрібні для відповіді.",
+    "HopTrip не продає квитків, не приймає платежів і не обслуговує бронювання. Щодо зміни квитка, повернень і претензій до купівлі звертайтеся до продавця, зазначеного в підтвердженні бронювання.",
+   ]},
+diff --git a/apps/web/src/lib/legal-content.ts b/apps/web/src/lib/legal-content.ts
+index edc445f..59bc7fc 100644
+--- a/apps/web/src/lib/legal-content.ts
++++ b/apps/web/src/lib/legal-content.ts
+@@ -3,12 +3,13 @@ import type {InfoContent} from "./info-types";
+ // Personal operator details are deliberately absent. Render them from server configuration.
+ export const legalContent:Record<string,InfoContent>={
+  contact:{title:"Kontakt",description:"Kontakt z operatorem HopTrip i zgłaszanie problemów.",draft:false,noindex:true,paragraphs:[
+-  "Napisz do nas w sprawie błędnej oferty, działania serwisu lub swoich danych osobowych. Adres email do kontaktu znajduje się poniżej.",
++  "Napisz do nas w sprawie błędnej oferty, działania serwisu lub swoich danych osobowych. Użyj emaila, jeśli jest widoczny w bloku kontaktowym. Jeśli adres jest chwilowo niedostępny, spróbuj ponownie później.",
+   "Przy zgłoszeniu błędu podaj adres strony, datę i opis problemu. Nie przesyłaj numerów kart, dokumentów tożsamości ani danych pasażerów, których nie potrzebujemy do odpowiedzi.",
+   "HopTrip nie sprzedaje biletów, nie przyjmuje płatności i nie obsługuje rezerwacji. Zmiany biletu, zwroty i reklamacje zakupu zgłaszaj sprzedawcy wskazanemu w potwierdzeniu rezerwacji.",
+  ]},
+  privacy:{title:"Prywatność",description:"Zasady przetwarzania danych i ustawienia prywatności HopTrip.",draft:false,noindex:true,paragraphs:[
+   "W sprawach przetwarzania danych przez HopTrip możesz napisać na podany poniżej adres email. Informacja obowiązuje od 25 września 2026 r.",
++   "Opis funkcji powiadomień zaktualizowano 2 listopada 2026 r.",
+  ],sections:[
+   {title:"Dane, cele i podstawy przetwarzania",paragraphs:[
+    "Przy połączeniu z serwisem infrastruktura przetwarza adres IP i dane techniczne żądania. Służą dostarczeniu strony, ograniczaniu nadużyć i diagnozowaniu błędów. Podstawą jest prawnie uzasadniony interes administratora — utrzymanie bezpiecznego serwisu (art. 6 ust. 1 lit. f RODO). Nie prowadzimy kont użytkowników ani formularza płatności.",
+@@ -16,7 +17,8 @@ export const legalContent:Record<string,InfoContent>={
+    "Opcjonalna analityka oraz skrypt marketingowy Travelpayouts Drive działają na podstawie oddzielnych zgód (art. 6 ust. 1 lit. a RODO). Odmowa nie ogranicza dostępu do ofert. Nie podejmujemy wobec Ciebie decyzji wywołujących skutki prawne wyłącznie na podstawie automatycznego przetwarzania. Ocena ofert dotyczy cen i tras, nie Twojej sytuacji osobistej.",
+   ]},
+   {title:"Pamięć przeglądarki i wycofanie zgody",paragraphs:[
+-   "Jeśli zapisy na subskrypcję email są dostępne, zapisujemy podany adres, ustawienia lotów, wersję zgody oraz daty zapisu, potwierdzenia i wyłączenia. Przed potwierdzeniem adresu subskrypcja nie jest aktywna. Link w emailu umożliwia zmianę ustawień i wypisanie. Nie przekazujemy adresu partnerom ofert. Podsumowania lotów nie są jeszcze wysyłane; formularz opisuje aktualny stan usługi.",
++   "Jeśli zapisy na subskrypcję email są dostępne, zapisujemy podany adres, ustawienia lotów, wersję zgody, daty zapisu, potwierdzenia i wyłączenia oraz historię prób dostarczenia ofert. Przed potwierdzeniem adresu subskrypcja nie jest aktywna. Link w emailu umożliwia zmianę ustawień i wypisanie; nie przekazuj go innym osobom, ponieważ daje dostęp do subskrypcji. Nie przekazujemy adresu partnerom ofert. Podsumowania zależą od włączonej wysyłki i nowych dopasowań; formularz pokazuje aktualny stan usługi.",
++    "Jeśli dostępne są osobiste alerty Telegram, po Twoich komendach w prywatnym czacie zapisujemy identyfikatory czatu i użytkownika, język, ustawienia lotów, wersję i czas zgody oraz zapisy obsługi i dostarczenia wiadomości. Samo /start nie włącza ofert: potrzebne jest oddzielne /confirm po zapisaniu warunków. /settings i /set służą zarządzaniu, a /stop wyłącza alert. Nie prosimy o numer telefonu ani listę kontaktów.",
+    "Zapisane wyjazdy przechowujemy w tej przeglądarce (do 20 planów). Link udostępnienia zawiera trasę, daty, liczbę osób, zapisane ceny i budżet. Każda osoba posiadająca link może odczytać plan. Przy otwieraniu linku dane docierają do serwera HopTrip jako część adresu i mogą wystąpić w historii przeglądarki oraz logach dostępu. Link jest niezależną kopią; usunięcie planu z listy nie unieważnia przekazanych linków. Nie umieszczamy w nich kontaktów ani prywatnych notatek.",
+    "Gdy zmieniasz kalkulator budżetu, zapisujemy jego szkic w pamięci tej przeglądarki: kwoty, liczbę osób, daty i długość pobytu, osobno dla każdej oferty. Nie wysyłamy szkicu na serwer HopTrip. Przycisk „Wyczyść kalkulator” zastępuje wpisane dane pustym planem; usunięcie danych witryny w przeglądarce usuwa wszystkie szkice. Szkice nie są synchronizowane między urządzeniami.",
+    "Za zgodą na analitykę mierzymy również kliknięcia kart muzeów i atrakcji: miasto, identyfikator obiektu, stronę poradnika lub oferty oraz rodzaj linku (partnerski lub oficjalny). Nie zapisujemy w tym zdarzeniu parametrów adresu strony. Kliknięcie nie oznacza zakupu biletu.",
+@@ -27,12 +29,14 @@ export const legalContent:Record<string,InfoContent>={
+   ]},
+   {title:"Odbiorcy i usługi zewnętrzne",paragraphs:[
+    "Hosting i baza danych HopTrip działają w Oracle Cloud w regionie Frankfurt (Niemcy). Pocztę obsługuje OVHcloud Zimbra; zgodnie z informacją dostawcy skrzynki tej usługi są hostowane we Francji. Dostawcy infrastruktury mogą przetwarzać dane w zakresie niezbędnym do świadczenia swoich usług.",
+-   "Telegram otrzymuje techniczne powiadomienie dla operatora o liczbie nowych wiadomości. Nie przekazujemy do niego treści, tematów ani adresów nadawców. Sprawdzenie skrzynki przez HopTrip nie oznacza wiadomości jako przeczytanej.",
++   "Do Telegram wysyłamy operatorowi techniczne powiadomienie o liczbie nowych wiadomości. W tym powiadomieniu nie przekazujemy treści, tematów ani adresów nadawców. Sprawdzenie skrzynki przez HopTrip nie oznacza wiadomości jako przeczytanej.",
++    "Gdy korzystasz z osobistych alertów Telegram, Twoje komendy i podane w nich warunki oraz odpowiedzi i dopasowane loty są przetwarzane także przez Telegram. Do tego kanału stosuje się również polityka prywatności Telegram. Wyłączenie alertu nie usuwa automatycznie historii czatu w aplikacji Telegram.",
+    "Po zgodzie na Drive dostawcą narzędzia jest Travelpayouts. Po kliknięciu linku partnerskiego przeglądarka może przejść przez tp.media do Aviasales lub sprzedawcy. Te podmioty przetwarzają dane zgodnie ze swoimi zasadami, także w związku z przypisaniem prowizji. HopTrip nie dodaje do takich linków Twojego emaila ani danych pasażerów.",
+    "Nie wszyscy dostawcy działają wyłącznie w EOG. Polityki i warunki dostawców opisują miejsca przetwarzania oraz stosowane mechanizmy transferu, w tym standardowe klauzule umowne lub inne właściwe zabezpieczenia. Informacje o zabezpieczeniach dotyczących usług wykorzystywanych przez HopTrip możesz uzyskać, kontaktując się z administratorem. Zgoda na marketing nie zastępuje wymaganych zabezpieczeń transferu.",
+   ]},
+   {title:"Jak długo przechowujemy dane",paragraphs:[
+-   "Zdarzenia analityczne starsze niż 90 dni usuwamy w zadaniu utrzymaniowym. Z wcześniejszych zapisów przejść partnerskich usuwamy powiązanie z sesją oraz źródłem i kampanią. Bez zgody na analitykę przekierowanie zapisuje tylko techniczny wpis bez identyfikatora sesji przeglądarki.",
++   "Dane aktywnej subskrypcji i historię prób wysyłki zachowujemy do jej obsługi i zapobiegania ponownym wysyłkom. Przy uruchomieniu czyszczenia usuwamy niepotwierdzone zapisy starsze niż 7 dni od ostatniego zgłoszenia oraz wyłączone subskrypcje starsze niż 30 dni od wypisania. Zapisy obsługi komend i odpowiedzi Telegram starsze niż 7 dni są usuwane; tekst odpowiedzi jest czyszczony po ostatecznym zakończeniu próby. Historia dopasowań aktywnej subskrypcji pozostaje, aby nie powtarzać ofert. Wypisanie nie oznacza natychmiastowego usunięcia wszystkich zapisów.",
++    "Zdarzenia analityczne starsze niż 90 dni usuwamy w zadaniu utrzymaniowym. Z wcześniejszych zapisów przejść partnerskich usuwamy powiązanie z sesją oraz źródłem i kampanią. Bez zgody na analitykę przekierowanie zapisuje tylko techniczny wpis bez identyfikatora sesji przeglądarki.",
+    "Techniczne zapisy przejść i rozliczeń przechowujemy w zakresie potrzebnym do uzgodnienia prowizji, wykrywania nadużyć i ustalenia lub obrony roszczeń — do zakończenia rozliczenia i upływu właściwego okresu przedawnienia. Podstawą jest art. 6 ust. 1 lit. f RODO; dokumenty objęte obowiązkiem ustawowym przechowuje się przez wymagany prawem okres na podstawie art. 6 ust. 1 lit. c RODO.",
+    "Korespondencję przechowujemy przez czas obsługi sprawy, a następnie tylko w zakresie niezbędnym do wykazania jej przebiegu, wykonania obowiązków prawnych lub obrony roszczeń, do upływu właściwych terminów. Dane techniczne są przetwarzane przez czas konieczny do obsługi połączenia i bezpieczeństwa; zapisy błędów mogą być przechowywane do zakończenia diagnostyki. Przeglądamy potrzebę dalszego przechowywania przy zamykaniu zgłoszeń.",
+    "Usunięte dane mogą pozostać w ograniczonych dostępem kopiach zapasowych do zastąpienia lub usunięcia kopii w cyklu retencji. Nie używamy tych kopii do bieżącej analityki; przy odtworzeniu ponownie stosujemy reguły usuwania danych.",
+diff --git a/apps/web/src/lib/i18n/legal-translations.ts b/apps/web/src/lib/i18n/legal-translations.ts
+index 2ee4854..e54d3a4 100644
+--- a/apps/web/src/lib/i18n/legal-translations.ts
++++ b/apps/web/src/lib/i18n/legal-translations.ts
+@@ -7,6 +7,7 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+  en:{
+   privacy:{title:"Privacy",description:"HopTrip data processing policy and privacy settings.",paragraphs:[
+    "For matters concerning data processing by HopTrip, you can write to the email address below. This notice applies from 25 September 2026.",
++   "The notification feature description was updated on 2 November 2026.",
+   ],sections:[
+    {title:"Data, purposes and legal bases for processing",paragraphs:[
+     "When you connect to the service, the infrastructure processes your IP address and technical request data. These are used to deliver the page, limit abuse and diagnose errors. The basis is the controller's legitimate interest in maintaining a secure service (Article 6(1)(f) GDPR). We do not provide user accounts or a payment form.",
+@@ -14,7 +15,8 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+     "Optional analytics and the Travelpayouts Drive marketing script operate on separate consents (Article 6(1)(a) GDPR). Refusal does not restrict access to offers. We do not make decisions about you that produce legal effects solely through automated processing. Offer scoring concerns prices and routes, not your personal circumstances.",
+    ]},
+    {title:"Browser storage and withdrawing consent",paragraphs:[
+-    "If email signup is available, we store the address you provide, flight preferences, consent version and signup, confirmation and deactivation dates. The subscription is not active until the address is confirmed. The email link lets you change settings and unsubscribe. We do not share the address with offer partners. Flight summaries are not yet being sent; the form describes the service's current status.",
++    "If email signup is available, we store your address, flight preferences, consent version, signup, confirmation and deactivation dates, and the history of offer delivery attempts. The subscription is not active until the address is confirmed. The email link lets you change settings and unsubscribe; do not share it, as it gives access to the subscription. We do not share your address with offer partners. Summaries depend on enabled delivery and new matches; the form shows the current service status.",
++    "If personal Telegram alerts are available, after your commands in a private chat we store chat and user identifiers, language, flight preferences, consent version and time, and command and delivery records. /start alone does not enable offers: a separate /confirm is required after saving preferences. Use /settings and /set to manage them, and /stop to disable the alert. We do not request your phone number or contact list.",
+     "Saved trips are stored in this browser (up to 20 plans). A sharing link contains the route, dates, number of people, saved prices and budget. Anyone with the link can read the plan. When the link is opened, the data reaches the HopTrip server as part of the address and may appear in browser history and access logs. The link is an independent copy; removing a plan from the list does not invalidate shared links. We do not include contacts or private notes in them.",
+     "When you change the budget calculator, we save its draft in this browser's storage: amounts, number of people, dates and length of stay, separately for each offer. We do not send the draft to the HopTrip server. The ‘Clear calculator’ button replaces the entered data with an empty plan; clearing site data in your browser removes all drafts. Drafts are not synchronised between devices.",
+     "With analytics consent, we also measure clicks on museum and attraction cards: city, venue identifier, guide or offer page, and link type (affiliate or official). We do not record page URL parameters in this event. A click does not mean a ticket purchase.",
+@@ -25,11 +27,13 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+    ]},
+    {title:"Recipients and external services",paragraphs:[
+     "HopTrip hosting and the database run in Oracle Cloud in the Frankfurt region (Germany). Email is handled by OVHcloud Zimbra; according to the provider, this service's mailboxes are hosted in France. Infrastructure providers may process data as necessary to provide their services.",
+-    "Telegram receives a technical notification for the operator about the number of new messages. We do not send message content, subjects or sender addresses to it. HopTrip checking the mailbox does not mark messages as read.",
++    "Operational Telegram notifications to the operator report the number of new messages. This notification does not include message content, subjects or sender addresses. HopTrip checking the mailbox does not mark messages as read.",
++    "When you use personal Telegram alerts, your commands and the preferences in them, as well as replies and matching flights, are also processed by Telegram. The Telegram privacy policy also applies to this channel. Disabling the alert does not automatically delete chat history in the Telegram app.",
+     "After consent to Drive, Travelpayouts provides the tool. After clicking an affiliate link, your browser may pass through tp.media to Aviasales or a seller. These entities process data under their own policies, including for commission attribution. HopTrip does not add your email or passenger data to these links.",
+     "Not all providers operate exclusively in the EEA. Providers' policies and terms describe processing locations and transfer mechanisms, including standard contractual clauses or other appropriate safeguards. You can obtain information about safeguards for services used by HopTrip by contacting the controller. Marketing consent does not replace required transfer safeguards.",
+    ]},
+    {title:"How long we keep data",paragraphs:[
++    "We retain active subscription data and delivery attempt history to operate the subscription and prevent repeated messages. When cleanup runs, it removes unconfirmed requests older than 7 days from the last request and disabled subscriptions older than 30 days from unsubscribing. Telegram command and reply records older than 7 days are removed; reply text is cleared after an attempt reaches a final outcome. Match history for active subscriptions remains to prevent repeated offers. Unsubscribing does not mean immediate deletion of every record.",
+     "We delete analytics events older than 90 days in a maintenance task. We remove links to sessions, sources and campaigns from older records of affiliate visits. Without analytics consent, a redirect stores only a technical record without the browser session identifier.",
+     "We keep technical records of visits and settlements as needed to reconcile commissions, detect abuse and establish or defend claims — until settlement is complete and the applicable limitation period expires. The basis is Article 6(1)(f) GDPR; documents subject to a statutory obligation are kept for the legally required period under Article 6(1)(c) GDPR.",
+     "We keep correspondence while handling the matter, and afterwards only as necessary to demonstrate its course, fulfil legal obligations or defend claims, until the applicable deadlines expire. Technical data are processed for as long as necessary to handle the connection and security; error logs may be kept until diagnostics are complete. We review the need for further retention when closing enquiries.",
+@@ -52,6 +56,7 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+  ru:{
+   privacy:{title:"Конфиденциальность",description:"Правила обработки данных и настройки конфиденциальности HopTrip.",paragraphs:[
+    "По вопросам обработки данных HopTrip можно написать на указанный ниже email. Информация действует с 25 сентября 2026 года.",
++   "Описание функций уведомлений обновлено 2 ноября 2026 года.",
+   ],sections:[
+    {title:"Данные, цели и основания обработки",paragraphs:[
+     "При подключении к сервису инфраструктура обрабатывает IP-адрес и технические данные запроса. Они нужны для предоставления страницы, ограничения злоупотреблений и диагностики ошибок. Основание — законный интерес контролёра данных в поддержании безопасного сервиса (ст. 6, п. 1, подп. f GDPR). У нас нет пользовательских аккаунтов и формы оплаты.",
+@@ -59,7 +64,8 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+     "Необязательная аналитика и маркетинговый скрипт Travelpayouts Drive работают на основании отдельных согласий (ст. 6, п. 1, подп. a GDPR). Отказ не ограничивает доступ к предложениям. Мы не принимаем в отношении вас решений с юридическими последствиями исключительно на основании автоматизированной обработки. Оценка предложений касается цен и маршрутов, а не вашей личной ситуации.",
+    ]},
+    {title:"Хранилище браузера и отзыв согласия",paragraphs:[
+-    "Если доступна подписка по email, мы сохраняем указанный адрес, настройки перелётов, версию согласия и даты подписки, подтверждения и отключения. До подтверждения адреса подписка неактивна. Ссылка в письме позволяет изменить настройки и отписаться. Мы не передаём адрес партнёрам предложений. Подборки перелётов пока не отправляются; форма описывает текущее состояние услуги.",
++    "Если доступна подписка по email, мы сохраняем адрес, настройки перелётов, версию согласия, даты подписки, подтверждения и отключения, а также историю попыток доставки предложений. До подтверждения адреса подписка неактивна. Ссылка в письме позволяет менять настройки и отписаться; не передавайте её другим людям, поскольку она даёт доступ к подписке. Мы не передаём адрес партнёрам предложений. Подборки зависят от включённой отправки и новых совпадений; форма показывает текущее состояние услуги.",
++    "Если доступны персональные уведомления Telegram, после ваших команд в личном чате мы сохраняем идентификаторы чата и пользователя, язык, настройки перелётов, версию и время согласия, записи обработки команд и доставки сообщений. Само /start не включает предложения: после сохранения условий нужно отдельное /confirm. /settings и /set позволяют управлять условиями, а /stop отключает уведомления. Мы не запрашиваем номер телефона или список контактов.",
+     "Сохранённые поездки хранятся в этом браузере (до 20 планов). Ссылка для отправки содержит маршрут, даты, число людей, сохранённые цены и бюджет. Любой обладатель ссылки может прочитать план. При открытии ссылки данные поступают на сервер HopTrip как часть адреса и могут оказаться в истории браузера и журналах доступа. Ссылка — независимая копия; удаление плана из списка не аннулирует отправленные ссылки. Мы не включаем в них контакты и личные заметки.",
+     "При изменении калькулятора бюджета мы сохраняем его черновик в хранилище этого браузера: суммы, число людей, даты и длительность пребывания отдельно для каждого предложения. Мы не отправляем черновик на сервер HopTrip. Кнопка «Очистить калькулятор» заменяет введённые данные пустым планом; удаление данных сайта в браузере удаляет все черновики. Черновики не синхронизируются между устройствами.",
+     "При согласии на аналитику мы также измеряем нажатия на карточки музеев и достопримечательностей: город, идентификатор объекта, страницу путеводителя или предложения и тип ссылки (партнёрская или официальная). Параметры адреса страницы в этом событии не записываются. Нажатие не означает покупку билета.",
+@@ -70,11 +76,13 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+    ]},
+    {title:"Получатели и внешние сервисы",paragraphs:[
+     "Хостинг и база данных HopTrip работают в Oracle Cloud в регионе Франкфурт (Германия). Почту обслуживает OVHcloud Zimbra; согласно информации поставщика, почтовые ящики этой услуги размещены во Франции. Поставщики инфраструктуры могут обрабатывать данные в объёме, необходимом для оказания своих услуг.",
+-    "Telegram получает техническое уведомление для оператора о количестве новых сообщений. Мы не передаём туда содержание, темы и адреса отправителей. Проверка почтового ящика HopTrip не помечает сообщения как прочитанные.",
++    "В эксплуатационном уведомлении Telegram оператор получает число новых писем. Это уведомление не содержит тексты, темы или адреса отправителей. Проверка почтового ящика HopTrip не помечает сообщения как прочитанные.",
++    "При использовании персональных уведомлений Telegram ваши команды и переданные в них условия, а также ответы и подобранные перелёты обрабатываются также Telegram. К этому каналу применяется и политика конфиденциальности Telegram. Отключение уведомлений не удаляет автоматически историю чата в приложении Telegram.",
+     "После согласия на Drive поставщиком инструмента является Travelpayouts. При нажатии на партнёрскую ссылку браузер может перейти через tp.media на Aviasales или к продавцу. Эти организации обрабатывают данные по своим правилам, в том числе для начисления комиссии. HopTrip не добавляет в такие ссылки ваш email и данные пассажиров.",
+     "Не все поставщики работают исключительно в ЕЭЗ. Политики и условия поставщиков описывают места обработки и механизмы передачи, включая стандартные договорные положения или иные надлежащие гарантии. Информацию о гарантиях для услуг, используемых HopTrip, можно получить у контролёра данных. Согласие на маркетинг не заменяет обязательных гарантий передачи.",
+    ]},
+    {title:"Как долго мы храним данные",paragraphs:[
++    "Данные активной подписки и историю попыток отправки сохраняем для её работы и предотвращения повторных сообщений. При запуске очистки удаляются неподтверждённые заявки старше 7 дней от последнего запроса и отключённые подписки старше 30 дней от отписки. Записи обработки команд и ответов Telegram старше 7 дней удаляются; текст ответа очищается после окончательного завершения попытки. История совпадений активной подписки остаётся, чтобы не повторять предложения. Отписка не означает немедленного удаления всех записей.",
+     "События аналитики старше 90 дней удаляются задачей обслуживания. Из более ранних записей партнёрских переходов удаляется связь с сессией, источником и кампанией. Без согласия на аналитику перенаправление сохраняет только техническую запись без идентификатора сессии браузера.",
+     "Технические записи переходов и расчётов хранятся в объёме, необходимом для сверки комиссий, выявления злоупотреблений и установления или защиты требований, — до завершения расчётов и истечения применимого срока исковой давности. Основание — ст. 6, п. 1, подп. f GDPR; документы, подпадающие под установленную законом обязанность хранения, хранятся в течение предусмотренного законом срока на основании ст. 6, п. 1, подп. c GDPR.",
+     "Переписка хранится во время рассмотрения вопроса, а затем только в объёме, необходимом для подтверждения его хода, выполнения юридических обязанностей или защиты от требований, до истечения применимых сроков. Технические данные обрабатываются столько, сколько необходимо для соединения и безопасности; журналы ошибок могут храниться до окончания диагностики. При закрытии обращений мы пересматриваем необходимость дальнейшего хранения.",
+@@ -97,6 +105,7 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+  uk:{
+   privacy:{title:"Конфіденційність",description:"Правила обробки даних і налаштування конфіденційності HopTrip.",paragraphs:[
+    "З питань обробки даних HopTrip можна написати на зазначений нижче email. Інформація діє з 25 вересня 2026 року.",
++   "Опис функцій сповіщень оновлено 2 листопада 2026 року.",
+   ],sections:[
+    {title:"Дані, цілі та підстави обробки",paragraphs:[
+     "Під час підключення до сервісу інфраструктура обробляє IP-адресу й технічні дані запиту. Вони потрібні для надання сторінки, обмеження зловживань і діагностики помилок. Підстава — законний інтерес контролера даних у підтриманні безпечного сервісу (ст. 6, п. 1, підп. f GDPR). У нас немає облікових записів користувачів і форми оплати.",
+@@ -104,7 +113,8 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+     "Необов’язкова аналітика й маркетинговий скрипт Travelpayouts Drive працюють на підставі окремих згод (ст. 6, п. 1, підп. a GDPR). Відмова не обмежує доступ до пропозицій. Ми не ухвалюємо щодо вас рішень із юридичними наслідками виключно на підставі автоматизованої обробки. Оцінка пропозицій стосується цін і маршрутів, а не вашої особистої ситуації.",
+    ]},
+    {title:"Сховище браузера та відкликання згоди",paragraphs:[
+-    "Якщо доступна підписка через email, ми зберігаємо вказану адресу, налаштування перельотів, версію згоди й дати підписки, підтвердження та вимкнення. До підтвердження адреси підписка неактивна. Посилання в листі дозволяє змінити налаштування й відписатися. Ми не передаємо адресу партнерам пропозицій. Добірки перельотів поки не надсилаються; форма описує поточний стан послуги.",
++    "Якщо доступна підписка через email, ми зберігаємо адресу, налаштування перельотів, версію згоди, дати підписки, підтвердження й вимкнення, а також історію спроб доставки пропозицій. До підтвердження адреси підписка неактивна. Посилання в листі дозволяє змінювати налаштування й відписатися; не передавайте його іншим людям, оскільки воно дає доступ до підписки. Ми не передаємо адресу партнерам пропозицій. Добірки залежать від увімкненого надсилання й нових збігів; форма показує поточний стан послуги.",
++    "Якщо доступні персональні сповіщення Telegram, після ваших команд у приватному чаті ми зберігаємо ідентифікатори чату й користувача, мову, налаштування перельотів, версію й час згоди, записи обробки команд і доставки повідомлень. Саме /start не вмикає пропозиції: після збереження умов потрібне окреме /confirm. /settings і /set дозволяють керувати умовами, а /stop вимикає сповіщення. Ми не запитуємо номер телефону або список контактів.",
+     "Збережені подорожі зберігаються в цьому браузері (до 20 планів). Посилання для надсилання містить маршрут, дати, кількість людей, збережені ціни й бюджет. Кожен, хто має посилання, може прочитати план. Під час відкриття посилання дані надходять на сервер HopTrip як частина адреси й можуть потрапити до історії браузера та журналів доступу. Посилання — незалежна копія; видалення плану зі списку не скасовує надісланих посилань. Ми не включаємо до них контактів або приватних нотаток.",
+     "Під час зміни калькулятора бюджету ми зберігаємо його чернетку у сховищі цього браузера: суми, кількість людей, дати й тривалість перебування окремо для кожної пропозиції. Ми не надсилаємо чернетку на сервер HopTrip. Кнопка «Очистити калькулятор» замінює введені дані порожнім планом; видалення даних сайту в браузері видаляє всі чернетки. Чернетки не синхронізуються між пристроями.",
+     "За згодою на аналітику ми також вимірюємо натискання на картки музеїв і пам’яток: місто, ідентифікатор об’єкта, сторінку путівника або пропозиції й тип посилання (партнерське чи офіційне). Параметри адреси сторінки в цій події не записуються. Натискання не означає купівлю квитка.",
+@@ -115,11 +125,13 @@ export const legalTranslations:Record<Exclude<Locale,"pl">,Record<"privacy"|"ter
+    ]},
+    {title:"Одержувачі та зовнішні сервіси",paragraphs:[
+     "Хостинг і база даних HopTrip працюють в Oracle Cloud у регіоні Франкфурт (Німеччина). Пошту обслуговує OVHcloud Zimbra; за інформацією постачальника, поштові скриньки цієї послуги розміщені у Франції. Постачальники інфраструктури можуть обробляти дані в обсязі, необхідному для надання своїх послуг.",
+-    "Telegram отримує технічне сповіщення для оператора про кількість нових повідомлень. Ми не передаємо туди вміст, теми й адреси відправників. Перевірка поштової скриньки HopTrip не позначає повідомлень як прочитаних.",
++    "В експлуатаційному сповіщенні Telegram оператор отримує кількість нових листів. Це сповіщення не містить вмісту, тем або адрес відправників. Перевірка поштової скриньки HopTrip не позначає повідомлень як прочитаних.",
++    "Під час використання персональних сповіщень Telegram ваші команди й передані в них умови, а також відповіді й дібрані перельоти обробляються також Telegram. До цього каналу застосовується й політика конфіденційності Telegram. Вимкнення сповіщень не видаляє автоматично історію чату в застосунку Telegram.",
+     "Після згоди на Drive постачальником інструмента є Travelpayouts. Після натискання на партнерське посилання браузер може перейти через tp.media на Aviasales або до продавця. Ці організації обробляють дані за власними правилами, зокрема для нарахування комісії. HopTrip не додає до таких посилань ваш email і дані пасажирів.",
+     "Не всі постачальники працюють виключно в ЄЕЗ. Політики й умови постачальників описують місця обробки та механізми передавання, зокрема стандартні договірні положення або інші належні гарантії. Інформацію про гарантії для послуг, які використовує HopTrip, можна отримати в контролера даних. Згода на маркетинг не замінює обов’язкових гарантій передавання.",
+    ]},
+    {title:"Як довго ми зберігаємо дані",paragraphs:[
++    "Дані активної підписки й історію спроб надсилання зберігаємо для її роботи та запобігання повторним повідомленням. Під час запуску очищення видаляються непідтверджені запити, старші за 7 днів від останнього запиту, і вимкнені підписки, старші за 30 днів від відписки. Записи обробки команд і відповідей Telegram, старші за 7 днів, видаляються; текст відповіді очищається після остаточного завершення спроби. Історія збігів активної підписки залишається, щоб не повторювати пропозиції. Відписка не означає негайного видалення всіх записів.",
+     "Події аналітики, старші за 90 днів, видаляються завданням обслуговування. З давніших записів партнерських переходів видаляється зв’язок із сесією, джерелом і кампанією. Без згоди на аналітику перенаправлення зберігає лише технічний запис без ідентифікатора сесії браузера.",
+     "Технічні записи переходів і розрахунків зберігаються в обсязі, потрібному для звіряння комісій, виявлення зловживань і встановлення або захисту вимог, — до завершення розрахунків і спливу застосовного строку позовної давності. Підстава — ст. 6, п. 1, підп. f GDPR; документи, на які поширюється встановлений законом обов’язок зберігання, зберігаються протягом передбаченого законом строку на підставі ст. 6, п. 1, підп. c GDPR.",
+     "Листування зберігається під час розгляду питання, а потім лише в обсязі, потрібному для підтвердження його перебігу, виконання юридичних обов’язків або захисту від вимог, до спливу застосовних строків. Технічні дані обробляються стільки, скільки потрібно для з’єднання й безпеки; журнали помилок можуть зберігатися до завершення діагностики. Закриваючи звернення, ми переглядаємо потребу подальшого зберігання.",
+diff --git a/apps/web/src/app/components/service-info.tsx b/apps/web/src/app/components/service-info.tsx
+index eccbc60..1c6dd42 100644
+--- a/apps/web/src/app/components/service-info.tsx
++++ b/apps/web/src/app/components/service-info.tsx
+@@ -21,6 +21,15 @@ export function serviceMetadata(slug:ServiceSlug,locale:Locale):Metadata {
+   twitter:{card:images.length ? "summary_large_image" : "summary",title:page.title,description,images}};
+ }
+ 
++export function ServiceLinks({slug,locale}:{slug:ServiceSlug;locale:Locale}) {
++ const labels=serviceLabels[locale];
++ return <nav aria-label={labels.links}><ul>
++  {serviceSlugs.filter(item=>item!==slug).map(item=><li key={item}><a href={localizedHref(`/info/${item}`,locale)}>{serviceContent(item,locale).title}</a></li>)}
++  <li><Link href={localizedHref("/deals",locale)}>{labels.catalog}</Link></li>
++  {slug.startsWith("price-") && <li><a href={localizedHref("/info",locale)}>{editorialCopy[locale].title}</a></li>}
++ </ul></nav>;
++}
++
+ export async function ServiceInfo({slug,locale}:{slug:ServiceSlug;locale:Locale}) {
+  const page=serviceContent(slug,locale),labels=serviceLabels[locale];
+  const legal=isLegalPage(slug),operator=legal ? await readOperator() : null;
+@@ -41,10 +50,6 @@ export async function ServiceInfo({slug,locale}:{slug:ServiceSlug;locale:Locale}
+    const card=editorialCard(item,related,locale),RelatedLink="a";
+    return <li key={item}><RelatedLink href={localizedHref(`/info/${item}`,card.translated ? locale : "pl")} hrefLang={card.translated ? locale : "pl"}><span lang={card.translated ? locale : "pl"}>{card.title}</span>{!card.translated && ` (${editorialCopy[locale].polish})`}</RelatedLink></li>;
+   })}</ul></nav>}
+-  <nav aria-label={labels.links}><ul>
+-   {serviceSlugs.filter(item=>item!==slug).map(item=><li key={item}><a href={localizedHref(`/info/${item}`,locale)}>{serviceContent(item,locale).title}</a></li>)}
+-   <li><Link href={localizedHref("/deals",locale)}>{labels.catalog}</Link></li>
+-   {slug.startsWith("price-") && <li><a href={localizedHref("/info",locale)}>{editorialCopy[locale].title}</a></li>}
+-  </ul></nav>
++  <ServiceLinks slug={slug} locale={locale}/>
+  </article></main>;
+ }
+diff --git a/apps/web/src/app/info/[slug]/page.tsx b/apps/web/src/app/info/[slug]/page.tsx
+index 04700e3..eda23ae 100644
+--- a/apps/web/src/app/info/[slug]/page.tsx
++++ b/apps/web/src/app/info/[slug]/page.tsx
+@@ -14,7 +14,7 @@ import {TripBudgetCalculator} from "../../components/trip-budget-calculator";
+ import {DestinationActivities} from "../../components/destination-activities";
+ import {AirportTransfer} from "../../components/airport-transfer";
+ import {isServiceSlug} from "../../../lib/i18n/service-content";
+-import {serviceMetadata} from "../../components/service-info";
++import {ServiceLinks,serviceMetadata} from "../../components/service-info";
+ import {LegalSources} from "../../components/legal-sources";
+ import {hasGuideTranslation} from '../../../lib/i18n/guide-slugs';
+ type Props={params:Promise<{slug:string}>};
+@@ -86,6 +86,7 @@ export default async function InfoPage({params}:Props) {
+  {related.length>0 && <nav aria-label="Powiązane poradniki"><h2>Czytaj dalej</h2><ul>{related.map(({slug,page,reason})=>
+   <li key={slug}><Link href={`/info/${slug}`}>{page.title}</Link>{reason && <p className="related-reason">{reason}</p>}</li>
+  )}</ul><Link href="/deals">{pl.deals}</Link></nav>}
++ {isServiceSlug(slug) && <ServiceLinks slug={slug} locale="pl"/>}
+  </article>
+  {destination && <Suspense fallback={<p role="status">Sprawdzamy loty: {destination.name}…</p>}>
+   <GuideFlights destination={destination}/>
+diff --git a/apps/web/tests/trust-content.spec.ts b/apps/web/tests/trust-content.spec.ts
+new file mode 100644
+index 0000000..e969d0d 100644
+--- /dev/null
++++ b/apps/web/tests/trust-content.spec.ts
+@@ -0,0 +1,46 @@
++import {test,expect} from '@playwright/test';
++import AxeBuilder from '@axe-core/playwright';
++import {localizedHref} from '../src/lib/i18n/routing';
++import {serviceLabels} from '../src/lib/i18n/service-content';
++
++const unknownCosts={pl:'Nieznane koszty nie oznaczają zera.',en:'Unknown costs do not mean zero.',ru:'Неизвестные расходы не означают ноль.',uk:'Невідомі витрати не означають нуль.'};
++const technicalUpdate={pl:'Opis funkcji powiadomień zaktualizowano 2 listopada 2026 r.',en:'The notification feature description was updated on 2 November 2026.',ru:'Описание функций уведомлений обновлено 2 ноября 2026 года.',uk:'Опис функцій сповіщень оновлено 2 листопада 2026 року.'};
++
++for(const locale of ['pl','en','ru','uk'] as const)test(`trust explanations match the product in ${locale}`,async({page},info)=>{
++ test.setTimeout(90000);
++ await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
++ const requests:string[]=[];
++ page.on('request',r=>{if(/emrld\.ltd|api\.telegram\.org|\/analytics\/events/.test(r.url()))requests.push(r.url());});
++ const about=localizedHref('/info/about',locale);
++ await page.goto(about);
++ await expect(page.locator('html')).toHaveAttribute('lang',locale);
++ await expect(page.locator('main h1')).toHaveCount(1);
++ await expect(page.locator('main article > p').filter({hasText:'Travelpayouts'})).toHaveCount(1);
++ await expect(page.getByRole('main')).toContainText(unknownCosts[locale]);
++ await expect(page.getByRole('main')).not.toContainText(/neutral value|neutralny wynik|нейтральное значение|нейтральне значення/);
++ for(const slug of ['price-comparison','price-freshness','price-history','partners','contact','privacy'])await expect(page.locator(`main a[href="${localizedHref('/info/'+slug,locale)}"]`)).toHaveCount(1);
++ await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',new URL(about,page.url()).href);
++ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','index, follow');
++ expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
++ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
++ await page.getByRole('main').screenshot({path:info.outputPath('about.png')});
++ await page.locator(`main a[href="${localizedHref('/info/privacy',locale)}"]`).click();
++ await expect(page.getByRole('main')).toContainText(technicalUpdate[locale]);
++ for(const command of ['/start','/confirm','/settings','/set','/stop'])await expect(page.getByRole('main')).toContainText(command);
++ await expect(page.getByRole('main')).not.toContainText(/Flight summaries are not yet being sent|Podsumowania lotów nie są jeszcze wysyłane|Подборки перелётов пока не отправляются|Добірки перельотів поки не надсилаються/);
++ const paragraphs=page.locator('main article > section p');
++ await expect(paragraphs.filter({hasText:/7/}).filter({hasText:/30/})).toHaveCount(1);
++ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
++ const region=page.getByRole('region',{name:serviceLabels[locale].contact});
++ await expect(region).toHaveAttribute('data-nosnippet');
++ await expect(region.getByRole('link')).toHaveAttribute('href','mailto:contact@example.test');
++ await expect(page.locator('.legal-sources a[href="https://telegram.org/privacy"]')).toHaveCount(1);
++ expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
++ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
++ await paragraphs.filter({hasText:'/confirm'}).screenshot({path:info.outputPath('telegram-disclosure.png')});
++ await page.locator(`main a[href="${localizedHref('/info/price-freshness',locale)}"]`).click();
++ for(const hours of ['6','24','48'])await expect(page.getByRole('main')).toContainText(hours);
++ await page.locator(`main a[href="${localizedHref('/info/contact',locale)}"]`).click();
++ await expect(page.getByRole('region',{name:serviceLabels[locale].contact}).getByRole('link')).toHaveAttribute('href','mailto:contact@example.test');
++ expect(requests).toEqual([]);
++});
+diff --git a/apps/web/tests/trust-contact-fallback.spec.ts b/apps/web/tests/trust-contact-fallback.spec.ts
+new file mode 100644
+index 0000000..62bdb48 100644
+--- /dev/null
++++ b/apps/web/tests/trust-contact-fallback.spec.ts
+@@ -0,0 +1,30 @@
++import {test,expect} from '@playwright/test';
++import AxeBuilder from '@axe-core/playwright';
++import {localizedHref} from '../src/lib/i18n/routing';
++import {serviceLabels} from '../src/lib/i18n/service-content';
++
++// Run against an isolated Next process with HOPTRIP_OPERATOR_FILE pointing to a
++// nonexistent test file. Do not change a user's real runtime operator configuration.
++const missing=process.env.HOPTRIP_TEST_OPERATOR_MODE==='missing';
++test(`${missing?'missing':'configured'} operator contact is explained without inventing identity`,async({page})=>{
++ test.setTimeout(90000);
++ await page.setViewportSize({width:320,height:740});
++ await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
++ for(const locale of ['pl','en','ru','uk'] as const){
++  await page.goto(localizedHref('/info/contact',locale));
++  const region=page.getByRole('region',{name:serviceLabels[locale].contact});
++  if(missing){
++   await expect(region.getByRole('alert')).toHaveText(serviceLabels[locale].unavailable);
++   await expect(region.locator('a[href^="mailto:"]')).toHaveCount(0);
++   await expect(page.getByRole('main')).not.toContainText('contact@example.test');
++  }else{
++   await expect(region.getByRole('alert')).toHaveCount(0);
++   await expect(region.getByRole('link')).toHaveAttribute('href','mailto:contact@example.test');
++  }
++  await expect(region).toHaveAttribute('data-nosnippet');
++  await expect(page.getByRole('main')).not.toContainText(/Example Test Operator|Example Street|Test Country/);
++  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','noindex, follow');
++  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
++  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
++ }
++});

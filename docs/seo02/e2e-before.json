@@ -1,0 +1,174 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)airport-landings\\.spec\\.ts$",
+      "--project=desktop",
+      "--grep",
+      "discovery and search preserve origin in pl",
+      "--max-failures=1",
+      "--output=test-results-seo02-before",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 1,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/test-results-seo02-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/test-results-seo02-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-seo02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "airport-landings.spec.ts",
+      "file": "airport-landings.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "airport discovery and search preserve origin in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10654,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-airport-context]')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-airport-context]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-airport-context]')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-airport-context]')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-airport-context]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-airport-context]')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts:26:78",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts",
+                      "column": 78,
+                      "line": 26
+                    },
+                    "snippet": "  24 |   const response=await page.goto(localizedHref(path,locale));expect(response?.status()).toBe(200);\n  25 |   await expect(page.locator('main h1')).toHaveCount(1);\n> 26 |   const context=page.locator('[data-airport-context]');await expect(context).toBeVisible();\n     |                                                                              ^\n  27 |   for(const code of origin.split(','))await expect(context.locator('li').filter({hasText:code})).toHaveCount(1);\n  28 |   await expect(context).toContainText(airportCopy[locale].scope);\n  29 |   const offers=await request.get(`${api}/api/v1/deals?origin=${encodeURIComponent(origin)}&limit=12`);expect(offers.ok()).toBe(true);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts",
+                        "column": 78,
+                        "line": 26
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-airport-context]')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-airport-context]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-airport-context]')\u001b[22m\n\n\n  24 |   const response=await page.goto(localizedHref(path,locale));expect(response?.status()).toBe(200);\n  25 |   await expect(page.locator('main h1')).toHaveCount(1);\n> 26 |   const context=page.locator('[data-airport-context]');await expect(context).toBeVisible();\n     |                                                                              ^\n  27 |   for(const code of origin.split(','))await expect(context.locator('li').filter({hasText:code})).toHaveCount(1);\n  28 |   await expect(context).toContainText(airportCopy[locale].scope);\n  29 |   const offers=await request.get(`${api}/api/v1/deals?origin=${encodeURIComponent(origin)}&limit=12`);expect(offers.ok()).toBe(true);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts:26:78"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T21:56:36.856Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\test-results-seo02-before\\airport-landings-airport-d-bb06a-earch-preserve-origin-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\test-results-seo02-before\\airport-landings-airport-d-bb06a-earch-preserve-origin-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-seo02\\apps\\web\\tests\\airport-landings.spec.ts",
+                    "column": 78,
+                    "line": 26
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a23587e900ae20011181-c49461986c5fecd0b614",
+          "file": "airport-landings.spec.ts",
+          "line": 16,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "message": "\u001b[31mTesting stopped early after 1 maximum allowed failures.\u001b[39m"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-11-01T21:56:15.626Z",
+    "duration": 35047.112,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

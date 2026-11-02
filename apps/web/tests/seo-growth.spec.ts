@@ -9,7 +9,8 @@ test('city break keeps dates, origin, sorting, pagination and back; empty state 
  await expect(page.locator('h1')).toHaveText('City break na 2–4 noce');
  await expect(page.locator('.deal-card')).toHaveCount(12);
  await expect(page.locator('input[name="duration_min"]')).toHaveValue('2');
- await page.locator(".advanced-filters summary").click();
+ const advanced=page.locator('.advanced-filters');
+ if(!await advanced.evaluate(node=>(node as HTMLDetailsElement).open))await advanced.locator('summary').click();
  await page.locator('[name="departure_from"]').fill('2030-05-03');
  await page.locator('[name="departure_to"]').fill('2030-05-03');
  await page.locator('[name="sort"]').selectOption('price');
@@ -31,7 +32,7 @@ test('city break keeps dates, origin, sorting, pagination and back; empty state 
  await expect(page).toHaveURL(/offset=12/);
  await page.locator('[name="budget"]').fill('1');
  await page.getByRole('button',{name:'Filtruj',exact:true}).click();
- await expect(page.locator('.empty-state')).toContainText('Brak aktualnych ofert');
+ await expect(page.locator('.offer-state[data-state="empty"]')).toContainText('Brak aktualnych ofert');
  await page.getByRole('link',{name:'Usuń limit ceny',exact:true}).click();
  await expect(page.locator('.deal-card')).toHaveCount(12);
 });
@@ -56,7 +57,7 @@ test('Warsaw union, individual airports, weekend and route constraints',async({p
  await expect(page.locator('.deal-card')).toHaveCount(12);
  await expect(page.locator('[name="origin"]')).toHaveValue('KRK');
  await expect(page.locator('[name="destination"]')).toHaveValue('rome');
- await expect(page.locator('.deal-card').first()).toContainText('Między przylotem a odlotem:');
+ await expect(page.locator('.deal-card').first()).toContainText('Między przylotem a odlotem powrotnym:');
 });
 
 test('new landing metadata, real HTTP 404 and normalized canonical',async({page})=>{
@@ -106,12 +107,12 @@ test('only successful email confirmation emits a token-free consent-gated event'
  await page.getByRole('checkbox',{name:/Chcę otrzymywać/}).check();
  await page.getByRole('button',{name:'Wyślij link potwierdzający'}).click();
  await expect(page.getByRole('status')).toContainText('Sprawdź skrzynkę');
- expect(payloads).toHaveLength(0);
+ await expect.poll(()=>payloads.map(event=>event.event_name)).toEqual(['ALERT_STARTED']);
  const mail=await (await request.get(`http://127.0.0.1:8100/__test__/mail?email=${encodeURIComponent(email)}`)).json();
  await page.goto(mail[0].body.match(/http[^\s]+\/alerts\/confirm#token=[^\s]+/)[0]);
  await page.getByRole('button',{name:'Potwierdzam zapis'}).click();
  await expect(page.getByRole('link',{name:'Zarządzaj alertem'})).toBeVisible();
- await expect.poll(()=>payloads.length).toBe(1);
- expect(payloads[0].event_name).toBe('ALERT_CONFIRMED');
+ await expect.poll(()=>payloads.length).toBe(2);
+ expect(payloads[1].event_name).toBe('ALERT_CONFIRMED');
  expect(JSON.stringify(payloads)).not.toMatch(/token|example.test|email/);
 });

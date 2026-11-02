@@ -3,8 +3,9 @@ import {catalogText,type CatalogKey} from "../../lib/i18n/catalog-copy";
 import type {Deal} from "../../lib/api";
 import {compactFlightTime,flightDayShift,flightTime,flightLegs,returnAirportNotice,stopsLabel} from "../../lib/flight-facts";
 import {flightRouteCopy} from '../../lib/i18n/flight-route-copy';
+import {FlightQualityNotice} from './flight-quality';
 
-export function FlightSchedule({deal,compact=false,locale="pl"}:{deal:Deal;compact?:boolean;locale?:Locale}) {
+export function FlightSchedule({deal,compact=false,card=false,detail=false,locale="pl"}:{deal:Deal;compact?:boolean;card?:boolean;detail?:boolean;locale?:Locale}) {
  const t=(source:CatalogKey)=>catalogText(locale,source);
  const f=deal.flight_facts;
  const {outbound,inbound}=flightLegs(f);
@@ -25,19 +26,26 @@ export function FlightSchedule({deal,compact=false,locale="pl"}:{deal:Deal;compa
   const back=compactFlightTime(inbound.departure,inbound.originZone,locale),home=compactFlightTime(inbound.arrival,inbound.destinationZone,locale);
   const clocks=deal.trip_type==="ROUND_TRIP" ? [out,arr,back,home] : [out,arr];
   const local=clocks.some(c=>c?.local),utc=clocks.some(c=>c && !c.local);
+  const estimated=Boolean(arr && f?.outbound_arrival_calculated || deal.trip_type==='ROUND_TRIP' && home && f?.return_arrival_calculated);
+  const offerDay=(value:string)=>compactFlightTime(`${value}T12:00:00Z`,'UTC',locale)?.day;
   const segment=(start:typeof out,end:typeof out,from:string,to:string,shift:string|null,estimated?:boolean)=>
    !start && !end ? <>{from} → {to} · {t("brak godziny")}</> :
    <>{start?.day ?? t("Data wylotu do sprawdzenia")}: {from} {start?.time ?? t("brak godziny")} → {to} {end?.time ?? t("brak godziny")}
     {end && (shift || !start || !start.local || !end.local) && <> ({end.day}{shift ? `, ${shift}` : ""})</>}
     {end && estimated && ` · ${t("szac.")}`}</>;
   return <div className="flight-schedule flight-schedule-compact">
-   <p className="outbound-leg"><strong>{t("Wylot")}</strong> · {segment(out,arr,origin,destination,outboundShift,outbound.calculated)}<span className="flight-stops">{stopsLabel(outbound.stops,locale)}</span></p>
-   {deal.trip_type==="ROUND_TRIP" && <p className="return-leg"><strong>{t("Powrót")}</strong> · {segment(back,home,returnOrigin,returnDestination,returnShift,inbound.calculated)}<span className="flight-stops">{stopsLabel(inbound.stops,locale)}</span></p>}
+   <FlightQualityNotice deal={deal} compact={card} expandedCritical={detail} locale={locale}/>
+   <p className="outbound-leg"><strong>{t("Wylot")}</strong> · {card ? `${origin} → ${destination}` : segment(out,arr,origin,destination,outboundShift,outbound.calculated)}<span className="flight-stops">{stopsLabel(outbound.stops,locale)}</span></p>
+   {deal.trip_type==="ROUND_TRIP" && <p className="return-leg"><strong>{t("Powrót")}</strong> · {card ? `${returnOrigin} → ${returnDestination}` : segment(back,home,returnOrigin,returnDestination,returnShift,inbound.calculated)}<span className="flight-stops">{stopsLabel(inbound.stops,locale)}</span></p>}
+   {card && clocks.some(clock=>!clock) && <p>{t('brak godziny')}</p>}
+   {card && out && out.day!==offerDay(deal.trip_start) && <p>{t('Wylot')}: {out.day} · {out.time} ({out.local ? t('Godziny lokalne') : t('UTC: strefa nieznana')})</p>}
+   {card && deal.trip_type==='ROUND_TRIP' && back && back.day!==offerDay(deal.trip_end) && <p>{t('Wylot powrotny')}: {back.day} · {back.time} ({back.local ? t('Godziny lokalne') : t('UTC: strefa nieznana')})</p>}
+   {card && outboundShift && <p>{t('Przylot')}: {destination} · {arr?.day} ({outboundShift})</p>}
    {deal.trip_type==="ROUND_TRIP" && returnShift && home && <p className="home-arrival"><strong>{t("Powrót do")} {returnDestination}: {home.day} ({returnShift})</strong></p>}
-   {(local || utc) && <p className="schedule-basis">{local && t("Godziny lokalne")}{local && utc && " · "}{utc && t("UTC: strefa nieznana")}
-    {(arr && f?.outbound_arrival_calculated || deal.trip_type==="ROUND_TRIP" && home && f?.return_arrival_calculated) && ` · ${t("Przylot szacowany")}`}</p>}
+   {(card ? utc || estimated : local || utc) && <p className="schedule-basis">{!card && local && t("Godziny lokalne")}{!card && local && utc && " · "}{utc && t("UTC: strefa nieznana")}
+    {estimated && `${!card && local || utc ? ' · ' : ''}${t("Przylot szacowany")}`}</p>}
    {notice&&<p className="flight-route-warning"><strong>{notice}</strong></p>}
-   <p className="schedule-airline">{airlineLine}</p>
+   {!card && <p className="schedule-airline">{airlineLine}</p>}
   </div>;
  }
  return <div className="flight-schedule">

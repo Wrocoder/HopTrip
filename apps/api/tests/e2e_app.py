@@ -3,6 +3,8 @@
 import asyncio
 import os
 import tempfile
+from copy import deepcopy
+from typing import Literal
 
 if os.getenv("HOPTRIP_E2E") != "1":
     raise RuntimeError("Fixture server requires HOPTRIP_E2E=1")
@@ -20,10 +22,11 @@ from app.models.deal import Deal, DealComponent
 from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
 from app.schemas.event import EventResults
-from app.services import alerts
+from app.services import alert_digests, alerts
 from app.services.catalog import serialize_deal
 from app.services.events import event_service
 from app.services.flight_facts import flight_facts
+from app.services.flight_quality import classify_flight_quality
 from app.services.scoring import SCORE_VERSION, score_flight_deal
 from helpers import approved_program, catalog_fixture
 from pydantic import SecretStr
@@ -32,6 +35,27 @@ from sqlalchemy.orm import Session
 from starlette.responses import HTMLResponse, JSONResponse
 
 fixture_dir = tempfile.TemporaryDirectory(prefix="hoptrip-browser-")
+
+
+@app.get("/__test__/grow03-external", response_class=HTMLResponse)
+def synthetic_partner_destination(kind: Literal["synthetic", "stay", "stay22", "ticket"] = "synthetic"):
+    """Loopback destination for native popups, including requests bypassing routing."""
+    heading = {"stay": "Local Stay22 destination", "stay22": "Stay22 test destination",
+               "ticket": "Local ticket fixture"}.get(kind, "Synthetic external destination")
+    return HTMLResponse(f"<title>{heading}</title><h1>{heading}</h1>", headers={"Cache-Control": "no-store"})
+
+
+if os.getenv("HOPTRIP_E2E_LOCAL_PARTNERS") == "1":
+    @app.middleware("http")
+    async def keep_partner_redirects_local(request, call_next):
+        """Exercise the real /go policy and journal, then contain browser navigation."""
+        response = await call_next(request)
+        if request.url.path.startswith("/go/") and response.status_code == 307:
+            response.headers["Location"] = "/__test__/grow03-external"
+            response.headers["X-HopTrip-Fixture"] = "loopback-partner"
+        return response
+
+
 # Browser tests intercept event responses. Never call the real provider from this app.
 get_settings().events_enabled = True
 get_settings().ticketmaster_api_key = SecretStr('local-browser-fixture')
@@ -136,6 +160,49 @@ def override():
 
 
 app.dependency_overrides[get_db] = override
+
+quality_original = None
+
+
+@app.post("/__test__/quality")
+def quality_fixture(scenario: Literal["complete", "partial", "critical", "reset"]):
+    """Synthetic itinerary quality; this module is guarded by HOPTRIP_E2E=1."""
+    global quality_original
+    from app.services.flight_routes import ticket_key
+    from app.services.time import utc
+
+    with Session(engine) as db:
+        deal = db.scalar(select(Deal).where(Deal.slug == "browser-13"))
+        component = db.scalar(select(DealComponent).where(DealComponent.deal_id == deal.id))
+        offer = db.get(TravelOffer, component.travel_offer_id)
+        if quality_original is None:
+            quality_original = deepcopy((offer.raw_payload, offer.route_details))
+        if scenario == "reset":
+            offer.raw_payload, offer.route_details = deepcopy(quality_original)
+        else:
+            start, back = utc(offer.depart_at), utc(offer.return_at)
+            arrival, home = start + timedelta(hours=2), back + timedelta(hours=2)
+            payload = dict(origin="WRO", origin_airport="WRO", destination="BCN",
+                destination_airport="BCN", return_origin_airport="BCN", return_destination_airport="WRO",
+                airline="FR", transfers=0, return_transfers=0, duration_to=120, duration_back=120,
+                departure_at=start.isoformat(), return_at=back.isoformat(),
+                link="/search/quality-fixture?t=synthetic-selected-ticket")
+            details = dict(source="travelpayouts_graphql", ticket_key=ticket_key(payload["link"]),
+                origin_airport_iata="WRO", destination_airport_iata="BCN", currency="pln", value=213,
+                departure_at=start.isoformat(), return_at=home.isoformat(), segments=[
+                    dict(departure_at=start.isoformat(), arrival_at=arrival.isoformat(), flight_legs=[
+                        dict(origin="WRO", destination="BCN", departure_at=start.isoformat(),
+                             arrival_at=arrival.isoformat(), operating_carrier="FR", flight_number="123")]),
+                    dict(departure_at=back.isoformat(), arrival_at=home.isoformat(), flight_legs=[
+                        dict(origin="BCN", destination="WRO", departure_at=back.isoformat(),
+                             arrival_at=home.isoformat(), operating_carrier="FR", flight_number="124")])])
+            if scenario != "complete":
+                details = None
+            if scenario == "critical":
+                payload.pop("return_origin_airport")
+            offer.raw_payload, offer.route_details = payload, details
+        db.commit()
+        return {"slug": deal.slug, "quality": serialize_deal(db, deal).flight_quality.model_dump()}
 
 
 @app.delete("/__test__/growth")
@@ -259,6 +326,40 @@ def htr01_fixture():
 app.router.routes.insert(0, app.router.routes.pop())
 
 
+@app.get('/api/v1/deals/stay-context-{scenario}')
+def stay_context_fixture(scenario: Literal['overnight', 'unknown-zone', 'one-way', 'same-day']):
+    """Read-only synthetic stay calendar examples; never changes fixture rows."""
+    with Session(engine) as db:
+        view = serialize_deal(db, db.scalar(select(Deal).where(Deal.slug == 'browser-13')))
+    departure = datetime(2030, 5, 1, 21, 30, tzinfo=UTC)
+    return_at = None if scenario == 'one-way' else datetime(
+        2030, 5, 2 if scenario == 'same-day' else 4, 12 if scenario == 'same-day' else 21, 30, tzinfo=UTC,
+    )
+    payload = dict(origin_airport='WRO', destination='BCN', destination_airport='BCN',
+        departure_at=departure.isoformat(), duration_to=180, airline='FR', transfers=0)
+    if return_at:
+        payload.update(return_at=return_at.isoformat(), duration_back=180, return_transfers=0,
+                       return_origin_airport='BCN', return_destination_airport='WRO')
+    offer = TravelOffer(source='travelpayouts_data', product_type='FLIGHT', departure_precision='TIME',
+                        depart_at=departure, return_at=return_at, raw_payload=payload)
+    facts = flight_facts(offer)
+    if scenario == 'unknown-zone':
+        facts.destination_timezone = None
+        facts.return_origin_timezone = None
+    view.slug = f'stay-context-{scenario}'
+    view.trip_type = 'ONE_WAY' if return_at is None else 'ROUND_TRIP'
+    view.trip_start = departure.date()
+    view.trip_end = return_at.date() if return_at else departure.date()
+    view.nights = (view.trip_end - view.trip_start).days if return_at else None
+    view.flight_facts = facts
+    view.flight_quality = classify_flight_quality(offer, facts, origin_code='WRO', destination_codes={'BCN'})
+    view.events_supported = False
+    return view
+
+
+app.router.routes.insert(0, app.router.routes.pop())
+
+
 @app.get("/api/v1/deals/hydration-fixture")
 def hydration_fixture():
     """London in winter exposes GMT/GMT+0 differences between Node and WebKit."""
@@ -310,6 +411,22 @@ def freshness_fixture():
 
 app.router.routes.insert(0, app.router.routes.pop())
 
+
+@app.get('/api/v1/deals/partner-unavailable-fixture')
+def partner_unavailable_fixture():
+    """Read-only synthetic presentation of a blocked partner program."""
+    with Session(engine) as db:
+        view = serialize_deal(db, db.scalar(select(Deal).where(Deal.slug == 'browser-deal')))
+    view.slug = 'partner-unavailable-fixture'
+    for component in view.components:
+        component.available = False
+        component.redirect_path = None
+        component.reason = 'PROGRAM_UNAVAILABLE'
+    return view
+
+
+app.router.routes.insert(0, app.router.routes.pop())
+
 # Explicit E2E mode above is mandatory. No external mail is sent.
 get_settings().alerts_enabled = True
 get_settings().alerts_signing_key = SecretStr("local-browser-fixture-key-not-for-production")
@@ -322,6 +439,7 @@ def fixture_mail(settings, recipient, subject, body):
 
 
 alerts.send_alert_mail = fixture_mail
+alert_digests.send_alert_mail = fixture_mail
 
 
 @app.get("/__test__/mail")
@@ -359,10 +477,28 @@ def tracking():
         }
 
 
+catalog_unavailable = False
+
+
+@app.post('/__test__/catalog-state')
+def set_catalog_state(unavailable: bool):
+    global catalog_unavailable
+    catalog_unavailable = unavailable
+    return {'unavailable': catalog_unavailable}
+
+
 @app.middleware("http")
 async def catalog_state_fixture(request, call_next):
     # Isolated E2E app only: deterministic transport delay/failure for SSR fetches.
+    if request.url.path == "/api/v1/deals/invalid-contract-fixture":
+        return JSONResponse({"slug": "invalid-contract-fixture", "components": None})
+    if request.url.path == "/api/v1/deals/unavailable-fixture":
+        return JSONResponse({"detail": "Fixture unavailable"}, status_code=503)
     if request.url.path == "/api/v1/deals":
+        if request.query_params.get("budget") == "987652":
+            return JSONResponse({"items": None, "total": 0, "offset": 0, "limit": 12})
+        if catalog_unavailable:
+            return JSONResponse({"detail": "Fixture unavailable"}, status_code=503)
         if request.query_params.get("budget") == "987654":
             await asyncio.sleep(2)
         if request.query_params.get("budget") == "987653":
@@ -400,9 +536,15 @@ def short_trip_fixtures(enabled: bool):
                             confidence=0, last_verified_at=datetime.now(UTC),
                             expires_at=datetime.now(UTC) + timedelta(hours=2))
                 flight = TravelOffer(data_provider_id=provider.id, external_id=f"short-{code}-{index}",
-                                     source="fixture", product_type="FLIGHT", departure_precision="TIME",
+                                       source="travelpayouts_data", product_type="FLIGHT", departure_precision="TIME",
                                      depart_at=start, return_at=end, original_price=180 + index,
-                                     original_currency="PLN", raw_payload={})
+                                       original_currency="PLN", raw_payload={
+                                           # Synthetic, explicit route facts for the quality-gated selection.
+                                           "origin_airport": code, "destination_airport": "BCN",
+                                           "return_origin_airport": "BCN", "return_destination_airport": code,
+                                           "departure_at": start.isoformat(), "return_at": end.isoformat(),
+                                           "duration_to": 120, "duration_back": 120,
+                                           "airline": "FR", "transfers": 0, "return_transfers": 0})
                 db.add_all([trip, flight])
                 db.flush()
                 db.add(DealComponent(deal_id=trip.id, component_type="FLIGHT",

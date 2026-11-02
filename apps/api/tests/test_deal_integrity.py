@@ -150,13 +150,14 @@ def test_baseline_matches_duration_and_component_price_is_refreshed(db, duration
                 p75_price_pln=price,
                 max_price_pln=price,
                 confidence=Decimal("0.3333"),
+                methodology_version="route-utc-v1",
             )
         )
     db.commit()
     deal = generate_flight_deal(db, offer)
     assert deal.historical_baseline_pln == Decimal(200 if duration is None else 300)
     explanation = serialize_deal(db, deal).score_explanation
-    assert deal.score_version == "flight-v3"
+    assert deal.score_version == "flight-v4"
     assert explanation.status == "CURRENT"
     assert explanation.sample_count == 10
     assert explanation.current_price_pln == 100

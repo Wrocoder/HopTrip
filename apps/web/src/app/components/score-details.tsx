@@ -37,7 +37,7 @@ export function ScoreDetails({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
   {unavailable ? <p className="score-caution">{t("unavailable")}</p> : <>
    {score.status==="PROVISIONAL" && <p className="score-caution"><strong>{t("provisional")}</strong> {t("neutral")}</p>}
    {score.status==="LEGACY" && <p className="score-caution">{t("legacy")}</p>}
-   <details className="score-method score-calculation"><summary>{t("calculation",{score:deal.deal_score})}</summary>
+   <details className="score-method score-calculation"><summary>{t("calculation")}</summary>
     <p className="score-sum"><strong>{score.parts.map(part=>number(part.points)).join(" + ")} = {number(score.total_before_rounding!)} {t("points")}</strong><br/>
      {t("rounded")} <strong>{deal.deal_score}/100</strong>.</p>
     <div className="score-parts">{score.parts.map(part=><section className="score-part" key={part.key}>

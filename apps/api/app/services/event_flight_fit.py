@@ -56,6 +56,17 @@ def event_instants(event: EventRead, zone: ZoneInfo | None) -> list[datetime]:
     return local_instants(event.start_date, event.local_time, zone) if event.local_time is not None and zone else []
 
 
+def event_end_instant(event: EventRead, zone: ZoneInfo | None, starts: list[datetime]) -> datetime | None:
+    end = instant(event.end_at)
+    if end and zone and (end.astimezone(zone).date() < event.start_date or (
+            event.end_date is not None and end.astimezone(zone).date() != event.end_date)):
+        return None
+    # Exact end time is evidence only when it follows every possible event start.
+    if end is not None and starts and end <= max(starts):
+        return None
+    return end
+
+
 def event_flight_fit(event: EventRead, facts: FlightFacts, trip_start: date,
                      trip_end: date | None) -> EventFlightFit:
     reasons: list[FitReason] = []
@@ -74,13 +85,7 @@ def event_flight_fit(event: EventRead, facts: FlightFacts, trip_start: date,
         reasons.append("INVALID_EVENT_TIME" if event.local_time is not None and zone else "UNKNOWN_EVENT_TIME")
     if len(starts) > 1:
         reasons.append("AMBIGUOUS_EVENT_TIME")
-    end = instant(event.end_at)
-    if end and zone and (end.astimezone(zone).date() < event.start_date or (
-            event.end_date is not None and end.astimezone(zone).date() != event.end_date)):
-        end = None
-    # Exact end time is evidence only when it follows every possible event start.
-    if end is not None and starts and end <= max(starts):
-        end = None
+    end = event_end_instant(event, zone, starts)
     duration = int((end - starts[0]).total_seconds() // 60) if end and len(starts) == 1 else None
     if duration is None:
         reasons.append("UNKNOWN_DURATION")

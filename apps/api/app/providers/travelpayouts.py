@@ -1,11 +1,13 @@
 import hashlib
 import json
+import re
 from dataclasses import dataclass
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from decimal import Decimal, InvalidOperation
 from email.utils import parsedate_to_datetime
 from math import isfinite
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import httpx
 
@@ -17,6 +19,8 @@ from app.providers.base import (
     RawTravelOffer,
     SearchQuery,
 )
+from app.services.flight_reference import airport_timezone
+from app.services.time import offset_datetime
 
 
 @dataclass
@@ -119,13 +123,19 @@ class TravelpayoutsDataProvider:
                 for item in data:
                     try:
                         offer = self._normalize(item, query)
+                        duration = None
+                        if query.trip_duration is not None and offer.return_at:
+                            duration = (
+                                _departure_day(item.get("return_at") or item.get("return_date"),
+                                               item.get("return_origin_airport"))
+                                - _departure_day(item.get("departure_at") or item.get("depart_date"),
+                                                 item.get("origin_airport") or item.get("origin"))
+                            ).days
                     except (ValueError, TypeError, InvalidOperation, KeyError, OverflowError):
                         self.diagnostics.rejected_items += 1
                         continue
                     if query.trip_duration is not None and (
-                        not offer.return_at
-                        or (offer.return_at.date() - offer.depart_at.date()).days
-                        != query.trip_duration
+                        duration != query.trip_duration
                     ):
                         self.diagnostics.filtered_items += 1
                         continue
@@ -166,8 +176,16 @@ class TravelpayoutsDataProvider:
         origin = str(item.get("origin_airport") or item.get("origin") or query.origin).upper()
         if not all(
             len(code) == 3 and code.isascii() and code.isalpha() for code in (origin, destination)
-        ):
+        ) or origin == destination or origin == str(item.get("destination_airport", "")).upper():
             raise ValueError("Invalid route")
+        # Queries may name a city or an airport. Require an explicit match to either;
+        # a different city/airport cannot silently satisfy this requested route.
+        if query.origin.upper() not in {origin, str(item.get("origin") or "").upper()}:
+            raise ValueError("Response origin does not match the requested route")
+        if query.destination and query.destination.upper() not in {
+            destination, str(item.get("destination_airport") or "").upper()
+        }:
+            raise ValueError("Response destination does not match the requested route")
         identity = "|".join(
             str(value)
             for value in (
@@ -209,12 +227,26 @@ def _parse_datetime(value: Any) -> datetime | None:
     if not value:
         return None
     text = str(value)
-    parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
-    if parsed.tzinfo is None:
-        if len(text) != 10:
-            raise ValueError("A timed value requires an explicit offset")
-        parsed = parsed.replace(tzinfo=UTC)  # date-only: conservative start of UTC day
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+        # A calendar date is stored at UTC midnight; it is never a known flight clock.
+        return datetime.fromisoformat(text).replace(tzinfo=UTC)
+    parsed = offset_datetime(text)
+    if parsed is None:
+        raise ValueError("A timed value requires a valid calendar date and explicit offset")
     return parsed.astimezone(UTC)
+
+
+def _departure_day(value: object, airport: object) -> date:
+    """Count nights by each departure's calendar day, as the public trip dates do."""
+    text = str(value)
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+        return date.fromisoformat(text)
+    parsed = offset_datetime(text)
+    if parsed is None:
+        raise ValueError("Invalid departure time")
+    zone = airport_timezone(airport if isinstance(airport, str) else None)
+    # An absent return airport is not inferred by reversing the outbound route.
+    return (parsed.astimezone(ZoneInfo(zone)) if zone else parsed).date()
 
 
 def _retry_after(value: str | None) -> float:

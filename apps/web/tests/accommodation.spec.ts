@@ -1,3 +1,4 @@
+import {localOutbound} from './local-outbound';
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -35,11 +36,11 @@ test("Stay22 lets travellers edit their stay before an attributed outbound click
  expect(url.searchParams.get("campaign")).toBe("hoptrip_accommodation");
  await expect(link).toHaveAttribute("rel","sponsored noopener noreferrer");
  await context.route("https://www.stay22.com/**",route=>route.fulfill({contentType:"text/html",body:"<h1>Stay22 test destination</h1>"}));
- const opened=context.waitForEvent("page");
+ const restore=await localOutbound(link,'stay22');const opened=context.waitForEvent("page");
  await link.click();
  const destination=await opened;
  await expect(destination.getByRole("heading")).toHaveText("Stay22 test destination");
- await destination.close();
+ await destination.close();await restore();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
 });
 

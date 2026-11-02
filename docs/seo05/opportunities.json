@@ -1,0 +1,564 @@
+{
+  "asOf": "2026-11-02",
+  "queryStatus": "candidate phrases, not observed GSC queries",
+  "opportunities": [
+    {
+      "id": "SEO05-01",
+      "rank": 1,
+      "priority": "C1",
+      "focusArea": "seasonal",
+      "query": "Alicante na weekend",
+      "country": "PL",
+      "language": "pl",
+      "intent": "информационный → выбор направления",
+      "demandIndicators": {
+        "summary": "Есть исторический сигнал по направлению Alicante, не по данной фразе.",
+        "sourceIds": [
+          "G26"
+        ],
+        "granularity": "historical-destination-level",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Обзор относится к лету 2026; спрос на ноябрь/зиму/2027 не установлен.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Существуют уникальный план 48 часов, airport guide и city CTA; SEO-04 не обнаружила потери города.",
+      "targetUrl": "/info/alicante-weekend",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/alicante-airport"
+      ],
+      "recommendation": "Первым проверить GSC для обеих статей; менять только обнаруженные пробелы по времени на месте/трансферу после проверки первичных источников. Сохранить existing URL и CTA, не переписывать ради длины.",
+      "businessRelevance": "Высокая связь: guide → выбор дат/лота → проживание/калькулятор. Доход не прогнозируется.",
+      "priorityRationale": "Единственный доступный внешний сигнал спроса на уровне направления + готовый полезный контент.",
+      "implementationGate": "Проверка актуального query-level спроса и конкретного пробела; при отсутствии пробела оставить текст.",
+      "evidenceSourceIds": [
+        "G26"
+      ]
+    },
+    {
+      "id": "SEO05-02",
+      "rank": 2,
+      "priority": "C1",
+      "focusArea": "seasonal",
+      "query": "Malaga na weekend",
+      "country": "PL",
+      "language": "pl",
+      "intent": "информационный → планирование",
+      "demandIndicators": {
+        "summary": "Есть исторический сигнал по направлению Málaga, не по данной фразе.",
+        "sourceIds": [
+          "G26"
+        ],
+        "granularity": "historical-destination-level",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Лето 2026 в источнике; зимний спрос и повторение пика не измерены.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть план 48 часов, отдельный airport guide и city CTA; дублировать их не требуется.",
+      "targetUrl": "/info/malaga-weekend",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/malaga-airport"
+      ],
+      "recommendation": "Проверить GSC и актуальность transfer/itinerary источников; улучшать существующую пару статей только при подтверждённом пробеле. Без новой сезонной копии.",
+      "businessRelevance": "Высокая: выбор направления, времени, ночёвок и расходов.",
+      "priorityRationale": "Датированный destination-level сигнал и подтверждённое покрытие дают основание для проверки, не обещание роста.",
+      "implementationGate": "Уточнить фактические запросы и намерение; летний интерес не считать зимним.",
+      "evidenceSourceIds": [
+        "G26"
+      ]
+    },
+    {
+      "id": "SEO05-03",
+      "rank": 3,
+      "priority": "C2",
+      "focusArea": "origin",
+      "query": "tanie loty z Krakowa",
+      "country": "PL",
+      "language": "pl",
+      "intent": "коммерческое исследование",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "LOT-KRK: существует коммерческая страница по KRK, включая short-trip/last-minute FAQ; ранги неизвестны.",
+        "sourceIds": [
+          "LOT-KRK"
+        ],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть reviewed/indexable KRK landing, airport guide, фильтры бюджета/weekend/2–4 ночи и route pilot.",
+      "targetUrl": "/from/KRK",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/krk-airport",
+        "/routes/krakow-rome"
+      ],
+      "recommendation": "Сопоставить GSC origin-запросы с landing; уточнять ответы про короткие выезды, если они не покрыты. Сохранить origin в CTA и честное состояние без наблюдений; не клонировать страницы KRK×цена×сезон.",
+      "businessRelevance": "Высокая: прямой вход в каталог с KRK и дальнейший выбор лота.",
+      "priorityRationale": "Прямое соответствие продукту и конкурентный контент подтверждены; внешнее доказательство спроса отсутствует.",
+      "implementationGate": "Измерить query спрос и текущие CTR/позиции до расширения текста.",
+      "evidenceSourceIds": [
+        "LOT-KRK"
+      ]
+    },
+    {
+      "id": "SEO05-04",
+      "rank": 4,
+      "priority": "C2",
+      "focusArea": "origin",
+      "query": "tanie loty z Wrocławia",
+      "country": "PL",
+      "language": "pl",
+      "intent": "коммерческое исследование",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "LOT-WRO: существует страница loty z Wrocławia; SERP/difficulty неизвестны.",
+        "sourceIds": [
+          "LOT-WRO"
+        ],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Reviewed/indexable WRO landing уже содержит origin-preserving budget и short-trip links.",
+      "targetUrl": "/from/WRO",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/wro-airport"
+      ],
+      "recommendation": "Сначала измерить существующую страницу; проверить понятность наблюдаемой цены и времени на месте на реальных query. Не повторять реализованную SEO-02 работу и не создавать отдельный индексируемый URL для каждого лимита.",
+      "businessRelevance": "Высокая: origin discovery → фильтр дат/цены → предложение.",
+      "priorityRationale": "Есть прямой сценарий и внешняя страница конкурента; это не измерение спроса.",
+      "implementationGate": "GSC/Trends для PL и доказанный конкретный пробел.",
+      "evidenceSourceIds": [
+        "LOT-WRO"
+      ]
+    },
+    {
+      "id": "SEO05-05",
+      "rank": 5,
+      "priority": "C2",
+      "focusArea": "origin",
+      "query": "tanie loty z Warszawy",
+      "country": "PL",
+      "language": "pl",
+      "intent": "коммерческое исследование",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "LOT-WAW: страница перевозчика по Warszawa/Chopin; не полное сравнение WAW/WMI и не анализ SERP.",
+        "sourceIds": [
+          "LOT-WAW"
+        ],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Reviewed/indexable combined WAW/WMI landing и отдельные airport guides уже есть.",
+      "targetUrl": "/from/warszawa",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/waw-airport",
+        "/info/wmi-airport"
+      ],
+      "recommendation": "При подтверждённых запросах уточнить выбор Chopin/Modlin и полную стоимость доезда; сохранять общий URL и переключение WAW/WMI, не переоткрывать indexation отдельных airport filters.",
+      "businessRelevance": "Высокая: помогает выбрать реальный аэропорт и цену всей поездки.",
+      "priorityRationale": "Продукт различает два порта; спрос/эффект этого отличия пока неизвестны.",
+      "implementationGate": "Запросы по городу и отдельным портам анализировать раздельно; нужен GSC.",
+      "evidenceSourceIds": [
+        "LOT-WAW"
+      ]
+    },
+    {
+      "id": "SEO05-06",
+      "rank": 6,
+      "priority": "C2",
+      "focusArea": "weekend",
+      "query": "tanie loty na weekend",
+      "country": "PL",
+      "language": "pl",
+      "intent": "коммерческое исследование",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Повторяемый календарный сценарий; спрос по дням/месяцам не измерен.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Постоянная indexable страница уже есть; Fri/Sat → ближайшее воскресенье, не гарантия выезда без отпуска.",
+      "targetUrl": "/tanie-loty-na-weekend",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/city-break-planning",
+        "/city-break"
+      ],
+      "recommendation": "Развести эту фразу с 2–4 ночами; измерить входные запросы/CTR. Если есть вопросы пользователей, дополнить пояснение календаря и фактического времени прибытия, без обещания возврата домой в воскресенье.",
+      "businessRelevance": "Высокая: готовый weekend search, дальнейшая карточка и бюджет.",
+      "priorityRationale": "Покрытие и продуктовый смысл подтверждены кодом; спрос — гипотеза.",
+      "implementationGate": "Получить query data; не менять действующие фильтры/URL ради keyword stuffing.",
+      "evidenceSourceIds": []
+    },
+    {
+      "id": "SEO05-07",
+      "rank": 7,
+      "priority": "C2",
+      "focusArea": "weekend",
+      "query": "city break na 2–4 noce",
+      "country": "PL",
+      "language": "pl",
+      "intent": "информационный и коммерческий",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть постоянный indexable каталог 2–4 ночи и отдельный how-to guide.",
+      "targetUrl": "/city-break",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/city-break-planning"
+      ],
+      "recommendation": "Сопоставить how-to queries с guide, поисковые — с каталогом. При реальном пробеле добавить конкретное объяснение времени на месте; не создавать городские копии одного шаблона.",
+      "businessRelevance": "Высокая: готовое ограничение ночей и самостоятельная сборка поездки.",
+      "priorityRationale": "Прямой сценарий, возможность снять смешение guide/catalog; каннибализация не доказана.",
+      "implementationGate": "Проверить query→page распределение в GSC, прежде чем считать две страницы конкурентами.",
+      "evidenceSourceIds": []
+    },
+    {
+      "id": "SEO05-08",
+      "rank": 8,
+      "priority": "C3",
+      "focusArea": "budget",
+      "query": "loty do 300 zł",
+      "country": "PL",
+      "language": "pl",
+      "intent": "коммерческое исследование",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть budget filter и ссылки с budget=300 в WRO/KRK; лимит относится к полёту на человека.",
+      "targetUrl": "/deals",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/trip-budget"
+      ],
+      "recommendation": "Проверять спрос на сумму отдельно. Улучшать объяснение ограничения в существующем каталоге; /deals?budget=300 оставить noindex. 300 zł — пример намерения, не заявленная цена или наличие.",
+      "businessRelevance": "Высокая: фильтр цены билета → подходящий лот; не бюджет всей поездки.",
+      "priorityRationale": "Нужная функция есть, но выбранная сумма и спрос не подтверждены.",
+      "implementationGate": "Запросы с суммой + достаточные качественные наблюдения; не публиковать псевдоподборку без offers.",
+      "evidenceSourceIds": []
+    },
+    {
+      "id": "SEO05-09",
+      "rank": 9,
+      "priority": "C3",
+      "focusArea": "budget",
+      "query": "city break do 1000 zł",
+      "country": "PL",
+      "language": "pl",
+      "intent": "информационный: бюджет всей поездки",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть guide и калькулятор с отдельными затратами; каталог фильтрует только flight price, не total package.",
+      "targetUrl": "/info/trip-budget",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/city-break"
+      ],
+      "recommendation": "После проверки спроса добавить в guide явно учебный разбор состава бюджета без выдуманных рыночных цен. Для реальной рекомендации нужны даты, люди, известные ночёвки/трансферы/сборы; unknown сохранять unknown. Без страницы с обещанием пакета до1000.",
+      "businessRelevance": "Высокая связь с калькулятором, средняя уверенность в привлечении: intent может ожидать готовый тур.",
+      "priorityRationale": "Соответствие калькулятору подтверждено, сумма и ожидания пользователя остаются гипотезой.",
+      "implementationGate": "Проверить пакетный vs самостоятельный intent и реальные известные составляющие расходов.",
+      "evidenceSourceIds": []
+    },
+    {
+      "id": "SEO05-10",
+      "rank": 10,
+      "priority": "C3",
+      "focusArea": "seasonal",
+      "query": "gdzie polecieć na weekend jesienią",
+      "country": "PL",
+      "language": "pl",
+      "intent": "информационный: сезонный выбор",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Осень задана смыслом запроса, не измеренной кривой. Нет вывода, что именно сейчас высокий спрос.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть сравнение Rome/Milan/Lisbon и origin-preserving ссылки; общий интерес к Италии не доказывает спрос на эти города.",
+      "targetUrl": "/info/gdzie-poleciec-na-weekend-jesienia",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/city-break"
+      ],
+      "recommendation": "Перед следующим редакционным review проверить сезонный ряд PL и вопросы GSC. Сверять факты по источникам, не обновлять год без review и не создавать отдельные клоны по месяцам.",
+      "businessRelevance": "Средняя/высокая: сравнение городов ведёт в существующий city-break search.",
+      "priorityRationale": "Сезонное полезное покрытие уже есть; летний G26 не доказательство осеннего query.",
+      "implementationGate": "Trends с одинаковыми периодами нескольких лет и query-level GSC.",
+      "evidenceSourceIds": []
+    },
+    {
+      "id": "SEO05-11",
+      "rank": 11,
+      "priority": "C3",
+      "focusArea": "event",
+      "query": "wyjazd na koncert za granicę",
+      "country": "PL",
+      "language": "pl",
+      "intent": "информационный: поездка под событие",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Зависит от объявленного события/продажи билетов; общий сезонный пик не измерен.",
+      "competitionIndicators": {
+        "summary": "Не измерено: нет query-level SERP/Keyword Planner. Сложность не оценивалась.",
+        "sourceIds": [],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Есть guide и deal-scoped events API; нужны существующий deal, supported destination и даты. Нельзя получить универсальный недатированный инвентарь города.",
+      "targetUrl": "/info/concert-trip",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/city-break-planning",
+        "/info/trip-budget"
+      ],
+      "recommendation": "При доказанном спросе улучшать checklist выбора дат/venue/ночного транспорта. Датированный контент допустим только по официальному организатору, с проверенным статусом и доступным контекстом; не генерировать artist×city landing.",
+      "businessRelevance": "Средняя/высокая: events + flight fit + ночёвки/калькулятор; органический эффект неизвестен.",
+      "priorityRationale": "Есть продуктовая возможность, но PL search demand и конкретные события не подтверждены.",
+      "implementationGate": "Точный запрос, официальный event source/date/status, существующий supported deal context.",
+      "evidenceSourceIds": []
+    },
+    {
+      "id": "SEO05-12",
+      "rank": 12,
+      "priority": "C3",
+      "focusArea": "origin",
+      "query": "loty Kraków Rzym",
+      "country": "PL",
+      "language": "pl",
+      "intent": "коммерческое исследование маршрута",
+      "demandIndicators": {
+        "summary": "Количественный спрос по точной фразе недоступен; формулировка — исследовательская гипотеза.",
+        "sourceIds": [],
+        "granularity": "unmeasured-query",
+        "metrics": {
+          "monthlySearchVolume": null,
+          "gscClicks": null,
+          "gscImpressions": null,
+          "gscCtr": null,
+          "gscPosition": null,
+          "trendsIndex": null,
+          "cpc": null,
+          "keywordDifficulty": null
+        }
+      },
+      "seasonality": "Потенциально круглогодичный сценарий по смыслу запроса; сезонная кривая не измерена.",
+      "competitionIndicators": {
+        "summary": "LOT-KRK содержит Rome route link; конкурентное покрытие, без ранга и объёма.",
+        "sourceIds": [
+          "LOT-KRK"
+        ],
+        "serpRank": null,
+        "plannerCompetition": null
+      },
+      "existingCoverage": "Уникальный reviewed/indexable route pilot уже фиксирует KRK→rome; guides разделяют CIA/FCO.",
+      "targetUrl": "/routes/krakow-rome",
+      "targetExists": true,
+      "targetIndexation": "existing-indexable",
+      "supportingUrls": [
+        "/info/rome-airports",
+        "/info/rome-3-days",
+        "/from/KRK"
+      ],
+      "recommendation": "Сначала измерить пилот и качество наблюдений. Дополнять только доказанные вопросы о конкретном порте/времени, не создавать сетку новых origin×destination по одному существованию route.",
+      "businessRelevance": "Высокая для точного маршрута: меньше выбора до лота; трафик и доход неизвестны.",
+      "priorityRationale": "Пилот пригоден для измерения; внешняя страница подтверждает контент конкурента, не потребительский спрос.",
+      "implementationGate": "GSC по маршруту и устойчивые релевантные наблюдения до решения о новых pilots.",
+      "evidenceSourceIds": [
+        "LOT-KRK"
+      ]
+    }
+  ]
+}

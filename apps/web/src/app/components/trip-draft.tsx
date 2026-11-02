@@ -4,7 +4,7 @@ import {emptyBudget,type BudgetInput} from "../../lib/trip-budget";
 import {budgetDraftKey,readLocalBudgetDraft,type BudgetDraft} from "../../lib/budget-draft";
 import type {PlannedEvent} from '../../lib/planned-events';
 export type TripDraftProps={initialInput?:Partial<BudgetInput>;initialEvents?:PlannedEvent[];tripId?:string;start?:string;end?:string;forceReview?:boolean;adultsOnly?:boolean};
-type State={draft:BudgetDraft;save:(next:BudgetDraft)=>void;ready:boolean;context:string;storageMessage:string};
+type State={draft:BudgetDraft;save:(next:BudgetDraft,action?:'reset')=>void;ready:boolean;context:string;storageMessage:string};
 const TripDraftContext=createContext<State|null>(null);
 export const useTripDraft=()=>useContext(TripDraftContext);
 // The existing budget draft owns stay dates and travellers, scoped to one trip page.
@@ -35,9 +35,11 @@ export function TripDraftProvider({children,initialInput={},initialEvents,tripId
   setStorageMessage(message);
   setReady(true);
  },[context,storageKey,forceReview,adultsOnly,eventsJson]);
- const save=(next:BudgetDraft)=>{
+ const save=(next:BudgetDraft,action?:'reset')=>{
   setDraft(next);
-  try {localStorage.setItem(storageKey,JSON.stringify(next));setStorageMessage("Szkic zapisany w tej przeglądarce. Odświeżenie strony go nie usuwa.");}
+  try {localStorage.setItem(storageKey,JSON.stringify(next));setStorageMessage(action==='reset'
+   ? "Wyczyszczono kalkulator. Zapisane wyjazdy i udostępnione linki pozostają bez zmian."
+   : "Szkic zapisany w tej przeglądarce. Odświeżenie strony go nie usuwa.");}
   catch {setStorageMessage("Nie udało się zapisać zmian. Po odświeżeniu najnowsze kwoty mogą zostać utracone.");}
  };
 

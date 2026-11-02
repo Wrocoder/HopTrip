@@ -1,6 +1,7 @@
 import {intlLocales,type Locale} from "./i18n/config.ts";
 import {catalogText,catalogTemplate,type CatalogKey} from "./i18n/catalog-copy.ts";
 import type {Deal} from "./api.ts";
+import {scoreText} from './i18n/score-copy.ts';
 
 const amount = (value:number,locale:Locale) => new Intl.NumberFormat(intlLocales[locale], {minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
 const positive = (value:string|null|undefined) => value != null && value.trim() !== "" && Number.isFinite(Number(value)) && Number(value)>0;
@@ -28,14 +29,15 @@ export function priceAssessment(deal:Pick<Deal,"score_explanation"|"flight_price
       t("Blisko mediany — różnica mniejsza niż 1 zł.") :
       catalogTemplate(locale,"Cena o {amount} zł {direction} mediany próby.",{amount:amount(Math.abs(grosz)/100,locale),direction:t(grosz>0 ? "poniżej" : "powyżej")});
   } else if(score?.status === "PROVISIONAL") {
-    summary=t("Ocena wstępna — za mało danych do porównania ceny.");
+    summary=scoreText(locale,'insufficient');
   } else if(score?.status === "LEGACY") {
-    summary=t("Ocena według poprzedniej metody — porównanie wymaga odświeżenia.");
+    summary=scoreText(locale,'legacyComparison');
   }
   const samples=knownCount ? `${t("Liczba obserwacji:")} ${count}.` : t("Liczba obserwacji nieznana.");
   const sufficiency=comparable ? `${samples} ${t("Próg porównania: 5; próbka nie obejmuje całego rynku.")}` :
     `${samples} ${t("Brak wystarczającej, zgodnej bazy porównawczej.")}`;
-  return {summary,sufficiency,comparable,median:comparable ? score.median_price_pln : null};
+  return {summary,sufficiency,comparable,median:comparable ? score.median_price_pln : null,
+    scope:comparable ? scoreText(locale,'sampleScope',{count:count!}) : null};
 }
 
 export function priceObservation(deal:Pick<Deal,"score_explanation"|"last_verified_at"|"price_freshness">,locale:Locale="pl") {

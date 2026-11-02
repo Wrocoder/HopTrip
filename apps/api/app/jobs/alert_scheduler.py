@@ -1,11 +1,13 @@
 """Separate opt-in worker; calendar eligibility is persisted per subscription."""
 
+import argparse
 import logging
 import time
+from datetime import UTC, datetime
 
 from app.config import get_settings
 from app.db.session import SessionLocal
-from app.services.alert_digests import deliver_digests
+from app.services.alert_digests import cleanup, deliver_digests
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +31,18 @@ def run_scheduler() -> None:
         time.sleep(60)
 
 
-if __name__ == "__main__":
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cleanup-only", action="store_true",
+                        help="Apply subscription retention once, without sending email")
+    args = parser.parse_args(argv)
     logging.basicConfig(level=get_settings().log_level)
-    run_scheduler()
+    if args.cleanup_only:
+        with SessionLocal() as db:
+            cleanup(db, datetime.now(UTC))
+    else:
+        run_scheduler()
+
+
+if __name__ == "__main__":
+    main()

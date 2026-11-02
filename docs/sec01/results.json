@@ -1,0 +1,79 @@
+{
+  "task": "SEC-01",
+  "date": "2026-10-30",
+  "scope": "checkout and isolated fixtures; public GET headers only; no deployment",
+  "python": {
+    "tested": {
+      "pytest": "9.0.3",
+      "certifi": "2026.10.23"
+    },
+    "packages": 42,
+    "uniqueAdvisoriesBefore": [
+      "PYSEC-2026-4320",
+      "PYSEC-2026-1845"
+    ],
+    "advisoriesAfter": 0
+  },
+  "npm": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 20,
+      "dev": 352,
+      "optional": 65,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 409
+    }
+  },
+  "tests": {
+    "nonPostgres": {
+      "passed": 655,
+      "deselected": 11,
+      "seconds": 62.45,
+      "warnings": 2
+    },
+    "postgres": {
+      "passed": 11,
+      "deselected": 655,
+      "seconds": 21.22,
+      "warnings": 2
+    },
+    "distinctBackendPassed": 666,
+    "webUnitPassed": 110,
+    "ruff": "passed",
+    "mypy": "passed, 100 source files",
+    "eslint": "passed",
+    "nextBuild": "passed, TypeScript, 61 static/SSG pages",
+    "e2eInitial": {
+      "startTime": "2026-10-30T11:54:16.027Z",
+      "duration": 171244.407,
+      "expected": 23,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "e2eTargetedRepeat": {
+      "startTime": "2026-10-30T11:58:21.780Z",
+      "duration": 14414.592,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "residual": [
+    "public web CSP/HSTS",
+    "proxy and per-process quotas",
+    "subscription/history/backup retention and erasure policy",
+    "professional consent/vendor/legal review",
+    "initial browser unavailable state cause unproven"
+  ],
+  "nextTaskStarted": false
+}

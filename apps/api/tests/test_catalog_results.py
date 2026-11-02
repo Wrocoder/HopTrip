@@ -53,3 +53,38 @@ def test_total_includes_weekend_and_freshness_rules(api_client, isolated_db):
     deal.expires_at = deal.last_verified_at - timedelta(days=1)
     isolated_db.commit()
     assert api_client.get("/api/v1/deals?include_total=true").json()["total"] == 0
+
+
+@pytest.mark.parametrize("sort", ["score", "price", "departure"])
+def test_ties_are_stable_across_pages_without_imputing_missing_journey_data(api_client, isolated_db, sort):
+    first, _ = catalog_fixture(isolated_db, price="200")
+    first.nights = None
+    first.depart_at = None
+    for index, nights in enumerate([0, 3, None], start=1):
+        isolated_db.add(Deal(
+            slug=f"tied-{index}", origin_airport_id=first.origin_airport_id,
+            destination_id=first.destination_id, trip_start=first.trip_start, trip_end=first.trip_end,
+            depart_at=None if index == 3 else first.last_verified_at + timedelta(days=30, hours=index),
+            nights=nights, travelers=1, price_per_person_pln=first.price_per_person_pln,
+            flight_price_pln=first.flight_price_pln, total_estimated_pln=first.total_estimated_pln,
+            deal_score=first.deal_score, confidence=0, last_verified_at=first.last_verified_at,
+            expires_at=first.expires_at,
+        ))
+    isolated_db.commit()
+    params = {"origin": "WRO", "sort": sort, "include_total": "true", "limit": 1}
+    pages = [api_client.get("/api/v1/deals", params={**params, "offset": offset}).json()
+             for offset in range(4)]
+    assert [page["total"] for page in pages] == [4] * 4
+    items = [page["items"][0] for page in pages]
+    assert [item["id"] for item in items] == sorted(item["id"] for item in items)
+    assert [item["nights"] for item in items] == [None, 0, 3, None]
+    whole = api_client.get("/api/v1/deals", params={**params, "limit": 100}).json()
+    legacy = api_client.get("/api/v1/deals", params={**params, "limit": 100, "include_total": "false"}).json()
+    assert whole["items"] == legacy == items
+    assert api_client.get("/api/v1/deals", params=params).json() == pages[0]
+
+
+@pytest.mark.parametrize("sort", ["duration", "usable_time", "historical_comparison"])
+@pytest.mark.parametrize("include_total", ["true", "false"])
+def test_unsupported_sort_metrics_do_not_silently_fall_back(api_client, sort, include_total):
+    assert api_client.get("/api/v1/deals", params={"sort": sort, "include_total": include_total}).status_code == 422

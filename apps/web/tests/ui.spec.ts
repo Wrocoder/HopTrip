@@ -26,8 +26,8 @@ test("UI keeps navigation, fonts and controls usable across viewport sizes",asyn
  await page.keyboard.press("Enter");
  await expect(page.locator("#content")).toBeFocused();
  await page.emulateMedia({reducedMotion:"reduce"});
- await page.getByRole("link",{name:"Aktualne okazje",exact:true}).last().hover();
- expect(await page.getByRole("link",{name:"Aktualne okazje",exact:true}).last().evaluate(el=>getComputedStyle(el).transform)).toBe("none");
+ await page.getByRole("link",{name:"Tanie loty",exact:true}).last().hover();
+ expect(await page.getByRole("link",{name:"Tanie loty",exact:true}).last().evaluate(el=>getComputedStyle(el).transform)).toBe("none");
  await page.setViewportSize({width:320,height:740});
  for(const path of ["/","/deals","/deals/browser-deal","/info/price-comparison"]) {
   await page.goto(path);
@@ -66,10 +66,12 @@ test("applied filter chips preserve other values and reset pagination",async({pa
 test("advanced fields remain keyboard accessible and navigation shows current section",async({page})=>{
  await page.goto("/deals");
  const menu=page.getByRole("navigation",{name:"Nawigacja główna"});
- await expect(menu.getByRole("link",{name:"Aktualne okazje"})).toHaveAttribute("aria-current","page");
+ await expect(menu.getByRole("link",{name:"Tanie loty"})).toHaveAttribute("aria-current","page");
  const summary=page.locator(".advanced-filters summary");
  await summary.focus();
  await page.keyboard.press("Enter");
+ await expect(page.locator('.advanced-filters')).not.toHaveAttribute('open','');
+ await page.keyboard.press('Enter');
   const duration=page.getByRole("spinbutton",{name:"Pobyt od (nocy)",exact:true});
  await expect(duration).toBeVisible();
  await duration.fill("-1");
@@ -83,12 +85,12 @@ test("advanced fields remain keyboard accessible and navigation shows current se
  await expect(page.locator(".advanced-filters")).toHaveAttribute("open","");
  for(const path of ["/from/WRO","/deals/browser-deal"]) {
   await page.goto(path);
-  await expect(menu.getByRole("link",{name:"Aktualne okazje"})).toHaveAttribute("aria-current","location");
+  await expect(menu.getByRole("link",{name:"Tanie loty"})).toHaveAttribute("aria-current","location");
  }
- await menu.getByRole("link",{name:"Jak działa HopTrip"}).click();
- await expect(menu.getByRole("link",{name:"Jak działa HopTrip"})).toHaveAttribute("aria-current","page");
+ await page.locator(".footer-nav").getByRole("link",{name:"Jak działa HopTrip",exact:true}).click();
+ await expect(menu.locator("[aria-current]")).toHaveCount(0);
  await page.getByRole("link",{name:"Jak porównujemy ceny lotów",exact:false}).click();
- await expect(menu.getByRole("link",{name:"Jak działa HopTrip"})).toHaveAttribute("aria-current","location");
+ await expect(menu.locator("[aria-current]")).toHaveCount(0);
  await page.getByRole("link",{name:"HopTrip — strona główna"}).click();
  await expect(menu.locator("[aria-current]")).toHaveCount(0);
 });

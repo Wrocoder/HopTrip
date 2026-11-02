@@ -1,0 +1,447 @@
+FFFFFFFFFFF                                                              [100%]
+================================== FAILURES ===================================
+________ test_critical_quality_is_not_recommended_in_email[unverified] ________
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39A6CB00>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F3901D0D0>
+invalid = 'unverified'
+
+    @pytest.mark.parametrize('invalid', ['unverified', 'missing-return'])
+    def test_critical_quality_is_not_recommended_in_email(isolated_db, monkeypatch, invalid):
+        alert = subscription(isolated_db)
+        deal = offer(isolated_db)
+        travel = source(isolated_db, deal)
+        if invalid == 'unverified':
+            travel.source = 'fixture-unknown'
+        else:
+            travel.raw_payload = {k: v for k, v in travel.raw_payload.items()
+                                  if k != 'return_origin_airport'}
+        isolated_db.commit()
+        assert not serialize_deal(isolated_db, deal).flight_quality.recommendation_eligible
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Unsafe email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['sent'] == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=790514a38699489f90c6f2e6a5742cc7.manage.508a510d724117469b185ac7f16d98faf443457f7df9b91ad34c7ffe6d2ca572')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Unsafe email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Unsafe email
+
+apps\api\tests\test_alert_safety.py:37: Failed
+______ test_critical_quality_is_not_recommended_in_email[missing-return] ______
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39D07410>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F39A91910>
+invalid = 'missing-return'
+
+    @pytest.mark.parametrize('invalid', ['unverified', 'missing-return'])
+    def test_critical_quality_is_not_recommended_in_email(isolated_db, monkeypatch, invalid):
+        alert = subscription(isolated_db)
+        deal = offer(isolated_db)
+        travel = source(isolated_db, deal)
+        if invalid == 'unverified':
+            travel.source = 'fixture-unknown'
+        else:
+            travel.raw_payload = {k: v for k, v in travel.raw_payload.items()
+                                  if k != 'return_origin_airport'}
+        isolated_db.commit()
+        assert not serialize_deal(isolated_db, deal).flight_quality.recommendation_eligible
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Unsafe email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['sent'] == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=e6349c0b5ebc42469839fc94592482d0.manage.4134cdc2895b82414ab50486b353459d435a6c12fdb6830fa590aed40bab2397')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Unsafe email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Unsafe email
+
+apps\api\tests\test_alert_safety.py:37: Failed
+_______ test_invalid_cheaper_candidates_do_not_hide_valid_partial_match _______
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39DBD250>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F39DC9C10>
+
+    def test_invalid_cheaper_candidates_do_not_hide_valid_partial_match(isolated_db, monkeypatch):
+        subscription(isolated_db)
+        for _ in range(6):
+            deal = offer(isolated_db, price='1')
+            source(isolated_db, deal).source = 'fixture-unknown'
+        good = offer(isolated_db)
+        isolated_db.commit()
+        assert serialize_deal(isolated_db, good).flight_quality.status == 'PARTIAL'
+        messages = []
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+        assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['sent'] == 1
+>       assert isolated_db.scalar(select(AlertDelivery)).deal_ids == [good.id]
+E       assert [1, 2, 3, 4, 5] == [7]
+E         
+E         At index 0 diff: 1 != 7
+E         Left contains 4 more items, first extra item: 2
+E         Use -v to get more diff
+
+apps\api\tests\test_alert_safety.py:54: AssertionError
+__________ test_offer_changes_after_reservation_cancel_email[hidden] __________
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39D9DB20>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F39E0FA40>
+mutation = 'hidden'
+
+    @pytest.mark.parametrize('mutation', ['hidden', 'over-budget', 'source-expired', 'critical'])
+    def test_offer_changes_after_reservation_cancel_email(isolated_db, monkeypatch, mutation):
+        subscription(isolated_db)
+        deal = offer(isolated_db)
+        real_commit = isolated_db.commit
+    
+        def commit():
+            reserved = any(isinstance(obj, AlertDelivery) for obj in isolated_db.new)
+            real_commit()
+            if reserved:
+                if mutation == 'hidden':
+                    deal.is_visible = False
+                elif mutation == 'over-budget':
+                    deal.price_per_person_pln = 251
+                elif mutation == 'source-expired':
+                    source(isolated_db, deal).expires_at = NOW
+                else:
+                    source(isolated_db, deal).raw_payload = {}
+                real_commit()
+    
+        monkeypatch.setattr(isolated_db, 'commit', commit)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['cancelled'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=c72c2ffab67948779808a1b18c8375bf.manage.23b08126a19f31cf90ff963d2e07823038cb209022fb3e0d555e7e09a4b0f100')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Stale email
+
+apps\api\tests\test_alert_safety.py:80: Failed
+_______ test_offer_changes_after_reservation_cancel_email[over-budget] ________
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39F2C8F0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F39B68890>
+mutation = 'over-budget'
+
+    @pytest.mark.parametrize('mutation', ['hidden', 'over-budget', 'source-expired', 'critical'])
+    def test_offer_changes_after_reservation_cancel_email(isolated_db, monkeypatch, mutation):
+        subscription(isolated_db)
+        deal = offer(isolated_db)
+        real_commit = isolated_db.commit
+    
+        def commit():
+            reserved = any(isinstance(obj, AlertDelivery) for obj in isolated_db.new)
+            real_commit()
+            if reserved:
+                if mutation == 'hidden':
+                    deal.is_visible = False
+                elif mutation == 'over-budget':
+                    deal.price_per_person_pln = 251
+                elif mutation == 'source-expired':
+                    source(isolated_db, deal).expires_at = NOW
+                else:
+                    source(isolated_db, deal).raw_payload = {}
+                real_commit()
+    
+        monkeypatch.setattr(isolated_db, 'commit', commit)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['cancelled'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=89ec496ed88b4cb2b9721e7da1715575.manage.232045ad132779d2973722fd2bc946f0e2e973d27064e15cd2de43a35a73247f')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Stale email
+
+apps\api\tests\test_alert_safety.py:80: Failed
+______ test_offer_changes_after_reservation_cancel_email[source-expired] ______
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39FCFC20>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F39FCCAA0>
+mutation = 'source-expired'
+
+    @pytest.mark.parametrize('mutation', ['hidden', 'over-budget', 'source-expired', 'critical'])
+    def test_offer_changes_after_reservation_cancel_email(isolated_db, monkeypatch, mutation):
+        subscription(isolated_db)
+        deal = offer(isolated_db)
+        real_commit = isolated_db.commit
+    
+        def commit():
+            reserved = any(isinstance(obj, AlertDelivery) for obj in isolated_db.new)
+            real_commit()
+            if reserved:
+                if mutation == 'hidden':
+                    deal.is_visible = False
+                elif mutation == 'over-budget':
+                    deal.price_per_person_pln = 251
+                elif mutation == 'source-expired':
+                    source(isolated_db, deal).expires_at = NOW
+                else:
+                    source(isolated_db, deal).raw_payload = {}
+                real_commit()
+    
+        monkeypatch.setattr(isolated_db, 'commit', commit)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['cancelled'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=2c3b0f53005641a88aa049fb2f80a1be.manage.b5624fa50a6f733e41b6a61a01da7af3c8a3f97da3714e91c1299f84f2dfa9e2')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Stale email
+
+apps\api\tests\test_alert_safety.py:80: Failed
+_________ test_offer_changes_after_reservation_cancel_email[critical] _________
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39DCB560>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F3A092DB0>
+mutation = 'critical'
+
+    @pytest.mark.parametrize('mutation', ['hidden', 'over-budget', 'source-expired', 'critical'])
+    def test_offer_changes_after_reservation_cancel_email(isolated_db, monkeypatch, mutation):
+        subscription(isolated_db)
+        deal = offer(isolated_db)
+        real_commit = isolated_db.commit
+    
+        def commit():
+            reserved = any(isinstance(obj, AlertDelivery) for obj in isolated_db.new)
+            real_commit()
+            if reserved:
+                if mutation == 'hidden':
+                    deal.is_visible = False
+                elif mutation == 'over-budget':
+                    deal.price_per_person_pln = 251
+                elif mutation == 'source-expired':
+                    source(isolated_db, deal).expires_at = NOW
+                else:
+                    source(isolated_db, deal).raw_payload = {}
+                real_commit()
+    
+        monkeypatch.setattr(isolated_db, 'commit', commit)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['cancelled'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=b2bfb83254924b08947c4fbc7ed94fe6.manage.86a09b52ddb60422f849ad6d177dc73e663465319944f44a01c396305773f4cd')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Stale email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Stale email
+
+apps\api\tests\test_alert_safety.py:80: Failed
+_______________ test_worker_uses_fresh_clock_after_reservation ________________
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F3A022210>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F3A10D4F0>
+
+    def test_worker_uses_fresh_clock_after_reservation(isolated_db, monkeypatch):
+        subscription(isolated_db)
+        offer(isolated_db)
+        current = [NOW]
+    
+        class Clock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return current[0]
+    
+        real_commit = isolated_db.commit
+    
+        def commit():
+            reserved = any(isinstance(obj, AlertDelivery) for obj in isolated_db.new)
+            real_commit()
+            if reserved:
+                current[0] = NOW + timedelta(hours=49)
+    
+        monkeypatch.setattr(alert_digests, 'datetime', Clock)
+        monkeypatch.setattr(isolated_db, 'commit', commit)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Expired email'))
+>       assert alert_digests.deliver_digests(isolated_db, settings())['cancelled'] == 1
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_alert_safety.py:106: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\app\services\alert_digests.py:158: in deliver_digests
+    send_alert_mail(settings, alert.email, "Twoja lista lot�w � HopTrip", body)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = (Settings(app_name='HopTrip API', app_env='test', log_level='INFO', database_url='sqlite://', admin_token='change-me-i...manage#token=d1676496c5664158908fafc78e20e6ed.manage.cb391ecd7b7a04b10642e887ab1c73453f181ff9f0e283f1590a9db4996164ee')
+
+>   monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: pytest.fail('Expired email'))
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: Expired email
+
+apps\api\tests\test_alert_safety.py:105: Failed
+___________________ test_digest_body_uses_revalidated_price ___________________
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F3A0BF4D0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F3A0BC200>
+
+    def test_digest_body_uses_revalidated_price(isolated_db, monkeypatch):
+        subscription(isolated_db)
+        deal = offer(isolated_db)
+        real_commit = isolated_db.commit
+    
+        def commit():
+            reserved = any(isinstance(obj, AlertDelivery) for obj in isolated_db.new)
+            real_commit()
+            if reserved:
+                deal.price_per_person_pln = 220
+                real_commit()
+    
+        messages = []
+        monkeypatch.setattr(isolated_db, 'commit', commit)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+        assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['sent'] == 1
+>       assert '220,00 z\u0142/os.' in messages[0][3]
+E       AssertionError: assert '220,00 z\u0142/os.' in 'Nowe loty pasuj\u0105ce do Twoich ustawie\u0144 HopTrip:\\n\\nWroc\u0142aw (WRO) \u2192 Mediolan\\n06.11.2026 \u2013 08.11.2026; liczba nocy: 2; .../manage#token=bdefe4cb2edd46c1a125d358647ba707.manage.4a2aa46b9e1b4913cdeb7016665d1acd50bb09fac8409255d0f6de27d9610f85'
+
+apps\api\tests\test_alert_safety.py:125: AssertionError
+_____ test_lifecycle_logs_no_email_capability_preferences_or_smtp_secrets _____
+
+api_client = <starlette.testclient.TestClient object at 0x0000028F3A16E210>
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F39EBE7E0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F3A210E30>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x0000028F3A2114F0>
+
+    def test_lifecycle_logs_no_email_capability_preferences_or_smtp_secrets(
+        api_client, isolated_db, monkeypatch, caplog,
+    ):
+        config = settings()
+        app.dependency_overrides[get_settings] = lambda: config
+        offer(isolated_db)
+        monkeypatch.setattr(alerts, 'send_alert_mail', lambda *args: None)
+        caplog.set_level(logging.INFO)
+        filters = {'origin': 'WRO', 'budget': '239.12'}
+        assert api_client.post('/api/v1/alerts', json={
+            'email': 'private-grow01@example.test', 'consent': True, 'filters': filters,
+        }).status_code == 202
+        alert = isolated_db.scalar(select(DealAlert))
+        token = alerts.capability(config, alert, 'confirm')
+        result = api_client.post('/api/v1/alerts/confirm', json={'token': token})
+        assert result.status_code == 200
+        manage = result.json()['token']
+        assert api_client.patch('/api/v1/alerts/manage', json={
+            'token': manage, 'filters': {**filters, 'frequency': 'daily'},
+        }).status_code == 200
+        assert api_client.post('/api/v1/alerts/unsubscribe', json={'token': manage}).status_code == 200
+        for event in ['Alert signup committed', 'Alert confirmation activated',
+                      'Alert preferences updated', 'Alert subscription stopped']:
+>           assert event in caplog.text
+E           assert 'Alert signup committed' in 'INFO     hoptrip.requests:security.py:33 request_id=4b0bd04afa7b495ebb7c70b5d95ba741 method=POST status=202\nINFO    ...200\nINFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/alerts/unsubscribe "HTTP/1.1 200 OK"\n'
+E            +  where 'INFO     hoptrip.requests:security.py:33 request_id=4b0bd04afa7b495ebb7c70b5d95ba741 method=POST status=202\nINFO    ...200\nINFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/alerts/unsubscribe "HTTP/1.1 200 OK"\n' = <_pytest.logging.LogCaptureFixture object at 0x0000028F3A2114F0>.text
+
+apps\api\tests\test_alert_safety.py:152: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=4b0bd04afa7b495ebb7c70b5d95ba741 method=POST status=202
+INFO:httpx:HTTP Request: POST http://testserver/api/v1/alerts "HTTP/1.1 202 Accepted"
+INFO:hoptrip.requests:request_id=b9d83cb5999947ea8bcd2e03f055f6d3 method=POST status=200
+INFO:httpx:HTTP Request: POST http://testserver/api/v1/alerts/confirm "HTTP/1.1 200 OK"
+INFO:hoptrip.requests:request_id=2d64698e234e4575829a59cad2eba2d2 method=PATCH status=200
+INFO:httpx:HTTP Request: PATCH http://testserver/api/v1/alerts/manage "HTTP/1.1 200 OK"
+INFO:hoptrip.requests:request_id=7178c0fe7f2e469c8a61731ad4d90bb9 method=POST status=200
+INFO:httpx:HTTP Request: POST http://testserver/api/v1/alerts/unsubscribe "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=4b0bd04afa7b495ebb7c70b5d95ba741 method=POST status=202
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/alerts "HTTP/1.1 202 Accepted"
+INFO     hoptrip.requests:security.py:33 request_id=b9d83cb5999947ea8bcd2e03f055f6d3 method=POST status=200
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/alerts/confirm "HTTP/1.1 200 OK"
+INFO     hoptrip.requests:security.py:33 request_id=2d64698e234e4575829a59cad2eba2d2 method=PATCH status=200
+INFO     httpx:_client.py:1025 HTTP Request: PATCH http://testserver/api/v1/alerts/manage "HTTP/1.1 200 OK"
+INFO     hoptrip.requests:security.py:33 request_id=7178c0fe7f2e469c8a61731ad4d90bb9 method=POST status=200
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/alerts/unsubscribe "HTTP/1.1 200 OK"
+_ test_cleanup_command_works_with_delivery_disabled_without_starting_scheduler _
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000028F3A2556D0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000028F3A257B00>
+
+    def test_cleanup_command_works_with_delivery_disabled_without_starting_scheduler(
+        isolated_db, monkeypatch,
+    ):
+        active = subscription(isolated_db)
+        pending = subscription(isolated_db)
+        pending.status, pending.requested_at = 'PENDING', NOW - timedelta(days=8)
+        stopped = subscription(isolated_db)
+        stopped.status, stopped.stopped_at = 'STOPPED', NOW - timedelta(days=31)
+        isolated_db.add(AlertDelivery(alert_id=active.id, deal_ids=[123], status='SENT', created_at=NOW))
+        isolated_db.commit()
+        config = settings()
+        config.alerts_enabled = config.alerts_digest_enabled = False
+    
+        @contextmanager
+        def session():
+            yield isolated_db
+    
+        class Clock(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return NOW
+    
+>       monkeypatch.setattr(alert_scheduler, 'datetime', Clock)
+E       AttributeError: <module 'app.jobs.alert_scheduler' from 'C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\api\\app\\jobs\\alert_scheduler.py'> has no attribute 'datetime'
+
+apps\api\tests\test_alert_safety.py:181: AttributeError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\docs\grow01\before.xml -
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_alert_safety.py::test_critical_quality_is_not_recommended_in_email[unverified]
+FAILED apps/api/tests/test_alert_safety.py::test_critical_quality_is_not_recommended_in_email[missing-return]
+FAILED apps/api/tests/test_alert_safety.py::test_invalid_cheaper_candidates_do_not_hide_valid_partial_match
+FAILED apps/api/tests/test_alert_safety.py::test_offer_changes_after_reservation_cancel_email[hidden]
+FAILED apps/api/tests/test_alert_safety.py::test_offer_changes_after_reservation_cancel_email[over-budget]
+FAILED apps/api/tests/test_alert_safety.py::test_offer_changes_after_reservation_cancel_email[source-expired]
+FAILED apps/api/tests/test_alert_safety.py::test_offer_changes_after_reservation_cancel_email[critical]
+FAILED apps/api/tests/test_alert_safety.py::test_worker_uses_fresh_clock_after_reservation
+FAILED apps/api/tests/test_alert_safety.py::test_digest_body_uses_revalidated_price
+FAILED apps/api/tests/test_alert_safety.py::test_lifecycle_logs_no_email_capability_preferences_or_smtp_secrets
+FAILED apps/api/tests/test_alert_safety.py::test_cleanup_command_works_with_delivery_disabled_without_starting_scheduler
+11 failed, 2 warnings in 1.52s

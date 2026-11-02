@@ -1,0 +1,302 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "price-assessment.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-data02/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-data02/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-data02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-data02/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-data02/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "price-assessment.spec.ts",
+      "file": "price-assessment.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "trip details reveal comparison on demand without navigating or opening other cards",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20313,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts:13:45",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts",
+                      "column": 45,
+                      "line": 13
+                    },
+                    "snippet": "  11 |   const summary=card.locator(\".trip-details .price-assessment\");\n  12 |   await expect(summary).not.toBeVisible();\n> 13 |   await expect(card.locator(\".deal-price\")).toBeVisible();\n     |                                             ^\n  14 |   await expect(card.locator(\".price-summary\")).toHaveCount(0);\n  15 |   const cardComparison=await summary.locator(\".price-comparison strong\").textContent();\n  16 |   const toggle=card.locator(\".trip-details > summary\");"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts",
+                        "column": 45,
+                        "line": 13
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.deal-price')\u001b[22m\n\n\n  11 |   const summary=card.locator(\".trip-details .price-assessment\");\n  12 |   await expect(summary).not.toBeVisible();\n> 13 |   await expect(card.locator(\".deal-price\")).toBeVisible();\n     |                                             ^\n  14 |   await expect(card.locator(\".price-summary\")).toHaveCount(0);\n  15 |   const cardComparison=await summary.locator(\".price-comparison strong\").textContent();\n  16 |   const toggle=card.locator(\".trip-details > summary\");\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts:13:45"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T16:25:15.532Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\test-results\\price-assessment-trip-deta-c32a9-ting-or-opening-other-cards-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\test-results\\price-assessment-trip-deta-c32a9-ting-or-opening-other-cards-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts",
+                    "column": 45,
+                    "line": 13
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-0c79e2a2c7a836eeccf6",
+          "file": "price-assessment.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "insufficient and historical data never advertise a price advantage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T16:25:37.561Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-bf35767560448ad231b3",
+          "file": "price-assessment.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "trip details reveal comparison on demand without navigating or opening other cards",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10081,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p')\nExpected: visible\nError: strict mode violation: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('region', { name: 'Cena i aktualność' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p>Porównujemy zapisane ceny lotu na osobę w PLN wed…</p> aka getByRole('region', { name: 'Cena i aktualność' }).getByText('Porównujemy zapisane ceny')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p')\nExpected: visible\nError: strict mode violation: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('region', { name: 'Cena i aktualność' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p>Porównujemy zapisane ceny lotu na osobę w PLN wed…</p> aka getByRole('region', { name: 'Cena i aktualność' }).getByText('Porównujemy zapisane ceny')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts:32:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts",
+                      "column": 46,
+                      "line": 32
+                    },
+                    "snippet": "  30 |   await expect(summary).toContainText(\"Bez potwierdzenia na żywo\");\n  31 |   await summary.locator(\"details > summary\").click();\n> 32 |   await expect(summary.locator(\"details p\")).toBeVisible();\n     |                                              ^\n  33 |   await expect(summary.locator(\"details p\")).toContainText(\"UTC\");\n  34 |   await expect(card.locator(\".score-trigger\")).toContainText(\"Jak porównujemy cenę?\");\n  35 |   await card.screenshot({path:testInfo.outputPath(\"price-card.png\")});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts",
+                        "column": 46,
+                        "line": 32
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p')\nExpected: visible\nError: strict mode violation: locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('region', { name: 'Cena i aktualność' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p>Porównujemy zapisane ceny lotu na osobę w PLN wed…</p> aka getByRole('region', { name: 'Cena i aktualność' }).getByText('Porównujemy zapisane ceny')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').filter({ has: locator('a.deal-card-link[href=\"/deals/browser-deal\"]') }).locator('.trip-details .price-assessment').locator('details p')\u001b[22m\n\n\n  30 |   await expect(summary).toContainText(\"Bez potwierdzenia na żywo\");\n  31 |   await summary.locator(\"details > summary\").click();\n> 32 |   await expect(summary.locator(\"details p\")).toBeVisible();\n     |                                              ^\n  33 |   await expect(summary.locator(\"details p\")).toContainText(\"UTC\");\n  34 |   await expect(card.locator(\".score-trigger\")).toContainText(\"Jak porównujemy cenę?\");\n  35 |   await card.screenshot({path:testInfo.outputPath(\"price-card.png\")});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts:32:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T16:25:50.143Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\test-results\\price-assessment-trip-deta-c32a9-ting-or-opening-other-cards-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\test-results\\price-assessment-trip-deta-c32a9-ting-or-opening-other-cards-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-data02\\apps\\web\\tests\\price-assessment.spec.ts",
+                    "column": 46,
+                    "line": 32
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-aece0c182ff0f8214175",
+          "file": "price-assessment.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "insufficient and historical data never advertise a price advantage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5112,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T16:26:03.923Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1881dcd430cb7855e543-0283058cbfaf2e1b94d6",
+          "file": "price-assessment.spec.ts",
+          "line": 59,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T16:24:51.585Z",
+    "duration": 80832.77799999999,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

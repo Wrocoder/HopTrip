@@ -1,0 +1,169 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "(^|/)interaction-feedback\\.spec\\.ts$",
+      "--project=desktop",
+      "--grep",
+      "clipboard progress.* in pl$",
+      "--output=test-results-ui05-before",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui05/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui05/apps/web/test-results-ui05-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui05/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui05/apps/web/test-results-ui05-before",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-ui05/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "interaction-feedback.spec.ts",
+      "file": "interaction-feedback.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "clipboard progress, recovery and stale completions in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8368,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#trip-save').locator('[aria-live=\"polite\"]')\nExpected: \u001b[32m\"Kopiujemy link…\"\u001b[39m\nReceived: \u001b[31m\"Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#trip-save').locator('[aria-live=\"polite\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').locator('[aria-live=\"polite\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p aria-live=\"polite\">Zapisano wyjazd w tej przeglądarce. Znajdziesz go…</p>\u001b[22m\n\u001b[2m       - unexpected value \"Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#trip-save').locator('[aria-live=\"polite\"]')\nExpected: \u001b[32m\"Kopiujemy link…\"\u001b[39m\nReceived: \u001b[31m\"Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#trip-save').locator('[aria-live=\"polite\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').locator('[aria-live=\"polite\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p aria-live=\"polite\">Zapisano wyjazd w tej przeglądarce. Znajdziesz go…</p>\u001b[22m\n\u001b[2m       - unexpected value \"Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\tests\\interaction-feedback.spec.ts:37:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\tests\\interaction-feedback.spec.ts",
+                      "column": 46,
+                      "line": 37
+                    },
+                    "snippet": "  35 |   await expect(save).toBeEnabled();await save.click();\n  36 |   await expect(feedback).toHaveText(t('Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.'));\n> 37 |   await share.click();await expect(feedback).toHaveText(copying[locale]);\n     |                                              ^\n  38 |   await expect(share).toBeDisabled();await expect(share).toHaveAttribute('aria-busy','true');\n  39 |   expect(await page.evaluate(()=>(window as typeof window&{clipboardHarness:ClipboardHarness}).clipboardHarness.writes.length)).toBe(1);\n  40 |   if(locale==='pl')await actions.screenshot({path:info.outputPath('copying.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\tests\\interaction-feedback.spec.ts",
+                        "column": 46,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#trip-save').locator('[aria-live=\"polite\"]')\nExpected: \u001b[32m\"Kopiujemy link…\"\u001b[39m\nReceived: \u001b[31m\"Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#trip-save').locator('[aria-live=\"polite\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').locator('[aria-live=\"polite\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <p aria-live=\"polite\">Zapisano wyjazd w tej przeglądarce. Znajdziesz go…</p>\u001b[22m\n\u001b[2m       - unexpected value \"Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n\n\n  35 |   await expect(save).toBeEnabled();await save.click();\n  36 |   await expect(feedback).toHaveText(t('Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.'));\n> 37 |   await share.click();await expect(feedback).toHaveText(copying[locale]);\n     |                                              ^\n  38 |   await expect(share).toBeDisabled();await expect(share).toHaveAttribute('aria-busy','true');\n  39 |   expect(await page.evaluate(()=>(window as typeof window&{clipboardHarness:ClipboardHarness}).clipboardHarness.writes.length)).toBe(1);\n  40 |   if(locale==='pl')await actions.screenshot({path:info.outputPath('copying.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\tests\\interaction-feedback.spec.ts:37:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T11:37:15.056Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\test-results-ui05-before\\interaction-feedback-clipb-0beb2-and-stale-completions-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\test-results-ui05-before\\interaction-feedback-clipb-0beb2-and-stale-completions-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-ui05\\apps\\web\\tests\\interaction-feedback.spec.ts",
+                    "column": 46,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7795d2e794d8faa5e2fb-1cf836b41ce7cce29a7c",
+          "file": "interaction-feedback.spec.ts",
+          "line": 30,
+          "column": 6
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-01T11:37:05.525Z",
+    "duration": 21792.811,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -38,6 +38,7 @@ class RouteStatistics(Base):
     p75_price_pln: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     max_price_pln: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     confidence: Mapped[Decimal] = mapped_column(Numeric(5, 4), nullable=False)
+    methodology_version: Mapped[str | None] = mapped_column(String(40))
     calculated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

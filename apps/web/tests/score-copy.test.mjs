@@ -7,7 +7,7 @@ test("score translations retain numeric rules and interpolation slots",()=>{
   const numbers=text=>(text.match(/\d+(?:[.,]\d+)?/g)??[]).map(value=>value.replace(",","."));
   const slots=text=>(text.match(/\{\w+\}/g)??[]).sort();
   for(const text of values){assert.ok(text.trim());assert.deepEqual(numbers(text),numbers(values[0]),key);assert.deepEqual(slots(text),slots(values[0]),key);}
-  for(const locale of ["pl","en","ru","uk"])assert.ok(!scoreText(locale,key,{count:24,age:24,price:"200.25 PLN",median:"250 PLN",comparison:"test",score:69}).includes("{"));
+  for(const locale of ["pl","en","ru","uk"])assert.ok(!scoreText(locale,key,{count:24,age:24,price:"200.25 PLN",median:"250 PLN",comparison:"test",score:69,destination:"Barcelona"}).includes("{"));
  }
 });
 test("translated methodology retains the complete example and all sections",()=>{

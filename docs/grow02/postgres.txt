@@ -1,0 +1,627 @@
+FF............F..                                                        [100%]
+================================== FAILURES ===================================
+__ test_personal_telegram_concurrent_updates_have_one_subscription_and_reply __
+
+self = <sqlalchemy.engine.base.Connection object at 0x000001F12786BB30>
+dialect = <sqlalchemy.dialects.postgresql.psycopg.PGDialect_psycopg object at 0x000001F1276C1100>
+context = <sqlalchemy.dialects.postgresql.psycopg.PGExecutionContext_psycopg object at 0x000001F1278CBC50>
+statement = <sqlalchemy.dialects.postgresql.psycopg.PGCompiler_psycopg object at 0x000001F1278CB650>
+parameters = [{'attempted_at': None, 'attempts': 0, 'chat_id': 900001, 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), ...}]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <psycopg.Cursor [closed] [IDLE] (host=127.0.0.1 port=53842 database=hoptrip_test) at 0x1f1276e71d0>
+query = 'INSERT INTO telegram_deliveries (subscription_id, chat_id, kind, status, deal_ids, filters, text, created_at, due_at,...MP WITH TIME ZONE, %(attempted_at)s::TIMESTAMP WITH TIME ZONE, %(attempts)s::INTEGER) RETURNING telegram_deliveries.id'
+params = {'attempted_at': None, 'attempts': 0, 'chat_id': 900001, 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), ...}
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           psycopg.errors.ForeignKeyViolation: insert or update on table "telegram_deliveries" violates foreign key constraint "telegram_deliveries_subscription_id_fkey"
+E           DETAIL:  Key (subscription_id)=(c3ec091b1f2b4f7e84efbe8debbd97f1) is not present in table "telegram_subscriptions".
+
+.venv\Lib\site-packages\psycopg\cursor.py:117: ForeignKeyViolation
+
+The above exception was the direct cause of the following exception:
+
+pg_factory = (sessionmaker(class_='Session', bind=Engine(postgresql+psycopg://hoptrip_test:***@127.0.0.1:53842/hoptrip_test), autoflush=False, expire_on_commit=True), 'postgresql+psycopg://hoptrip_test:grow02-local-fixture@127.0.0.1:53842/hoptrip_test')
+
+    def test_personal_telegram_concurrent_updates_have_one_subscription_and_reply(pg_factory):
+        from threading import Barrier
+    
+        from app.models.telegram import TelegramDelivery, TelegramSubscription
+        from app.services.telegram_subscriptions import receive_update
+        from test_alert_digests import NOW, offer
+        from test_telegram import config, update
+    
+        factory, _ = pg_factory
+        with factory() as db:
+            offer(db)
+        barrier = Barrier(2)
+    
+        def run():
+            with factory() as db:
+                barrier.wait(timeout=10)
+                receive_update(db, config(), update(text='/subscribe origin=WRO budget=250'), NOW)
+    
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            futures = [pool.submit(run) for _ in range(2)]
+            for future in futures:
+>               future.result(timeout=20)
+
+apps\api\tests\test_postgres.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py:59: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+apps\api\tests\test_postgres.py:47: in run
+    receive_update(db, config(), update(text='/subscribe origin=WRO budget=250'), NOW)
+apps\api\app\services\telegram_subscriptions.py:159: in receive_update
+    db.commit()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2035: in commit
+    trans.commit(_to_root=True)
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1643: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <psycopg.Cursor [closed] [IDLE] (host=127.0.0.1 port=53842 database=hoptrip_test) at 0x1f1276e71d0>
+query = 'INSERT INTO telegram_deliveries (subscription_id, chat_id, kind, status, deal_ids, filters, text, created_at, due_at,...MP WITH TIME ZONE, %(attempted_at)s::TIMESTAMP WITH TIME ZONE, %(attempts)s::INTEGER) RETURNING telegram_deliveries.id'
+params = {'attempted_at': None, 'attempts': 0, 'chat_id': 900001, 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), ...}
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) insert or update on table "telegram_deliveries" violates foreign key constraint "telegram_deliveries_subscription_id_fkey"
+E           DETAIL:  Key (subscription_id)=(c3ec091b1f2b4f7e84efbe8debbd97f1) is not present in table "telegram_subscriptions".
+E           [SQL: INSERT INTO telegram_deliveries (subscription_id, chat_id, kind, status, deal_ids, filters, text, created_at, due_at, attempted_at, attempts) VALUES (%(subscription_id)s::VARCHAR, %(chat_id)s::BIGINT, %(kind)s::VARCHAR, %(status)s::VARCHAR, %(deal_ids)s::JSON, %(filters)s::JSON, %(text)s::VARCHAR, %(created_at)s::TIMESTAMP WITH TIME ZONE, %(due_at)s::TIMESTAMP WITH TIME ZONE, %(attempted_at)s::TIMESTAMP WITH TIME ZONE, %(attempts)s::INTEGER) RETURNING telegram_deliveries.id]
+E           [parameters: {'subscription_id': 'c3ec091b1f2b4f7e84efbe8debbd97f1', 'chat_id': 900001, 'kind': 'REPLY', 'status': 'READY', 'deal_ids': Json([]), 'filters': Json(None), 'text': 'Ustawienia:\\norigin=WRO\\nbudget=250\\nduration_min=0\\nduration_max=14\\nweekend=false\\nfrequency=weekly\\nAby wyrazi\u0107 zgod\u0119 na wiadomo\u015bci z nowymi lotami wed\u0142ug tych warunk\xf3w, wy\u015blij /confirm w ci\u0105gu24h. Do tego czasu nie wysy\u0142amy ofert.\\nPrywatno\u015b\u0107: https://example.test/info/privacy', 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), 'due_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), 'attempted_at': None, 'attempts': 0}]
+E           (Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+.venv\Lib\site-packages\psycopg\cursor.py:117: IntegrityError
+---------------------------- Captured stderr call -----------------------------
+INFO:app.services.telegram_subscriptions:Telegram preferences pending confirmation
+INFO:app.services.telegram_subscriptions:Telegram preferences pending confirmation
+------------------------------ Captured log call ------------------------------
+INFO     app.services.telegram_subscriptions:telegram_subscriptions.py:115 Telegram preferences pending confirmation
+INFO     app.services.telegram_subscriptions:telegram_subscriptions.py:115 Telegram preferences pending confirmation
+________ test_personal_telegram_concurrent_workers_have_one_submission ________
+
+self = <sqlalchemy.engine.base.Connection object at 0x000001F127D367E0>
+dialect = <sqlalchemy.dialects.postgresql.psycopg.PGDialect_psycopg object at 0x000001F1278F52E0>
+context = <sqlalchemy.dialects.postgresql.psycopg.PGExecutionContext_psycopg object at 0x000001F1279962D0>
+statement = <sqlalchemy.dialects.postgresql.psycopg.PGCompiler_psycopg object at 0x000001F127995F40>
+parameters = [{'attempted_at': None, 'attempts': 0, 'chat_id': 900001, 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), ...}]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <psycopg.Cursor [closed] [IDLE] (host=127.0.0.1 port=53842 database=hoptrip_test) at 0x1f1291584d0>
+query = 'INSERT INTO telegram_deliveries (subscription_id, chat_id, kind, status, deal_ids, filters, text, created_at, due_at,...MP WITH TIME ZONE, %(attempted_at)s::TIMESTAMP WITH TIME ZONE, %(attempts)s::INTEGER) RETURNING telegram_deliveries.id'
+params = {'attempted_at': None, 'attempts': 0, 'chat_id': 900001, 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), ...}
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           psycopg.errors.ForeignKeyViolation: insert or update on table "telegram_deliveries" violates foreign key constraint "telegram_deliveries_subscription_id_fkey"
+E           DETAIL:  Key (subscription_id)=(5f815f9bcbfc41878730e18b3776504f) is not present in table "telegram_subscriptions".
+
+.venv\Lib\site-packages\psycopg\cursor.py:117: ForeignKeyViolation
+
+The above exception was the direct cause of the following exception:
+
+pg_factory = (sessionmaker(class_='Session', bind=Engine(postgresql+psycopg://hoptrip_test:***@127.0.0.1:53842/hoptrip_test), autoflush=False, expire_on_commit=True), 'postgresql+psycopg://hoptrip_test:grow02-local-fixture@127.0.0.1:53842/hoptrip_test')
+
+    def test_personal_telegram_concurrent_workers_have_one_submission(pg_factory):
+        from threading import Barrier
+    
+        from app.models.telegram import TelegramDelivery
+        from app.services.telegram_delivery import deliver_once
+        from test_alert_digests import NOW
+        from test_telegram import Sender, active, config
+    
+        factory, _ = pg_factory
+        with factory() as db:
+>           active(db)
+
+apps\api\tests\test_postgres.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\tests\test_telegram.py:45: in active
+    command(db, '/subscribe origin=WRO budget=250 ' + extra, chat=chat, locale=locale)
+apps\api\tests\test_telegram.py:39: in command
+    subscriptions.receive_update(db, settings or config(),
+apps\api\app\services\telegram_subscriptions.py:159: in receive_update
+    db.commit()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:2035: in commit
+    trans.commit(_to_root=True)
+<string>:2: in commit
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1316: in commit
+    self._prepare_impl()
+<string>:2: in _prepare_impl
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py:137: in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:1290: in _prepare_impl
+    self.session.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1643: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <psycopg.Cursor [closed] [IDLE] (host=127.0.0.1 port=53842 database=hoptrip_test) at 0x1f1291584d0>
+query = 'INSERT INTO telegram_deliveries (subscription_id, chat_id, kind, status, deal_ids, filters, text, created_at, due_at,...MP WITH TIME ZONE, %(attempted_at)s::TIMESTAMP WITH TIME ZONE, %(attempts)s::INTEGER) RETURNING telegram_deliveries.id'
+params = {'attempted_at': None, 'attempts': 0, 'chat_id': 900001, 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), ...}
+
+    def execute(
+        self,
+        query: Query,
+        params: Params | None = None,
+        *,
+        prepare: bool | None = None,
+        binary: bool | None = None,
+    ) -> Self:
+        """
+        Execute a query or command to the database.
+        """
+        try:
+            with self._conn.lock:
+                self._conn.wait(
+                    self._execute_gen(query, params, prepare=prepare, binary=binary)
+                )
+        except e._NO_TRACEBACK as ex:
+>           raise ex.with_traceback(None)
+E           sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) insert or update on table "telegram_deliveries" violates foreign key constraint "telegram_deliveries_subscription_id_fkey"
+E           DETAIL:  Key (subscription_id)=(5f815f9bcbfc41878730e18b3776504f) is not present in table "telegram_subscriptions".
+E           [SQL: INSERT INTO telegram_deliveries (subscription_id, chat_id, kind, status, deal_ids, filters, text, created_at, due_at, attempted_at, attempts) VALUES (%(subscription_id)s::VARCHAR, %(chat_id)s::BIGINT, %(kind)s::VARCHAR, %(status)s::VARCHAR, %(deal_ids)s::JSON, %(filters)s::JSON, %(text)s::VARCHAR, %(created_at)s::TIMESTAMP WITH TIME ZONE, %(due_at)s::TIMESTAMP WITH TIME ZONE, %(attempted_at)s::TIMESTAMP WITH TIME ZONE, %(attempts)s::INTEGER) RETURNING telegram_deliveries.id]
+E           [parameters: {'subscription_id': '5f815f9bcbfc41878730e18b3776504f', 'chat_id': 900001, 'kind': 'REPLY', 'status': 'READY', 'deal_ids': Json([]), 'filters': Json(None), 'text': 'Ustawienia:\\norigin=WRO\\nbudget=250\\nduration_min=0\\nduration_max=14\\nweekend=false\\nfrequency=weekly\\nAby wyrazi\u0107 zgod\u0119 na wiadomo\u015bci z nowymi lotami wed\u0142ug tych warunk\xf3w, wy\u015blij /confirm w ci\u0105gu24h. Do tego czasu nie wysy\u0142amy ofert.\\nPrywatno\u015b\u0107: https://example.test/info/privacy', 'created_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), 'due_at': datetime.datetime(2026, 10, 12, 7, 0, tzinfo=datetime.timezone.utc), 'attempted_at': None, 'attempts': 0}]
+E           (Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+.venv\Lib\site-packages\psycopg\cursor.py:117: IntegrityError
+---------------------------- Captured stderr call -----------------------------
+INFO:app.services.telegram_subscriptions:Telegram preferences pending confirmation
+------------------------------ Captured log call ------------------------------
+INFO     app.services.telegram_subscriptions:telegram_subscriptions.py:115 Telegram preferences pending confirmation
+______________ test_editor_upgrade_preserves_existing_catalogue _______________
+
+    def test_editor_upgrade_preserves_existing_catalogue():
+        import subprocess
+        import sys
+        from pathlib import Path
+    
+        url = os.getenv("TEST_DATABASE_URL")
+        if not url:
+            pytest.skip("Set TEST_DATABASE_URL")
+        assert make_url(url).database == "hoptrip_test"
+        schema = "test_editor_upgrade_" + uuid4().hex
+        engine = create_engine(url)
+        with engine.begin() as db:
+            db.execute(text(f'CREATE SCHEMA "{schema}"'))
+        scoped_url = make_url(url).update_query_dict({"options": f"-csearch_path={schema}"})
+        scoped = create_engine(scoped_url)
+        env = {**os.environ, "DATABASE_URL": scoped_url.render_as_string(hide_password=False)}
+        try:
+            for revision in ["0016_flight_route_details", "0017_routes_editorial_merge", "head"]:
+                result = subprocess.run([sys.executable, "-m", "alembic", "upgrade", revision],
+                                        cwd=Path(__file__).parents[1], env=env,
+                                        capture_output=True, text=True, timeout=60)
+                assert result.returncode == 0, result.stderr
+                with scoped.begin() as db:
+                    if revision == "0016_flight_route_details":
+                        db.execute(text("INSERT INTO data_providers (code, name) "
+                                        "VALUES ('editor-upgrade-sentinel', 'Existing catalogue')"))
+                    elif revision == "0017_routes_editorial_merge":
+                        item_id = db.scalar(text("INSERT INTO editorial_items "
+                            "(kind, source, version, status, created_at) VALUES "
+                            "('guide', '{}', 1, 'APPROVED', now()) RETURNING id"))
+                        db.execute(text("INSERT INTO editorial_revisions "
+                            "(item_id, version, snapshot, variants, artifacts, checksum, owner, created_at) "
+                            "VALUES (:id, 1, '{}', '{\"telegram\":\"Existing text\"}', '{}', :checksum, 'fixture', now())"),
+                            {"id": item_id, "checksum": "a" * 64})
+                        db.execute(text("INSERT INTO editorial_approvals "
+                            "(item_id, version, channels, checksum, owner, created_at, expires_at) "
+                            "VALUES (:id, 1, '[\"telegram\"]', :checksum, 'fixture', now(), now()+interval '1 day')"),
+                            {"id": item_id, "checksum": "a" * 64})
+                    else:
+                        assert db.scalar(text("SELECT name FROM data_providers "
+                                              "WHERE code='editor-upgrade-sentinel'")) == "Existing catalogue"
+>                       assert db.scalar(text("SELECT version_num FROM alembic_version")) == "0020_statistics_method"
+E                       AssertionError: assert '0021_telegram_alerts' == '0020_statistics_method'
+E                         
+E                         - 0020_statistics_method
+E                         + 0021_telegram_alerts
+
+apps\api\tests\test_postgres.py:538: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\docs\grow02\postgres.xml -
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_postgres.py::test_personal_telegram_concurrent_updates_have_one_subscription_and_reply
+FAILED apps/api/tests/test_postgres.py::test_personal_telegram_concurrent_workers_have_one_submission
+FAILED apps/api/tests/test_postgres.py::test_editor_upgrade_preserves_existing_catalogue
+3 failed, 14 passed, 2 warnings in 35.63s

@@ -1,6 +1,20 @@
 import type {Locale} from './config.ts';
 
 export const homeCopy={
+ 'Kolekcje na krótki wyjazd':['Short trip collections','Подборки коротких поездок','Добірки коротких подорожей'],
+ 'Zaplanuj podróż':['Plan your trip','Спланируй поездку','Сплануй подорож'],
+ 'Zapisane wyjazdy':['Saved trips','Сохранённые поездки','Збережені подорожі'],
+ 'Jak działa HopTrip':['How HopTrip works','Как работает HopTrip','Як працює HopTrip'],
+ 'Wyszukaj lot według lotniska, dat i budżetu.':['Search for a flight by airport, dates and budget.','Найди перелёт по аэропорту, датам и бюджету.','Знайди переліт за аеропортом, датами й бюджетом.'],
+ 'Porównaj oferty i sprawdź szczegóły wybranego lotu.':['Compare offers and check the details of your chosen flight.','Сравни предложения и проверь детали выбранного перелёта.','Порівняй пропозиції й перевір деталі вибраного перельоту.'],
+ 'Zaplanuj koszty podróży. Dostępność i warunki rezerwacji potwierdź u partnera.':['Plan your travel costs. Confirm availability and booking terms with the partner.','Рассчитай расходы на поездку. Наличие и условия бронирования уточни у партнёра.','Розрахуй витрати на подорож. Наявність та умови бронювання уточни в партнера.'],
+ 'Poradniki i pomoc':['Guides and help','Руководства и помощь','Порадники й допомога'],
+ 'Świeżość ofert':['Offer freshness','Актуальность предложений','Актуальність пропозицій'],
+ 'Wszystkie poradniki':['All guides','Все руководства','Усі порадники'],
+ 'Zmień lotnisko':['Change airport','Изменить аэропорт','Змінити аеропорт'],
+ 'Lotnisko wybierasz w wyszukiwarce. Ten sam wybór stosujemy do propozycji poniżej i zapamiętujemy na tym urządzeniu.':['Choose your airport in the search form. We use the same choice for the suggestions below and remember it on this device.','Выбирай аэропорт в поиске. Этот же выбор применяется к предложениям ниже и сохраняется на этом устройстве.','Вибирай аеропорт у пошуку. Цей самий вибір застосовується до пропозицій нижче та зберігається на цьому пристрої.'],
+ 'Tanie podróże zaczynają się tutaj.':['Affordable trips start here.','Недорогие путешествия начинаются здесь.','Недорогі подорожі починаються тут.'],
+ 'Znajdź lot, sprawdź wydarzenia i zaplanuj wyjazd w jednym miejscu.':['Find a flight, explore events and plan your trip in one place.','Найди перелёт, посмотри события и спланируй поездку в одном месте.','Знайди переліт, переглянь події та сплануй подорож в одному місці.'],
  'Loty z Polski i planowanie krótkich wyjazdów | HopTrip':['Flights from Poland and short trip planning | HopTrip','Перелёты из Польши и планирование коротких поездок | HopTrip','Перельоти з Польщі та планування коротких подорожей | HopTrip'],
  'Znajdź lot z Polski, sprawdź wydarzenia na miejscu i zaplanuj krótki wyjazd. Wybierz lotnisko, porównaj daty i policz budżet podróży.':['Find a flight from Poland, explore local events and plan a short trip. Choose your airport, compare dates and calculate your travel budget.','Найдите перелёт из Польши, посмотрите события на месте и спланируйте короткую поездку. Выберите аэропорт, сравните даты и рассчитайте бюджет путешествия.','Знайдіть переліт із Польщі, перегляньте місцеві події та сплануйте коротку подорож. Виберіть аеропорт, порівняйте дати й розрахуйте бюджет подорожі.'],
  'Loty z Polski · HopTrip':['Flights from Poland · HopTrip','Перелёты из Польши · HopTrip','Перельоти з Польщі · HopTrip'],

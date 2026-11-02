@@ -18,8 +18,10 @@ from app.models.job import JobRun, JobStatus
 from app.models.location import Airport, Destination, DestinationAlias
 from app.models.offer import PriceObservation, TravelOffer
 from app.models.statistics import RouteStatistics
+from app.models.telegram import TelegramDelivery, TelegramSubscription, TelegramUpdate
 
 __all__ = [
+    "TelegramDelivery", "TelegramSubscription", "TelegramUpdate",
     "EditorialApproval", "EditorialAudit", "EditorialItem", "EditorialRehearsal",
     "EditorialRevision", "EditorSession",
     "AlertDelivery",
