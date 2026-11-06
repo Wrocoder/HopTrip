@@ -1,0 +1,139 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b1-20261105\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "h3-17b2-probe.spec.ts",
+      "--project=desktop",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b1-20261105\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b1-20261105/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b1-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b1-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b1-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b1-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-17b2-probe.spec.ts",
+      "file": "h3-17b2-probe.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H3-17b2 production CLS attribution",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 34306,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[\n  { width: \u001b[33m390\u001b[39m, consent: \u001b[32m'unset'\u001b[39m, route: \u001b[32m'/'\u001b[39m, cls: \u001b[33m0.2927667824074074\u001b[39m },\n  { width: \u001b[33m390\u001b[39m, consent: \u001b[32m'unset'\u001b[39m, route: \u001b[32m'/'\u001b[39m, cls: \u001b[33m0.2927667824074074\u001b[39m },\n  {\n    width: \u001b[33m390\u001b[39m,\n    consent: \u001b[32m'unset'\u001b[39m,\n    route: \u001b[32m'/deals'\u001b[39m,\n    cls: \u001b[33m0.2906077353395062\u001b[39m\n  },\n  {\n    width: \u001b[33m390\u001b[39m,\n    consent: \u001b[32m'unset'\u001b[39m,\n    route: \u001b[32m'/deals'\u001b[39m,\n    cls: \u001b[33m0.2906077353395062\u001b[39m\n  },\n  { width: \u001b[33m390\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  { width: \u001b[33m390\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  { width: \u001b[33m390\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/deals'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  { width: \u001b[33m390\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/deals'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  {\n    width: \u001b[33m1440\u001b[39m,\n    consent: \u001b[32m'unset'\u001b[39m,\n    route: \u001b[32m'/'\u001b[39m,\n    cls: \u001b[33m0.12528949652777777\u001b[39m\n  },\n  {\n    width: \u001b[33m1440\u001b[39m,\n    consent: \u001b[32m'unset'\u001b[39m,\n    route: \u001b[32m'/'\u001b[39m,\n    cls: \u001b[33m0.12528949652777777\u001b[39m\n  },\n  {\n    width: \u001b[33m1440\u001b[39m,\n    consent: \u001b[32m'unset'\u001b[39m,\n    route: \u001b[32m'/deals'\u001b[39m,\n    cls: \u001b[33m0.1432403308256173\u001b[39m\n  },\n  {\n    width: \u001b[33m1440\u001b[39m,\n    consent: \u001b[32m'unset'\u001b[39m,\n    route: \u001b[32m'/deals'\u001b[39m,\n    cls: \u001b[33m0.1432403308256173\u001b[39m\n  },\n  { width: \u001b[33m1440\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  { width: \u001b[33m1440\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  { width: \u001b[33m1440\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/deals'\u001b[39m, cls: \u001b[33m0\u001b[39m },\n  { width: \u001b[33m1440\u001b[39m, consent: \u001b[32m'denied'\u001b[39m, route: \u001b[32m'/deals'\u001b[39m, cls: \u001b[33m0\u001b[39m }\n]\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:48:46.779Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "93d0534c0c15a631b7e3-1f8232de9ffb8f419b5c",
+          "file": "h3-17b2-probe.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T10:48:37.926Z",
+    "duration": 45273.536,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

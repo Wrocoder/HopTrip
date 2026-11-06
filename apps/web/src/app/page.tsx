@@ -16,6 +16,10 @@ import {searchFilters,type SearchRaw} from '../lib/search-policy';
 import {destinationImage} from '../lib/destination-imagery';
 import {DestinationCard} from './components/destination-card';
 import destinationStyles from './components/destination-card.module.css';
+import {loadHomeCollections} from '../lib/home-collections';
+import {HomeCollections} from './components/home-collections';
+import {destinationBrowseHref} from '../lib/destination-directory';
+import {directoryCopy} from '../lib/i18n/directory-copy';
 export const dynamic="force-dynamic";
 type Props={searchParams:Promise<SearchRaw>;locale?:Locale};
 export function generateMetadata({locale="pl"}:{locale?:Locale}={}):Metadata {
@@ -34,26 +38,20 @@ export default async function HomePage({searchParams,locale="pl"}:Props) {
   const [origins,places]=await Promise.allSettled([getAirports(),getDestinations()]);
   const airports:Airport[]=origins.status==="fulfilled" ? origins.value : [];
   const destinations:Destination[]=places.status==="fulfilled" ? places.value : [];
-  const pictured=destinations.filter(d=>destinationImage(d.slug)).slice(0,3);
-  const picturedIds=new Set(pictured.map(d=>d.id));
-  const destinationHref=(d:Destination)=>pageLocales(`/destinations/${d.slug}`).includes(locale)?localizedHref(`/destinations/${d.slug}`,locale):localizedHref(`/deals?destination=${encodeURIComponent(d.slug)}`,locale);
+  const pictured=destinations.filter(d=>d.is_active&&destinationImage(d.slug)).slice(0,3);
   const origin=selectedOrigin(raw.origin,stored,origins.status==="fulfilled" ? airports.map(a=>a.iata_code) : null);
   const heroFilters={...searchFilters(raw),origin};
   const filters={origin,duration_min:"2",duration_max:"4"};
   let deals:Deal[]=[], failed=false;
-  const [offers]=await Promise.allSettled([getDeals({...filters,limit:"100"})]);
+  const [offers,collections]=await Promise.all([Promise.allSettled([getDeals({...filters,limit:"100"})]).then(([result])=>result),loadHomeCollections(origin)]);
   if(offers.status==="fulfilled")deals=shortTripSelection(offers.value,origin);else failed=true;
   return <main className="page-shell home-page">
-    <HomeOrigin airports={airports} destinations={destinations} initialOrigin={origin} initialFilters={heroFilters} count={deals.length} initialFailed={failed} locale={locale}><DealGrid deals={deals} locale={locale}/></HomeOrigin>
-    <section className="home-section" aria-labelledby="home-collections">
-      <h2 id="home-collections">{t('Kolekcje na krótki wyjazd')}</h2>
-      <nav className="route-link-grid" aria-label={t("Pomysły na krótki wyjazd")}>{([['/city-break','City break na 2–4 noce'],['/tanie-loty-na-weekend','Tanie loty na weekend'],['/from/warszawa','Warszawa — oba lotniska']] as const).map(([href,label])=><Link prefetch={false} key={href} href={localizedHref(href,locale)} hrefLang={locale}>{t(label)}</Link>)}</nav>
-      <p><Link prefetch={false} href={localizedHref("/deals",locale)}>{t("Zobacz loty ze wszystkich lotnisk →")}</Link></p>
-    </section>
+    <HomeOrigin airports={airports} destinations={destinations} initialOrigin={origin} initialFilters={heroFilters} count={deals.length} initialFailed={failed} locale={locale} collections={collections} collectionPreviews={<HomeCollections collections={collections} locale={locale}/>}><DealGrid deals={deals} locale={locale}/></HomeOrigin>
     <section className="home-section destination-links" aria-labelledby="home-destinations">
       <h2 id="home-destinations">{pl.destinations}</h2>
-      {pictured.length>0&&<ul className={destinationStyles.grid}>{pictured.map(d=><DestinationCard key={d.id} slug={d.slug} label={destinationLabel(d,locale)} href={destinationHref(d)} locale={locale}/>)}</ul>}
-      <div className="route-link-grid">{destinations.filter(d=>!picturedIds.has(d.id)).map(d=><Link prefetch={false} key={d.id} href={destinationHref(d)}>{destinationLabel(d,locale)}</Link>)}</div>
+      <p>{directoryCopy[locale].home}</p>
+      {pictured.length>0&&<ul className={destinationStyles.grid}>{pictured.map(d=><DestinationCard key={d.id} slug={d.slug} label={destinationLabel(d,locale)} href={destinationBrowseHref(d,locale)} locale={locale}/>)}</ul>}
+      <p><Link prefetch={false} href={localizedHref('/destinations',locale)}>{directoryCopy[locale].all}</Link></p>
     </section>
     <section className="home-section" aria-labelledby="home-planning">
       <h2 id="home-planning">{t('Zaplanuj podróż')}</h2>

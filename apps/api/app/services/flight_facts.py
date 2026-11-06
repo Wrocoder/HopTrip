@@ -8,6 +8,7 @@ from app.schemas.deal import FlightFacts, FlightLeg
 from app.services.flight_reference import airline_name, airport_timezone
 from app.services.flight_routes import validated_segments
 from app.services.time import offset_datetime
+from app.services.trip_timeline import elapsed, trip_timeline
 
 
 def _code(value: object, pattern: str = r"[A-Z]{3}") -> str | None:
@@ -87,6 +88,8 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
                 ))
             if name == "outbound":
                 facts.outbound_legs = public
+                facts.origin_timezone = public[0].origin_timezone
+                facts.destination_timezone = public[-1].destination_timezone
                 facts.outbound_departure = public[0].departure
                 facts.outbound_arrival = public[-1].arrival
                 facts.outbound_arrival_calculated = False
@@ -99,10 +102,6 @@ def flight_facts(offer: TravelOffer) -> FlightFacts:
                 facts.return_arrival_calculated = False
                 facts.return_stops = len(public) - 1
     if offer.return_at is not None:
-        if facts.outbound_arrival and facts.return_departure:
-            interval = (
-                facts.return_departure.astimezone(UTC) - facts.outbound_arrival
-            ).total_seconds()
-            if interval >= 0:
-                facts.destination_interval_minutes = int(interval // 60)
+        facts.destination_interval_minutes = elapsed(facts.outbound_arrival, facts.return_departure)
+    facts.timeline = trip_timeline(facts)
     return facts

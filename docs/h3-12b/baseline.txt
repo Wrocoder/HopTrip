@@ -1,0 +1,42 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-12b-baseline.spec.ts --project=desktop --trace=off --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [44260]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=a9b1a52a2ccf47a4aa6015033bf705c9 method=GET status=200
+
+
+[WebServer] (node:51712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=786404903a8c47a090b921321b2327ff method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3b11d17e71c744899b87a28b290a6743 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=bebabe435cae457e85c152461a7189bc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=04bc68a9f8234d4690a2af9dc33f1d56 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=eecc7d631be84c2591726a27c1aa963d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4087bed05c28493f8ed9e046e47e10ec method=GET status=200
+
+Running 1 test using 1 worker
+
+
+(node:45976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\h3-12b-baseline.spec.ts:2:5 › pre-change saves identify plans by payload and an edit adds another snapshot without a stable ID
+[WebServer] INFO:hoptrip.requests:request_id=88ed7778477744878393be59126198c3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=24c515586274439b8065be3cc3e2cd47 method=GET status=200
+  1 passed (10.0s)

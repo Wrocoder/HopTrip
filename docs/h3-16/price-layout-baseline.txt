@@ -1,0 +1,78 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test compact-catalog.spec.ts --config h3-16-probe.config.ts --project desktop --grep catalog exposes --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [40464]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8126 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=b7d6a0e4c18f439f86f14896a2867050 method=GET status=200
+
+
+[WebServer] (node:27968) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=c8c8d6f5c7dc4f6e83c7002cd64eb620 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7b15b8bd18ba4feca66b30b43e8f0d0d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=aa61825cc7ad4f0cadd7150e77f1bfc3 method=GET status=200
+
+
+Running 1 test using 1 worker
+
+(node:20156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] [desktop] › tests\compact-catalog.spec.ts:4:5 › catalog exposes first offer and keyboard accessible filter help
+[WebServer] INFO:hoptrip.requests:request_id=259f49d1fc5949359efb40e4d8739de2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7825337eb18a4b62880fbecf1ee0bf4a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f461c8d748b74aff8baba4e14816f706 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=66e96a1b97954cd8a8abdd70af2e87cf method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ebf2d9373d874191a46e0e2d48a4941d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=271dec99133c41c19580bb7e0c7d0d35 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=92ece20621d0425ea1f0766b822c25f0 method=GET status=200
+
+  1) [desktop] › tests\compact-catalog.spec.ts:4:5 › catalog exposes first offer and keyboard accessible filter help 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 900
+    Received:   1004.140625
+
+      12 |   const price=await page.locator(".deal-price").first().boundingBox();
+      13 |   await testInfo.attach("first-price-bottom",{body:String(price!.y+price!.height),contentType:"text/plain"});
+    > 14 |   expect(price!.y+price!.height).toBeLessThan(900);
+         |                                  ^
+      15 |  }
+      16 |  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      17 |  const help=page.locator(".catalog-page .preset-rules");
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-08b-20261104\apps\web\tests\compact-catalog.spec.ts:14:34
+
+    attachment #1: first-price-bottom (text/plain) ─────────────────────────────────────────────────
+    1004.140625
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\compact-catalog-catalog-ex-ad9a8-oard-accessible-filter-help-desktop\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\compact-catalog-catalog-ex-ad9a8-oard-accessible-filter-help-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\compact-catalog-catalog-ex-ad9a8-oard-accessible-filter-help-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [desktop] › tests\compact-catalog.spec.ts:4:5 › catalog exposes first offer and keyboard accessible filter help 

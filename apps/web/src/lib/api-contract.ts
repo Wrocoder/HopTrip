@@ -1,6 +1,7 @@
 import type {Airport,Deal,DealResults,Destination} from './api';
 import type {EventFlightFit} from './event-flight-fit';
 import {validCalendarDate} from './calendar-date.ts';
+import {isAirportContext,type AirportContext} from './airport-context.ts';
 
 type Check=(value:unknown)=>boolean;
 const text:Check=v=>typeof v==='string';
@@ -24,10 +25,16 @@ const basis=nullable(oneOf('SOURCE','FIRST_SEEN'));
 const component:Check=v=>shape(v,{id:integer,component_type:text,price_pln:nullable(decimal),available:bool,reason:text,redirect_path:nullable(text)},{partner_name:nullable(text)});
 const leg:Check=v=>shape(v,{origin_airport:text,destination_airport:text,departure:timestamp,arrival:timestamp},
  {origin_timezone:nullable(text),destination_timezone:nullable(text),airline_code:nullable(text),airline_name:nullable(text),flight_number:nullable(text)});
+const timeline:Check=v=>shape(v,{
+ version:oneOf('trip-timeline-v1'),local_outbound_departure_date:nullable(calendar),local_destination_arrival_date:nullable(calendar),
+ local_return_departure_date:nullable(calendar),local_return_arrival_date:nullable(calendar),nights_at_destination:nullable(integer),
+ nights_estimated:bool,return_arrival_estimated:bool,return_arrival_day_offset:nullable(v=>number(v)&&Number.isSafeInteger(v)),
+ outbound_elapsed_minutes:nullable(integer),return_elapsed_minutes:nullable(integer),journey_elapsed_minutes:nullable(integer),
+});
 const facts:Check=v=>shape(v,{
  origin_airport:nullable(text),destination_airport:nullable(text),destination_code:nullable(text),airline_code:nullable(text),outbound_stops:nullable(integer),return_stops:nullable(integer),
  outbound_departure:nullable(timestamp),outbound_arrival:nullable(timestamp),return_departure:nullable(timestamp),return_arrival:nullable(timestamp),destination_interval_minutes:nullable(integer),
-},{outbound_legs:array(leg),return_legs:array(leg),origin_timezone:nullable(text),destination_timezone:nullable(text),airline_name:nullable(text),outbound_arrival_calculated:bool,return_arrival_calculated:bool,
+},{timeline,outbound_legs:array(leg),return_legs:array(leg),origin_timezone:nullable(text),destination_timezone:nullable(text),airline_name:nullable(text),outbound_arrival_calculated:bool,return_arrival_calculated:bool,
  return_origin_airport:nullable(text),return_destination_airport:nullable(text),return_origin_timezone:nullable(text),return_destination_timezone:nullable(text)});
 const quality:Check=v=>shape(v,{version:oneOf('flight-quality-v1'),status:oneOf('COMPLETE','PARTIAL','CRITICAL_INCOMPLETE'),reasons:array(text),recommendation_eligible:bool});
 const freshness:Check=v=>shape(v,{observed_at:nullable(timestamp),observation_basis:basis,fetched_at:nullable(timestamp),availability_checked_at:nullable(timestamp),hidden_after:nullable(timestamp),max_age_hours:integer});
@@ -35,12 +42,34 @@ const explanation:Check=v=>shape(v,{
  status:oneOf('CURRENT','PROVISIONAL','LEGACY','UNAVAILABLE'),parts:array(x=>shape(x,{key:text,points:decimal,max_points:integer})),total_before_rounding:nullable(decimal),sample_count:nullable(integer),
  current_price_pln:nullable(decimal),median_price_pln:nullable(decimal),price_difference_percent:nullable(decimal),observed_at:nullable(timestamp),calculated_at:nullable(timestamp),observation_basis:basis,
 });
+const weekend:Check=v=>shape(v,{
+ version:oneOf('weekend-v1'),work_hours:x=>shape(x,{start:x=>typeof x==='string'&&clock(x),end:x=>typeof x==='string'&&clock(x)}),
+ work_timezone:nullable(text),actual_return_local_date:nullable(calendar),airport_arrival_day_offset:nullable(x=>number(x)&&Number.isSafeInteger(x)),
+ confidence:oneOf('KNOWN','ESTIMATED','UNKNOWN'),calendar:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),flexible:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),no_leave:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),
+ might_require_leave:nullable(bool),airport_times_only:oneOf(true),reasons:array(text),
+});
+const destinationTime:Check=v=>{
+ if(!shape(v,{version:oneOf('destination-time-v1'),scope:oneOf('AIRPORT_ARRIVAL_TO_RETURN_DEPARTURE'),status:oneOf('KNOWN','ESTIMATED','UNKNOWN'),
+  airport_interval_minutes:nullable(integer),arrival_airport:nullable(x=>typeof x==='string'&&/^[A-Z]{3}$/.test(x)),departure_airport:nullable(x=>typeof x==='string'&&/^[A-Z]{3}$/.test(x)),
+  airport_change:nullable(bool),reason:nullable(oneOf('UNVERIFIED_ITINERARY','MISSING_AIRPORTS','MISSING_OR_INVALID_TIMES','UNKNOWN_TIMEZONE')),
+  usable_city_minutes:oneOf(null),city_time_status:oneOf('UNKNOWN'),buffers_applied:oneOf(false),sort_eligible:bool}))return false;
+ const known=v.status!=='UNKNOWN';
+ return v.sort_eligible===(v.status==='KNOWN')&&(known?
+  v.airport_interval_minutes!==null&&v.arrival_airport!==null&&v.departure_airport!==null&&v.reason===null&&v.airport_change===(v.arrival_airport!==v.departure_airport):
+  v.airport_interval_minutes===null&&v.arrival_airport===null&&v.departure_airport===null&&v.airport_change===null);
+};
 export function isDeal(v:unknown):v is Deal{
- return shape(v,{
+ const valid=shape(v,{
   id:integer,slug:text,trip_start:calendar,trip_end:calendar,origin_airport_id:integer,destination_id:integer,origin_code:text,origin_city:text,destination_city:text,destination_slug:text,
   trip_type:oneOf('ONE_WAY','ROUND_TRIP'),price_basis:text,components:array(component),flight_price_pln:nullable(decimal),hotel_price_pln:nullable(decimal),total_estimated_pln:decimal,price_per_person_pln:decimal,
   historical_baseline_pln:nullable(decimal),discount_percent:nullable(decimal),deal_score:number,confidence:decimal,explanation_codes:array(text),score_version:text,score_components:object,last_verified_at:timestamp,expires_at:nullable(timestamp),
- },{destination_country_code:text,events_supported:bool,flight_quality:quality,price_freshness:freshness,flight_facts:facts,score_explanation:explanation});
+ },{airport_context:isAirportContext,destination_time:destinationTime,weekend_assessment:weekend,destination_country_code:text,events_supported:bool,flight_quality:quality,price_freshness:freshness,flight_facts:facts,score_explanation:explanation});
+ if(!valid)return false;
+ const c=v.airport_context as AirportContext|undefined;
+ if(!c?.itinerary_verified)return true;
+ const f=v.flight_facts as Deal['flight_facts'];
+ return [c.arrival,c.return_departure].every(x=>!x||x.destination_slug===v.destination_slug)&&
+  (!f||c.arrival.airport===f.destination_airport&&(!c.return_departure||c.return_departure.airport===f.return_origin_airport));
 }
 export const isDeals=(v:unknown):v is Deal[]=>array(isDeal)(v);
 export function isDealResults(v:unknown):v is DealResults{
@@ -53,7 +82,7 @@ export const isAlertStatus=(v:unknown):v is {enabled:boolean;delivery_enabled?:b
 
 export type TicketOption={id:string;name:string;ticket_kind:'STANDARD'|'PREMIUM';url:string;price_from:string|null;currency:string|null;status?:string};
 export type EventItem={id:string;name:string;category:'MUSIC'|'SPORTS'|'CULTURE'|'OTHER';venue:string;city:string;start_date:string;end_date:string|null;local_time:string|null;timezone:string;status:string;url:string;price_from:string|null;currency:string|null;ticket_options?:TicketOption[]};
-export type EventResults={status:string;events:EventItem[];checked_at?:string|null;partial?:boolean;flight_fit?:Record<string,EventFlightFit>;total?:number;page?:number;page_size?:number;has_more?:boolean};
+export type EventResults={status:string;events:EventItem[];checked_at?:string|null;partial?:boolean;fit_mode?:'all'|'possible';flight_fit?:Record<string,EventFlightFit>;total?:number;page?:number;page_size?:number;has_more?:boolean};
 const currency:Check=v=>v===null||(typeof v==='string'&&/^[A-Z]{3}$/.test(v));
 const clock:Check=v=>v===null||(typeof v==='string'&&/^\d{2}:\d{2}(?::\d{2}(?:\.\d{1,6})?)?$/.test(v)&&Number(v.slice(0,2))<24&&Number(v.slice(3,5))<60&&(!v.slice(6)||Number(v.slice(6))<60));
 const ticket:Check=v=>shape(v,{id:text,name:text,ticket_kind:oneOf('STANDARD','PREMIUM'),url:text,price_from:nullable(decimal),currency},{status:text});
@@ -62,7 +91,8 @@ const fit:Check=v=>shape(v,{status:oneOf('CONFLICT','TIGHT','CHECK','NO_KNOWN_CO
  {buffer_minutes:integer,arrival_gap_minutes:nullable(number),return_gap_minutes:nullable(number),return_start_gap_minutes:nullable(number),duration_minutes:nullable(integer),arrival_airport:nullable(text),return_airport:nullable(text),arrival_estimated:bool});
 export function isEventResults(v:unknown):v is EventResults{
  if(!shape(v,{status:oneOf('READY','EMPTY','UNAVAILABLE','NEEDS_DATES','DISABLED','UNSUPPORTED'),events:array(event)},
-  {checked_at:nullable(text),partial:bool,flight_fit:x=>object(x)&&Object.values(x).every(fit),total:integer,page:x=>integer(x)&&Number(x)>=1&&Number(x)<=84,page_size:x=>integer(x)&&Number(x)>=1,has_more:bool}))return false;
+  {checked_at:nullable(text),partial:bool,fit_mode:oneOf('all','possible'),flight_fit:x=>object(x)&&Object.values(x).every(fit),total:integer,page:x=>integer(x)&&Number(x)>=1&&Number(x)<=84,page_size:x=>integer(x)&&Number(x)>=1,has_more:bool}))return false;
+ if(v.fit_mode==='possible'&&(v.events as EventItem[]).some(item=>{const assessment=(v.flight_fit as EventResults['flight_fit'])?.[item.id];return !assessment||assessment.status==='CONFLICT';}))return false;
  const count=(v.events as unknown[]).length;
  return (v.page_size===undefined||count<=Number(v.page_size))&&(v.total===undefined||count===0||(Number(v.page??1)-1)*Number(v.page_size??12)+count<=Number(v.total));
 }

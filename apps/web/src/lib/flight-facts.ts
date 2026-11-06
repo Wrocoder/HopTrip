@@ -88,6 +88,10 @@ export function flightDayShift(departure:string|null|undefined,arrival:string|nu
   const start=localDay(departure,departureZone),end=localDay(arrival,arrivalZone);
   if(start===null || end===null || start===end)return null;
   const days=end-start;
+  return dayShiftLabel(days,locale);
+}
+export function dayShiftLabel(days:number,locale:Locale='pl'):string|null {
+  if(!Number.isSafeInteger(days)||days===0)return null;
   const category=new Intl.PluralRules(intlLocales[locale]).select(Math.abs(days));
   const units={pl:{one:"dzień",few:"dni",other:"dni"},en:{one:"day",few:"days",other:"days"},ru:{one:"день",few:"дня",other:"дней"},uk:{one:"день",few:"дні",other:"днів"}};
   return `${days>0 ? "+" : ""}${days} ${units[locale][category==="one" ? "one" : category==="few" ? "few" : "other"]}`;

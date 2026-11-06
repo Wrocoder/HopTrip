@@ -1,0 +1,54 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test ssr-cache.spec.ts --grep previous release --project=desktop --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [30884]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=cfdb98b536294fe881925d0c8fb999e2 method=GET status=200
+
+
+[WebServer] (node:29620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=029b301a487a4483a74ed0babf8d9932 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=725f0dd5d4504f1aa0df011e8fca1a91 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5d46d5052033488d9c4c94a723547433 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=40aea0ae42a2499abf21b5292157b9aa method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a822c8b6bf6a4c6fb44b9d17e28bb5e5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8e2a36b59e964e68aba13a6606a7141c method=GET status=200
+
+Running 1 test using 1 worker
+
+(node:5624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\ssr-cache.spec.ts:59:6 › previous release validators cannot return old HTML for the new build
+
+[WebServer] INFO:hoptrip.requests:request_id=f8f62fd0ac2c49b6a3cbc996443e1e2e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b9ea26a0ade74c8b9fdf9de9814a4353 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=76b2be8d65c74fd996f43ba562556874 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=15d27fba1a7042bcad648c4a7e3afc8d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e53ab481a76a463e99b494dff60bc7a6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d6a1e77536384381965aae8ad7709fa5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e14e96e027b24c2089238044e3a1197b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2afc14c7c2294bf0bc5d633a92ff4305 method=GET status=200
+
+  1 passed (6.3s)

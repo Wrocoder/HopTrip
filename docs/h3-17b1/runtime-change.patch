@@ -1,0 +1,29 @@
+diff --git a/.cache/aud05-h3-15-20261105/apps/web/src/app/globals.css b/apps/web/src/app/globals.css
+index 269aa50..f18b134 100644
+--- a/.cache/aud05-h3-15-20261105/apps/web/src/app/globals.css
++++ b/apps/web/src/app/globals.css
+@@ -642,8 +642,23 @@ fieldset.filter-primary { min-width: 0; margin: 0; padding: 0; border: 0; }
+   body:has(.catalog-page) .site-header .language-switcher { width: auto; }
+   .catalog-page .page-heading h1 { font-size: 2.25rem; margin-block: 2px 4px; }
+   .catalog-page .filter-panel { padding: 8px; }
+-  .catalog-page .filters { grid-template-columns: minmax(140px,.8fr) minmax(200px,1.2fr) minmax(0,3fr) auto; gap: 2px 12px; }
++  .catalog-page .filters { grid-template-columns: minmax(220px,1fr) minmax(360px,1.4fr) minmax(0,2fr) auto; gap: 2px 12px; }
++  .catalog-page .filter-primary { grid-template-columns: repeat(3,minmax(0,1fr)) auto; }
++  .catalog-page .weekend-options { display: grid; grid-template-columns: minmax(260px,1fr) minmax(0,2fr); gap: 8px 20px; align-items: start; margin: 0; padding: 0; border: 0; }
++  /* Keep the group name for assistive technology; the select has the same visible label. */
++  .catalog-page .weekend-options > legend { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
++  .catalog-page .weekend-options > #weekend-rules { margin: 0; align-self: center; }
++  .catalog-page .weekend-options > .filter-secondary,
++  .catalog-page .weekend-options > .field-hint:not(#weekend-rules) { grid-column: 1 / -1; }
++  .catalog-page .weekend-options > .filter-secondary { grid-template-columns: repeat(2,minmax(0,1fr)); }
++  .catalog-page .sort-control { gap: 4px; }
++  .catalog-page .sort-control .field-hint { margin-top: 0; }
+   .catalog-page .trip-presets, .catalog-page .preset-rules { grid-column: auto; }
+   .catalog-page .preset-rules[open] { grid-column: 1 / -1; }
+   .catalog-page .active-filters { margin-top: 6px; padding-top: 6px; }
+ }
++
++@media (min-width: 1024px) {
++  body:has(.offer-detail) .site-header { padding-block: 12px; }
++  main.page-shell:has(.offer-detail) { padding-top: 24px; }
++}

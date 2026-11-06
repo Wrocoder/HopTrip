@@ -1,0 +1,171 @@
+diff --git "a/.cache\\h3-18b6-before\\apps\\api\\app\\schemas\\usage.py" b/apps/api/app/schemas/usage.py
+index fe1a755..de7566d 100644
+--- "a/.cache\\h3-18b6-before\\apps\\api\\app\\schemas\\usage.py"
++++ b/apps/api/app/schemas/usage.py
+@@ -41,6 +41,24 @@ class EngagementReport(BaseModel):
+     metrics: list[UsageMetric]
+ 
+ 
++OriginKey = Literal[
++    "WRO", "WAW", "WMI", "KRK", "GDN", "KTW", "POZ", "RZE", "SZZ", "LUZ",
++    "BZG", "LCJ", "SZY", "RDO", "IEG", "WAW,WMI", "unknown",
++]
++
++
++class OriginCohort(BaseModel):
++    origin: OriginKey
++    sessions: int = Field(ge=0)
++    percent: Decimal | None = Field(default=None, ge=0, le=100)
++    metrics: list[UsageMetric]
++
++
++class OriginCohortReport(BaseModel):
++    version: Literal["first-search-origin-cohorts-v1"] = "first-search-origin-cohorts-v1"
++    rows: list[OriginCohort]
++
++
+ class UsageReport(BaseModel):
+     start: datetime
+     end: datetime
+@@ -53,3 +71,4 @@ class UsageReport(BaseModel):
+     page_cohorts: list[PageCohort]
+     ordered_funnel: OrderedFunnel | None = None
+     engagement: EngagementReport | None = None
++    origin_cohorts: OriginCohortReport | None = None
+diff --git "a/.cache\\h3-18b6-before\\apps\\api\\app\\services\\usage_metrics.py" b/apps/api/app/services/usage_metrics.py
+index 52a1551..0e4e4a1 100644
+--- "a/.cache\\h3-18b6-before\\apps\\api\\app\\services\\usage_metrics.py"
++++ b/apps/api/app/services/usage_metrics.py
+@@ -3,7 +3,7 @@
+ from collections import Counter, defaultdict
+ from datetime import UTC, datetime, timedelta
+ from decimal import ROUND_HALF_UP, Decimal
+-from typing import get_args
++from typing import cast, get_args
+ 
+ from app.models.analytics import AnalyticsEvent
+ from app.schemas.analytics import EventName
+@@ -12,6 +12,9 @@ from app.schemas.usage import (
+     FunnelStage,
+     FunnelStep,
+     OrderedFunnel,
++    OriginCohort,
++    OriginCohortReport,
++    OriginKey,
+     PageCohort,
+     UsageMetric,
+     UsageReport,
+@@ -25,6 +28,12 @@ PAGE_TYPES = frozenset({
+     "deal", "budget", "saved_trip", "saved", "alerts", "guide",
+ })
+ PRODUCT_EVENTS = frozenset(get_args(EventName))
++ORIGIN_KEYS = frozenset(get_args(OriginKey))
++ENGAGEMENT_EVENTS = (
++    ("detail_disclosure", "DEAL_DETAILS_OPEN"),
++    ("budget_completion", "BUDGET_CALCULATED"),
++    ("trip_update", "TRIP_UPDATE"),
++)
+ 
+ 
+ class UsageLimitExceeded(ValueError):
+@@ -98,6 +107,34 @@ def ordered_funnel(events: list[AnalyticsEvent]) -> OrderedFunnel:
+     ) for index, key in enumerate(keys)])
+ 
+ 
++def origin_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -> OriginCohortReport:
++    """Partition by first received search context, not first valid origin/attribution.
++
++    Events have already been filtered and sorted by (server created_at, DB id).
++    All session actions in the window contribute, including before this context.
++    """
++    first: dict[str, OriginKey] = {}
++    for row in events:
++        if row.event_name not in {"SEARCH", "SEARCH_RESULT"} or row.anonymous_session_id in first:
++            continue
++        metadata = row.metadata_json if isinstance(row.metadata_json, dict) else {}
++        search = metadata.get("search")
++        filters = search.get("filters") if isinstance(search, dict) else None
++        value = filters.get("origin") if isinstance(filters, dict) else None
++        first[row.anonymous_session_id] = (
++            cast(OriginKey, value) if isinstance(value, str) and value in ORIGIN_KEYS else "unknown"
++        )
++    groups: dict[OriginKey, set[str]] = defaultdict(set)
++    for row in events:
++        groups[first.get(row.anonymous_session_id, "unknown")].add(row.anonymous_session_id)
++    population = sum(len(members) for members in groups.values())
++    return OriginCohortReport(rows=[OriginCohort(
++        origin=origin, sessions=len(members), percent=percent(len(members), population),
++        metrics=[metric(key, len(members & by_name[event]), len(members))
++                 for key, event in ENGAGEMENT_EVENTS],
++    ) for origin, members in sorted(groups.items())])
++
++
+ def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
+     """Window is [start,end); stable DB order disambiguates equal timestamps."""
+     start, end = usage_window(start, end)
+@@ -171,8 +208,7 @@ def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
+         unlinked_detail_views=unlinked, metrics=metrics, page_cohorts=pages,
+         ordered_funnel=ordered_funnel(events),
+         engagement=EngagementReport(metrics=[
+-            metric("detail_disclosure", len(by_name["DEAL_DETAILS_OPEN"]), n),
+-            metric("budget_completion", len(by_name["BUDGET_CALCULATED"]), n),
+-            metric("trip_update", len(by_name["TRIP_UPDATE"]), n),
++            metric(key, len(by_name[event]), n) for key, event in ENGAGEMENT_EVENTS
+         ]),
++        origin_cohorts=origin_cohorts(events, by_name),
+     )
+diff --git "a/.cache\\h3-18b6-before\\apps\\api\\app\\services\\usage_dashboard.py" b/apps/api/app/services/usage_dashboard.py
+index 20a6650..c28dd03 100644
+--- "a/.cache\\h3-18b6-before\\apps\\api\\app\\services\\usage_dashboard.py"
++++ b/apps/api/app/services/usage_dashboard.py
+@@ -24,6 +24,20 @@ FUNNEL = {
+     "partner_click": ("Kliknięcie tej samej oferty", "Same-offer partner click", "Клик по тому же предложению", "Клік за тією самою пропозицією"),
+ }
+ UI = {
++    "origin_cohorts": ("Pierwszy kontekst lotniska wylotu", "First search origin context", "Первый контекст аэропорта вылета", "Перший контекст аеропорту вильоту"),
++    "origin_note": (
++        "Kohorta to origin z pierwszego SEARCH lub SEARCH_RESULT odebranego w tym okresie (czas serwera, potem ID zapisu). Brak, błędny lub nieobsługiwany origin pozostaje nieznany, nawet po późniejszym wyszukiwaniu. Używamy 15 kodów z rejestru polskich lotnisk i osobnej grupy WAW/WMI; grupy nie rozdzielamy. Każda obserwowana sesja należy do jednej kohorty, także bez wyszukiwania lub PAGE_VIEW. Udział kohorty: jej sesje / wszystkie sesje. Komórki działań: sesje ze zdarzeniem / sesje kohorty oraz procent. Uwzględniają całe okno, także działania sprzed wyszukiwania; to podział opisowy, nie atrybucja ani konwersja między etapami.",
++        "The cohort uses origin from the first SEARCH or SEARCH_RESULT received in this period (server time, then record ID). Missing, invalid or unsupported origin stays unknown even after a later search. We use 15 codes from the Polish airport registry and the separate WAW/WMI group, without splitting it. Every observed session belongs to one cohort, including no-search or no-PAGE_VIEW sessions. Cohort share: its sessions / all sessions. Action cells: sessions with the event / cohort sessions, plus percentage. The whole window counts, including actions before the search; this is a descriptive split, not attribution or step conversion.",
++        "Когорта берётся из origin первого SEARCH или SEARCH_RESULT, полученного за период (время сервера, затем ID записи). Отсутствующий, неверный или неподдерживаемый origin остаётся неизвестным даже после позднего поиска. Используются 15 кодов из реестра польских аэропортов и отдельная группа WAW/WMI без разделения. Каждая наблюдаемая сессия входит в одну когорту, включая сессии без поиска или PAGE_VIEW. Доля когорты: её сессии / все сессии. Ячейки действий: сессии с событием / сессии когорты и процент. Учитывается всё окно, включая действия до поиска; это описательный разрез, не атрибуция и не межэтапная конверсия.",
++        "Когорта береться з origin першого SEARCH або SEARCH_RESULT, отриманого за період (час сервера, потім ID запису). Відсутній, хибний або непідтримуваний origin лишається невідомим навіть після пізнішого пошуку. Використовуються 15 кодів з реєстру польських аеропортів та окрема група WAW/WMI без поділу. Кожна спостережувана сесія входить до однієї когорти, зокрема без пошуку або PAGE_VIEW. Частка когорти: її сесії / усі сесії. Комірки дій: сесії з подією / сесії когорти та відсоток. Враховується все вікно, зокрема дії до пошуку; це описовий розріз, не атрибуція й не міжетапна конверсія.",
++    ),
++    "origin": ("Lotnisko lub grupa", "Airport or group", "Аэропорт или группа", "Аеропорт або група"),
++    "origin_unknown": ("Nieznany lub niezaobserwowany", "Unknown or not observed", "Неизвестен или не наблюдался", "Невідомий або не спостерігався"),
++    "origin_group": ("WAW/WMI — grupa", "WAW/WMI — group", "WAW/WMI — группа", "WAW/WMI — група"),
++    "origin_share": ("Udział sesji kohorty", "Share of all sessions", "Доля сессий когорты", "Частка сесій когорти"),
++    "origin_details": ("Szczegóły w kohorcie", "Details in cohort", "Сведения в когорте", "Відомості в когорті"),
++    "origin_budget": ("Pełny budżet w kohorcie", "Complete budget in cohort", "Полный бюджет в когорте", "Повний бюджет у когорті"),
++    "origin_update": ("Aktualizacje w kohorcie", "Updates in cohort", "Обновление в когорте", "Оновлення в когорті"),
+     "engagement": ("Szczegóły, budżet i aktualizacje planu", "Details, budget and plan updates", "Сведения, бюджет и обновления плана", "Відомості, бюджет і оновлення плану"),
+     "engagement_note": (
+         "Mianownik: wszystkie zaobserwowane sesje produktu w tym okresie. Każda sesja liczy się raz na wskaźnik, także bez PAGE_VIEW. To udziały sesji z odebranymi działaniami, nie konwersja między etapami ani odsetek wszystkich osób. Przywrócony budżet lub aktualizacja mogą nie mieć wcześniejszego rozpoczęcia lub zapisu w tym oknie. Zero oznacza brak odebranego działania, nie dowód braku użycia. Porównuj okresy z takim samym zakresem zbierania zdarzeń.",
+@@ -127,6 +141,21 @@ def render_usage(report: UsageReport, locale: DashboardLocale = "pl") -> str:
+     if report.engagement is not None:
+         engagement = f'''<section data-engagement="{escape(report.engagement.version)}"><h2>{t("engagement")}</h2>
+ <p class="notice">{t("engagement_note")}</p><ul class="metrics">{metric_cards(report.engagement.metrics, "h3")}</ul></section>'''
++    origins = ""
++    if report.origin_cohorts is not None:
++        origin_rows = []
++        for row in report.origin_cohorts.rows:
++            label = (t("origin_unknown") if row.origin == "unknown" else t("origin_group")
++                     if row.origin == "WAW,WMI" else escape(row.origin))
++            cells = "".join(f'<td>{item.numerator} / {item.denominator}<br>{rate(item.percent)}</td>'
++                            for item in row.metrics)
++            origin_rows.append(f'<tr><th scope="row">{label}</th><td>{row.sessions}</td>'
++                               f'<td>{rate(row.percent)}</td>{cells}</tr>')
++        origin_table = (f'''<div class="table-scroll" role="region" aria-label="{t("origin_cohorts")}" tabindex="0">
++<table><caption>{t("origin_cohorts")}</caption><thead><tr><th scope="col">{t("origin")}</th><th scope="col">{t("sessions")}</th><th scope="col">{t("origin_share")}</th><th scope="col">{t("origin_details")}</th><th scope="col">{t("origin_budget")}</th><th scope="col">{t("origin_update")}</th></tr></thead><tbody>{"".join(origin_rows)}</tbody></table></div>'''
++                        if origin_rows else f'<p class="notice">{t("no_data")}</p>')
++        origins = f'''<section data-origin-cohorts="{escape(report.origin_cohorts.version)}"><h2>{t("origin_cohorts")}</h2>
++<p class="notice">{t("origin_note")}</p>{origin_table}</section>'''
+     rows = "".join(f'<tr><th scope="row">{escape(PAGES[row.page_type][index])}</th>'
+                    f'<td>{row.sessions}</td><td>{row.partner_sessions if row.partner_sessions is not None else "—"}</td>'
+                    f'<td>{rate(row.percent)}</td></tr>' for row in report.page_cohorts)
+@@ -162,6 +191,7 @@ caption{{text-align:left;font-weight:700;padding:.5rem 0}}dt{{font-weight:600}}d
+ <p class="notice">{t("coverage")}</p>{empty}<ul class="metrics">{cards}</ul>
+ {engagement}
+ {funnel}
++{origins}
+ <h2>{t("entry")}</h2><p>{t("proxy")}</p>{cohorts}
+ <h2>{t("quality")}</h2><dl><dt>{t("excluded")}</dt><dd>{report.excluded_events}</dd><dt>{t("invalid")}</dt><dd>{report.invalid_results}</dd><dt>{t("unlinked")}</dt><dd>{report.unlinked_detail_views}</dd></dl>
+ <p>{t("limits")}</p></main></body></html>'''

@@ -4,11 +4,14 @@ import {tripText} from '../src/lib/i18n/trip-copy';
 import {budgetText} from '../src/lib/i18n/budget-copy';
 import {savedTripCopy} from '../src/lib/i18n/saved-trip-copy';
 import {encodeTrip,savedTripsKey} from '../src/lib/shared-trip';
+import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
+import {savedPlansKey} from '../src/lib/saved-plans';
 import {emptyBudget} from '../src/lib/trip-budget';
 
 test.setTimeout(90000);
 const snapshot=(slug:string,start='2030-05-01')=>encodeTrip({version:1,offer:{slug,origin:'Warsaw',destination:'Barcelona',start,end:start,price:'100',observedAt:''},
  draft:{version:1,input:{...emptyBudget,flight:'100',hotel_basis:'stay',hotel_total:'900,01',taxes:'12,34',buffer:'100'},start:'2030-05-01',end:'2030-05-03',context:'',review:true,adultsOnly:true}})!;
+const active=(tokens:string[])=>JSON.stringify({version:2,revision:1,plans:tokens.map((token,i)=>({id:'00000000-0000-4000-8000-'+String(i+1).padStart(12,'0'),revision:1,token})),legacyBackup:null,legacySource:null});
 const cards=(page:import('@playwright/test').Page)=>page.locator('main > ul > li');
 
 test.beforeEach(async({page})=>{
@@ -34,16 +37,16 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`saved snapshot feedback
  const save=actions.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true});
  const share=actions.getByRole('button',{name:tripText(locale,'Udostępnij'),exact:true});
  await save.click();await expect(page.getByTestId('saved-plan-state')).toHaveText(copy.saved);
- await save.click();await expect(actions).toContainText(copy.already);
- expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).length,savedTripsKey)).toBe(1);
+ await expect(actions.getByRole('button',{name:planEditorCopy[locale].update,exact:true})).toBeDisabled();
+ expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).plans.length,savedPlansKey)).toBe(1);
  await share.click();const first=await page.locator('#trip-share-link').inputValue();
  await expect(page.getByTestId('share-version')).toHaveText(copy.linkCurrent);
  await page.locator('#budget-food').fill('10');
- await expect(page.getByTestId('saved-plan-state')).toHaveText(copy.unsaved);
+ await expect(page.getByTestId('saved-plan-state')).toHaveText(planEditorCopy[locale].dirty);
  await expect(page.getByTestId('share-version')).toHaveText(copy.linkOld);
  await expect(page.locator('#trip-share-link')).toHaveValue(first);
  await share.click();const second=await page.locator('#trip-share-link').inputValue();expect(second).not.toBe(first);
- await save.click();await expect(page.getByTestId('saved-plan-state')).toHaveText(copy.saved);
+ await actions.getByRole('button',{name:planEditorCopy[locale].duplicate,exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(copy.saved);
  await actions.getByRole('link',{name:tripText(locale,'Zapisane wyjazdy'),exact:true}).click();
  await expect(cards(page)).toHaveCount(2);await expect(page.locator('main')).toContainText(copy.localOnly);
  await expect(cards(page).first()).toContainText(/1\D?272[,.]35/);
@@ -67,7 +70,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`saved snapshot feedback
  await page.goto(`${prefix}/saved`);await expect(cards(page).first()).toContainText(/1\D?272[,.]35/);
  await cards(page).first().getByRole('link').click();
  await expect(page.locator('#budget-food')).toHaveValue('20');
- await expect(page.getByTestId('saved-plan-state')).toHaveText(copy.unsaved);
+ await expect(page.getByTestId('saved-plan-state')).toHaveText(planEditorCopy[locale].conflict);
  expect(errors).toEqual([]);
 });
 
@@ -99,32 +102,34 @@ test('corrupt storage is explained, preserved and never presented as an empty li
  await page.goto('/deals/browser-deal');
  await expect(page.locator('#trip-save').getByRole('button',{name:'Zapisz wyjazd',exact:true})).toBeDisabled();
  await page.locator('#trip-save').getByRole('button',{name:'Udostępnij',exact:true}).click();
- await expect(page.locator('#trip-share-link')).toHaveValue(/\/trip\?plan=/);
+ await expect(page.locator('#trip-share-link')).toHaveValue(/\/trip#plan=/);
  expect(await page.evaluate(key=>localStorage.getItem(key),savedTripsKey)).toBe(JSON.stringify(['bad',token]));
 });
 
 test('capacity never evicts a plan and failed undo leaves the latest collection intact',async({page})=>{
- const tokens=Array.from({length:20},(_,i)=>snapshot(`missing-${i}`)),raw=JSON.stringify(tokens);
- await page.addInitScript(({key,raw})=>{if(localStorage.getItem(key)===null)localStorage.setItem(key,raw);},{key:savedTripsKey,raw});
+ const tokens=Array.from({length:20},(_,i)=>snapshot(`missing-${i}`)),raw=active(tokens);
+ await page.addInitScript(({key,raw})=>{if(localStorage.getItem(key)===null)localStorage.setItem(key,raw);},{key:savedPlansKey,raw});
  await page.goto('/deals/browser-deal');await page.locator('#trip-save').getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
  await expect(page.locator('#trip-save')).toContainText('Masz już 20 zapisanych planów');
- expect(await page.evaluate(key=>localStorage.getItem(key),savedTripsKey)).toBe(raw);
+ expect(await page.evaluate(key=>localStorage.getItem(key),savedPlansKey)).toBe(raw);
  await page.goto('/saved');await expect(cards(page)).toHaveCount(20);await cards(page).first().getByRole('button').click();
  await expect(cards(page)).toHaveCount(19);
- const updated=JSON.stringify([snapshot('replacement'),...tokens.slice(1)]);
- await page.evaluate(({key,raw})=>{localStorage.setItem(key,raw);window.dispatchEvent(new Event('focus'));},{key:savedTripsKey,raw:updated});
+ const updatedStore=JSON.parse(raw);updatedStore.revision=3;
+ updatedStore.plans=[{id:'00000000-0000-4000-8000-000000000021',revision:1,token:snapshot('replacement')},...updatedStore.plans.slice(1)];
+ const updated=JSON.stringify(updatedStore);
+ await page.evaluate(({key,raw})=>{localStorage.setItem(key,raw);window.dispatchEvent(new Event('focus'));},{key:savedPlansKey,raw:updated});
  await expect(cards(page)).toHaveCount(20);await page.getByRole('button',{name:savedTripCopy.pl.undo,exact:true}).click();
  await expect(page.getByRole('status')).toHaveText(savedTripCopy.pl.undoError);
- expect(await page.evaluate(key=>localStorage.getItem(key),savedTripsKey)).toBe(updated);
+ expect(await page.evaluate(key=>localStorage.getItem(key),savedPlansKey)).toBe(updated);
 });
 
 test('failed removal keeps the list; a later successful removal clears its error and can be undone',async({page})=>{
- const raw=JSON.stringify([snapshot('missing-a'),snapshot('missing-b')]);
+ const raw=active([snapshot('missing-a'),snapshot('missing-b')]);
  await page.addInitScript(({key,raw})=>{
   const original=Storage.prototype.setItem;original.call(localStorage,key,raw);
   const flags=window as typeof window&{failSavedWrites:boolean};flags.failSavedWrites=true;
   Storage.prototype.setItem=function(name,value){if(name===key&&flags.failSavedWrites)throw new DOMException('Synthetic quota','QuotaExceededError');return original.call(this,name,value);};
- },{key:savedTripsKey,raw});
+ },{key:savedPlansKey,raw});
  await page.goto('/saved');await expect(cards(page)).toHaveCount(2);await cards(page).first().getByRole('button').click();
  await expect(page.getByRole('status')).toContainText('Nie udało się usunąć planu');await expect(cards(page)).toHaveCount(2);
  await page.evaluate(()=>{(window as typeof window&{failSavedWrites:boolean}).failSavedWrites=false;});

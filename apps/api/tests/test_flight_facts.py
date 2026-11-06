@@ -98,6 +98,8 @@ def test_public_contract_and_non_flight_component(api_client, isolated_db):
     assert body["trip_type"] == "ROUND_TRIP"
     assert body["flight_facts"]["origin_airport"] is None
     assert body["flight_facts"]["origin_timezone"] is None
+    assert body["flight_facts"]["timeline"]["version"] == "trip-timeline-v1"
+    assert body["flight_facts"]["timeline"]["local_return_arrival_date"] is None
     assert body["flight_facts"]["return_origin_airport"] is None
     assert body["flight_facts"]["return_destination_airport"] is None
     assert body["flight_facts"]["destination_airport"] == "BGY"

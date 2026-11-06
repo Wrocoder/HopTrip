@@ -1,0 +1,498 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test weekend.spec.ts --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [56828]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=c23a4b34b72a4150a28eefdfe80c7d21 method=GET status=200
+
+[WebServer] (node:46244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=f7ed85fbdb22431fb62c61f246f4128b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=59ca6d5796904cf7a11bf9781fde856d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8c5521b3184a469b98d8bb9b426e9fbf method=GET status=200
+
+Running 10 tests using 1 worker
+
+(node:36068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/10] [desktop] › tests\weekend.spec.ts:18:56 › pl: exact modes, work hours, URL history and legacy landing
+
+[WebServer] INFO:hoptrip.requests:request_id=bf9570cb7c754b699c2bc68ce9e03eca method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=21a2a3c56f614862b3b76ec0c8f12293 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=988504aab48049bbaa1928c85c255af9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0e3b11d73c40497a920ebf36adf5dcfd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c03a709f78d84a37ab0f67bc388ab8a2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f8b46be9a7ea485fadfba181c85f66af method=POST status=200
+  1) [desktop] › tests\weekend.spec.ts:18:56 › pl: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Godziny lotniska poza godzinami pracy; sprawdź czas dojazdu"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Godziny lotniska poza').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Godziny lotniska poza').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-pl-exact-modes-wor-805e7--history-and-legacy-landing-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-pl-exact-modes-wor-805e7--history-and-legacy-landing-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-pl-exact-modes-wor-805e7--history-and-legacy-landing-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:43804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/10] [desktop] › tests\weekend.spec.ts:18:56 › en: exact modes, work hours, URL history and legacy landing
+
+[WebServer] INFO:hoptrip.requests:request_id=3d530dd9fa8743ae96ab2f0d18895b11 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=87de1361ee944c17b4a8964d9eb36b6f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5070beb9c6f148d886b175739f630640 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d1c714b64ccc4cdfa61ac9c008f7fd3d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=05d0bb3e4dbc402185f2194d658d8d5f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=520e3ef1916c48cfacc6e1696954d536 method=POST status=200
+  2) [desktop] › tests\weekend.spec.ts:18:56 › en: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Airport times outside work hours; check commute time"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Airport times outside work').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Airport times outside work').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-en-exact-modes-wor-352f4--history-and-legacy-landing-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-en-exact-modes-wor-352f4--history-and-legacy-landing-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-en-exact-modes-wor-352f4--history-and-legacy-landing-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:33300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/10] [desktop] › tests\weekend.spec.ts:18:56 › ru: exact modes, work hours, URL history and legacy landing
+[WebServer] INFO:hoptrip.requests:request_id=10f7a1d5f1ba4108ba1a318015771092 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=de9d6087025e42dba265f0f9f41ff3d5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b91900d7f04b412eb64a4ba555f65212 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e874f721f2d14d57bff43a0aa74a04fb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d4c3b400e5c44e6fbf83c860fe4b57eb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bcd212a355994330ac0ffcd42a7fb296 method=POST status=200
+
+  3) [desktop] › tests\weekend.spec.ts:18:56 › ru: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Время в аэропортах вне рабочих часов; проверьте дорогу"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Время в аэропортах вне рабочих часов; проверьте дорогу · 09:00:00–17:00:00 ·').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Время в аэропортах вне рабочих часов; проверьте дорогу · 09:00:00–17:00:00 ·').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-ru-exact-modes-wor-87de7--history-and-legacy-landing-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-ru-exact-modes-wor-87de7--history-and-legacy-landing-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-ru-exact-modes-wor-87de7--history-and-legacy-landing-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:50640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/10] [desktop] › tests\weekend.spec.ts:18:56 › uk: exact modes, work hours, URL history and legacy landing
+[WebServer] INFO:hoptrip.requests:request_id=0ac2e33a53744f25a00ed71979ab137b method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1454d55b148c41df9fa7dde580bdd0b6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1e8abacb46bf4ab58c9bf986254b1e33 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1882f7310cf340e3a1710f1abcae2621 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ac4b492ecff946d9b71ce47333201315 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a1a35b43384149ab993b862896dd04e8 method=POST status=200
+  4) [desktop] › tests\weekend.spec.ts:18:56 › uk: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Час в аеропортах поза робочими годинами; перевірте дорогу"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Час в аеропортах поза робочими годинами; перевірте дорогу · 09:00:00–17:00:00').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Час в аеропортах поза робочими годинами; перевірте дорогу · 09:00:00–17:00:00').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-uk-exact-modes-wor-123e7--history-and-legacy-landing-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-uk-exact-modes-wor-123e7--history-and-legacy-landing-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-uk-exact-modes-wor-123e7--history-and-legacy-landing-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:2672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/10] [desktop] › tests\weekend.spec.ts:57:5 › too-broad errors are explicit; DST itinerary passes strict mode
+
+[WebServer] INFO:hoptrip.requests:request_id=b79127ca33ea454aac40c493b7877fcd method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=279e6f4e4a134f7f9b8740c52249ed31 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=135743350c1d4ad1b9a79b87f685ddd6 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a5df0f668c5e4f98b70cf30ab8ea8dfa method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7b9c85a9632045428f18add7d0b7f2c4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4d374592cf314c88896f603f44017ac7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0a5c6ab25bae48a8b6d06f10d8348c32 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ef03da680ea44fe6ab604efb57e874db method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8eaf6064c80b4d87ae212f49b7f63279 method=POST status=200
+
+(node:39668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/10] [mobile] › tests\weekend.spec.ts:18:56 › pl: exact modes, work hours, URL history and legacy landing
+[WebServer] INFO:hoptrip.requests:request_id=21ae72ea0fee4228bfd2ba6df8b260d5 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=96c60f4246144f1cbaa6a2191d481414 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a5a88b4885643a8821d88d45e5e66a4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b39ae763b63545a88f702e3dfce7c5e7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca9c2ee3f10f4d3281030f4644ebc787 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=cf46f860180d44ef858858731c10ea9b method=POST status=200
+  5) [mobile] › tests\weekend.spec.ts:18:56 › pl: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Godziny lotniska poza godzinami pracy; sprawdź czas dojazdu"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Godziny lotniska poza').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Godziny lotniska poza').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-pl-exact-modes-wor-805e7--history-and-legacy-landing-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-pl-exact-modes-wor-805e7--history-and-legacy-landing-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-pl-exact-modes-wor-805e7--history-and-legacy-landing-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:12368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/10] [mobile] › tests\weekend.spec.ts:18:56 › en: exact modes, work hours, URL history and legacy landing
+[WebServer] INFO:hoptrip.requests:request_id=d64fdcfe78fe49cf97982c49e9c3e2d0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=aa6d3a785ef94b3f94928824fb00bcc1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1f900220a6d9491fad76e6aa1b2546e7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f8ef08f8e2ac4a1480bb51f709ab31dc method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d1d65d29a95f406cb0bc1050ed0bc2a9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8bc3e1675dd146e081fff392655250a7 method=POST status=200
+
+  6) [mobile] › tests\weekend.spec.ts:18:56 › en: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Airport times outside work hours; check commute time"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Airport times outside work').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Airport times outside work').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-en-exact-modes-wor-352f4--history-and-legacy-landing-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-en-exact-modes-wor-352f4--history-and-legacy-landing-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-en-exact-modes-wor-352f4--history-and-legacy-landing-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:26836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[8/10] [mobile] › tests\weekend.spec.ts:18:56 › ru: exact modes, work hours, URL history and legacy landing
+[WebServer] INFO:hoptrip.requests:request_id=ebc8c3e4521c45518cd1304c69349650 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eada3b2fbd7347c4a460f42f770275a7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2ffd5e81b7f0469f85963b8076dedcbf method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fd388a042dfb43babd583a78c5de240f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c42f80f75c7740268151164ccfffa1c3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=82e38487f2734f539b5a81a5f5f04d88 method=POST status=200
+
+  7) [mobile] › tests\weekend.spec.ts:18:56 › ru: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Время в аэропортах вне рабочих часов; проверьте дорогу"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Время в аэропортах вне рабочих часов; проверьте дорогу · 09:00:00–17:00:00 ·').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Время в аэропортах вне рабочих часов; проверьте дорогу · 09:00:00–17:00:00 ·').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-ru-exact-modes-wor-87de7--history-and-legacy-landing-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-ru-exact-modes-wor-87de7--history-and-legacy-landing-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-ru-exact-modes-wor-87de7--history-and-legacy-landing-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:52016) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[9/10] [mobile] › tests\weekend.spec.ts:18:56 › uk: exact modes, work hours, URL history and legacy landing
+
+[WebServer] INFO:hoptrip.requests:request_id=b17a7a36523f401bac46e3828bf074c0 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=a4e0150f385c4e9e89fd07ca4ca8dd64 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6a7fa6ffa27d470598e5c6731b290868 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=af63499a048a4d61b3352d3e7b02c46a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0a0e30989fb8432497d3e50ff526d15a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=16fbd3a1d5e240a082c2cf0b4c514f31 method=POST status=200
+  8) [mobile] › tests\weekend.spec.ts:18:56 › uk: exact modes, work hours, URL history and legacy landing 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+    Expected substring: "Час в аеропортах поза робочими годинами; перевірте дорогу"
+    Error: strict mode violation: locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') resolved to 2 elements:
+        1) <p class="weekend-assessment">…</p> aka getByText('Час в аеропортах поза робочими годинами; перевірте дорогу · 09:00:00–17:00:00').nth(2)
+        2) <p class="weekend-assessment">…</p> aka getByText('Час в аеропортах поза робочими годинами; перевірте дорогу · 09:00:00–17:00:00').nth(3)
+
+    Call log:
+      - Expect "toContainText" locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment') with timeout 5000ms
+      - waiting for locator('.deal-card').filter({ has: locator('a[href*="/deals/weekend-fixture-monday"]') }).locator('.flight-schedule-compact .weekend-assessment')
+
+
+      24 |  const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+      25 |  await expect(monday.locator('.home-arrival')).toContainText('+1');
+    > 26 |  await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+         |                                                                               ^
+      27 |  await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+      28 |  await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+      29 |  await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01c-20261103\apps\web\tests\weekend.spec.ts:26:79
+
+    Error Context: test-results\weekend-uk-exact-modes-wor-123e7--history-and-legacy-landing-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\weekend-uk-exact-modes-wor-123e7--history-and-legacy-landing-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\weekend-uk-exact-modes-wor-123e7--history-and-legacy-landing-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:50012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[10/10] [mobile] › tests\weekend.spec.ts:57:5 › too-broad errors are explicit; DST itinerary passes strict mode
+[WebServer] INFO:hoptrip.requests:request_id=b7bfcea3be944dc4a43781a1a9bcd812 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3efd87f99ab644cb964cc2a426120d4b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3a957b97b67a4f55acf2cc93a33c97e2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=84fd62c9bbb8445ea158db03f2ce3311 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=264b0403d63545ddacd7fe3035bfbd81 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a4000ab360447289d050c79bd6b6048 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8300f25826524c5d86f9cd9051fb196c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=37be876e9d0541d0bc54b22c7f745eb0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d53c343d195f4a11adab1053fea1ce3d method=POST status=200
+
+  8 failed
+    [desktop] › tests\weekend.spec.ts:18:56 › pl: exact modes, work hours, URL history and legacy landing 
+    [desktop] › tests\weekend.spec.ts:18:56 › en: exact modes, work hours, URL history and legacy landing 
+    [desktop] › tests\weekend.spec.ts:18:56 › ru: exact modes, work hours, URL history and legacy landing 
+    [desktop] › tests\weekend.spec.ts:18:56 › uk: exact modes, work hours, URL history and legacy landing 
+    [mobile] › tests\weekend.spec.ts:18:56 › pl: exact modes, work hours, URL history and legacy landing 
+    [mobile] › tests\weekend.spec.ts:18:56 › en: exact modes, work hours, URL history and legacy landing 
+    [mobile] › tests\weekend.spec.ts:18:56 › ru: exact modes, work hours, URL history and legacy landing 
+    [mobile] › tests\weekend.spec.ts:18:56 › uk: exact modes, work hours, URL history and legacy landing 
+  2 passed (29.5s)

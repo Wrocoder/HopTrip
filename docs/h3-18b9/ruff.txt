@@ -1,0 +1,23 @@
+I001 [*] Import block is un-sorted or un-formatted
+ --> apps\api\app\schemas\usage.py:1:1
+  |
+1 | / from datetime import datetime
+2 | | from decimal import Decimal
+3 | | from typing import Literal
+4 | |
+5 | | from pydantic import BaseModel, Field
+6 | |
+7 | | from app.schemas.analytics import AnalyticsLocale
+  | |_________________________________________________^
+help: Organize imports
+  |
+4 |
+  - from pydantic import BaseModel, Field
+  -
+5 | from app.schemas.analytics import AnalyticsLocale
+6 + from pydantic import BaseModel, Field
+7 |
+  |
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

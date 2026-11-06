@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.404" timestamp="2026-11-06T20:37:03.202754+01:00" hostname="wave"><testcase classname="apps.api.tests.test_locale_cohorts" name="test_first_received_locale_partitions_sessions_and_preserves_legacy_metrics" time="0.147"><failure message="KeyError: 'locale_cohorts'">api_client = &lt;starlette.testclient.TestClient object at 0x000001A333FAF860&gt;
+isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x000001A3377FE9C0&gt;
+
+    def test_first_received_locale_partitions_sessions_and_preserves_legacy_metrics(api_client, isolated_db):
+        locale_seed(isolated_db)
+        body = get(api_client).json()
+        assert body["observed_events"] == 10 and body["observed_sessions"] == 5
+&gt;       assert body["locale_cohorts"]["version"] == "first-received-locale-cohorts-v1"
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'locale_cohorts'
+
+apps\api\tests\test_locale_cohorts.py:34: KeyError</failure></testcase></testsuite></testsuites>

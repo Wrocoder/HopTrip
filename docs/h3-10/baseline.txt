@@ -1,0 +1,52 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-10-baseline.spec.ts --project=desktop --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [12260]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=f1ad23fe7fc24b0f9d8a5278ebdd98e0 method=GET status=200
+
+[WebServer] (node:32344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=12340f16eb854bc496ec876584c543f8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4b96f3e5bdfc48b180ac07780250442d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d71df81081f74727a18afefd365a3dd4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8053e42ddca04c059789b628df2774e0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4b1c646601e84a5fb4b512dab8ab6d71 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dc814815901843749ae6b1946afe7205 method=GET status=200
+
+Running 1 test using 1 worker
+
+
+(node:43352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\h3-10-baseline.spec.ts:3:5 › H3-10 baseline: missing directory and current destination links
+
+[WebServer] INFO:hoptrip.requests:request_id=f8cf4cb7aaee405ca88dc2e455812014 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f0507bd2b6e24a678ab5c7a5fb503e5e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0d5d70bd0af24c5fbb478c08e198e1c5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d2c8c7227e56472b8d5220750b65cb1a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8197625183b8485799bf8defcaa0e551 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a77f4aef3f7d49b5a5fb0dc253bf40a9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=06e8bfb576e54255aa9fe09bfb3d6b88 method=GET status=200
+  1 passed (6.6s)

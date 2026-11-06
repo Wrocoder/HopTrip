@@ -1,0 +1,32 @@
+# H3-07c — сортировка и аэропортовый интервал в интерфейсе
+
+Дата: 2026-11-03. **H3-07c DONE; H3-07 DONE** по локальным acceptance. Эта часть завершает интерфейс H3-07 на основе готовых 07a/b. Следующий отдельный запуск — H3-08, sourced airport-to-city warnings/metadata. Новые transfer estimates в H3-07c не добавляются.
+
+## Что изменено
+
+В существующий select добавлен opt-in `Najwięcej czasu na miejscu`. Пояснение в «Как работают фильтры» раскрывает точный порядок: известный аэропортовый интервал DESC; tie price/date/ID; unknown/estimated после известных с price fallback. Default price и три прежние сортировки сохранены. Существующий submit передаёт sort серверу и сбрасывает offset; клиент не пересортировывает текущую страницу. Search URL/history/pagination/back-link и canonical используют общий прежний механизм; sorted URL остаётся noindex с собственным canonical.
+
+В общей FlightSchedule добавлена одна краткая строка для ROUND_TRIP: время между прилётом и обратным вылетом, фактические endpoints, estimated при расчётном прилёте и явное «время в городе неизвестно». KNOWN0 показывается как 0; UNKNOWN/старый API — неизвестно, не 0. Строка одинакова в card/detail, без интерактивных элементов; старый interval paragraph в FlightFacts удалён, чтобы не дублировать и не выдавать unqualified legacy число за достоверное. Смена аэропорта видна через endpoints и прежний существенный route warning. Nights/transit/leave notices сохраняют отдельную семантику. PL/EN/RU/UK добавлены в существующий filter copy и небольшой общий destination-time module. Нет новых источников данных/буферов/городских оценок.
+
+API type и runtime validator принимают optional destination-time-v1. Отсутствующий объект допустим для прежних сортировок; присутствующий должен удовлетворять версии, enum, nonnegative integer/null, IATA endpoints и согласованности status/sort_eligible/airport_change. В v1 city minutes строго null, city status UNKNOWN, buffers false. Неизвестная версия или повреждённый объект дают INVALID_RESPONSE. Новая сортировка с непустым ответом старого API без объекта даёт DESTINATION_TIME_UNSUPPORTED; старый API, отвергающий sort enum, распознаётся по query/sort validation location. Ошибка иного поля не маскируется как unsupported sort. Пустой ответ не позволяет доказать поддержку сервера и не выдаётся за найденные предложения.
+
+DESTINATION_TIME_QUERY_TOO_BROAD показывает просьбу сузить аэропорт/даты/цену или выбрать иной порядок; unsupported предлагает другую сортировку. Условия поиска остаются доступны в форме, автоматического изменения порядка нет. Для browser tests добавлены две явно synthetic branches только в e2e_app middleware с зарезервированными test budgets; production API не менялся.
+
+## Совместимость
+
+Нет DB migration, зависимостей, новых wire analytics events или изменений consent. Старые ссылки/прежние sort/SEO, saved v1/share/budget/affiliate сохранены. Сохранённый план без нового объекта не получает придуманную оценку: новый formatter не использует legacy destination_interval_minutes. Реальные цены, transfer times, production KPI и поездки не подтверждались. Общая карточка может стать выше на короткую строку, необходимую H3-07; сокращение высоты H3-06 не объявляется новым замером или неизменной гарантией.
+
+## Проверки
+
+- **247 Node passed**, [лог](node.txt). Добавлены проверки четырёх locale, KNOWN/ESTIMATED/UNKNOWN/zero, airport change, legacy absence, URL/SEO и API codes; расширен existing API contract test для malformed v1/false eligibility/unsupported city values. Первый smoke до последнего API error test: 246 passed, [лог](node-initial.txt).
+- ESLint pass, [лог](lint.txt); production `npm run build` с TypeScript pass и 61 static entries, [лог](build.txt). IDE build success с limited diagnostics. Ruff изменённой fixture pass, [лог](ruff.txt).
+- Browser production regression: **18 passed**, destination-time.spec.ts, sorting.spec.ts, local-flight-time.spec.ts, Chrome desktop/mobile, PL/EN/RU/UK; [JSON](browser.json), [лог](browser.txt). Новые сценарии сравнивают список с реальным API, unknown card, select/rule, reload/history/detail/back-link, too-broad/old API; 320px overflow и axe filter panel. Старые sort проверяют pagination/drafts/history и совместимость midnight/manual budget/share. [8 скриншотов](screenshots/) карточки при320px сохранены; PL desktop визуально проверен. Изолированная копия `.cache/aud05-h3-07c-20261103`, 3125/8125, fixture SQLite. Конфиг только копии использует npm start после production build; исходный config не менялся.
+- Backend runtime в этой части не менялся: full API/mypy не повторялись. Последний full API в H3-07b — 1057 passed /18 PostgreSQL skipped, это историческое evidence. Новый browser middleware проверен Ruff и браузером. WebKit/full-site regression/CWV/production/deploy не проверялись.
+
+Финальный поиск stale assertions нашёл прежний interval paragraph в seo-growth.spec.ts. Ожидание обновлено на видимую общую .destination-time и city unknown. Целевой `seo-growth.spec.ts --grep 'Warsaw union'` — ещё **2 passed** desktop/mobile: Warsaw union/individual origin, weekend/route constraints и новая строка. [JSON](browser-seo.json), [лог](browser-seo.txt). Всего в этой части **20 уникальных browser cases** (18+2), без runtime изменений после первого прогона. Целевой ESLint обновлённого spec также pass.
+
+Воспроизведение: из apps/web `npm run test:unit`, `npm run lint`; из изолированной копии — `npm run build` с loopback API/site и tests/fixtures/operator.json, затем `npm run test:e2e -- destination-time.spec.ts sorting.spec.ts local-flight-time.spec.ts --reporter=json`. HOPTRIP_TEST_PYTHON — PyCharm SDK Python3.12.10 из .venv после python-tools preflight; PLAYWRIGHT_CHANNEL=chrome, PLAYWRIGHT_JSON_OUTPUT_NAME — docs/h3-07c/browser.json. Для копии используется docs/aud05/prepare-e2e.ps1, untracked weekend_browser_fixtures.py копируется явно. Новые specs/runtime code включаются подготовщиком автоматически.
+
+## Откат
+
+Удалить только new destination-time helper/component/spec/unit tests и delta 07c в api.ts/api-contract.ts, filters/filter-copy, FlightSchedule/FlightFacts, deals/page, existing API/sorting tests и synthetic middleware branches. Сохранить API sort/schema/services 07a/b, старые H3-01–06 и пользовательские изменения; общий файл целиком не сбрасывать. Feature flag/DB rollback не нужны. PR/commit/deploy, реальные партнёрские переходы/отправки не выполнялись. После обновления progress/decisions — остановка перед H3-08.

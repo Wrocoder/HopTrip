@@ -1,0 +1,35 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_received_session_population_bounds_rates_without_inventing_a_funnel ___
+
+api_client = <starlette.testclient.TestClient object at 0x00000256E66A5790>
+isolated_db = <sqlalchemy.orm.session.Session object at 0x00000256E66A57F0>
+
+    def test_received_session_population_bounds_rates_without_inventing_a_funnel(api_client, isolated_db):
+        engagement_seed(isolated_db)
+        body = get(api_client).json()
+        assert body["observed_events"] == 13 and body["observed_sessions"] == 4
+>       report = body["engagement"]
+                 ^^^^^^^^^^^^^^^^^^
+E       KeyError: 'engagement'
+
+apps\api\tests\test_engagement_usage.py:30: KeyError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=c0796a55e2f849bda596fe9666a75297 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/admin/analytics/usage?start=2026-10-01T00%3A00%3A00%2B00%3A00&end=2026-10-02T00%3A00%3A00%2B00%3A00 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=c0796a55e2f849bda596fe9666a75297 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/admin/analytics/usage?start=2026-10-01T00%3A00%3A00%2B00%3A00&end=2026-10-02T00%3A00%3A00%2B00%3A00 "HTTP/1.1 200 OK"
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_engagement_usage.py::test_received_session_population_bounds_rates_without_inventing_a_funnel
+1 failed, 17 deselected, 2 warnings in 0.29s

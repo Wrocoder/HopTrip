@@ -1,0 +1,935 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test saved-revisit-observability.spec.ts trip-update-analytics.spec.ts --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [39176]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=504c2f92b0e84e95bc11c8bb52d9b4ae method=GET status=200
+
+[WebServer] (node:9436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=c734253565ca46c6a1cf27b567a00617 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d871d5c2a59840409fb42f30b7179efb method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=63e598b5550f46d0bf99bbd06b746b29 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8b6d2c92231b43f0ac80c210183d0f72 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a4f0937e1c3a4281bca854d4f02faa04 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3eb3df2c2aef487bb188b9428d14d37c method=GET status=200
+
+Running 30 tests using 1 worker
+
+
+(node:39688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/30] [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › pl: Save automatically emits a saved-page view before any manual return
+
+[WebServer] INFO:hoptrip.requests:request_id=9fae6cfeabc24dd390355f9a281da96c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ef3a9b7873fb4ec78e489594bcf5b55c method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=63837448b9ab4398b15bce7a263ef8b7 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=eaf4dc740da24d9fbf34040a4e51fac3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a706a4130d6c4e09861045fb0f597279 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=6a7c3dab1cc246afaf34fba656663a01 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d39204370ce748118b3ce52c87786ca7 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=dbe52646861e404a9237fc452961bd86 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=38029ce782bc464ebe702a75632847b8 method=GET status=200
+  1) [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › pl: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b03abf25-d960-4c36-8788-1dcb30b4453c"
+    Received: "189f611d-a57b-4dfd-b911-935f6920729e"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-27f33-ew-before-any-manual-return-desktop\error-context.md
+
+
+
+(node:37220) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/30] [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › en: Save automatically emits a saved-page view before any manual return
+[WebServer] INFO:hoptrip.requests:request_id=e532b0e3a1864910a1bdc461ff98ea1e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1ccd340433b44f80b0c0596817152f8a method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=85bed04e23894262a972cebad3f172b3 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=09b62fb7ea9c4b0f8bf098859658a717 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c45d8a35d3d64aa18aa1e21713716066 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=ff77f511f74c484e8b9b1ea5f213138b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=cfc33b1302e74bad8f624ef60c66fe7f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c71796b46c8f49a4a94dfbc5bb75ca59 method=GET status=200
+  2) [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › en: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "9591f37e-5368-4853-a60a-ce0f2099dad7"
+    Received: "f5786999-07fe-40d8-b317-7d6b5f0c8023"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-0604d-ew-before-any-manual-return-desktop\error-context.md
+
+
+(node:36792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/30] [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › ru: Save automatically emits a saved-page view before any manual return
+
+[WebServer] INFO:hoptrip.requests:request_id=00def88eb1c8441792145b913768e7db method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f55e05116d2f4f16a256b1070b00218c method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a3a4cda7503b43efbc5d0e40635fdef5 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=50a97e5e6384419fa24590bfe9a61aff method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=bdb6a6ca27e44aa69e2c42ab2be7bfdb method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=bbc4753e7b554b43987f845c89bc523b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=d457780c3ee941769b0abe9c06b8a8c2 method=GET status=200
+
+  3) [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › ru: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "aede07ad-138c-48ec-b239-ad657dbc60b5"
+    Received: "63bd9bfe-8677-412b-9643-39bed7ea367c"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-d4ce1-ew-before-any-manual-return-desktop\error-context.md
+
+
+(node:33064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/30] [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › uk: Save automatically emits a saved-page view before any manual return
+[WebServer] INFO:hoptrip.requests:request_id=eace4030da04438c80aacb668f8a75f6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0d6659087b524808bb66e5291c56fb95 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=edaef0e17fa24c709be953b015f41c2f method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=e2fb7a477c1a46308e84186f1e23690d method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=29c64a78f0ec41ddbb2904694f66cf77 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a4b4d22c31a746f6840e938785c20a2d method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=e05dae65e1044e0da22a6d464d0e943e method=GET status=200
+
+  4) [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › uk: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "8ded58db-94cb-4ed9-b454-64b9cf3b6c97"
+    Received: "5fee402f-c8ea-44c2-8332-cb031522b8cc"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-15308-ew-before-any-manual-return-desktop\error-context.md
+
+
+
+(node:38792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/30] [desktop] › tests\saved-revisit-observability.spec.ts:48:5 › reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed
+[WebServer] INFO:hoptrip.requests:request_id=24d4506d5bad41d8b7be70177e331850 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=aac4be97755f4a31a4eadb5254d8cace method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=327aa838dc1c4227b5c3d9c818f0943f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2b89baeef0ca417bb0fcf8c23d490856 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=906e41af345e4eec9fa42a06bb0510d6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=376eb50e5c9f4120979391e4204bd8d1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5ff3a8be992d47fd9a83ba467769ce6b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a53ee945cbbe4f68a1c4a56042d587b0 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=0f53562b83034523853262456feba681 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ce56433a9d6f486a87ae0144770db753 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=dcbb6e3bfdce466184400675b8fe953d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ec6629b6c9464e4f9dfbe791b25eba09 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0ca28b3986474e46a11f1abf25151471 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=323023eb1cbe4d2d9bf844d6e0c8e224 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=8669eaf33a4a473b965032d0d7b60c0a method=GET status=200
+  5) [desktop] › tests\saved-revisit-observability.spec.ts:48:5 › reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "anonymous_session_id": "4dfad23f-6757-44e1-ab62-9a999479ca04",
+    +   "anonymous_session_id": "6f938172-b60a-4a87-beab-4d2b1fa7065f",
+        "event_name": "PAGE_VIEW",
+        "metadata": Object {
+          "page_type": "saved_trip",
+        },
+      }
+
+      54 |  await page.goto('about:blank');await page.goto('/trip#plan='+a);await expect(page.locator('#budget-food')).toBeEnabled();await expect(page.locator('#budget-food')).toHaveValue('10');await expect(page.getByTestId('plan-edit-state')).toHaveCount(0);await expect.poll(()=>views().length).toBe(5);
+      55 |  const normalized=views().map(({event_id,...event})=>{void event_id;return event;});
+    > 56 |  for(const shape of normalized)expect(shape).toEqual(normalized[0]);
+         |                                              ^
+      57 |  expect(Object.keys(views()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
+      58 |  await page.evaluate(id=>{location.hash='local='+id;},idA);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy.pl.saved);expect(views()).toHaveLength(5);
+      59 |  expect(JSON.stringify(views())).not.toMatch(/plan=|local=|plan_id|revision|navigation_cause/);expect(errors).toEqual([]);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:56:46
+
+    Error Context: test-results\saved-revisit-observabilit-cbff6--only-changes-can-be-missed-desktop\error-context.md
+
+
+
+(node:35880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/30] [desktop] › tests\saved-revisit-observability.spec.ts:63:5 › the same retained plan can reopen with a new anonymous session after idle expiry
+[WebServer] INFO:hoptrip.requests:request_id=96614acd2d274398b6754f0a107f48e2 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=bc9cd98b0a814b5c89833a0c773789da method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=72af65439eb14976a4d73653d8d7611f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d07c14ca36164ff893b4c960cd6bb299 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=62ce9fd27e5448a79921748c563381cd method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3756d2c62baf408c94f8ea27ed684c90 method=GET status=200
+[7/30] [desktop] › tests\saved-revisit-observability.spec.ts:72:5 › denied analytics still allows Save and an actual reopen with no received browser events
+[WebServer] INFO:hoptrip.requests:request_id=c0029f19b5794fe28fb38d44b5b41c5c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=17ade2f1ad584afe998f3caacdd62bc3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0339cced2d0449a893488be7f30de07d method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2fed29e619de4ef0a4d13f77f20c8d6c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8a068f95b35c4d22b1a9e78cc49c1244 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc2dc55cab4f4814904e8ffe59883e99 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=27e465bc0dda42ca9cbd548e2baf6ec5 method=GET status=200
+
+[8/30] [desktop] › tests\trip-update-analytics.spec.ts:39:56 › pl: successful Update alone sends one private event; opening/reload/share/duplicate do not
+
+[WebServer] INFO:hoptrip.requests:request_id=34b2f1ef01e448379e4551074beee2f3 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=bba02c8709ef48e39e6a8f491b667426 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=7ca0a4f865974f8887bd66ba0c80c0d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=828bb5d57f1d421caa15e625699ad21c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f04e280e94ee4582bb5445e0b0af84bf method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=df5f7b0c84364d45a737648bfa277c07 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a5545fba43314c909906157fdc336e53 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=69b674bd8136467f8f80ef767752ca4f method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=e97d7968afba4877855b6562381fef95 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=753516bf65734a20acfce9d6b39d9174 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=94286c5db00b46c9a57c8dffa4d5bc01 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b9878c34ac5a42d08b2864cc39980136 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=915ad16e400c499187f36cf2c15fa692 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=69c14d0cf2944a328289089305f18eb0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4cb81ba5208e4f429a639c1d98ec6c48 method=POST status=202
+
+[9/30] [desktop] › tests\trip-update-analytics.spec.ts:39:56 › en: successful Update alone sends one private event; opening/reload/share/duplicate do not
+[WebServer] INFO:hoptrip.requests:request_id=24a6a4a6fb3840bb940520f648d59c55 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=0479964889064f278815eb2d7fbd6bbc method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=be91d190475743b5b322263688bd25c4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e81b823d30c04816baeca0499ac5265b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=29628cfac1c5468c8d6fd101def81f16 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=830a39f092fe4293aa9401446473a6bf method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=100cc804a3744527b7d66855d400e650 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=1cb48387c51947af948f66ccff0d2236 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=5af9ad2b1a26401497dc8867cc566275 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a7a35d0da70848efb8fa0c949db9ba87 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c2182f2002144b2993fa2784bb3feb18 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=dc895b7266594c36a826a7c3995429dc method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=c35b60ce825849efa20308a1c4efade6 method=GET status=200
+
+[10/30] [desktop] › tests\trip-update-analytics.spec.ts:39:56 › ru: successful Update alone sends one private event; opening/reload/share/duplicate do not
+[WebServer] INFO:hoptrip.requests:request_id=5ea1be5dfb8d410286b8922d1732aff6 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=e53cfa006651427d92c55fb244a3189e method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f734f8b90f0d4518b89d7b0b47328de6 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6b7c9a19284246468ed19a541e51ee34 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=dfeb5e73321d4e15b22f00b16612f932 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c9f2abff3cb549acafbbd170410b6b61 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=25869d111f824a37a9d7c5b95d35101c method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=206c5bfa7e044233b6bfe39937c803d4 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=2bd430c720084831bf48f5bde5095755 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=08e0be2a1a24435ebbae60463c0263cb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c04100172b494957ad5f422b76306aaf method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4d8e2be786e2460d9900bf63d66b8b16 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=2bb3c99e3842423883262dacc99e77ef method=GET status=200
+
+[11/30] [desktop] › tests\trip-update-analytics.spec.ts:39:56 › uk: successful Update alone sends one private event; opening/reload/share/duplicate do not
+[WebServer] INFO:hoptrip.requests:request_id=64ece8e67014429694a7c76d2059d2bc method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=50b6a83f525f4436bd99cefc33141fe4 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=3435beb3975049ecbbdc6a1d1ff3fa7a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a88b348eca114f7f9ca3015269dc2449 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2f575fe7c30849c7b22af4b35ce8596a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c3f77c2d83994eef895a8648b98ea1cb method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=eb24cff2f0b34f5a9bd55c208e8b05fc method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=6778aa25df514ee28d01e518d4ce8f56 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=88e37300fd6749128f958e2bea430fae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0b78179a72274cdd87f1554be0fa6bc9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e8e020e6635b4b969233f0cb6128e08b method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=824364f5972e475ab0f6c3eb6a379b58 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9898fc72abe947a7a2c46df1afcd505b method=POST status=202
+[12/30] [desktop] › tests\trip-update-analytics.spec.ts:58:5 › denial and revocation suppress successful updates; accepting has no replay
+[WebServer] INFO:hoptrip.requests:request_id=f34175446ede426baff963d3d26ec625 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a8f18d6ea38941229321daee9eb0a30e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c8159b111030484fb5a55dd4b5352150 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=bbc697b72e6e4dbba3ead2429d59bb92 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6f502c3cf9b9408893ae3530d0407ed0 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=8ab00dfb336f419b819a7f9131d99714 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f2aa6933e5dd4c8a89d7d3bb38731f95 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=28d76224697c457c8f4ccd9d9d8d80e4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e1794bb29529438faf7e7361b53b3c9e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=484952104cdc4312bccd1bca73764194 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=033578cc755b4f0395cb4360a8fd081a method=POST status=202
+[13/30] [desktop] › tests\trip-update-analytics.spec.ts:71:5 › consent revoked while Update waits for the lock prevents a send after commit
+[WebServer] INFO:hoptrip.requests:request_id=2cb6466de0bc4fbbbd6975e538a1cd4e method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=c235d4637277437bab87d2e26771dbbb method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dfd49f1b453642bea45c38605efe6506 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fb10d2adf7aa4edd8b981594a80ba289 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=970cff3e01554f0bab78c64974ff7353 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=00dd75805fef4f2699e6bfbd9c3146dd method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=9c2644455ce44a58853b8484009e95b9 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=930ebe4efd8b4a8fa592c7f36c362ba4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5ab81b4ab14841298f01585af83a3534 method=POST status=202
+[14/30] [desktop] › tests\trip-update-analytics.spec.ts:84:5 › failed storage commit and blocked analytics leave editor recovery intact
+[WebServer] INFO:hoptrip.requests:request_id=125f92b5a6424725b1c9920d914d6e31 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=88b54103d6f746b88d5a8b0c84dec27b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=cbf767da8381466cb29ba1cc2855e25f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8253f510002d481c87f62c347b0adb11 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=485af69a8aee41049558cf059cbc60c4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=da1f20df6f714236824911b7a4234e0b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=12cf403c2bc1431fba92076f44b72385 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=f923347cf3f848f5b36c31cf49024779 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=74d19ae579ca480992f25261ad446146 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f0c4a84adb494549bbc97f397eaab1b9 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e09464012cbf4de79d3cd7bb459550df method=GET status=200
+[15/30] [desktop] › tests\trip-update-analytics.spec.ts:97:5 › lock wait emits only after commit; concurrent no-op and conflict emit nothing
+
+[WebServer] INFO:hoptrip.requests:request_id=e7780d01351c479f8d94fd2a2c8d68d0 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=04f42f095afc487e8f57daf535e382d9 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=694884364e8f4b2fbadf6342b45b7a80 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=cbfc8e1c736047958d5391721b948903 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f2c15c37cbff45e6946bd29989e4a613 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c8102b6520c4eac9dc060ef1614fc46 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=b3b990dba37b47bbbc1e835f3825a305 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=fdfa14e676664cac81cb9f9e2a4e470f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bbe0ef23e92b42798d9f7407ce7e9fac method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=66129799114c409197c69adc2d8f140e method=POST status=202
+
+(node:39564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[16/30] [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › pl: Save automatically emits a saved-page view before any manual return
+[WebServer] INFO:hoptrip.requests:request_id=1436785df0c542cb82248b303458721d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=94e400b28f334447a23baa22ed3b3f53 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=eef3af4fc25a4be7b7e51eaf44d08021 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=36603ddac44e4cf690519abd6ec6e7b2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=32b424f7d7e64b0db3c11642e7c61247 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=6e321fc21bc94688acd4d256745feeb8 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=97cba48569054aafaf0d62c7a90019bb method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=54bd01c64a9146f593d8a62667e3a566 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=363a3af5a17c4781957e132de882bebb method=GET status=200
+  6) [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › pl: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "f7887c30-b990-4c5e-9fc9-91a0fa67f613"
+    Received: "392d5d73-f005-4906-98a9-327544d2f538"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-27f33-ew-before-any-manual-return-mobile\error-context.md
+
+
+
+(node:35032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[17/30] [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › en: Save automatically emits a saved-page view before any manual return
+[WebServer] INFO:hoptrip.requests:request_id=2c567f6e588d4ebabedc77ab95e4f0c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d438321ad9f2430f808143130ea19f8d method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=fb34cad253b54e26a23431dfaa76dac6 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=68ac3d0fe41a45678fea46a0a8e66441 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=be454ea67c7f4fa1a5dc079a648ae57c method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=941a694f4b0a4d89978400692782396d method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b6e0cb6c85cc4c2299158411a74013e4 method=GET status=200
+  7) [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › en: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "bb141316-5a92-47d5-82bb-d7f634325842"
+    Received: "485c668f-ff9a-49f7-8fc1-bcaa5b869bd3"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-0604d-ew-before-any-manual-return-mobile\error-context.md
+
+
+
+(node:35592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[18/30] [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › ru: Save automatically emits a saved-page view before any manual return
+
+[WebServer] INFO:hoptrip.requests:request_id=ed37c288945d4071a433094b453c6fd5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8fab37b3f4114cb191d875bb7a089738 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=dc7cf54e7ecc4f24987fffb6d35bef88 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=586be6cc14604697ba4bc096ba1c523d method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=42c7941065134163976e57e37b50f4e2 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=c54aae548b664c3bace9799545095ca0 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=2a0e2920e48e48cc870a6d8ebcac044d method=GET status=200
+
+  8) [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › ru: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b6b70f39-ba44-4fd9-a5d0-7a8b5d73df4c"
+    Received: "687dc079-f320-4137-b00b-fec69479bfb8"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-d4ce1-ew-before-any-manual-return-mobile\error-context.md
+
+
+(node:21904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[19/30] [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › uk: Save automatically emits a saved-page view before any manual return
+
+[WebServer] INFO:hoptrip.requests:request_id=071dfecfae7144eda0e882c4e31ceb9c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eee8799eb5834afc9d0312430e32daab method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=8c7e459f0d8e46faa06a7921e3ab5503 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=1fbfb19c8aad401382ba72813db4de2d method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=18b3c055818b48dbbd28643a964659f4 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b92b0557cd944935a8ab5c27122012e8 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=08339e78ddcb4175a5d1e577895bbdfd method=GET status=200
+
+  9) [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › uk: Save automatically emits a saved-page view before any manual return 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "c5a8aa8f-0bbd-4b0f-8d7c-65dbf7e5b161"
+    Received: "7e5b3fb4-5800-480f-9ff6-40e60105684f"
+
+      34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);
+      35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);
+    > 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);
+         |                                                                                                                        ^
+      37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);
+      38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));
+      39 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:36:120
+
+    Error Context: test-results\saved-revisit-observabilit-15308-ew-before-any-manual-return-mobile\error-context.md
+
+
+
+(node:36276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[20/30] [mobile] › tests\saved-revisit-observability.spec.ts:48:5 › reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed
+
+[WebServer] INFO:hoptrip.requests:request_id=eb6508512c814239b906a04b812fe71e method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=d702cd8a5c0f4a81b5c75d3ac1eae062 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6d51af7f5ccf49589ab7e087e54d220d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3bc74bd8a05b414186ba9c3e4ee2e1be method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=75301e4a54d64c66843c339eda30a4b4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=444cd75adad14d8f8fb2da4a936fae8c method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=d4c04b9e37314396894881daff96963d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=573ab2968ff344448ec2153697c041a1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a32a366c4f4445efa67c028e55e6d1cd method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=ccead73deca64f80b6c0171cea46dfc4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=981e383961444c74af297d5939439460 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=63015a716f6448059ca7697d11320681 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=835fd874fc65472ba7bade0dfc839a02 method=GET status=200
+
+  10) [mobile] › tests\saved-revisit-observability.spec.ts:48:5 › reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+      Object {
+    -   "anonymous_session_id": "a9140c6b-7693-4b53-b676-a3256a824a21",
+    +   "anonymous_session_id": "4dd2016f-a4e5-4283-814c-ee5c16a62412",
+        "event_name": "PAGE_VIEW",
+        "metadata": Object {
+          "page_type": "saved_trip",
+        },
+      }
+
+      54 |  await page.goto('about:blank');await page.goto('/trip#plan='+a);await expect(page.locator('#budget-food')).toBeEnabled();await expect(page.locator('#budget-food')).toHaveValue('10');await expect(page.getByTestId('plan-edit-state')).toHaveCount(0);await expect.poll(()=>views().length).toBe(5);
+      55 |  const normalized=views().map(({event_id,...event})=>{void event_id;return event;});
+    > 56 |  for(const shape of normalized)expect(shape).toEqual(normalized[0]);
+         |                                              ^
+      57 |  expect(Object.keys(views()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
+      58 |  await page.evaluate(id=>{location.hash='local='+id;},idA);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy.pl.saved);expect(views()).toHaveLength(5);
+      59 |  expect(JSON.stringify(views())).not.toMatch(/plan=|local=|plan_id|revision|navigation_cause/);expect(errors).toEqual([]);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\saved-revisit-observability.spec.ts:56:46
+
+    Error Context: test-results\saved-revisit-observabilit-cbff6--only-changes-can-be-missed-mobile\error-context.md
+
+
+(node:35616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[21/30] [mobile] › tests\saved-revisit-observability.spec.ts:63:5 › the same retained plan can reopen with a new anonymous session after idle expiry
+
+[WebServer] INFO:hoptrip.requests:request_id=60734de7ad5d43f68c7f190cac236842 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=7fbfa92ae8a949d5ad9aba90011b9e76 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=67ff3e824f5c499a94a44e7c56a3d561 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5db93746bf894de086d23721038c825d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5a2a40f9e5d04081ab1e2f1ebb4dab43 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=ab14f67c34814c97932b8e33cc3c513f method=GET status=200
+[22/30] [mobile] › tests\saved-revisit-observability.spec.ts:72:5 › denied analytics still allows Save and an actual reopen with no received browser events
+[WebServer] INFO:hoptrip.requests:request_id=d68ca1fcbfd64f3d930c25d9831aeb9e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bfe9785b4a884f8a8f5b7a294c88217f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=aa410b55bb3343729bf94602f2dc52ef method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=f20f376fd3554656be91329b5d2689d7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6900524ce9b64e448d0b69aa7535b142 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0f09739c468b4d8491a811207457ecc1 method=GET status=200
+[23/30] [mobile] › tests\trip-update-analytics.spec.ts:39:56 › pl: successful Update alone sends one private event; opening/reload/share/duplicate do not
+
+[WebServer] INFO:hoptrip.requests:request_id=1ea3c2128b144ee79c94fb6085252c99 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=adf045da181b44dfb44885ac40066540 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=67167e9b4f7748cf908dad97c8c869ee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d410a90c5fcb4cdc821da8c9425c4c63 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7ea4d0a95a584e9bb2b69b12a20ec6cf method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=18ad066756764df287cab43c7dc9b0ad method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=08fdb4af66a9408d90ea9b8a3293baf5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a1c460bb8f2b4a529bfc518d1b4d9388 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=d5b0f6d925dd44d6af884104f15579ac method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=2f07a2f65d484d1097e3df31650ac6e4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a9517e44574947a6af9c290abce8c16c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7198cc72927243c3a128f91bece3a27e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d3877bf06fc34c42ae477f029198500a method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=22e593418222433c9376a2138ee39aab method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2df79493cb014b019a7b1057884d7568 method=POST status=202
+[24/30] [mobile] › tests\trip-update-analytics.spec.ts:39:56 › en: successful Update alone sends one private event; opening/reload/share/duplicate do not
+[WebServer] INFO:hoptrip.requests:request_id=113fb0cdaf6140c98937c5fd09f2fd47 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=e7cfceee1f1c43a9aa7dfb76668528d4 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0696698df7c0480b8512856ffbe42613 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3d717f811b024dfb953200b1319b9122 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=4165efaa5e46499d9ffc095fa3d64489 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1c54d5f7bc024fa69ebcc1709d0c0147 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=517bf855055a499091e63c98705ecb8c method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=08728e09eec944c89e7da5f56242b1d3 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=dd847927479b452eb4db83491e16cb82 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bb845c6dff9849dfbbfc18cb18715b86 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f0d5a99146db4178b6cdfc391334f74c method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=ef4f9b1767ee424f93d8fe33f961e501 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=71897bf53e854b9ba3cf0667de7b4fc4 method=GET status=200
+[25/30] [mobile] › tests\trip-update-analytics.spec.ts:39:56 › ru: successful Update alone sends one private event; opening/reload/share/duplicate do not
+[WebServer] INFO:hoptrip.requests:request_id=1ec069ee7a9945249a6d14c92fee9345 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3f479fdcae2a41f8835b12e872f61212 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=2fc10b01f3b54db6ac5701401da8510b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ae3faaadb3e0433480f29b21a2be413d method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=482f902e1c4f48fd9dec594837d31076 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=47e43c1c3c0843dd9b3ba3b9a8f10767 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=0e1056dce3284a109c2eb08433f11f53 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=f8d54ef175844dd7968127e9d9dbe85d method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=947ef110306142d5843052060232e5a3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ba329dab4e32437eb2bd692bdcc02abd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=847043c62d66442d948b0ce56284acc2 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=afcd2398c94d47ddad7e2e719a9211ee method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=dc81b4e64bf34639b09ac672d932935d method=GET status=200
+
+[26/30] [mobile] › tests\trip-update-analytics.spec.ts:39:56 › uk: successful Update alone sends one private event; opening/reload/share/duplicate do not
+[WebServer] INFO:hoptrip.requests:request_id=37da40f487b24897b45cc3db739be5f7 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fbe04f7d52b1489384fe849e0763d026 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=2bb5c1da1fb7459995f6194682beddae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b8fcfa08249840d8a7a3a6ee467ad592 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f49c40ba3a804aa4948e747762bca573 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=29279c1c00c74c8ca84cfcad4ae79f96 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=90642899b38a45c2b6fd3c8ba8b8f1d3 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=85f4a8da9e6a4083a2ece5f49b90b89b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=7ae2e9ed4c834e05a6d369b29635afa8 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ccce43d2a1794d44b9b47aee18d49e00 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=a7a302d0b23a43c4ab1e0a3ff79a61d4 method=GET status=200
+[27/30] [mobile] › tests\trip-update-analytics.spec.ts:58:5 › denial and revocation suppress successful updates; accepting has no replay
+
+[WebServer] INFO:hoptrip.requests:request_id=b2bd233c3db249caa7741bc48c3a2c5d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b1aec1cc8e6e4f788a81e00c139831df method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=193d7da925d74d4d94d0c3686c45eb69 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=59ef4a47df274a7cb0da148156c0c125 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b1f280675d49417690b8bd5334deeeb5 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=6fd42f6b9712496c9f52f41d7755ff0e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f800b6f361ee4ffbb5c5dd66077da985 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=5f36c9ea8e0d48ec9e374e776cd94083 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ffc078199dca482dbe179d5994f24557 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=83c90983c9e646dc9af7882381b94fa0 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=bf509c66f46f44b7a7a79ea79651f854 method=POST status=202
+
+[28/30] [mobile] › tests\trip-update-analytics.spec.ts:71:5 › consent revoked while Update waits for the lock prevents a send after commit
+[WebServer] INFO:hoptrip.requests:request_id=bb1cc5cdf62b4bfb8155e5b0dabdb42c method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0d3bc995687942a394ae852150763255 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=c3e88c3d1173499fb259a272bba75873 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7446362a771449e99fca1ab8ce36fac8 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=edc23dba3bbd4ba4aca8baca12d234bb method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=b5e1250ed40043b3a8fdf73bee825114 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=6aea3977134e4cb2a6ec291ebb8b26d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c846f04b10614bdf9fb4ce16a1db233f method=POST status=202
+
+[29/30] [mobile] › tests\trip-update-analytics.spec.ts:84:5 › failed storage commit and blocked analytics leave editor recovery intact
+
+[WebServer] INFO:hoptrip.requests:request_id=86997dfb66604da28a7fc89fe3d53710 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=e7a563757cbe4923b7e5e78db18e4f50 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=559eb726beec4e8fa57837b576734a79 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=41dab743ed6b447f9688ea417ab12bcc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc03fb62107e418a8847f3295436a00b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=da23fba686084e71a851496fb05f865d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d8fde7a286fa4f63a3d2c71e02a5e061 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=09f20096a7c94ab19ca7b9a0dd881a64 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=396ccad94cf84b22bd4fbff160d5aaf2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e2d28e546a904d95b144ce5d44006e74 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d23af75b7a244282a0bac5e45cf77c43 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1440931c65e34b968d998248e3c31e4e method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8537b53e4ed84f069d206769ed3b0a07 method=GET status=200
+[30/30] [mobile] › tests\trip-update-analytics.spec.ts:97:5 › lock wait emits only after commit; concurrent no-op and conflict emit nothing
+
+[WebServer] INFO:hoptrip.requests:request_id=95070232f5224b16b5ca6b35a18cf57d method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=3642b88ffd2a4df3982cee63b7be0bfb method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=c4d18e4c81a341e7baca77892c9b97ae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a7270337c1fa4fb2a5683ea608ebfa87 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f82708d814874e1496709b5aab12c33c method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=152bf330a8a14f3c8a5341778ca35b7c method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f82ba8f660d24680a8ce118103c9b8d1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bb6c4a24001d417f8a94318cfa057e0d method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=7b2bffd11352471897e22f0c1dcf6310 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4387252115c643c68778d7c0e6acb2e9 method=POST status=202
+
+  10 failed
+    [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › pl: Save automatically emits a saved-page view before any manual return 
+    [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › en: Save automatically emits a saved-page view before any manual return 
+    [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › ru: Save automatically emits a saved-page view before any manual return 
+    [desktop] › tests\saved-revisit-observability.spec.ts:33:56 › uk: Save automatically emits a saved-page view before any manual return 
+    [desktop] › tests\saved-revisit-observability.spec.ts:48:5 › reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed 
+    [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › pl: Save automatically emits a saved-page view before any manual return 
+    [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › en: Save automatically emits a saved-page view before any manual return 
+    [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › ru: Save automatically emits a saved-page view before any manual return 
+    [mobile] › tests\saved-revisit-observability.spec.ts:33:56 › uk: Save automatically emits a saved-page view before any manual return 
+    [mobile] › tests\saved-revisit-observability.spec.ts:48:5 › reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed 
+  20 passed (3.4m)

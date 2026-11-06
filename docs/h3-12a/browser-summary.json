@@ -1,0 +1,942 @@
+{
+  "status": "PASS on latest results",
+  "uniquePostChangeCases": 100,
+  "newPrivacyCases": 16,
+  "baseline": {
+    "startTime": "2026-11-04T18:00:22.507Z",
+    "duration": 6664.54,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "initialPrivacy": {
+    "startTime": "2026-11-04T18:09:57.850Z",
+    "duration": 50233.92,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "main": {
+    "startTime": "2026-11-04T18:12:25.274Z",
+    "duration": 564225.706,
+    "expected": 98,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "targetedRecheck": {
+    "startTime": "2026-11-04T18:22:14.372Z",
+    "duration": 20960.177,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "initialPrivacyFailure": "Two no-JavaScript cases: client-component noscript text was missing. Replaced with explicit initial SSR paragraph and rebuilt; all 16 privacy cases passed in main run.",
+  "mainHarnessFailure": "During test recopy the isolated canonical assertion kept source port3100 while production copy serves3125. Copy normalization restored, affected desktop/mobile scenario repeated without runtime/assertion changes.",
+  "remainingKnownRisks": "First-price/CLS and unexplained H3-11a cross-tab failure remain H3-17b. This run does not establish their causes.",
+  "latest": [
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in pl:desktop",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in pl",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in en:desktop",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in en",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in ru:desktop",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in ru",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in uk:desktop",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in uk",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:48:hidden invalid detailed costs can be reached and corrected from quick budget:desktop",
+      "file": "budget-modes.spec.ts",
+      "title": "hidden invalid detailed costs can be reached and corrected from quick budget",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:67:legacy plan and new taxes/buffer survive save/share without reallocating old contingency:desktop",
+      "file": "budget-modes.spec.ts",
+      "title": "legacy plan and new taxes/buffer survive save/share without reallocating old contingency",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in pl:mobile",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in pl",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in en:mobile",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in en",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in ru:mobile",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in ru",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:12:quick and detailed budgets retain all costs in uk:mobile",
+      "file": "budget-modes.spec.ts",
+      "title": "quick and detailed budgets retain all costs in uk",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:48:hidden invalid detailed costs can be reached and corrected from quick budget:mobile",
+      "file": "budget-modes.spec.ts",
+      "title": "hidden invalid detailed costs can be reached and corrected from quick budget",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-modes.spec.ts:67:legacy plan and new taxes/buffer survive save/share without reallocating old contingency:mobile",
+      "file": "budget-modes.spec.ts",
+      "title": "legacy plan and new taxes/buffer survive save/share without reallocating old contingency",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:pl: personal ranges, exact overrides, profile switching, reload and reset:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "pl: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:en: personal ranges, exact overrides, profile switching, reload and reset:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "en: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:ru: personal ranges, exact overrides, profile switching, reload and reset:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "ru: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:uk: personal ranges, exact overrides, profile switching, reload and reset:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "uk: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:42:stay/night basis, dates, corrected invalid ranges and exact-source transport retain honest totals:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "stay/night basis, dates, corrected invalid ranges and exact-source transport retain honest totals",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:54:profiles persist in v1 snapshots and saved previews; recipient edits keep the original intact:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "profiles persist in v1 snapshots and saved previews; recipient edits keep the original intact",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:65:legacy drafts remain exact and malformed profile metadata recovers amounts before explicit discard:desktop",
+      "file": "budget-profiles.spec.ts",
+      "title": "legacy drafts remain exact and malformed profile metadata recovers amounts before explicit discard",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:pl: personal ranges, exact overrides, profile switching, reload and reset:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "pl: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:en: personal ranges, exact overrides, profile switching, reload and reset:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "en: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:ru: personal ranges, exact overrides, profile switching, reload and reset:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "ru: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:19:uk: personal ranges, exact overrides, profile switching, reload and reset:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "uk: personal ranges, exact overrides, profile switching, reload and reset",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:42:stay/night basis, dates, corrected invalid ranges and exact-source transport retain honest totals:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "stay/night basis, dates, corrected invalid ranges and exact-source transport retain honest totals",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:54:profiles persist in v1 snapshots and saved previews; recipient edits keep the original intact:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "profiles persist in v1 snapshots and saved previews; recipient edits keep the original intact",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-profiles.spec.ts:65:legacy drafts remain exact and malformed profile metadata recovers amounts before explicit discard:mobile",
+      "file": "budget-profiles.spec.ts",
+      "title": "legacy drafts remain exact and malformed profile metadata recovers amounts before explicit discard",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:52:late reference conversion cannot overwrite manual:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "late reference conversion cannot overwrite manual",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:52:late reference conversion cannot overwrite reset:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "late reference conversion cannot overwrite reset",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:67:legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:78:new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original:desktop",
+      "file": "budget-provenance.spec.ts",
+      "title": "new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:17:uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:52:late reference conversion cannot overwrite manual:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "late reference conversion cannot overwrite manual",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:52:late reference conversion cannot overwrite reset:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "late reference conversion cannot overwrite reset",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:67:legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-provenance.spec.ts:78:new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original:mobile",
+      "file": "budget-provenance.spec.ts",
+      "title": "new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-recovery.spec.ts:5:321 PLN, travellers and selected tickets survive an invalid date, reload and language changes:desktop",
+      "file": "budget-recovery.spec.ts",
+      "title": "321 PLN, travellers and selected tickets survive an invalid date, reload and language changes",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "budget-recovery.spec.ts:5:321 PLN, travellers and selected tickets survive an invalid date, reload and language changes:mobile",
+      "file": "budget-recovery.spec.ts",
+      "title": "321 PLN, travellers and selected tickets survive an invalid date, reload and language changes",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:14:catalog to offer to saved plan keeps adults, money and partner parameters across languages:desktop",
+      "file": "localized-trips.spec.ts",
+      "title": "catalog to offer to saved plan keeps adults, money and partner parameters across languages",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:80:old plans, missing offers and expired dates retain honest translated states:desktop",
+      "file": "localized-trips.spec.ts",
+      "title": "old plans, missing offers and expired dates retain honest translated states",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:97:flight detail languages expose local times, metadata, accessible controls and labelled Polish references:desktop",
+      "file": "localized-trips.spec.ts",
+      "title": "flight detail languages expose local times, metadata, accessible controls and labelled Polish references",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:116:localized storage failures still permit sharing and unavailable offers return translated 404:desktop",
+      "file": "localized-trips.spec.ts",
+      "title": "localized storage failures still permit sharing and unavailable offers return translated 404",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:139:localized partner clicks respect consent and never send the plan or budget to analytics:desktop",
+      "file": "localized-trips.spec.ts",
+      "title": "localized partner clicks respect consent and never send the plan or budget to analytics",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:14:catalog to offer to saved plan keeps adults, money and partner parameters across languages:mobile",
+      "file": "localized-trips.spec.ts",
+      "title": "catalog to offer to saved plan keeps adults, money and partner parameters across languages",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:80:old plans, missing offers and expired dates retain honest translated states:mobile",
+      "file": "localized-trips.spec.ts",
+      "title": "old plans, missing offers and expired dates retain honest translated states",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:97:flight detail languages expose local times, metadata, accessible controls and labelled Polish references:mobile",
+      "file": "localized-trips.spec.ts",
+      "title": "flight detail languages expose local times, metadata, accessible controls and labelled Polish references",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:116:localized storage failures still permit sharing and unavailable offers return translated 404:mobile",
+      "file": "localized-trips.spec.ts",
+      "title": "localized storage failures still permit sharing and unavailable offers return translated 404",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "localized-trips.spec.ts:139:localized partner clicks respect consent and never send the plan or budget to analytics:mobile",
+      "file": "localized-trips.spec.ts",
+      "title": "localized partner clicks respect consent and never send the plan or budget to analytics",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "planned-events.spec.ts:26:selected ticket variants persist and share with independent costs, without double counting:desktop",
+      "file": "planned-events.spec.ts",
+      "title": "selected ticket variants persist and share with independent costs, without double counting",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "planned-events.spec.ts:74:different sessions, unknown and zero prices, invalid input and removal keep an honest budget:desktop",
+      "file": "planned-events.spec.ts",
+      "title": "different sessions, unknown and zero prices, invalid input and removal keep an honest budget",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "planned-events.spec.ts:101:a saved event remains editable when its flight and catalogue no longer exist:desktop",
+      "file": "planned-events.spec.ts",
+      "title": "a saved event remains editable when its flight and catalogue no longer exist",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "planned-events.spec.ts:26:selected ticket variants persist and share with independent costs, without double counting:mobile",
+      "file": "planned-events.spec.ts",
+      "title": "selected ticket variants persist and share with independent costs, without double counting",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "planned-events.spec.ts:74:different sessions, unknown and zero prices, invalid input and removal keep an honest budget:mobile",
+      "file": "planned-events.spec.ts",
+      "title": "different sessions, unknown and zero prices, invalid input and removal keep an honest budget",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "planned-events.spec.ts:101:a saved event remains editable when its flight and catalogue no longer exist:mobile",
+      "file": "planned-events.spec.ts",
+      "title": "a saved event remains editable when its flight and catalogue no longer exist",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in pl:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in pl",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in en:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in en",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in ru:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in ru",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in uk:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in uk",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:74:storage events keep two tabs in sync and undo preserves another tab’s new snapshot:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "storage events keep two tabs in sync and undo preserves another tab’s new snapshot",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:91:corrupt storage is explained, preserved and never presented as an empty list:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "corrupt storage is explained, preserved and never presented as an empty list",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:106:capacity never evicts a plan and failed undo leaves the latest collection intact:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "capacity never evicts a plan and failed undo leaves the latest collection intact",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:121:failed removal keeps the list; a later successful removal clears its error and can be undone:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "failed removal keeps the list; a later successful removal clears its error and can be undone",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:136:unavailable, missing and past flight snapshots keep all manual settings and honest saved previews:desktop",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "unavailable, missing and past flight snapshots keep all manual settings and honest saved previews",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in pl:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in pl",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in en:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in en",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in ru:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in ru",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:21:saved snapshot feedback, undo and local restoration in uk:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "saved snapshot feedback, undo and local restoration in uk",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:74:storage events keep two tabs in sync and undo preserves another tab’s new snapshot:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "storage events keep two tabs in sync and undo preserves another tab’s new snapshot",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:91:corrupt storage is explained, preserved and never presented as an empty list:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "corrupt storage is explained, preserved and never presented as an empty list",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:106:capacity never evicts a plan and failed undo leaves the latest collection intact:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "capacity never evicts a plan and failed undo leaves the latest collection intact",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:121:failed removal keeps the list; a later successful removal clears its error and can be undone:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "failed removal keeps the list; a later successful removal clears its error and can be undone",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "saved-trip-workflow.spec.ts:136:unavailable, missing and past flight snapshots keep all manual settings and honest saved previews:mobile",
+      "file": "saved-trip-workflow.spec.ts",
+      "title": "unavailable, missing and past flight snapshots keep all manual settings and honest saved previews",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:pl: fragment payload stays outside requests and previews; new sharing and saved opening work:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "pl: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:en: fragment payload stays outside requests and previews; new sharing and saved opening work:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "en: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:ru: fragment payload stays outside requests and previews; new sharing and saved opening work:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "ru: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:uk: fragment payload stays outside requests and previews; new sharing and saved opening work:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "uk: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:34:native sections, skip link, reload, Back/Forward and language switching retain the plan:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "native sections, skip link, reload, Back/Forward and language switching retain the plan",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:44:local editing is available during catalog failure and a late response cannot replace a different fragment:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "local editing is available during catalog failure and a late response cannot replace a different fragment",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:57:malformed fragment variants never request an offer and never fall back to a previous plan:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "malformed fragment variants never request an offer and never fall back to a previous plan",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:64:legacy query links still render without JavaScript; fragment links explain the JavaScript requirement:desktop",
+      "file": "share-privacy.spec.ts",
+      "title": "legacy query links still render without JavaScript; fragment links explain the JavaScript requirement",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:pl: fragment payload stays outside requests and previews; new sharing and saved opening work:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "pl: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:en: fragment payload stays outside requests and previews; new sharing and saved opening work:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "en: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:ru: fragment payload stays outside requests and previews; new sharing and saved opening work:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "ru: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:12:uk: fragment payload stays outside requests and previews; new sharing and saved opening work:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "uk: fragment payload stays outside requests and previews; new sharing and saved opening work",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:34:native sections, skip link, reload, Back/Forward and language switching retain the plan:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "native sections, skip link, reload, Back/Forward and language switching retain the plan",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:44:local editing is available during catalog failure and a late response cannot replace a different fragment:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "local editing is available during catalog failure and a late response cannot replace a different fragment",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:57:malformed fragment variants never request an offer and never fall back to a previous plan:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "malformed fragment variants never request an offer and never fall back to a previous plan",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "share-privacy.spec.ts:64:legacy query links still render without JavaScript; fragment links explain the JavaScript requirement:mobile",
+      "file": "share-privacy.spec.ts",
+      "title": "legacy query links still render without JavaScript; fragment links explain the JavaScript requirement",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "shared-trip.spec.ts:7:saved and shared plans survive reload and recipients edit independent copies:desktop",
+      "file": "shared-trip.spec.ts",
+      "title": "saved and shared plans survive reload and recipients edit independent copies",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "shared-trip.spec.ts:47:invalid, missing and expired offers retain clear states and honest previews:desktop",
+      "file": "shared-trip.spec.ts",
+      "title": "invalid, missing and expired offers retain clear states and honest previews",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "shared-trip.spec.ts:61:sharing remains available when browser storage and clipboard are blocked:desktop",
+      "file": "shared-trip.spec.ts",
+      "title": "sharing remains available when browser storage and clipboard are blocked",
+      "project": "desktop",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "shared-trip.spec.ts:7:saved and shared plans survive reload and recipients edit independent copies:mobile",
+      "file": "shared-trip.spec.ts",
+      "title": "saved and shared plans survive reload and recipients edit independent copies",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "shared-trip.spec.ts:47:invalid, missing and expired offers retain clear states and honest previews:mobile",
+      "file": "shared-trip.spec.ts",
+      "title": "invalid, missing and expired offers retain clear states and honest previews",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    },
+    {
+      "key": "shared-trip.spec.ts:61:sharing remains available when browser storage and clipboard are blocked:mobile",
+      "file": "shared-trip.spec.ts",
+      "title": "sharing remains available when browser storage and clipboard are blocked",
+      "project": "mobile",
+      "status": "expected",
+      "result": "passed",
+      "retries": 0
+    }
+  ]
+}

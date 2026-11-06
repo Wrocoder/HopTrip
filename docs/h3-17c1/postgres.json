@@ -1,0 +1,22 @@
+{
+  "name": "/hoptrip-h3-17c1-pg-20261106",
+  "id": "30e804ade27569644cd1c6bc60cc9934cea907b9360f6c732847c1b02f666470",
+  "image": "postgres:16-alpine",
+  "imageId": "sha256:16bc17c64a573ef34162af9298258d1aec548232985b33ed7b1eac33ba35c229",
+  "label": "H3-17c1",
+  "running": true,
+  "tmpfs": {
+    "/var/lib/postgresql/data": "rw,size=536870912"
+  },
+  "publishedPorts": {
+    "5432/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "54955"
+      }
+    ]
+  },
+  "persistentMounts": [],
+  "database": "hoptrip_test",
+  "migrationHead": "0021_telegram_alerts"
+}

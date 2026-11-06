@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {readFileSync,readdirSync,writeFileSync} from 'node:fs';
+const out='docs/h3-18b8/';
+const read=p=>JSON.parse(readFileSync(out+p,'utf8'));
+function cases(report){const result=[];function walk(s){for(const spec of s.specs||[])for(const t of spec.tests||[])result.push({title:spec.title,project:t.projectName,status:t.status,file:spec.file});for(const child of s.suites||[])walk(child);}walk(report);return result;}
+const before=cases(read('browser-before.json'));assert.equal(before.length,1);assert.equal(before[0].status,'unexpected');
+const after=cases(read('browser.json'));assert.equal(after.length,66);assert.equal(after.filter(t=>t.status==='expected').length,64);
+const final=cases(read('browser-final.json'));assert.equal(final.length,10);assert(final.every(t=>t.status==='expected'));
+const latest=new Map(after.map(t=>[t.project+' '+t.title,t]));for(const t of final)latest.set(t.project+' '+t.title,t);
+assert.equal(latest.size,66);assert([...latest.values()].every(t=>t.status==='expected'));
+const traces=readdirSync(out+'traces').filter(p=>p.endsWith('.json')).map(name=>({name,...read('traces/'+name)}));
+const select=name=>traces.filter(t=>t.name.endsWith('__'+name+'.json'));
+assert.equal(select('navigation').length,8);assert(select('navigation').every(t=>t.distinctSessions===1&&t.saveAutoOpenRetainsSession&&t.sourceCampaignRetained));
+assert.equal(select('client-locale').length,2);assert(select('client-locale').every(t=>t.clientNavigationWithoutDocumentReload&&t.languageSwitches===4&&t.distinctSessions===1));
+assert.equal(select('revocation').length,2);assert(select('revocation').every(t=>t.staleIdentityCleared&&t.noPreGrantOrRevokedReplay&&t.regrantStartsNewSession));
+assert.equal(select('expiry').length,2);assert(select('expiry').every(t=>t.at29MinutesSameSession&&t.at30MinutesNewSession));
+assert.equal(select('auto-open').length,8);assert(select('auto-open').every(t=>t.sameAnonymousSessionAcrossAutoOpen&&t.sessionRemovals.length===0));
+assert.equal(select('indistinguishable').length,2);assert(select('indistinguishable').every(t=>t.distinctAnonymousSessions===1&&t.semanticShapesEqual&&t.hashOnlyLocalTransitionGeneratedNewView===false));
+assert.equal(select('storage').length,4);assert.equal(select('blocked').length,2);
+assert.match(readFileSync(out+'api.txt','utf8'),/104 passed/);assert.match(readFileSync(out+'node.txt','utf8'),/pass 331/);
+assert.match(readFileSync(out+'build.txt','utf8'),/Compiled successfully/);assert.match(readFileSync(out+'build.txt','utf8'),/Finalizing page optimization/);
+assert.equal(readFileSync(out+'types.txt','utf8').trim(),'');
+for(const file of ['types-final.txt','lint-final.txt'])assert.equal(readFileSync(out+file,'utf8').trim(),'');
+assert.match(readFileSync(out+'lint.txt','utf8'),/eslint/);assert(!/\berror\b|\bwarning\b/i.test(readFileSync(out+'lint.txt','utf8')));
+const parity=read('parity-summary.json');assert.equal(parity.runtimeDelta.length,1);
+const result={task:'H3-18b8',status:'DONE locally',...parity,browser:{before:before.map(t=>({title:t.title,status:t.status})),initialPassed:64,initialFailed:2,finalAffectedPassed:10,uniqueLatestPassed:latest.size,newLifecycleCases:30,existingRegressionCases:36,projects:['desktop','mobile'],locales:['pl','en','ru','uk'],autoOpenCasesWithoutSessionRemoval:8},apiPassed:104,nodePassed:331,eslint:'PASS',typescript:'PASS',nextBuild:'PASS',fullApiRerun:false,newAnalyticsFields:0,dbMigrations:0,newDependencies:0,productionDeployed:false,trueRetentionMetric:'unavailable',realKpiMeasured:false};
+writeFileSync(out+'verification.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

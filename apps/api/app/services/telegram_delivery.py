@@ -16,6 +16,7 @@ from app.services.catalog import serialize_deal
 from app.services.telegram_subscriptions import CONSENT_VERSION, cancel_queued, lock
 from app.services.telegram_text import message
 from app.services.telegram_transport import TelegramClient, TelegramFailure
+from app.services.trip_timeline_text import timeline_text
 from pydantic import ValidationError
 from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session
@@ -52,7 +53,8 @@ def body(db: Session, settings: Settings, sub: TelegramSubscription, deals: list
                          for v in (facts.outbound_stops, facts.return_stops))
         lines.append(
             f'\n{view.origin_code} → {view.destination_city[:60]}\n'
-            f'{deal.trip_start} – {deal.trip_end}; {message("nights", locale)}: {deal.nights}\n'
+            f'{deal.trip_start} – {deal.trip_end}\n'
+            f'{timeline_text(facts, locale)}\n'
             f'{message("price", locale)}: {deal.price_per_person_pln:.2f} PLN\n'
             f'{message("seen", locale)}: {utc(deal.last_verified_at):%Y-%m-%d %H:%M UTC}\n'
             f'{message("connections", locale)}: {stops}\n'

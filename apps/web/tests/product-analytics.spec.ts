@@ -40,7 +40,12 @@ async function signup(page:Page,locale:Locale,email:string){
 for(const locale of ['pl','en','ru','uk'] as const)test(`product taxonomy follows real actions without private payloads in ${locale}`,async({page,context,request})=>{
  test.setTimeout(120000);
  const {events,statuses,externalTrackers}=await setup(page,context);
- const flush=async()=>{await expect.poll(()=>statuses.length).toBe(events.length);expect(statuses.every(s=>s===202)).toBe(true);};
+ const flush=async()=>{
+  // Navigation can enqueue more events while earlier responses are still in flight.
+  // Sample both counters together instead of freezing the expected request count.
+  await expect.poll(()=>events.length>0&&statuses.length===events.length).toBe(true);
+  expect(statuses.every(s=>s===202)).toBe(true);
+ };
  await page.goto(localizedHref('/deals?origin=WRO&budget=300&sort=price',locale));
  await page.locator('.filter-chip').last().click();
  await expect.poll(()=>events.some(e=>e.filter?.action==='remove')).toBe(true);

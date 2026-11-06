@@ -212,7 +212,7 @@ API версия, статус пояснения и арифметика оце
 Прямая проверка до установки выявила, что flight-v3 уже работал в контейнерах
 от 2026-09-27; прежняя запись «не опубликовано» была устаревшей. Выпуск 2026-09-28
 фиксирует код в GitHub, успешный CI и повторное развёртывание проверенной версии.
-Backup и порядок отката: [запись приёмки flight-v3](releases/2026-09-28-flight-v3.md).
+Backup и порядок отката: запись приёмки flight-v3 (`docs/releases/2026-09-28-flight-v3.md`; исторический файл удалён).
 
 **Далее:**
 
@@ -551,7 +551,7 @@ there is no implemented package feed adapter yet. See [seo.md](seo.md).
 
 This is an **external-input checklist**, not the complete implementation plan. The repository
 audit identified internal blockers; the local implementation and tests now address them. See
-[project-audit-and-plan.md](project-audit-and-plan.md) for priorities, implementation scope
+project-audit-and-plan.md (`docs/project-audit-and-plan.md`; исторический файл удалён) for priorities, implementation scope
 and acceptance criteria, and [implementation-status.md](implementation-status.md) for progress.
 
 - [ ] Confirm permitted data access and capture one real provider response securely.

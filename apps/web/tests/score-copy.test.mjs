@@ -13,7 +13,7 @@ test("score translations retain numeric rules and interpolation slots",()=>{
 test("translated methodology retains the complete example and all sections",()=>{
  for(const page of Object.values(priceGuide)){
   assert.equal(page.paragraphs.length,1);
-  assert.deepEqual(page.sections.map(section=>section.paragraphs.length),[2,2,6]);
+  assert.deepEqual(page.sections.map(section=>section.paragraphs.length),[4,2,7]);
   const text=JSON.stringify(page).replaceAll(",",".");
   for(const value of ["0–100","60","25","15","48","0.6","0.1","330 PLN","400 PLN","40.5","7.5","68/100"])assert.ok(text.includes(value),value);
  }

@@ -1,0 +1,23 @@
+import {test,expect} from '@playwright/test';
+import {localizedHref} from '../src/lib/i18n/routing';
+import {scoreText} from '../src/lib/i18n/score-copy';
+test.use({javaScriptEnabled:false});
+for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: SSR help and native disclosures work without JavaScript`,async({page,request},info)=>{
+ await page.goto(localizedHref('/deals?budget=200.25',locale));
+ const card=page.locator('.deal-card');await expect(card).toHaveCount(1);
+ await card.locator('.trip-details > summary').click();
+ await expect(card.locator('.price-methodology-link')).toBeVisible();
+ await expect(card.locator('.trip-details .price-comparison')).toBeVisible();
+ await expect(card.locator('.trip-details .price-observation')).toBeVisible();
+ await card.locator('.score-trigger').click();
+ await expect(page).toHaveURL(/#score$/);
+ await expect(page.locator('#score .score-sum')).not.toBeVisible();
+ await page.locator('#score .score-calculation > summary').focus();await page.keyboard.press('Enter');
+ await expect(page.locator('#score .score-sum')).toContainText('76/100');
+ await page.locator('#score a.text-link').focus();await page.keyboard.press('Enter');
+ await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+ await expect(page.locator('main')).toContainText(scoreText(locale,'exclusions'));
+ const html=await(await request.get(localizedHref('/info/price-comparison',locale))).text();
+ expect(html).toContain(scoreText(locale,'grouping'));expect(html).toContain(scoreText(locale,'exclusions'));
+ await info.attach('methodology-ssr',{body:html,contentType:'text/html'});
+});

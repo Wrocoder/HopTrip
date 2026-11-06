@@ -1,0 +1,70 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test static-retention.spec.ts --project=desktop --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [4768]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5840802f6fbb4431a8797aa0e438f020 method=GET status=200
+
+[WebServer] (node:35332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=d89cf1347b4c4ca3a77bdb5ea5cb7c68 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b024baeb3b4547fa8ed06e8cf76a955f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f27a4f620d8c49e3aa0bcb1632067335 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b012aeecce9a4bcdb08a96127d6c4eb0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a8d4bc2d279146aaaba320acbbb01fee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a37d44d86d14c1a840a88a17bfc2171 method=GET status=200
+
+
+Running 1 test using 1 worker
+
+
+(node:9396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\static-retention.spec.ts:8:5 › previous and current release resources survive switching server generations
+
+[WebServer] INFO:hoptrip.requests:request_id=6a9edd89c08a4f229f712c4d98f0799b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=578d6a0a575c4ed9b133a8ba1bef3dc1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8af47b1eb91242efbae33efe4215dd0b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=521f841847af45b7b0952be80f816e65 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dc8310aa6c434660b50bd9b0bc8bd6dd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=505bf42fa80f4b7dad916fb30e5dab40 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4b1e944f2a69489e8cccaad8ad0316d4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=36871f9dc1fe409881810e9f4074e811 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=03d7ef2da5cc4908bcdf051857d63b17 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a4b69d3af135451dac4258c799981188 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4bcf329f5ae04e3ba7fdf7d6ffd0f750 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6a6bf9cff036419591e81d6c4ac755d6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=60efb6755cec484ca95af43e7d3da486 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=78a40595d65c4435957993acd1b57ecf method=GET status=200
+[desktop] › tests\static-retention.spec.ts:8:5 › previous and current release resources survive switching server generations
+(node:35072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  1 passed (10.6s)

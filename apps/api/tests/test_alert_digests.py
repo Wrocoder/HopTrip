@@ -101,8 +101,10 @@ def test_five_sorted_new_matches_then_no_repeat_and_working_unsubscribe(isolated
     body = mail[0][3]
     assert body.count('/deals/') == 5
     for text in ['Wrocław (WRO) → Mediolan', '06.11.2026 – 08.11.2026', '200,00 zł/os.',
-                 'liczba nocy: 2', 'Bagaż', 'Nocleg', 'brak danych', 'Cena i dostępność', '/manage#token=']:
+                 'Noce na miejscu: do potwierdzenia', 'Dzień i godzina przylotu powrotnego do potwierdzenia.',
+                 'Bagaż', 'Nocleg', 'brak danych', 'Cena i dostępność', '/manage#token=']:
         assert text in body
+    assert 'liczba nocy: 2' not in body  # Deal.nights is not an evidenced destination stay.
     assert digests.deliver_digests(db, config, NOW)['sent'] == 0
     assert digests.deliver_digests(db, config, NOW + timedelta(days=1))['sent'] == 0
     for deal in deals:

@@ -1,0 +1,528 @@
+diff --git a/docs/h3-18b9/analytics.py.before.txt b/apps/api/app/api/analytics.py
+index d8a3f42..8c6e3d7 100644
+--- a/docs/h3-18b9/analytics.py.before.txt
++++ b/apps/api/app/api/analytics.py
+@@ -1,108 +1,220 @@
+-from datetime import date
+-from decimal import Decimal
+-from typing import Any, Literal
+-
+-from pydantic import BaseModel, Field, field_validator, model_validator
+-
+-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN", "BUDGET_CALCULATED"]
+-
+-
+-class ActivityContext(BaseModel):
+-    city: str = Field(max_length=80, pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+-    activity_id: str = Field(max_length=100, pattern=r"^(?:tiqets-[0-9]+|official-[a-z0-9-]+)$")
+-    page: str = Field(max_length=240, pattern=r"^/(?:info|deals)/[a-z0-9-]+$")
+-    link_kind: Literal["affiliate", "official"]
+-
+-
+-class ActivityClickSummary(ActivityContext):
+-    clicks: int
+-    sessions: int
+-
+-
+-class SearchFilters(BaseModel):
+-    origin: str | None = Field(None, pattern=r"^(?:[A-Z]{3}|WAW,WMI)$")
+-    destination: str | None = Field(None, max_length=80, pattern=r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+-    departure_from: date | None = None
+-    departure_to: date | None = None
+-    budget: Decimal | None = Field(None, ge=0, le=1000000)
+-    duration_min: int | None = Field(None, ge=0, le=365)
+-    duration_max: int | None = Field(None, ge=0, le=365)
+-    offset: int | None = Field(None, ge=0, le=10000)
+-    weekend: bool | None = None
+-
+-
+-class SearchContext(BaseModel):
+-    filters: SearchFilters
+-    result_count: int | None = Field(None, ge=0, le=100)
+-    error: Literal["invalid_filters", "unavailable"] | None = None
+-
+-
+-class PartnerContext(BaseModel):
+-    category: Literal["flight", "stay", "activity"]
+-    provider: Literal["catalog", "stay22", "tiqets"]
+-
+-
+-class FilterContext(BaseModel):
+-    action: Literal["apply", "remove", "reset"]
+-
+-
+-class AnalyticsEventCreate(BaseModel):
+-    event_id: str | None = Field(None, pattern=r"^[a-fA-F0-9-]{36}$")
+-    event_name: EventName
+-    anonymous_session_id: str = Field(min_length=8, max_length=120)
+-    deal_slug: str | None = Field(default=None, max_length=220)
+-    component: str | None = Field(default=None, max_length=40)
+-    source: str | None = Field(default=None, max_length=80)
+-    metadata: dict[str, Any] = Field(default_factory=dict)
+-    activity: ActivityContext | None = None
+-    search: SearchContext | None = None
+-    partner: PartnerContext | None = None
+-    filter: FilterContext | None = None
+-
+-    @field_validator("source")
+-    @classmethod
+-    def allowed_source(cls, value):
+-        return value if value in {"homepage", "google", "facebook", "instagram", "newsletter", "direct", "test"} else None
+-
+-    @model_validator(mode="after")
+-    def activity_matches_event(self):
+-        if (self.event_name == "ACTIVITY_CLICK") != (self.activity is not None):
+-            raise ValueError("Activity context is required only for ACTIVITY_CLICK")
+-        if self.event_name == "SEARCH_RESULT":
+-            if self.search is None or (self.search.result_count is None) == (self.search.error is None):
+-                raise ValueError("Search result needs either a count or an error")
+-        if self.search and self.event_name not in {"SEARCH", "SEARCH_RESULT"}:
+-            raise ValueError("Search context only belongs to search events")
+-        if (self.event_name == "PARTNER_CLICK") != (self.partner is not None):
+-            raise ValueError("Partner context is required only for PARTNER_CLICK")
+-        if self.filter and self.event_name != "FILTER_USE":
+-            raise ValueError("Filter context only belongs to FILTER_USE")
+-        return self
+-
+-
+-class AnalyticsEventAccepted(BaseModel):
+-    accepted: bool = True
+-
+-
+-class AnalyticsSummary(BaseModel):
+-    total_activity_clicks: int = 0
+-    activity_clicks: list[ActivityClickSummary] = Field(default_factory=list)
+-    session_ctr_percent: Decimal = Decimal("0.00")
+-    attributed_conversions: int = 0
+-    unattributed_conversions: int = 0
+-    total_events: int
+-    by_event: dict[str, int]
+-    total_sessions: int = 0
+-    total_deal_views: int = 0
+-    total_affiliate_clicks: int = 0
+-    confirmed_bookings: int = 0
+-    affiliate_ctr_percent: Decimal = Decimal("0.00")
+-    booking_conversion_percent: Decimal = Decimal("0.00")
+-    revenue_per_session_pln: Decimal = Decimal("0.00")
+-    revenue_per_affiliate_click_pln: Decimal = Decimal("0.00")
+-    revenue_per_1000_sessions_pln: Decimal = Decimal("0.00")
+-    total_conversions: int = 0
+-    confirmed_commission_pln: Decimal = Decimal("0.00")
+-    revenue_by_provider_pln: dict[str, Decimal] = Field(default_factory=dict)
+-    revenue_by_category_pln: dict[str, Decimal] = Field(default_factory=dict)
+-    revenue_by_deal_pln: dict[str, Decimal] = Field(default_factory=dict)
++from datetime import UTC, datetime, timedelta
++from decimal import ROUND_HALF_UP, Decimal
++from typing import Any, get_args
++
++from fastapi import APIRouter, Depends, HTTPException, Response
++from fastapi.responses import HTMLResponse
++from sqlalchemy import func, select
++from sqlalchemy.exc import IntegrityError
++from sqlalchemy.orm import Session
++
++from app.api.admin import require_admin
++from app.config import get_settings
++from app.db.session import get_db
++from app.models.affiliate_click import AffiliateClick
++from app.models.analytics import AnalyticsEvent
++from app.models.conversion import AffiliateConversion
++from app.models.deal import Deal
++from app.models.location import Airport, Destination
++from app.schemas.analytics import (
++    ActivityClickSummary,
++    AnalyticsEventAccepted,
++    AnalyticsEventCreate,
++    AnalyticsLocale,
++    AnalyticsSummary,
++)
++from app.schemas.usage import UsageReport
++from app.services.usage_dashboard import DashboardLocale, render_usage
++from app.services.usage_metrics import UsageLimitExceeded, usage_report, usage_window
++
++router = APIRouter(prefix="/api/v1", tags=["analytics"])
++
++
++def _usage(db: Session, start: datetime | None, end: datetime | None) -> UsageReport:
++    try:
++        start, end = usage_window(start, end)
++        return usage_report(db, start, end)
++    except UsageLimitExceeded as exc:
++        raise HTTPException(413, str(exc)) from None
++    except ValueError as exc:
++        raise HTTPException(422, str(exc)) from None
++
++
++@router.get("/admin/analytics/usage", response_model=UsageReport,
++            dependencies=[Depends(require_admin)])
++def product_usage(response: Response, start: datetime | None = None,
++                  end: datetime | None = None, db: Session = Depends(get_db)) -> UsageReport:
++    response.headers["X-Robots-Tag"] = "noindex, nofollow, nosnippet"
++    return _usage(db, start, end)
++
++
++@router.get("/admin/analytics/dashboard", response_class=HTMLResponse,
++            dependencies=[Depends(require_admin)])
++def usage_dashboard(start: datetime | None = None, end: datetime | None = None,
++                    locale: DashboardLocale = "pl", db: Session = Depends(get_db)) -> HTMLResponse:
++    return HTMLResponse(render_usage(_usage(db, start, end), locale), headers={
++        "X-Robots-Tag": "noindex, nofollow, nosnippet",
++        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; "
++                                   "frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
++    })
++
++
++def _money(value) -> Decimal:
++    return Decimal(str(value or 0)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
++
++
++def _per_unit(value, units: int) -> Decimal:
++    return _money(Decimal(str(value)) / units) if units else Decimal("0.00")
++
++
++def _percent(numerator: int, denominator: int) -> Decimal:
++    return _per_unit(numerator * 100, denominator)
++
++
++@router.post("/analytics/events", response_model=AnalyticsEventAccepted, status_code=202)
++def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
++    deal_id = None
++    if payload.deal_slug:
++        deal_id = db.scalar(select(Deal.id).where(Deal.slug == payload.deal_slug))
++        if deal_id is None:
++            raise HTTPException(404, "Deal not found")
++    # Keep bounded campaign context and separately validated activity fields only.
++    metadata: dict[str, Any] = {
++        k: str(v)[:80] for k, v in payload.metadata.items() if k == "campaign" and v in ("hoptrip-launch", "wro-weekend", "test")
++    }
++    if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "saved", "alerts", "guide"}:
++        metadata["page_type"] = payload.metadata["page_type"]
++    locale = payload.metadata.get("locale")
++    if isinstance(locale, str) and locale in get_args(AnalyticsLocale):
++        metadata["locale"] = locale
++    if payload.activity:
++        metadata["activity"] = payload.activity.model_dump()
++    if payload.search:
++        search = payload.search.model_dump(mode="json", exclude_none=True)
++        filters = search["filters"]
++        if "origin" in filters and filters["origin"] != "WAW,WMI" and not db.scalar(select(Airport.id).where(Airport.iata_code == filters["origin"])):
++            filters.pop("origin")
++        if "destination" in filters and not db.scalar(select(Destination.id).where(Destination.slug == filters["destination"])):
++            filters.pop("destination")
++        metadata["search"] = search
++    if payload.partner:
++        metadata["partner"] = payload.partner.model_dump()
++    if payload.filter:
++        metadata["filter"] = payload.filter.model_dump()
++    event = AnalyticsEvent(
++        event_id=payload.event_id,
++        event_name=payload.event_name,
++        anonymous_session_id=payload.anonymous_session_id,
++        deal_id=deal_id,
++        component=payload.component,
++        source=payload.source,
++        metadata_json=metadata,
++    )
++    try:
++        with db.begin_nested():
++            db.add(event)
++            db.flush()
++        db.commit()
++    except IntegrityError:
++        if not payload.event_id or not db.scalar(
++            select(AnalyticsEvent.id).where(AnalyticsEvent.event_id == payload.event_id)
++        ):
++            raise
++    return AnalyticsEventAccepted()
++
++
++@router.get(
++    "/admin/analytics/summary",
++    response_model=AnalyticsSummary,
++    dependencies=[Depends(require_admin)],
++)
++def analytics_summary(
++    start: datetime | None = None, end: datetime | None = None, db: Session = Depends(get_db)
++):
++    for bound in (start, end):
++        if bound and bound.tzinfo is None:
++            raise HTTPException(422, "Use timezone-aware period bounds")
++    end = end or datetime.now(UTC)
++    start = start or end - timedelta(days=get_settings().analytics_retention_days)
++    if start and start >= end:
++        raise HTTPException(422, "start must precede end")
++
++    def window(column):
++        return [column < end] + ([column >= start] if start else [])
++
++    events = list(db.scalars(select(AnalyticsEvent).where(*window(AnalyticsEvent.created_at))))
++    clicks = list(
++        db.scalars(
++            select(AffiliateClick).where(
++                AffiliateClick.status == "REDIRECTED", *window(AffiliateClick.created_at)
++            )
++        )
++    )
++    conversions = list(
++        db.scalars(
++            select(AffiliateConversion).where(
++                *window(
++                    func.coalesce(AffiliateConversion.occurred_at, AffiliateConversion.created_at)
++                )
++            )
++        )
++    )
++    sessions = {e.anonymous_session_id for e in events}
++    views = [e for e in events if e.event_name == "DEAL_VIEW"]
++    view_sessions = {e.anonymous_session_id for e in views}
++    click_sessions = {c.anonymous_session_id for c in clicks}
++    confirmed = [c for c in conversions if c.status == "CONFIRMED"]
++    pln = [c for c in confirmed if c.currency == "PLN"]
++    revenue = sum((c.commission or Decimal(0) for c in pln), Decimal(0))
++    by_event: dict[str, int] = {}
++    by_provider: dict[str, Decimal] = {}
++    by_category: dict[str, Decimal] = {}
++    by_deal: dict[str, Decimal] = {}
++    activity_groups: dict[tuple, dict] = {}
++    for event in events:
++        by_event[event.event_name] = by_event.get(event.event_name, 0) + 1
++        if event.event_name == "ACTIVITY_CLICK" and (activity := event.metadata_json.get("activity")):
++            key = tuple(activity[field] for field in ("city", "activity_id", "page", "link_kind"))
++            group = activity_groups.setdefault(key, {**activity, "clicks": 0, "sessions": set()})
++            group["clicks"] += 1
++            group["sessions"].add(event.anonymous_session_id)
++    for conversion in pln:
++        value = conversion.commission or Decimal(0)
++        by_provider[conversion.provider_code] = (
++            by_provider.get(conversion.provider_code, Decimal(0)) + value
++        )
++        by_category[conversion.booking_category] = (
++            by_category.get(conversion.booking_category, Decimal(0)) + value
++        )
++        deal = db.get(Deal, conversion.deal_id) if conversion.deal_id else None
++        if deal:
++            by_deal[deal.slug] = by_deal.get(deal.slug, Decimal(0)) + value
++    attributed = sum(c.click_id is not None for c in conversions)
++    return AnalyticsSummary(
++        total_activity_clicks=by_event.get("ACTIVITY_CLICK", 0),
++        activity_clicks=[
++            ActivityClickSummary.model_validate({**group, "sessions": len(group["sessions"])})
++            for _, group in sorted(activity_groups.items(), key=lambda item: (-item[1]["clicks"], item[0]))
++        ],
++        total_events=len(events),
++        by_event=by_event,
++        total_sessions=len(sessions),
++        total_deal_views=len(views),
++        total_affiliate_clicks=len(clicks),
++        total_conversions=len(conversions),
++        confirmed_bookings=len(confirmed),
++        confirmed_commission_pln=_money(revenue),
++        affiliate_ctr_percent=_percent(len(clicks), len(views)),
++        session_ctr_percent=_percent(len(view_sessions & click_sessions), len(view_sessions)),
++        booking_conversion_percent=_percent(
++            sum(c.click_id is not None for c in confirmed), len(clicks)
++        ),
++        attributed_conversions=attributed,
++        unattributed_conversions=len(conversions) - attributed,
++        revenue_per_session_pln=_per_unit(revenue, len(sessions)),
++        revenue_per_affiliate_click_pln=_per_unit(revenue, len(clicks)),
++        revenue_per_1000_sessions_pln=_per_unit(revenue * 1000, len(sessions)),
++        revenue_by_provider_pln=by_provider,
++        revenue_by_category_pln=by_category,
++        revenue_by_deal_pln=by_deal,
++    )
+diff --git a/docs/h3-18b9/analytics.py.before.txt b/apps/api/app/schemas/analytics.py
+index d8a3f42..2c477cf 100644
+--- a/docs/h3-18b9/analytics.py.before.txt
++++ b/apps/api/app/schemas/analytics.py
+@@ -4,6 +4,8 @@ from typing import Any, Literal
+ 
+ from pydantic import BaseModel, Field, field_validator, model_validator
+ 
++AnalyticsLocale = Literal["pl", "en", "ru", "uk"]
++
+ EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN", "BUDGET_CALCULATED"]
+ 
+ 
+diff --git a/docs/h3-18b9/usage.py.before.txt b/apps/api/app/schemas/usage.py
+index de7566d..6845b0a 100644
+--- a/docs/h3-18b9/usage.py.before.txt
++++ b/apps/api/app/schemas/usage.py
+@@ -2,6 +2,7 @@ from datetime import datetime
+ from decimal import Decimal
+ from typing import Literal
+ 
++from app.schemas.analytics import AnalyticsLocale
+ from pydantic import BaseModel, Field
+ 
+ 
+@@ -59,6 +60,21 @@ class OriginCohortReport(BaseModel):
+     rows: list[OriginCohort]
+ 
+ 
++LocaleKey = Literal[AnalyticsLocale, "unknown"]
++
++
++class LocaleCohort(BaseModel):
++    locale: LocaleKey
++    sessions: int = Field(ge=0)
++    percent: Decimal | None = Field(default=None, ge=0, le=100)
++    metrics: list[UsageMetric]
++
++
++class LocaleCohortReport(BaseModel):
++    version: Literal["first-received-locale-cohorts-v1"] = "first-received-locale-cohorts-v1"
++    rows: list[LocaleCohort]
++
++
+ class UsageReport(BaseModel):
+     start: datetime
+     end: datetime
+@@ -72,3 +88,4 @@ class UsageReport(BaseModel):
+     ordered_funnel: OrderedFunnel | None = None
+     engagement: EngagementReport | None = None
+     origin_cohorts: OriginCohortReport | None = None
++    locale_cohorts: LocaleCohortReport | None = None
+diff --git a/docs/h3-18b9/usage_metrics.py.before.txt b/apps/api/app/services/usage_metrics.py
+index 0e4e4a1..81535d8 100644
+--- a/docs/h3-18b9/usage_metrics.py.before.txt
++++ b/apps/api/app/services/usage_metrics.py
+@@ -6,11 +6,14 @@ from decimal import ROUND_HALF_UP, Decimal
+ from typing import cast, get_args
+ 
+ from app.models.analytics import AnalyticsEvent
+-from app.schemas.analytics import EventName
++from app.schemas.analytics import AnalyticsLocale, EventName
+ from app.schemas.usage import (
+     EngagementReport,
+     FunnelStage,
+     FunnelStep,
++    LocaleCohort,
++    LocaleCohortReport,
++    LocaleKey,
+     OrderedFunnel,
+     OriginCohort,
+     OriginCohortReport,
+@@ -29,6 +32,7 @@ PAGE_TYPES = frozenset({
+ })
+ PRODUCT_EVENTS = frozenset(get_args(EventName))
+ ORIGIN_KEYS = frozenset(get_args(OriginKey))
++LOCALE_KEYS = frozenset(get_args(AnalyticsLocale))
+ ENGAGEMENT_EVENTS = (
+     ("detail_disclosure", "DEAL_DETAILS_OPEN"),
+     ("budget_completion", "BUDGET_CALCULATED"),
+@@ -135,6 +139,28 @@ def origin_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -
+     ) for origin, members in sorted(groups.items())])
+ 
+ 
++def locale_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -> LocaleCohortReport:
++    """First received product event in the window; never backfill legacy unknowns."""
++    first: dict[str, LocaleKey] = {}
++    for row in events:
++        if row.anonymous_session_id in first:
++            continue
++        metadata = row.metadata_json if isinstance(row.metadata_json, dict) else {}
++        value = metadata.get("locale")
++        first[row.anonymous_session_id] = (
++            cast(LocaleKey, value) if isinstance(value, str) and value in LOCALE_KEYS else "unknown"
++        )
++    groups: dict[LocaleKey, set[str]] = defaultdict(set)
++    for session, locale in first.items():
++        groups[locale].add(session)
++    population = len(first)
++    return LocaleCohortReport(rows=[LocaleCohort(
++        locale=locale, sessions=len(members), percent=percent(len(members), population),
++        metrics=[metric(key, len(members & by_name[event]), len(members))
++                 for key, event in ENGAGEMENT_EVENTS],
++    ) for locale, members in sorted(groups.items())])
++
++
+ def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
+     """Window is [start,end); stable DB order disambiguates equal timestamps."""
+     start, end = usage_window(start, end)
+@@ -211,4 +237,5 @@ def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
+             metric(key, len(by_name[event]), n) for key, event in ENGAGEMENT_EVENTS
+         ]),
+         origin_cohorts=origin_cohorts(events, by_name),
++        locale_cohorts=locale_cohorts(events, by_name),
+     )
+diff --git a/docs/h3-18b9/usage_dashboard.py.before.txt b/apps/api/app/services/usage_dashboard.py
+index c28dd03..5fd9b46 100644
+--- a/docs/h3-18b9/usage_dashboard.py.before.txt
++++ b/apps/api/app/services/usage_dashboard.py
+@@ -3,9 +3,10 @@
+ from html import escape
+ from typing import Literal
+ 
++from app.schemas.analytics import AnalyticsLocale
+ from app.schemas.usage import UsageMetric, UsageReport
+ 
+-DashboardLocale = Literal["pl", "en", "ru", "uk"]
++DashboardLocale = AnalyticsLocale
+ LANG_INDEX = {"pl": 0, "en": 1, "ru": 2, "uk": 3}
+ FUNNEL = {
+     "title": ("Sekwencja sesji", "Ordered session funnel", "Последовательная воронка сессий", "Послідовна воронка сесій"),
+@@ -24,6 +25,15 @@ FUNNEL = {
+     "partner_click": ("Kliknięcie tej samej oferty", "Same-offer partner click", "Клик по тому же предложению", "Клік за тією самою пропозицією"),
+ }
+ UI = {
++    "locale_cohorts": ("Język pierwszego odebranego zdarzenia", "First received event language", "Язык первого полученного события", "Мова першої отриманої події"),
++    "locale": ("Język strony", "Page language", "Язык страницы", "Мова сторінки"),
++    "locale_unknown": ("Nieznany lub niezaobserwowany", "Unknown or not observed", "Неизвестен или не наблюдался", "Невідомий або не спостерігався"),
++    "locale_note": (
++        "Kohorta to język strony z pierwszego zdarzenia produktu odebranego w tym okresie (czas serwera, potem ID zapisu), także bez PAGE_VIEW. Brak lub błędny język pozostaje nieznany; późniejsze zdarzenia i zmiana języka nie przenoszą sesji. Starszych danych nie uzupełniamy. To nie język przeglądarki, osoby ani konkretnego działania. Każda sesja należy do jednej kohorty. Udział: sesje kohorty / wszystkie obserwowane sesje. Działania: sesje ze zdarzeniem w całym oknie / sesje kohorty. To podział opisowy, nie atrybucja ani konwersja między etapami. Porównuj okresy z takim samym zakresem zbierania zdarzeń; zero odebranych działań nie dowodzi braku użycia.",
++        "The cohort uses page language from the first product event received in this period (server time, then record ID), including sessions without PAGE_VIEW. Missing or invalid language stays unknown; later events and language switches do not move the session. Legacy data is not backfilled. This is not browser, person or action language. Every session belongs to one cohort. Share: cohort sessions / all observed sessions. Actions: sessions with the event anywhere in the window / cohort sessions. This is a descriptive split, not attribution or step conversion. Compare periods with matching collection coverage; zero received actions does not prove no usage.",
++        "Когорта использует язык страницы из первого продуктового события, полученного за период (время сервера, затем ID записи), включая сессии без PAGE_VIEW. Отсутствующий или неверный язык остаётся неизвестным; поздние события и смена языка не переносят сессию. Старые данные не дополняются. Это не язык браузера, человека или конкретного действия. Каждая сессия входит в одну когорту. Доля: сессии когорты / все наблюдаемые сессии. Действия: сессии с событием во всём окне / сессии когорты. Это описательный разрез, не атрибуция и не межэтапная конверсия. Сравнивайте периоды с одинаковым сбором; ноль полученных действий не доказывает отсутствие использования.",
++        "Когорта використовує мову сторінки з першої продуктової події, отриманої за період (час сервера, потім ID запису), зокрема без PAGE_VIEW. Відсутня або хибна мова лишається невідомою; пізніші події й зміна мови не переносять сесію. Старі дані не доповнюються. Це не мова браузера, людини або конкретної дії. Кожна сесія входить до однієї когорти. Частка: сесії когорти / усі спостережувані сесії. Дії: сесії з подією в усьому вікні / сесії когорти. Це описовий розріз, не атрибуція й не міжетапна конверсія. Порівнюйте періоди з однаковим збиранням; нуль отриманих дій не доводить відсутність використання.",
++    ),
+     "origin_cohorts": ("Pierwszy kontekst lotniska wylotu", "First search origin context", "Первый контекст аэропорта вылета", "Перший контекст аеропорту вильоту"),
+     "origin_note": (
+         "Kohorta to origin z pierwszego SEARCH lub SEARCH_RESULT odebranego w tym okresie (czas serwera, potem ID zapisu). Brak, błędny lub nieobsługiwany origin pozostaje nieznany, nawet po późniejszym wyszukiwaniu. Używamy 15 kodów z rejestru polskich lotnisk i osobnej grupy WAW/WMI; grupy nie rozdzielamy. Każda obserwowana sesja należy do jednej kohorty, także bez wyszukiwania lub PAGE_VIEW. Udział kohorty: jej sesje / wszystkie sesje. Komórki działań: sesje ze zdarzeniem / sesje kohorty oraz procent. Uwzględniają całe okno, także działania sprzed wyszukiwania; to podział opisowy, nie atrybucja ani konwersja między etapami.",
+@@ -156,6 +166,20 @@ def render_usage(report: UsageReport, locale: DashboardLocale = "pl") -> str:
+                         if origin_rows else f'<p class="notice">{t("no_data")}</p>')
+         origins = f'''<section data-origin-cohorts="{escape(report.origin_cohorts.version)}"><h2>{t("origin_cohorts")}</h2>
+ <p class="notice">{t("origin_note")}</p>{origin_table}</section>'''
++    languages = ""
++    if report.locale_cohorts is not None:
++        locale_rows = []
++        for language_row in report.locale_cohorts.rows:
++            label = t("locale_unknown") if language_row.locale == "unknown" else escape(language_row.locale.upper())
++            cells = "".join(f'<td>{item.numerator} / {item.denominator}<br>{rate(item.percent)}</td>'
++                            for item in language_row.metrics)
++            locale_rows.append(f'<tr><th scope="row">{label}</th><td>{language_row.sessions}</td>'
++                               f'<td>{rate(language_row.percent)}</td>{cells}</tr>')
++        locale_table = (f'''<div class="table-scroll" role="region" aria-label="{t("locale_cohorts")}" tabindex="0">
++<table><caption>{t("locale_cohorts")}</caption><thead><tr><th scope="col">{t("locale")}</th><th scope="col">{t("sessions")}</th><th scope="col">{t("origin_share")}</th><th scope="col">{t("origin_details")}</th><th scope="col">{t("origin_budget")}</th><th scope="col">{t("origin_update")}</th></tr></thead><tbody>{"".join(locale_rows)}</tbody></table></div>'''
++                        if locale_rows else f'<p class="notice">{t("no_data")}</p>')
++        languages = f'''<section data-locale-cohorts="{escape(report.locale_cohorts.version)}"><h2>{t("locale_cohorts")}</h2>
++<p class="notice">{t("locale_note")}</p>{locale_table}</section>'''
+     rows = "".join(f'<tr><th scope="row">{escape(PAGES[row.page_type][index])}</th>'
+                    f'<td>{row.sessions}</td><td>{row.partner_sessions if row.partner_sessions is not None else "—"}</td>'
+                    f'<td>{rate(row.percent)}</td></tr>' for row in report.page_cohorts)
+@@ -192,6 +216,7 @@ caption{{text-align:left;font-weight:700;padding:.5rem 0}}dt{{font-weight:600}}d
+ {engagement}
+ {funnel}
+ {origins}
++{languages}
+ <h2>{t("entry")}</h2><p>{t("proxy")}</p>{cohorts}
+ <h2>{t("quality")}</h2><dl><dt>{t("excluded")}</dt><dd>{report.excluded_events}</dd><dt>{t("invalid")}</dt><dd>{report.invalid_results}</dd><dt>{t("unlinked")}</dt><dd>{report.unlinked_detail_views}</dd></dl>
+ <p>{t("limits")}</p></main></body></html>'''
+diff --git a/docs/h3-18b9/session.ts.before.txt b/apps/web/src/lib/session.ts
+index d77497f..12e8923 100644
+--- a/docs/h3-18b9/session.ts.before.txt
++++ b/apps/web/src/lib/session.ts
+@@ -1,4 +1,4 @@
+-import {localizedHref} from "./i18n/routing.ts";
++import {localizedHref,pathLocale} from "./i18n/routing.ts";
+ import {analyticsPageType,campaignLabel,sourceLabel,type AnalyticsEventName,type EventContext} from "./analytics-context.ts";
+ import {analyticsAllowed} from "./consent.ts";
+ const KEY = "hoptrip.session.v2";
+@@ -51,7 +51,7 @@ function sendEvent(event_name:AnalyticsEventName,deal_slug?:string,activity?:Act
+  void fetch(publicApi("/api/v1/analytics/events"),{
+    method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,referrerPolicy:"no-referrer",
+    body:JSON.stringify({event_id:crypto.randomUUID(),event_name,deal_slug,activity,...context,
+-     anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign,page_type:analyticsPageType(location.pathname)}}),
++     anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign,page_type:analyticsPageType(location.pathname),locale:pathLocale(location.pathname)}}),
+  }).catch(()=>undefined);
+ }
+ export function track(event_name:AnalyticsEventName,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {

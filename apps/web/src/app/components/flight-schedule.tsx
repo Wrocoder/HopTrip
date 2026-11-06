@@ -1,13 +1,20 @@
+import {timelineView} from "../../lib/trip-timeline";
 import type {Locale} from "../../lib/i18n/config";
 import {catalogText,type CatalogKey} from "../../lib/i18n/catalog-copy";
 import type {Deal} from "../../lib/api";
 import {compactFlightTime,flightDayShift,flightTime,flightLegs,returnAirportNotice,stopsLabel} from "../../lib/flight-facts";
 import {flightRouteCopy} from '../../lib/i18n/flight-route-copy';
 import {FlightQualityNotice} from './flight-quality';
+import {weekendCopy} from '../../lib/weekend';
+import {DestinationTimeSummary} from './destination-time';
+import {AirportContextNotice} from './airport-warnings';
 
 export function FlightSchedule({deal,compact=false,card=false,detail=false,locale="pl"}:{deal:Deal;compact?:boolean;card?:boolean;detail?:boolean;locale?:Locale}) {
  const t=(source:CatalogKey)=>catalogText(locale,source);
  const f=deal.flight_facts;
+ const timeline=timelineView(deal,locale);
+ const assessment=deal.weekend_assessment,wc=weekendCopy[locale];
+ const leaveNotice=deal.trip_type==='ROUND_TRIP'?<p className="weekend-assessment">{assessment?.might_require_leave===true?wc.leave:assessment?.might_require_leave===false?wc.compatible:wc.unknown}{!card&&assessment?.might_require_leave!==null&&assessment?.might_require_leave!==undefined&&` · ${assessment.work_hours.start}–${assessment.work_hours.end} · ${assessment.work_timezone??''}`}</p>:null;
  const {outbound,inbound}=flightLegs(f);
  const airport=(code?:string|null)=>code ?? t("lotnisko do sprawdzenia");
  const origin=airport(outbound.origin),destination=airport(outbound.destination);
@@ -41,10 +48,14 @@ export function FlightSchedule({deal,compact=false,card=false,detail=false,local
    {card && out && out.day!==offerDay(deal.trip_start) && <p>{t('Wylot')}: {out.day} · {out.time} ({out.local ? t('Godziny lokalne') : t('UTC: strefa nieznana')})</p>}
    {card && deal.trip_type==='ROUND_TRIP' && back && back.day!==offerDay(deal.trip_end) && <p>{t('Wylot powrotny')}: {back.day} · {back.time} ({back.local ? t('Godziny lokalne') : t('UTC: strefa nieznana')})</p>}
    {card && outboundShift && <p>{t('Przylot')}: {destination} · {arr?.day} ({outboundShift})</p>}
-   {deal.trip_type==="ROUND_TRIP" && returnShift && home && <p className="home-arrival"><strong>{t("Powrót do")} {returnDestination}: {home.day} ({returnShift})</strong></p>}
+   {timeline.arrival && <p className="home-arrival"><strong>{timeline.arrival}</strong></p>}
+   {leaveNotice}
+   <DestinationTimeSummary deal={deal} locale={locale}/>
+   {!card&&!detail&&timeline.nights&&<p className="timeline-nights">{timeline.nights}</p>}
    {(card ? utc || estimated : local || utc) && <p className="schedule-basis">{!card && local && t("Godziny lokalne")}{!card && local && utc && " · "}{utc && t("UTC: strefa nieznana")}
     {estimated && `${!card && local || utc ? ' · ' : ''}${t("Przylot szacowany")}`}</p>}
    {notice&&<p className="flight-route-warning"><strong>{notice}</strong></p>}
+   <AirportContextNotice deal={deal} locale={locale}/>
    {!card && <p className="schedule-airline">{airlineLine}</p>}
   </div>;
  }
@@ -54,9 +65,12 @@ export function FlightSchedule({deal,compact=false,card=false,detail=false,local
    <strong>{t("Przylot")} · {destination}:</strong> {clock(outbound.arrival,outbound.destinationZone)}{outboundShift && ` · ${outboundShift}`}{outbound.calculated && ` · ${t("obliczony z czasu lotu")}`}<span className="flight-stops">{stopsLabel(outbound.stops,locale)}</span></p>
   {deal.trip_type==="ROUND_TRIP" && <>
    <p className="return-leg"><strong>{t("Wylot powrotny")} · {returnOrigin}:</strong> {clock(inbound.departure,inbound.originZone)}<span className="flight-stops">{stopsLabel(inbound.stops,locale)}</span></p>
-   <p className="home-arrival"><strong>{t("Powrót do domu")} · {returnDestination}:</strong> {clock(inbound.arrival,inbound.destinationZone)}{returnShift && ` · ${returnShift}`}{inbound.calculated && ` · ${t("obliczony z czasu lotu")}`}</p>
+   <p className="home-arrival"><strong>{timeline.arrival}</strong><br/>{clock(inbound.arrival,inbound.destinationZone)}</p>
   </>}
   {notice&&<p className="flight-route-warning"><strong>{notice}</strong></p>}
+  <AirportContextNotice deal={deal} locale={locale}/>
+  {leaveNotice}
+  <DestinationTimeSummary deal={deal} locale={locale}/>
   <p className="deal-note">{airlineLine}. {t("Potwierdź rozkład u partnera.")}</p>
  </div>;
 }

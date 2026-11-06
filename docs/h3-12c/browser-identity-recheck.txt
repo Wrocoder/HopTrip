@@ -1,0 +1,57 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test saved-plan-identity.spec.ts --grep fresh saves use v2 only --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [17392]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=2ea34c3efdb040729e11ab0773c8cffc method=GET status=200
+
+[WebServer] (node:41676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=9676f6bc9d16488d9b08a9712f0d4f55 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2bae2dd2c8e846bebc191f14aa483c68 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=715487d6a2484e568862d6f513b49bba method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f9c61a1055e3470fb93c3e140fc0c708 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=12b15d41dacf416088483e04db9efa5d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c3e45a85de644dc4ba00a1034ce50fcf method=GET status=200
+
+
+Running 2 tests using 1 worker
+
+
+(node:49524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/2] [desktop] › tests\saved-plan-identity.spec.ts:26:5 › fresh saves use v2 only; remove and undo retain identity while advancing revision
+
+[WebServer] INFO:hoptrip.requests:request_id=56bab6f902fa4b6182d86b079965d765 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9c553176d0244b71b4194cc78be3dc99 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=57fe45e2fd11439f94e92d8deb2364d7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d2de83e3bdd1499bb2a87ebdd4f6df96 method=GET status=200
+
+
+(node:14720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2/2] [mobile] › tests\saved-plan-identity.spec.ts:26:5 › fresh saves use v2 only; remove and undo retain identity while advancing revision
+[WebServer] INFO:hoptrip.requests:request_id=379b67016c6d4333b573dc2b792cafae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6536192b736a41779ffc84fbee10d6bc method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1200964f2da8405fac5b3af9ce483312 method=GET status=200
+  2 passed (9.8s)

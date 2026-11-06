@@ -1,0 +1,358 @@
+{
+  "status": "PASS_WITH_KNOWN_OUT_OF_SCOPE_ISSUES",
+  "task": "H3-15",
+  "baseline": {
+    "browser": {
+      "startTime": "2026-11-04T23:02:18.222Z",
+      "duration": 48045.560000000005,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "report": "browser-baseline.json"
+  },
+  "node": {
+    "passed": 314,
+    "failed": 0,
+    "skipped": 0,
+    "newCases": 5,
+    "report": "node.txt",
+    "initial": {
+      "passed": 313,
+      "failed": 1,
+      "report": "node-initial.txt",
+      "cause": "Null-only guard admitted undefined unknown price; fixed with a nullish check"
+    }
+  },
+  "apiFixtures": {
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "report": "api-fixtures.xml"
+  },
+  "browser": {
+    "unique": 36,
+    "passed": 36,
+    "newCases": 16,
+    "regressionCases": 20,
+    "retries": 0,
+    "firstMainRun": {
+      "startTime": "2026-11-04T23:15:01.228Z",
+      "duration": 405230.848,
+      "expected": 36,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "focusScreenshotRecheck": {
+      "startTime": "2026-11-04T23:24:10.328Z",
+      "duration": 21784.439,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "catalog-seo.spec.ts",
+        "title": "only reviewed permanent catalog pages are indexable",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "catalog-seo.spec.ts",
+        "title": "previews are real images and unavailable trips have no preview",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "catalog-seo.spec.ts",
+        "title": "only reviewed permanent catalog pages are indexable",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "catalog-seo.spec.ts",
+        "title": "previews are real images and unavailable trips have no preview",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in pl",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in en",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in ru",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in uk",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in pl",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in en",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in ru",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "destination remains useful without offers in uk",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "empty and populated destinations have honest content and working search links",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-landings.spec.ts",
+        "title": "empty and populated destinations have honest content and working search links",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "real offer detail, city search and destination directory are reachable without scripts",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "real offer detail, city search and destination directory are reachable without scripts",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "technical-seo.spec.ts",
+        "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "technical-seo.spec.ts",
+        "title": "robots allows crawlers to see noindex while excluding redirects and API",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "technical-seo.spec.ts",
+        "title": "expired and nonexistent pages are noindex without a bookable price",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "technical-seo.spec.ts",
+        "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "technical-seo.spec.ts",
+        "title": "robots allows crawlers to see noindex while excluding redirects and API",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "technical-seo.spec.ts",
+        "title": "expired and nonexistent pages are noindex without a bookable price",
+        "project": "mobile",
+        "status": "passed"
+      }
+    ],
+    "executionMode": "development"
+  },
+  "selectionProbe": {
+    "report": "browser-focus-no-match.txt",
+    "note": "Anchored grep matched no tests; corrected before the two-case screenshot recheck; not counted as passing cases"
+  },
+  "sitemap": [
+    {
+      "project": "desktop",
+      "pages": 248,
+      "editorialLinks": 54
+    },
+    {
+      "project": "mobile",
+      "pages": 248,
+      "editorialLinks": 54
+    }
+  ],
+  "gsc": {
+    "available": false,
+    "impressions": null,
+    "clicks": null,
+    "productionCoverage": null,
+    "inventory": "index-decisions.json"
+  },
+  "build": {
+    "status": "PASS",
+    "report": "build.txt",
+    "api": "http://127.0.0.1:8125",
+    "site": "http://127.0.0.1:3125"
+  },
+  "lint": {
+    "status": "PASS",
+    "report": "lint.txt"
+  },
+  "types": {
+    "status": "PASS",
+    "report": "types.txt"
+  },
+  "ruff": {
+    "status": "PASS",
+    "scope": "New guarded E2E fixture module",
+    "report": "ruff.txt"
+  },
+  "ide": {
+    "status": "PASS",
+    "limitation": "Limited diagnostics; CLI build/types provide compiler evidence"
+  },
+  "sourceParity": "source-parity.json",
+  "cleanup": "cache-cleanup.json",
+  "unchanged": [
+    "API runtime/schema/DB/dependencies",
+    "SEO registry/sitemap/canonical/hreflang/public URLs",
+    "Saved/shared/budget/consent/affiliate/analytics contracts"
+  ],
+  "knownOutOfScope": [
+    "H3-17b CLS0.137–0.292",
+    "H3-17b first-price1004.14>900",
+    "H3-17b RU/UK desktop CTA920.140625>900",
+    "H3-11a transient cross-tab cause unknown",
+    "Existing N badge visible in both13 baseline and15 fixture screenshots; cause/production presence not established"
+  ],
+  "notRun": [
+    "Full API suite/mypy: Python production code unchanged",
+    "GSC/production coverage/performance/usability",
+    "PostgreSQL/WebKit/real devices/manual screen reader",
+    "Live providers/partners/notifications/paid APIs/deployment"
+  ],
+  "nextTask": "H3-17b",
+  "remainingTasks": [
+    "H3-14",
+    "H3-17",
+    "H3-18"
+  ],
+  "executionModeCorrection": {
+    "date": "2026-11-05",
+    "finding": "The original browser runner used next dev, not next start. Original production-browser wording is retracted; original counts remain valid development functional evidence.",
+    "evidence": "../h3-17b1/runtime-mode-audit.json",
+    "productionSpotCheck": {
+      "cases": 16,
+      "report": "../h3-17b1/browser-production.json",
+      "scope": "Current implementation of the new feature cases; not the entire original suite"
+    }
+  }
+}

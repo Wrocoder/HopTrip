@@ -4,7 +4,8 @@ import type {Locale} from "./config.ts";
 export const catalogCopy={
  "Pełne dane lotu i bagaż":["Full flight details and baggage","Полные данные рейса и багаж","Повні дані рейсу та багаж"],
  "Zobacz szczegóły lotu":["View flight details","Посмотреть детали перелёта","Переглянути деталі перельоту"],
- "Bez noclegu · bagaż do sprawdzenia":["Accommodation excluded · check baggage","Без жилья · багаж нужно уточнить","Без житла · багаж слід уточнити"],
+ "Cena dotyczy lotu. Nocleg nie jest wliczony.":["The price covers the flight. Accommodation is not included.","Цена указана за перелёт. Проживание не включено.","Ціну вказано за переліт. Проживання не включено."],
+ "Bagaż do sprawdzenia":["Check baggage allowance","Багаж нужно уточнить","Багаж слід уточнити"],
  "Loty z Polski":["Flights from Poland","Перелёты из Польши","Перельоти з Польщі"],
  "Wyniki wyszukiwania lotów | HopTrip":["Flight search results | HopTrip","Результаты поиска перелётов | HopTrip","Результати пошуку перельотів | HopTrip"],
  "Sprawdź parametry wyszukiwania":["Check your search parameters","Проверьте параметры поиска","Перевірте параметри пошуку"],

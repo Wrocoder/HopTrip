@@ -7,7 +7,7 @@ import {shell} from "../../lib/i18n/shell";
 import {localizedHref} from "../../lib/i18n/routing";
 import {driveAllowedOnPage} from "../../lib/drive-policy";
 import {usePathname} from "next/navigation";
-import {consentSnapshot,readConsent,saveConsent,subscribeConsent} from "../../lib/consent";
+import {analyticsAllowed,consentSnapshot,readConsent,saveConsent,subscribeConsent} from "../../lib/consent";
 import {clearSession,track} from "../../lib/session";
 
 // The portal host belongs to the persistent root layout; no DOM subscription is needed.
@@ -31,7 +31,9 @@ export function ConsentControls({driveEnabled}:{driveEnabled:boolean}) {
   const panel=useRef<HTMLElement>(null);
   const settings=useRef<HTMLButtonElement>(null);
   useEffect(()=>{
-    if(!analytics) clearSession();
+    // Hydration starts with an empty server snapshot; consult current consent
+    // before clearing an already valid browser session.
+    if(!analyticsAllowed()) clearSession();
     else track("PAGE_VIEW");
   },[analytics]);
   useEffect(()=>{

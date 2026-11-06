@@ -9,6 +9,8 @@ import {pl} from "../../../lib/pl";
 import {DealGrid} from "../../components/catalog";
 import {DestinationGuides} from "../../components/destination-guides";
 import {DestinationPlanning} from '../../components/destination-planning';
+import {DestinationRecovery} from '../../components/destination-recovery';
+import {destinationRecoveryThreshold,loadDestinationRecovery} from '../../../lib/destination-recovery';
 import {OfferState} from '../../components/offer-state';
 import {destinationCopy} from '../../../lib/i18n/destination-copy';
 import {catalogText} from '../../../lib/i18n/catalog-copy';
@@ -23,10 +25,11 @@ export const dynamic="force-dynamic";
 type Props={params:Promise<{slug:string}>;locale?:Locale};
 const load=cache(async(value:string)=>{
   try{
-    const record=(await getDestinations()).find(r=>r.slug === value);
+    const destinations=await getDestinations();
+    const record=destinations.find(r=>r.slug === value);
     const deals=record?await getDeals({destination:value}):[];
-    return {record,deals,failed:false};
-  }catch{return {record:undefined,deals:[],failed:true};}
+    return {record,destinations,deals,failed:false};
+  }catch{return {record:undefined,destinations:[],deals:[],failed:true};}
 });
 export async function generateMetadata({params,locale="pl"}:Props) {
   const value=(await params).slug;
@@ -40,9 +43,10 @@ export async function generateMetadata({params,locale="pl"}:Props) {
 export default async function RoutePage({params,locale="pl"}:Props) {
   const value=(await params).slug;
   const path=`/destinations/${encodeURIComponent(value)}`;
-  const {record,deals,failed}=await load(value);
+  const {record,destinations,deals,failed}=await load(value);
   if(failed)return <ApiUnavailable locale={locale} path={path}/>;
   if (!record) notFound();
+  const recovery=deals.length<=destinationRecoveryThreshold?await loadDestinationRecovery(record,destinations):null;
   const page=landingPage(`/destinations/${value}`,locale),messages=getMessages(locale),copy=destinationCopy[locale];
   const search=localizedHref(`/deals?destination=${encodeURIComponent(value)}`,locale);
   return <main className="page-shell"><header className="page-heading"><p className="eyebrow">{messages.destinations}</p><h1>{destinationLabel(record,locale)}</h1>
@@ -57,6 +61,7 @@ export default async function RoutePage({params,locale="pl"}:Props) {
         <a href={search}>{copy.search}</a><Link href={localizedHref('/deals',locale)}>{copy.other}</Link>
       </>}><p>{copy.empty}</p></OfferState>}
     </section>
+    {recovery&&<DestinationRecovery data={recovery} slug={value} locale={locale}>{recovery.status==='READY'&&<DealGrid deals={recovery.offers} locale={locale}/>}</DestinationRecovery>}
     {page && <CatalogIntro page={page} locale={locale}/>}
     </main>;
 }

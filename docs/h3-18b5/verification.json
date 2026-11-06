@@ -1,0 +1,71 @@
+{
+  "scope": "H3-18b5 received-session engagement API/admin report only",
+  "runtimeDelta": [
+    {
+      "path": "apps/api/app/schemas/usage.py",
+      "before": "df4920288ade47eacb1c102daeddd1554987413789a2704616535cf0681f61c5",
+      "after": "2725d47601aa0595d4002265b7e1cf6f2e6689a773df7f6a00afcf921de0ce5e"
+    },
+    {
+      "path": "apps/api/app/services/usage_metrics.py",
+      "before": "b44087d5e33e070388bee33b0cff3b08afdf7b9ad5fa3bb8e0f90c984429dae5",
+      "after": "c173c99c0d8b7a63885d925a2d377ec4f82ca090be4e64dbfb938e367f0390e6"
+    },
+    {
+      "path": "apps/api/app/services/usage_dashboard.py",
+      "before": "7fdf8b7a09f1d1645edc1e0b2d7da6230436be7008f88f6e1324dbf636ac1d75",
+      "after": "6e73295a7ab7b6beb331dae37efc4a9b6879b7d6512a7fca974d98769a9e12fa"
+    }
+  ],
+  "newApiTests": 18,
+  "api": {
+    "targetedPassed": 111,
+    "afterFinalHtmlPassed": 68,
+    "full": {
+      "passed": 1156,
+      "failed": 1,
+      "skipped": 18
+    },
+    "knownFailure": "Unchanged Telegram fixture departure 2026-11-06T09:00Z already past; full API before final HTML-only empty-state/copy fixes"
+  },
+  "browser": {
+    "checks": 48,
+    "locales": 4,
+    "states": 3,
+    "widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "violations": 0,
+    "incomplete": 0,
+    "mode": "file URLs of actual TestClient-rendered HTML with CSP; auth/API separately tested"
+  },
+  "synthetic": {
+    "events": 13,
+    "sessions": 4,
+    "numerators": [
+      1,
+      2,
+      2
+    ],
+    "percentages": [
+      "25.00",
+      "50.00",
+      "50.00"
+    ],
+    "budget_use_sessions": 1,
+    "trip_save_sessions": 1
+  },
+  "emptyState": {
+    "before": "one empty cohort table, axe incomplete th-has-data-cells; not a confirmed violation",
+    "after": "existing localized no_data message replaces empty table"
+  },
+  "migration": false,
+  "dependenciesAdded": false,
+  "trackingChanged": false,
+  "nextBuild": "not run: Python-rendered admin HTML, unchanged web bundle",
+  "productionData": false,
+  "deploy": false
+}

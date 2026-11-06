@@ -1,0 +1,13 @@
+diff --git a/docs/h3-17b2/globals-before.css b/apps/web/src/app/globals.css
+index f18b134..3f4bc02 100644
+--- a/docs/h3-17b2/globals-before.css
++++ b/apps/web/src/app/globals.css
+@@ -251,6 +251,8 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
+ }
+ .breadcrumbs { margin-block: 24px; font-size: .875rem; }
+ .consent-controls { flex-basis: 100%; }
++#privacy-panel { position: fixed; inset-inline: 0; bottom: max(12px, env(safe-area-inset-bottom)); width: min(100% - 24px, 1160px); z-index: 15; }
++#privacy-panel .consent-panel { margin-top: 0; max-height: 70dvh; overflow-y: auto; overscroll-behavior: contain; box-shadow: var(--shadow); }
+ .privacy-settings { padding: 10px 14px; background: #fff; color: #153b35; border: 1px solid #526d66; border-radius: 8px; cursor: pointer; }
+ .consent-panel { margin-top: 16px; padding: 16px 20px; background: var(--surface); color: var(--ink); border: 1px solid var(--sage); border-radius: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+ .consent-panel h2 { font-size: 20px; margin: 0; }

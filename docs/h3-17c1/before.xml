@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.323" timestamp="2026-11-06T21:48:47.386341+01:00" hostname="wave"><testcase classname="apps.api.tests.test_telegram" name="test_real_api_to_queue_to_mock_telegram_journey" time="0.147"><failure message="assert 0 == 1">api_client = &lt;starlette.testclient.TestClient object at 0x0000018879C5AE10&gt;
+isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x00000188798DAE40&gt;
+
+    def test_real_api_to_queue_to_mock_telegram_journey(api_client, isolated_db):
+        now, settings, sender = datetime.now(UTC), config(), Sender()
+        settings.alerts_digest_hour = settings.alerts_digest_minute = 0
+        app.dependency_overrides[get_settings] = lambda: settings
+        deal = offer(isolated_db)
+        deal.last_verified_at, deal.expires_at = now, now + timedelta(hours=2)
+        for travel in isolated_db.scalars(select(TravelOffer)):
+            travel.last_verified_at = now
+        isolated_db.commit()
+        header = {'X-Telegram-Bot-Api-Secret-Token': settings.telegram_webhook_secret.get_secret_value()}
+    
+        def post(text, number):
+            response = api_client.post('/api/v1/telegram/webhook', headers=header,
+                                       json=update(number, text, now=now))
+            assert response.status_code == 200
+    
+        post('/subscribe origin=WRO budget=190 frequency=daily', 1)
+        # Webhook timestamps its queue row after the request begins; dispatch after it is due.
+        assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=1))['sent'] == 1
+        assert message('confirm', 'pl') in sender.messages[-1][1]
+        post('/confirm', 2)
+        delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=3))
+        assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=5))['sent'] == 0
+        post('/set budget=230', 3)
+        delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=7))
+&gt;       assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=9))['sent'] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_telegram.py:269: AssertionError</failure></testcase></testsuite></testsuites>

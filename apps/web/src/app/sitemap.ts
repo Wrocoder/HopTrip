@@ -8,7 +8,7 @@ export default function sitemap():MetadataRoute.Sitemap {
   const base=(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/,"");
   const infoPages=publishedInfoPages(),reviewed=new Map(infoPages.map(([slug,page])=>[`/info/${slug}`,page.reviewedAt]));
   const translated=[...new Set([...translatedPaths,...translatedGuideSlugs.map(slug=>`/info/${slug}`)])];
-  return [{url:base,changeFrequency:"daily",priority:1},{url:base+"/info"},
+  return [{url:base,changeFrequency:"daily",priority:1},{url:base+"/info"},{url:base+"/destinations"},
     ...translated.flatMap(path=>locales.filter(locale=>locale!=="pl").map(locale=>({url:base+localizedHref(path,locale),
       ...(reviewed.get(path)?{lastModified:reviewed.get(path)}:{})}))),
     ...catalogPages.map(page=>({url:base+page.path})),

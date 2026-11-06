@@ -1,0 +1,451 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test partner-boundaries.spec.ts --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [15156]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=f8728518af4547a7a879eb585f48b0e5 method=GET status=200
+
+[WebServer] (node:3796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=3178336b3f72411780b691fa15655326 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87985b8aa67e437fb22fde6dc563865c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=658a6fc1873241b899e2d457598050d0 method=GET status=200
+
+Running 8 tests using 1 worker
+
+
+(node:43732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/8] [desktop] › tests\partner-boundaries.spec.ts:5:56 › pl: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=228bde154e0e4aa4975022c4c42f50d0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=69b5d69ffc114780b8e5ac098122a843 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4d610a30dac04f6c91ccc0496ba747d2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b9306efea366431ea32b26e03f07bb15 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a46b22a97a304067bf96eb080cadebe8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=45b12100af5d43f68a9f28c23aafaed8 method=GET status=404
+  1) [desktop] › tests\partner-boundaries.spec.ts:5:56 › pl: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')
+        2) <p class="partner-context-limitation">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:32956) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/8] [desktop] › tests\partner-boundaries.spec.ts:5:56 › en: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=8a75aca003944c35908841e3921c7cb9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=84cbfe8ef0084d68b106bc5a07705974 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4757de44cde245a78dc11206faa1e972 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=47154049c78b4fe4b110ceb8ffdbcffd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3f5cb2cf4c1b483da90052d90fc52bac method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f23c64cdf30547049861801fd219b3fd method=GET status=404
+  2) [desktop] › tests\partner-boundaries.spec.ts:5:56 › en: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')
+        2) <p class="partner-context-limitation">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+
+(node:12916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[3/8] [desktop] › tests\partner-boundaries.spec.ts:5:56 › ru: supported stay context and unsupported ticket changes are explicit
+
+[WebServer] INFO:hoptrip.requests:request_id=350b794ae96440e38424d26bcc6dcc14 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d0a76e76af1d4b1abe958921c4035908 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2199a67b64214d6db64ec35e3acb9ad2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0bed614fd3d04198816e4e762a58208c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d1ce6aa6ab2444819282d879e714124c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=441c708a689b4e99a7737744b0f21b21 method=GET status=404
+
+  3) [desktop] › tests\partner-boundaries.spec.ts:5:56 › ru: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')
+        2) <p class="partner-context-limitation">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:55112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/8] [desktop] › tests\partner-boundaries.spec.ts:5:56 › uk: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=0d39f35bb1f8418287be93b84f6ac5f9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0e380baf069743d190699caea2d742c4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f4aa43f83ddb454bb88575da6407bd25 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=017c51304e5f4cb48fcd9a4ae161172d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5ebbc6219b5c4963909041aa2ac1bdb3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d999b29de97847dba3b4208ea0ac8324 method=GET status=404
+  4) [desktop] › tests\partner-boundaries.spec.ts:5:56 › uk: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')
+        2) <p class="partner-context-limitation">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:25304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/8] [mobile] › tests\partner-boundaries.spec.ts:5:56 › pl: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=21dc612ecc1e415fa110c2f7c6f439b3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8f4847c412644347b469f418a5413125 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9309126bab7349fb99facb282c424021 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c104f680aab446fea943fb9aa1ac2dcd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8c4d13a76bf64ff8a61b6462e0005af2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=95a94374ab984810b3d57d8b03250e57 method=GET status=404
+
+  5) [mobile] › tests\partner-boundaries.spec.ts:5:56 › pl: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')
+        2) <p class="partner-context-limitation">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:45792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[6/8] [mobile] › tests\partner-boundaries.spec.ts:5:56 › en: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=e6d5df178bf745cd822ba6f22a4b215f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f8c23e6cb2da414e9874ccc986aaab1d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0e8946207f39435babbf08967d621e53 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=472df7559cd34ab7b15d044ce816c1ea method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=dc5dc54fd15b4d98aaa6c672d6c2833a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fa6134258dc74a7ab334f2829ce1285a method=GET status=404
+  6) [mobile] › tests\partner-boundaries.spec.ts:5:56 › en: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')
+        2) <p class="partner-context-limitation">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:47388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/8] [mobile] › tests\partner-boundaries.spec.ts:5:56 › ru: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=7d82d3fd89b4425e9c0ec31f643c61e4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=69b0bb37fcee41e0a2e04bef97af025a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7d12c0d637b44dd98fd07e2ebecddfcd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=093e5b6a221b4ea2b25e994e11c5407f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d247c6210eb147bba701aea66be5119c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6524dee8b59d462b9840110359e56ea3 method=GET status=404
+
+  7) [mobile] › tests\partner-boundaries.spec.ts:5:56 › ru: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')
+        2) <p class="partner-context-limitation">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[8/8] [mobile] › tests\partner-boundaries.spec.ts:5:56 › uk: supported stay context and unsupported ticket changes are explicit
+[WebServer] INFO:hoptrip.requests:request_id=bd3cc0dd5167483dbd003b80cc04c1e2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ded4c6f1a7ca48eb9a24561d05524433 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9187ef50ebb34132b4d0ca5afda436e9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3e33ba85e11b4a5db9bec7eb187f7874 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=08e9481da0774166b0ea35221d6fa720 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=cbe37834d4bc4fa19e679d25f0e93648 method=GET status=404
+  8) [mobile] › tests\partner-boundaries.spec.ts:5:56 › uk: supported stay context and unsupported ticket changes are explicit 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.partner-context-limitation')
+    Expected: "Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера."
+    Error: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:
+        1) <p class="partner-context-limitation">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')
+        2) <p class="partner-context-limitation">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')
+
+    Call log:
+      - Expect "toHaveText" locator('.partner-context-limitation') with timeout 5000ms
+      - waiting for locator('.partner-context-limitation')
+
+
+      23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+      24 |  await page.goto(localizedHref('/info/malaga-airport',locale));
+    > 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);
+         |                                                            ^
+      26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      27 | });
+      28 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-05b-20261103\apps\web\tests\partner-boundaries.spec.ts:25:60
+
+    Error Context: test-results\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  8 failed
+    [desktop] › tests\partner-boundaries.spec.ts:5:56 › pl: supported stay context and unsupported ticket changes are explicit 
+    [desktop] › tests\partner-boundaries.spec.ts:5:56 › en: supported stay context and unsupported ticket changes are explicit 
+    [desktop] › tests\partner-boundaries.spec.ts:5:56 › ru: supported stay context and unsupported ticket changes are explicit 
+    [desktop] › tests\partner-boundaries.spec.ts:5:56 › uk: supported stay context and unsupported ticket changes are explicit 
+    [mobile] › tests\partner-boundaries.spec.ts:5:56 › pl: supported stay context and unsupported ticket changes are explicit 
+    [mobile] › tests\partner-boundaries.spec.ts:5:56 › en: supported stay context and unsupported ticket changes are explicit 
+    [mobile] › tests\partner-boundaries.spec.ts:5:56 › ru: supported stay context and unsupported ticket changes are explicit 
+    [mobile] › tests\partner-boundaries.spec.ts:5:56 › uk: supported stay context and unsupported ticket changes are explicit 

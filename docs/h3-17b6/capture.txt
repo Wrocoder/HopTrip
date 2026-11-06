@@ -1,0 +1,54 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test ssr-cache.spec.ts --project=desktop --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [33628]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=376112678bcf4ce695a3a1cdf08ddd92 method=GET status=200
+[WebServer] (node:33892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d581926848dd496ab96dedba69aeacd8 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6bb2abf60363405caf990d9e0527b07a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b3292e17612347f8bc4d320f1308b069 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8e0e4b91674d417d9bec68c6a7e745fc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=07208f891d574f29a90c0d6d036403c4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2d3236faf8a946e3bce0de6bceae078a method=GET status=200
+
+Running 1 test using 1 worker
+
+(node:33564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] [desktop] › tests\ssr-cache.spec.ts:17:6 › capture old release snapshot
+[WebServer] INFO:hoptrip.requests:request_id=6ed4ab41eb784ab4b5e94e4a3783dcab method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=74f89e750ef44ad8bdfe2a1599a807aa method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a5e5453f779441f7830046d3e4ee6e84 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=be11d14f016242d5bb1f47f071b3cc49 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d8acf15677444007b45c1d916f223c93 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4cffe3a098364d6091727f32dd8ef387 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bb5d28b89fed4560a654298f5adc5b24 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=69021427c92d4757850f4601e6fc268d method=GET status=200
+
+  1 passed (12.2s)

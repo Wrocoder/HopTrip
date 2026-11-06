@@ -70,6 +70,7 @@ def test_rounding_and_snapshot_explanation_reproduce_exact_score():
     assert score.breakdown.total_before_rounding == Decimal("57.5")
     assert score.deal_score == 58
     deal = Deal(deal_score=score.deal_score, score_version=SCORE_VERSION,
+                flight_price_pln=400, price_per_person_pln=400, historical_baseline_pln=400,
                 score_components={"breakdown": score.breakdown.model_dump(mode="json")})
     assert explain_score(deal) == score.breakdown
     deal.deal_score += 1

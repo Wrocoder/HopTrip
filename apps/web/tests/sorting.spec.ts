@@ -8,18 +8,23 @@ import type {DealResults} from '../src/lib/api';
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
-const labels={score:'Wynik pomocniczy ↓',price:'Cena/os. (PLN) ↑',departure:'Data wylotu ↑'};
+const labels={score:'Cena, historia, świeżość ↓',price:'Cena — najniższa',departure:'Wylot — najbliższy'};
 const visibleSlugs=(page:Page)=>page.locator('.deal-card-link').evaluateAll(links=>links.map(link=>new URL((link as HTMLAnchorElement).href).pathname.split('/').at(-1)));
 
 for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: applied sorting matches the full catalog and survives paging, drafts and history`,async({page,request},info)=>{
  test.setTimeout(120000);
  const t=(source:string)=>filterText(locale,source),messages=getMessages(locale);
+ await page.goto(localizedHref('/deals?origin=WRO',locale));
+ await expect(page.locator('select[name="sort"]')).toHaveValue('price');
+ const defaultResponse=await request.get('http://127.0.0.1:8100/api/v1/deals?origin=WRO&sort=price&limit=100');
+ expect(defaultResponse.ok()).toBe(true);
+ expect(await visibleSlugs(page)).toEqual((await defaultResponse.json()).slice(0,12).map((d:{slug:string})=>d.slug));
  const initial=localizedHref('/deals?origin=WRO&sort=score&offset=12',locale);
  await page.goto(initial);
  const select=page.locator('select[name="sort"]'),rule=page.locator('.sort-explanation');
  await expect(page.locator('.deal-card')).toHaveCount(2);
  await expect(rule).toContainText(t(labels.score));
- await expect(select.locator('option')).toHaveCount(3);
+ await expect(select.locator('option')).toHaveCount(4);
  for(const [key,label] of Object.entries(labels))await expect(select.locator(`option[value="${key}"]`)).toHaveText(t(label));
  expect(await select.getAttribute('aria-describedby')).toBe(await rule.getAttribute('id'));
  await page.locator('.preset-rules > summary').click();

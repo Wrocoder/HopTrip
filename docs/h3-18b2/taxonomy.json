@@ -1,0 +1,24 @@
+{
+  "version": "h3-analytics-taxonomy-v2",
+  "date": "2026-11-06",
+  "kind": "current documentation mapping; additive wire event, no DB schema change",
+  "baseline": "../h3-18a/taxonomy.json",
+  "wire_events": ["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE"],
+  "changed_h3_mapping": {
+    "name": "trip_updated",
+    "wire": "TRIP_UPDATE",
+    "status": "mapped",
+    "meaning": "Explicit Update successfully committed changed content to an existing local saved plan",
+    "condition": "PlanResult.status=updated with a returned plan; analytics consent checked at send time",
+    "excluded": ["opening", "draft edit", "share", "already/no-op", "conflict", "absent", "busy", "failed storage", "save", "duplicate", "delete", "undo"],
+    "payload": "Existing random event_id and anonymous_session_id; bounded page_type=saved_trip; no local plan ID, revision, token, budget, dates or notes",
+    "deduplication": "Existing 1000ms action key window and server event_id uniqueness; fast independent updates can merge because no plan identity is sent",
+    "delivery": "Existing best-effort fetch; no retries and no retrospective replay on consent grant",
+    "metric": "Existing protected summary.by_event.TRIP_UPDATE; not TRIP_SAVE, returning visitor, booking or durable server proof of a local write"
+  },
+  "unchanged_h3_mappings": "All other mappings retain the baseline definitions; historical v1 is not overwritten",
+  "missing_h3_events": ["offer_details_opened", "budget_calculated"],
+  "production_activation": "not deployed or observed",
+  "production_baseline": "not collected",
+  "unavailable_dimensions": ["device", "locale", "returning visitor", "exact search-to-booking attribution"]
+}

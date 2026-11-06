@@ -1,7 +1,7 @@
 # Состояние реализации HopTrip
 
 Проверено 2026-09-23. Основание: [MasterPrompt](../doc/MasterPrompt.md),
-[исходный аудит](project-audit-and-plan.md) и [18 внутренних задач](independent-development-tasks.md).
+исходный аудит (`docs/project-audit-and-plan.md`; исторический файл удалён) и [18 внутренних задач](independent-development-tasks.md).
 
 ## Результат
 

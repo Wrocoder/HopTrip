@@ -1,0 +1,1404 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "home-collection-visual.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-09b-20261104/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-09b-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-09b-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-09b-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-09b-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "home-collection-visual.spec.ts",
+      "file": "home-collection-visual.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6581,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:22:35.723Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-6eaa5488da64ee8c5986",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "en: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6471,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:22:43.531Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-en--11720--conditions-and-catalog-CTA-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-en--11720--conditions-and-catalog-CTA-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-6e841fa0075050d14073",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "ru: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6519,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:22:51.186Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-b64f6de70f82a09c66b3",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "uk: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6505,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:22:58.990Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-8a323b7e248d2b68e5e5",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "origin transitions hide previous snapshots, last selection wins and Back restores the right offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6362,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('.deal-card')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('.deal-card') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('.deal-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('.deal-card')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('.deal-card') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('.deal-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:68:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 46,
+                      "line": 68
+                    },
+                    "snippet": "  66 |  await page.goto('/?origin=KTW');\n  67 |  const section=page.locator('.home-collections'),input=page.locator('#home-origin');\n> 68 |  await expect(section.locator('.deal-card')).toHaveCount(4);\n     |                                              ^\n  69 |  await input.fill('GDN');await input.press('ArrowDown');await input.press('Enter');\n  70 |  await expect(section).toHaveAttribute('aria-busy','true');await expect(section.locator('[data-collection]')).toHaveCount(0);\n  71 |  await input.fill('WAW');await input.press('ArrowDown');await input.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 46,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('.deal-card')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('.deal-card') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('.deal-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n  66 |  await page.goto('/?origin=KTW');\n  67 |  const section=page.locator('.home-collections'),input=page.locator('#home-origin');\n> 68 |  await expect(section.locator('.deal-card')).toHaveCount(4);\n     |                                              ^\n  69 |  await input.fill('GDN');await input.press('ArrowDown');await input.press('Enter');\n  70 |  await expect(section).toHaveAttribute('aria-busy','true');await expect(section.locator('[data-collection]')).toHaveCount(0);\n  71 |  await input.fill('WAW');await input.press('ArrowDown');await input.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:68:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:06.734Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ori-2d53c-k-restores-the-right-offers-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ori-2d53c-k-restores-the-right-offers-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 46,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-76cc32292894ba3a6ab5",
+          "file": "home-collection-visual.spec.ts",
+          "line": 64,
+          "column": 5
+        },
+        {
+          "title": "one real offer per preview needs no filler and missing licensed image keeps the flight action",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6999,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:88:79",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 79,
+                      "line": 88
+                    },
+                    "snippet": "  86 |   const collection=page.locator(`[data-collection=\"${id}\"]`);\n  87 |   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);\n> 88 |   await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);\n     |                                                                               ^\n  89 |   await expect(collection.locator('.deal-card-link')).toHaveAttribute('href',/\\/deals\\/weekend-fixture-/);\n  90 |  }\n  91 |  await page.locator('[data-collection=\"under-300\"] .deal-card-link').click();await expect(page).toHaveURL(/\\/deals\\/weekend-fixture-/);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 79,
+                        "line": 88
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\u001b[22m\n\n\n  86 |   const collection=page.locator(`[data-collection=\"${id}\"]`);\n  87 |   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);\n> 88 |   await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);\n     |                                                                               ^\n  89 |   await expect(collection.locator('.deal-card-link')).toHaveAttribute('href',/\\/deals\\/weekend-fixture-/);\n  90 |  }\n  91 |  await page.locator('[data-collection=\"under-300\"] .deal-card-link').click();await expect(page).toHaveURL(/\\/deals\\/weekend-fixture-/);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:88:79"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:14.452Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-one-693ec-age-keeps-the-flight-action-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-one-693ec-age-keeps-the-flight-action-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 79,
+                    "line": 88
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-84b75cf2d9d2d2470f2f",
+          "file": "home-collection-visual.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "weekend-error: independent errors preserve other previews and retry recovers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3344,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:22.860Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "43d2206a718560fff396-6e157a8785ff708b7187",
+          "file": "home-collection-visual.spec.ts",
+          "line": 94,
+          "column": 70
+        },
+        {
+          "title": "weekend-broad: independent errors preserve other previews and retry recovers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2509,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:26.521Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "43d2206a718560fff396-333f60243ae3d73c5d1d",
+          "file": "home-collection-visual.spec.ts",
+          "line": 94,
+          "column": 70
+        },
+        {
+          "title": "failed photo preserves frame, credit, conditions and the real offer action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2145,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:29.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "43d2206a718560fff396-6e4528e7fabbe710619d",
+          "file": "home-collection-visual.spec.ts",
+          "line": 103,
+          "column": 5
+        },
+        {
+          "title": "expiry invalidates a preview without presenting stale prices as current availability",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6423,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-state=\"ready\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('[data-state=\"ready\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-state=\"ready\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-state=\"ready\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('[data-state=\"ready\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-state=\"ready\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:116:56",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 56,
+                      "line": 116
+                    },
+                    "snippet": "  114 |  await page.clock.install();await request.post(`${fixture}/__test__/home-collections?scenario=expiring`);\n  115 |  await page.goto('/?origin=KTW');const section=page.locator('.home-collections');\n> 116 |  await expect(section.locator('[data-state=\"ready\"]')).toHaveCount(2);await expect(section.locator('.deal-card')).toHaveCount(4);\n      |                                                        ^\n  117 |  await page.clock.fastForward(20000);await expect(section.locator('[data-state=\"unavailable\"]')).toHaveCount(2);\n  118 |  await expect(section.locator('.deal-card')).toHaveCount(0);await expect(section.getByText(collectionCopy.pl.expired,{exact:true})).toHaveCount(2);\n  119 |  await expect(section.locator('[data-state=\"empty\"]')).toHaveCount(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 56,
+                        "line": 116
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-state=\"ready\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('[data-state=\"ready\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-state=\"ready\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  114 |  await page.clock.install();await request.post(`${fixture}/__test__/home-collections?scenario=expiring`);\n  115 |  await page.goto('/?origin=KTW');const section=page.locator('.home-collections');\n> 116 |  await expect(section.locator('[data-state=\"ready\"]')).toHaveCount(2);await expect(section.locator('.deal-card')).toHaveCount(4);\n      |                                                        ^\n  117 |  await page.clock.fastForward(20000);await expect(section.locator('[data-state=\"unavailable\"]')).toHaveCount(2);\n  118 |  await expect(section.locator('.deal-card')).toHaveCount(0);await expect(section.getByText(collectionCopy.pl.expired,{exact:true})).toHaveCount(2);\n  119 |  await expect(section.locator('[data-state=\"empty\"]')).toHaveCount(1);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:116:56"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:31.253Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-exp-c36b2-ces-as-current-availability-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-exp-c36b2-ces-as-current-availability-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 56,
+                    "line": 116
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-016e11fd544666924985",
+          "file": "home-collection-visual.spec.ts",
+          "line": 113,
+          "column": 5
+        },
+        {
+          "title": "collection and flight links are present without JavaScript in all four locales",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6393,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('link[rel=\"canonical\"]')\nExpected: \u001b[32m\"http://127.0.0.1:3125\u001b[7m/\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('link[rel=\"canonical\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('link[rel=\"canonical\"]')\u001b[22m\n\u001b[2m    13 × locator resolved to <link rel=\"canonical\" href=\"http://127.0.0.1:3125\"/>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('link[rel=\"canonical\"]')\nExpected: \u001b[32m\"http://127.0.0.1:3125\u001b[7m/\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('link[rel=\"canonical\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('link[rel=\"canonical\"]')\u001b[22m\n\u001b[2m    13 × locator resolved to <link rel=\"canonical\" href=\"http://127.0.0.1:3125\"/>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:127:55",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 55,
+                      "line": 127
+                    },
+                    "snippet": "  125 |   const response=await page.goto(localizedHref('/?origin=KTW',locale));expect(response?.status()).toBe(200);\n  126 |   await expect(page.locator('html')).toHaveAttribute('lang',locale);\n> 127 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',String(info.project.use.baseURL)+localizedHref('/',locale));\n      |                                                       ^\n  128 |   await expect(page.locator('meta[name=\"robots\"]')).toHaveAttribute('content',/^index,/);\n  129 |   for(const definition of homeCollectionDefinitions('KTW'))await expect(page.locator(`[data-collection=\"${definition.id}\"] > div > a`)).toHaveAttribute('href',localizedHref(definition.href,locale));\n  130 |   await expect(page.locator('.home-collections .deal-card-link')).toHaveCount(4);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 55,
+                        "line": 127
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('link[rel=\"canonical\"]')\nExpected: \u001b[32m\"http://127.0.0.1:3125\u001b[7m/\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('link[rel=\"canonical\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('link[rel=\"canonical\"]')\u001b[22m\n\u001b[2m    13 × locator resolved to <link rel=\"canonical\" href=\"http://127.0.0.1:3125\"/>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125\"\u001b[22m\n\n\n  125 |   const response=await page.goto(localizedHref('/?origin=KTW',locale));expect(response?.status()).toBe(200);\n  126 |   await expect(page.locator('html')).toHaveAttribute('lang',locale);\n> 127 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',String(info.project.use.baseURL)+localizedHref('/',locale));\n      |                                                       ^\n  128 |   await expect(page.locator('meta[name=\"robots\"]')).toHaveAttribute('content',/^index,/);\n  129 |   for(const definition of homeCollectionDefinitions('KTW'))await expect(page.locator(`[data-collection=\"${definition.id}\"] > div > a`)).toHaveAttribute('href',localizedHref(definition.href,locale));\n  130 |   await expect(page.locator('.home-collections .deal-card-link')).toHaveCount(4);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:127:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:38.681Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-col-7d10e-aScript-in-all-four-locales-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-col-7d10e-aScript-in-all-four-locales-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 55,
+                    "line": 127
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-42b37ea75fb34db4adc6",
+          "file": "home-collection-visual.spec.ts",
+          "line": 122,
+          "column": 5
+        },
+        {
+          "title": "pl: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6475,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:46.360Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-4eef5895dd196643c3ca",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "en: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6487,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:23:53.989Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-en--11720--conditions-and-catalog-CTA-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-en--11720--conditions-and-catalog-CTA-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-0c09173eb147376ae98c",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "ru: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6483,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:01.733Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-1f86299e91e13ec3836d",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "uk: real previews, criteria, photos, essential conditions and catalog CTA",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6400,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 28,
+                      "line": 34
+                    },
+                    "snippet": "  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 28,
+                        "line": 34
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\nExpected: \u001b[32m\"\u001b[7mempt\u001b[27my\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mread\u001b[27my\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-collection=\"calendar-weekend\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to <section data-state=\"ready\" class=\"vkItlW_collection\" data-collection=\"calendar-weekend\" aria-labelledby=\"collection-calendar-weekend\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"ready\"\u001b[22m\n\n\n  32 |   await expect(collection).toContainText(copy.criteria[definition.id]);\n  33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));\n> 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');\n     |                            ^\n  35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);\n  36 |  }\n  37 |  const budget=section.locator('[data-collection=\"under-300\"]');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:34:28"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:09.365Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 28,
+                    "line": 34
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-b6d309a37f27bbfcc759",
+          "file": "home-collection-visual.spec.ts",
+          "line": 23,
+          "column": 56
+        },
+        {
+          "title": "origin transitions hide previous snapshots, last selection wins and Back restores the right offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6386,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('.deal-card')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('.deal-card') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('.deal-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('.deal-card')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('.deal-card') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('.deal-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:68:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 46,
+                      "line": 68
+                    },
+                    "snippet": "  66 |  await page.goto('/?origin=KTW');\n  67 |  const section=page.locator('.home-collections'),input=page.locator('#home-origin');\n> 68 |  await expect(section.locator('.deal-card')).toHaveCount(4);\n     |                                              ^\n  69 |  await input.fill('GDN');await input.press('ArrowDown');await input.press('Enter');\n  70 |  await expect(section).toHaveAttribute('aria-busy','true');await expect(section.locator('[data-collection]')).toHaveCount(0);\n  71 |  await input.fill('WAW');await input.press('ArrowDown');await input.press('Enter');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 46,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('.deal-card')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('.deal-card') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('.deal-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n  66 |  await page.goto('/?origin=KTW');\n  67 |  const section=page.locator('.home-collections'),input=page.locator('#home-origin');\n> 68 |  await expect(section.locator('.deal-card')).toHaveCount(4);\n     |                                              ^\n  69 |  await input.fill('GDN');await input.press('ArrowDown');await input.press('Enter');\n  70 |  await expect(section).toHaveAttribute('aria-busy','true');await expect(section.locator('[data-collection]')).toHaveCount(0);\n  71 |  await input.fill('WAW');await input.press('ArrowDown');await input.press('Enter');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:68:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:16.904Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ori-2d53c-k-restores-the-right-offers-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-ori-2d53c-k-restores-the-right-offers-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 46,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-9153d8d957aec0e5a9ab",
+          "file": "home-collection-visual.spec.ts",
+          "line": 64,
+          "column": 5
+        },
+        {
+          "title": "one real offer per preview needs no filler and missing licensed image keeps the flight action",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6879,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:88:79",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 79,
+                      "line": 88
+                    },
+                    "snippet": "  86 |   const collection=page.locator(`[data-collection=\"${id}\"]`);\n  87 |   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);\n> 88 |   await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);\n     |                                                                               ^\n  89 |   await expect(collection.locator('.deal-card-link')).toHaveAttribute('href',/\\/deals\\/weekend-fixture-/);\n  90 |  }\n  91 |  await page.locator('[data-collection=\"under-300\"] .deal-card-link').click();await expect(page).toHaveURL(/\\/deals\\/weekend-fixture-/);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 79,
+                        "line": 88
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-collection=\"upcoming-short\"]').getByText('Zdjęcie niedostępne', { exact: true })\u001b[22m\n\n\n  86 |   const collection=page.locator(`[data-collection=\"${id}\"]`);\n  87 |   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);\n> 88 |   await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);\n     |                                                                               ^\n  89 |   await expect(collection.locator('.deal-card-link')).toHaveAttribute('href',/\\/deals\\/weekend-fixture-/);\n  90 |  }\n  91 |  await page.locator('[data-collection=\"under-300\"] .deal-card-link').click();await expect(page).toHaveURL(/\\/deals\\/weekend-fixture-/);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:88:79"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:24.481Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-one-693ec-age-keeps-the-flight-action-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-one-693ec-age-keeps-the-flight-action-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 79,
+                    "line": 88
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-407328b079abd312100b",
+          "file": "home-collection-visual.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "weekend-error: independent errors preserve other previews and retry recovers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2495,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:32.579Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "43d2206a718560fff396-d73ad0ec6c1159117114",
+          "file": "home-collection-visual.spec.ts",
+          "line": 94,
+          "column": 70
+        },
+        {
+          "title": "weekend-broad: independent errors preserve other previews and retry recovers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2393,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:35.479Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "43d2206a718560fff396-803adc1749aa4d997837",
+          "file": "home-collection-visual.spec.ts",
+          "line": 94,
+          "column": 70
+        },
+        {
+          "title": "failed photo preserves frame, credit, conditions and the real offer action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2357,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:37.913Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "43d2206a718560fff396-96e495abb3efd18ae466",
+          "file": "home-collection-visual.spec.ts",
+          "line": 103,
+          "column": 5
+        },
+        {
+          "title": "expiry invalidates a preview without presenting stale prices as current availability",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 14,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6503,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-state=\"ready\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('[data-state=\"ready\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-state=\"ready\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-state=\"ready\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('[data-state=\"ready\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-state=\"ready\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:116:56",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 56,
+                      "line": 116
+                    },
+                    "snippet": "  114 |  await page.clock.install();await request.post(`${fixture}/__test__/home-collections?scenario=expiring`);\n  115 |  await page.goto('/?origin=KTW');const section=page.locator('.home-collections');\n> 116 |  await expect(section.locator('[data-state=\"ready\"]')).toHaveCount(2);await expect(section.locator('.deal-card')).toHaveCount(4);\n      |                                                        ^\n  117 |  await page.clock.fastForward(20000);await expect(section.locator('[data-state=\"unavailable\"]')).toHaveCount(2);\n  118 |  await expect(section.locator('.deal-card')).toHaveCount(0);await expect(section.getByText(collectionCopy.pl.expired,{exact:true})).toHaveCount(2);\n  119 |  await expect(section.locator('[data-state=\"empty\"]')).toHaveCount(1);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 56,
+                        "line": 116
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.home-collections').locator('[data-state=\"ready\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" locator('.home-collections').locator('[data-state=\"ready\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.home-collections').locator('[data-state=\"ready\"]')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  114 |  await page.clock.install();await request.post(`${fixture}/__test__/home-collections?scenario=expiring`);\n  115 |  await page.goto('/?origin=KTW');const section=page.locator('.home-collections');\n> 116 |  await expect(section.locator('[data-state=\"ready\"]')).toHaveCount(2);await expect(section.locator('.deal-card')).toHaveCount(4);\n      |                                                        ^\n  117 |  await page.clock.fastForward(20000);await expect(section.locator('[data-state=\"unavailable\"]')).toHaveCount(2);\n  118 |  await expect(section.locator('.deal-card')).toHaveCount(0);await expect(section.getByText(collectionCopy.pl.expired,{exact:true})).toHaveCount(2);\n  119 |  await expect(section.locator('[data-state=\"empty\"]')).toHaveCount(1);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:116:56"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:40.305Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-exp-c36b2-ces-as-current-availability-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-exp-c36b2-ces-as-current-availability-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 56,
+                    "line": 116
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-dc37a166d93abbf0ba27",
+          "file": "home-collection-visual.spec.ts",
+          "line": 113,
+          "column": 5
+        },
+        {
+          "title": "collection and flight links are present without JavaScript in all four locales",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 15,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6576,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('link[rel=\"canonical\"]')\nExpected: \u001b[32m\"http://127.0.0.1:3125\u001b[7m/\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('link[rel=\"canonical\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('link[rel=\"canonical\"]')\u001b[22m\n\u001b[2m    13 × locator resolved to <link rel=\"canonical\" href=\"http://127.0.0.1:3125\"/>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('link[rel=\"canonical\"]')\nExpected: \u001b[32m\"http://127.0.0.1:3125\u001b[7m/\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('link[rel=\"canonical\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('link[rel=\"canonical\"]')\u001b[22m\n\u001b[2m    13 × locator resolved to <link rel=\"canonical\" href=\"http://127.0.0.1:3125\"/>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:127:55",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                      "column": 55,
+                      "line": 127
+                    },
+                    "snippet": "  125 |   const response=await page.goto(localizedHref('/?origin=KTW',locale));expect(response?.status()).toBe(200);\n  126 |   await expect(page.locator('html')).toHaveAttribute('lang',locale);\n> 127 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',String(info.project.use.baseURL)+localizedHref('/',locale));\n      |                                                       ^\n  128 |   await expect(page.locator('meta[name=\"robots\"]')).toHaveAttribute('content',/^index,/);\n  129 |   for(const definition of homeCollectionDefinitions('KTW'))await expect(page.locator(`[data-collection=\"${definition.id}\"] > div > a`)).toHaveAttribute('href',localizedHref(definition.href,locale));\n  130 |   await expect(page.locator('.home-collections .deal-card-link')).toHaveCount(4);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                        "column": 55,
+                        "line": 127
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('link[rel=\"canonical\"]')\nExpected: \u001b[32m\"http://127.0.0.1:3125\u001b[7m/\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"http://127.0.0.1:3125\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('link[rel=\"canonical\"]') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('link[rel=\"canonical\"]')\u001b[22m\n\u001b[2m    13 × locator resolved to <link rel=\"canonical\" href=\"http://127.0.0.1:3125\"/>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3125\"\u001b[22m\n\n\n  125 |   const response=await page.goto(localizedHref('/?origin=KTW',locale));expect(response?.status()).toBe(200);\n  126 |   await expect(page.locator('html')).toHaveAttribute('lang',locale);\n> 127 |   await expect(page.locator('link[rel=\"canonical\"]')).toHaveAttribute('href',String(info.project.use.baseURL)+localizedHref('/',locale));\n      |                                                       ^\n  128 |   await expect(page.locator('meta[name=\"robots\"]')).toHaveAttribute('content',/^index,/);\n  129 |   for(const definition of homeCollectionDefinitions('KTW'))await expect(page.locator(`[data-collection=\"${definition.id}\"] > div > a`)).toHaveAttribute('href',localizedHref(definition.href,locale));\n  130 |   await expect(page.locator('.home-collections .deal-card-link')).toHaveCount(4);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts:127:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T12:24:47.838Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-col-7d10e-aScript-in-all-four-locales-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\test-results\\home-collection-visual-col-7d10e-aScript-in-all-four-locales-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-09b-20261104\\apps\\web\\tests\\home-collection-visual.spec.ts",
+                    "column": 55,
+                    "line": 127
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "43d2206a718560fff396-48c80eb6710d176768d5",
+          "file": "home-collection-visual.spec.ts",
+          "line": 122,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T12:22:30.744Z",
+    "duration": 145369.982,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 16,
+    "flaky": 0
+  }
+}

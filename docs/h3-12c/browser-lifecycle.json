@@ -1,0 +1,957 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "plan-lifecycle.spec.ts",
+      "--trace=off",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12c-20261104/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12c-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12c-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12c-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12c-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "plan-lifecycle.spec.ts",
+      "file": "plan-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13211,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:56:30.763Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-aef9f219b403772c4247",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8507,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"This plan is saved.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"This plan is saved.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                      "column": 202,
+                      "line": 19
+                    },
+                    "snippet": "  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                        "column": 202,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"This plan is saved.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n\n  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:56:44.328Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\test-results\\plan-lifecycle-en-Save-ope-7252a-hare-preserve-the-lifecycle-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                    "column": 202,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-d9070e9378b53c126388",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8764,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Этот план сохранён.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Этот план сохранён.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                      "column": 202,
+                      "line": 19
+                    },
+                    "snippet": "  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                        "column": 202,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Этот план сохранён.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n\n  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:56:53.667Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\test-results\\plan-lifecycle-ru-Save-ope-4d9ff-hare-preserve-the-lifecycle-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                    "column": 202,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-ba83a7ee41cbeaaf5509",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8649,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Цей план збережено.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Цей план збережено.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                      "column": 202,
+                      "line": 19
+                    },
+                    "snippet": "  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                        "column": 202,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Цей план збережено.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n\n  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:57:03.561Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\test-results\\plan-lifecycle-uk-Save-ope-c38a1-hare-preserve-the-lifecycle-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                    "column": 202,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-b0085ea0883c6edecce9",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "two tabs retain independent drafts through conflicts, reload, explicit discard and deletion recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19385,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:57:13.402Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-4cf9eb64cf584a51d5b9",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 35,
+          "column": 5
+        },
+        {
+          "title": "edits and reset during an update waiting for the lock are retained while only the captured snapshot is committed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26161,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:57:33.542Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-f74d3a4b37762087b91a",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 46,
+          "column": 5
+        },
+        {
+          "title": "changed, missing, unavailable and expired offers retain amounts and can still be updated",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:57:59.748Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-1b95c4f3b56a8dfcd4f3",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "local links are device-bound; malformed or missing IDs do not request offers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:03.321Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-582d6e0ea777a533cf89",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 69,
+          "column": 5
+        },
+        {
+          "title": "capacity blocks Duplicate without blocking Update; source profiles, events and legacy-copy work survive opening",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3032,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:03.802Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-6c1bf36b215a3f39132f",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 74,
+          "column": 5
+        },
+        {
+          "title": "unavailable locks and draft storage keep reading and independent sharing available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6047,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:06.853Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-8e3b30b1907fc22b3f78",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14415,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:13.699Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-b1153ed47deec8fb0700",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8846,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"This plan is saved.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"This plan is saved.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                      "column": 202,
+                      "line": 19
+                    },
+                    "snippet": "  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                        "column": 202,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"This plan is saved.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n\n  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:28.536Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\test-results\\plan-lifecycle-en-Save-ope-7252a-hare-preserve-the-lifecycle-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                    "column": 202,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-ec84494f0e923fd068b8",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9021,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Этот план сохранён.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Этот план сохранён.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                      "column": 202,
+                      "line": 19
+                    },
+                    "snippet": "  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                        "column": 202,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Этот план сохранён.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n\n  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:38.142Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\test-results\\plan-lifecycle-ru-Save-ope-4d9ff-hare-preserve-the-lifecycle-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                    "column": 202,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-0341db77c9ae3c12d3ae",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9056,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Цей план збережено.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Цей план збережено.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                      "column": 202,
+                      "line": 19
+                    },
+                    "snippet": "  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                        "column": 202,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('plan-edit-state')\nExpected: \u001b[32m\"Цей план збережено.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('plan-edit-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('plan-edit-state')\u001b[22m\n\n\n  17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){\n  18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');\n> 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);\n     |                                                                                                                                                                                                          ^\n  20 | }\n  21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{\n  22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();\n    at create (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:19:202)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts:22:39"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:48.286Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\test-results\\plan-lifecycle-uk-Save-ope-c38a1-hare-preserve-the-lifecycle-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12c-20261104\\apps\\web\\tests\\plan-lifecycle.spec.ts",
+                    "column": 202,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-5011d2e2db58ebe790e4",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "two tabs retain independent drafts through conflicts, reload, explicit discard and deletion recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20301,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:58:58.583Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-aa0e4ac80cb1eef44ed5",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 35,
+          "column": 5
+        },
+        {
+          "title": "edits and reset during an update waiting for the lock are retained while only the captured snapshot is committed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28384,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:59:19.303Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-26267d7b30cd0b813c66",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 46,
+          "column": 5
+        },
+        {
+          "title": "changed, missing, unavailable and expired offers retain amounts and can still be updated",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:59:47.705Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-aa03cfe9271aad10f998",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "local links are device-bound; malformed or missing IDs do not request offers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 435,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:59:51.116Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-4881b191c2a3f1c66f68",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 69,
+          "column": 5
+        },
+        {
+          "title": "capacity blocks Duplicate without blocking Update; source profiles, events and legacy-copy work survive opening",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:59:51.571Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-d4a8b6ef955b3e322691",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 74,
+          "column": 5
+        },
+        {
+          "title": "unavailable locks and draft storage keep reading and independent sharing available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7107,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T20:59:54.854Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-2c62fc175db4d4baaf75",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 82,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T20:56:24.762Z",
+    "duration": 218534.993,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}

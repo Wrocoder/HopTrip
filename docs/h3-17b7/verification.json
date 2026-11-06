@@ -1,0 +1,77 @@
+{
+  "status": "IMPLEMENTED_AND_LOCALLY_VALIDATED_NOT_DEPLOYED",
+  "task": "H3-17b7",
+  "date": "2026-11-06",
+  "finding": "H3-17-F03 locally mitigated; real activation/staging pending",
+  "nodeTests": 321,
+  "deployScenarios": 6,
+  "deployTestPlatform": "WSL Linux with native flock and isolated command doubles",
+  "docker": {
+    "image": "sha256:7b1a0b1529c9de665ea7b5333cc060477f3fb6629d3efcc6d7eea8375e1843fe",
+    "build": "PASS",
+    "emptyVolumeSeedVerified": true,
+    "requiredVolumeMissingRejected": true,
+    "postflightResources": 50,
+    "expectedImageBuildChecked": true,
+    "hostnameOverride": "0.0.0.0 for container-internal loopback smoke"
+  },
+  "releases": {
+    "a": "B03jo9a_4GShaLeB8HAfD",
+    "b": "r0GcPxhHoaf0i7WcFdlMD",
+    "allOld13AvailableOnBoth": true,
+    "bResourcesOnRollbackA": 40,
+    "currentBChecked": 30
+  },
+  "retainedLocalFiles": 315,
+  "hashes": [
+    {
+      "path": "apps/web/scripts/retain-static.mjs",
+      "sha256": "3380700dcff901b2693946662a79a4ce29cd8a88252310b3a8674353b51a91f1"
+    },
+    {
+      "path": "apps/web/scripts/start-with-static.mjs",
+      "sha256": "8c8eba6b1586c23eb9210cd65a91900dcca57b4b6baba7d86b63ed60e1969ee1"
+    },
+    {
+      "path": "apps/web/scripts/check-static.mjs",
+      "sha256": "c274882fe0c96e737e9da231aa8b8c90913044ad547c25893e2b8d6c93f58ae8"
+    },
+    {
+      "path": "apps/web/Dockerfile",
+      "sha256": "875a7b149813620acd39d8c535108fa9fac13537d8f297437d7142514fa5cbad"
+    },
+    {
+      "path": "docker-compose.production.yml",
+      "sha256": "f8f6697dd833d039a510c6fc1ea865100b60c13c9ccf78c33949680cb6d00a30"
+    },
+    {
+      "path": "docker-compose.static-cache.yml",
+      "sha256": "c50c5c55749e747dc6af736a02e3ec4611913b35bb71b87458804fdc646f6bc3"
+    },
+    {
+      "path": "scripts/deploy-production.sh",
+      "sha256": "4ca337789c8d854124d9bd27c234cb6758151fedd2d0a04cffbce9d67e668fe2"
+    },
+    {
+      "path": "scripts/tests/deploy-production.test.sh",
+      "sha256": "2ce23214d1ea6debbb3556d80209e84cf040dbda46a276a42b024aa089ec4d32"
+    },
+    {
+      "path": "apps/web/tests/retained-static.test.mjs",
+      "sha256": "7bd8af24533e4dfe1d778f965c2a6cf2e2c55dc328a2975a564ff069a95e0049"
+    },
+    {
+      "path": "apps/web/tests/static-retention.spec.ts",
+      "sha256": "15168aee0e5f836fb80fe4768d2e3a2c7a87f6a4254a39673d3d5a590cd33629"
+    }
+  ],
+  "constraints": [
+    "Preseed before server startup; appending files after startup did not make the old URL available until restart",
+    "No automatic GC; retained volume/backups need capacity monitoring and a separate deletion policy",
+    "Installed root-owned deployer must be updated before deployment; no self-update or actual production activation performed",
+    "No DB/API/consent/locale/business behavior changes",
+    "Not a full mounted-browser-session rolling deploy or real TLS/CDN/staging test",
+    "F02 dev diagnostic/WebKit/manualSR/fieldCWV remain open"
+  ],
+  "next": "Independent H3-18b; H3-17 operational release gates remain pending explicit staging/activation"
+}

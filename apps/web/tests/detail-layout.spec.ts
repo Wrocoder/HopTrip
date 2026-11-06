@@ -3,8 +3,9 @@ import AxeBuilder from '@axe-core/playwright';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {tripText} from '../src/lib/i18n/trip-copy';
 import {qualityReasonText} from '../src/lib/i18n/quality-copy';
-import {savedTripsKey} from '../src/lib/shared-trip';
+import {savedPlansKey as savedTripsKey} from '../src/lib/saved-plans';
 import {searchReturnPath} from '../src/lib/search-context';
+import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
 
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
@@ -61,9 +62,10 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
  // The schedule fixture has no approved seller link. Use the approved flight
  // fixture for CTA visibility and the existing planning/share journey.
  await page.goto(localizedHref('/deals/browser-deal?returnTo='+encodeURIComponent('/deals?origin=WRO&sort=price&offset=12'),locale));
+ await expect(page.locator('#budget-people')).toBeEnabled();await page.evaluate(()=>document.fonts.ready);
  await nav.locator('a[href="#trip-booking"]').focus();await page.keyboard.press('Enter');
  await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();
- await page.evaluate(()=>scrollTo(0,0));
+ await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
  if(locale==='pl')await expect(summary.locator('.deal-price')).toBeInViewport({ratio:1});
  if(info.project.name==='desktop')await expect(booking.locator('a.cta')).toBeInViewport({ratio:1});
@@ -92,7 +94,9 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
  await nav.locator('a[href="#trip-save"]').focus();await page.keyboard.press('Enter');
  await expect(page.locator('#trip-save')).toBeFocused();
  await page.getByRole('button',{name:t('Zapisz wyjazd'),exact:true}).click();
- expect(JSON.parse((await page.evaluate(key=>localStorage.getItem(key),savedTripsKey))!)).toHaveLength(1);
+  await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);
+  await expect(page.getByRole('button',{name:planEditorCopy[locale].update,exact:true})).toBeDisabled();
+ await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'null')?.plans.length??0,savedTripsKey)).toBe(1);
  await page.getByRole('button',{name:t('Udostępnij'),exact:true}).click();
  const shared=await page.locator('#trip-share-link').inputValue();
  await page.goto(shared);await expect(page.locator('#budget-hotel_total')).toHaveValue('1000');

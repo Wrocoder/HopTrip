@@ -22,7 +22,8 @@ test("compact cards preserve clocks, missing facts, keyboard access and long nam
  }
  await expect(first.locator(".flight-schedule-compact")).toContainText("brak godziny");
  await expect(first.locator(".flight-schedule-compact")).not.toContainText("Powrót");
- const card=page.locator(".deal-card").filter({has:page.locator('a.deal-card-link[href="/deals/browser-13"]')});
+ await page.goto('/deals?offset=12');
+ const card=page.locator(".deal-card").filter({has:page.locator('a.deal-card-link[href^="/deals/browser-13"]')});
  // DEAL-01 keeps route warnings outside; full known clocks/zones are in details.
  await expect(card.locator(".flight-schedule-compact")).toContainText("Przylot szacowany");
  await expect(card.locator(".flight-schedule-compact")).not.toContainText(/Europe\/|GMT/);
@@ -32,7 +33,9 @@ test("compact cards preserve clocks, missing facts, keyboard access and long nam
   // Observation and availability are now always visible; the existing card stays compact.
   const freshness=await card.locator('.price-freshness').boundingBox();
   expect(freshness!.height).toBeLessThan(130);
-  expect((await card.boundingBox())!.height).toBeLessThan(730);
+  // H3-06 compares height against its measured locale/state baseline; retain
+  // the independent no-clipping guard here instead of the pre-H3 pixel budget.
+  expect(await card.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
  }
  await page.screenshot({path:testInfo.outputPath("catalog.png")});
  await card.screenshot({path:testInfo.outputPath("card.png")});
@@ -53,8 +56,8 @@ test("compact cards preserve clocks, missing facts, keyboard access and long nam
 
 test("next-day home arrival is visible without expanding details",async({page,request},testInfo)=>{
  await request.post("http://127.0.0.1:8100/__test__/compact-card?scenario=midnight");
- await page.goto("/deals");
- const card=page.locator(".deal-card").filter({has:page.locator('a.deal-card-link[href="/deals/browser-13"]')});
+ await page.goto("/deals?offset=12");
+ const card=page.locator(".deal-card").filter({has:page.locator('a.deal-card-link[href^="/deals/browser-13"]')});
  await expect(card.locator(".home-arrival")).toBeVisible();
  await expect(card.locator(".home-arrival")).toContainText("+1 dzień");
  await expect(card.locator(".trip-details")).not.toHaveAttribute("open","");

@@ -1,0 +1,1105 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-card.spec.ts offer-card.spec.ts compact-cards.spec.ts price-freshness.spec.ts local-flight-time.spec.ts --reporter=json
+
+
+[WebServer] INFO:     Started server process [37364]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dd7b42aab6244578b458449f029a33fa method=GET status=200
+
+[WebServer] (node:18704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=0b13b6903bfd458e9fdbdfd5feae49c9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=60888a83407b4484b3c521eac1b5ba1c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=807ea5fa980647c7a24f0f2935dd7872 method=GET status=200
+
+Running 28 tests using 1 worker
+
+(node:45828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/28] [desktop] › tests\compact-cards.spec.ts:12:5 › compact cards preserve clocks, missing facts, keyboard access and long names
+
+[WebServer] INFO:hoptrip.requests:request_id=c5a3381b95fd4934b45050fca26b8e0a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6b046233cecf4d04969c8542b43f83fb method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8cbff2db802741e781d3a63a10b6a533 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f2ad7e26eceb4726a162c5259539d2a4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7eac9c2945eb447db5744a3d1700ab68 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1174d5e5a50142d3a6be12dcb8af7204 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2562cec61653476dbc80ba56bbb468a0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9c99559634e641edb11259a22962182d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7c14c10117364b6f97c9cde714726a39 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1b52349c436e4abaa687e7feaa528680 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3d19ed313c8a4a02a59ed38d3a054c17 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f18c5e190616492384dad34edd49361c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=efc8a14846344af1a9937baf67fa91ca method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e709e57966c746af81e9eab65c6afa91 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=cb6e0f1e54d14967ba333b1c0dd484a2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=32cdb6ac6b494101916369fcb8df6ffb method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=0b8e37c7c8e74ccba936363f518ded42 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=815e7f6f21014741ab675c46130ac58d method=GET status=200
+  1) [desktop] › tests\compact-cards.spec.ts:12:5 › compact cards preserve clocks, missing facts, keyboard access and long names 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 730
+    Received:   932.578125
+
+      34 |   const freshness=await card.locator('.price-freshness').boundingBox();
+      35 |   expect(freshness!.height).toBeLessThan(130);
+    > 36 |   expect((await card.boundingBox())!.height).toBeLessThan(730);
+         |                                              ^
+      37 |  }
+      38 |  await page.screenshot({path:testInfo.outputPath("catalog.png")});
+      39 |  await card.screenshot({path:testInfo.outputPath("card.png")});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\compact-cards.spec.ts:36:46
+
+    Error Context: test-results\compact-cards-compact-card-2b6c4-board-access-and-long-names-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\compact-cards-compact-card-2b6c4-board-access-and-long-names-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\compact-cards-compact-card-2b6c4-board-access-and-long-names-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:18972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/28] [desktop] › tests\compact-cards.spec.ts:55:5 › next-day home arrival is visible without expanding details
+[WebServer] INFO:hoptrip.requests:request_id=63c48c98f6e84952ac3b4eec0990e73f method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b28a5c1e31b54008b8646e8390e0c900 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f046b7cb3a3e4aa99af77b62ea4f4d99 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0ee46f4549fc4e68b6ef7b45d5cab7f7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b797950f751f49cfabd95543c3c3b931 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d07c9d8cc7f44219b963c5ded13dd0e5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6730b1c91cb5468ebaf2b182280fc73e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=141b88e92b574d849b65db96a8cfae36 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=536a2f043e1f472a83ad8b7d2fc2c7a7 method=POST status=200
+
+[3/28] [desktop] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=f764848151ff4b17a0af0529a216e9df method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c25d0beb1049433ab8271524c954a6fe method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9e17ceca4db4773ae6343dc1cd90d72 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fbf1ab91383c4e5d80b81a5c8d128a8d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=57909cac0a144c6fb4382aa421cfa13d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=021983ba78534c8eaafa05eecd818d43 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=df46410371404c1a882e260927c3e5ab method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=df56f750387848ef97347cb12c6e5bf2 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3eb0fa95ac8545eb9efd3b88a37b0916 method=POST status=200
+
+  2) [desktop] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 1081.765625
+    Received:   760.765625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:54248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/28] [desktop] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=9773ea59958a4eb9af5f02b6c8b985f4 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e1588e03d39043dfbfb8ad10b5e47fb8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9792cebae05a42c0a6b84c3d7c7561ca method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5e5ef8b72b9e4e148757da8593ca513f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5e33da8e8b2e43868cde72d5c79f273f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d41958f696ea4fbe896745928075e514 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=466d348595ad4b739ae1dc6023424298 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6baa5b4f87684fc58fffde4d9690c051 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=5522ddd3788e49b882ad74c4a2281f18 method=POST status=200
+
+  3) [desktop] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 738.765625
+    Received:   656.765625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-en-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-en-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-en-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:9308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/28] [desktop] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=a3cb6b09a8514739b9c9039cfab7eb48 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=84e6c70a5ddf429daca1d1ae951f50cd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=115226da799f406aa938a8199420c00b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d5ff31e564a84431a9d1d1a75a5dbcd8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=23e584b0703c412ba60bc65214e3ba4a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d77f49bb6810464aba734efe32eecb19 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=218bdeb28e224865985db3adfe06f776 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d687f83ec74a4186b55d57c219516188 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=6327f4b8596640a39ca07f843fcedc22 method=POST status=200
+
+  4) [desktop] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 798.765625
+    Received:   756.765625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:12936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[6/28] [desktop] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=2d0e4c0873a14150a64f255f20284bd1 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=f9859a959b324f9da2e99d94529bdce9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=51709d892818426bb1e3f2539e1d9111 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=97012cb947b74f4aa175cf05037adb95 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c3beb7ba84d48f494bfd6f3d9a35cf2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2fb0c7e403bf448886c62be28049725d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7a1691c56c05486b847a3fb797036a4c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5771730584004aac8e5d8323a6b06a2b method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5030685607c34d0c8ae1dc42221dbb3c method=POST status=200
+  5) [desktop] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 787.765625
+    Received:   677.765625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:12324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/28] [desktop] › tests\local-flight-time.spec.ts:3:5 › audit midnight arrival is visible while seven hotel nights and manual money survive sharing
+
+[WebServer] INFO:hoptrip.requests:request_id=d83b7971647043aabe9253c397adc905 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bbab8c76786d43b9ab7db281a967c410 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=0aab688b62a347e8a20e0d273caf5659 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c3943cb5ffbf4d0c813766a581982d7b method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=49a0e73670b3439d8caae4da9340c110 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=54a5ab9800354333a2c515426d9c08e6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bfb1fc7202764d488adf81fe827247e4 method=GET status=404
+
+[8/28] [desktop] › tests\offer-card.spec.ts:17:56 › pl: card exposes price, CTA and material warnings for every quality state
+[WebServer] INFO:hoptrip.requests:request_id=456c95b611d242a1a042427bdb4d4fd9 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6938eaca74d3468f81c76e9865b344ba method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=42395fa2ab444cbfbb8edee62eb9ac44 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c58254b4393542d2936130bff2875705 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1ca65bd62eb543b6b17a7b254808c6a2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fd03306895654d868b73f1ffe18b827c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f5031d2e7f4342d7974114adabb51232 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6943ad387eac4562b238e3ac70c644ea method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8aa738b0c67c4ae5a65e660bfb7dc805 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a76acb160eb840798dd7112a6a1798df method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f77b71070a444f008d6ba3b4557ca40a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=db7bb07cafeb4637bb6c5ced816cc6de method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=570fa37e19e34e8ca22ed58121a0dfff method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=34e074d9b4c2439f9fb5e59b387e5876 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0f82b957650a4bd5bc6a1325d9c9adac method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9cc1730f3894431ba73a9026d17673ac method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=616cc791372e496ca63d23bfbf005502 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=70b4c9ed5c2e46f8b3364de8649911c3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ffd18825f8d742c4a36a234f9173e3ee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd62ced3675540f8ad186dca0d75c6cb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=474f6a6862624723821851cefeccb346 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c9a42a90f1fb49ca968b22dc42a1550d method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc4ad458addc4610bc8faa2914a528f7 method=POST status=200
+
+[9/28] [desktop] › tests\offer-card.spec.ts:17:56 › en: card exposes price, CTA and material warnings for every quality state
+
+[WebServer] INFO:hoptrip.requests:request_id=a2a46008ad114be4b6888ce0732fc18d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fa685c55d2d2471c8433277bb1263a3c method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3f54c6158e1e4fd78589ee2be0e70115 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=906012ae2b574298bc60dc848f3d6ef2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9277abcdb25a4ab5b5fc727a395a7a5b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8a73ce487d5c4943804daad69b8ce87c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=36085d4445bf42b38d80bdce8d147b83 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9107d96fd4b847d783c2acbae59e7a93 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fc71f130ac8f48b382354c6c43b84028 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9a45b9463c2a4603b269e6d28fb901ce method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b1f5f7954751428385cdebe5094ba961 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=01b3ce5384b04351a7c7934360378115 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9db42eaadcd74aedb1582ae74eb9dbc2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f75c9809cb79432b862373d2d7fc43f0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=36f19cc90cde410297ab95ea726f6f37 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a6000850c9434258a6d0562155f2b61a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f7953144f0334b4dbb28055fda86d94e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d117af931c6e4a7c8638cb140d744b38 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=974a6a97d0d842929942218334d3bf0e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fcb87f5414404948ba4587a750a93a69 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6cdc66aba27d4d0c8375ed1914812f20 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7591ccd8eba244aab8e63be3f2b4c80a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=19a71e5f72be4edb949e7c509a63c054 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fa9b81c1b5424df29de0abace38d44dc method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=054be5468a3242249c6a2f974ecadf2b method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=855fffb065c1421ba95b1cb051ab3da1 method=GET status=200
+
+[10/28] [desktop] › tests\offer-card.spec.ts:17:56 › ru: card exposes price, CTA and material warnings for every quality state
+
+[WebServer] INFO:hoptrip.requests:request_id=27ad6b6024ea4609a5218257c915227a method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=73ee51af70b94f9a8813ce1c7c6cd47c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4816cfb586fd4ca0b4f666df46fab2a4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=49bd018b4f044631bdf7c9614d53624f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=661a44f8c2d44c18823ebfefe02ebdc9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1a2a696cf73d4222ad9ebfe2f4470399 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=92a3073acd6a4fc98a7bdf0393f50aba method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2114874a8613402e9fb311a0be71ff52 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e66dff64660441738e46c826fb5dc5ee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a15dec5e61e4be5897cae6f8e98d337 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d00ecec8d5824645888804e5baf1a56e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1b519e7140894bb4a416f893ec5c8ed0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=12e263365ead479b85a45fca22a07c36 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=82b5fcd475f54a768ce32808478f3bc6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d34eb380678c4a28bac19f2747e85a04 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5fd4c0ac9c3640d99c5d16039042af78 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fca8d62d5f8440ff9bf860710b076947 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=537e8a0762c641bfbdbc01b82c18fcf8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fa091aaf4da94cbe9d4ab03eeba20801 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ccc75041409344af80ecd1612402f30a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=13db443e2c9d44f9a0cdfaf0af174593 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=efcd82f4645a44bc8eec54398605a195 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3a33a9ac96074ad49edb8216269e3544 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d026510841354e55a525224246f1ced2 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c7fb0b98892d44e09dc3988303052453 method=GET status=200
+
+[11/28] [desktop] › tests\offer-card.spec.ts:17:56 › uk: card exposes price, CTA and material warnings for every quality state
+[WebServer] INFO:hoptrip.requests:request_id=d51ad9a9191245a28ec9849a45715fab method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=30a61c101dda4226b32eb8dc1d7ec924 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1214d44d129a46be851072bcc485ab8c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=91a3fd41361a47c0a01330d29a6821e6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=92cfb10ceaa541ac96c4f979a31a21c0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9acebb9851eb4f3db1bc09cee00a40da method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=71ef970b7b40443094a79c010ffa96d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1d055aba92b14aa7ab6804598f01afe3 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b17d6c946ed241d28781608338019013 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5d5b18d0579f49dc8fb0294ea52eefad method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=23241de5535b449db37192653a04b9e2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=040710df2fa041ac9d2b4f15aa66e2da method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2561a0c025cc4e38ad17387408265978 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9d2b1dd6218e4aeeab8fd71f1001c013 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9c7c431e88a7437b86a9c8a6db369bc8 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=93f57037df9541c68fe91d7d54034715 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e3a16632271c49e8bfca0fb4124d0370 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3f43d474b0a74fedaa7069649aec594c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7628857e93684955aff3dd3858a3bebe method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5cd8d0255a614f408fee6894fca0ed37 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e170f875371e40658e0b850894d9c0a5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8a0534603ef64e92ae894dfadeef2d78 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f2438b05f3c047d2b4608d8903020a09 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=2293d9749e1f41bf84c0f898f1219468 method=POST status=200
+
+[12/28] [desktop] › tests\offer-card.spec.ts:53:5 › an open card announces expiry without requiring technical details
+[WebServer] INFO:hoptrip.requests:request_id=5681d132c11f4e59816886e33c4cf838 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8a55d1de357242bfa1d4b733a4d28b04 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=607635a6720d49c5b217fe79768179ce method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7e8da2c166c7465c8dec5f240f569a19 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2156e1455d8e4f3aa22bfa45bc2d8287 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6e778af20ed4413fb5a0ee125b64b7d2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=65f47f5ca59546bd9a36a336976d7d1f method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bc47d11bb4ea491c962a5a3fcae66095 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=72f4eb150b244b019488c0ea2c66aec7 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1c3e002b4cc74f30a1e14ae552ed66ac method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1cc5209bc1c54b7eaddd96abd5f75a18 method=GET status=200
+
+[13/28] [desktop] › tests\price-freshness.spec.ts:9:5 › observation and seller caveat are visible next to the price without opening details
+
+[WebServer] INFO:hoptrip.requests:request_id=f23b68a6b71b4008883352be715c19de method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=843fb03f11754c67884dd92950f78aef method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=480dbd12048c4e2eb71880e93dfd6dfd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a78ecd120dc0467aaddb9f9f588e8713 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5d34e4b44cc94d24ac894bb8d1baf682 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a3557325fde8438a815352f0708dad49 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2ac8c5f1102e46c8a2d95f300f441339 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2947a7ab5115429ca1bafdef4b719e81 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bf04a66df11a4eb29bb1248edc86f549 method=GET status=200
+[14/28] [desktop] › tests\price-freshness.spec.ts:33:5 › delivery time is separate and an open tab removes the partner link at the deadline
+
+[WebServer] INFO:hoptrip.requests:request_id=b668dc281c6a4b50b4dac7bc95f9966e method=GET status=200
+
+(node:14484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[15/28] [mobile] › tests\compact-cards.spec.ts:12:5 › compact cards preserve clocks, missing facts, keyboard access and long names
+
+[WebServer] INFO:hoptrip.requests:request_id=3daeb2f3222f40199a412bbadcdf33ba method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=1ce5d53538dd43588baf59ab77137e1e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=164a045cbe02473791039829f251c79b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=aea919b6157942caad12eb28e8f77fdd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8bdde6c8be534d64847ffa73e85cf101 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=28ce3350cc904aa09a447d5115155ccc method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4c4bdc27a525462d956460557e329c5c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6ef726742d474c539d105d0b16116ee0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=694bbf3486ce4131b41989cb0ca71882 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=33f827706c534b8aab868141495aa2d3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0a2cd115972a4ddda904226f8edc181e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=faca0d96a43d4980a4eccb00be90d28b method=POST status=200
+[16/28] [mobile] › tests\compact-cards.spec.ts:55:5 › next-day home arrival is visible without expanding details
+[WebServer] INFO:hoptrip.requests:request_id=ac225f9ddd474fe6a26454361a198827 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1b7bb2f6fe48497d82e9aae8923c578d method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf991f7260324f63b3c8faace3792a7d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ae20ab0a04c14ce9bcb34f160dd18572 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f54bdecf86c64a5984334368e333988e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f734aa56b61d4e41b006860ac6d3b459 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8d4d0db20100408f902ca74bcd5d7e7b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4ada6d5e37a543b3b79588d5c16807bf method=POST status=200
+
+[17/28] [mobile] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=c0a54151721e4db3ba1fd3bc774e4940 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=4288eaf1768d40aebd96eee0658060c1 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=306f83c29d754c0396a3704253c66407 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f7ab644940794fc3b35e4549598f57ea method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8774b26756384ba2a39d5c053fd3640e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=085d32f2edab4923a3fe9e0e42a51a89 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8985f25d60eb40009db9184fa6a7042a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e1fbac37647b4d11a35fa366b42825c0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=98619dece9b84e08847f8ac299e52eee method=POST status=200
+
+  6) [mobile] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ─────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 1672.359375
+    Received:   1033.359375
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:37788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[18/28] [mobile] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=f146afeb3ec24f52846fb245ce1cd833 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=d89e1a79ba2f4f0ca367f05a1e6c910c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e360e94a031d4f29b492c147f1d720c0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9fd59862800c454f987ad395b963b31c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d0ee11d5868949c79dbda16646479620 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6f28a0a886124025811861d98b8b3a07 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=290ee9da6424426297729141a3dbdbac method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1e9cb93cf8c240c6865c18c8bbe410aa method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5a96d51569d84ff8b8f347cf9cc9c513 method=GET status=200
+  7) [mobile] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ─────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 2699.90625
+    Received:   2534.90625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-en-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-en-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-en-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:25672) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[19/28] [mobile] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=c9590f3048c24d38bb7837f096ac2130 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d518ab74751549e788c0e9b89a78decb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=37023b768bbe41f3a39db61f050763e7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eedbddfb3ed14677b592c8953842b920 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d4aead85c54143e7a0817261024d0230 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=838bb0584f7840fdbd20e9f13c20bc78 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=85e58f16919b40e8935b6626c8d7a9f4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=221363899efb40f38dd62bfc107ecccc method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e3229ad7912549b2845ce56bf0216631 method=POST status=200
+  8) [mobile] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ─────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 1268.265625
+    Received:   867.265625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:5740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[20/28] [mobile] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=7ef17948a9ee499ab7bc0cdcb763ef37 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=84e1f31bca55435aac81499d6d6d8e9c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7272ba8de4864804a9244f188f6b05d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d93ed991c2374c8299b739fd55d445b6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf46a3e420a94bebbee433ad65eaff0b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b7de29086217478595fe3feb090dcc9e method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=a8da64a9a1ad4965aeb5dc7869e31e68 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1559d4e8d76e4369967849ead46b9a2c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=db59ed23b055469d91d1f607ab189d2c method=GET status=200
+  9) [mobile] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ─────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 2774.140625
+    Received:   2461.140625
+
+      25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');
+      26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();
+    > 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);
+         |                   ^
+      28 |   }
+      29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});
+      30 |   if(!before&&scenario==='partial'){
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:27:19
+
+    Error Context: test-results\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:23628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[21/28] [mobile] › tests\local-flight-time.spec.ts:3:5 › audit midnight arrival is visible while seven hotel nights and manual money survive sharing
+[WebServer] INFO:hoptrip.requests:request_id=85b3de8726474c1fb379e7138c211e97 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=84efb4484b1b4f1f95477f5483589587 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=306b62f268024afa9f41c0794910057e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=655110fb520a4e38b66b81a1b8b91d43 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=0fec45cd21044930b53b9ffd6073e781 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c1ae3425b4194022955f3282bda292a2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1aba4149b07e42c0aa1ce02abb37b2a1 method=GET status=404
+
+[22/28] [mobile] › tests\offer-card.spec.ts:17:56 › pl: card exposes price, CTA and material warnings for every quality state
+
+[WebServer] INFO:hoptrip.requests:request_id=6f0b0feb0cfd428ebb47d8d8538d3c0d method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=a997813b849d4098bd16833b56011fa3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=60a545355bc74728b3dd401ff06d98be method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=67533b2702424761b1f0decb2b91c373 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5e3e9a1cef314eec9235e2bfc9deb4cf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8445f9c7b064456ea69b31ab82b05055 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=216dc6cf56e3486f9364d662fada0a02 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e697361363b940c0acb1b383e2060400 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5dc29a52539d430f821931e1d37b092a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c664a12cda1b438ba34c0f17da4acac2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=faaa2d0038bd42aaa1fb68a9932be2b3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=28f9eaaa96b642e3acb1c9b1e7e4fcc6 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d8823e98902e49a78c8503dba7d89936 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e28f717447ba428e81644925b9f03ae6 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=420e52b914824e11a2c2b8a43c015d85 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1535af0ba49d4ae7ae7a282cd031660e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d6400aa0301b42ada1bb23b7aa96b543 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=66a0c810242141e79ff0f9d3d7eece07 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=147fee7bee364edc93f9f4d85578c405 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f1d52c32aac94fcca65f42c3ad992e22 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=21d44eefc73d481b98a0c0bb5bef90f5 method=GET status=200
+
+  10) [mobile] › tests\offer-card.spec.ts:17:56 › pl: card exposes price, CTA and material warnings for every quality state 
+
+    Error: apiRequestContext.post: socket hang up
+    Call log:
+      - → POST http://127.0.0.1:8125/__test__/quality?scenario=reset
+        - user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1
+        - accept: */*
+        - accept-encoding: gzip,deflate,br
+
+
+      11 | });
+      12 | test.afterEach(async({request})=>{
+    > 13 |  await request.post('http://127.0.0.1:8125/__test__/quality?scenario=reset');
+         |                ^
+      14 |  await request.post('http://127.0.0.1:8125/__test__/compact-card?scenario=normal');
+      15 | });
+      16 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\offer-card.spec.ts:13:16
+
+    Error Context: test-results\offer-card-pl-card-exposes-453d1-ngs-for-every-quality-state-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\offer-card-pl-card-exposes-453d1-ngs-for-every-quality-state-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\offer-card-pl-card-exposes-453d1-ngs-for-every-quality-state-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:7444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[23/28] [mobile] › tests\offer-card.spec.ts:17:56 › en: card exposes price, CTA and material warnings for every quality state
+[WebServer] INFO:hoptrip.requests:request_id=d7e802a5db614bda9949b0ccf59f6119 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ffc73f6e1bc949d0873ac7914e19a982 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=050b373388374a3a9160576441606f2a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=692c6c8acb644619b3e83cd463e42037 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f676ad2d50e345dfa3dfc7ce823df957 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=63e9f81d8ddd485a9a7df2de531d4e28 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e9543f42aa2b4442a3122a57face3415 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c7112bb3ef442ba9a14c51a485872f7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a9c7818ec65042bbbbfd4385739bb690 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7f9fe59e8a82430db02ccc90df5973b4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a485e602a87241a885d1c433d1ab94ec method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=56fedc21c7fb4c4cb632ee6343514460 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b1689bada2a047488fd75cf26b20b184 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=35efc315fe6c4918904e014298931b7d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f4524acb5e744c428e34919a97930dfb method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e39af34f013049ce9e280ae06e9ed0a3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1cca9b8785774c2babc9d412283c4137 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7b323fbdb26e45868c72c93fda3b9126 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=38cf56704b7a4895ad01b425cd6fb886 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=342f9d1813c34fca9625063f080d3c10 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c46d255a2a2548f4991f1a5038cf6038 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2c71807a92e049db809fa66e4e522228 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=29a3147ce2084fe8a360a7ec86ae4410 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fb47bc8ef30a49b6875c7975bec6c46c method=POST status=200
+
+[24/28] [mobile] › tests\offer-card.spec.ts:17:56 › ru: card exposes price, CTA and material warnings for every quality state
+[WebServer] INFO:hoptrip.requests:request_id=78a3fc1b05c240418832640e1c09966f method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a18bd14bd7cb4627ad3e440436c53c41 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=953c910cdcbe472181f2a5c8d3cef970 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d874f41b0a00489cb5f5fedbf2ba633b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5ccd6a36115d4ae9ac44344d9eb27287 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9d25d1c6d1cb459f9176ca9add3b85e8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5727128ac6434c5cab849ba230b1c498 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=094014a4ad64426386a4932864a165aa method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bc738467fb3b4c0d835c1e46b9ad1333 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c40f08e9699f43d4935cc5569ef071fb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f738eb5cec124f3ca5720e2be1a9f35b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=af21ddbd1e764ec8b7820773ac6ab0f9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=25e7da1129034192aeddd723a3c2a570 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a194a70bd97542b1b8bc0ba9deec306b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6295f2a6e4e44f01a3051c584c69c2e4 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1e00dc14581b41b6939739d513d95435 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d3bcd9d10ec5422481ce9f01d867f741 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1b7e35790c56410aa0ef9e801b44c31e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=bf5064b5419148dca65d1701eddd376d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=58370872485d45deb42d8cbff6fdde9b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4386cda74eb64ef181189f965b4919c4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=eed594cc628043558e6fcc6f127821ce method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=aade50ee2b0d41d1be0b2fec25ace705 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=246a70dd0a18474cb3b9117d4a444f96 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1381c756fd0b454e83d1f20c5560e3e6 method=GET status=200
+
+[25/28] [mobile] › tests\offer-card.spec.ts:17:56 › uk: card exposes price, CTA and material warnings for every quality state
+
+[WebServer] INFO:hoptrip.requests:request_id=2d97ee008a974d4584b7a89979dc6423 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=c3da62bbae7347d285a4175a6fe1574a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=462611851c1c49bb87983582b021c58d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9457c362ea2a46c3b89257e93873a20e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=96acd065d401427b94dc5be5e82f57ba method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e86581ffbae64f27a4cb7a416b6b472a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6f3f71c7c749492c982f6872419e78cb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2917ef1a699b46c7b6b3a45012d8b142 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=836115639638417bbbce9ab91785399f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=69ac1623f19f45b2ba4d265be52083fb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9fd6f36e1da546e0a670d20e8701e3e5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fe84986a60a44eaca2fc6d6c4696343e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ef95d58e885940c5ac990c5416de60b5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5873dbdae158483da76252952b47f92f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c96eaeda4c5d4ca384c1db9ccaef5946 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=4842e90834004e978c235b8130b351a0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b86f9992484740019648498130b214c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2b5d3a697f314d06ac1cbc973626b00a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=85a20b1fb81243d2829c8de33337afb7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7c9de911343b4234ae4340de007765ff method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=11b762857ffc430692b82209e4b836f4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c3aca5317c244673b5cf2be0b0607914 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c9c9fdeed6e3439dbb2b1734c898024c method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d77b9d08c7b24792860d83576840c263 method=POST status=200
+[26/28] [mobile] › tests\offer-card.spec.ts:53:5 › an open card announces expiry without requiring technical details
+
+[WebServer] INFO:hoptrip.requests:request_id=7a2769cf1bbc4b908a057a9acf83b29d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a810b17531d04b4ca5de7681f5ec5bb1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d1a359a2783a4a9697f8d97b1089562c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bd51819cb19245ff9b427eaab8fb9a18 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8f977304ab8e49358329ffff3022bdd9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0f83add469ce4302ac0718df4101795b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=67ea7e6fd5b844ce87f3d539b2c8892e method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=c4bb2eed7a7e4d3692ebc748c13cbfff method=POST status=200
+
+[27/28] [mobile] › tests\price-freshness.spec.ts:9:5 › observation and seller caveat are visible next to the price without opening details
+
+[WebServer] INFO:hoptrip.requests:request_id=907b423a3a7442d0879b422c599faca7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f5b713ac659f4b86a6e46c2bedfd4db1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c6a017c078a2493c843eafb6795e961e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b684e112db7b40c9a08a4399773b4373 method=GET status=200
+
+[28/28] [mobile] › tests\price-freshness.spec.ts:33:5 › delivery time is separate and an open tab removes the partner link at the deadline
+[WebServer] INFO:hoptrip.requests:request_id=86ff09a228834f19a8ec60334e696f9d method=GET status=200
+
+  10 failed
+    [desktop] › tests\compact-cards.spec.ts:12:5 › compact cards preserve clocks, missing facts, keyboard access and long names 
+    [desktop] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ─────
+    [desktop] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ─────
+    [desktop] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ─────
+    [desktop] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ─────
+    [mobile] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ──────
+    [mobile] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ──────
+    [mobile] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ──────
+    [mobile] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ──────
+    [mobile] › tests\offer-card.spec.ts:17:56 › pl: card exposes price, CTA and material warnings for every quality state 
+  18 passed (3.8m)

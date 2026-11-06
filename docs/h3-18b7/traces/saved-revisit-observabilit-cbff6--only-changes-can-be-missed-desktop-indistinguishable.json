@@ -1,0 +1,49 @@
+{
+  "cases": [
+    "local A open",
+    "local A reload",
+    "return to A after untracked local fixture",
+    "different local B",
+    "shared copy A"
+  ],
+  "distinctAnonymousSessions": 5,
+  "sessionSequence": [
+    "session-1",
+    "session-2",
+    "session-3",
+    "session-4",
+    "session-5"
+  ],
+  "semanticShapesEqual": true,
+  "excludedRandomIdentityFields": [
+    "event_id",
+    "anonymous_session_id"
+  ],
+  "normalizedKeys": [
+    "event_name",
+    "metadata"
+  ],
+  "pageTypes": [
+    {
+      "event": "PAGE_VIEW",
+      "page_type": "saved_trip"
+    },
+    {
+      "event": "PAGE_VIEW",
+      "page_type": "saved_trip"
+    },
+    {
+      "event": "PAGE_VIEW",
+      "page_type": "saved_trip"
+    },
+    {
+      "event": "PAGE_VIEW",
+      "page_type": "saved_trip"
+    },
+    {
+      "event": "PAGE_VIEW",
+      "page_type": "saved_trip"
+    }
+  ],
+  "hashOnlyLocalTransitionGeneratedNewView": false
+}

@@ -3,11 +3,25 @@
 from collections import Counter, defaultdict
 from datetime import UTC, datetime, timedelta
 from decimal import ROUND_HALF_UP, Decimal
-from typing import get_args
+from typing import cast, get_args
 
 from app.models.analytics import AnalyticsEvent
-from app.schemas.analytics import EventName
-from app.schemas.usage import PageCohort, UsageMetric, UsageReport
+from app.schemas.analytics import AnalyticsLocale, EventName
+from app.schemas.usage import (
+    EngagementReport,
+    FunnelStage,
+    FunnelStep,
+    LocaleCohort,
+    LocaleCohortReport,
+    LocaleKey,
+    OrderedFunnel,
+    OriginCohort,
+    OriginCohortReport,
+    OriginKey,
+    PageCohort,
+    UsageMetric,
+    UsageReport,
+)
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -17,6 +31,13 @@ PAGE_TYPES = frozenset({
     "deal", "budget", "saved_trip", "saved", "alerts", "guide",
 })
 PRODUCT_EVENTS = frozenset(get_args(EventName))
+ORIGIN_KEYS = frozenset(get_args(OriginKey))
+LOCALE_KEYS = frozenset(get_args(AnalyticsLocale))
+ENGAGEMENT_EVENTS = (
+    ("detail_disclosure", "DEAL_DETAILS_OPEN"),
+    ("budget_completion", "BUDGET_CALCULATED"),
+    ("trip_update", "TRIP_UPDATE"),
+)
 
 
 class UsageLimitExceeded(ValueError):
@@ -49,6 +70,95 @@ def metric(key: str, numerator: int, denominator: int) -> UsageMetric:
         key=key, numerator=numerator, denominator=denominator,
         percent=percent(numerator, denominator), status="available" if denominator else "no_data",
     )
+
+
+def ordered_funnel(events: list[AnalyticsEvent]) -> OrderedFunnel:
+    """Ordered prefix within the received window, not search/booking attribution.
+
+    Input uses (server created_at, DB id) order. Each session contributes at most
+    once per stage; all later viewed deals can qualify the final same-deal click.
+    """
+    progress: dict[str, int] = defaultdict(int)
+    deals: dict[str, set[int]] = defaultdict(set)
+    for row in events:
+        session, name = row.anonymous_session_id, row.event_name
+        stage = progress[session]
+        metadata = row.metadata_json if isinstance(row.metadata_json, dict) else {}
+        search = metadata.get("search")
+        search = search if isinstance(search, dict) else {}
+        count = search.get("result_count")
+        if stage == 0 and name == "PAGE_VIEW":
+            progress[session] = 1
+        elif stage == 1 and name == "SEARCH":
+            progress[session] = 2
+        elif (stage == 2 and name == "SEARCH_RESULT" and type(count) is int
+              and 0 < count <= 100 and search.get("error") is None):
+            progress[session] = 3
+        elif stage >= 3 and name == "DEAL_VIEW" and row.deal_id is not None:
+            deals[session].add(row.deal_id)
+            progress[session] = max(stage, 4)
+        elif stage == 4 and name == "PARTNER_CLICK" and row.deal_id in deals[session]:
+            progress[session] = 5
+    keys: tuple[FunnelStage, ...] = (
+        "page_view", "search", "positive_results", "deal_view", "partner_click",
+    )
+    counts = [sum(stage >= index for stage in progress.values()) for index in range(1, 6)]
+    return OrderedFunnel(steps=[FunnelStep(
+        key=key, sessions=counts[index],
+        previous_sessions=counts[index - 1] if index else None,
+        percent=percent(counts[index], counts[index - 1]) if index else None,
+        status="available" if (counts[index - 1] if index else counts[0]) else "no_data",
+    ) for index, key in enumerate(keys)])
+
+
+def origin_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -> OriginCohortReport:
+    """Partition by first received search context, not first valid origin/attribution.
+
+    Events have already been filtered and sorted by (server created_at, DB id).
+    All session actions in the window contribute, including before this context.
+    """
+    first: dict[str, OriginKey] = {}
+    for row in events:
+        if row.event_name not in {"SEARCH", "SEARCH_RESULT"} or row.anonymous_session_id in first:
+            continue
+        metadata = row.metadata_json if isinstance(row.metadata_json, dict) else {}
+        search = metadata.get("search")
+        filters = search.get("filters") if isinstance(search, dict) else None
+        value = filters.get("origin") if isinstance(filters, dict) else None
+        first[row.anonymous_session_id] = (
+            cast(OriginKey, value) if isinstance(value, str) and value in ORIGIN_KEYS else "unknown"
+        )
+    groups: dict[OriginKey, set[str]] = defaultdict(set)
+    for row in events:
+        groups[first.get(row.anonymous_session_id, "unknown")].add(row.anonymous_session_id)
+    population = sum(len(members) for members in groups.values())
+    return OriginCohortReport(rows=[OriginCohort(
+        origin=origin, sessions=len(members), percent=percent(len(members), population),
+        metrics=[metric(key, len(members & by_name[event]), len(members))
+                 for key, event in ENGAGEMENT_EVENTS],
+    ) for origin, members in sorted(groups.items())])
+
+
+def locale_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -> LocaleCohortReport:
+    """First received product event in the window; never backfill legacy unknowns."""
+    first: dict[str, LocaleKey] = {}
+    for row in events:
+        if row.anonymous_session_id in first:
+            continue
+        metadata = row.metadata_json if isinstance(row.metadata_json, dict) else {}
+        value = metadata.get("locale")
+        first[row.anonymous_session_id] = (
+            cast(LocaleKey, value) if isinstance(value, str) and value in LOCALE_KEYS else "unknown"
+        )
+    groups: dict[LocaleKey, set[str]] = defaultdict(set)
+    for session, locale in first.items():
+        groups[locale].add(session)
+    population = len(first)
+    return LocaleCohortReport(rows=[LocaleCohort(
+        locale=locale, sessions=len(members), percent=percent(len(members), population),
+        metrics=[metric(key, len(members & by_name[event]), len(members))
+                 for key, event in ENGAGEMENT_EVENTS],
+    ) for locale, members in sorted(groups.items())])
 
 
 def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
@@ -122,4 +232,10 @@ def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
         start=start, end=end, observed_events=len(events), observed_sessions=n,
         excluded_events=len(records) - len(events), invalid_results=invalid,
         unlinked_detail_views=unlinked, metrics=metrics, page_cohorts=pages,
+        ordered_funnel=ordered_funnel(events),
+        engagement=EngagementReport(metrics=[
+            metric(key, len(by_name[event]), n) for key, event in ENGAGEMENT_EVENTS
+        ]),
+        origin_cohorts=origin_cohorts(events, by_name),
+        locale_cohorts=locale_cohorts(events, by_name),
     )

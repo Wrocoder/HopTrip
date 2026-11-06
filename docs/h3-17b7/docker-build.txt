@@ -1,0 +1,142 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 978B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:22-alpine
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 224B 0.0s done
+#3 DONE 0.0s
+
+#4 [deps 1/4] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#4 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 5.77MB 0.3s done
+#5 DONE 0.3s
+
+#6 [deps 2/4] WORKDIR /app
+#6 CACHED
+
+#7 [deps 3/4] COPY package.json package-lock.json ./
+#7 CACHED
+
+#8 [deps 4/4] RUN --mount=type=secret,id=npm_ca     if [ -f /run/secrets/npm_ca ]; then       NODE_EXTRA_CA_CERTS=/run/secrets/npm_ca npm ci;     else npm ci; fi
+#8 CACHED
+
+#9 [builder 3/5] COPY --from=deps /app/node_modules ./node_modules
+#9 CACHED
+
+#10 [builder 4/5] COPY . .
+#10 DONE 0.3s
+
+#11 [builder 5/5] RUN npm run build
+#11 0.943 
+#11 0.943 > hoptrip-web@0.1.0 build
+#11 0.943 > next build
+#11 0.943 
+#11 1.549 ▲ Next.js 16.4.3 (Turbopack)
+#11 1.656 ✓ Running next.config.ts took 107ms
+#11 1.664 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#11 1.664 This information is used to shape Next.js' roadmap and prioritize features.
+#11 1.664 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#11 1.664 https://nextjs.org/telemetry
+#11 1.664 
+#11 1.699 
+#11 1.747   Creating an optimized production build ...
+#11 5.782 ✓ Compiled successfully in 4.0s
+#11 5.804   Running TypeScript ...
+#11 15.62   Finished TypeScript in 9.8s ...
+#11 15.63   Collecting page data using 11 workers ...
+#11 17.46   Generating static pages using 11 workers (0/61) ...
+#11 18.24   Generating static pages using 11 workers (15/61) 
+#11 18.61   Generating static pages using 11 workers (30/61) 
+#11 18.69   Generating static pages using 11 workers (45/61) 
+#11 18.91 ✓ Generating static pages using 11 workers (61/61) in 1447ms
+#11 18.92   Finalizing page optimization ...
+#11 19.25 
+#11 19.25 Route (app)
+#11 19.25 ┌ ƒ /
+#11 19.25 ├ ƒ /_not-found
+#11 19.25 ├ ƒ /[locale]
+#11 19.25 ├ ƒ /[locale]/[...landing]
+#11 19.25 ├ ƒ /[locale]/alerts
+#11 19.25 ├ ƒ /[locale]/alerts/[mode]
+#11 19.25 ├ ƒ /[locale]/deals
+#11 19.25 ├ ƒ /[locale]/deals/[slug]
+#11 19.25 ├ ƒ /[locale]/destinations
+#11 19.25 ├ ƒ /[locale]/info
+#11 19.25 ├ ƒ /[locale]/info/[slug]
+#11 19.25 ├ ƒ /[locale]/info/trip-budget
+#11 19.25 ├ ƒ /[locale]/saved
+#11 19.25 ├ ƒ /[locale]/trip
+#11 19.25 ├ ƒ /alerts
+#11 19.25 ├ ƒ /alerts/[mode]
+#11 19.25 ├ ○ /apple-icon.png
+#11 19.25 ├ ƒ /city-break
+#11 19.25 ├ ƒ /deals
+#11 19.25 ├ ƒ /deals/[slug]
+#11 19.25 ├ ƒ /destinations
+#11 19.25 ├ ƒ /destinations/[slug]
+#11 19.25 ├ ƒ /from/[iata_code]
+#11 19.25 ├ ƒ /from/warszawa
+#11 19.25 ├ ○ /icon.png
+#11 19.25 ├ ƒ /info
+#11 19.25 ├ ƒ /info/[slug]
+#11 19.25 ├ ƒ /preview/[kind]/[key]
+#11 19.25 ├ ○ /robots.txt
+#11 19.25 ├ ƒ /routes/krakow-rome
+#11 19.25 ├ ƒ /saved
+#11 19.25 ├   /share/[slug]
+#11 19.25 │ ├ ● /share/baggage
+#11 19.25 │ ├ ● /share/connections
+#11 19.25 │ ├ ● /share/booking-with-agents
+#11 19.25 │ └ ● [+48 more paths]
+#11 19.25 ├ ○ /sitemap.xml
+#11 19.25 ├ ƒ /tanie-loty-na-weekend
+#11 19.25 └ ƒ /trip
+#11 19.25 
+#11 19.25 
+#11 19.25 ƒ Proxy (Middleware)
+#11 19.25 
+#11 19.25 ○  (Static)   prerendered as static content
+#11 19.25 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+#11 19.25 ƒ  (Dynamic)  server-rendered on demand
+#11 19.25 
+#11 DONE 19.7s
+
+#6 [deps 2/4] WORKDIR /app
+#6 CACHED
+
+#12 [runner 3/7] COPY --from=builder /app/.next/standalone ./
+#12 DONE 0.2s
+
+#13 [runner 4/7] COPY --from=builder /app/.next/static ./.next/static
+#13 DONE 0.1s
+
+#14 [runner 5/7] COPY --from=builder /app/.next/static ./static-seed
+#14 DONE 0.1s
+
+#15 [runner 6/7] COPY --from=builder /app/public ./public
+#15 DONE 0.0s
+
+#16 [runner 7/7] COPY scripts/retain-static.mjs scripts/start-with-static.mjs scripts/check-static.mjs ./
+#16 DONE 0.0s
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 2.2s done
+#17 exporting manifest sha256:7e7aee6478de0f770116880b0c630d40bc7864d453d85af72538d5aa0bcab424 0.0s done
+#17 exporting config sha256:d8a88dfadfe6559a89fd6e7e0afbdf103968f0e6047d232762cb55eb2e513eea 0.0s done
+#17 exporting attestation manifest sha256:69cdaa2a13030b8b4a9ed1318dcb22506372d1fdfb52cf6aab95b92c58910979 0.0s done
+#17 exporting manifest list sha256:59440e9e11bb26c0819a72551c00b5bf23db7b2ff5d4ea7218942f05f7a77368 0.0s done
+#17 naming to docker.io/library/hoptrip-h3-17b7-local:20261106 done
+#17 unpacking to docker.io/library/hoptrip-h3-17b7-local:20261106
+#17 unpacking to docker.io/library/hoptrip-h3-17b7-local:20261106 0.6s done
+#17 DONE 2.9s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/izm00nzrgq20pjuznlrb8vkiv

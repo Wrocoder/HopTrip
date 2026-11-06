@@ -1,0 +1,173 @@
+..........F...........................................                   [100%]
+================================== FAILURES ===================================
+_ test_click_keeps_opaque_context_currency_and_attribution_without_refresh_token _
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x000001EDFB8D4E30>
+api_client = <starlette.testclient.TestClient object at 0x000001EDFBAD60C0>
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...2A0>, <app.models.offer.TravelOffer object at 0x000001EDFBDF6AE0>, <app.models.deal.Deal object at 0x000001EDFBDF7590>)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001EDFBDF6900>
+
+    def test_click_keeps_opaque_context_currency_and_attribution_without_refresh_token(isolated_db, api_client, link_fixture, monkeypatch):
+        settings, _, component, offer, deal = link_fixture
+        # These are synthetic source parameters, not newly invented supported fields.
+        opaque = "/search/WRO0101BCN04011?" + urlencode([
+            ("t", "opaque-ticket"), ("t", "connection-open-jaw"), ("label", "M\xe1laga & \u0141\xf3d\u017a"),
+            ("adults", "1"), ("currency", "eur"), ("expected_price_currency", "usd"),
+        ])
+        offer.raw_payload = {"link": opaque}
+        isolated_db.commit()
+>       synced(isolated_db, link_fixture, monkeypatch)
+
+apps\api\tests\test_flight_link_binding.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\tests\test_flight_link_binding.py:18: in synced
+    asyncio.run(partner_links.sync_partner_links(db, transport=httpx.MockTransport(success)))
+..\..\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = <sqlalchemy.orm.session.Session object at 0x000001EDFB8D4E30>
+
+    async def sync_partner_links(
+        db: Session, *, transport: httpx.AsyncBaseTransport | None = None
+    ) -> LinkSyncResult:
+        settings = get_settings()
+        result = LinkSyncResult(enabled=settings.travelpayouts_links_enabled)
+        if not result.enabled:
+            return result
+        marker, project = settings.travelpayouts_marker, settings.travelpayouts_project_id
+        if not settings.travelpayouts_api_token or not marker or not project:
+            raise ProviderNotConfigured("Partner link credentials are incomplete")
+        program = db.scalar(
+            select(AffiliateProgram)
+            .join(AffiliateProvider)
+            .where(
+                AffiliateProvider.code == "travelpayouts",
+                AffiliateProgram.code == "aviasales",
+                AffiliateProvider.is_active.is_(True),
+                AffiliateProgram.is_active.is_(True),
+                AffiliateProvider.onboarding_status == "APPROVED",
+                AffiliateProgram.onboarding_status == "APPROVED",
+            )
+        )
+        if program is None:
+            raise ProviderNotConfigured("Aviasales program is not approved and active")
+        provider = db.get(AffiliateProvider, program.provider_id)
+        if (
+            provider is None
+            or "AFFILIATE_LINK" not in provider.capabilities_json
+            or "AFFILIATE_LINK" not in program.capabilities_json
+            or "tp.media" not in program.allowed_hosts
+            or program.adapter_code != "stored_link"
+            or program.tracking_param is not None
+        ):
+            raise ProviderNotConfigured("Unsupported Aviasales link policy")
+        active_ids = available_deals_query().with_only_columns(Deal.id)
+        rows = db.execute(
+            select(DealComponent, TravelOffer)
+            .join(TravelOffer, DealComponent.travel_offer_id == TravelOffer.id)
+            .where(
+                DealComponent.deal_id.in_(active_ids),
+                DealComponent.component_type == "FLIGHT",
+                TravelOffer.source == "travelpayouts_data",
+            )
+            .order_by(DealComponent.id)
+        ).all()
+        pending: list[tuple[DealComponent, str]] = []
+        for component, offer in rows:
+            # Explicit manual binding to another program takes precedence.
+            if component.affiliate_program_id not in (None, program.id):
+                continue
+            metadata = dict(component.metadata_json or {})
+            try:
+                direct = source_url(offer.raw_payload.get("link"))
+            except ValueError:
+                metadata.pop("outbound_url", None)
+                component.metadata_json = metadata
+                result.invalid_sources += 1
+                continue
+            if component.affiliate_program_id == program.id and valid_partner(
+                metadata.get("outbound_url"), direct, marker, project
+            ):
+                result.unchanged += 1
+                continue
+            # An old URL must not keep advertising previous dates/prices if conversion fails.
+            metadata.pop("outbound_url", None)
+            component.metadata_json = metadata
+            pending.append((component, direct))
+        db.commit()
+        async with httpx.AsyncClient(timeout=30, transport=transport, follow_redirects=False) as client:
+            for start in range(0, len(pending), 10):
+                if start:
+                    await asyncio.sleep(0.7)  # Below 100 requests/minute; pipeline lock is shared.
+                batch = pending[start : start + 10]
+                requested = {direct for _, direct in batch}
+                try:
+                    response = await client.post(
+                        "https://api.travelpayouts.com/links/v1/create",
+                        headers={"X-Access-Token": settings.travelpayouts_api_token},
+                        json={
+                            "trs": project,
+                            "marker": marker,
+                            "shorten": False,
+                            "links": [
+                                {"url": direct, "sub_id": PLACEMENT_SUB_ID}
+                                for direct in sorted(requested)
+                            ],
+                        },
+                    )
+                except httpx.TransportError:
+                    raise ProviderTransientError("Partner links transport failure") from None
+                if response.status_code == 429 or response.status_code >= 500:
+                    raise ProviderTransientError(
+                        f"Partner links HTTP {response.status_code}",
+                        _retry_after(response.headers.get("Retry-After")),
+                    )
+                if response.status_code != 200:
+                    raise ProviderPermanentError(f"Partner links HTTP {response.status_code}")
+                try:
+                    body = response.json()
+                    if body.get("code") != "success":
+                        raise ValueError
+                    converted: dict[str, str] = {}
+                    for item in body["result"]["links"]:
+                        direct, partner = item["url"], item["partner_url"]
+                        if (
+                            item["code"] != "success"
+                            or direct not in requested
+                            or not valid_partner(partner, direct, marker, project)
+                        ):
+                            raise ValueError
+                        converted[direct] = partner
+                    if set(converted) != requested:
+                        raise ValueError
+                except (ValueError, TypeError, KeyError, AttributeError):
+>                   raise ProviderPermanentError("Invalid partner links response") from None
+E                   app.providers.base.ProviderPermanentError: Invalid partner links response
+
+apps\api\app\services\partner_links.py:192: ProviderPermanentError
+---------------------------- Captured stderr call -----------------------------
+INFO:httpx:HTTP Request: POST https://api.travelpayouts.com/links/v1/create "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     httpx:_client.py:1740 HTTP Request: POST https://api.travelpayouts.com/links/v1/create "HTTP/1.1 200 OK"
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\docs\h3-05a\targeted.xml -
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_flight_link_binding.py::test_click_keeps_opaque_context_currency_and_attribution_without_refresh_token
+1 failed, 53 passed, 2 warnings in 2.56s

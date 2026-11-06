@@ -1,0 +1,26 @@
+{
+  "version": "first-search-origin-cohorts-v1",
+  "date": "2026-11-06",
+  "api": "GET /api/v1/admin/analytics/usage -> origin_cohorts",
+  "source": "Existing metadata_json.search.filters.origin on the first received SEARCH or SEARCH_RESULT for the session in [start,end)",
+  "order": "Existing server created_at, then DB id; not client action time",
+  "population": "Existing observed product sessions across 17 allowed events, excluding placeholder sessions; no PAGE_VIEW requirement",
+  "supported_origins": ["WRO","WAW","WMI","KRK","GDN","KTW","POZ","RZE","SZZ","LUZ","BZG","LCJ","SZY","RDO","IEG","WAW,WMI"],
+  "registry": "Pinned OriginKey enum mirrors existing Polish AIRPORT_ALIASES keys plus WAW,WMI; parity test guards drift. No arbitrary IATA-shaped metadata or DB airport names are rendered",
+  "unknown": "No search event, missing/malformed/unsupported first origin, or noncanonical value. First unknown stays unknown; later valid origins do not backfill",
+  "partition": "Each observed session belongs to exactly one cohort. WAW,WMI is separate from WAW and WMI and is never split. Rows sorted by origin key",
+  "share": "Cohort sessions / observed_sessions, Decimal ROUND_HALF_UP two decimals; JSON string. Rounded shares may sum to 99.99 or 100.01",
+  "metrics": [
+    {"key":"detail_disclosure","event":"DEAL_DETAILS_OPEN"},
+    {"key":"budget_completion","event":"BUDGET_CALCULATED"},
+    {"key":"trip_update","event":"TRIP_UPDATE"}
+  ],
+  "metric_denominator": "Sessions in that cohort, not all product sessions. Numerator is distinct cohort sessions with the event anywhere inside the same window, including before the first search context",
+  "invariants": "Sum of cohort sessions equals observed_sessions; sum of cohort metric numerators equals the matching global engagement numerator",
+  "not": ["first valid origin", "origin currently selected at action time", "airport of a booked flight", "same-search or same-plan attribution", "cross-step conversion", "returning person", "causal uplift"],
+  "empty": "No sessions -> rows=[] and existing localized no_data message, no empty HTML table",
+  "compatibility": "New optional origin_cohorts root field; old metrics/page_cohorts/ordered_funnel/engagement versions and definitions unchanged",
+  "privacy": "Existing context only. No new tracking fields/identifiers/metadata, no airport inference from URLs/deal IDs, no raw session IDs/tokens/labels/amounts. No extra SQL queries or DB changes",
+  "synthetic_fixture": {"events":11,"sessions":4,"origins":["WAW,WMI","WRO","unknown"],"cohort_sessions":[1,1,2],"shares":["25.00","25.00","50.00"],"metric_numerators":[[0,0,1],[1,1,0],[0,0,1]]},
+  "production_baseline": "not collected"
+}

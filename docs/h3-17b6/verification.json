@@ -1,0 +1,136 @@
+{
+  "status": "DONE_SSR_CACHE_SCOPE_WITH_OPEN_RELEASE_SKEW_FINDING",
+  "date": "2026-11-06",
+  "task": "H3-17b6",
+  "browser": {
+    "startTime": "2026-11-05T23:07:28.330Z",
+    "duration": 34784.606,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "capture": {
+    "startTime": "2026-11-05T23:06:19.347Z",
+    "duration": 12219.876,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "ssr": {
+    "javaScriptEnabled": false,
+    "routeVisits": 40,
+    "uniqueUrls": 37,
+    "locales": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "allHtmlNoStore": true,
+    "currentUniqueAssets": 25,
+    "allCheckedCurrentAssetsImmutable": true,
+    "cookieOrigins": [
+      "WRO",
+      "KRK",
+      "none"
+    ],
+    "queryOverrides": true,
+    "forgedLocaleIgnored": true
+  },
+  "transition": {
+    "before": "B03jo9a_4GShaLeB8HAfD",
+    "after": "r0GcPxhHoaf0i7WcFdlMD",
+    "validator": "\"stale-B03jo9a_4GShaLeB8HAfD\"",
+    "realOldEtag": false,
+    "status": 200,
+    "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+    "previousAssets": [
+      {
+        "url": "/_next/static/chunks/25qesb72t5xyv.css",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/20bcqoudhx99e.js",
+        "status": 200
+      },
+      {
+        "url": "/_next/static/chunks/0_uqrzzg54op_.js",
+        "status": 200
+      },
+      {
+        "url": "/_next/static/chunks/0shvv_fexnkj2.js",
+        "status": 200
+      },
+      {
+        "url": "/_next/static/chunks/0ne2s8-h25m38.js",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/turbopack-2c3mg3r-05n1w.js",
+        "status": 200
+      },
+      {
+        "url": "/_next/static/chunks/35xns_mi0t2jy.js",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/25svbm54vtwsb.js",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/0yzlf-168i-92.js",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/2avyl1-e-ljmx.js",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/0dcmeq2dewlij.js",
+        "status": 404
+      },
+      {
+        "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200
+      },
+      {
+        "url": "/_next/static/media/es.3jwq6b1aedu03.svg",
+        "status": 200
+      }
+    ]
+  },
+  "finding": {
+    "id": "H3-17-F03",
+    "priority": "P1",
+    "status": "OPEN",
+    "localReproduction": "CONFIRMED",
+    "missingOldAssets": 7,
+    "totalOldAssets": 13,
+    "deployedSiteStatus": "NEEDS_EVIDENCE",
+    "notes": "Current HTML/assets pass. Old mounted documents may reference missing chunks after release. Container copies only current .next/static; repository deploy postflight lacks old-asset check; host/CDN behavior unverified."
+  },
+  "sourceParity": {
+    "files": 635,
+    "runtimeDelta": [],
+    "test": "apps/web/tests/ssr-cache.spec.ts"
+  },
+  "build": {
+    "before": "B03jo9a_4GShaLeB8HAfD",
+    "after": "r0GcPxhHoaf0i7WcFdlMD",
+    "freshAfterBuild": true
+  },
+  "node": {
+    "passed": 314
+  },
+  "limits": [
+    "Local next start,not Docker/CDN/deployed origin",
+    "Old response has no ETag;If-None-Match validator synthetic,not real old conditional cache hit",
+    "Old chunks diagnostics not treated as a passed rolling release gate",
+    "No browser session surviving server restart or chunk-load recovery guarantee",
+    "No full sitemap crawl/full E2E/WebKit/manual SR/fieldCWV claim",
+    "React dev F02 remains open"
+  ],
+  "next": "H3-17b7 release asset skew protection/postflight; H3-14/18 not started"
+}

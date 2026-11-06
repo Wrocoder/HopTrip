@@ -7,7 +7,7 @@ export const navigation:Record<Locale,{flights:string;weekend:string;destination
 };
 
 export function activeNavigation(path:string,hash:string):string|undefined {
- if(path==='/' && hash==='#home-destinations' || path.startsWith('/destinations/'))return '/#home-destinations';
+ if(path==='/' && hash==='#home-destinations' || path==='/destinations' || path.startsWith('/destinations/'))return '/destinations';
  if(path==='/tanie-loty-na-weekend')return path;
  if(path==='/saved' || path==='/info/trip-budget')return path;
  if(['/deals','/from','/routes'].some(base=>path===base || path.startsWith(base+'/')) || path==='/city-break')return '/deals';

@@ -47,8 +47,8 @@ test("old snapshot format and storage tokens are unchanged across display langua
  const original=JSON.stringify(decoded);
  for(const locale of locales){
   const url=new URL(localizedHref(tripPath(token),locale),"https://example.test");
-  assert.equal(url.searchParams.get("plan"),token);
-  assert.deepEqual(decodeTrip(url.searchParams.get("plan")),decoded);
+  assert.equal(new URLSearchParams(url.hash.slice(1)).get("plan"),token);
+  assert.deepEqual(decodeTrip(new URLSearchParams(url.hash.slice(1)).get("plan")),decoded);
   assert.deepEqual(readSavedTrips(JSON.stringify([token])),[token]);
   assert.equal(decoded.draft.adultsOnly,undefined);
  }

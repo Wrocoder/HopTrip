@@ -1,4 +1,5 @@
 "use client";
+import {partnerContextCopy} from '../../lib/i18n/partner-context-copy';
 
 import {useEffect,useRef,useState,type FormEvent} from 'react';
 import type {Deal} from '../../lib/api';
@@ -13,6 +14,7 @@ import {useTripDraft} from './trip-draft';
 import {EventFlightNotice} from './event-flight-notice';
 import {isEventResults,type EventItem,type TicketOption,type EventResults} from '../../lib/api-contract';
 import {eventFitCopy} from '../../lib/i18n/event-fit-copy';
+import {eventFitFilterCopy} from '../../lib/i18n/event-fit-filter-copy';
 import {cityLabel,eventCityLabel} from '../../lib/cities';
 import {eventResultsCopy} from '../../lib/i18n/event-results-copy';
 import {eventContextCopy} from '../../lib/i18n/event-context-copy';
@@ -28,6 +30,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
  const ux=eventUx[locale];
  const resultsCopy=eventResultsCopy[locale];
  const contextCopy=eventContextCopy[locale];
+ const fitCopy=eventFitFilterCopy[locale];
  const record=()=>track("EVENT_CLICK",deal.slug);
  const startInput=useRef<HTMLInputElement>(null);
  const {draft,save,ready}=useTripDraft()!;
@@ -35,25 +38,29 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
  const [custom,setCustom]=useState({start:'',end:''});
  const {start,end}=mode==='stay'?draft:custom;
  const [category,setCategory]=useState<Category>('ALL');
+ const [fitMode,setFitMode]=useState<'all'|'possible'>('all');
  const [applied,setApplied]=useState<string|null>(null),[refresh,setRefresh]=useState(0);
  const [state,setState]=useState<FetchState|null>(null);
  const [navigation,setNavigation]=useState({query:'',day:'',page:1});
  const resultsRef=useRef<HTMLDivElement>(null);
  const valid=validEventDates(start,end);
  const query=new URLSearchParams({start_date:start,end_date:end,category,date_mode:mode}).toString();
- const day=navigation.query===query?navigation.day:'';
- const page=navigation.query===query?navigation.page:1;
+ const searchKey=query+'&fit_mode='+fitMode;
+ const day=navigation.query===searchKey?navigation.day:'';
+ const page=navigation.query===searchKey?navigation.page:1;
  const days=eventSearchDays(start,end);
  const dayIndex=days.indexOf(day);
  const navigationQuery=new URLSearchParams({page:String(page),...(day?{event_date:day}:{})}).toString();
- const url=publicApi(`/api/v1/deals/${encodeURIComponent(deal.slug)}/events?${query}&${navigationQuery}`);
+ const url=publicApi(`/api/v1/deals/${encodeURIComponent(deal.slug)}/events?${searchKey}&${navigationQuery}`);
  const requestKey=ready&&deal.events_supported&&valid&&(mode==='stay'||applied===query)?`${url}#${refresh}`:'';
  const current=state?.key===requestKey?state:null;
- const result=current?.result;
+ const response=current?.result;
+ const unsupportedFit=fitMode==='possible'&&!!response&&['READY','EMPTY'].includes(response.status)&&response.fit_mode!=='possible';
+ const result=unsupportedFit?undefined:response;
  const checked=eventCheckedAt(result?.checked_at);
  const busy=Boolean(requestKey&&!current);
  const malformed=[start,end].some(value=>value!==''&&!validCalendarDate(value));
- const error=ready&&malformed?dateCopy[locale].invalid:(ready&&(start||end)&&!valid)||current?.kind==='invalid'?t.dates:current?.kind==='error'?t.unavailable:'';
+ const error=ready&&malformed?dateCopy[locale].invalid:(ready&&(start||end)&&!valid)||current?.kind==='invalid'?t.dates:current?.kind==='error'?t.unavailable:unsupportedFit?fitCopy.unsupported:'';
  useEffect(()=>{
   if(!requestKey)return;
   const controller=new AbortController();
@@ -94,9 +101,9 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   setCategory('ALL');
   if(mode==='other')setApplied(new URLSearchParams({start_date:start,end_date:end,category:'ALL',date_mode:mode}).toString());
  }
- function selectDay(value:string){setNavigation({query,day:value,page:1});}
+ function selectDay(value:string){setNavigation({query:searchKey,day:value,page:1});}
  function selectPage(value:number){
-  setNavigation({query,day,page:value});
+  setNavigation({query:searchKey,day,page:value});
   resultsRef.current?.scrollIntoView({block:'start'});
  }
  function price(amount:string|null,currency:string|null){
@@ -123,6 +130,10 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
     {(['ALL','MUSIC','SPORTS','CULTURE','OTHER'] as const).map(c=><option key={c} value={c}>{labels[c]}</option>)}
    </select></label><button className="button" disabled={!ready||busy} type="submit">{busy?t.loading:t.search}</button>
   </form>
+  <div className={styles.dayNavigation}><label>{fitCopy.label}<select value={fitMode} disabled={!ready} aria-describedby="event-fit-filter-hint" onChange={e=>setFitMode(e.target.value as 'all'|'possible')}>
+   <option value="all">{fitCopy.all}</option><option value="possible">{fitCopy.possible}</option>
+  </select></label></div>
+  <p id="event-fit-filter-hint" className={styles.modeHint}>{fitCopy.hint}</p>
   {ready&&valid&&(mode==='stay'||applied===query)&&<div className={styles.dayNavigation}>
    <label>{resultsCopy.browseDays}<select value={day} onChange={e=>selectDay(e.target.value)}>
     <option value="">{resultsCopy.allDays}</option>
@@ -134,6 +145,7 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   <div ref={resultsRef} role="status" aria-live="polite" className={styles.feedback}>
    {busy&&<p>{t.loading}</p>}
    {error&&<p id="event-dates-error">{error}</p>}
+   {unsupportedFit&&<button type="button" className={styles.retry} onClick={()=>setFitMode('all')}>{fitCopy.showAll}</button>}
    {!error&&unavailable&&<p>{t.unavailable}</p>}
    {!busy&&result?.status==='EMPTY'&&<p>{t.empty}</p>}
    {result?.status==='NEEDS_DATES'&&<p>{t.dates}</p>}
@@ -142,9 +154,10 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
    {!!result?.events.length&&<p>{ux.results}: <strong>{result.total!=null?`${(page-1)*(result.page_size??12)+1}–${(page-1)*(result.page_size??12)+result.events.length} ${resultsCopy.of} ${result.total}`:result.events.length}</strong> · {day?date(day):resultsCopy.allDays} · {ux.local}</p>}
   </div>
   {!busy&&!error&&result?.status==='EMPTY'&&<div className={styles.empty}>
-   <h3>{resultsCopy.emptyTitle}</h3><p>{resultsCopy.coverage}</p>
+   <h3>{fitMode==='possible'?fitCopy.empty:resultsCopy.emptyTitle}</h3><p>{resultsCopy.coverage}</p>
    {result.partial&&<p>{resultsCopy.partialEmpty}</p>}
    <div className={styles.emptyActions}>
+    {fitMode==='possible'&&<button type="button" className={styles.retry} onClick={()=>setFitMode('all')}>{fitCopy.showAll}</button>}
     {dayIndex>=0&&dayIndex<days.length-1&&<button type="button" className={styles.retry} onClick={()=>selectDay(days[dayIndex+1])}>{resultsCopy.nextDay} →</button>}
     {day&&<button type="button" className={styles.retry} onClick={()=>selectDay('')}>{resultsCopy.allDays}</button>}
     {page>1&&<button type="button" className={styles.retry} onClick={()=>selectPage(1)}>{resultsCopy.firstPage}</button>}
@@ -190,5 +203,6 @@ export function TripEvents({deal,locale='pl',activitiesHref}:{deal:Deal;locale?:
   {result&&<p className={styles.hint}>{contextCopy.availability}</p>}
   <details className={styles.details}><summary>{ux.before}</summary><p>{t.warning}</p></details>
   <p className={styles.disclosure}>{t.disclosure}</p>
+  <p className="partner-context-limitation">{partnerContextCopy[locale]}</p>
  </section>;
 }

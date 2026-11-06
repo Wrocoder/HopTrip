@@ -1,0 +1,90 @@
+{
+  "scope": "H3-18b6 first received origin cohort API/admin report",
+  "runtimeDelta": [
+    {
+      "path": "apps/api/app/schemas/usage.py",
+      "before": "2725d47601aa0595d4002265b7e1cf6f2e6689a773df7f6a00afcf921de0ce5e",
+      "after": "fff1fb601f12524142eb54f5a26d2134729107ede28ff1f8de375885ec8d0dcf"
+    },
+    {
+      "path": "apps/api/app/services/usage_metrics.py",
+      "before": "c173c99c0d8b7a63885d925a2d377ec4f82ca090be4e64dbfb938e367f0390e6",
+      "after": "1b7307036b8c3987238856d8b77942e54bf04b1b5c5306cf27a4820e48d6ec0d"
+    },
+    {
+      "path": "apps/api/app/services/usage_dashboard.py",
+      "before": "6e73295a7ab7b6beb331dae37efc4a9b6879b7d6512a7fca974d98769a9e12fa",
+      "after": "aef191f6338bc1de2ed31ba2dd927d8c46a077cb0b4e4b3b3be64eaf6cf5fa06"
+    }
+  ],
+  "newApiTests": 31,
+  "api": {
+    "baselinePassed": 111,
+    "targetedPassed": 142,
+    "afterPolishLabelPassed": 99,
+    "full": {
+      "passed": 1187,
+      "failed": 1,
+      "skipped": 18
+    },
+    "knownFailure": "Unchanged Telegram fixture departure 2026-11-06T09:00Z already past; controls retained in H3-18b2"
+  },
+  "browser": {
+    "checks": 48,
+    "locales": 4,
+    "states": 3,
+    "widths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "horizontalKeyboardChecks": 16,
+    "violations": 0,
+    "incomplete": 0,
+    "mode": "file URLs of actual TestClient HTML with CSP; auth/API separately tested"
+  },
+  "synthetic": {
+    "events": 11,
+    "sessions": 4,
+    "origins": [
+      "WAW,WMI",
+      "WRO",
+      "unknown"
+    ],
+    "cohort_sessions": [
+      1,
+      1,
+      2
+    ],
+    "shares": [
+      "25.00",
+      "25.00",
+      "50.00"
+    ],
+    "metric_numerators": [
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ]
+  },
+  "nextBuild": "not run: Python-rendered admin HTML, unchanged web source/bundle",
+  "trackingChanged": false,
+  "migration": false,
+  "extraSqlQueries": false,
+  "dependenciesAdded": false,
+  "productionData": false,
+  "deploy": false
+}

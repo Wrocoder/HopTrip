@@ -1,14 +1,19 @@
+from decimal import Decimal
+
 from app.config import get_settings
 from app.models.deal import Deal, DealComponent
 from app.models.location import Airport, Destination, DestinationAlias
 from app.models.offer import TravelOffer
 from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
+from app.services.airport_context import airport_context
+from app.services.destination_time import destination_time
 from app.services.event_destinations import event_city
 from app.services.flight_facts import flight_facts
 from app.services.flight_quality import classify_flight_quality
 from app.services.price_freshness import price_freshness
 from app.services.score_explanation import explain_score
+from app.services.weekend import assess_weekend
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -16,8 +21,14 @@ from sqlalchemy.orm import Session
 def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result = DealRead.model_validate(deal)
     result.score_explanation = explain_score(deal)
-    if result.score_explanation.status != "CURRENT":
-        result.discount_percent = None
+    comparison = result.score_explanation
+    # Compatibility field must agree with the validated saved comparison, never
+    # an independently stored (possibly stale) discount. No DB write or rescoring.
+    result.discount_percent = (
+        max(Decimal("0.00"), comparison.price_difference_percent)
+        if comparison.status == "CURRENT" and comparison.price_difference_percent is not None
+        else None
+    )
     result.price_freshness = price_freshness(deal)
     origin = db.get(Airport, deal.origin_airport_id)
     destination = db.get(Destination, deal.destination_id)
@@ -72,5 +83,15 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
                 source_offer.origin_airport_id is not None and source_offer.origin_airport_id != deal.origin_airport_id
                 or source_offer.destination_id is not None and source_offer.destination_id != deal.destination_id))),
     )
+    result.weekend_assessment = assess_weekend(
+        result.flight_facts, itinerary_eligible=result.flight_quality.recommendation_eligible,
+    )
+    result.destination_time = destination_time(
+        result.flight_facts, itinerary_eligible=result.flight_quality.recommendation_eligible,
+    )
     result.is_featured = deal.is_featured and result.flight_quality.recommendation_eligible
+    result.airport_context = airport_context(
+        result.flight_facts, destination_slug=result.destination_slug, round_trip=result.trip_type == "ROUND_TRIP",
+        itinerary_eligible=result.flight_quality.recommendation_eligible,
+    )
     return result

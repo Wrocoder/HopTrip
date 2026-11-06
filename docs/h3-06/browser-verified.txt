@@ -1,0 +1,616 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-card.spec.ts price-freshness.spec.ts --reporter=json
+
+
+[WebServer] INFO:     Started server process [40472]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=25047383482d4bde86c39de7a2dcecb7 method=GET status=200
+
+[WebServer] (node:56340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+
+[WebServer] INFO:hoptrip.requests:request_id=63654f3fb4c24ae898226b3ce9076d11 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=70d8332c4f9244a1b8751b95f8ebc769 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=db81086ffa5a459ebb008c40174fa10c method=GET status=200
+
+
+Running 12 tests using 1 worker
+
+(node:45976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/12] [desktop] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=86cc24edcfed4d458a59448cbc47be27 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d0c36c73f620484690aa04485fdd2980 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a07525cc18e3458ba1b9364be66fe250 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc3f1a8e2ebf40ddad1d8eb2c6bdf145 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=819dc4ea37e64d318096a838dba6a63a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=db1b5422ae0c4804b1aa99155670ac74 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=dd449bc844be4fba9f56302e4ff9d6b3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b3f2383953d94046869b21947e5134b0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a190122d85de4f45af28ea164ec4c6ad method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8fbd69d30f0c46eeba64ee474624ff31 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b012316bc21f4692a932c6fa11631097 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=902d43c76fbe4deeb188a4fd63645762 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a9dae8de1cd94198acd690a6c9f8a6b9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=18dde2967db343c6b19fcf51e40d6f39 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d9594905495d45ca869c96bf9e5c2df5 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3fd0cc2dfab64d91842c9b0ed84a2e3c method=POST status=200
+
+  1) [desktop] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })
+        2) <h2 id="_R_l54lfivdb_">Cena na tle historii</h2> aka locator('[id="_R_l54lfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:24680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/12] [desktop] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=056fd57e27ca4d70af2995e223422af8 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b4969c4111fd4c40bf7ad168e7ea8272 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=755b0bdccc4b4b3680f4dd211a6c0727 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9ad11a46c74249b984039b8540bba7ad method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b8b1867a97894f47aee254be61f83c86 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c375940731aa4d39ae4681628ddd3f6c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3ecf5f13d1244fc58cce9b9dc5986c98 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9213f69931704dfb96cd8f45e9b423d4 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=17013f0956b348b6b19e3e37861fd954 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=81ff44abf22a48efa067295b12636264 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2aec300e3ccb485b98a9f2704ef472a5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a31a9ef7b81047cc969e43f765a8286d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=bf6a6e1a04fe471095480bd9a7d8afc0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d00a85aa639349d98fdd8bf1d8996c43 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e50778fd538b41c79c20dd681974847e method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=955f31e6243d49e6a4c8ffc994934fb8 method=POST status=200
+
+  2) [desktop] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/en/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })
+        2) <h2 id="_R_aiianpfivdb_">Price against history</h2> aka locator('[id="_R_aiianpfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/en/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-en-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-en-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-en-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:24212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/12] [desktop] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=05f1cbe558954750aac875051452f3c4 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a7366747512547d78cba40eb22407685 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=233f999653a04724995e75ab606e24a7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=266fc896f76f4f1a9cd9f149acc6d841 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=203daef5932848eaac0a47586d22eca3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ff07f4ca7c3b4850931485ab30812f4b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=35873d8dcb164a868fca22995fec468d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=390abc5b31e542ad940068c2ec9e0836 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f7f38626039146cb8012329aaa4c0c9e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8fd824fbeba648289cad13aa6051895d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7ba733a33c8546c188a15de667fa08f8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b603e7f466c54b5aa8232e3e14d865fc method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fc148bf7f3614f1d9a7820687de310ae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6343306401714b4ba983b450cbc9f94e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d0a1fd711ce347d68858d16986eecdab method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=971ff42acd4e41bb89ff49ad4e961708 method=POST status=200
+
+  3) [desktop] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/ru/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })
+        2) <h2 id="_R_aiianpfivdb_">Цена на фоне истории</h2> aka locator('[id="_R_aiianpfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/ru/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:31488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/12] [desktop] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=a56c6ed4c3b745cabee30f4c73002ed0 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=50ace33b5e8f432da0a30b02fefa5433 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d4f0cc1acb9a4c5989a1a1d25aa1cd3b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b44fd29bcd4e44118bedbd8b28e67f36 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7106843138664f3d99a12f06f00dcdd4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=59eb552923f64633a1bfc2924bdd5664 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd746ec5005f46a2be367acb373b07c4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c9ba499744542b7965dbcab86327051 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=03d344510ded4ecaa3595feef9cdfa4b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=db6b7fcc5a284dce843df62559efd499 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2c3a4c3a26074772857ad108e830bb31 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0130a0068c98421fab31b40790d06504 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=69cf1b2b0d544c73861a92f2a017d5d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e03ad80bd75640699126f3f8d087904a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=518b6d978bd94cb09fbf0ace206b52cb method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=9ea5f603b12840ccb144df4076dcc583 method=POST status=200
+
+  4) [desktop] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/uk/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })
+        2) <h2 id="_R_aiianpfivdb_">Ціна на тлі історії</h2> aka locator('[id="_R_aiianpfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/uk/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:3012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[5/12] [desktop] › tests\price-freshness.spec.ts:9:5 › observation and seller caveat are visible next to the price without opening details
+[WebServer] INFO:hoptrip.requests:request_id=7b75582111534515b9140c6f94ad9ded method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d0133d2d78bd4dc7bdc5d223a8208f29 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0e6df534f6dd4d7db7ae68ebdc41b801 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c31f6e677f8e49aab02198623b0bb33d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=01c3ee175bf94438a9d7985783296b74 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=74c976c084cb4f60925d7140e2459c1a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=08f103545ad346d9af1539d5f405960b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4ac8fae1304445ce8016336eb79e0086 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c29d40ff00746dcbeee61050bafda1f method=GET status=200
+
+[6/12] [desktop] › tests\price-freshness.spec.ts:34:5 › delivery time is separate and an open tab removes the partner link at the deadline
+[WebServer] INFO:hoptrip.requests:request_id=0b0303f94158436a8db62dc29c256218 method=GET status=200
+
+
+(node:27268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/12] [mobile] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=3b864dfd890f4519862ae8495839edad method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=f8c6247438254e0dbc1432bd7738fb97 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5caafc00928448d69134171dd3d72229 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=304ac49945c74fe29fde6d9957de8261 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f921b4a49ff44dbbbb6a90cddd2f8394 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f4835e4ad8374d3d818e1f022e8c9743 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=759410e9936c4e4e8ebcb9ecaea64e43 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=4f47e89a74a1499c9e8b0f0074f70057 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=56e3441f5a62404a9d877508bd5c81f0 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9ca81edcb8d84ee5b43ca58d44509d82 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a83dafe77abd4d309b4df114f1015ac5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1b1d5ef3797842728b154d7ebd5f1713 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ef64d117a0224e158b0d26f69c79192a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=483aedd95c08496d9bba2bcd74a9c710 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=12c0fed725d74f709b7ace50c2f4f65c method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=52bb89369adb427aab2b7d6ad7822e2b method=POST status=200
+  5) [mobile] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ─────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })
+        2) <h2 id="_R_l54lfivdb_">Cena na tle historii</h2> aka locator('[id="_R_l54lfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:8812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[8/12] [mobile] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=ad928dfb37fa475b9befbcbf38025711 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2e417b18402a4b19a4526ac7d3dfd57e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=de49aa4988644cbe8bf2662523a4ace7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=14ce68ebb6364cddaa08bdf8393fd3ba method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=108109605df94e5184f2564a5347a3bb method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6d4114e92beb4ff282c56fbf95fefbbe method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9b3d59d45bee48fbbc10d8bb0d3cb95f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3be7372705bf4cd2906406759e3d5034 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9b989ee14d7c46dba474b7275106374d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ab70b00e704341528f2d1445b335a372 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=da09041857bc4779aeb9f3811d05bdfe method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2cd8dcc43e014b1b86444868a334f11f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8cdcaa83c30c4e5abeaf9f37ee690515 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ed7e8db2d9544f7fb7c0bd4b95d2fde8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d9f8388f62d64c53835fe477427b8807 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ba7ee13366e440ce8bd1022ba3b06d18 method=POST status=200
+
+  6) [mobile] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ─────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/en/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })
+        2) <h2 id="_R_aiianpfivdb_">Price against history</h2> aka locator('[id="_R_aiianpfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/en/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-en-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-en-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-en-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:14592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[9/12] [mobile] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information
+[WebServer] INFO:hoptrip.requests:request_id=6b5ba6159c6440c4a85a421a49e17c6b method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cef64bbda54b4ed2bf8f0ef5c67fc411 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d919ef18c5194215bc7bf07396de472e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=481fa675f8ee4b33b23c40c988395fab method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0f0056baba4147a9b4a8e212d07e4924 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8dd875aa5d664bff8dfdfd027c016520 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=537f23a018dc4ddcbe241b9fce43d5a9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0d814e3f25424ce989a36954a90a3051 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3fed50696eb04a5ba34cd0fc6d5af4e1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc5ca40800ca47a7a30917d057e5d4ba method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=22d0276bd17c47a0be48833315987707 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=28ba6100e98644e68a5dd245e1539f4f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b40cb14112ea4bb79dca09f9938d76eb method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8fe9f9e5238a4f9dbc7427ee42e31bc1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=97a27aabd0d348f3816698257398b99a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2cc5ec5ff263478291ebe99c773cfc87 method=POST status=200
+
+  7) [mobile] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ─────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/ru/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })
+        2) <h2 id="_R_aiianpfivdb_">Цена на фоне истории</h2> aka locator('[id="_R_aiianpfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/ru/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:22516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[10/12] [mobile] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information
+
+[WebServer] INFO:hoptrip.requests:request_id=be211e211faa4eb08f3f8aed6ab8c996 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=16a4555d165a408bb43d49cd74346ec2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=842b93e0da0041d08be9aa5a482f9eff method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f00d3f25b9394cb2afd7352d67d8eeef method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=167f96eddccd4e7eb363a315977d266b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fe9bf502147b4dd0a01a2c331efc9b15 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6e65c59fdc2f47f1bc67a498782e9cff method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=040c49eee52449318b4383944f11dfda method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f9e703758ae542638bdd141ec857e1be method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5577388b470d4468993873380c447888 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6cfbf90a3873450ab9552f9a2904512b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1e4dd44eb2c041f289fbb9a4bd433252 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=41944950417346d0b32254a05270bffd method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8087f2ae33074f37bf79d92081bca0b6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=99152cc0a5ef423aa837ee1da3dd33ab method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=92e52236d00343a0857a39ebd8fb941d method=POST status=200
+
+  8) [mobile] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ─────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/uk/deals/browser-13"]') }).locator('h2') resolved to 2 elements:
+        1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })
+        2) <h2 id="_R_aiianpfivdb_">Ціна на тлі історії</h2> aka locator('[id="_R_aiianpfivdb_"]')
+
+    Call log:
+      - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^="/uk/deals/browser-13"]') }).locator('h2')
+
+
+      36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();
+      37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
+    > 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');
+         |                             ^
+      39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');
+      40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-06-20261103\apps\web\tests\h3-card.spec.ts:38:29
+
+    Error Context: test-results\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:56996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+[11/12] [mobile] › tests\price-freshness.spec.ts:9:5 › observation and seller caveat are visible next to the price without opening details
+[WebServer] INFO:hoptrip.requests:request_id=b115ee6bbd904ea68d7a263c06201328 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ad8879c035b54bd988aa69a552d0d271 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f50579461c104791b12df43fc6228f5e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5139b507047a4786b76df9ae89634142 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f96c9d3c22c64cd99e0f92aff95438bc method=GET status=200
+[12/12] [mobile] › tests\price-freshness.spec.ts:34:5 › delivery time is separate and an open tab removes the partner link at the deadline
+[WebServer] INFO:hoptrip.requests:request_id=297fc12710594c4ca6fd5f20e1ee19cd method=GET status=200
+
+  8 failed
+    [desktop] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ─────
+    [desktop] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ─────
+    [desktop] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ─────
+    [desktop] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ─────
+    [mobile] › tests\h3-card.spec.ts:9:56 › pl: card hierarchy preserves critical information ──────
+    [mobile] › tests\h3-card.spec.ts:9:56 › en: card hierarchy preserves critical information ──────
+    [mobile] › tests\h3-card.spec.ts:9:56 › ru: card hierarchy preserves critical information ──────
+    [mobile] › tests\h3-card.spec.ts:9:56 › uk: card hierarchy preserves critical information ──────
+  4 passed (2.3m)

@@ -1,0 +1,12 @@
+.directory{overflow-wrap:anywhere}
+.search{display:flex;align-items:end;flex-wrap:wrap;gap:var(--space-4);padding:var(--space-4);border:1px solid var(--border);border-radius:var(--radius-card);background:var(--surface)}
+.search label{flex:1 1 240px;min-width:0;display:grid;gap:var(--space-2)}
+.search input{width:100%}
+.search a,.countries a,.cities a{display:inline-flex;align-items:center;min-height:var(--target-height);max-width:100%;padding-block:var(--space-2)}
+.countries{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-5);margin-block:var(--space-6)}
+.group{margin-block:var(--space-8)}
+.group h2{scroll-margin-top:var(--space-6)}
+.cities{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-2) var(--space-5)}
+.cities li{min-width:0}
+@media(max-width:900px){.cities{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.cities{grid-template-columns:minmax(0,1fr)}}

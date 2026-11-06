@@ -1,0 +1,648 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "h3-explanations.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-16-20261104/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-16-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-16-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-16-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-16-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-explanations.spec.ts",
+      "file": "h3-explanations.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1766,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:53:48.895Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-83cef41475d18952f7ea",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "en: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2152,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')\n    2) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')\n    2) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')\n    2) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:53:51.773Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-9ec8f46fd72cefd45916",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "ru: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1752,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')\n    2) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')\n    2) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')\n    2) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:53:55.043Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-850d4b3d37bb8ba36203",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "uk: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1742,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')\n    2) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')\n    2) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')\n    2) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:53:57.887Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-ecb53b63f8ef500f7139",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "pl: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1484,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')\n    2) <p class=\"price-samples\">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:54:00.793Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-be05f7c188f1e8df2c12",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "en: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2412,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')\n    2) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')\n    2) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')\n    2) <p class=\"price-samples\">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:54:03.824Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-af7fbcc5bc70c3ddb52d",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "ru: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2095,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')\n    2) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')\n    2) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')\n    2) <p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:54:07.801Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-b49a377f0b3c65219177",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        },
+        {
+          "title": "uk: price explanations before/after, one and many offers",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2440,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')\n    2) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')\n    2) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                      "column": 48,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                        "column": 48,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.deal-card').first().locator('.price-samples')\nExpected: visible\nError: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:\n    1) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')\n    2) <p class=\"price-samples\">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.price-samples')\u001b[22m\n\n\n  18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();\n  19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');\n> 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();\n     |                                                ^\n  21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}\n  22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}\n  23 |   const expandedHeight=(await card.boundingBox())!.height;\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts:20:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T00:54:11.411Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\test-results\\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-16-20261104\\apps\\web\\tests\\h3-explanations.spec.ts",
+                    "column": 48,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "72a40aed7803d21e882e-37fd6d67f232fd8942e0",
+          "file": "h3-explanations.spec.ts",
+          "line": 8,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T00:53:41.927Z",
+    "duration": 33928.244,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

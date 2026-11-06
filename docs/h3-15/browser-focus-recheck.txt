@@ -1,0 +1,89 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test destination-recovery.spec.ts --grep pl: zero, one and many --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [5560]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=07be0ac038fd4cd4ba7f007d804a8371 method=GET status=200
+
+
+[WebServer] (node:52612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:13148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=83bdee396f844a8392115a06325f5942 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d8948dc545eb447fb8f643711786959e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4de1219ea7754955a742c3c4cee3d7c2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2f9c5a5bbc5e4c99bbf4bf4a60ea4da8 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4e288b996a824e2ebf51a3e11f811028 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c08386dec0024d2b80ef4af49883a185 method=GET status=200
+
+
+Running 2 tests using 1 worker
+
+
+(node:17724) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/2] [desktop] › tests\destination-recovery.spec.ts:15:56 › pl: zero, one and many observations preserve the city and offer real alternative destinations
+
+[WebServer] INFO:hoptrip.requests:request_id=a9d616df7cc0452ab40af060bd70c0a4 method=POST status=200
+[WebServer] (node:41816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=bc30daf685b84bcbad1d460bed370676 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b44487b5702840289d3f22598bfd61e1 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6f20b592bf1c4c17b56c97a4d9cbe3b1 method=GET status=200
+
+
+[WebServer] (node:16456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=42c4ec2bb3f148048843bc299b80374c method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b7e31cc1acfc40fba5332fad5abfefb8 method=GET status=200
+
+[WebServer] (node:54508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=0d0f9fff97a34367b00af9ba60271da7 method=POST status=200
+(node:32804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/2] [mobile] › tests\destination-recovery.spec.ts:15:56 › pl: zero, one and many observations preserve the city and offer real alternative destinations
+[WebServer] INFO:hoptrip.requests:request_id=bda4ecf70f5548089269295c31fc723a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7dfbb12f64a249e2b2d5bf8701d04a86 method=GET status=200
+
+[WebServer] (node:20828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=cd0248ef04074e888e250575010512d0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9d99ef1782c440249aaa8c827092bb07 method=GET status=200
+
+[WebServer] (node:26772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=674fe16539e5447db6c79faa21908a5c method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=98907d57e22b4ae3b97abed245f82f36 method=GET status=200
+
+[WebServer] (node:36424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=ea5222f1c933454ea65d4d698bc4f601 method=POST status=200
+
+  2 passed (21.8s)

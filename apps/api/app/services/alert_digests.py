@@ -15,6 +15,7 @@ from app.services.alert_matching import candidate_deals
 from app.services.alerts import alert_link, utc
 from app.services.catalog import serialize_deal
 from app.services.destination_search import destination_search_fields
+from app.services.trip_timeline_text import timeline_text
 from pydantic import ValidationError
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
@@ -61,7 +62,8 @@ def digest_body(db: Session, settings: Settings, alert: DealAlert, deals: list[D
         return_stops = (str(facts.return_stops) if facts.return_stops is not None else "brak danych")
         lines.append(
             f"\n{view.origin_city} ({view.origin_code}) → {label}\n"
-            f"{deal.trip_start:%d.%m.%Y} – {deal.trip_end:%d.%m.%Y}; liczba nocy: {deal.nights}; w obie strony.\n"
+            f"{deal.trip_start:%d.%m.%Y} – {deal.trip_end:%d.%m.%Y}; w obie strony.\n"
+            f"{timeline_text(facts)}\n"
             f"Zaobserwowana cena lotu: {price} zł/os. Dane odświeżono: {observed}.\n"
             f"Przesiadki: wylot {stops}, powrót {return_stops}. "
             "Bagaż i warunki taryfy: sprawdź u sprzedawcy.\n"

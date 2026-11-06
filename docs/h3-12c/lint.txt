@@ -1,0 +1,24 @@
+
+> hoptrip-web@0.1.0 lint
+> eslint . --max-warnings=0
+
+
+C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\src\app\components\fragment-trip.tsx
+  47:11  warning  React Hook useEffect has a complex expression in the dependency array. Extract it to a separate variable so it can be statically checked  react-hooks/exhaustive-deps
+
+C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\src\app\components\shared-trip-view.tsx
+  26:119  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\src\app\components\shared-trip-view.tsx:26:119
+  24 |  const {offer,draft}=trip;
+  25 |  const deadline=current&&offerDeadline(current);
+> 26 |  const expired=Boolean(offer.start&&offer.start<new Date().toISOString().slice(0,10)||deadline&&Date.parse(deadline)<=Date.now());
+     |                                                                                                                       ^^^^^^^^^^ Cannot call impure function
+  27 |  const changed=savedOfferChanged(offer,current),editor=planEditorCopy[locale];
+  28 |  return <main className="page-shell"><h1>{cityLabel(offer.origin,undefined,locale)} → {cityLabel(offer.destination,undefined,locale)}</h1>
+  29 |   <TripNavigation hasAccommodation={Boolean(current && !expired)} hasEvents={Boolean(current && !expired && current.events_supported)} locale={locale}/>  react-hooks/purity
+
+✖ 2 problems (1 error, 1 warning)
+

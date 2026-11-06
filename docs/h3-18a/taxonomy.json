@@ -1,0 +1,26 @@
+{
+  "version": "h3-analytics-baseline-v1",
+  "kind": "documentation mapping; not a new wire schema",
+  "wire_events": ["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED"],
+  "h3_events": [
+    {"name":"search_submitted","wire":"SEARCH","status":"mapped","meaning":"Valid explicit search submission; not every results visit"},
+    {"name":"results_viewed","wire":"SEARCH_RESULT","status":"proxy","meaning":"Received page outcome including empty/error, direct entry and pagination; not proof of visual attention"},
+    {"name":"filter_applied","wire":"FILTER_USE","status":"mapped","condition":"filter.action=apply; remove/reset kept separate"},
+    {"name":"offer_viewed","wire":"DEAL_VIEW","status":"mapped","meaning":"Offer detail visit"},
+    {"name":"offer_details_opened","wire":null,"status":"missing","meaning":"Disclosure/dialog opened; do not alias to DEAL_VIEW"},
+    {"name":"affiliate_clicked","wire":"PARTNER_CLICK","status":"mapped","meaning":"Browser intent for flight/stay/activity; not server redirect or booking"},
+    {"name":"budget_started","wire":"BUDGET_USE","status":"proxy","meaning":"First valid changed nonempty field per visit/context; not calculator visibility"},
+    {"name":"budget_calculated","wire":null,"status":"missing","meaning":"No explicit completion event; reactive partial totals are not full budgets"},
+    {"name":"trip_saved","wire":"TRIP_SAVE","status":"mapped","meaning":"Successful new local snapshot write; no plan or budget payload"},
+    {"name":"trip_updated","wire":null,"status":"missing","meaning":"No persistent plan Update operation yet; depends on H3-12"},
+    {"name":"event_clicked","wire":"EVENT_CLICK","status":"mapped","meaning":"Event ticket interaction; ACTIVITY_CLICK is a separate attraction action"},
+    {"name":"alert_opt_in","wire":"ALERT_CONFIRMED","status":"mapped","meaning":"Successful email confirmation with analytics consent; not ALERT_STARTED or Telegram opt-in"}
+  ],
+  "consent": {"required":"analytics=true and valid consent v1","marketing_is_analytics":false,"max_age_days":180,"revocation":"stop future browser sends; clear local session; does not delete prior server records"},
+  "session": {"idle_minutes":30,"identity":"random UUID, not a person","persistent_visitor_id":false},
+  "delivery": {"mode":"best effort keepalive fetch, no retry","event_id":"UUID, unique server index","action_dedupe_ms":1000,"view_dedupe":"per URL visit plus event/context/session; reload or return is a new visit"},
+  "timestamp":"server received created_at UTC; not client action time",
+  "baseline_population":"consenting received product-event sessions, not all site visitors",
+  "production_baseline":"not collected",
+  "unavailable_dimensions":["device", "locale", "returning visitor", "exact search-to-booking attribution"]
+}

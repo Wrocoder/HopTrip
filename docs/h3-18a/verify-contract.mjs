@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {analyticsEvents} from '../../apps/web/src/lib/analytics-context.ts';
+const read=async name=>JSON.parse(await readFile(new URL(name,import.meta.url),'utf8'));
+const taxonomy=await read('taxonomy.json'),baseline=await read('synthetic-baseline.json');
+assert.deepEqual([...taxonomy.wire_events].sort(),[...analyticsEvents].sort());
+assert.deepEqual([...taxonomy.wire_events].sort(),[...baseline.schema.properties.event_name.enum].sort());
+assert.equal(new Set(taxonomy.h3_events.map(e=>e.name)).size,12);
+for(const event of taxonomy.h3_events)assert.equal(event.status==='missing',event.wire===null);
+assert.equal(baseline.synthetic,true);
+console.log('Frontend / OpenAPI / H3 baseline v1: 14 wire events; 12 logical definitions, 3 missing.');

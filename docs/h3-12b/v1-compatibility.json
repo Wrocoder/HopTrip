@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "oldKey": "hoptrip.saved-trips.v1",
+  "newKey": "hoptrip.saved-plans.v2",
+  "tokenBytesAndSharePathsUnchanged": true,
+  "explicitMigrationPreservesExactTokenAndRawBackup": true,
+  "provenanceAndProfilesAndManualZeroPreserved": true,
+  "updateRetainsIdAndBackup": true,
+  "oldReaderCanStillReadUnmodifiedLegacyArchive": true,
+  "newReaderUsesUpdatedV2Collection": true,
+  "limitation": "An older app sees only the legacy archive, not subsequent v2 edits. Keep the v2 reader for rollback; never delete the v2 key or overwrite the v1 source automatically."
+}

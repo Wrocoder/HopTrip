@@ -1,0 +1,162 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "h3-11a-baseline.spec.ts",
+      "--project=desktop",
+      "--trace=off",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-10-20261104/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-10-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-10-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-10-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-10-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-11a-baseline.spec.ts",
+      "file": "h3-11a-baseline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H3-11a baseline: copied flight is labelled manual, unknown still differs from zero",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7004,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected substring: \u001b[32m\"200,25\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected substring: \u001b[32m\"200,25\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\tests\\h3-11a-baseline.spec.ts:8:49",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\tests\\h3-11a-baseline.spec.ts",
+                      "column": 49,
+                      "line": 8
+                    },
+                    "snippet": "   6 |  await page.goto('/deals/browser-deal#calculator');await expect(page.locator('#budget-flight')).toHaveValue('200.25');\n   7 |  const hint=page.locator('#budget-flight').locator('..');await expect(hint).toContainText('Wpisana kwota — do weryfikacji');\n>  8 |  await expect(page.getByTestId('budget-total')).toContainText('200,25');\n     |                                                 ^\n   9 |  await expect(page.locator('#calculator [role=\"status\"]')).toContainText('Budżet niepełny');\n  10 |  await page.locator('#budget-hotel').fill('0');await expect(page.getByTestId('budget-total')).toContainText('200,25');\n  11 |  writeFileSync(process.env.HOPTRIP_H3_AUDIT_DIR+'/baseline-observation.json',JSON.stringify({flight:'200.25',label:await hint.textContent(),missingIsNotZero:true},null,2));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\tests\\h3-11a-baseline.spec.ts",
+                        "column": 49,
+                        "line": 8
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('budget-total')\nExpected substring: \u001b[32m\"200,25\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByTestId('budget-total') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('budget-total')\u001b[22m\n\n\n   6 |  await page.goto('/deals/browser-deal#calculator');await expect(page.locator('#budget-flight')).toHaveValue('200.25');\n   7 |  const hint=page.locator('#budget-flight').locator('..');await expect(hint).toContainText('Wpisana kwota — do weryfikacji');\n>  8 |  await expect(page.getByTestId('budget-total')).toContainText('200,25');\n     |                                                 ^\n   9 |  await expect(page.locator('#calculator [role=\"status\"]')).toContainText('Budżet niepełny');\n  10 |  await page.locator('#budget-hotel').fill('0');await expect(page.getByTestId('budget-total')).toContainText('200,25');\n  11 |  writeFileSync(process.env.HOPTRIP_H3_AUDIT_DIR+'/baseline-observation.json',JSON.stringify({flight:'200.25',label:await hint.textContent(),missingIsNotZero:true},null,2));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\tests\\h3-11a-baseline.spec.ts:8:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T15:41:34.015Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\test-results\\h3-11a-baseline-H3-11a-bas-420a1-own-still-differs-from-zero-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-10-20261104\\apps\\web\\tests\\h3-11a-baseline.spec.ts",
+                    "column": 49,
+                    "line": 8
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "cf4c6f467a781215b8ed-2e77b0d18b39ed452bf2",
+          "file": "h3-11a-baseline.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T15:41:24.584Z",
+    "duration": 19319.4,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

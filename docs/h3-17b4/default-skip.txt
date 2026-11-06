@@ -1,0 +1,34 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test contrast-review.spec.ts --grep contrast bounds reject --project=desktop --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [54744]
+[WebServer] INFO:     Waiting for application startup.
+
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=bb3327e2bbc240b398c8d22ab2f5bd8e method=GET status=200
+
+[WebServer] (node:23868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=8bd87cd4cf3f4666974812fb0fa5f0bc method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a558fd5c5f924e31a22b0e40f408df13 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9f1b4a0da1a4460186f90644963a49be method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1a2a03d427264cfe87af7adfcc68cd37 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fc73300bd3524257982dddca1988a80c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=03172a0840974a02ba57ce7a1387181d method=GET status=200
+
+
+Running 1 test using 1 worker
+
+[1/1] [desktop] › tests\contrast-review.spec.ts:106:5 › contrast bounds reject low contrast and unsupported compositing
+  1 skipped

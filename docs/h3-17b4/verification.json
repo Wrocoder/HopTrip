@@ -1,0 +1,108 @@
+{
+  "status": "PASS_FOR_H3_17B4_CONTRAST_SCOPE_H3_17_STILL_IN_PROGRESS",
+  "date": "2026-11-05",
+  "scope": "Conservative computed-style triage of color-contrast incomplete in default rendered states; no manual SR certification",
+  "build": {
+    "id": "B03jo9a_4GShaLeB8HAfD",
+    "origin": "Reused unchanged production17b3 build",
+    "freshBuild": false,
+    "servedBuildChecked": true,
+    "runnerHashUnchanged": true
+  },
+  "runtimeDelta": [],
+  "checkedRuntimeFiles": 635,
+  "testSource": "apps/web/tests/contrast-review.spec.ts",
+  "testSha256": "385b94687ba583dfe4ccdf3afa003c55ebd8bb3680085dd6758242d6933ef413",
+  "browser": {
+    "fullRun": {
+      "startTime": "2026-11-05T16:24:17.646Z",
+      "duration": 164593.03100000002,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "negativeRerun": {
+      "startTime": "2026-11-05T16:28:00.036Z",
+      "duration": 11385.074999999999,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "uniqueAccepted": 10,
+    "reasonForRerun": "Multiple background was correctly rejected by earlier compositing guard; assertion accepted only gradient error, now matches either unsupported category; evaluator unchanged",
+    "defaultGuard": {
+      "startTime": "2026-11-05T16:29:55.111Z",
+      "duration": 7388.580999999999,
+      "expected": 0,
+      "skipped": 1,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "contrast": {
+    "scans": 80,
+    "localeCases": 4,
+    "projects": [
+      "desktop",
+      "mobile"
+    ],
+    "widths": [
+      1440,
+      390
+    ],
+    "rawIncompleteVisits": 56,
+    "reviewedNodes": 936,
+    "classifications": {
+      "nonBmp": 784,
+      "bgGradient": 116,
+      "bgImage": 32,
+      "shortTextContent": 4
+    },
+    "decorativeNodes": 784,
+    "conservativeBounds": 152,
+    "minimumBound": 5.803768758874591,
+    "violations": 0,
+    "unclassified": 0,
+    "negativeControlCases": 2,
+    "controlsPerCase": [
+      "lowContrastBelow4.5",
+      "opacityRejected",
+      "multipleBackgroundRejected",
+      "originalStylesRestored"
+    ]
+  },
+  "node": {
+    "passed": 314,
+    "failed": 0
+  },
+  "initial": {
+    "stats": {
+      "startTime": "2026-11-05T16:15:09.752Z",
+      "duration": 148968.24599999998,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
+    "reason": "RU/UK shortTextContent one-letter labels were not yet classified; preserved, not treated as product contrast failure",
+    "classifiedRun": {
+      "startTime": "2026-11-05T16:20:51.745Z",
+      "duration": 164347.32499999998,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "limits": [
+    "Current selected default DOM states, not all hover/focus/theme/zoom/browser combinations",
+    "Unsupported CSS/unknown axe message keys fail the test instead of passing",
+    "Conservative sRGB interval contrast above opaque gradient/select backgrounds, not pixel OCR/manual review",
+    "Decorative nonBmp excluded only when aria-hidden with a named ancestor control",
+    "No WebKit/physical device/manual screen reader/RUM/INP/field p75 evidence",
+    "Dev conditional-use cause and historical cross-tab root cause not investigated"
+  ],
+  "next": "H3-17b5: remaining local runtime diagnostics; H3-14/18 not started"
+}

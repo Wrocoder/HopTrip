@@ -1,0 +1,38 @@
+diff --git "a/.cache\\h3-18b2-before\\apps\\api\\app\\schemas\\analytics.py" b/apps/api/app/schemas/analytics.py
+index 16e9393..cc83fb9 100644
+--- "a/.cache\\h3-18b2-before\\apps\\api\\app\\schemas\\analytics.py"
++++ b/apps/api/app/schemas/analytics.py
+@@ -4,7 +4,7 @@ from typing import Any, Literal
+ 
+ from pydantic import BaseModel, Field, field_validator, model_validator
+ 
+-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED"]
++EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE"]
+ 
+ 
+ class ActivityContext(BaseModel):
+diff --git "a/.cache\\h3-18b2-before\\apps\\web\\src\\lib\\analytics-context.ts" b/apps/web/src/lib/analytics-context.ts
+index 741886c..f9ef36b 100644
+--- "a/.cache\\h3-18b2-before\\apps\\web\\src\\lib\\analytics-context.ts"
++++ b/apps/web/src/lib/analytics-context.ts
+@@ -7,7 +7,7 @@ export const sourceLabel=(value:string|null|undefined)=>sources.includes(value??
+ export type SearchContext={filters:Filters;result_count?:number;error?:"invalid_filters"|"unavailable"};
+ export type PartnerContext={category:"flight"|"stay"|"activity";provider:"catalog"|"stay22"|"tiqets"};
+ export type FilterContext={action:"apply"|"remove"|"reset"};
+-export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED"] as const;
++export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED","TRIP_UPDATE"] as const;
+ export type AnalyticsEventName=typeof analyticsEvents[number];
+ export type EventContext={search?:SearchContext;partner?:PartnerContext;filter?:FilterContext};
+ export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
+diff --git "a/.cache\\h3-18b2-before\\apps\\web\\src\\app\\components\\trip-actions.tsx" b/apps/web/src/app/components/trip-actions.tsx
+index 870328e..befa686 100644
+--- "a/.cache\\h3-18b2-before\\apps\\web\\src\\app\\components\\trip-actions.tsx"
++++ b/apps/web/src/app/components/trip-actions.tsx
+@@ -65,6 +65,7 @@ export function TripActions({offer,draft,ready}:{offer:TripOffer;draft:BudgetDra
+   operation.current++;setCopying(null);
+   const result=await store.mutate({type:'update',id:local.id,expectedRevision:base.revision,token});
+   if((result.status==='updated'||result.status==='already')&&result.plan){
++   if(result.status==='updated')track("TRIP_UPDATE");
+    context?.acknowledgePlan(base,result.plan.revision);setMessage({token,editor:'updated'});
+   }else failure(result);
+  }

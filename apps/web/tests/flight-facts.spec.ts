@@ -50,9 +50,9 @@ test("unknown flight details remain explicit before the partner click",async({pa
 });
 
 test("round trip facts agree between card and detail without mobile overflow",async({page},testInfo)=>{
-  await page.goto("/deals");
+  await page.goto("/deals?offset=12");
   await page.getByRole("button",{name:"Odrzuć opcjonalne",exact:true}).click();
-  const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"]')});
+  const card=page.locator(".deal-card").filter({has:page.locator('a[href^="/deals/browser-13"]')});
   await expect(card.locator(".flight-schedule-compact")).toBeVisible();
   await expect(card.locator(".flight-schedule-compact")).not.toContainText("Europe/Warsaw");
   // DEAL-01 keeps full carrier details in the disclosure; they are checked below.
@@ -63,7 +63,7 @@ test("round trip facts agree between card and detail without mobile overflow",as
   await card.locator(".trip-details > summary").click();
   await expect(card.locator(".deal-price")).toContainText("za osobę · w obie strony");
   await expect(card.locator(".flight-facts")).toContainText("Ryanair (FR)");
-  await expect(card.locator(".flight-facts")).toContainText("70 godz. 0 min");
+  await expect(card.locator(".destination-time")).toContainText("70 godz. 0 min");
   await card.screenshot({path:testInfo.outputPath("flight-card.png")});
   await card.locator(".deal-card-link").click();
   const facts=page.locator(".detail-summary .flight-facts");
@@ -83,8 +83,8 @@ test("different return airports stay independent on cards and details",async({pa
   await request.post("http://127.0.0.1:8100/__test__/compact-card?scenario=open-jaw");
   await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
   try {
-    await page.goto("/deals");
-    const card=page.locator(".deal-card").filter({has:page.locator('a[href="/deals/browser-13"]')});
+    await page.goto("/deals?offset=12");
+    const card=page.locator(".deal-card").filter({has:page.locator('a[href^="/deals/browser-13"]')});
     await expect(card.locator(".trip-details")).not.toHaveAttribute("open","");
     await expect(card.locator(".outbound-leg")).toContainText(/WRO .*→ STN/);
     await expect(card.locator(".return-leg")).toContainText(/LTN .*→ WRO/);

@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "runtimeFiles": 11,
+  "testFiles": 16,
+  "runtime": [
+    {
+      "path": "apps/web/src/lib/plan-editor.ts",
+      "sha256": "2b5859a7572ea283bfad26e2f7b4bff0e9fb13491831753167bfd84e14d565f1"
+    },
+    {
+      "path": "apps/web/src/lib/i18n/plan-editor-copy.ts",
+      "sha256": "e27c6f63b3f9f27e328a88dd0d0aff0430ae23f6cd1452f9e650609137811ddb"
+    },
+    {
+      "path": "apps/web/src/lib/trip-fragment.ts",
+      "sha256": "a73d486469152ec4bb8466ef67bd245c1006936e01969324820d42609b91cb16"
+    },
+    {
+      "path": "apps/web/src/lib/i18n/saved-trip-copy.ts",
+      "sha256": "71c8813b50c2bbba6c7d608f528ca340174254d0e082d754441e161a6fcc9bd6"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-draft.tsx",
+      "sha256": "d1e5da2ac8c4d3522f857473722848e3f7ab79a0dfab7948cea8b5c606e8c8d2"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-actions.tsx",
+      "sha256": "dbd107041d2bd46d05a1c2da97d5d3182b4fd01b15a08ddaa15cce67df324d40"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-budget-calculator.tsx",
+      "sha256": "90729e65c2be98620e720717a29bf63e5d4b2dbbf615ac0dc2c607fe2eed320e"
+    },
+    {
+      "path": "apps/web/src/app/components/saved-trips.tsx",
+      "sha256": "0fc0ce70fab7c41f4a88f0f3225028a53767c97d9f08e9ad71eb65fc764d941a"
+    },
+    {
+      "path": "apps/web/src/app/components/fragment-trip.tsx",
+      "sha256": "5b1f41145326cddb143cb67ed1aa83646521c47795e09e67d5f1e0096ab71fb8"
+    },
+    {
+      "path": "apps/web/src/app/components/shared-trip-view.tsx",
+      "sha256": "4e782f1e17ebfa211a1ea0cec0da47e378e929c6d9a1c32a03e1708c4539d092"
+    },
+    {
+      "path": "apps/web/src/app/components/local-saved-trip.tsx",
+      "sha256": "c024e244c03bb7c15ea9ce0bc24dc3b9ced621f59222e5aae3ad5a874e741387"
+    }
+  ],
+  "tests": [
+    "apps/web/tests/plan-editor.test.mjs",
+    "apps/web/tests/plan-lifecycle.spec.ts",
+    "apps/web/tests/budget-modes.spec.ts",
+    "apps/web/tests/budget-profiles.spec.ts",
+    "apps/web/tests/budget-provenance.spec.ts",
+    "apps/web/tests/planned-events.spec.ts",
+    "apps/web/tests/share-privacy.spec.ts",
+    "apps/web/tests/shared-trip.spec.ts",
+    "apps/web/tests/saved-trip-workflow.spec.ts",
+    "apps/web/tests/saved-plan-identity.spec.ts",
+    "apps/web/tests/localized-trips.spec.ts",
+    "apps/web/tests/interaction-feedback.spec.ts",
+    "apps/web/tests/mobile-workflow.spec.ts",
+    "apps/web/tests/budget-recovery.spec.ts",
+    "apps/web/tests/saved-plans.test.mjs",
+    "apps/web/tests/trip-fragment.test.mjs"
+  ],
+  "normalization": "Only test loopback ports 8100->8125 and3100->3125; runtime byte-identical.",
+  "onlyExpectedWebRuntimeDelta": true,
+  "unchangedSince12b": [
+    "apps/web/src/lib/saved-plans.ts",
+    "apps/web/src/lib/shared-trip.ts",
+    "apps/web/src/lib/budget-draft.ts",
+    "apps/web/src/lib/budget-estimates.ts",
+    "apps/web/src/lib/budget-provenance.ts",
+    "apps/web/src/lib/trip-budget.ts",
+    "apps/web/src/app/components/use-saved-trips.ts",
+    "apps/web/src/lib/offer-expiry.ts",
+    "apps/web/src/app/components/use-offer-expired.ts",
+    "apps/web/src/lib/session.ts",
+    "apps/web/src/lib/drive-policy.ts",
+    "apps/web/package.json",
+    "apps/web/package-lock.json",
+    "apps/web/src/app/sitemap.ts",
+    "apps/api/app/api/catalog.py",
+    "apps/api/app/schemas/deal.py"
+  ]
+}

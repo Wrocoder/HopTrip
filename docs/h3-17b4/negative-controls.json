@@ -1,0 +1,192 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "contrast-review.spec.ts",
+      "--grep",
+      "contrast bounds reject",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "contrast-review.spec.ts",
+      "file": "contrast-review.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "contrast bounds reject low contrast and unsupported compositing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1359,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T16:28:05.775Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiJCMDNqbzlhXzRHU2hhTGVCOEhBZkQifQ=="
+                    },
+                    {
+                      "name": "negative-controls",
+                      "contentType": "application/json",
+                      "body": "eyJiYXNlbGluZSI6MTIuMzI1NDc3OTMyMDkzNDk5LCJsb3dDb250cmFzdCI6MS43MTMyNjM4MDgzODAwMTcxLCJ0cmFuc2x1Y2VudEFuY2VzdG9yUmVqZWN0ZWQiOnRydWUsIm11bHRpcGxlQmFja2dyb3VuZFJlamVjdGVkIjp0cnVlLCJyZXN0b3JlZCI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0bbc5af5e15884077475-9a728722b4ae1a592d36",
+          "file": "contrast-review.spec.ts",
+          "line": 106,
+          "column": 5
+        },
+        {
+          "title": "contrast bounds reject low contrast and unsupported compositing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1197,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T16:28:08.209Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiJCMDNqbzlhXzRHU2hhTGVCOEhBZkQifQ=="
+                    },
+                    {
+                      "name": "negative-controls",
+                      "contentType": "application/json",
+                      "body": "eyJiYXNlbGluZSI6MTIuMzI1NDc3OTMyMDkzNDk5LCJsb3dDb250cmFzdCI6MS43MTMyNjM4MDgzODAwMTcxLCJ0cmFuc2x1Y2VudEFuY2VzdG9yUmVqZWN0ZWQiOnRydWUsIm11bHRpcGxlQmFja2dyb3VuZFJlamVjdGVkIjp0cnVlLCJyZXN0b3JlZCI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0bbc5af5e15884077475-efbfbcb102425982de3b",
+          "file": "contrast-review.spec.ts",
+          "line": 106,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T16:28:00.036Z",
+    "duration": 11385.074999999999,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

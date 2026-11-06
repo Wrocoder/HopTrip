@@ -5,6 +5,7 @@ import {money,dateTime} from "../../lib/pl";
 import {intlLocales,type Locale} from "../../lib/i18n/config";
 import {localizedHref} from "../../lib/i18n/routing";
 import {scoreText,type ScoreKey} from "../../lib/i18n/score-copy";
+import {OfferDetailsDisclosure} from './offer-details-disclosure';
 
 export function scoreReason(key:string,score:ScoreExplanation,locale:Locale):string {
  const t=(key:ScoreKey,values:Record<string,string|number>={})=>scoreText(locale,key,values);
@@ -33,11 +34,11 @@ export function ScoreDetails({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
  const labels:Record<string,ScoreKey>={price:"price",history:"history",freshness:"freshness",flight_price:"flight_price",historical_discount:"historical_discount",convenience:"convenience",confidence:"history"};
  const score=deal.score_explanation,unavailable=!score || score.status==="UNAVAILABLE";
  return <div className="score-details">
-  <PriceAssessment deal={deal} locale={locale}/><p>{t("intro")}</p>
+  <PriceAssessment deal={deal} locale={locale} includeMethodologyLink={false}/><p>{t("intro")}</p>
   {unavailable ? <p className="score-caution">{t("unavailable")}</p> : <>
    {score.status==="PROVISIONAL" && <p className="score-caution"><strong>{t("provisional")}</strong> {t("neutral")}</p>}
    {score.status==="LEGACY" && <p className="score-caution">{t("legacy")}</p>}
-   <details className="score-method score-calculation"><summary>{t("calculation")}</summary>
+   <OfferDetailsDisclosure slug={deal.slug} className="score-method score-calculation"><summary>{t("calculation")}</summary>
     <p className="score-sum"><strong>{score.parts.map(part=>number(part.points)).join(" + ")} = {number(score.total_before_rounding!)} {t("points")}</strong><br/>
      {t("rounded")} <strong>{deal.deal_score}/100</strong>.</p>
     <div className="score-parts">{score.parts.map(part=><section className="score-part" key={part.key}>
@@ -46,9 +47,8 @@ export function ScoreDetails({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
      <p>{scoreReason(part.key,score,locale)}</p>
     </section>)}</div>
     {score.calculated_at && <p className="muted">{t("calculated")} <time dateTime={score.calculated_at}>{dateTime(score.calculated_at,locale)}</time> {t("calculationTime")}</p>}
-   </details>
+   </OfferDetailsDisclosure>
   </>}
-  <details className="score-method"><summary>{t("scope")}</summary><p>{t("grouping")}</p><p>{t("exclusions")}</p></details>
   <Link className="text-link" href={localizedHref("/info/price-comparison",locale)}>{t("methodology")} →</Link>
  </div>;
 }

@@ -1,6 +1,6 @@
 from datetime import UTC, datetime, timedelta
 from decimal import ROUND_HALF_UP, Decimal
-from typing import Any
+from typing import Any, get_args
 
 from fastapi import APIRouter, Depends, HTTPException, Response
 from fastapi.responses import HTMLResponse
@@ -20,6 +20,7 @@ from app.schemas.analytics import (
     ActivityClickSummary,
     AnalyticsEventAccepted,
     AnalyticsEventCreate,
+    AnalyticsLocale,
     AnalyticsSummary,
 )
 from app.schemas.usage import UsageReport
@@ -83,6 +84,9 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     }
     if payload.metadata.get("page_type") in {"home", "catalog", "city_break", "weekend", "origin", "destination", "route", "deal", "budget", "saved_trip", "saved", "alerts", "guide"}:
         metadata["page_type"] = payload.metadata["page_type"]
+    locale = payload.metadata.get("locale")
+    if isinstance(locale, str) and locale in get_args(AnalyticsLocale):
+        metadata["locale"] = locale
     if payload.activity:
         metadata["activity"] = payload.activity.model_dump()
     if payload.search:

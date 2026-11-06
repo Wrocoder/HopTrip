@@ -13,6 +13,7 @@ export function presetActive(filters:Filters, preset:TripPreset):boolean {
   return !!filters.budget && Number(filters.budget)===300;
 }
 export function togglePreset(query:URLSearchParams, preset:TripPreset):void {
+  if(preset==='weekend'&&query.get('weekend_mode'))return;
   const remove=presetActive(Object.fromEntries(query),preset);
   const values=presetValues[preset];
   for(const [key,value] of Object.entries(values)) {

@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "runtime": [
+    {
+      "path": "apps/api/app/api/events.py",
+      "sha256": "6b33bc60349ebcd977c9aa56e922fbf0993cd2abe07187b95f2009cfa6aa8aea"
+    },
+    {
+      "path": "apps/api/app/schemas/event.py",
+      "sha256": "027fc60441d05d5f9a4e4602fd937184e3b888ab933db4a3b00e5cdf4bb6ce55"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-events.tsx",
+      "sha256": "a684a181d142bc10829dac6b230d59b2076dd55a1a984c9f9ab9e97656317d2e"
+    },
+    {
+      "path": "apps/web/src/lib/api-contract.ts",
+      "sha256": "7fc69e424d7abfb11f03884ba6faad59c01a56989ec6331125a6bbc54a87ca43"
+    },
+    {
+      "path": "apps/web/src/lib/i18n/event-fit-copy.ts",
+      "sha256": "aea711f86a91c144e92c4d59ee847b7e7f8f21e19262b86f52fdba20119023a2"
+    },
+    {
+      "path": "apps/web/src/lib/i18n/event-fit-filter-copy.ts",
+      "sha256": "374727aa6c88f11a0dcfeca84932fa64da41fd339171d9c74f604a668ee4200f"
+    }
+  ],
+  "testSources": [
+    "apps/web/tests/event-fit-filter.spec.ts",
+    "apps/web/tests/event-fit-filter.test.mjs",
+    "apps/web/tests/event-flight-fit.spec.ts",
+    "apps/web/tests/event-browsing.spec.ts",
+    "apps/web/tests/event-context.spec.ts",
+    "apps/web/tests/events.spec.ts",
+    "apps/web/tests/events-sync.spec.ts",
+    "apps/web/tests/event-results.spec.ts",
+    "apps/web/tests/localized-events.spec.ts",
+    "apps/web/tests/planned-events.spec.ts",
+    "apps/web/tests/shared-trip.spec.ts"
+  ],
+  "onlyExpectedRuntimeDelta": true,
+  "testNormalization": "Loopback 8100->8125 and3100->3125 only",
+  "apiTestsExecutedAtRepositoryRoot": true,
+  "unchangedSince12c": [
+    "apps/api/app/services/event_flight_fit.py",
+    "apps/api/app/services/event_grouping.py",
+    "apps/api/app/providers/ticketmaster.py",
+    "apps/api/app/services/events.py",
+    "apps/api/app/services/event_sync.py",
+    "apps/api/app/models/event.py",
+    "apps/api/app/services/trip_timeline.py",
+    "apps/api/app/services/destination_time.py",
+    "apps/web/src/lib/shared-trip.ts",
+    "apps/web/src/lib/saved-plans.ts",
+    "apps/web/src/lib/budget-draft.ts",
+    "apps/web/src/lib/budget-estimates.ts",
+    "apps/web/src/lib/event-flight-fit.ts",
+    "apps/web/src/lib/event-presentation.ts",
+    "apps/web/src/app/components/event-flight-notice.tsx",
+    "apps/web/src/lib/session.ts",
+    "apps/web/src/lib/drive-policy.ts",
+    "apps/web/src/app/sitemap.ts",
+    "apps/web/package.json",
+    "apps/web/package-lock.json"
+  ]
+}

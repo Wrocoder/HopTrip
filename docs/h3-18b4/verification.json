@@ -1,0 +1,188 @@
+{
+  "scope": "H3-18b4 BUDGET_CALCULATED only",
+  "build": "tX41skKr_3OJY_fpf8cjU",
+  "runtimeDelta": [
+    {
+      "path": "apps/api/app/schemas/analytics.py",
+      "before": "e9d555a1471cbe064e83fed710ee8582f573be4f24a3be2e697708d285436c11",
+      "after": "57984114671f881d9871fa3111ddd55d60f5a7b8054d58a6a880e5d4555b0fc0"
+    },
+    {
+      "path": "apps/web/src/lib/analytics-context.ts",
+      "before": "5224c5d49eb7522abc7a3f30cbeb174fe1a031cb1a7e81e554d0cf0ef015bfb7",
+      "after": "2bcd545c904771e922999f83e0add55dba4f8ee964eb7eea9d61bfa240892868"
+    },
+    {
+      "path": "apps/web/src/lib/session.ts",
+      "before": "a08ca407fbb6b47d120c79e1419144a646645cafec56b9bd5e079ff992aa990d",
+      "after": "1b3d69063fa4a82375ab82aca98f5c161c284fbebec62761f1e580ef51c4f88d"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-budget-calculator.tsx",
+      "before": "90729e65c2be98620e720717a29bf63e5d4b2dbbf615ac0dc2c607fe2eed320e",
+      "after": "dd1d3467acb15a4a6916d0a703fe79b2d12e72f0d7c078b6edac673694bd8d34"
+    },
+    {
+      "path": "apps/web/src/lib/budget-completion.ts",
+      "before": null,
+      "after": "46fb1b2ffe557de8e0eca6fe88055c6666d8141a0996ebde68a01485d350c36a"
+    }
+  ],
+  "matchingSourceFiles": 677,
+  "matchingTestFiles": 3,
+  "wireEvents": 17,
+  "browser": {
+    "passed": 32,
+    "feature": 16,
+    "regression": 16,
+    "firstRun": true,
+    "retries": 0,
+    "cases": [
+      {
+        "case": "desktop / pl: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / en: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / ru: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / uk: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / partial/open calculations, invalid values/dates and unreviewed changes do not complete",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / denial/revocation suppress completion and grant does not replay the open breakdown",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / blocked analytics leaves calculation and breakdown usable without retries",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / a restored shared plan with unknown ticket price stays incomplete and exposes no plan data",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / pl: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / en: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / ru: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / uk: explicit complete breakdown counts once; input/reload/restore do not auto-complete",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / partial/open calculations, invalid values/dates and unreviewed changes do not complete",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / denial/revocation suppress completion and grant does not replay the open breakdown",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / blocked analytics leaves calculation and breakdown usable without retries",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / a restored shared plan with unknown ticket price stays incomplete and exposes no plan data",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / budget calculates shared costs, validates input and resets accessibly",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / draft survives reload, stays separate per offer and reset persists",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / date and party edits flag prices and keep whole-stay costs unchanged",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / unavailable or corrupt storage never prevents calculation",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / invalid draft and changed offer metadata are handled explicitly",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / flight links to the budget calculator",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / reference fare fills only local transport and preserves manual amounts",
+        "status": "passed"
+      },
+      {
+        "case": "desktop / lodging total survives mode changes and is counted only once",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / budget calculates shared costs, validates input and resets accessibly",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / draft survives reload, stays separate per offer and reset persists",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / date and party edits flag prices and keep whole-stay costs unchanged",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / unavailable or corrupt storage never prevents calculation",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / invalid draft and changed offer metadata are handled explicitly",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / flight links to the budget calculator",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / reference fare fills only local transport and preserves manual amounts",
+        "status": "passed"
+      },
+      {
+        "case": "mobile / lodging total survives mode changes and is counted only once",
+        "status": "passed"
+      }
+    ]
+  },
+  "api": {
+    "targetedPassed": 93,
+    "full": {
+      "passed": 1138,
+      "failed": 1,
+      "skipped": 18
+    },
+    "knownFailure": "Unchanged Telegram fixture departure 2026-11-06T09:00Z is past; before/current/future fixture controls retained in H3-18b2"
+  },
+  "node": {
+    "allPassed": 331,
+    "completionFinalPassed": 6
+  },
+  "productionData": false,
+  "deploy": false,
+  "migration": false,
+  "dependenciesAdded": false
+}

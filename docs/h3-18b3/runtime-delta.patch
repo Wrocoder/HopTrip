@@ -1,0 +1,123 @@
+diff --git "a/.cache\\h3-18b3-before\\apps\\api\\app\\schemas\\analytics.py" b/apps/api/app/schemas/analytics.py
+index cc83fb9..203b339 100644
+--- "a/.cache\\h3-18b3-before\\apps\\api\\app\\schemas\\analytics.py"
++++ b/apps/api/app/schemas/analytics.py
+@@ -4,7 +4,7 @@ from typing import Any, Literal
+ 
+ from pydantic import BaseModel, Field, field_validator, model_validator
+ 
+-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE"]
++EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN"]
+ 
+ 
+ class ActivityContext(BaseModel):
+diff --git "a/.cache\\h3-18b3-before\\apps\\web\\src\\lib\\analytics-context.ts" b/apps/web/src/lib/analytics-context.ts
+index f9ef36b..74d81af 100644
+--- "a/.cache\\h3-18b3-before\\apps\\web\\src\\lib\\analytics-context.ts"
++++ b/apps/web/src/lib/analytics-context.ts
+@@ -7,7 +7,7 @@ export const sourceLabel=(value:string|null|undefined)=>sources.includes(value??
+ export type SearchContext={filters:Filters;result_count?:number;error?:"invalid_filters"|"unavailable"};
+ export type PartnerContext={category:"flight"|"stay"|"activity";provider:"catalog"|"stay22"|"tiqets"};
+ export type FilterContext={action:"apply"|"remove"|"reset"};
+-export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED","TRIP_UPDATE"] as const;
++export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED","TRIP_UPDATE","DEAL_DETAILS_OPEN"] as const;
+ export type AnalyticsEventName=typeof analyticsEvents[number];
+ export type EventContext={search?:SearchContext;partner?:PartnerContext;filter?:FilterContext};
+ export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
+diff --git "a/.cache\\h3-18b3-before\\apps\\web\\src\\lib\\session.ts" b/apps/web/src/lib/session.ts
+index d118d72..02bbce7 100644
+--- "a/.cache\\h3-18b3-before\\apps\\web\\src\\lib\\session.ts"
++++ b/apps/web/src/lib/session.ts
+@@ -41,7 +41,7 @@ function sendEvent(event_name:AnalyticsEventName,deal_slug?:string,activity?:Act
+  if(!analyticsAllowed()) return;
+  const session=sessionContext();
+  const key=[event_name,deal_slug,activity?.activity_id,JSON.stringify(context),location.pathname,location.search,session.id].join("|");
+- const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED","ALERT_STARTED"].includes(event_name);
++ const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED","ALERT_STARTED","DEAL_DETAILS_OPEN"].includes(event_name);
+  if(view && viewEvents.has(key))return;
+  if(view)viewEvents.add(key);
+  const now=Date.now();
+diff --git "a/.cache\\h3-18b3-before\\apps\\web\\src\\app\\components\\trip-details.tsx" b/apps/web/src/app/components/trip-details.tsx
+index 81556d0..b5b0c28 100644
+--- "a/.cache\\h3-18b3-before\\apps\\web\\src\\app\\components\\trip-details.tsx"
++++ b/apps/web/src/app/components/trip-details.tsx
+@@ -9,11 +9,12 @@ import {qualityText,qualityReasonText} from '../../lib/i18n/quality-copy';
+ import {weekendCopy} from '../../lib/weekend';
+ import {PriceMetadata} from './price-freshness';
+ import {AirportContextDetails} from './airport-warnings';
++import {OfferDetailsDisclosure} from './offer-details-disclosure';
+ 
+ export function TripDetails({deal,locale="pl",qualityDetails=false,includePrice=true}:{deal:Deal;locale?:Locale;qualityDetails?:boolean;includePrice?:boolean}) {
+   const pl=getMessages(locale),t=(source:CatalogKey)=>catalogText(locale,source);
+   const notice=qualityDetails ? qualityNotice(deal) : null;
+-  return <details className="trip-details">
++  return <OfferDetailsDisclosure slug={deal.slug} className="trip-details">
+     <summary>{t(includePrice ? "Szczegóły lotu i ceny" : "Pełne dane lotu i bagaż")}</summary>
+     <div className="trip-details-content">
+       {includePrice && <section aria-label={t("Cena i aktualność")}>
+@@ -32,5 +33,5 @@ export function TripDetails({deal,locale="pl",qualityDetails=false,includePrice=
+       </section>
+       <AirportContextDetails deal={deal} locale={locale}/>
+     </div>
+-  </details>;
++  </OfferDetailsDisclosure>;
+ }
+diff --git "a/.cache\\h3-18b3-before\\apps\\web\\src\\app\\components\\score-trigger.tsx" b/apps/web/src/app/components/score-trigger.tsx
+index 3ccca50..dca5868 100644
+--- "a/.cache\\h3-18b3-before\\apps\\web\\src\\app\\components\\score-trigger.tsx"
++++ b/apps/web/src/app/components/score-trigger.tsx
+@@ -3,6 +3,7 @@
+ import {useEffect, useId, useRef, useState, type ReactNode} from "react";
+ import type {Locale} from '../../lib/i18n/config';
+ import {scoreText} from '../../lib/i18n/score-copy';
++import {track} from '../../lib/session';
+ 
+ export function ScoreTrigger({slug,href,destination,locale='pl',children}:{
+   slug:string; href?:string; destination:string; locale?:Locale; children:ReactNode;
+@@ -18,6 +19,7 @@ export function ScoreTrigger({slug,href,destination,locale='pl',children}:{
+     const opener=trigger.current;
+     if(!element) return;
+     element.showModal();
++    track('DEAL_DETAILS_OPEN',slug);
+     const previous=document.body.style.overflow;
+     document.body.style.overflow="hidden";
+     return ()=>{
+@@ -25,7 +27,7 @@ export function ScoreTrigger({slug,href,destination,locale='pl',children}:{
+       document.body.style.overflow=previous;
+       opener?.focus({preventScroll:true});
+     };
+-  },[open]);
++  },[open,slug]);
+   return <>
+     <a ref={trigger} className="score-badge score-trigger" href={href ?? `/deals/${slug}#score`}
+       aria-haspopup="dialog" aria-label={t('triggerLabel')}
+diff --git "a/.cache\\h3-18b3-before\\apps\\web\\src\\app\\components\\score-details.tsx" b/apps/web/src/app/components/score-details.tsx
+index e738ef9..0d713cd 100644
+--- "a/.cache\\h3-18b3-before\\apps\\web\\src\\app\\components\\score-details.tsx"
++++ b/apps/web/src/app/components/score-details.tsx
+@@ -5,6 +5,7 @@ import {money,dateTime} from "../../lib/pl";
+ import {intlLocales,type Locale} from "../../lib/i18n/config";
+ import {localizedHref} from "../../lib/i18n/routing";
+ import {scoreText,type ScoreKey} from "../../lib/i18n/score-copy";
++import {OfferDetailsDisclosure} from './offer-details-disclosure';
+ 
+ export function scoreReason(key:string,score:ScoreExplanation,locale:Locale):string {
+  const t=(key:ScoreKey,values:Record<string,string|number>={})=>scoreText(locale,key,values);
+@@ -37,7 +38,7 @@ export function ScoreDetails({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
+   {unavailable ? <p className="score-caution">{t("unavailable")}</p> : <>
+    {score.status==="PROVISIONAL" && <p className="score-caution"><strong>{t("provisional")}</strong> {t("neutral")}</p>}
+    {score.status==="LEGACY" && <p className="score-caution">{t("legacy")}</p>}
+-   <details className="score-method score-calculation"><summary>{t("calculation")}</summary>
++   <OfferDetailsDisclosure slug={deal.slug} className="score-method score-calculation"><summary>{t("calculation")}</summary>
+     <p className="score-sum"><strong>{score.parts.map(part=>number(part.points)).join(" + ")} = {number(score.total_before_rounding!)} {t("points")}</strong><br/>
+      {t("rounded")} <strong>{deal.deal_score}/100</strong>.</p>
+     <div className="score-parts">{score.parts.map(part=><section className="score-part" key={part.key}>
+@@ -46,7 +47,7 @@ export function ScoreDetails({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
+      <p>{scoreReason(part.key,score,locale)}</p>
+     </section>)}</div>
+     {score.calculated_at && <p className="muted">{t("calculated")} <time dateTime={score.calculated_at}>{dateTime(score.calculated_at,locale)}</time> {t("calculationTime")}</p>}
+-   </details>
++   </OfferDetailsDisclosure>
+   </>}
+   <Link className="text-link" href={localizedHref("/info/price-comparison",locale)}>{t("methodology")} →</Link>
+  </div>;

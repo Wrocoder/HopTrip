@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {writeFileSync} from 'node:fs';
-import {destinationImages,imageryCopy} from '../src/lib/destination-imagery';
+import {destinationImage,destinationImages,imageryCopy} from '../src/lib/destination-imagery';
 import {destinationLabel} from '../src/lib/destinations';
 import {localizedHref,pageLocales} from '../src/lib/i18n/routing';
 import type {Destination} from '../src/lib/api';
@@ -21,7 +21,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`destination photographs
   await expect(page.locator('.hero h1')).toBeVisible();await expect(page.locator('.hero button[type="submit"]')).toBeEnabled();
   const destinations:Destination[]=await(await request.get('http://127.0.0.1:8100/api/v1/destinations')).json();
   const section=page.locator('section:has(> #home-destinations)');
-  for(const d of destinations){
+  for(const d of destinations.filter(d=>d.is_active&&destinationImage(d.slug)).slice(0,3)){
    const route=pageLocales(`/destinations/${d.slug}`).includes(locale)?`/destinations/${d.slug}`:`/deals?destination=${encodeURIComponent(d.slug)}`;
    await expect(section.locator(`a[href="${localizedHref(route,locale)}"]`)).toHaveCount(1);
   }

@@ -1,0 +1,125 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test trip-update-analytics.spec.ts --grep denial and revocation|consent revoked while --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [14184]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=f7d44505ed1940d0858a2555047bfdac method=GET status=200
+
+
+[WebServer] (node:32760) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=02b3b7977a7446ad89cfc7fa40fcee20 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d8a83b9eb37f42aa9f9beaaed8b27629 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b856e28507644eefa1bc0f6a83e22e19 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=70d3468e26864d9cbcdaca881885526c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a588e78c8af64096867de7274175eeba method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=605a989001be493884258b142d7a4381 method=GET status=200
+
+
+Running 4 tests using 1 worker
+
+(node:34900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] [desktop] › tests\trip-update-analytics.spec.ts:58:5 › denial and revocation suppress successful updates; accepting has no replay
+
+[WebServer] INFO:hoptrip.requests:request_id=8fb09f027220453eaa3441feb722dc09 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c6399fd31724a7f8de177e35153fead method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d2806820ce744038883d9ad92e63af1f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8013fb8e0d5441628a333b1260f4bfc3 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=566c721a228e4ae79952efdfb8f82b16 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3754a2146c3948c899936d22ad195899 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=73a7590a23b24ff4b3e42b4316e8f1d8 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=ac4314707fa244b2add5ef3fc60be797 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e5600a87635e45698c9af7de729d2eb5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c57cf3b50e924ed2931ffa802fafad0b method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4c6ec93ee6e04c99b1cd3a9a4e6e2e67 method=POST status=202
+[2/4] [desktop] › tests\trip-update-analytics.spec.ts:71:5 › consent revoked while Update waits for the lock prevents a send after commit
+
+[WebServer] INFO:hoptrip.requests:request_id=6b46cf9d84e34cbab1b0610e0a10edab method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=3d33a4ab232e4999b6c98631d8c35961 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=54f659a1539142e8b86930a54b884c38 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=eb783bc0e69b4534ac7efadd00161ba3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6d4c1aee6e5b4680b32f078fbb665184 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=837cb3aa6dc84e2a82758e262aa24736 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ff7636221e3042f9a8f4a4a9c7ce7a44 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=4302e7ec6a8c44478a97c7ce183d2b16 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d46e8b1cbb3d4fe6b044ac5ac20eaea0 method=POST status=202
+
+(node:23260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/4] [mobile] › tests\trip-update-analytics.spec.ts:58:5 › denial and revocation suppress successful updates; accepting has no replay
+[WebServer] INFO:hoptrip.requests:request_id=2dca9969d39c41dc8f0656c6c5c13178 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2c28c4b873f5472b8a9ce689694168b6 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7a827f1db89346d09b9ed9a33083a479 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3586597c75be40e1ab892e3fdc49868b method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=abd8f5284ebb4df0813acd3053b1e053 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=17c505a72bba449eb5d9e63b6718a8e3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=95bc685004f64990858c9c03737fc486 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a31b4bc0e854453db5d995b0b13352a9 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b2391c9651324b77a328ae6eb704b18c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=dc4f1e3767f8423ebb2637d40460b5fd method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=37ddf1086f394062b408d3a62f945f63 method=POST status=202
+[4/4] [mobile] › tests\trip-update-analytics.spec.ts:71:5 › consent revoked while Update waits for the lock prevents a send after commit
+
+[WebServer] INFO:hoptrip.requests:request_id=ad865830e0934f90ade0a34373033681 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=6931476fc9454db390bbf6167993ff1b method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=24d5b9d3279c4846b5fa7b08ea716eed method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=da33192650d04fa4844964bcaf1161c2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b8846c599b544f9eac8cdb315d48df60 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=06ed048d9275438d8182d4de30c4cac1 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=1072778928474e47a0aeafcab9c5724c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=64dcf63e0b3d4fd388d77b82f9cbc2db method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=eb12f604f6df49b9b7b558dec60b3d23 method=GET status=200
+
+  4 passed (1.0m)

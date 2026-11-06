@@ -251,6 +251,8 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 }
 .breadcrumbs { margin-block: 24px; font-size: .875rem; }
 .consent-controls { flex-basis: 100%; }
+#privacy-panel { position: fixed; inset-inline: 0; bottom: max(12px, env(safe-area-inset-bottom)); width: min(100% - 24px, 1160px); z-index: 15; }
+#privacy-panel .consent-panel { margin-top: 0; max-height: 70dvh; overflow-y: auto; overscroll-behavior: contain; box-shadow: var(--shadow); }
 .privacy-settings { padding: 10px 14px; background: #fff; color: #153b35; border: 1px solid #526d66; border-radius: 8px; cursor: pointer; }
 .consent-panel { margin-top: 16px; padding: 16px 20px; background: var(--surface); color: var(--ink); border: 1px solid var(--sage); border-radius: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
 .consent-panel h2 { font-size: 20px; margin: 0; }
@@ -589,6 +591,8 @@ fieldset.filter-primary { min-width: 0; margin: 0; padding: 0; border: 0; }
 .flight-offer-card .price-freshness { margin-bottom: 0; }
 .flight-offer-card .trip-details { margin-top: 8px; }
 .flight-offer-card .card-quality-label { margin: 4px 0; padding: 4px 8px; border-left: 3px solid var(--coral); background: var(--coral-light); }
+.flight-offer-card .card-price-origin { font-size: var(--text-sm); margin-block: 0 6px; }
+.flight-offer-card .card-cost-scope, .flight-offer-card .card-baggage-scope { margin-block: 4px; }
 .flight-offer-card .deal-origin { margin-top: 8px; }
 .flight-offer-card .deal-dates { margin-bottom: 4px; }
 
@@ -633,13 +637,30 @@ fieldset.filter-primary { min-width: 0; margin: 0; padding: 0; border: 0; }
 .language-switcher a { display: inline-flex; align-items: center; justify-content: center; min-width: var(--target-height); min-height: var(--target-height); }
 
 /* Keep desktop catalogue results visible without shrinking interactive targets. */
+.weekend-options { grid-column: 1 / -1; min-width: 0; }
+.weekend-options select { width: 100%; min-width: 0; max-width: 100%; }
 @media (min-width: 1100px) {
   body:has(.catalog-page) .site-header { padding-block: 6px; }
   body:has(.catalog-page) .site-header .language-switcher { width: auto; }
   .catalog-page .page-heading h1 { font-size: 2.25rem; margin-block: 2px 4px; }
   .catalog-page .filter-panel { padding: 8px; }
-  .catalog-page .filters { grid-template-columns: minmax(140px,.8fr) minmax(200px,1.2fr) minmax(0,3fr) auto; gap: 2px 12px; }
+  .catalog-page .filters { grid-template-columns: minmax(220px,1fr) minmax(360px,1.4fr) minmax(0,2fr) auto; gap: 2px 12px; }
+  .catalog-page .filter-primary { grid-template-columns: repeat(3,minmax(0,1fr)) auto; }
+  .catalog-page .weekend-options { display: grid; grid-template-columns: minmax(260px,1fr) minmax(0,2fr); gap: 8px 20px; align-items: start; margin: 0; padding: 0; border: 0; }
+  /* Keep the group name for assistive technology; the select has the same visible label. */
+  .catalog-page .weekend-options > legend { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .catalog-page .weekend-options > #weekend-rules { margin: 0; align-self: center; }
+  .catalog-page .weekend-options > .filter-secondary,
+  .catalog-page .weekend-options > .field-hint:not(#weekend-rules) { grid-column: 1 / -1; }
+  .catalog-page .weekend-options > .filter-secondary { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .catalog-page .sort-control { gap: 4px; }
+  .catalog-page .sort-control .field-hint { margin-top: 0; }
   .catalog-page .trip-presets, .catalog-page .preset-rules { grid-column: auto; }
   .catalog-page .preset-rules[open] { grid-column: 1 / -1; }
   .catalog-page .active-filters { margin-top: 6px; padding-top: 6px; }
+}
+
+@media (min-width: 1024px) {
+  body:has(.offer-detail) .site-header { padding-block: 12px; }
+  main.page-shell:has(.offer-detail) { padding-top: 24px; }
 }

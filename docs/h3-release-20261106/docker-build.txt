@@ -1,0 +1,213 @@
+ Image hoptrip-h3-release-preflight-migrate Building 
+ Image hoptrip-h3-release-preflight-api Building 
+ Image hoptrip-h3-release-preflight-web Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.98kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 978B 0.0s done
+#2 DONE 0.1s
+
+#3 [api internal] load build definition from Dockerfile
+#3 transferring dockerfile: 624B done
+#3 DONE 0.1s
+
+#4 [web internal] load metadata for docker.io/library/node:22-alpine
+#4 DONE 0.1s
+
+#5 [migrate internal] load metadata for docker.io/library/python:3.12-slim
+#5 ...
+
+#6 [web internal] load .dockerignore
+#6 transferring context: 224B 0.0s done
+#6 DONE 0.0s
+
+#7 [web deps 1/4] FROM docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85
+#7 resolve docker.io/library/node:22-alpine@sha256:b6f26b36c8ff49624cfdac716b8ea1138d606df02586a77d364bb5536a634f85 0.1s done
+#7 DONE 0.1s
+
+#8 [web internal] load build context
+#8 transferring context: 590.28kB 0.3s done
+#8 DONE 0.3s
+
+#9 [web deps 2/4] WORKDIR /app
+#9 CACHED
+
+#10 [web deps 3/4] COPY package.json package-lock.json ./
+#10 CACHED
+
+#11 [web deps 4/4] RUN --mount=type=secret,id=npm_ca     if [ -f /run/secrets/npm_ca ]; then       NODE_EXTRA_CA_CERTS=/run/secrets/npm_ca npm ci;     else npm ci; fi
+#11 CACHED
+
+#12 [web builder 3/5] COPY --from=deps /app/node_modules ./node_modules
+#12 CACHED
+
+#13 [web builder 4/5] COPY . .
+#13 DONE 0.4s
+
+#5 [migrate internal] load metadata for docker.io/library/python:3.12-slim
+#5 DONE 3.5s
+
+#14 [api internal] load .dockerignore
+#14 transferring context: 216B done
+#14 DONE 0.0s
+
+#15 [migrate internal] load build context
+#15 DONE 0.0s
+
+#16 [migrate 1/8] FROM docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54
+#16 resolve docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54 0.0s done
+#16 DONE 0.0s
+
+#17 [web builder 5/5] RUN npm run build
+#17 1.610 
+#17 1.610 > hoptrip-web@0.1.0 build
+#17 1.610 > next build
+#17 1.610 
+#17 2.385 ▲ Next.js 16.4.3 (Turbopack)
+#17 2.556 ✓ Running next.config.ts took 170ms
+#17 2.568 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+#17 2.568 This information is used to shape Next.js' roadmap and prioritize features.
+#17 2.568 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+#17 2.568 https://nextjs.org/telemetry
+#17 2.568 
+#17 2.635 
+#17 2.707   Creating an optimized production build ...
+#17 ...
+
+#15 [migrate internal] load build context
+#15 transferring context: 1.33MB 0.3s done
+#15 DONE 0.4s
+
+#16 [api 1/8] FROM docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54
+#16 resolve docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54 0.0s done
+#16 sha256:05e0eee5572e9c9f50408a2132590133b830a668a1cf2ff2b150f19c57707e2b 248B / 248B 0.2s done
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 0.3s
+#16 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 0.2s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 0.2s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.05MB / 12.12MB 1.4s
+#16 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.05MB / 1.29MB 2.3s
+#16 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.29MB / 1.29MB 2.4s
+#16 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.29MB / 1.29MB 2.6s done
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 2.7s
+#16 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.29MB / 1.29MB 2.6s done
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 2.10MB / 29.86MB 3.1s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 3.15MB / 12.12MB 3.3s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 4.19MB / 12.12MB 4.2s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 4.19MB / 29.86MB 4.2s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 5.24MB / 12.12MB 4.4s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 6.29MB / 12.12MB 4.7s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 6.29MB / 29.86MB 4.7s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 7.34MB / 12.12MB 5.1s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 8.39MB / 12.12MB 5.3s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 8.39MB / 29.86MB 5.3s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 9.44MB / 12.12MB 5.7s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 10.49MB / 12.12MB 5.9s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 11.53MB / 12.12MB 6.0s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 10.49MB / 29.86MB 5.9s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 12.58MB / 29.86MB 6.3s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 14.68MB / 29.86MB 6.6s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 16.78MB / 29.86MB 7.1s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 18.87MB / 29.86MB 7.4s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 20.97MB / 29.86MB 7.5s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 23.07MB / 29.86MB 8.0s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 25.17MB / 29.86MB 9.3s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 27.26MB / 29.86MB 9.8s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 11.53MB / 12.12MB 11.4s
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 29.36MB / 29.86MB 11.4s
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 12.12MB / 12.12MB 12.0s done
+#16 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 12.12MB / 12.12MB 12.0s done
+#16 ...
+
+#17 [web builder 5/5] RUN npm run build
+#17 17.62 ✓ Compiled successfully in 14.9s
+#17 17.64   Running TypeScript ...
+#17 ...
+
+#16 [api 1/8] FROM docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54
+#16 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 29.86MB / 29.86MB 16.1s done
+#16 extracting sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 2.4s done
+#16 extracting sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0.3s done
+#16 DONE 19.2s
+
+#16 [api 1/8] FROM docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54
+#16 extracting sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0.3s done
+#16 extracting sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085
+#16 extracting sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.0s done
+#16 DONE 20.2s
+
+#17 [web builder 5/5] RUN npm run build
+#17 ...
+
+#16 [api 1/8] FROM docker.io/library/python:3.12-slim@sha256:4840d514c583a4d3d8cad3940e68dee6f0f6f3635c12fcd0a3d74c21a5b93a54
+#16 extracting sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.0s done
+#16 extracting sha256:05e0eee5572e9c9f50408a2132590133b830a668a1cf2ff2b150f19c57707e2b 0.0s done
+#16 DONE 20.2s
+
+#18 [api 2/8] WORKDIR /app
+#18 DONE 3.8s
+
+#17 [web builder 5/5] RUN npm run build
+#17 ...
+
+#18 [api 2/8] WORKDIR /app
+#18 DONE 3.8s
+
+#19 [api 3/8] COPY pyproject.toml requirements.lock ./
+#19 DONE 0.1s
+
+#20 [api 4/8] RUN pip install --no-cache-dir -r requirements.lock
+#20 3.585 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+#20 4.168 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+#20 5.321 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+#20 7.424 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+#20 11.59 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+#20 11.67 Could not fetch URL https://pypi.org/simple/alembic/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/alembic/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))) - skipping
+#20 11.68 ERROR: Could not find a version that satisfies the requirement alembic==1.20.0 (from versions: none)
+#20 11.77 Could not fetch URL https://pypi.org/simple/pip/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/pip/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))) - skipping
+#20 11.77 ERROR: No matching distribution found for alembic==1.20.0
+#20 ERROR: process "/bin/sh -c pip install --no-cache-dir -r requirements.lock" did not complete successfully: exit code: 1
+
+#17 [web builder 5/5] RUN npm run build
+#17 ...
+
+#20 [api 4/8] RUN pip install --no-cache-dir -r requirements.lock
+#20 ERROR: process "/bin/sh -c pip install --no-cache-dir -r requirements.lock" did not complete successfully: exit code: 1
+
+#17 [web builder 5/5] RUN npm run build
+#17 CANCELED
+------
+ > [api 4/8] RUN pip install --no-cache-dir -r requirements.lock:
+3.585 WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+4.168 WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+5.321 WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+7.424 WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+11.59 WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))': /simple/alembic/
+11.67 Could not fetch URL https://pypi.org/simple/alembic/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/alembic/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))) - skipping
+11.68 ERROR: Could not find a version that satisfies the requirement alembic==1.20.0 (from versions: none)
+11.77 Could not fetch URL https://pypi.org/simple/pip/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host='pypi.org', port=443): Max retries exceeded with url: /simple/pip/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)'))) - skipping
+11.77 ERROR: No matching distribution found for alembic==1.20.0
+------
+Dockerfile:4
+
+--------------------
+
+   2 |     WORKDIR /app
+
+   3 |     COPY pyproject.toml requirements.lock ./
+
+   4 | >>> RUN pip install --no-cache-dir -r requirements.lock
+
+   5 |     COPY apps/api ./apps/api
+
+   6 |     COPY apps/api/entrypoint.sh ./entrypoint.sh
+
+--------------------
+
+target api: failed to solve: process "/bin/sh -c pip install --no-cache-dir -r requirements.lock" did not complete successfully: exit code: 1
+
+
+
+View build details: docker-desktop://dashboard/build/default/default/djrkyyxv75zh54z4l1cm1r6d0
+

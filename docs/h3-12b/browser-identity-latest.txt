@@ -1,0 +1,145 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test saved-plan-identity.spec.ts --trace=off --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [26040]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=6ee308a851da47be987760b09ebe78e2 method=GET status=200
+
+[WebServer] (node:50320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+
+[WebServer] INFO:hoptrip.requests:request_id=87f58856f50e4136a108e8b859c0d140 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c89b8b57a9d64e16bf4cdd1bcf8ec038 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9f7f904e7c354b44acfe9e2c4a6ee8b8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d59728fba4974659b339526b78e69c7d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=28a5bd44ff2f43648fd153e5f97ac974 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=38a56ee6833449c4830258077392f35f method=GET status=200
+
+Running 18 tests using 1 worker
+
+
+(node:8816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=df14775c322c4f2f935cd4ca645d8118 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=f12642ae64d2406d9db2bde1b9777a58 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=657b8a4e8b184ab0808fe7eb81f07ff4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7994c76dd65b4c8890e397c5e5683021 method=GET status=404
+[2/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=6d7dcd270dd04295a7f8608105f78eb9 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=84b510d263cd42aab80bb61708436aea method=GET status=404
+[3/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=295176049ccc40ce924edfdb3037862e method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=b953946239444e859eaeab288572d902 method=GET status=404
+
+[4/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=928db483e402482baed1eb0bf1879fc4 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=2ea4ccc3acf64f2dbcf596dd50d8f94b method=GET status=404
+[5/18] [desktop] › tests\saved-plan-identity.spec.ts:25:5 › fresh saves use v2 only; remove and undo retain identity while advancing revision
+
+[WebServer] INFO:hoptrip.requests:request_id=ddf69bd811a149d4bafc7f366c15e10e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=cfec269552a14a809a34a557c8959656 method=GET status=200
+
+[6/18] [desktop] › tests\saved-plan-identity.spec.ts:31:5 › old tabs cannot overwrite v2; importing additions never resurrects an unchanged deleted plan
+
+[WebServer] INFO:hoptrip.requests:request_id=4cd65dae40a74c70bdebd67a1ba085f1 method=GET status=200
+[7/18] [desktop] › tests\saved-plan-identity.spec.ts:39:5 › a legacy change while migration waits for the cross-tab lock yields conflict without overwriting either key
+
+[WebServer] INFO:hoptrip.requests:request_id=aa546a9102f84cd8a95d477075508d85 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ece76af69076467488fcf4742d534471 method=GET status=200
+[8/18] [desktop] › tests\saved-plan-identity.spec.ts:48:5 › parallel saves from two tabs retain both plans with distinct IDs
+[WebServer] INFO:hoptrip.requests:request_id=482a0a7025734b74a0d09f61725a6023 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d726582fa2e741a88443b37f416b0cff method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=172eca83a6b94aa6922b88069b79c684 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8ca74c393b8e44249a6eab0e1e325857 method=GET status=200
+
+[9/18] [desktop] › tests\saved-plan-identity.spec.ts:55:5 › failed migration preserves the source; unavailable locking keeps reading and sharing available
+[WebServer] INFO:hoptrip.requests:request_id=9e82d2d49cf541209b074c3a71c0ab30 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c982f1add4e44c73b10f8d61b4ab1821 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=7a6a133e1a124def8e183bd878fb56a1 method=GET status=200
+
+
+(node:48372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[10/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=1cb27fe7c07644bc81ac4691677550d1 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=bb9c83913c604c3d808c7784c2a43287 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ba1b6170beff4fb7b518502b1a2fe8d8 method=GET status=404
+[11/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=9e2642601ccb4409bf788359ae75e6bb method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=aaa92655f0374609b3ac906dfef1ccc3 method=GET status=404
+
+[12/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+[WebServer] INFO:hoptrip.requests:request_id=8187a3b17b1c4986aac1e2f668222bfa method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8703b944c254422dbb70103b338515d2 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=d3a0c5a9fc3946e6a6be26436bd4739b method=GET status=404
+
+[13/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=5f26e250dcbd4598ad822d862a3339da method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=98fdeb44e3a7491a9c85f67745409896 method=GET status=404
+
+[14/18] [mobile] › tests\saved-plan-identity.spec.ts:25:5 › fresh saves use v2 only; remove and undo retain identity while advancing revision
+
+[WebServer] INFO:hoptrip.requests:request_id=32ac989f99c445939b5ed4c6c47d1545 method=GET status=200
+[15/18] [mobile] › tests\saved-plan-identity.spec.ts:31:5 › old tabs cannot overwrite v2; importing additions never resurrects an unchanged deleted plan
+
+[WebServer] INFO:hoptrip.requests:request_id=64692c00f5f14888bcdf827d99b76713 method=GET status=200
+[16/18] [mobile] › tests\saved-plan-identity.spec.ts:39:5 › a legacy change while migration waits for the cross-tab lock yields conflict without overwriting either key
+
+[WebServer] INFO:hoptrip.requests:request_id=fc73c551729643f8bcd1a939aaddea4d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=76de91bd1ee44057bab27d4c642fae65 method=GET status=200
+
+[17/18] [mobile] › tests\saved-plan-identity.spec.ts:48:5 › parallel saves from two tabs retain both plans with distinct IDs
+
+[WebServer] INFO:hoptrip.requests:request_id=2be906a9a1144f9c88572f22ae509ba1 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4890c02de2144e748eca0911ea33250c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d0990e7daccc4927b1ac421337e32eb9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f8a1e4d1846542588c19b56178296839 method=GET status=200
+[18/18] [mobile] › tests\saved-plan-identity.spec.ts:55:5 › failed migration preserves the source; unavailable locking keeps reading and sharing available
+[WebServer] INFO:hoptrip.requests:request_id=56b9600deac24bbe989819958d1eb495 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0f7ebdd53b314a99b3ad0edd4f27c90b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7620adf39776491fbf2b501791a51939 method=GET status=404
+
+  18 passed (48.3s)

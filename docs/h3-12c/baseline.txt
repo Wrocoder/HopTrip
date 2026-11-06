@@ -1,0 +1,46 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-12c-baseline.spec.ts --project=desktop --trace=off --reporter=json
+
+
+[WebServer] INFO:     Started server process [49648]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=4416ae99eda24265b5fab16a290ca167 method=GET status=200
+
+
+[WebServer] (node:43000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=f557a0e798de47d1b943053550e76760 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f8e02719b0e14e5da99c214a76cac4d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3491eeb500db4e44a76e51ae28990869 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ad5498d667a346b7bb6f59f9cd2c3c2c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5178d6d8b6804c228098d1827ab42d1b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c206b0010e6742438320b67daad4d9d2 method=GET status=200
+
+Running 1 test using 1 worker
+
+(node:43436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\h3-12c-baseline.spec.ts:2:5 › pre-change editor uses token links and saving edits creates another ID instead of updating a plan
+[WebServer] INFO:hoptrip.requests:request_id=c35f47bd34a045cd980e59dcdedfb87f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a6776ffe7336499dbc6840fae5a8d2c4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3911c65eac124f0ba7922cebee994f4d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a6c596914d254048bf617633176c71e4 method=GET status=200
+  1 passed (12.4s)

@@ -1,0 +1,180 @@
+{
+  "start": "2026-10-01T00:00:00Z",
+  "end": "2026-10-02T00:00:00Z",
+  "observed_events": 17,
+  "observed_sessions": 4,
+  "excluded_events": 0,
+  "invalid_results": 0,
+  "unlinked_detail_views": 0,
+  "metrics": [
+    {
+      "key": "search_initiation",
+      "status": "available",
+      "numerator": 2,
+      "denominator": 4,
+      "percent": "50.00"
+    },
+    {
+      "key": "search_success",
+      "status": "available",
+      "numerator": 1,
+      "denominator": 3,
+      "percent": "33.33"
+    },
+    {
+      "key": "empty_results",
+      "status": "available",
+      "numerator": 1,
+      "denominator": 2,
+      "percent": "50.00"
+    },
+    {
+      "key": "result_errors",
+      "status": "available",
+      "numerator": 1,
+      "denominator": 3,
+      "percent": "33.33"
+    },
+    {
+      "key": "detail_opening",
+      "status": "available",
+      "numerator": 2,
+      "denominator": 4,
+      "percent": "50.00"
+    },
+    {
+      "key": "affiliate_ctr",
+      "status": "available",
+      "numerator": 1,
+      "denominator": 2,
+      "percent": "50.00"
+    },
+    {
+      "key": "trip_save",
+      "status": "available",
+      "numerator": 1,
+      "denominator": 4,
+      "percent": "25.00"
+    },
+    {
+      "key": "budget_usage",
+      "status": "available",
+      "numerator": 1,
+      "denominator": 4,
+      "percent": "25.00"
+    },
+    {
+      "key": "event_engagement",
+      "status": "available",
+      "numerator": 2,
+      "denominator": 4,
+      "percent": "50.00"
+    },
+    {
+      "key": "returning_visitors",
+      "status": "unavailable",
+      "numerator": null,
+      "denominator": null,
+      "percent": null
+    },
+    {
+      "key": "device_funnel",
+      "status": "unavailable",
+      "numerator": null,
+      "denominator": null,
+      "percent": null
+    }
+  ],
+  "page_cohorts": [
+    {
+      "page_type": "catalog",
+      "sessions": 1,
+      "partner_sessions": 0,
+      "percent": "0.00"
+    },
+    {
+      "page_type": "guide",
+      "sessions": 1,
+      "partner_sessions": 0,
+      "percent": "0.00"
+    },
+    {
+      "page_type": "home",
+      "sessions": 1,
+      "partner_sessions": 1,
+      "percent": "100.00"
+    },
+    {
+      "page_type": "not_observed",
+      "sessions": 1,
+      "partner_sessions": null,
+      "percent": null
+    }
+  ],
+  "ordered_funnel": {
+    "version": "ordered-session-funnel-v1",
+    "steps": [
+      {
+        "key": "page_view",
+        "sessions": 3,
+        "previous_sessions": null,
+        "percent": null,
+        "status": "available"
+      },
+      {
+        "key": "search",
+        "sessions": 2,
+        "previous_sessions": 3,
+        "percent": "66.67",
+        "status": "available"
+      },
+      {
+        "key": "positive_results",
+        "sessions": 1,
+        "previous_sessions": 2,
+        "percent": "50.00",
+        "status": "available"
+      },
+      {
+        "key": "deal_view",
+        "sessions": 1,
+        "previous_sessions": 1,
+        "percent": "100.00",
+        "status": "available"
+      },
+      {
+        "key": "partner_click",
+        "sessions": 1,
+        "previous_sessions": 1,
+        "percent": "100.00",
+        "status": "available"
+      }
+    ]
+  },
+  "engagement": {
+    "version": "received-session-engagement-v1",
+    "metrics": [
+      {
+        "key": "detail_disclosure",
+        "status": "available",
+        "numerator": 0,
+        "denominator": 4,
+        "percent": "0.00"
+      },
+      {
+        "key": "budget_completion",
+        "status": "available",
+        "numerator": 0,
+        "denominator": 4,
+        "percent": "0.00"
+      },
+      {
+        "key": "trip_update",
+        "status": "available",
+        "numerator": 0,
+        "denominator": 4,
+        "percent": "0.00"
+      }
+    ]
+  }
+}

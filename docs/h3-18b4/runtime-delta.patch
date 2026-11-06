@@ -1,0 +1,62 @@
+diff --git "a/.cache\\h3-18b4-before\\apps\\api\\app\\schemas\\analytics.py" b/apps/api/app/schemas/analytics.py
+index 203b339..d8a3f42 100644
+--- "a/.cache\\h3-18b4-before\\apps\\api\\app\\schemas\\analytics.py"
++++ b/apps/api/app/schemas/analytics.py
+@@ -4,7 +4,7 @@ from typing import Any, Literal
+ 
+ from pydantic import BaseModel, Field, field_validator, model_validator
+ 
+-EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN"]
++EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN", "BUDGET_CALCULATED"]
+ 
+ 
+ class ActivityContext(BaseModel):
+diff --git "a/.cache\\h3-18b4-before\\apps\\web\\src\\lib\\analytics-context.ts" b/apps/web/src/lib/analytics-context.ts
+index 74d81af..b172b04 100644
+--- "a/.cache\\h3-18b4-before\\apps\\web\\src\\lib\\analytics-context.ts"
++++ b/apps/web/src/lib/analytics-context.ts
+@@ -7,7 +7,7 @@ export const sourceLabel=(value:string|null|undefined)=>sources.includes(value??
+ export type SearchContext={filters:Filters;result_count?:number;error?:"invalid_filters"|"unavailable"};
+ export type PartnerContext={category:"flight"|"stay"|"activity";provider:"catalog"|"stay22"|"tiqets"};
+ export type FilterContext={action:"apply"|"remove"|"reset"};
+-export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED","TRIP_UPDATE","DEAL_DETAILS_OPEN"] as const;
++export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED","TRIP_UPDATE","DEAL_DETAILS_OPEN","BUDGET_CALCULATED"] as const;
+ export type AnalyticsEventName=typeof analyticsEvents[number];
+ export type EventContext={search?:SearchContext;partner?:PartnerContext;filter?:FilterContext};
+ export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
+diff --git "a/.cache\\h3-18b4-before\\apps\\web\\src\\lib\\session.ts" b/apps/web/src/lib/session.ts
+index 02bbce7..d77497f 100644
+--- "a/.cache\\h3-18b4-before\\apps\\web\\src\\lib\\session.ts"
++++ b/apps/web/src/lib/session.ts
+@@ -41,7 +41,7 @@ function sendEvent(event_name:AnalyticsEventName,deal_slug?:string,activity?:Act
+  if(!analyticsAllowed()) return;
+  const session=sessionContext();
+  const key=[event_name,deal_slug,activity?.activity_id,JSON.stringify(context),location.pathname,location.search,session.id].join("|");
+- const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED","ALERT_STARTED","DEAL_DETAILS_OPEN"].includes(event_name);
++ const view=["PAGE_VIEW","DEAL_VIEW","DEAL_IMPRESSION","SEARCH_RESULT","BUDGET_USE","ALERT_CONFIRMED","ALERT_STARTED","DEAL_DETAILS_OPEN","BUDGET_CALCULATED"].includes(event_name);
+  if(view && viewEvents.has(key))return;
+  if(view)viewEvents.add(key);
+  const now=Date.now();
+diff --git "a/.cache\\h3-18b4-before\\apps\\web\\src\\app\\components\\trip-budget-calculator.tsx" b/apps/web/src/app/components/trip-budget-calculator.tsx
+index 8027ec4..a5490d8 100644
+--- "a/.cache\\h3-18b4-before\\apps\\web\\src\\app\\components\\trip-budget-calculator.tsx"
++++ b/apps/web/src/app/components/trip-budget-calculator.tsx
+@@ -21,6 +21,7 @@ import {cleanBudgetProvenance,withoutBudgetOrigin,type BudgetMoneyKey} from '../
+ import {BudgetOrigin} from './budget-origin';
+ import {BudgetProfiles} from './budget-profiles';
+ import {BudgetProjection} from './budget-projection';
++import {budgetCompletionReady} from '../../lib/budget-completion';
+ 
+ 
+ 
+@@ -138,7 +139,9 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
+   </div>
+   <BudgetProjection draft={draft} locale={locale}/>
+   {!extraOpen && hiddenErrors && <p className={styles.error}>{t("Błąd w dodatkowych kosztach.")}{" "}<button type="button" onClick={revealError}>{t("Szczegółowy budżet")}</button></p>}
+-  {result.valid && !datesInvalid && <details><summary>{t("Rozbicie kosztów całej grupy")}</summary><dl className={styles.breakdown}>
++  {result.valid && !datesInvalid && <details onToggle={event=>{
++   if(ready&&event.target===event.currentTarget&&event.currentTarget.open&&budgetCompletionReady(draft))track('BUDGET_CALCULATED');
++  }}><summary>{t("Rozbicie kosztów całej grupy")}</summary><dl className={styles.breakdown}>
+    {result.lines.map(line=><div key={line.key}><dt>{lineLabel(line.label)}</dt><dd>{line.total===null ? t("Nieznane") : format(line.total)+(line.incomplete?planCopy.plusUnknown:'')}</dd></div>)}
+   </dl></details>}
+   <p className={styles.hint}>{t("To twój plan kosztów, nie oferta ani rezerwacja. Sprawdź końcowe ceny u sprzedawców. Szkic jest dostępny tylko w tej przeglądarce; usunięcie danych witryny usuwa też szkice.")}</p>

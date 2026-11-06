@@ -1,0 +1,50 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test home-hierarchy.spec.ts --project=desktop --grep pl: --reporter=json
+
+
+[WebServer] INFO:     Started server process [27680]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b7f5090df3a34931bcd60914dc4f3218 method=GET status=200
+
+[WebServer] (node:55516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=9f57752db3d14a4aa282ee4cce33bd88 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca639ae4e0d249a2be27cc5d1d8d1985 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=22e627e7e7344b26a5ab70334dce63a7 method=GET status=200
+
+
+Running 1 test using 1 worker
+
+
+(node:19852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\home-hierarchy.spec.ts:13:56 › pl: search, offers, collections and help remain distinct and linked
+
+[WebServer] INFO:hoptrip.requests:request_id=bb3cf2b54b6a4913a69dab6fd2ef8d47 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ecadd34b73b641b0906c2f7804b307b7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7ff67c1c752f4cfcaa3cafaca7cee118 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9741dd0dd76a4c6c91bf87bd78f3fb54 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d79ce41096134ff388ca9577eba0ea4f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=22e11d828aa3448fb90bec03b0fd90d7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1193be7987cf4046811698aa96ff0dd3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=06e041c05c01419c807e575f09c67240 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d1d5c12fd70143a5bd11c24feacd8011 method=POST status=200
+  1 passed (9.2s)

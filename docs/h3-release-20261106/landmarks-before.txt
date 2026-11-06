@@ -1,0 +1,157 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test release-landmarks.spec.ts --project=desktop --grep pl: --trace=off --reporter=line,json
+
+
+
+[WebServer] INFO:     Started server process [42228]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=1b27634a4a794ad7845070730b80cfff method=GET status=200
+[WebServer] (node:27836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=8cb1e4b673c242caa0e46bee52fde1a3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=71fe04e4304d4ae783f15efe71f35cb6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bb84b0e507bf4488a0ac83643d510253 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9daf5e56de184e4dbe15dd55e2bc7510 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=65027feffe024312b213d2be30e1be7b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b8224c88207d4e34b7e3bf7c90de7887 method=GET status=200
+
+Running 1 test using 1 worker
+
+
+(node:22704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\release-landmarks.spec.ts:11:56 › pl: two keyboard-open offer disclosures have no duplicate landmarks
+
+[WebServer] INFO:hoptrip.requests:request_id=41c13ecfbd3b40dcae7815fe32929fc7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0c9310e474aa416da6ca2ae9a00b3bb2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bba64bcf815041cbb6b93a7615636546 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=40f7d079b7444795ac37705bba67a53e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0ed2bc9eaacf47ac9b312e55fd85ac3e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=883e065d594046b6857c44b1b5ded555 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6932224da6304e06baeae30c7c26c8f7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6f52c2567e984b2f9925072ca5d4196c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ad240644608942cf9505e7a03b0337f3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=255ef5c58ba34ca2b20fae84702e99d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bdb18e9b466449b7950b0ebdd8ef4771 method=GET status=200
+
+  1) [desktop] › tests\release-landmarks.spec.ts:11:56 › pl: two keyboard-open offer disclosures have no duplicate landmarks 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "cena i aktualność",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Cena i aktualność\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Cena i aktualność\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "lot i bagaż",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Lot i bagaż\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Lot i bagaż\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      15 |  const audit=await new AxeBuilder({page}).include('.trip-details[open]').analyze();
+      16 |  writeFileSync(info.outputPath('landmarks.json'),JSON.stringify({locale,violations:audit.violations.map(v=>({id:v.id,impact:v.impact,targets:v.nodes.map(n=>n.target)}))},null,2));
+    > 17 |  expect(audit.violations).toEqual([]);
+         |                           ^
+      18 |  for(const index of [0,1])await expect(cards.nth(index).locator('.trip-details-content > section[role="group"]')).toHaveCount(2);
+      19 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      20 | });
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b9-20261106\apps\web\tests\release-landmarks.spec.ts:17:27
+
+    Error Context: test-results\release-landmarks-pl-two-k-a7401-have-no-duplicate-landmarks-desktop\error-context.md
+
+
+  1 failed
+    [desktop] › tests\release-landmarks.spec.ts:11:56 › pl: two keyboard-open offer disclosures have no duplicate landmarks 

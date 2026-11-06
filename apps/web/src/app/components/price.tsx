@@ -13,6 +13,6 @@ async function EuroPrice({value,locale="pl"}:{value:string|null;locale?:Locale})
   return <small className="price-eur" title={explanation}><span aria-hidden="true">≈ {euro}</span><span className="sr-only">{explanation}</span></small>;
 }
 
-export function Price({value,locale="pl"}:{value:string|null;locale?:Locale}) {
-  return <>{money(value,locale)} <Suspense fallback={null}><EuroPrice value={value} locale={locale}/></Suspense></>;
+export function Price({value,locale="pl",showEuro=true}:{value:string|null;locale?:Locale;showEuro?:boolean}) {
+  return <>{money(value,locale)} {showEuro&&<Suspense fallback={null}><EuroPrice value={value} locale={locale}/></Suspense>}</>;
 }

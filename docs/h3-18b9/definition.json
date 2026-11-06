@@ -1,0 +1,15 @@
+{
+  "task": "H3-18b9",
+  "version": "first-received-locale-cohorts-v1",
+  "wire": {"field": "metadata.locale", "allowed": ["pl", "en", "ru", "uk"], "source": "existing pathLocale(location.pathname), after existing consent checks", "server": "retain exact strings from allowlist; drop invalid values, no Accept-Language/IP/URL inference"},
+  "population": "all existing observed product sessions in [start,end), with existing placeholder/event exclusions",
+  "selection": "locale of first received product event ordered by server created_at then DB id; no PAGE_VIEW required",
+  "unknown": "first event missing/invalid/unsupported -> unknown permanently within this window, no later backfill",
+  "switching": "later page languages do not move or split a session; current language is still attached to each new event",
+  "share": "cohort sessions / all observed sessions",
+  "engagement": {"detail_disclosure": "DEAL_DETAILS_OPEN", "budget_completion": "BUDGET_CALCULATED", "trip_update": "TRIP_UPDATE", "numerator": "distinct cohort sessions with matching received event anywhere in the window", "denominator": "all sessions in that cohort"},
+  "empty": "rows=[]; no_data UI, never fabricated language groups",
+  "compatibility": "optional UsageReport.locale_cohorts; old clients without locale -> unknown; old API drops new metadata; legacy report without block still renders",
+  "not_measured": ["browser/person/action language", "nationality", "locale-specific ordered funnel", "specific search/plan attribution", "returning visitors", "device type", "bookings", "real before/after uplift"],
+  "rollout": "API before web if a deployment is later authorized; no deployment in this execution"
+}

@@ -1,0 +1,54 @@
+{
+  "version": "h3-analytics-taxonomy-v5",
+  "date": "2026-11-06",
+  "kind": "additive bounded metadata.locale; same 17 event names and DB schema",
+  "previous": "../h3-18b4/taxonomy.json",
+  "baseline": "../h3-18a/taxonomy.json",
+  "wire_events": [
+    "PAGE_VIEW",
+    "DEAL_IMPRESSION",
+    "DEAL_VIEW",
+    "SEARCH",
+    "FILTER_USE",
+    "ACTIVITY_CLICK",
+    "SEARCH_RESULT",
+    "PARTNER_CLICK",
+    "BUDGET_USE",
+    "TRIP_SAVE",
+    "ALERT_CONFIRMED",
+    "TRIP_REMOVE",
+    "EVENT_CLICK",
+    "ALERT_STARTED",
+    "TRIP_UPDATE",
+    "DEAL_DETAILS_OPEN",
+    "BUDGET_CALCULATED"
+  ],
+  "retained_h3_mappings": "All existing names and trigger/dedup/privacy meanings unchanged; see v4/v3/v2 and baseline",
+  "added_context": {
+    "field": "metadata.locale",
+    "allowed": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "source": "existing pathLocale(location.pathname), after existing consent checks",
+    "server": "retain exact strings from allowlist; drop invalid values, no Accept-Language/IP/URL inference"
+  },
+  "cohort_version": "first-received-locale-cohorts-v1",
+  "compatibility": "optional UsageReport.locale_cohorts; old clients without locale -> unknown; old API drops new metadata; legacy report without block still renders",
+  "consent": "Existing checks and no replay; current live-consent hydration fix from b8 retained",
+  "session": "Existing UUID, 30-minute idle timeout, no persistent visitor identity; language switch changes current event context without resetting the session",
+  "remaining": [
+    "privacy-safe device split",
+    "same-plan/person retention remains unavailable under current contract",
+    "comparable real before/after periods"
+  ],
+  "unavailable_dimensions": [
+    "device",
+    "returning visitor",
+    "exact search/plan/booking attribution"
+  ],
+  "production_activation": "not deployed or observed",
+  "production_baseline": "not collected"
+}

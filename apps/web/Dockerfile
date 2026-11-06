@@ -21,6 +21,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/.next/static ./static-seed
 COPY --from=builder /app/public ./public
+COPY scripts/retain-static.mjs scripts/start-with-static.mjs scripts/check-static.mjs ./
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["node", "start-with-static.mjs"]

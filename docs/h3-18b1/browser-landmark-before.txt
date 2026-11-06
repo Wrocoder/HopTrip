@@ -1,0 +1,85 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   {
++     description: 'Ensure landmarks are unique',
++     help: 'Landmarks should have a unique role or role/label/title (i.e. accessible name) combination',
++     helpUrl: 'https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright',
++     id: 'landmark-unique',
++     impact: 'moderate',
++     nodes: [
++       {
++         all: [],
++         any: [
++           {
++             data: {
++               accessibleText: 'sekwencja sesji',
++               role: 'region'
++             },
++             id: 'landmark-is-unique',
++             impact: 'moderate',
++             message: 'The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable',
++             relatedNodes: [
++               {
++                 html: '<div class="table-scroll" role="region" aria-label="Sekwencja sesji" tabindex="0">',
++                 target: [
++                   'div[aria-label="Sekwencja sesji"]'
++                 ]
++               }
++             ]
++           }
++         ],
++         failureSummary: 'Fix any of the following:\n' +
++           '  The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable',
++         html: '<section aria-labelledby="ordered-funnel">',
++         impact: 'moderate',
++         none: [],
++         target: [
++           'section'
++         ]
++       }
++     ],
++     tags: [
++       'cat.semantics',
++       'best-practice'
++     ]
++   }
++ ]
+- []
+
+    at file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/h3-18b1-browser.mjs:17:59 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    {
+      id: 'landmark-unique',
+      impact: 'moderate',
+      tags: [ 'cat.semantics', 'best-practice' ],
+      description: 'Ensure landmarks are unique',
+      help: 'Landmarks should have a unique role or role/label/title (i.e. accessible name) combination',
+      helpUrl: 'https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright',
+      nodes: [
+        {
+          any: [ [Object] ],
+          all: [],
+          none: [],
+          impact: 'moderate',
+          html: '<section aria-labelledby="ordered-funnel">',
+          target: [ 'section' ],
+          failureSummary: 'Fix any of the following:\n' +
+            '  The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable'
+        }
+      ]
+    }
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,125 @@
+{
+  "scope": "H3-18b2 TRIP_UPDATE only",
+  "productionBuildId": "T0SP041Yg88N0Xkfu_QAW",
+  "browser": {
+    "uniqueLatestPassed": 16,
+    "initial": "12 passed / 2 failed; pending-state barrier fixed only in test",
+    "finalConsent": "4 passed",
+    "cases": [
+      {
+        "case": "desktop / pl: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / en: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / ru: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / uk: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / denial and revocation suppress successful updates; accepting has no replay",
+        "status": "passed",
+        "run": "browser-consent-final.json"
+      },
+      {
+        "case": "desktop / failed storage commit and blocked analytics leave editor recovery intact",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / lock wait emits only after commit; concurrent no-op and conflict emit nothing",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / pl: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / en: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / ru: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / uk: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / denial and revocation suppress successful updates; accepting has no replay",
+        "status": "passed",
+        "run": "browser-consent-final.json"
+      },
+      {
+        "case": "mobile / failed storage commit and blocked analytics leave editor recovery intact",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / lock wait emits only after commit; concurrent no-op and conflict emit nothing",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / consent revoked while Update waits for the lock prevents a send after commit",
+        "status": "passed",
+        "run": "browser-consent-final.json"
+      },
+      {
+        "case": "mobile / consent revoked while Update waits for the lock prevents a send after commit",
+        "status": "passed",
+        "run": "browser-consent-final.json"
+      }
+    ]
+  },
+  "api": {
+    "targetedPassed": 81,
+    "full": {
+      "passed": 1126,
+      "failed": 1,
+      "skipped": 18
+    },
+    "knownFailure": "Telegram fixture departs 2026-11-06T09:00Z, already past; reproduced with pre-change schema; future-departure fixture probe passes"
+  },
+  "nodePassed": 323,
+  "wireEvents": 15,
+  "runtimeDelta": [
+    {
+      "path": "apps/api/app/schemas/analytics.py",
+      "before": "85b036841811e26dc5d2d755b68bd3535216e45c682f9f215e1aab16cba45d1b",
+      "after": "aa8e14a7cf8dca41397ebee6c2b0bea6c81ed5bb2edc82732b0f56b0d103d349"
+    },
+    {
+      "path": "apps/web/src/lib/analytics-context.ts",
+      "before": "77624b8853f2a71ad972192b6705b914fe6bbe8db178a6eb2b7597760045099f",
+      "after": "1a27b5130974785df289e10c829a9ec545c821b81440c29be078954f882d8ca5"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-actions.tsx",
+      "before": "dbd107041d2bd46d05a1c2da97d5d3182b4fd01b15a08ddaa15cce67df324d40",
+      "after": "92760acb85cefb4571ebdbea865a8ee8f5579b33111bcbd95df8dcfe158aba90"
+    }
+  ],
+  "matchingSourceFiles": 675,
+  "buildEnvironment": "Fresh isolated production build, next start, NODE_ENV=production, served build ID guard, API/site 8125/3125; Next config only adds workspace turbopack.root",
+  "productionData": false,
+  "deploy": false,
+  "dependenciesAdded": false,
+  "dbMigration": false
+}

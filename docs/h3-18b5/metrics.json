@@ -1,0 +1,24 @@
+{
+  "version": "received-session-engagement-v1",
+  "date": "2026-11-06",
+  "api": "GET /api/v1/admin/analytics/usage -> engagement",
+  "dashboard": "GET /api/v1/admin/analytics/dashboard",
+  "event_taxonomy": "../h3-18b4/taxonomy.json",
+  "population": "Distinct non-placeholder anonymous_session_id across the existing 17 allowed product event names received in [start,end); includes sessions without PAGE_VIEW",
+  "denominator": "observed_sessions",
+  "deduplication": "Each session contributes at most once to each metric; ordering and number of offers/plans/actions do not change the count",
+  "metrics": [
+    {"key": "detail_disclosure", "event": "DEAL_DETAILS_OPEN", "numerator": "distinct received-event sessions", "not": "DEAL_VIEW visits or offer impression CTR"},
+    {"key": "budget_completion", "event": "BUDGET_CALCULATED", "numerator": "distinct received-event sessions", "not": "completion / BUDGET_USE conversion or verified supplier prices"},
+    {"key": "trip_update", "event": "TRIP_UPDATE", "numerator": "distinct received-event sessions", "not": "update / TRIP_SAVE conversion or returning-person metric"}
+  ],
+  "percentage": "100 * numerator / denominator, Decimal ROUND_HALF_UP to two decimals; JSON string",
+  "empty_population": "numerator=0, denominator=0, percent=null, status=no_data",
+  "zero_received_actions": "When denominator>0 and numerator=0: percent=0.00, status=available; says nothing about actual usage or event collection coverage",
+  "compatibility": "New optional engagement root field with version; old metrics array, page_cohorts and ordered_funnel definitions unchanged",
+  "window_limits": "Existing UTC default7/max31days and MAX_USAGE_EVENTS=20000; over limit rejects413 without truncating",
+  "privacy": "No new event collection, identifiers or metadata; no raw session/plan/offer IDs, labels, amounts, tokens or arbitrary metadata in output",
+  "interpretation": "Received-session action shares, not cross-step conversion, all-visitor estimates, bookings, causal attribution, or uplift. Compare only matching taxonomy/coverage periods",
+  "baseline": "Synthetic only; no production before/after collected",
+  "synthetic_fixture": {"events": 13, "sessions": 4, "numerators": [1,2,2], "percentages": ["25.00","50.00","50.00"], "budget_use_sessions": 1, "trip_save_sessions": 1}
+}

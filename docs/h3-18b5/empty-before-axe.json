@@ -1,0 +1,58 @@
+{
+  "viewport": {
+    "width": 320,
+    "height": 900
+  },
+  "emptyTables": 1,
+  "violations": [],
+  "incomplete": [
+    {
+      "id": "th-has-data-cells",
+      "impact": "serious",
+      "tags": [
+        "cat.tables",
+        "wcag2a",
+        "wcag131",
+        "section508",
+        "section508.22.g",
+        "TTv5",
+        "TT14.b",
+        "EN-301-549",
+        "EN-9.1.3.1",
+        "RGAAv4",
+        "RGAA-5.7.1"
+      ],
+      "description": "Ensure that <th> elements and elements with role=columnheader/rowheader have data cells they describe",
+      "help": "Table headers in a data table must refer to data cells",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells?application=playwright",
+      "nodes": [
+        {
+          "any": [],
+          "all": [
+            {
+              "id": "th-has-data-cells",
+              "data": null,
+              "relatedNodes": [
+                {
+                  "html": "<th scope=\"col\">Udział</th>",
+                  "target": [
+                    "#report > div > table > thead > tr > th[scope=\"col\"]:nth-child(4)"
+                  ]
+                }
+              ],
+              "impact": "serious",
+              "message": "Table data cells are missing or empty"
+            }
+          ],
+          "none": [],
+          "impact": "serious",
+          "html": "<table><caption>Pierwszy zaobserwowany typ strony</caption><thead><tr><th scope=\"col\">Typ strony</th><th scope=\"col\">Zaobserwowane sesje</th><th scope=\"col\">Sesje z późniejszym kliknięciem partnera</th><th scope=\"col\">Udział</th></tr></thead><tbody></tbody></table>",
+          "target": [
+            "#report > div > table"
+          ],
+          "failureSummary": "Fix all of the following:\n  Table data cells are missing or empty"
+        }
+      ]
+    }
+  ]
+}

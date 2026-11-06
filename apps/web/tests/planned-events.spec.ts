@@ -42,7 +42,7 @@ test('selected ticket variants persist and share with independent costs, without
  await expect(duke.getByLabel('Liczba biletów')).toHaveValue('2');
  await expect(page.locator('#planned-events > ul > li')).toHaveCount(2);
  await expect(page.getByTestId('budget-total')).toHaveText(/540,58/);
- await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
+ await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page).toHaveURL(/#local=/);
  await page.getByRole('button',{name:'Udostępnij',exact:true}).click();
  const url=await page.locator('#trip-share-link').inputValue();
  const context=await browser.newContext({viewport:{width:390,height:844}});
@@ -66,7 +66,7 @@ test('selected ticket variants persist and share with independent costs, without
   expect(await copy.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await copy.locator('#planned-events').screenshot({path:testInfo.outputPath('planned-events.png')});
  }finally{await context.close();}
- await page.goto('/saved');await page.locator('main a[href^="/trip?plan="]').first().click();
+ await page.goto('/saved');await page.locator('main a[href^="/trip#local="]').first().click();
  await expect(page.locator('#planned-events > ul > li')).toHaveCount(2);
  await expect(page.getByTestId('budget-total')).toHaveText(/540,58/);
 });

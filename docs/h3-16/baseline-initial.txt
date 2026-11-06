@@ -1,0 +1,445 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-explanations.spec.ts --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [54316]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=770f469b83244f109e64edb9825f56c5 method=GET status=200
+
+
+[WebServer] (node:55992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:21008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=75a356443af04f04b18b3e221f365845 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8ade1e7e4dbb45eaae0d63e16a587f87 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=06bec992d35f42c58ed555589278e0c4 method=GET status=200
+
+Running 8 tests using 1 worker
+
+(node:25292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers
+
+[WebServer] INFO:hoptrip.requests:request_id=dd25c21f5b6646fdaa60f5cc4d252b72 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ef7315e7d4924636918bea946848f3ae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0e20974d5a624e2181ade1deea28bafa method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ef5078926c9445549fd2594515e6a59f method=GET status=200
+  1) [desktop] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:47540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers
+
+[WebServer] (node:19576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=b6c14ef330b74aaf87068879e4b20eed method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4a42a9642dc8493fbacc116379ff1dca method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c6c28428eecb4c97bc753be924527a4a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=56fa00c4c784463fa3939d91b79e9f11 method=GET status=200
+
+  2) [desktop] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        13 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:33868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=38cd3aee944041819886abb940e018c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1f04b3b255c04034b45c63c978a3237b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f4137ccecab14ffb8aa25947c1968950 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd8ebf8150c44b60a0ecf32d6a132126 method=GET status=200
+
+
+[WebServer] (node:19580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  3) [desktop] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:40148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=c92b607a489446a9bf3227d7161d00ed method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=648c861479ea4a1ab1355fb7cd35f91a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=99ba1803a1c847afb69955771c2cf05b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=91081492d86a422faa0e67838a975a1f method=GET status=200
+
+
+[WebServer] (node:53264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  4) [desktop] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        13 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:47812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=a625535ca7b54b99a21f0f649eeb9869 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c056ffeb8d7d45f789a86c66f64c0639 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=40239b2bdb3d4b36898505863737764b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=352cddb282a642cd85b898621215bddf method=GET status=200
+  5) [mobile] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:24648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers
+
+[WebServer] INFO:hoptrip.requests:request_id=e4acc0ecf8a64babb4e4dd486009ad46 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ef1121d12f3b4af7bec7752374cf8baa method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=20a576149d004f64a41f23afb199d7ba method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5be083e79d914470a854c19910540788 method=GET status=200
+
+
+[WebServer] (node:45148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  6) [mobile] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        13 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:47912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers
+
+[WebServer] INFO:hoptrip.requests:request_id=f220aa74354e44539b7a0559263dd706 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8ec0c3a3cd5d4b19bb76df7cb69d102f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=64c024814d5d40eda084082b45e67cf7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=49b2f8c91c694b9b936ef030e7369435 method=GET status=200
+
+[WebServer] (node:27204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  7) [mobile] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:22328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[8/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=a5e15c9b43d64bb1b8d5f2432fe843f7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1364a32c7a104b838778b0a34284d9ed method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1c449298a21e4ef38f00af6cc3a43d14 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=649cd0b8cc7c49d29af5d974d930d9c6 method=GET status=200
+
+[WebServer] (node:48784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  8) [mobile] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.deal-card')
+    Expected: 1
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.deal-card')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      10 |  for(const count of [1,12]){
+      11 |   await page.goto(localizedHref(count===1?'/deals?budget=200':'/deals',locale));await page.evaluate(()=>document.fonts.ready);
+    > 12 |   await expect(page.locator('.deal-card')).toHaveCount(count);
+         |                                            ^
+      13 |   const card=page.locator('.deal-card').first(),grouping=scoreText(locale,'grouping');
+      14 |   const repeated=await page.locator('.deal-grid').evaluate((el,text)=>[...el.querySelectorAll('p')].filter(p=>p.textContent===text).length,grouping);
+      15 |   expect(repeated).toBe(before?count*3:0);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:12:44
+
+    Error Context: test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  8 failed
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 

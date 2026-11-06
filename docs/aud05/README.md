@@ -1,6 +1,6 @@
 # AUD-05 — регрессионный baseline
 
-Дата: 2026-10-30. Стратегия: [HOPTRIP_TEST_PLAN.md](../HOPTRIP_TEST_PLAN.md). Проверенные результаты: [HOPTRIP_AUDIT.md](../HOPTRIP_AUDIT.md), раздел AUD-05. Продуктовая логика не меняется; тесты используют только синтетические fixtures и локальную БД.
+Дата: 2026-10-30. Стратегия: [HOPTRIP_TEST_PLAN.md](../HOPTRIP_TEST_PLAN.md). Проверенные результаты: HOPTRIP_AUDIT.md (`docs/HOPTRIP_AUDIT.md`; исторический файл удалён), раздел AUD-05. Продуктовая логика не меняется; тесты используют только синтетические fixtures и локальную БД.
 
 ## Окружение и изоляция
 
@@ -50,14 +50,14 @@ CLI-аргументы Playwright — regex-фильтры путей, поэт�
 
 `apps/web/tests/roadmap-baseline.spec.ts` добавляет полный cookie-cycle предпочтения аэропорта и отдельный тест потери фильтров F01. Для F01 test.fail устанавливается только перед известной регрессионной проверкой; подготовка должна пройти нормально. Expected failure не считается PASS и не отключает проверку навсегда: при исправлении неожиданное прохождение потребует удалить аннотацию.
 
-`playwright.config.ts` теперь содержит testMatch=**/*.spec.ts. Раньше unrestricted discovery импортировал Node unit .test.mjs, включая require-hook TypeScript, и ломал распознавание callback fixtures. До изменения: 129 discovery errors, 0 discovered tests; после: errors=[], 436 cases. [preexisting-discovery.json](preexisting-discovery.json) и [inventory-summary.json](inventory-summary.json) сохраняют эти результаты, [e2e-inventory.json](e2e-inventory.json) — итоговый полный список.
+`playwright.config.ts` теперь содержит testMatch=**/*.spec.ts. Раньше unrestricted discovery импортировал Node unit .test.mjs, включая require-hook TypeScript, и ломал распознавание callback fixtures. До изменения: 129 discovery errors, 0 discovered tests; после: errors=[], 436 cases. preexisting-discovery.json (`docs/aud05/preexisting-discovery.json`; исторический файл удалён) и inventory-summary.json (`docs/aud05/inventory-summary.json`; исторический файл удалён) сохраняют эти результаты, e2e-inventory.json (`docs/aud05/e2e-inventory.json`; исторический файл удалён) — итоговый полный список.
 
 Ограничения baseline: Chrome headless и mobile emulation, не реальные устройства; live booking, SMTP/партнёрские кабинеты/marketing scripts не проверены; проценты покрытия строк не измерены. Shell/PowerShell operational tests и полный E2E-suite вне выбранного набора не объявляются пройденными. Остальные требования и gaps — в тест-плане.
 
 ## Итоговые результаты
 
-[results.json](results.json): 664 backend-теста по двум раздельным наборам, 110 web unit, Ruff/mypy/ESLint/build — прошли. [backend.xml](backend.xml), [postgres.xml](postgres.xml), [build-output.txt](build-output.txt) содержат доказательства.
+results.json (`docs/aud05/results.json`; исторический файл удалён): 664 backend-теста по двум раздельным наборам, 110 web unit, Ruff/mypy/ESLint/build — прошли. backend.xml (`docs/aud05/backend.xml`; исторический файл удалён), postgres.xml (`docs/aud05/postgres.xml`; исторический файл удалён), build-output.txt (`docs/aud05/build-output.txt`; исторический файл удалён) содержат доказательства.
 
-[Первый E2E-прогон](e2e-initial.txt): 96 обычных PASS, два expected failure F01, два неожиданных desktop failure (airport-search и catalog-results); line reporter включает expected failures в «98 passed». [Целевой повтор](e2e-recheck.json): 3 обычных PASS и один expected failure F01, unexpected=0. Код двух старых тестов не менялся; успешный повтор не стирает первоначальные падения. Их причины остаются неустановленными, риск нестабильности отмечен в аудите.
+Первый E2E-прогон (`docs/aud05/e2e-initial.txt`; исторический файл удалён): 96 обычных PASS, два expected failure F01, два неожиданных desktop failure (airport-search и catalog-results); line reporter включает expected failures в «98 passed». Целевой повтор (`docs/aud05/e2e-recheck.json`; исторический файл удалён): 3 обычных PASS и один expected failure F01, unexpected=0. Код двух старых тестов не менялся; успешный повтор не стирает первоначальные падения. Их причины остаются неустановленными, риск нестабильности отмечен в аудите.
 
-[isolation-source-check.json](isolation-source-check.json) подтверждает совпадение 539 runtime-файлов. Подготовленный контейнер удалён Docker через --rm после остановки; локальные серверы тестов завершены. Временная копия оставлена для проверки результатов, без удаления пользовательских каталогов.
+isolation-source-check.json (`docs/aud05/isolation-source-check.json`; исторический файл удалён) подтверждает совпадение 539 runtime-файлов. Подготовленный контейнер удалён Docker через --rm после остановки; локальные серверы тестов завершены. Временная копия оставлена для проверки результатов, без удаления пользовательских каталогов.

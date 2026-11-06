@@ -25,10 +25,10 @@ viewport 1440×900 и 390×844. В мобильном профиле deviceScale
 
 | Состояние | До | После |
 | --- | --- | --- |
-| Desktop, выбор сохранён | [До](hoptrip-ht07-before-desktop.png) | [После](hoptrip-ht07-after-desktop.png) |
-| Mobile, выбор сохранён | [До](hoptrip-ht07-before-mobile.png) | [После](hoptrip-ht07-after-mobile.png) |
-| Desktop, панель приватности | [До](hoptrip-ht07-before-desktop-consent.png) | [После](hoptrip-ht07-after-desktop-consent.png) |
-| Mobile, панель приватности | [До](hoptrip-ht07-before-mobile-consent.png) | [После](hoptrip-ht07-after-mobile-consent.png) |
+| Desktop, выбор сохранён | До (`docs/hoptrip-ht07-before-desktop.png`; исторический файл удалён) | После (`docs/hoptrip-ht07-after-desktop.png`; исторический файл удалён) |
+| Mobile, выбор сохранён | До (`docs/hoptrip-ht07-before-mobile.png`; исторический файл удалён) | После (`docs/hoptrip-ht07-after-mobile.png`; исторический файл удалён) |
+| Desktop, панель приватности | До (`docs/hoptrip-ht07-before-desktop-consent.png`; исторический файл удалён) | После (`docs/hoptrip-ht07-after-desktop-consent.png`; исторический файл удалён) |
+| Mobile, панель приватности | До (`docs/hoptrip-ht07-before-mobile-consent.png`; исторический файл удалён) | После (`docs/hoptrip-ht07-after-mobile-consent.png`; исторический файл удалён) |
 
 Исходные измерения: hoptrip-ht07-before/after-desktop/mobile.json.
 Скриншоты dev-сервера содержат индикатор Next.js, отсутствующий в production.

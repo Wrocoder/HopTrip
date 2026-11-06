@@ -47,12 +47,16 @@ test("robots allows crawlers to see noindex while excluding redirects and API",a
  expect(text).toContain('Allow: /');expect(text).toContain('Disallow: /api/');expect(text).toContain('Disallow: /go/');
  expect(text).toContain('Sitemap: http://127.0.0.1:3100/sitemap.xml');
  for(const path of ['/deals','/trip','/saved','/alerts'])expect(text).not.toContain(`Disallow: ${path}`);
- for(const path of ['/deals?origin=WRO&budget=1','/deals?offset=12','/deals?sort=price','/deals/browser-deal','/destinations/barcelona','/saved','/trip?plan=invalid','/alerts','/alerts/confirm','/alerts/manage']){
+ for(const path of ['/deals?origin=WRO&budget=1','/deals?offset=12','/deals?sort=score','/deals/browser-deal','/destinations/barcelona','/saved','/trip?plan=invalid','/alerts','/alerts/confirm','/alerts/manage']){
   expect((await page.goto(path))?.status()).toBe(200);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/noindex/);
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','http://127.0.0.1:3100'+(path.startsWith('/trip?')?'/trip':path));
  }
+ // H3-04 made price the default; an explicit default is the indexed base URL.
+ await page.goto('/deals?sort=price');
+ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/^index,/);
+ await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','http://127.0.0.1:3100/deals');
  await page.goto('/from/wro');
  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','http://127.0.0.1:3100/from/WRO');
 });

@@ -14,7 +14,7 @@ test("trip anchors focus sections and the two-adult budget survives sharing",asy
   await page.getByRole("navigation",{name:"Sekcje planu podróży"}).getByRole("link",{name:label,exact:true}).focus();
   await page.keyboard.press("Enter");
   await expect(page.locator(id)).toBeFocused();
-  expect((await page.locator(id).boundingBox())!.y).toBeGreaterThanOrEqual(0);
+  await expect.poll(async()=>(await page.locator(id).boundingBox())?.y??-1).toBeGreaterThanOrEqual(0);
  };
  await navigate("Nocleg","#accommodation");
  await page.locator("#stay-checkin").fill("2027-01-15");

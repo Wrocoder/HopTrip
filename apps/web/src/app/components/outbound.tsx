@@ -12,6 +12,7 @@ import {freshnessCopy} from '../../lib/i18n/freshness-copy';
 import Link from 'next/link';
 import {stateText} from '../../lib/i18n/state-copy';
 import {localizedHref} from '../../lib/i18n/routing';
+import {partnerContextCopy} from '../../lib/i18n/partner-context-copy';
 export function Outbound({component,dealSlug,hiddenAfter}:{component:Component;dealSlug?:string;hiddenAfter?:string|null}) {
  const {locale,messages:pl}=useLocale();
  const t=(source:TripKey)=>tripText(locale,source);
@@ -22,7 +23,7 @@ export function Outbound({component,dealSlug,hiddenAfter}:{component:Component;d
   const path=component.redirect_path;
   return <>{component.component_type==="FLIGHT" && plan && <p className="partner-limitation" data-testid="flight-search-limitation">
     <strong>{plan.ready ? passengerInstruction(plan.draft.input.people,plan.draft.adultsOnly===true,locale) : t("U partnera ustaw skład grupy.")}</strong>{" "}
-    {t("Link otwiera daty tej oferty. Nie przekazujemy zmian dat ani liczby pasażerów z planu. Sprawdź cenę u partnera.")} </p>}<a className="cta" rel="sponsored noopener" href={publicApi(path)} onClick={event=>{
+    {t("Link otwiera ofertę partnera. Nie przekazujemy zmian dat ani liczby pasażerów z planu. Sprawdź daty i cenę u partnera.")} </p>}{component.component_type!=='FLIGHT'&&<p className="partner-context-limitation">{partnerContextCopy[locale]}</p>}<a className="cta" rel="sponsored noopener noreferrer" href={publicApi(path)} onClick={event=>{
     event.currentTarget.href=publicApi(path);
     if(!analyticsAllowed()) return;
     const category=component.component_type==="FLIGHT" ? "flight" : component.component_type==="HOTEL" ? "stay" : component.component_type==="ACTIVITY" ? "activity" : null;

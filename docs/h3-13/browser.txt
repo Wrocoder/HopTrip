@@ -1,0 +1,602 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test event-fit-filter.spec.ts event-flight-fit.spec.ts event-browsing.spec.ts event-context.spec.ts events.spec.ts events-sync.spec.ts event-results.spec.ts localized-events.spec.ts planned-events.spec.ts shared-trip.spec.ts --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [51108]
+
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=c8fe47472d5848fe9972a18308e87692 method=GET status=200
+
+
+[WebServer] (node:45948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:43504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=e1099450a6ce419abce2010d3c38f845 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=497aa8122ffb4ab0b0bcb1e00988f727 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=18d2386f874349b8a2760c670d51c53a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d29efb5484054526b1cd613da4c6698d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=dad5d100d5434b068b68738458b8b8ba method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1a4995f0f1384e4ba6bb798dd382be01 method=GET status=200
+
+Running 66 tests using 1 worker
+
+
+(node:49952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/66] [desktop] › tests\event-browsing.spec.ts:8:5 › day navigation and pagination reach later events without editing the trip
+
+[WebServer] (node:17200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=5929988024c14a4db3dfcc2c91a7953a method=GET status=200
+[2/66] [desktop] › tests\event-browsing.spec.ts:67:5 › late day responses cannot replace a newly selected day even when fetch ignores abort
+[WebServer] INFO:hoptrip.requests:request_id=337addb6348c4eddb9b912508ffa016d method=GET status=200
+
+[WebServer] (node:43588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/66] [desktop] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in pl
+[WebServer] INFO:hoptrip.requests:request_id=74bd02986692473685a56329ed153cd5 method=GET status=200
+
+[WebServer] (node:45884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/66] [desktop] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in en
+
+[WebServer] (node:7976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=4ec0459ff9f1437a9e74f20af5371bc6 method=GET status=200
+[5/66] [desktop] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in ru
+
+[WebServer] INFO:hoptrip.requests:request_id=6170e19a5edd4d99829c101870ce433f method=GET status=200
+[WebServer] (node:4428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/66] [desktop] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in uk
+
+[WebServer] INFO:hoptrip.requests:request_id=58db35a794184690918bf33afde309eb method=GET status=200
+
+[WebServer] (node:55740) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[7/66] [desktop] › tests\event-context.spec.ts:66:5 › inactive and unknown sales have no booking or add action; mixed options keep their own status
+[WebServer] INFO:hoptrip.requests:request_id=867d9a2b10d34a5ca86dbe654fbcf4fc method=GET status=200
+
+[WebServer] (node:25416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=cf164f4eb96c436bb97da8a6c83c0cc4 method=GET status=200
+[8/66] [desktop] › tests\event-fit-filter.spec.ts:15:56 › pl: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+
+[WebServer] INFO:hoptrip.requests:request_id=8ccfa360a0374b2eaeba48e48470d13a method=GET status=200
+
+[WebServer] (node:8856) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[9/66] [desktop] › tests\event-fit-filter.spec.ts:15:56 › en: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+[WebServer] INFO:hoptrip.requests:request_id=d6ad6f01d623414b85535a38a9b12a8b method=GET status=200
+
+[WebServer] (node:50612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[10/66] [desktop] › tests\event-fit-filter.spec.ts:15:56 › ru: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+
+[WebServer] INFO:hoptrip.requests:request_id=b28e9834b36b47149f2933a45cf4ef1d method=GET status=200
+[WebServer] (node:42728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[11/66] [desktop] › tests\event-fit-filter.spec.ts:15:56 › uk: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+[WebServer] INFO:hoptrip.requests:request_id=b6bcb960ae564676b45e0223826465c6 method=GET status=200
+
+[WebServer] (node:12808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[12/66] [desktop] › tests\event-fit-filter.spec.ts:35:5 › fit changes reset pages and days; independent dates still require explicit search
+[WebServer] INFO:hoptrip.requests:request_id=eb7f0d0fccc448ef874f93ad480cdb45 method=GET status=200
+
+[WebServer] (node:48828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[13/66] [desktop] › tests\event-fit-filter.spec.ts:50:5 › an older API cannot silently ignore the filter; inconsistent assessments fail closed and can be retried
+
+[WebServer] INFO:hoptrip.requests:request_id=20659eded1c641ab9aa630bdcee620a1 method=GET status=200
+[WebServer] (node:14040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[14/66] [desktop] › tests\event-fit-filter.spec.ts:61:5 › a late filter response cannot replace the currently selected mode even when fetch ignores abort
+
+[WebServer] INFO:hoptrip.requests:request_id=9926bb5f0913480fa5b0566782bfda34 method=GET status=200
+
+[WebServer] (node:49704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[15/66] [desktop] › tests\event-flight-fit.spec.ts:9:5 › flight conflicts, tight transfers and unknown durations are visible on event cards
+[WebServer] INFO:hoptrip.requests:request_id=bbdc9f183f7247b4bb576d60463fb849 method=GET status=200
+
+[WebServer] (node:52708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[16/66] [desktop] › tests\event-results.spec.ts:8:5 › one session presents independent ticket options while Glasper sessions stay separate
+[WebServer] INFO:hoptrip.requests:request_id=cb06ec277b4d4a4fa766f01cad556ae7 method=GET status=200
+
+
+[WebServer] (node:7424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[17/66] [desktop] › tests\event-results.spec.ts:45:5 › empty results explain coverage and recover category or dates without changing the stay
+
+[WebServer] INFO:hoptrip.requests:request_id=ea227a1b43054c288cfe0d8f6d8152a6 method=GET status=200
+
+[WebServer] (node:55264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[18/66] [desktop] › tests\events-sync.spec.ts:17:5 › stay edits update budget, event search and restored/shared dates together
+[WebServer] INFO:hoptrip.requests:request_id=5c934e3f5f054c15bf506426eb0e44c7 method=GET status=200
+
+
+[WebServer] (node:11840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=5cf3ed6b7b77421c9181a58e0d8a0fb8 method=GET status=200
+
+[WebServer] (node:14484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=7669f9d668c646d993100f39d227baa6 method=GET status=200
+[19/66] [desktop] › tests\events-sync.spec.ts:55:5 › other dates stay independent while use-trip-dates reads the latest stay
+
+[WebServer] INFO:hoptrip.requests:request_id=5acff3161352495cb8ad09ec0d041fea method=GET status=200
+[WebServer] (node:25872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[20/66] [desktop] › tests\events-sync.spec.ts:82:5 › late responses cannot replace newer stay results even if fetch ignores abort
+[WebServer] INFO:hoptrip.requests:request_id=987fed8fe0244cafbaedd228da6931d1 method=GET status=200
+
+[WebServer] (node:29884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[21/66] [desktop] › tests\events-sync.spec.ts:110:5 › restored dates are used for the first request and long stays are not truncated
+[WebServer] INFO:hoptrip.requests:request_id=24d3fc2902304509a8ff33f1554a6d88 method=GET status=200
+
+
+[WebServer] (node:26328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[22/66] [desktop] › tests\events.spec.ts:4:5 › round trips show catalogue events automatically
+[WebServer] INFO:hoptrip.requests:request_id=02a8785fe8f64c0795d223e3f9718ac7 method=GET status=200
+
+[WebServer] (node:50560) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[23/66] [desktop] › tests\events.spec.ts:16:5 › events are fetched on demand with affiliate links and reset when dates change
+[WebServer] INFO:hoptrip.requests:request_id=ed6d7531750542529526bc36156184bb method=GET status=200
+
+
+[WebServer] (node:11716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[24/66] [desktop] › tests\events.spec.ts:50:5 › provider failure keeps the flight page usable; empty results have no ticket links
+[WebServer] INFO:hoptrip.requests:request_id=df3a9191228c4dd7bc3bde0bb29ce4a9 method=GET status=200
+
+[WebServer] (node:57048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[25/66] [desktop] › tests\localized-events.spec.ts:8:6 › events and their budget remain translated and shareable in en
+[WebServer] INFO:hoptrip.requests:request_id=11b8f3fcf3a04ad68654c9138cd6f888 method=GET status=200
+
+[WebServer] (node:21892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=0a517a9eeff54a97b22a3dbd023a334e method=GET status=200
+
+
+[WebServer] (node:1796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:23680) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=cdbc15816964414d87bd7a9e4ada2454 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a625aa2daedb49f68ea9f7393d5ad5f3 method=GET status=200
+
+[26/66] [desktop] › tests\localized-events.spec.ts:8:6 › events and their budget remain translated and shareable in ru
+[WebServer] INFO:hoptrip.requests:request_id=e40eddfd4b13482c830c34272226595b method=GET status=200
+
+[WebServer] (node:26820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=ef28acfd6b734e779c39305a7f33a69c method=GET status=200
+
+
+[WebServer] (node:54012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=399933ab73124d208b5b3b072e9087d2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ac24a19b88b140d39c7d240d19889d86 method=GET status=200
+[27/66] [desktop] › tests\localized-events.spec.ts:8:6 › events and their budget remain translated and shareable in uk
+[WebServer] INFO:hoptrip.requests:request_id=5339aea6e6784ccc9d762768dd7eedfc method=GET status=200
+
+
+[WebServer] (node:15564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=6fa6824213e24e68b8b851ecbe6e85ff method=GET status=200
+
+
+[WebServer] (node:27792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:43596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=89f7d5d0b73747669f34d7da1a628f48 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1c549319d4064d35b31686235913b75e method=GET status=200
+
+[28/66] [desktop] › tests\planned-events.spec.ts:26:5 › selected ticket variants persist and share with independent costs, without double counting
+[WebServer] INFO:hoptrip.requests:request_id=83eb5affd47f4bb786a9aea6fb9c1c42 method=GET status=200
+
+
+[WebServer] (node:53308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=94416146f7f54bdb9a820101dc967c43 method=GET status=200
+
+[WebServer] (node:31764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=d397fbb80bf84d5c9b654f0565de1317 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=12d2495adff94589934af39659f9e79b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=447c35456c0d45bc8afef00046f9f665 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c9d984e57fef4f10830068388b77374b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7f79c885a4194fffba9086b8444f2c1b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=559b4cb288ce4ea7a5fddcf9bffac319 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=798facbb60cd4b92ad733b38c7838ff1 method=GET status=200
+[29/66] [desktop] › tests\planned-events.spec.ts:74:5 › different sessions, unknown and zero prices, invalid input and removal keep an honest budget
+[WebServer] INFO:hoptrip.requests:request_id=7050467126a44f10b285d3c8d295ac2a method=GET status=200
+
+
+[WebServer] (node:26228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[30/66] [desktop] › tests\planned-events.spec.ts:101:5 › a saved event remains editable when its flight and catalogue no longer exist
+
+[WebServer] INFO:hoptrip.requests:request_id=fd98853e11ce4d9981f823500d30081d method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=9a99f991cb8c4c36be3e999a695e5437 method=GET status=404
+
+[31/66] [desktop] › tests\shared-trip.spec.ts:8:5 › saved and shared plans survive reload and recipients edit independent copies
+[WebServer] INFO:hoptrip.requests:request_id=add15e713e884e39aeab3d005af7bdd3 method=GET status=200
+
+[WebServer] (node:10568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=412159ab4c0149e49c91961376b6a579 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f1518c3f7a6b483b8c0a36f3294ccf06 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=037c8bb017874c9d97093b5ea33257a6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d39df8d891fc441f9fe7fc1e08313790 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=474ca17db30b4ecbabfe348e800dde3c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fbad044bba424a29bdce7542665746a4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=38334fc7a33141fba38cc12bb75d8186 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=850e605c577f496088af0a2f40170dcb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9a932ea89684c4f882c57c38db759cd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca1463335fac4294a0970fc663c3ae0a method=GET status=200
+
+[32/66] [desktop] › tests\shared-trip.spec.ts:48:5 › invalid, missing and expired offers retain clear states and honest previews
+[WebServer] INFO:hoptrip.requests:request_id=e92728f711a741d1990118fcf9757c15 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=8f6efb51c0564c49ab35743447fe16bb method=GET status=404
+
+[33/66] [desktop] › tests\shared-trip.spec.ts:62:5 › sharing remains available when browser storage and clipboard are blocked
+[WebServer] INFO:hoptrip.requests:request_id=44a4dc3bd673478d9281e7d5f9b197b2 method=GET status=200
+
+[WebServer] (node:28660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+(node:27728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[34/66] [mobile] › tests\event-browsing.spec.ts:8:5 › day navigation and pagination reach later events without editing the trip
+[WebServer] INFO:hoptrip.requests:request_id=693b067a544e43ceb8f563d7ed4fe933 method=GET status=200
+
+
+[WebServer] (node:7736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[35/66] [mobile] › tests\event-browsing.spec.ts:67:5 › late day responses cannot replace a newly selected day even when fetch ignores abort
+[WebServer] INFO:hoptrip.requests:request_id=ba9294eb2a654caab7d4e8996dc78240 method=GET status=200
+
+
+[WebServer] (node:320) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[36/66] [mobile] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in pl
+[WebServer] INFO:hoptrip.requests:request_id=fa04e9f793ed47eeac0847a2dc4cca22 method=GET status=200
+
+
+[WebServer] (node:33336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[37/66] [mobile] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in en
+[WebServer] INFO:hoptrip.requests:request_id=e1a96c8ca4e84eb5ae764e3519b079ed method=GET status=200
+
+
+[WebServer] (node:49996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[38/66] [mobile] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in ru
+[WebServer] INFO:hoptrip.requests:request_id=d7a07fe177ab4faf8b7d4d222cf87c1b method=GET status=200
+
+[WebServer] (node:19920) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[39/66] [mobile] › tests\event-context.spec.ts:14:56 › event context and OTHER filter preserve the plan in uk
+[WebServer] INFO:hoptrip.requests:request_id=343d586e70ff492881dcb3db66de17ba method=GET status=200
+
+[WebServer] (node:27796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[40/66] [mobile] › tests\event-context.spec.ts:66:5 › inactive and unknown sales have no booking or add action; mixed options keep their own status
+[WebServer] INFO:hoptrip.requests:request_id=ed3534ddd6c5432d8aae9de46f184d5e method=GET status=200
+
+[WebServer] (node:33248) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=c077f158fd994130af5f9eb1c197b79a method=GET status=200
+[41/66] [mobile] › tests\event-fit-filter.spec.ts:15:56 › pl: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+[WebServer] INFO:hoptrip.requests:request_id=260c6c0cf726405ab511fdf6efcadc81 method=GET status=200
+
+[WebServer] (node:25548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[42/66] [mobile] › tests\event-fit-filter.spec.ts:15:56 › en: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+[WebServer] INFO:hoptrip.requests:request_id=4a42ab84a916412781cc432bd6285873 method=GET status=200
+
+[WebServer] (node:23944) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[43/66] [mobile] › tests\event-fit-filter.spec.ts:15:56 › ru: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+
+[WebServer] INFO:hoptrip.requests:request_id=714fab4592314c23a33fb688c77ccc4d method=GET status=200
+
+[WebServer] (node:26820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[44/66] [mobile] › tests\event-fit-filter.spec.ts:15:56 › uk: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty
+[WebServer] INFO:hoptrip.requests:request_id=0370baac08754f0c9c6f2ef53c7787bf method=GET status=200
+
+[WebServer] (node:22212) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[45/66] [mobile] › tests\event-fit-filter.spec.ts:35:5 › fit changes reset pages and days; independent dates still require explicit search
+[WebServer] INFO:hoptrip.requests:request_id=43ed2148c50f4534bf0136454b8a4061 method=GET status=200
+
+[WebServer] (node:3496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[46/66] [mobile] › tests\event-fit-filter.spec.ts:50:5 › an older API cannot silently ignore the filter; inconsistent assessments fail closed and can be retried
+[WebServer] INFO:hoptrip.requests:request_id=bfb9d69ca153492889052eb75d8e5baa method=GET status=200
+
+[WebServer] (node:48416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[47/66] [mobile] › tests\event-fit-filter.spec.ts:61:5 › a late filter response cannot replace the currently selected mode even when fetch ignores abort
+[WebServer] INFO:hoptrip.requests:request_id=210b660887fb47cab0609f3d229c3da4 method=GET status=200
+
+[WebServer] (node:15984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[48/66] [mobile] › tests\event-flight-fit.spec.ts:9:5 › flight conflicts, tight transfers and unknown durations are visible on event cards
+[WebServer] INFO:hoptrip.requests:request_id=fc32df7c04b148a3935308ae588a3a1f method=GET status=200
+
+
+[WebServer] (node:26128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[49/66] [mobile] › tests\event-results.spec.ts:8:5 › one session presents independent ticket options while Glasper sessions stay separate
+[WebServer] INFO:hoptrip.requests:request_id=b83895c0b1b049bf959cdcfc322cc742 method=GET status=200
+
+
+[WebServer] (node:28204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[50/66] [mobile] › tests\event-results.spec.ts:45:5 › empty results explain coverage and recover category or dates without changing the stay
+[WebServer] INFO:hoptrip.requests:request_id=30ad4cb3cd5b45cea76a392e9d4f6b66 method=GET status=200
+
+[WebServer] (node:33120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[51/66] [mobile] › tests\events-sync.spec.ts:17:5 › stay edits update budget, event search and restored/shared dates together
+
+[WebServer] INFO:hoptrip.requests:request_id=7203c20499d74d879f8bda1f3f56d718 method=GET status=200
+
+[WebServer] (node:36564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=3eeed7e8feee400694d0e6410ee581fa method=GET status=200
+
+
+[WebServer] (node:28144) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=5c5cfd03f8c0446985af7a452ea72b4f method=GET status=200
+
+[52/66] [mobile] › tests\events-sync.spec.ts:55:5 › other dates stay independent while use-trip-dates reads the latest stay
+[WebServer] INFO:hoptrip.requests:request_id=d1dd1b1d2d214c969e6f4e1cf90590d6 method=GET status=200
+
+
+[WebServer] (node:52140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[53/66] [mobile] › tests\events-sync.spec.ts:82:5 › late responses cannot replace newer stay results even if fetch ignores abort
+[WebServer] INFO:hoptrip.requests:request_id=4a49e84b84434da7ba52bb2a814cafad method=GET status=200
+
+[WebServer] (node:54072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[54/66] [mobile] › tests\events-sync.spec.ts:110:5 › restored dates are used for the first request and long stays are not truncated
+
+[WebServer] INFO:hoptrip.requests:request_id=acd4cffed7ba4273b10d2d254c4ba5c0 method=GET status=200
+[WebServer] (node:14004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[55/66] [mobile] › tests\events.spec.ts:4:5 › round trips show catalogue events automatically
+[WebServer] INFO:hoptrip.requests:request_id=e1d090308e5f4d4fb7bc02546058aaa0 method=GET status=200
+
+
+[WebServer] (node:28244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[56/66] [mobile] › tests\events.spec.ts:16:5 › events are fetched on demand with affiliate links and reset when dates change
+[WebServer] INFO:hoptrip.requests:request_id=3fdd5a3c4c8c4fa5a5bc6b6087efc7b4 method=GET status=200
+
+[WebServer] (node:23612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[57/66] [mobile] › tests\events.spec.ts:50:5 › provider failure keeps the flight page usable; empty results have no ticket links
+
+[WebServer] INFO:hoptrip.requests:request_id=860f492086ec4843a5f59a85afe9821d method=GET status=200
+
+[WebServer] (node:37664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[58/66] [mobile] › tests\localized-events.spec.ts:8:6 › events and their budget remain translated and shareable in en
+
+[WebServer] INFO:hoptrip.requests:request_id=0861b28131cf414abc73d5d6d2199c1f method=GET status=200
+[WebServer] (node:45276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=17923387a9394914b3596f2bc838edfe method=GET status=200
+
+
+[WebServer] (node:16784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] (node:45168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=72fd7c6e23284c42b4669b8c4953a3b1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cbde4b248ef444b89a13dae6d7b197a1 method=GET status=200
+[59/66] [mobile] › tests\localized-events.spec.ts:8:6 › events and their budget remain translated and shareable in ru
+[WebServer] INFO:hoptrip.requests:request_id=5a420c1b52bf4e62a4bcffe61f69ea2b method=GET status=200
+
+
+[WebServer] (node:17332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=dd2bffd001b54264aaee3f41e39e1359 method=GET status=200
+
+[WebServer] (node:26520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] (node:40860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=e4bac3e350ac47fd872d10e40b2f1ead method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a974aca7586241f19f052549138333f7 method=GET status=200
+[60/66] [mobile] › tests\localized-events.spec.ts:8:6 › events and their budget remain translated and shareable in uk
+
+[WebServer] INFO:hoptrip.requests:request_id=4ea687329da740d7981503adbf0c92db method=GET status=200
+
+[WebServer] (node:46696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=26f83f518cdd47899fb4fbaf2b596d06 method=GET status=200
+
+[WebServer] (node:37244) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:17788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=130113d034194a319288dc77575273b6 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=84749b238a194eddbf63c80beed691a4 method=GET status=200
+
+[61/66] [mobile] › tests\planned-events.spec.ts:26:5 › selected ticket variants persist and share with independent costs, without double counting
+[WebServer] INFO:hoptrip.requests:request_id=5d4b80cd742e4bbda59e8701d164bbb5 method=GET status=200
+
+[WebServer] (node:44668) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=2ef68d51d9704ca690e858c14648d12c method=GET status=200
+
+[WebServer] (node:6376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=865897db7ff84f7daf4e66abdee7fcf0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=40d8bd941f624edbb429c20f71c6a9e1 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1e4a8fed60cd4fa7bc623a4b8d40e976 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=56d371860d8d4cd5991d7c307511900d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f05476b1a60442a288a111f46e0d6da7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=15d9c82b45584d15ac06e5681554c494 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6dc1898cfa0542d49a19de4951234b54 method=GET status=200
+
+[62/66] [mobile] › tests\planned-events.spec.ts:74:5 › different sessions, unknown and zero prices, invalid input and removal keep an honest budget
+
+[WebServer] INFO:hoptrip.requests:request_id=59b6b5ade46a4a64b2514d23e1824b7e method=GET status=200
+[WebServer] (node:20588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[63/66] [mobile] › tests\planned-events.spec.ts:101:5 › a saved event remains editable when its flight and catalogue no longer exist
+
+[WebServer] INFO:hoptrip.requests:request_id=2f36eac2c7bc4544857d27bd933f309a method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=8703f9620ab243e6bde110bac04f4e86 method=GET status=404
+
+[64/66] [mobile] › tests\shared-trip.spec.ts:8:5 › saved and shared plans survive reload and recipients edit independent copies
+
+[WebServer] INFO:hoptrip.requests:request_id=33e0d6a1c9b645439783adc9c5d56e48 method=GET status=200
+
+[WebServer] (node:27000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=48ea194658934c9cb3a5aabce3d2b480 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=560e3b79f8894928ad998a33d9d98baf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc277f64a6fc429aa851fcf3b6465aea method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=392d5ab6cb9a41e6b48b0314d5d3c9b8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cd21f6af03044d7f805c588ae9f09e58 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=52679ff0040240459f074f28c965d946 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=adc11e17e1c644c38631d274ef6298e3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8ff5bd537796457b8e855940c6014ee4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2aa84cafc2734a6faefc695333213d50 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7d81fb03c94b44baa162738a7af15cfb method=GET status=200
+
+[65/66] [mobile] › tests\shared-trip.spec.ts:48:5 › invalid, missing and expired offers retain clear states and honest previews
+[WebServer] INFO:hoptrip.requests:request_id=9fb249ba923246a9bbab6786a1ce01bc method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=b468d993ff2d40ce981967d042be0c70 method=GET status=404
+
+[66/66] [mobile] › tests\shared-trip.spec.ts:62:5 › sharing remains available when browser storage and clipboard are blocked
+[WebServer] INFO:hoptrip.requests:request_id=0e01bc29c4e343be8875c02339b72670 method=GET status=200
+
+[WebServer] (node:15304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  66 passed (5.5m)

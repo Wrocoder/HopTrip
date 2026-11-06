@@ -1,0 +1,54 @@
+
+> hoptrip-web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 33ms
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./.cache/aud05-h3-09b-20261104/apps/web/src/app/components/home-collection-preview.tsx:12:1
+Error: Module not found: Can't resolve './home-collections.module.css'
+  10 | import {offerDeadline} from '../../lib/offer-expiry';
+  11 | import {useOfferExpired} from './use-offer-expired';
+> 12 | import styles from './home-collections.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export function HomeCollectionPreview({collection,locale,children}:{collection:HomeCollect...
+  15 |  const copy=collectionCopy[locale],router=useRouter();
+
+
+
+Import trace:
+  Server Component:
+    ./.cache/aud05-h3-09b-20261104/apps/web/src/app/components/home-collection-preview.tsx
+    ./.cache/aud05-h3-09b-20261104/apps/web/src/app/components/home-collections.tsx
+    ./.cache/aud05-h3-09b-20261104/apps/web/src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./.cache/aud05-h3-09b-20261104/apps/web/src/app/components/home-collections.tsx:7:1
+Error: Module not found: Can't resolve './home-collections.module.css'
+   5 | import {DestinationPhoto,DestinationPhotoCredit} from './destination-card';
+   6 | import {HomeCollectionPreview} from './home-collection-preview';
+>  7 | import styles from './home-collections.module.css';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 |
+   9 | export function HomeCollections({collections,locale}:{collections:HomeCollection[];locale:...
+  10 |  return collections.map(collection=><HomeCollectionPreview key={collection.id} collection=...
+
+
+
+Import trace:
+  Server Component:
+    ./.cache/aud05-h3-09b-20261104/apps/web/src/app/components/home-collections.tsx
+    ./.cache/aud05-h3-09b-20261104/apps/web/src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

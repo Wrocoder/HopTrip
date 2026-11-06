@@ -2,7 +2,8 @@ import {test,expect,type Locator} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {writeFileSync} from 'node:fs';
 import {localizedHref} from '../src/lib/i18n/routing';
-import {savedTripsKey} from '../src/lib/shared-trip';
+import {tripText} from '../src/lib/i18n/trip-copy';
+import {savedPlansKey} from "../src/lib/saved-plans";
 
 async function fit(control:Locator) {
  await control.scrollIntoViewIfNeeded();
@@ -83,12 +84,12 @@ for(const width of [320,375,390,768,1440])test.describe(`${width}px`,()=>{
   await expect(page.locator('#budget-flight')).toHaveAttribute('inputmode','decimal');await overflow('short-viewport');
   await page.setViewportSize({width,height:844});
   const actions=page.locator('#trip-save .trip-actions button');await activate(actions.nth(0));
-  await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'[]').length,savedTripsKey)).toBe(1);
-  await activate(actions.nth(1));const shared=page.locator('#trip-share-link');await expect(shared).toHaveValue(/\/trip\?plan=/);await fit(shared);
+  await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'null')?.plans.length??0,savedPlansKey)).toBe(1);
+  await expect(page).toHaveURL(/#local=/);await activate(page.getByRole('button',{name:tripText(locale,'Udostępnij'),exact:true}));const shared=page.locator('#trip-share-link');await expect(shared).toHaveValue(/\/trip#plan=/);await fit(shared);
   if(width===320||width===1440)expect((await new AxeBuilder({page}).include('.site-header').include('#calculator').include('#accommodation').include('#trip-events').analyze()).violations).toEqual([]);
   if(locale==='pl')await page.locator('#calculator').screenshot({path:info.outputPath(`calculator-${width}.png`),scale:'css',animations:'disabled'});
   await page.reload();await expect(page.locator('#budget-flight')).toHaveValue('123,45');await expect(page.getByTestId('budget-total')).toContainText(/646[,.]90/);
-  await activate(page.locator('.back-link'));await expect(page).toHaveURL(applied.href);
+  await page.goBack();await activate(page.locator('.back-link'));await expect(page).toHaveURL(applied.href);
   for(const [key,value] of Object.entries(selected))expect(new URL(page.url()).searchParams.get(key)).toBe(value);
   await page.goBack();await expect(page.locator('#budget-flight')).toHaveValue('123,45');await expect(page.locator('#budget-end')).toHaveValue(end);
   await page.goForward();await expect(page).toHaveURL(applied.href);await overflow('return');

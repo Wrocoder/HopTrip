@@ -5,6 +5,7 @@ import type {Locale} from '../../lib/i18n/config';
 import {guideUi,type GuideUiKey} from '../../lib/i18n/guide-ui';
 import {localizedHref} from '../../lib/i18n/routing';
 import {eventCityLabel} from '../../lib/cities';
+import {partnerContextCopy} from '../../lib/i18n/partner-context-copy';
 
 export function AirportTransfer({slug,locale='pl'}:{slug:string;locale?:Locale}) {
  const transfer=transferForGuide(slug);
@@ -15,6 +16,7 @@ export function AirportTransfer({slug,locale='pl'}:{slug:string;locale?:Locale})
   <p><a className="button button-secondary" href={transfer.affiliateHref} target="_blank"
    rel="sponsored noopener noreferrer">{t('transferButton')}</a></p>
   <p className="muted">{t('transferDisclosure')}</p>
+  <p className="partner-context-limitation">{partnerContextCopy[locale]}</p>
   <Link href={localizedHref('/info/trip-budget#calculator',locale)}>{t('transferBudget')}</Link>
  </aside>;
 }

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-05",
+  "finding": "Preparing a workspace did not switch the copied Playwright webServer from dev to start. Build success alone did not establish a production browser run.",
+  "priorBrowserClaimsNeedCorrection": [
+    "H3-13",
+    "H3-15",
+    "initial H3-17b1"
+  ],
+  "workspaces": [
+    {
+      "workspace": "aud05-h3-12c-20261104",
+      "command": "npm start -- --hostname 127.0.0.1 --port 3125",
+      "sha256": "6504E1B2ACF0AA0E280E6591425E3C148C59D9D8646C6F1410F2641A841A938F",
+      "classification": "production start"
+    },
+    {
+      "workspace": "aud05-h3-13-20261104",
+      "command": "npm run dev -- --hostname 127.0.0.1 --port 3125",
+      "sha256": "08A65F6217350A4B284E4E1D41EBB4838DA4F2F5FBE4F4E43CA159DE511E6F8A",
+      "classification": "development"
+    },
+    {
+      "workspace": "aud05-h3-15-20261105",
+      "command": "npm run dev -- --hostname 127.0.0.1 --port 3125",
+      "sha256": "08A65F6217350A4B284E4E1D41EBB4838DA4F2F5FBE4F4E43CA159DE511E6F8A",
+      "classification": "development"
+    },
+    {
+      "workspace": "aud05-h3-17b1-20261105",
+      "command": "npm run dev -- --hostname 127.0.0.1 --port 3125",
+      "sha256": "08A65F6217350A4B284E4E1D41EBB4838DA4F2F5FBE4F4E43CA159DE511E6F8A",
+      "classification": "development"
+    }
+  ]
+}

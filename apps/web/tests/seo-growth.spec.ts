@@ -57,7 +57,8 @@ test('Warsaw union, individual airports, weekend and route constraints',async({p
  await expect(page.locator('.deal-card')).toHaveCount(12);
  await expect(page.locator('[name="origin"]')).toHaveValue('KRK');
  await expect(page.locator('[name="destination"]')).toHaveValue('rome');
- await expect(page.locator('.deal-card').first()).toContainText('Między przylotem a odlotem powrotnym:');
+ await expect(page.locator('.deal-card').first().locator('.destination-time')).toContainText('Między przylotem a odlotem:');
+ await expect(page.locator('.deal-card').first().locator('.destination-time')).toContainText('Czas w mieście nieznany');
 });
 
 test('new landing metadata, real HTTP 404 and normalized canonical',async({page})=>{

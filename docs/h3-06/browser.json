@@ -1,0 +1,1434 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "h3-card.spec.ts",
+      "offer-card.spec.ts",
+      "compact-cards.spec.ts",
+      "price-freshness.spec.ts",
+      "local-flight-time.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "compact-cards.spec.ts",
+      "file": "compact-cards.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "compact cards preserve clocks, missing facts, keyboard access and long names",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2814,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m730\u001b[39m\nReceived:   \u001b[31m932.578125\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m730\u001b[39m\nReceived:   \u001b[31m932.578125\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\compact-cards.spec.ts:36:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\compact-cards.spec.ts",
+                      "column": 46,
+                      "line": 36
+                    },
+                    "snippet": "  34 |   const freshness=await card.locator('.price-freshness').boundingBox();\n  35 |   expect(freshness!.height).toBeLessThan(130);\n> 36 |   expect((await card.boundingBox())!.height).toBeLessThan(730);\n     |                                              ^\n  37 |  }\n  38 |  await page.screenshot({path:testInfo.outputPath(\"catalog.png\")});\n  39 |  await card.screenshot({path:testInfo.outputPath(\"card.png\")});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\compact-cards.spec.ts",
+                        "column": 46,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m730\u001b[39m\nReceived:   \u001b[31m932.578125\u001b[39m\n\n  34 |   const freshness=await card.locator('.price-freshness').boundingBox();\n  35 |   expect(freshness!.height).toBeLessThan(130);\n> 36 |   expect((await card.boundingBox())!.height).toBeLessThan(730);\n     |                                              ^\n  37 |  }\n  38 |  await page.screenshot({path:testInfo.outputPath(\"catalog.png\")});\n  39 |  await card.screenshot({path:testInfo.outputPath(\"card.png\")});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\compact-cards.spec.ts:36:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:23:57.911Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\compact-cards-compact-card-2b6c4-board-access-and-long-names-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\compact-cards-compact-card-2b6c4-board-access-and-long-names-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\compact-cards.spec.ts",
+                    "column": 46,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ed2a3577d9660097a895-d414a53de5c208f09a4d",
+          "file": "compact-cards.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "next-day home arrival is visible without expanding details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1801,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:02.471Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ed2a3577d9660097a895-30df4db0b8962950ca6d",
+          "file": "compact-cards.spec.ts",
+          "line": 55,
+          "column": 5
+        },
+        {
+          "title": "compact cards preserve clocks, missing facts, keyboard access and long names",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8620,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:37.403Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ed2a3577d9660097a895-d14e2ad3e3ca9d9781d8",
+          "file": "compact-cards.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "next-day home arrival is visible without expanding details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2614,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:46.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ed2a3577d9660097a895-5159864b858ead10e708",
+          "file": "compact-cards.spec.ts",
+          "line": 55,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "h3-card.spec.ts",
+      "file": "h3-card.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2414,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1081.765625\u001b[39m\nReceived:   \u001b[31m760.765625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1081.765625\u001b[39m\nReceived:   \u001b[31m760.765625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1081.765625\u001b[39m\nReceived:   \u001b[31m760.765625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:04.825Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-143d6197ef596b63996c",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "en: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3049,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m738.765625\u001b[39m\nReceived:   \u001b[31m656.765625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m738.765625\u001b[39m\nReceived:   \u001b[31m656.765625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m738.765625\u001b[39m\nReceived:   \u001b[31m656.765625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:09.029Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-b2c2e0d732cd7b4bb117",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "ru: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2613,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m798.765625\u001b[39m\nReceived:   \u001b[31m756.765625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m798.765625\u001b[39m\nReceived:   \u001b[31m756.765625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m798.765625\u001b[39m\nReceived:   \u001b[31m756.765625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:14.189Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-6616876142b87427d1f0",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "uk: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2828,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m787.765625\u001b[39m\nReceived:   \u001b[31m677.765625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m787.765625\u001b[39m\nReceived:   \u001b[31m677.765625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m787.765625\u001b[39m\nReceived:   \u001b[31m677.765625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:18.958Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-49ed55527f63ba87385d",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "pl: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3542,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1672.359375\u001b[39m\nReceived:   \u001b[31m1033.359375\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1672.359375\u001b[39m\nReceived:   \u001b[31m1033.359375\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1672.359375\u001b[39m\nReceived:   \u001b[31m1033.359375\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:49.402Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-c84e89f1bc0a65034bb9",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "en: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1999,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m2699.90625\u001b[39m\nReceived:   \u001b[31m2534.90625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m2699.90625\u001b[39m\nReceived:   \u001b[31m2534.90625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m2699.90625\u001b[39m\nReceived:   \u001b[31m2534.90625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:54.883Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-0349364745abcf00c6c8",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "ru: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3037,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1268.265625\u001b[39m\nReceived:   \u001b[31m867.265625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1268.265625\u001b[39m\nReceived:   \u001b[31m867.265625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m1268.265625\u001b[39m\nReceived:   \u001b[31m867.265625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:58.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-3a756efb8c972e0a030a",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "uk: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2619,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m2774.140625\u001b[39m\nReceived:   \u001b[31m2461.140625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m2774.140625\u001b[39m\nReceived:   \u001b[31m2461.140625\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 19,
+                      "line": 27
+                    },
+                    "snippet": "  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 19,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m2774.140625\u001b[39m\nReceived:   \u001b[31m2461.140625\u001b[39m\n\n  25 |    await details.locator('summary').focus();await page.keyboard.press('Enter');await expect(details.locator('time').first()).toBeVisible();await page.keyboard.press('Enter');\n  26 |    const lastCondition=await card.locator('.card-baggage-scope').boundingBox(),cta=await card.locator('.card-cta').boundingBox();\n> 27 |    expect(cta!.y).toBeGreaterThan(lastCondition!.y);\n     |                   ^\n  28 |   }\n  29 |   if(scenario==='partial')await card.screenshot({path:info.outputPath(`card-${before?'before':'after'}.png`)});\n  30 |   if(!before&&scenario==='partial'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:27:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:26:04.583Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 19,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-7dc36637b41beac99181",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "local-flight-time.spec.ts",
+      "file": "local-flight-time.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "audit midnight arrival is visible while seven hotel nights and manual money survive sharing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7003,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:23.776Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e68fece3f2299c412855-b300337704ad61cf137c",
+          "file": "local-flight-time.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "audit midnight arrival is visible while seven hotel nights and manual money survive sharing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4521,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:26:09.610Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e68fece3f2299c412855-83690cd3de493acfc809",
+          "file": "local-flight-time.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "offer-card.spec.ts",
+      "file": "offer-card.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12227,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:31.712Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-075eb1b2513bbc76241b",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "en: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13910,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:43.992Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-c53aacfa9fb739c2cfff",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "ru: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:24:57.960Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-b96924b801c90f14af94",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "uk: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13488,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:11.387Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-cb57f600473109d8909f",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "an open card announces expiry without requiring technical details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2051,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:24.947Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-64dcc1c67e4894e1c11b",
+          "file": "offer-card.spec.ts",
+          "line": 53,
+          "column": 5
+        },
+        {
+          "title": "pl: card exposes price, CTA and material warnings for every quality state",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 15238,
+                  "error": {
+                    "message": "Error: apiRequestContext.post: socket hang up\nCall log:\n\u001b[2m  - → POST http://127.0.0.1:8125/__test__/quality?scenario=reset\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n",
+                    "stack": "Error: apiRequestContext.post: socket hang up\nCall log:\n\u001b[2m  - → POST http://127.0.0.1:8125/__test__/quality?scenario=reset\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\offer-card.spec.ts:13:16",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\offer-card.spec.ts",
+                      "column": 16,
+                      "line": 13
+                    },
+                    "snippet": "  11 | });\n  12 | test.afterEach(async({request})=>{\n> 13 |  await request.post('http://127.0.0.1:8125/__test__/quality?scenario=reset');\n     |                ^\n  14 |  await request.post('http://127.0.0.1:8125/__test__/compact-card?scenario=normal');\n  15 | });\n  16 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\offer-card.spec.ts",
+                        "column": 16,
+                        "line": 13
+                      },
+                      "message": "Error: apiRequestContext.post: socket hang up\nCall log:\n\u001b[2m  - → POST http://127.0.0.1:8125/__test__/quality?scenario=reset\u001b[22m\n\u001b[2m    - user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.6 Mobile/15E148 Safari/604.1\u001b[22m\n\u001b[2m    - accept: */*\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n  11 | });\n  12 | test.afterEach(async({request})=>{\n> 13 |  await request.post('http://127.0.0.1:8125/__test__/quality?scenario=reset');\n     |                ^\n  14 |  await request.post('http://127.0.0.1:8125/__test__/compact-card?scenario=normal');\n  15 | });\n  16 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\offer-card.spec.ts:13:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:26:14.879Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\offer-card-pl-card-exposes-453d1-ngs-for-every-quality-state-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\offer-card-pl-card-exposes-453d1-ngs-for-every-quality-state-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\offer-card.spec.ts",
+                    "column": 16,
+                    "line": 13
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-225eb6149c288264554a",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "en: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14453,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:26:32.897Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-df2be55ac154509c029c",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "ru: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14052,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:26:48.021Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-9f96bd67a9b044326cf6",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "uk: card exposes price, CTA and material warnings for every quality state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15205,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:27:02.141Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-cf95a9b2afa6598c48b6",
+          "file": "offer-card.spec.ts",
+          "line": 17,
+          "column": 56
+        },
+        {
+          "title": "an open card announces expiry without requiring technical details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2410,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:27:17.412Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "374749048959bec2f0dc-a69e810062a4cb89ff67",
+          "file": "offer-card.spec.ts",
+          "line": 53,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "price-freshness.spec.ts",
+      "file": "price-freshness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:27.103Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-01a103906105a3e529fc",
+          "file": "price-freshness.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2911,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:25:32.517Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-0a49966619700448c2a4",
+          "file": "price-freshness.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5248,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:27:19.909Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-6cdc8dedc666bef22564",
+          "file": "price-freshness.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3644,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:27:25.211Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-036e25ee3898819aa814",
+          "file": "price-freshness.spec.ts",
+          "line": 33,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T19:23:44.302Z",
+    "duration": 227059.49599999998,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 10,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,1334 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test home-collection-visual.spec.ts --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [34444]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=194abf86b0c94a35b7c446d9c0c0249f method=GET status=200
+[WebServer] (node:46644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=9ec7f6beb2a444c3a5d4f52c3102e1ae method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=133e4d58d5dc4c85b39fb4cfe04dbe13 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2f73ddade851400eafb56d5b3fc70797 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ed81f301396748919917adcccf230458 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b9cc41991be3493d8aa76e629cec9e4a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=09b3d6feaafd4a199d0b517d7840492e method=GET status=200
+
+Running 22 tests using 1 worker
+
+
+(node:27992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/22] [desktop] › tests\home-collection-visual.spec.ts:23:56 › pl: real previews, criteria, photos, essential conditions and catalog CTA
+[WebServer] INFO:hoptrip.requests:request_id=9897d7f147964bb982960ee3d21ec7a9 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4cdde1b181d14365a5abcb75045b77d6 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1d2bd3df91e9434288615e8d0143a30e method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5762d04234974150a5a70a7a832bac6e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=590c56138edd4f1baa3a46841f166e93 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d85b40e2ea214d16ac433474150c33db method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a79b04e0d9ee46cbb05a99b814f69e0f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=36709ffcaf6f4366b47f4d096f3adef5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e026e5c99e884de1bb2cd3ab68bd4b7e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87d83df847c84d119ecde15b64f00fa8 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c08b00c018a434e8d4dba2644cac34c method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e8eb8311d02a47d5929396515d56954a method=POST status=200
+  1) [desktop] › tests\home-collection-visual.spec.ts:23:56 › pl: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:28224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/22] [desktop] › tests\home-collection-visual.spec.ts:23:56 › en: real previews, criteria, photos, essential conditions and catalog CTA
+
+[WebServer] INFO:hoptrip.requests:request_id=60569d86361b483eb78ec1ef1c2761a0 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=ea41dd7075cb4f0dbce769d06fd25848 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=68f8bdc0acc6416c81965474b869e8b9 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bf81d04d015b4758a3f11dbef1a19a81 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a7d12622723c462f8c3c17c37fc50c2e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a97b7c444f0d4b9c87fc782ca6968b1f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c1d6e3149b2d41edbb1d4d4b5267409b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3bc01cbf425e48c39287f24e94c6a47a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=08071d33ce8847b98d2c4939041fe546 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=27201b16472d4887800d95ecc1fbc3f0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7cb23fd07e864212b67fe6cb2ad810f8 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9acda38d3a7742f88258e043a387a3fa method=POST status=200
+
+  2) [desktop] › tests\home-collection-visual.spec.ts:23:56 › en: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-en--11720--conditions-and-catalog-CTA-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-en--11720--conditions-and-catalog-CTA-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-en--11720--conditions-and-catalog-CTA-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:5872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/22] [desktop] › tests\home-collection-visual.spec.ts:23:56 › ru: real previews, criteria, photos, essential conditions and catalog CTA
+[WebServer] INFO:hoptrip.requests:request_id=24332f7381ed4d89958980208c64fd06 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc9374a6e41046da963d58ecc6d37d64 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=25636c7be0e74c949a1b74b430296eac method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7c5eb2e4db114029a7db4035e814fb1d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9c8604d0fcfe44cba4a6cca50099ec79 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6def25a04ebd42fbacee31387b20e681 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=01b3ff64567645c1a919e385f7199d69 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4d6660fbfa2541adbc80ff5bda0454f5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a9c7dbd54c67410ca6e1396f19f091e8 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9e3e1b8eee874a2a93dd72b6f7f0e1ef method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=859a68bc1014405c840fee928549ee08 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=35ffab6e78584dbca118a7caf1e0cc44 method=POST status=200
+
+  3) [desktop] › tests\home-collection-visual.spec.ts:23:56 › ru: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:54396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/22] [desktop] › tests\home-collection-visual.spec.ts:23:56 › uk: real previews, criteria, photos, essential conditions and catalog CTA
+[WebServer] INFO:hoptrip.requests:request_id=5bd072cd36b84e0b93e46d65b3cb1d7f method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e9172a74e39147a2b59606f16a4edf28 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5fd78b015a5141cfbc9a304a479eb7a5 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=6765b36dbf0245398024b6ba2a998766 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87d452abe1f941b7942b9917af980f6e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=271b365cf3e9455b8e6cd6fcb2fe37e0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ed741314011849b5a6a77d2deca849fd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5f7f82c933074ad68411e3747e395859 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5a14ca3f87754f5ab4c0c4cd97b09e7f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2f2aceaaf93a444ab311a714ebca706d method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=31bb2f0856044b8abd05e5bbc4640ba8 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=9e5572245b634f05a78fb19674b87983 method=POST status=200
+
+  4) [desktop] › tests\home-collection-visual.spec.ts:23:56 › uk: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:21192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/22] [desktop] › tests\home-collection-visual.spec.ts:64:5 › origin transitions hide previous snapshots, last selection wins and Back restores the right offers
+[WebServer] INFO:hoptrip.requests:request_id=afe59d52064b4479938648a05850f318 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a16ea357902b4afaa1e0cdc8fb38583c method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=787fb1ca2492436481e327a5489a507b method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=d75d2b6501714b4482b0e89d56a46e15 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=618af485a3b047e6b8419605c0212042 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e77eb38cdd4c46c29d9e4abb8ce991b3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e2022451042345f8b13f998bdc88a629 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9b3860d58dbd488783c9cddfcd385c3d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d793e9cafeac4947aa85ed8a04e5f324 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87296c9f382d44dd8104a43a7db2f25d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7dd64543a9bf4600975a770e36be305a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=40c93ffd838a4dcead31e968137158dc method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=de147e22ed3b4abdaa4cae088cf7d587 method=POST status=200
+
+  5) [desktop] › tests\home-collection-visual.spec.ts:64:5 › origin transitions hide previous snapshots, last selection wins and Back restores the right offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.home-collections').locator('.deal-card')
+    Expected: 4
+    Received: 5
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.home-collections').locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('.deal-card')
+        14 × locator resolved to 5 elements
+           - unexpected value "5"
+
+
+      66 |  await page.goto('/?origin=KTW');
+      67 |  const section=page.locator('.home-collections'),input=page.locator('#home-origin');
+    > 68 |  await expect(section.locator('.deal-card')).toHaveCount(4);
+         |                                              ^
+      69 |  await input.fill('GDN');await input.press('ArrowDown');await input.press('Enter');
+      70 |  await expect(section).toHaveAttribute('aria-busy','true');await expect(section.locator('[data-collection]')).toHaveCount(0);
+      71 |  await input.fill('WAW');await input.press('ArrowDown');await input.press('Enter');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:68:46
+
+    Error Context: test-results\home-collection-visual-ori-2d53c-k-restores-the-right-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-ori-2d53c-k-restores-the-right-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-ori-2d53c-k-restores-the-right-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:53940) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[6/22] [desktop] › tests\home-collection-visual.spec.ts:82:5 › one real offer per preview needs no filler and missing licensed image keeps the flight action
+[WebServer] INFO:hoptrip.requests:request_id=602a73d1093c49ffaf09b77a5b5fb2c9 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c5ea6cbdb88546a78dd64189ee6d7598 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2668c6c013e54346a213f44a302cc932 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8b6f376116be4beb9191d0dba702238c method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=eb47acf5000646aebfd1a8b844661960 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dafd31c03ebf4adaacab900df9f2ed3e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=01a6d74a0ea14ed38f00fd425fd9fc9a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=818c5d75a72e41f79c213884550ed963 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=62d1258d2088465e9c16211bc4b7a3bf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9aee6e06aa59453090ba65b7a1734b4d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a447291d743f4c3da8813b5e2395cb1d method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=8ba33030071a4bb999d0bd1a9aaaca68 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8419e1bfda514adcbc92c55059c793a1 method=POST status=200
+
+  6) [desktop] › tests\home-collection-visual.spec.ts:82:5 › one real offer per preview needs no filler and missing licensed image keeps the flight action 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-collection="upcoming-short"]').getByText('Zdjęcie niedostępne', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('[data-collection="upcoming-short"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms
+      - waiting for locator('[data-collection="upcoming-short"]').getByText('Zdjęcie niedostępne', { exact: true })
+
+
+      86 |   const collection=page.locator(`[data-collection="${id}"]`);
+      87 |   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);
+    > 88 |   await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);
+         |                                                                               ^
+      89 |   await expect(collection.locator('.deal-card-link')).toHaveAttribute('href',/\/deals\/weekend-fixture-/);
+      90 |  }
+      91 |  await page.locator('[data-collection="under-300"] .deal-card-link').click();await expect(page).toHaveURL(/\/deals\/weekend-fixture-/);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:88:79
+
+    Error Context: test-results\home-collection-visual-one-693ec-age-keeps-the-flight-action-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-one-693ec-age-keeps-the-flight-action-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-one-693ec-age-keeps-the-flight-action-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:42588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/22] [desktop] › tests\home-collection-visual.spec.ts:94:70 › weekend-error: independent errors preserve other previews and retry recovers
+
+[WebServer] INFO:hoptrip.requests:request_id=502b24174163448ea7b6499b5969a06f method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=9505c0a6abba4a86af62b6dd58f9eb68 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=04d52dfe156f4cf58d8139362ca05fa2 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2384ce0e48d247e68653c4feadc2ecd5 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=20e2f8f059d34a0c9c9eb25003f2f2a6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=77b3640026ad40e2962f0e2bb2db444b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=01bd6324c44c4d939793d20f026bb29a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=865c540a788b4cab884a9bc556995325 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=17ab3d03f06c40a9b0a1200163a1b684 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=01d168f5295c4610809db51d929808db method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=61abb9f843264fbf9392c1ec2295166c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f4b0cffc509a49758de0d93dad684983 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6b54af01e55346c1bdc9d955ac81b894 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=baa318ec1a834a09816b33880dbb6c0e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7e2e84f86e4b429bb3995001df990908 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4cfa02bbb7384643a42765904306e5c9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ac4d034c72144b7ba98532938831271b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d553f1cb6621408b9c25a02e9b0f200e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b30fa3c6225e4ad1b08ba63f7bc19fa2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e59b3b5df3d24d928870924a5ebdf409 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=00185dfad3b74750879aff6c26155698 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b5a67399b8ff4f7baf863723fe5c82cc method=POST status=200
+
+[8/22] [desktop] › tests\home-collection-visual.spec.ts:94:70 › weekend-broad: independent errors preserve other previews and retry recovers
+[WebServer] INFO:hoptrip.requests:request_id=4117b49e639c47cdbca65a32a937b668 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ce978d1b1e914a568720f9b9a9233b92 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b6b1824daf564c15b1e3b94f5fc80010 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=367ff654b20448d6a654ce8c9b722678 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=41fe7a8694c247a08ca60d2b8951ba9b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ee02243c8d8e47588ea9edb060c32bc0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7d9009dcd2904cd08b54fad271452cc5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f6d605f527af4e7c85d1768affd1054d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2afbca99fe8f4d3c8b78d02d50616ae3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=60b13a792cdd45c6bb3f1083414ffd4f method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3643c7f0409b475580596cb06bddef03 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fbbc9695e2c840a5b4a8ddefdcd5b0e4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=77a5f675e97c4ed780087f0790dc14af method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=077205c0bec94766883e490d23ac86ab method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=179926d3ccf5410e87c4061be4e7485f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d8b69fc48f754837970ef0532c23ef3b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0a95af64076947b79d1368e4fc876ff4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9a8b7f2df48d492a94b901d917288298 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c2bc704d1f33404283f42819a5e07770 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e6a80fe5350c4be9869ce1b81377cf0d method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a8be857134c64b4590102c1fb88e1b9a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9ae50992a2e245a5a426b9826f90faa4 method=POST status=200
+[9/22] [desktop] › tests\home-collection-visual.spec.ts:103:5 › failed photo preserves frame, credit, conditions and the real offer action
+[WebServer] INFO:hoptrip.requests:request_id=96531df9fe504954bc9d2c554253ce97 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=67f40c22d0124e1e8210802a0dc68dcf method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3922bf6f6f0540aea3b19b0ee464ad90 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=525805aecd124446909da5aee4d11a79 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=21859029919f4874b49eb1550191189d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a0898cafc01c48639dc51fe7931b3455 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f37caf14de7246cfa8c650cc93b9caa0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf88affbed284c259d35914d60e291c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ddc3eafe163c451aaade8cf1fda92a1e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8653e5d05cc342f5b48c66f4e796544f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8c01fd5651ef44f7a7ac2efa738ce42a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8b9ab7f25f044156ae5e35564527ca81 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=47fd3a4e69b643b89bafb1e2253f0e5a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bc7dcd4bf6b94fa1ab8299fd79ef887f method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=11eb2f518a394b4fb31a7ca65645a50b method=POST status=200
+[10/22] [desktop] › tests\home-collection-visual.spec.ts:113:5 › expiry invalidates a preview without presenting stale prices as current availability
+[WebServer] INFO:hoptrip.requests:request_id=c08a1538504e4ff29d7d19e672e9a6b8 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=52ad4dff193b4a65a843114f0e432b22 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c7f7041dc386431f8b691361a8cd5fb1 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=6562e5b7b8d74cedb1f48965314f25ac method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=81bac0eaaf734d89bfe35ea5b7e2e587 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7f67f6c39bf643a78f5ba58d60825743 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a296b728de89436798df41432fdb3d69 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e67973fa5de14208a76d278e296b552e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e565c5bb666044ccb03a3f7ea7db7f21 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9c8c2c02672d49129f0a6b21e85e864c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=467cd1da381f4f32a30d3731fd618eb2 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b5716c6d5e634a94a97ad879ae9a52e8 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8df910b0747345bfa4997f017d88740b method=POST status=200
+  7) [desktop] › tests\home-collection-visual.spec.ts:113:5 › expiry invalidates a preview without presenting stale prices as current availability 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-state="ready"]')
+    Expected: 2
+    Received: 3
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.home-collections').locator('[data-state="ready"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-state="ready"]')
+        14 × locator resolved to 3 elements
+           - unexpected value "3"
+
+
+      114 |  await page.clock.install();await request.post(`${fixture}/__test__/home-collections?scenario=expiring`);
+      115 |  await page.goto('/?origin=KTW');const section=page.locator('.home-collections');
+    > 116 |  await expect(section.locator('[data-state="ready"]')).toHaveCount(2);await expect(section.locator('.deal-card')).toHaveCount(4);
+          |                                                        ^
+      117 |  await page.clock.fastForward(20000);await expect(section.locator('[data-state="unavailable"]')).toHaveCount(2);
+      118 |  await expect(section.locator('.deal-card')).toHaveCount(0);await expect(section.getByText(collectionCopy.pl.expired,{exact:true})).toHaveCount(2);
+      119 |  await expect(section.locator('[data-state="empty"]')).toHaveCount(1);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:116:56
+
+    Error Context: test-results\home-collection-visual-exp-c36b2-ces-as-current-availability-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-exp-c36b2-ces-as-current-availability-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-exp-c36b2-ces-as-current-availability-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:44388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[11/22] [desktop] › tests\home-collection-visual.spec.ts:122:5 › collection and flight links are present without JavaScript in all four locales
+
+[WebServer] INFO:hoptrip.requests:request_id=15a5300b13f7422585096727b82dfaf3 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=ff67744015ed4223885841490773bb0f method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c438ffbd0182400db1820125d3e4d507 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=0ec50ddb0f4f41af88f04e92615090f0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dc50e23d35374f3292afeb2ea0d5999f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3e796e3b14e64c8dbe4ffb89bd2314ca method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2376eb3f4d1d42e3874ff290fd882335 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=69818f4996cc4659b683e63b8375d221 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=80ee6756bf7843388e9eaddc547496cd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d8f0688d8c6948a590042968421ca699 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd216a36402047d592af28b0f19c7bc5 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=a97beee254b84093a2d510d664e8f5b1 method=POST status=200
+
+  8) [desktop] › tests\home-collection-visual.spec.ts:122:5 › collection and flight links are present without JavaScript in all four locales 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('link[rel="canonical"]')
+    Expected: "http://127.0.0.1:3125/"
+    Received: "http://127.0.0.1:3125"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('link[rel="canonical"]') with timeout 5000ms
+      - waiting for locator('link[rel="canonical"]')
+        13 × locator resolved to <link rel="canonical" href="http://127.0.0.1:3125"/>
+           - unexpected value "http://127.0.0.1:3125"
+
+
+      125 |   const response=await page.goto(localizedHref('/?origin=KTW',locale));expect(response?.status()).toBe(200);
+      126 |   await expect(page.locator('html')).toHaveAttribute('lang',locale);
+    > 127 |   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',String(info.project.use.baseURL)+localizedHref('/',locale));
+          |                                                       ^
+      128 |   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/^index,/);
+      129 |   for(const definition of homeCollectionDefinitions('KTW'))await expect(page.locator(`[data-collection="${definition.id}"] > div > a`)).toHaveAttribute('href',localizedHref(definition.href,locale));
+      130 |   await expect(page.locator('.home-collections .deal-card-link')).toHaveCount(4);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:127:55
+
+    Error Context: test-results\home-collection-visual-col-7d10e-aScript-in-all-four-locales-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-col-7d10e-aScript-in-all-four-locales-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-col-7d10e-aScript-in-all-four-locales-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:8616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[12/22] [mobile] › tests\home-collection-visual.spec.ts:23:56 › pl: real previews, criteria, photos, essential conditions and catalog CTA
+
+[WebServer] INFO:hoptrip.requests:request_id=7e2ae861e25840d691006cec5796eb70 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=05d27d30500c46c4904d532c09a797ab method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=701bb93a2f1745849b6fbb4d5b5e49a0 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c9cb86abf5a6422c97fcd5c935d2d4a2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5f21863505264cd99028b9df67e41750 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c9874a192f4c42f885c0c22ff63127da method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=79d455e9459b4d048093bbab7b9b4518 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5f04182fc494426bb0c4e86560ce903f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5447bf0a080d439487ebcfb9a4644a5f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3d7ce7e9ccf24085a9e5b62687ed1660 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d8cd5744d9384dc3b058633c58469622 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c325a4b1480d4c298b408bfba3dde15e method=POST status=200
+  9) [mobile] › tests\home-collection-visual.spec.ts:23:56 › pl: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-pl--5feb9--conditions-and-catalog-CTA-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:34808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[13/22] [mobile] › tests\home-collection-visual.spec.ts:23:56 › en: real previews, criteria, photos, essential conditions and catalog CTA
+[WebServer] INFO:hoptrip.requests:request_id=38f4f02885b044cabf29fc2c1b943b99 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dc8f8bc6c27c45ce9691db22030b66b9 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=94fdbe34eca641a5a5189b6c69ab1d21 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=46047b3142e9401aae3a00298e116bf1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8ab9d7d0ad4a4578932950fb46a92d71 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e96c35a494674892a39be3e73fb9bef6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9d472f014e184c26bf09577e12f79147 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c59965543e2340eebf1d84c7a657b553 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9c04c50fff214864a436efbffd1c473c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ffcba3aa52ee44dabbad3a54840e73e1 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf54266179234ad993533f7f79f9de84 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0ab466cdba2541dda66894175b79a347 method=POST status=200
+
+  10) [mobile] › tests\home-collection-visual.spec.ts:23:56 › en: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-en--11720--conditions-and-catalog-CTA-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-en--11720--conditions-and-catalog-CTA-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-en--11720--conditions-and-catalog-CTA-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:56444) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[14/22] [mobile] › tests\home-collection-visual.spec.ts:23:56 › ru: real previews, criteria, photos, essential conditions and catalog CTA
+[WebServer] INFO:hoptrip.requests:request_id=13aacc0466674363ab272e5f98ac4283 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ff0dd326c9dd44de87cd1608cee7193f method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=650c887173a84bd6ace47249f693bebf method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=162a3a29085944a4916faab5f2bbd5c9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd1bf44091984b1594b507642e43ad83 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a371b530f44a4c0b867111e2660d134d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6ae6f2dd525345c1b7ea9f313d995293 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b10db193e87a42ed9cc817654be9586e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c0c75b0c21ef44b387366c9166849fd1 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f9d02d847bb4450997bbb9d11fdbc101 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=723a7bc6aee54ce0be3fc527afcd0eec method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=48658fef3c364f62bb6e9d231a319024 method=POST status=200
+  11) [mobile] › tests\home-collection-visual.spec.ts:23:56 › ru: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-ru--57d8f--conditions-and-catalog-CTA-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:19284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[15/22] [mobile] › tests\home-collection-visual.spec.ts:23:56 › uk: real previews, criteria, photos, essential conditions and catalog CTA
+[WebServer] INFO:hoptrip.requests:request_id=9f4eaf8fc55246108621585834363aa9 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=defd40456a72478a853c16c1b2264b70 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=37c11613f34a4353a149eabc6a7d2322 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=badddfde7c3f48a0a1b4b0bd1cba1146 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e813b42fece34d06b3c35c738b225892 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=90d5e357e5be4ff4a27f7dec5d3d41c2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2e33233f5ac04fd789211add774f1a3e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a032c716ad1f4fbd878947f3d325fd66 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bf1fe3992651444faa36c8f3dbebc199 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7bb1403dfe104bcb90cbfebf0335706d method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=b11acffc44104fb4909a6e0777e26722 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=792a619e7e5048538921e9e1d0743a34 method=POST status=200
+
+  12) [mobile] › tests\home-collection-visual.spec.ts:23:56 › uk: real previews, criteria, photos, essential conditions and catalog CTA 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+    Expected: "empty"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.home-collections').locator('[data-collection="calendar-weekend"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-collection="calendar-weekend"]')
+        14 × locator resolved to <section data-state="ready" class="vkItlW_collection" data-collection="calendar-weekend" aria-labelledby="collection-calendar-weekend">…</section>
+           - unexpected value "ready"
+
+
+      32 |   await expect(collection).toContainText(copy.criteria[definition.id]);
+      33 |   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
+    > 34 |   await expect(collection).toHaveAttribute('data-state',definition.id==='calendar-weekend'?'empty':'ready');
+         |                            ^
+      35 |   await expect(collection.locator('.deal-card')).toHaveCount(definition.id==='calendar-weekend'?0:2);
+      36 |  }
+      37 |  const budget=section.locator('[data-collection="under-300"]');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:34:28
+
+    Error Context: test-results\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-uk--7714e--conditions-and-catalog-CTA-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:50696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[16/22] [mobile] › tests\home-collection-visual.spec.ts:64:5 › origin transitions hide previous snapshots, last selection wins and Back restores the right offers
+[WebServer] INFO:hoptrip.requests:request_id=e2e01e63d6124eb987d036d0ee400e91 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0cc5ba44490a467b9b18bb9f40097e76 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=39b47df3d7e44aacbd1e6f69b277dd2f method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4b38b62970a94c07ace7d0a1267af222 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=995780cbaec14c6d8d894c2809155f77 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2600ffeac5c44dca8ccbc744adee37ce method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=be63c1f2cc164c9bb7b4b5de76eec266 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8810479df72f49f088cce18425cc8e46 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=774c59fe2ba84e45b7dd58d812ffa340 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4ff3e4519cbb476d8c6e533ad2779d7d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f607f6e15eaa4e7cb5687d8da03fce8a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ba9b39b6e36545e5b065324430dc380b method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b30aa8c4b771459c895c2d1d941e7550 method=POST status=200
+
+  13) [mobile] › tests\home-collection-visual.spec.ts:64:5 › origin transitions hide previous snapshots, last selection wins and Back restores the right offers 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.home-collections').locator('.deal-card')
+    Expected: 4
+    Received: 5
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.home-collections').locator('.deal-card') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('.deal-card')
+        14 × locator resolved to 5 elements
+           - unexpected value "5"
+
+
+      66 |  await page.goto('/?origin=KTW');
+      67 |  const section=page.locator('.home-collections'),input=page.locator('#home-origin');
+    > 68 |  await expect(section.locator('.deal-card')).toHaveCount(4);
+         |                                              ^
+      69 |  await input.fill('GDN');await input.press('ArrowDown');await input.press('Enter');
+      70 |  await expect(section).toHaveAttribute('aria-busy','true');await expect(section.locator('[data-collection]')).toHaveCount(0);
+      71 |  await input.fill('WAW');await input.press('ArrowDown');await input.press('Enter');
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:68:46
+
+    Error Context: test-results\home-collection-visual-ori-2d53c-k-restores-the-right-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-ori-2d53c-k-restores-the-right-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-ori-2d53c-k-restores-the-right-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:15500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[17/22] [mobile] › tests\home-collection-visual.spec.ts:82:5 › one real offer per preview needs no filler and missing licensed image keeps the flight action
+[WebServer] INFO:hoptrip.requests:request_id=3f1f59daa6704ab3957a1d9fc650614a method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8f8fa92a71b24af6b38be7c32d13c520 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd4c7ee3e1874c11b50756df5c94cdd4 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=915cf3f51eb648fd8193eb05f29ce5c4 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f524de362104434fb8ed4c0ea0621cc2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eb404937bf9045548d16fbf14b920322 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0729fc5433234ef9ab7e03a421e6e803 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3450c5259f78435ebe02622428e3ba2e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7ab4d3930afe47058bb43e9ba18d86de method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9b6889e04e2940a68f727a20b53a6cf3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4db16f73ff9544f59b6779ec230434c4 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=6e61e2079d8c46229bb743a819075d1e method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f6d76b7a4ffd47889600637f2a2b2bb1 method=POST status=200
+  14) [mobile] › tests\home-collection-visual.spec.ts:82:5 › one real offer per preview needs no filler and missing licensed image keeps the flight action 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-collection="upcoming-short"]').getByText('Zdjęcie niedostępne', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('[data-collection="upcoming-short"]').getByText('Zdjęcie niedostępne', { exact: true }) with timeout 5000ms
+      - waiting for locator('[data-collection="upcoming-short"]').getByText('Zdjęcie niedostępne', { exact: true })
+
+
+      86 |   const collection=page.locator(`[data-collection="${id}"]`);
+      87 |   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);
+    > 88 |   await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);
+         |                                                                               ^
+      89 |   await expect(collection.locator('.deal-card-link')).toHaveAttribute('href',/\/deals\/weekend-fixture-/);
+      90 |  }
+      91 |  await page.locator('[data-collection="under-300"] .deal-card-link').click();await expect(page).toHaveURL(/\/deals\/weekend-fixture-/);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:88:79
+
+    Error Context: test-results\home-collection-visual-one-693ec-age-keeps-the-flight-action-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-one-693ec-age-keeps-the-flight-action-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-one-693ec-age-keeps-the-flight-action-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:23008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[18/22] [mobile] › tests\home-collection-visual.spec.ts:94:70 › weekend-error: independent errors preserve other previews and retry recovers
+
+[WebServer] INFO:hoptrip.requests:request_id=38e4cac1ffb14e18982a870af8109341 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=1d4579a6f95148f79e217f31b1e0627e method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4e966054ccc740a98db1b84c3286d8af method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e8f1c2f0e3e942788474e97a708a0ac0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=32f9bcd6e50d4e7f8f0764fe5748be42 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=52e52daabe694b9a9b8c354b78b778dc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=180cc24afbd24fc1a8cdeaaa4b85644c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=82232443ebe14458a9029cc827a7c9b3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2acd2317a2284696b4bf42b96589b2c2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e5eb41a6f2b1404c8fb380332c8fa954 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4310f0ec129a4ad88a9c7b40cd19445b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=91744230100846df9a27ca9ca288ca44 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=20bda082985c48a9a5dc00b8ba870ba7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ff1046ed46304f47853581a7b0629644 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7c0ebf8de4cc483699874d384f0928d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=861516a069c74377afa6c14624355522 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d5b57cba41464ba990739d05b09c9be5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4384001f10354ff09dbc343deb46c473 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=c4b20cecc1cc4c06a1a438b348e11528 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d8eeb1f946fa48e3a4ea96a57c7101be method=POST status=200
+[19/22] [mobile] › tests\home-collection-visual.spec.ts:94:70 › weekend-broad: independent errors preserve other previews and retry recovers
+[WebServer] INFO:hoptrip.requests:request_id=0df8aebec90d416db8961c44602ff51d method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c9ed008a87446da976737053bc2adcd method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6f5449cefe0340fda2300739b04b0ea9 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=766082dd130a4e37850c102938480fa3 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b59266a7591048349f6f42b603934a5b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=729427b3b4654449823fa47145073d0a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a6b3e719b5c24bddbb7db1be7312aa2d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3c3c28972c5d45daac447358adff5e08 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1cec22d180264c3aa6dbf2ad368bc550 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=31ea985ed17a4db8befce2031e0f6bfc method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=844c820ec12042e9836650efd3a8df3d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ad6ebac3086946558534b2b6c13f5fb4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4f41e48496ae4800984b5ac8d588cbd6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cd5d72243c8c4c92a47037b488dd0513 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=abf3ca422b504993ac20f8929d2219dc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f6b2bc7ff4a9417d974e7448d15e4f8d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0a0199f526d244e6a036cb03b8b6b0cc method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e94d91ae056d4ef791b957b3528972b3 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=f2796c5b02734e12aa75b070ffcbeff1 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=305988270b6f4d7493d0ed1ebe7e82af method=POST status=200
+
+[20/22] [mobile] › tests\home-collection-visual.spec.ts:103:5 › failed photo preserves frame, credit, conditions and the real offer action
+[WebServer] INFO:hoptrip.requests:request_id=15200ce694fe41d29b66fbbbe33e008f method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5178e68eb3df41b79abfeb5529252c13 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d85fe920be244c2a9c17ae00ec0be672 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2bc900a2e9d64d79aaae94b759bc98b3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c9f0f2239d9e4bb4b98a0e3d624346d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b4018a70296043dfa6461cf18348fb52 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4f3fd48da3704cb3af149c8e175d7380 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=93be1279de3e41b2ab044e90dcb7bf4a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=de2c4eaac32b475399d897cc4475820d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ddc11963e64746b4a576441907a391fb method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e4583369c265490293172adf213aba14 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7de15d1fad9e4186bd557684f5669eb2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6ef74f6bbce546b79e14338f1c4fd807 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b586971962da4178961845163dc53dc5 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fca5f9fbe1844222a9edd3caa2953349 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3e5c6113ef46457cab3b35fe551e9d25 method=GET status=404
+
+[21/22] [mobile] › tests\home-collection-visual.spec.ts:113:5 › expiry invalidates a preview without presenting stale prices as current availability
+[WebServer] INFO:hoptrip.requests:request_id=204f092c4da74fa89cad63803a414c5e method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=db5b1b833165423ca84fc9b67fd9060b method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b3c6428ba4d64be88e70ea1aa7ed6b04 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=63abfff773694b90b148d8a4458d0077 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fc30caecc99a4cdb86b1b1240b2b719d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5c2d7379051b433db2b16b36b4c9bd6f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fc3a9c420789463593a818bb5e0bdede method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f0d07850a28443f8a220c06d0ea8b1ad method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ac483360cb7442c581af31b4da429986 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=45b6797b47684da089818e0a193c54f6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f3f30011113c428bb4522fb71d64090d method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6842352809464cd387706d57708f89e5 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87203e1a5d4a4e918eb742f21706c331 method=POST status=200
+  15) [mobile] › tests\home-collection-visual.spec.ts:113:5 › expiry invalidates a preview without presenting stale prices as current availability 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.home-collections').locator('[data-state="ready"]')
+    Expected: 2
+    Received: 3
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" locator('.home-collections').locator('[data-state="ready"]') with timeout 5000ms
+      - waiting for locator('.home-collections').locator('[data-state="ready"]')
+        14 × locator resolved to 3 elements
+           - unexpected value "3"
+
+
+      114 |  await page.clock.install();await request.post(`${fixture}/__test__/home-collections?scenario=expiring`);
+      115 |  await page.goto('/?origin=KTW');const section=page.locator('.home-collections');
+    > 116 |  await expect(section.locator('[data-state="ready"]')).toHaveCount(2);await expect(section.locator('.deal-card')).toHaveCount(4);
+          |                                                        ^
+      117 |  await page.clock.fastForward(20000);await expect(section.locator('[data-state="unavailable"]')).toHaveCount(2);
+      118 |  await expect(section.locator('.deal-card')).toHaveCount(0);await expect(section.getByText(collectionCopy.pl.expired,{exact:true})).toHaveCount(2);
+      119 |  await expect(section.locator('[data-state="empty"]')).toHaveCount(1);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:116:56
+
+    Error Context: test-results\home-collection-visual-exp-c36b2-ces-as-current-availability-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-exp-c36b2-ces-as-current-availability-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-exp-c36b2-ces-as-current-availability-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:17424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[22/22] [mobile] › tests\home-collection-visual.spec.ts:122:5 › collection and flight links are present without JavaScript in all four locales
+
+[WebServer] INFO:hoptrip.requests:request_id=f4c14cbd9af1420695ff70a33f0ee7f8 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=40e18410b6004961aebf6236e8c349a9 method=POST status=200
+[WebServer] INFO:hoptrip.requests:request_id=db681a44d13043deab3b1a80c841d6d4 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=72137c8bd99e4d1cb74269fd33889d99 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e66c97da0cd44590ac5b8388c2863eb5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c7428419999b4d70b651d43f902d9713 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0440ff4227114be18acb6f1db3852041 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2527e0fc66ae42ed808e16984445c696 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=707882dc073245d0a8b76baff9c464c3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e1fd840fd7854a2eb91ee2fad06cb155 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=39f88abb5f4040feb669819df08f4063 method=POST status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a81b91d7d33e4871a4522a99d42aea35 method=POST status=200
+  16) [mobile] › tests\home-collection-visual.spec.ts:122:5 › collection and flight links are present without JavaScript in all four locales 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('link[rel="canonical"]')
+    Expected: "http://127.0.0.1:3125/"
+    Received: "http://127.0.0.1:3125"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('link[rel="canonical"]') with timeout 5000ms
+      - waiting for locator('link[rel="canonical"]')
+        13 × locator resolved to <link rel="canonical" href="http://127.0.0.1:3125"/>
+           - unexpected value "http://127.0.0.1:3125"
+
+
+      125 |   const response=await page.goto(localizedHref('/?origin=KTW',locale));expect(response?.status()).toBe(200);
+      126 |   await expect(page.locator('html')).toHaveAttribute('lang',locale);
+    > 127 |   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',String(info.project.use.baseURL)+localizedHref('/',locale));
+          |                                                       ^
+      128 |   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/^index,/);
+      129 |   for(const definition of homeCollectionDefinitions('KTW'))await expect(page.locator(`[data-collection="${definition.id}"] > div > a`)).toHaveAttribute('href',localizedHref(definition.href,locale));
+      130 |   await expect(page.locator('.home-collections .deal-card-link')).toHaveCount(4);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-09b-20261104\apps\web\tests\home-collection-visual.spec.ts:127:55
+
+    Error Context: test-results\home-collection-visual-col-7d10e-aScript-in-all-four-locales-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\home-collection-visual-col-7d10e-aScript-in-all-four-locales-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\home-collection-visual-col-7d10e-aScript-in-all-four-locales-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  16 failed
+    [desktop] › tests\home-collection-visual.spec.ts:23:56 › pl: real previews, criteria, photos, essential conditions and catalog CTA 
+    [desktop] › tests\home-collection-visual.spec.ts:23:56 › en: real previews, criteria, photos, essential conditions and catalog CTA 
+    [desktop] › tests\home-collection-visual.spec.ts:23:56 › ru: real previews, criteria, photos, essential conditions and catalog CTA 
+    [desktop] › tests\home-collection-visual.spec.ts:23:56 › uk: real previews, criteria, photos, essential conditions and catalog CTA 
+    [desktop] › tests\home-collection-visual.spec.ts:64:5 › origin transitions hide previous snapshots, last selection wins and Back restores the right offers 
+    [desktop] › tests\home-collection-visual.spec.ts:82:5 › one real offer per preview needs no filler and missing licensed image keeps the flight action 
+    [desktop] › tests\home-collection-visual.spec.ts:113:5 › expiry invalidates a preview without presenting stale prices as current availability 
+    [desktop] › tests\home-collection-visual.spec.ts:122:5 › collection and flight links are present without JavaScript in all four locales 
+    [mobile] › tests\home-collection-visual.spec.ts:23:56 › pl: real previews, criteria, photos, essential conditions and catalog CTA 
+    [mobile] › tests\home-collection-visual.spec.ts:23:56 › en: real previews, criteria, photos, essential conditions and catalog CTA 
+    [mobile] › tests\home-collection-visual.spec.ts:23:56 › ru: real previews, criteria, photos, essential conditions and catalog CTA 
+    [mobile] › tests\home-collection-visual.spec.ts:23:56 › uk: real previews, criteria, photos, essential conditions and catalog CTA 
+    [mobile] › tests\home-collection-visual.spec.ts:64:5 › origin transitions hide previous snapshots, last selection wins and Back restores the right offers 
+    [mobile] › tests\home-collection-visual.spec.ts:82:5 › one real offer per preview needs no filler and missing licensed image keeps the flight action 
+    [mobile] › tests\home-collection-visual.spec.ts:113:5 › expiry invalidates a preview without presenting stale prices as current availability 
+    [mobile] › tests\home-collection-visual.spec.ts:122:5 › collection and flight links are present without JavaScript in all four locales 
+  6 passed (2.4m)

@@ -8,6 +8,8 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
  ],sections:[
   {title:"What enters the comparison",paragraphs:[
    scoreText("en","grouping"),
+   scoreText("en","currencyPolicy"),
+   scoreText("en","exclusions"),
    "We compare flight prices per person in PLN. However, a group does not guarantee the same destination airport, baggage, flight times, airline or booking change conditions. Check these with the seller before purchase; the historical comparison does not make them equivalent.",
   ]},
   {title:"Understanding the percentage below the median",paragraphs:[
@@ -15,6 +17,7 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
    "Calculation example only: with a median of 400 PLN and an observation of 300 PLN, the difference is 25%. These amounts are not a travel offer. Without a historical comparison, there is no basis for stating savings; zero in this field does not prove a typical price.",
   ]},
   {title:"The score helps order offers",paragraphs:[
+   scoreText("en","rankingPolicy"),
    "The 0–100 offer score combines price against history (up to 60 points), observation count (up to 25 points) and data freshness (up to 15 points). It is an auxiliary index using HopTrip's chosen weights, not an airline rating or a purchase probability. From the card, open the price comparison and expand the calculation to see the percentage and point breakdown. On the offer page, the same calculation is available in ‘Price against history’.",
    "With at least 5 observations and a valid median, a price equal to the median gives 30 out of 60 points. Each 1% below the median adds 0.6 points; each 1% above subtracts 0.6 points. We cap this component at 0–60. With less history or an unknown median, we assume a neutral 30 points and mark the score as provisional. This is an assumption, not confirmation of a bargain.",
    "History receives 25 × min(observation count / 30, 1) points. These are recorded observations, not independent sellers. The sample can include the current price and need not represent the whole market. Freshness contributes up to 15 points: points decrease linearly with observation age to 0 after 48 hours. An invalid timestamp or an expired offer means 0 freshness points. If the source gives no price observation time, we use the first recording of that observation in HopTrip, without promising a live price.",
@@ -28,6 +31,8 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
  ],sections:[
   {title:"Что входит в сравнение",paragraphs:[
    scoreText("ru","grouping"),
+   scoreText("ru","currencyPolicy"),
+   scoreText("ru","exclusions"),
    "Мы сравниваем цены перелёта на человека в PLN. Однако группа не гарантирует одинаковый аэропорт назначения, багаж, время перелёта, перевозчика или условия изменения бронирования. Перед покупкой проверьте это у продавца; историческое сравнение не делает эти условия одинаковыми.",
   ]},
   {title:"Как понимать процент ниже медианы",paragraphs:[
@@ -35,6 +40,7 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
    "Только расчётный пример: при медиане 400 PLN и наблюдении 300 PLN разница составляет 25%. Эти суммы не являются предложением поездки. Без исторического сравнения нет оснований указывать экономию; ноль в этом поле не доказывает, что цена типична.",
   ]},
   {title:"Оценка помогает упорядочить предложения",paragraphs:[
+   scoreText("ru","rankingPolicy"),
    "Оценка предложения 0–100 объединяет цену на фоне истории (до 60 баллов), число наблюдений (до 25 баллов) и свежесть данных (до 15 баллов). Это вспомогательный индекс с весами HopTrip, а не оценка авиакомпании или вероятность покупки. Из карточки откройте сравнение цены, затем разверните расчёт, чтобы увидеть процент и распределение баллов. На странице предложения тот же расчёт доступен в разделе «Цена на фоне истории».",
    "При минимум 5 наблюдениях и корректной медиане цена на уровне медианы даёт 30 из 60 баллов. Каждый 1% ниже медианы добавляет 0,6 балла; каждый 1% выше вычитает 0,6 балла. Результат этой части ограничен диапазоном 0–60. При меньшей истории или неизвестной медиане принимаем нейтральные 30 баллов и помечаем оценку как предварительную. Это допущение, а не подтверждение выгодности.",
    "За историю начисляем 25 × min(число наблюдений / 30, 1) баллов. Это сохранённые наблюдения, а не число независимых продавцов. Выборка может включать текущую цену и не обязана представлять весь рынок. Свежесть даёт до 15 баллов: баллы линейно уменьшаются с возрастом наблюдения до 0 через 48 часов. Некорректное время или истечение предложения означают 0 баллов за свежесть. Если источник не сообщает время наблюдения цены, используем первое сохранение этого наблюдения в HopTrip, без обещания цены в реальном времени.",
@@ -48,6 +54,8 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
  ],sections:[
   {title:"Що входить до порівняння",paragraphs:[
    scoreText("uk","grouping"),
+   scoreText("uk","currencyPolicy"),
+   scoreText("uk","exclusions"),
    "Ми порівнюємо ціни перельоту на людину в PLN. Однак група не гарантує однакового аеропорту призначення, багажу, часу перельоту, перевізника чи умов зміни бронювання. Перед купівлею перевірте це в продавця; історичне порівняння не робить ці умови однаковими.",
   ]},
   {title:"Як розуміти відсоток нижче медіани",paragraphs:[
@@ -55,6 +63,7 @@ export const priceGuide:Record<Exclude<Locale,"pl">,Translation>={
    "Лише розрахунковий приклад: за медіани 400 PLN і спостереження 300 PLN різниця становить 25%. Ці суми не є пропозицією подорожі. Без історичного порівняння немає підстав указувати економію; нуль у цьому полі не доводить, що ціна типова.",
   ]},
   {title:"Оцінка допомагає впорядкувати пропозиції",paragraphs:[
+   scoreText("uk","rankingPolicy"),
    "Оцінка пропозиції 0–100 поєднує ціну на тлі історії (до 60 балів), кількість спостережень (до 25 балів) і свіжість даних (до 15 балів). Це допоміжний індекс із вагами HopTrip, а не оцінка авіакомпанії чи ймовірність купівлі. Із картки відкрийте порівняння ціни, а потім розгорніть розрахунок, щоб побачити відсоток і розподіл балів. На сторінці пропозиції той самий розрахунок доступний у розділі «Ціна на тлі історії».",
    "За щонайменше 5 спостережень і коректної медіани ціна на рівні медіани дає 30 із 60 балів. Кожен 1% нижче медіани додає 0,6 бала; кожен 1% вище віднімає 0,6 бала. Результат цієї частини обмежений діапазоном 0–60. За меншої історії або невідомої медіани приймаємо нейтральні 30 балів і позначаємо оцінку як попередню. Це припущення, а не підтвердження вигідності.",
    "За історію нараховуємо 25 × min(кількість спостережень / 30, 1) балів. Це збережені спостереження, а не кількість незалежних продавців. Вибірка може містити поточну ціну й не обов’язково представляє весь ринок. Свіжість дає до 15 балів: бали лінійно зменшуються з віком спостереження до 0 через 48 годин. Некоректний час або завершення строку пропозиції означають 0 балів за свіжість. Якщо джерело не повідомляє часу спостереження ціни, використовуємо перше збереження цього спостереження в HopTrip, без обіцянки ціни в реальному часі.",

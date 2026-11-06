@@ -1,0 +1,76 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_______________ test_real_api_to_queue_to_mock_telegram_journey _______________
+
+api_client = <starlette.testclient.TestClient object at 0x000001F1C2DC98E0>
+isolated_db = <sqlalchemy.orm.session.Session object at 0x000001F1C2B0FE60>
+
+    def test_real_api_to_queue_to_mock_telegram_journey(api_client, isolated_db):
+        now, settings, sender = datetime.now(UTC), config(), Sender()
+        settings.alerts_digest_hour = settings.alerts_digest_minute = 0
+        app.dependency_overrides[get_settings] = lambda: settings
+        deal = offer(isolated_db)
+        deal.last_verified_at, deal.expires_at = now, now + timedelta(hours=2)
+        for travel in isolated_db.scalars(select(TravelOffer)):
+            travel.last_verified_at = now
+        isolated_db.commit()
+        header = {'X-Telegram-Bot-Api-Secret-Token': settings.telegram_webhook_secret.get_secret_value()}
+    
+        def post(text, number):
+            response = api_client.post('/api/v1/telegram/webhook', headers=header,
+                                       json=update(number, text, now=now))
+            assert response.status_code == 200
+    
+        post('/subscribe origin=WRO budget=190 frequency=daily', 1)
+        # Webhook timestamps its queue row after the request begins; dispatch after it is due.
+        assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=1))['sent'] == 1
+        assert message('confirm', 'pl') in sender.messages[-1][1]
+        post('/confirm', 2)
+        delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=3))
+        assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=5))['sent'] == 0
+        post('/set budget=230', 3)
+        delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=7))
+>       assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=9))['sent'] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_telegram.py:269: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:app.services.telegram_subscriptions:Telegram preferences pending confirmation
+INFO:hoptrip.requests:request_id=f03e9ac8e2cf4efa8c5d04a0ad80b0a8 method=POST status=200
+INFO:httpx:HTTP Request: POST http://testserver/api/v1/telegram/webhook "HTTP/1.1 200 OK"
+INFO:app.services.telegram_delivery:Telegram message submitted
+INFO:app.services.telegram_subscriptions:Telegram opt-in confirmed
+INFO:hoptrip.requests:request_id=dfacff3225c7437c95b3cf149d37017a method=POST status=200
+INFO:httpx:HTTP Request: POST http://testserver/api/v1/telegram/webhook "HTTP/1.1 200 OK"
+INFO:app.services.telegram_delivery:Telegram message submitted
+INFO:app.services.telegram_subscriptions:Telegram preferences updated
+INFO:hoptrip.requests:request_id=e59bd34c3bdb4d96bb1aee233e1897ef method=POST status=200
+INFO:httpx:HTTP Request: POST http://testserver/api/v1/telegram/webhook "HTTP/1.1 200 OK"
+INFO:app.services.telegram_delivery:Telegram message submitted
+------------------------------ Captured log call ------------------------------
+INFO     app.services.telegram_subscriptions:telegram_subscriptions.py:125 Telegram preferences pending confirmation
+INFO     hoptrip.requests:security.py:33 request_id=f03e9ac8e2cf4efa8c5d04a0ad80b0a8 method=POST status=200
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/telegram/webhook "HTTP/1.1 200 OK"
+INFO     app.services.telegram_delivery:telegram_delivery.py:155 Telegram message submitted
+INFO     app.services.telegram_subscriptions:telegram_subscriptions.py:130 Telegram opt-in confirmed
+INFO     hoptrip.requests:security.py:33 request_id=dfacff3225c7437c95b3cf149d37017a method=POST status=200
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/telegram/webhook "HTTP/1.1 200 OK"
+INFO     app.services.telegram_delivery:telegram_delivery.py:155 Telegram message submitted
+INFO     app.services.telegram_subscriptions:telegram_subscriptions.py:147 Telegram preferences updated
+INFO     hoptrip.requests:security.py:33 request_id=e59bd34c3bdb4d96bb1aee233e1897ef method=POST status=200
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/api/v1/telegram/webhook "HTTP/1.1 200 OK"
+INFO     app.services.telegram_delivery:telegram_delivery.py:155 Telegram message submitted
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\docs\h3-18b2\telegram-recheck.xml -
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_telegram.py::test_real_api_to_queue_to_mock_telegram_journey
+1 failed, 2 warnings in 0.33s

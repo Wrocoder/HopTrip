@@ -65,11 +65,13 @@ export const content:Record<string,InfoContent> = {
  "price-comparison":{
   title:"Jak porównujemy ceny lotów",
   description:"Co oznacza porównanie z medianą w HopTrip i co sprawdzić, zanim wybierzesz lot.",
-  draft:false,reviewedAt:"2026-09-27",
+  draft:false,reviewedAt:"2026-11-04",
   paragraphs:["Niska cena i dobry wybór podróży nie zawsze oznaczają to samo. HopTrip porównuje zapisane ceny lotów, ale decyzja wymaga też sprawdzenia dat, lotnisk i warunków biletu. Oto jak czytać nasze porównanie."],
   sections:[
    {title:"Co trafia do porównania",paragraphs:[
     scoreText("pl","grouping"),
+    scoreText("pl","currencyPolicy"),
+    scoreText("pl","exclusions"),
     "Porównujemy ceny lotu na osobę w PLN. Taka grupa nie gwarantuje jednak tego samego lotniska docelowego, identycznego bagażu, godzin lotu, przewoźnika ani warunków zmiany rezerwacji. Przed zakupem sprawdź te elementy u sprzedawcy; historyczne porównanie ich nie wyrównuje.",
    ]},
    {title:"Jak rozumieć procent poniżej mediany",paragraphs:[
@@ -77,6 +79,7 @@ export const content:Record<string,InfoContent> = {
     "Przykład wyłącznie obliczeniowy: przy medianie 400 PLN i obserwacji 300 PLN różnica wynosi 25%. Te kwoty nie są ofertą podróży. Gdy brakuje porównania historycznego, nie mamy podstaw do wskazania oszczędności; zero w tym polu nie dowodzi, że cena jest typowa.",
    ]},
    {title:"Ocena pomaga uporządkować oferty",paragraphs:[
+    scoreText("pl","rankingPolicy"),
     "Ocena oferty 0–100 łączy cenę na tle historii (do 60 pkt), liczbę obserwacji (do 25 pkt) i świeżość danych (do 15 pkt). To pomocniczy indeks według przyjętych przez HopTrip wag, a nie ocena linii lotniczej ani prawdopodobieństwo zakupu. Kliknij „Jak porównujemy cenę?” na karcie, a następnie rozwiń obliczenia, aby zobaczyć procent i podział punktów. Na stronie oferty ten sam rachunek można rozwinąć w sekcji „Cena na tle historii”.",
     "Przy co najmniej 5 obserwacjach i poprawnej medianie cena równa medianie daje 30 z 60 pkt. Każdy 1% poniżej mediany dodaje 0,6 pkt; każdy 1% powyżej odejmuje 0,6 pkt. Wynik tej części ograniczamy do 0–60. Gdy historii jest mniej lub mediana jest nieznana, przyjmujemy neutralne 30 pkt i oznaczamy ocenę jako wstępną. To założenie, nie potwierdzenie okazji.",
     "Za historię przyznajemy 25 × min(liczba obserwacji / 30, 1) pkt. Są to zapisane obserwacje, a nie liczba niezależnych sprzedawców. Próba może zawierać obecną cenę i nie musi reprezentować całego rynku. Świeżość daje do 15 pkt: punkty maleją liniowo z wiekiem obserwacji do 0 po 48 godzinach. Brak poprawnego czasu lub wygaśnięcie oferty oznacza 0 pkt za świeżość. Jeśli źródło nie podaje czasu znalezienia ceny, używamy pierwszego zapisania tej obserwacji w HopTrip, bez obietnicy ceny na żywo.",

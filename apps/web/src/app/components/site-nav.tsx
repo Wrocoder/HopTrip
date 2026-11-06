@@ -25,7 +25,7 @@ export function SiteNav() {
  const links=[
   {href:"/deals",label:labels.flights},
   {href:"/tanie-loty-na-weekend",label:labels.weekend},
-  {href:"/#home-destinations",label:labels.destinations},
+  {href:"/destinations",label:labels.destinations},
   {href:"/saved",label:labels.saved},
   {href:"/info/trip-budget",label:labels.budget},
  ];

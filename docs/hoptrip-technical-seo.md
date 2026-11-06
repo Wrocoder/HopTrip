@@ -60,7 +60,7 @@ HTML проверялся в Chromium с JavaScript выключенным и Us
 
 Итог: 49 страниц sitemap и 44 уникальные внутренние ссылки /info/* проверены;
 9 E2E passed, ESLint и production build с TypeScript прошли, diff check чистый.
-[Машиночитаемый отчёт](hoptrip-seo-audit.json) содержит метаданные и HTTP-статусы.
+Машиночитаемый отчёт (`docs/hoptrip-seo-audit.json`; исторический файл удалён) содержит метаданные и HTTP-статусы.
 Динамические отсутствующие страницы вернули 200 с noindex, /missing-page — 404.
 
 tests/technical-seo.spec.ts обходит все адреса, реально опубликованные sitemap:

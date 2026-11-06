@@ -1,0 +1,526 @@
+{
+  "status": "PASS_FOR_H3_17B1_H3_17_STILL_IN_PROGRESS",
+  "task": "H3-17b1",
+  "scope": "Initial catalogue price and primary flight CTA; true production runner/provenance correction",
+  "production": {
+    "beforeBuildId": "NA7w-XaBBu4PGJs0_XJ5K",
+    "afterBuildId": "XcgpuiIKweYr4QakgIavb",
+    "command": "npm run start --",
+    "nodeEnv": "production",
+    "servedBuildIdAsserted": true,
+    "devPortalAbsentOn64DetailVisits": true
+  },
+  "baseline": {
+    "startTime": "2026-11-05T09:16:13.632Z",
+    "duration": 47685.831,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "browser": {
+    "stats": {
+      "startTime": "2026-11-05T09:18:54.093Z",
+      "duration": 318714.326,
+      "expected": 74,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "unique": 74,
+    "newLayoutCases": 8,
+    "relatedRegressionCases": 36,
+    "productionSpotChecks": {
+      "H3_13": 14,
+      "H3_15": 16
+    },
+    "retries": 0,
+    "cases": [
+      {
+        "file": "compact-cards.spec.ts",
+        "title": "compact cards preserve clocks, missing facts, keyboard access and long names",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "compact-cards.spec.ts",
+        "title": "next-day home arrival is visible without expanding details",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "compact-cards.spec.ts",
+        "title": "compact cards preserve clocks, missing facts, keyboard access and long names",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "compact-cards.spec.ts",
+        "title": "next-day home arrival is visible without expanding details",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "real offer detail, city search and destination directory are reachable without scripts",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "destination-recovery.spec.ts",
+        "title": "real offer detail, city search and destination directory are reachable without scripts",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "critical flight detail and navigation fit 320px in every locale",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "detail-layout.spec.ts",
+        "title": "critical flight detail and navigation fit 320px in every locale",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "pl: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "en: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "ru: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "uk: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "fit changes reset pages and days; independent dates still require explicit search",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "an older API cannot silently ignore the filter; inconsistent assessments fail closed and can be retried",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "a late filter response cannot replace the currently selected mode even when fetch ignores abort",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "pl: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "en: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "ru: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "uk: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "fit changes reset pages and days; independent dates still require explicit search",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "an older API cannot silently ignore the filter; inconsistent assessments fail closed and can be retried",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "a late filter response cannot replace the currently selected mode even when fetch ignores abort",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "pl: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "en: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "ru: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "uk: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "a full search wins over a delayed earlier origin preference response",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "removing a fixed landing constraint opens the general catalog without losing unrelated conditions",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "pl: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "en: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "ru: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "uk: visible primary filters preserve manual overrides, history and reset semantics",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "a full search wins over a delayed earlier origin preference response",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "filter-workflow.spec.ts",
+        "title": "removing a fixed landing constraint opens the general catalog without losing unrelated conditions",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "pl: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "en: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "ru: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "uk: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "pl: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "en: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "ru: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "first-screen-layout.spec.ts",
+        "title": "uk: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "pl: exact modes, work hours, URL history and legacy landing",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "en: exact modes, work hours, URL history and legacy landing",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "ru: exact modes, work hours, URL history and legacy landing",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "uk: exact modes, work hours, URL history and legacy landing",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "too-broad errors are explicit; DST itinerary passes strict mode",
+        "project": "desktop",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "pl: exact modes, work hours, URL history and legacy landing",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "en: exact modes, work hours, URL history and legacy landing",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "ru: exact modes, work hours, URL history and legacy landing",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "uk: exact modes, work hours, URL history and legacy landing",
+        "project": "mobile",
+        "status": "passed"
+      },
+      {
+        "file": "weekend.spec.ts",
+        "title": "too-broad errors are explicit; DST itinerary passes strict mode",
+        "project": "mobile",
+        "status": "passed"
+      }
+    ]
+  },
+  "geometry": "geometry-comparison.json",
+  "sourceParity": "source-parity.json",
+  "node": {
+    "passed": 314,
+    "failed": 0,
+    "skipped": 0
+  },
+  "build": "build.txt",
+  "lint": "lint.txt",
+  "types": "types.txt",
+  "ide": {
+    "status": "PASS",
+    "limitation": "Limited diagnostics; CLI build/types give compiler evidence"
+  },
+  "runner": "production-prepare-check.json",
+  "provenanceCorrection": "runtime-mode-audit.json",
+  "earlierDevelopmentRun": {
+    "stats": {
+      "startTime": "2026-11-05T08:59:06.166Z",
+      "duration": 516690.356,
+      "expected": 44,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "report": "browser-dev.json",
+    "note": "Not production; use() diagnostic observed only here; no claim of application fix"
+  },
+  "notResolved": [
+    "H3-17a CLS0.137–0.292 remains historical lab evidence; no fresh CLS/LCP/INP/RUM run in b1",
+    "H3-11a transient cross-tab cause",
+    "Dev React conditional-use diagnostic cause; not reproduced in this scoped production run",
+    "WebKit/real devices/manual screen reader/whole release gate",
+    "H3-14 external staging/delivery approval"
+  ],
+  "notRun": [
+    "Full API/Ruff/mypy (Python runtime unchanged)",
+    "New full production sitemap crawl (H3-15 historical crawl was dev)",
+    "Production deployment/live partners/notifications/paid API"
+  ],
+  "nextTask": "H3-17b2: layout shifts and remaining quality gate"
+}

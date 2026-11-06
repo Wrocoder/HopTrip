@@ -59,6 +59,7 @@ class EventRead(EventSession):
 
 class EventResults(BaseModel):
     date_mode: Literal["flight", "stay", "other"] = "flight"
+    fit_mode: Literal["all", "possible"] = "all"
     status: Literal["READY", "EMPTY", "UNAVAILABLE", "NEEDS_DATES", "DISABLED", "UNSUPPORTED"]
     events: list[EventRead] = Field(default_factory=list)
     start_date: date | None = None

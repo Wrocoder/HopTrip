@@ -1,0 +1,1336 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test details-open-analytics.spec.ts --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [13180]
+[WebServer] INFO:     Waiting for application startup.
+
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=3b3356e0509147fcaeb7f07025a814ef method=GET status=200
+
+[WebServer] (node:24600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=014e23e1486e4ac5be04d2cd61be8c7d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2740ed4867264b63bc1538f69cdb6691 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c87abaf6661d412097880f591af1352a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1c98feb965ad460fad558d9a21232c1f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6ac6e8f4cc794fc9b4aa09146bdf989d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=78b5e54b89014382a02225f41ae607d8 method=GET status=200
+
+Running 16 tests using 1 worker
+
+
+(node:32900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/16] [desktop] › tests\details-open-analytics.spec.ts:26:56 › pl: modal and native flight disclosures share one offer event per visit
+
+[WebServer] INFO:hoptrip.requests:request_id=404fe109c3eb48c3be0e2f91eb49e638 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=22689b57ec1744be91c96dd851da629e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b076cb1ad05f49cd88ac27957ec4c6f8 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e20f56a4747a4055908b64cdc0acb8ce method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bfddca3183754ac7afedbf009dce3c81 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8949a7b096934c9ebd751afe2362fdb9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=492dd83f25de4200aeef2ab861947874 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9566c454eb594ad1ba374d75588dd8a8 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0d7ff59e619141d0bc93f4b2bbe62484 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b6d1f6d5c6a44c6e8af81a1a4afc2d8c method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=ad918913a81b4a24b2b639085a989cde method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7e4008b2348d415f8aefc6dd076d3496 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=65c7e476a44d4f599a36a05a2425b3f1 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=f69f14004b12492dad61a770e907384f method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=12af9ae207b24c51b620206863293f15 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f51e53461a754a1f96e29577ec6cadc6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d6c378bd823a43f297d16c2177a55817 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2b0af7692c594440832310bae957bf5a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f46510fb1d0244e0a9c2667aabc8e40c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=37938b19243b44a69555ae5bac5839ad method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=060da6bb1188455a86a02bd599b73603 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a55cef33cade433fb43757dad740eccb method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=970f084a89404ada84c76e784afb6843 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a75ba22626544d45a62bee136d383e53 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=0df8e895f91345bca1f138f490689cb0 method=POST status=202
+
+  1) [desktop] › tests\details-open-analytics.spec.ts:26:56 › pl: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "cena i aktualność",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Cena i aktualność\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Cena i aktualność\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "lot i bagaż",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Lot i bagaż\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Lot i bagaż\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-pl--76980-e-one-offer-event-per-visit-desktop\error-context.md
+
+
+
+(node:8568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/16] [desktop] › tests\details-open-analytics.spec.ts:26:56 › en: modal and native flight disclosures share one offer event per visit
+[WebServer] INFO:hoptrip.requests:request_id=049b5d8aa2664800a92640cd497470e0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0f2b189e9f31482ea094e6cedfabdfa7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ab0eb73858db4d2cab5261641fa66330 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=aa53e37c94414765b1515bd84326dc4f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=68e9b275579d4289bc884fb65f170cef method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3cd21aa73a5f470d8c62dc66efb4e189 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=be9c8cc66ac94f16824660f32898b4a2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=09de725fa6114c1a9a076a50275e1253 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e16a2c0c8e0944a7b896ad91a3327f72 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2f0070c95da24bedb81d9332c7a99f2e method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=6c3b817a5f194111843a17b2c77ab53e method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=8dd4b555214d4e53954339e15f7914e7 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=ddfa58cf89d34696b36daee50010abbb method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=150ef33d226e4684a032c2836154694f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f06cfc52a26a40dea54ab79f320537b6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6266a8ec180b463bb0f8334a59674834 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=021ea1b936b646759226e034d47383a6 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=058ac18519ae450ea8056b1ce64dc8dd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=199b3c53ee304380ad512d880da9e14a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=67b72b8e2fb647f7a6c45fe585e97d08 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fd06e16b39ec462fb676a2fdcd136c19 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=b2c82d5b2efd40ae8fb5160bb6778f44 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=8e8c371a4f3448a4863a3b977552739b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=892d9b6cf1614dd083ed6d67d46b277f method=POST status=202
+
+  2) [desktop] › tests\details-open-analytics.spec.ts:26:56 › en: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "price and freshness",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Price and freshness\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Price and freshness\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Price and freshness\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Price and freshness\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "flight and baggage",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Flight and baggage\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Flight and baggage\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Flight and baggage\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Flight and baggage\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-en--fd994-e-one-offer-event-per-visit-desktop\error-context.md
+
+
+
+(node:12860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/16] [desktop] › tests\details-open-analytics.spec.ts:26:56 › ru: modal and native flight disclosures share one offer event per visit
+[WebServer] INFO:hoptrip.requests:request_id=981ad486b4974f198741900cb94947d0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8595258fef004357b642ace007323b73 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7847bb7a41344be8a1f86e3ab2702d5b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6411bcaf3d8840959b60a8967347b8f0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8284d2b3451242448106322dc4492541 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4ba83b7b784b45aa92a95beac45dd8e6 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=45baf6ed7ee24fa995cd76ad9ca2f20d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3a1b3372fe2344e3af4fc0c3fe0c64e3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=10d3ea528e4b424e95d1256f42ba7675 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5a592322cc2d4e59b88c28b416707e5a method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=b688308c672949d1bfdd1f445754195b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=cddca80759894044b6285d0bcadd4e13 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=bb2c2c28994f499daee06988cc1a5918 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=233da6e66b504e80b1d046552a5c5662 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=72501b5d022f4a32ab5d0e2cb3e4d677 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4ea1c89d56c040c0a6db51c34f18ceab method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=279051537a6541178f2bf2ad90be1c35 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=54078b3762444173a072831a30ef0014 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3422ec9a202945f5b13ce281691e488a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=faed1f11c3a142d1a946347c4afe8b5b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4b60c4c700694b608d60f7cba7e83815 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=f1747d69e9b448e5b6ba4e7ce71a4097 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=952eebee97ed488cb693172d8dba8b6c method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=0bfab6e3c0be4219908fcf25f3d5f2f8 method=POST status=202
+  3) [desktop] › tests\details-open-analytics.spec.ts:26:56 › ru: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "цена и актуальность",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Цена и актуальность\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Цена и актуальность\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Цена и актуальность\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Цена и актуальность\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "перелёт и багаж",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Перелёт и багаж\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Перелёт и багаж\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Перелёт и багаж\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Перелёт и багаж\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-ru--c6e24-e-one-offer-event-per-visit-desktop\error-context.md
+
+
+(node:36308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/16] [desktop] › tests\details-open-analytics.spec.ts:26:56 › uk: modal and native flight disclosures share one offer event per visit
+
+[WebServer] INFO:hoptrip.requests:request_id=76d54ca328fa4c179ba9c5b0b1ce2ea1 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=46859cb377334d6eaeaf51f8ef062528 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=63656eb18b774f0690cf264550a091d8 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4c7fe76e511741f6bdc62e1a26ef515d method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3c6437b8c0bb4eb8a8728989c7c0f1e2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=638b7ee2adb049c683ec5eb6b460fefc method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e4f12ca68698480eb6cdb7e2d4748686 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=50192df68af44b3d85139dd780a85d69 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ce016e710d4f45f2a8000e98c3dce5d4 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=624ae0540a134699b478982ce4a1dea5 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=5523e60ad8624394abc38ab05014ebb8 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=94c65687204b46b8a6c4a25d8e353c5d method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=55135d6593214479ad8a4c7c0f1eac92 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=fc73edc1fadb4b5e9265e1ec582af503 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c2b86b48f06c47f3a66dfbcb72956041 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=99f9f460742e4150b2dd93278f688d7e method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=5961bdcbef5248d6b524a2f822941754 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9841483f4b1b4f75a3dde4b51b1fc7c9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=27fb14f5bafa42689a4e6fca69583d12 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7488c078bd064408aa2a866fa16f2d6e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=155c796357884e919dfaa7fd1647fd48 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=68e5f9fcb2ee483dbff24ea2fe29d201 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=0590ef3711754b53bd7c2063a0ce90e2 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a6e3cce44a6a41629af8e5eab3cc794e method=POST status=202
+  4) [desktop] › tests\details-open-analytics.spec.ts:26:56 › uk: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "ціна й актуальність",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Ціна й актуальність\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Ціна й актуальність\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Ціна й актуальність\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Ціна й актуальність\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "переліт і багаж",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Переліт і багаж\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Переліт і багаж\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Переліт і багаж\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Переліт і багаж\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-uk--e9070-e-one-offer-event-per-visit-desktop\error-context.md
+
+
+(node:33796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/16] [desktop] › tests\details-open-analytics.spec.ts:50:5 › direct score calculation is a disclosure; visit and closure are separate
+[WebServer] INFO:hoptrip.requests:request_id=d7e1236e50d04eebb8e76bec6c238c67 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87c52127dcbc4f698731812598b671ee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=78c8736398fb4700aaddb61fc70863e3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=95472a4748ce47e79b500e86465cda3c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e81645eb35584756a8c127195d2c99e0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2aae59b006a24b828b0f5e853c49ede5 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=8e6a4a3ab28e46948462b78cfbdbff28 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=67aede928e4c4d358e9c8a310c5dd769 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=dc98b198093f436c89462666b3f26e33 method=GET status=200
+
+[6/16] [desktop] › tests\details-open-analytics.spec.ts:60:5 › denial/revocation prevent sends; consent grant does not replay already open panels
+[WebServer] INFO:hoptrip.requests:request_id=6a7b342874c6423aabc4260a05e018f4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c61b04bbcf904881952fb8e6343e3e2f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b3f2d532a58f417ab99a72c4285bd7b2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=70bbf311a6644f0d95d49555826652e0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=81d9cc57921d4c14a4466533c9816e07 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f68469e6434f442d96774d3d8f7d94bf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=783d688a5aca4cd99aa112064c0ce513 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d9ff023a83c743a89e4ed75ea65e8756 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4821f373ceb84bf1bb76429a5d985890 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f7f97d1d113447f586da6e07b7e85905 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c55cd75db0d4407b9a7d38c9027015ad method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=758fd2e1ce0b475fa5674a40b16c983a method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=18114b647d8447b0bcf1ac0bfda0bcdb method=POST status=202
+[7/16] [desktop] › tests\details-open-analytics.spec.ts:74:5 › blocked analytics preserves native toggles, modal Escape and focus without retries
+[WebServer] INFO:hoptrip.requests:request_id=3a3badd9a5e44b1cb770dddea4bae0ae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2012fe7b57e44c2fb94dbf9bddd22c10 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5c7b47341fc04f63b164109c05613a96 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0e4c1c2889354332a569032147cc0cf0 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f90347d0236b439fa075ebd668e6d06d method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=e42eae4bf1e441e88b4a2b2dd4da3e69 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=db89c7c1b03b46f4845f41e5f0e4b588 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e074bafbe9954d138aa7e293bfcc70e0 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=1c7c43a71275499da9472069d977e286 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=4354f426458d49109bc20672df261b33 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=040f395fcf8b4eb4ab943fa092bd6470 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b3ba5009f00c494ca2d74bc176b65e55 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e1703f87452a4cbfa947a192c2e03b29 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=aa2b723151c74aa2ac9728a457ec9c14 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=e846ee8a8e154e21a20b03d9a43e4dbe method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=93194d7ad6534dca8d6448930e96cc73 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=c1d5adedd400446d81f02df68243a8ea method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=445dda882bef4393b73c69284b0660e8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5f4cd49e990d4e43b5d544fbf05df6d1 method=GET status=200
+
+[8/16] [desktop] › tests\details-open-analytics.spec.ts:83:5 › server-rendered disclosures and score anchor work with JavaScript disabled
+[WebServer] INFO:hoptrip.requests:request_id=c82361cb524f416180cf6a4c895c73cc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5ed7a2cef2af42a8ac966f2ff1978da1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cc13f2c292a04492b77b42142ba3536d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=039aefc3073743d792498ec1c010e80f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5e4c7a3ff6ca4df3a20ae2509f988a02 method=GET status=200
+
+  5) [desktop] › tests\details-open-analytics.spec.ts:83:5 › server-rendered disclosures and score anchor work with JavaScript disabled 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test ended.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Jak działa pomocniczy wynik sortowania?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      87 |   await page.goto('/deals');const card=page.locator('.deal-card').first();await card.locator('.trip-details > summary').click();await expect(card.locator('.trip-details .price-samples')).toBeVisible();
+      88 |   await card.locator('.score-trigger').click();await expect(page).toHaveURL(/\/deals\/[^/]+#score$/);await expect(page.locator('#score')).toBeVisible();
+    > 89 |   await page.locator('#score .score-calculation > summary').click();await expect(page.locator('#score .score-sum')).toBeVisible();expect(events).toEqual([]);
+         |                                                             ^
+      90 |  }finally{await context.close();}
+      91 | });
+      92 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:89:61
+
+    Error Context: test-results\details-open-analytics-ser-faecc-rk-with-JavaScript-disabled-desktop\error-context.md
+
+
+(node:33532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[9/16] [mobile] › tests\details-open-analytics.spec.ts:26:56 › pl: modal and native flight disclosures share one offer event per visit
+[WebServer] INFO:hoptrip.requests:request_id=19555859caf54bd7a5addf7c26875926 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ec22d19b6a5147d19fb5575cbf23eca9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=102d7081ca794a3cbf3adde754e50471 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4017403eaff740a0b3eb9f3e988d4f91 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1412693671a34fe792cf88146b9a8126 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=14e3ecececc34ad7892f1a0ae099ea9b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1e40309bac2c409bb51b8111832dc3e6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c21ee8913fc94bf385061b3a6b97f93e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fae9112caefb4bf288642de2f46d35d2 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=f3d0ac2a0101412f942d244ab0893c51 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6663c9dbfa924e46bd3de39a889f92dd method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7ba387d4407f4136a330768ce472a4b8 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=afa28d67f3324b42abfc5f1803aca1af method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=1027be1a02644717b8d93575fc6c2a2c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fd56e1845876472e9f0137cf53581fac method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=089643a0cc9442eabb33aab4eeee6a2e method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=8bec469fc0fc44ceac41267f287e9fbd method=POST status=202
+
+  6) [mobile] › tests\details-open-analytics.spec.ts:26:56 › pl: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "cena i aktualność",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Cena i aktualność\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Cena i aktualność\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "lot i bagaż",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Lot i bagaż\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Lot i bagaż\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-pl--76980-e-one-offer-event-per-visit-mobile\error-context.md
+
+
+
+(node:16840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[10/16] [mobile] › tests\details-open-analytics.spec.ts:26:56 › en: modal and native flight disclosures share one offer event per visit
+
+[WebServer] INFO:hoptrip.requests:request_id=804f3da78e824ae696cbde1d79e63322 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3c30e002242c427a97ed0ff4c7afb3c0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4ec84b5d666748829f3bace6360f331e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c1a05eaaae344675a1e3984131709c52 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=318205e16d9b42cda3d847b9480eea48 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=47786b86b68c46dd9e573789c920e55b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3cf3560eaeb54726a50dfbcc155255c3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d6c9458ad2a14428938f30476f1c3a30 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9eb61b7cdc964342ae754738ad067736 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=2d8eae964839427abf75320f8e8e38fd method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a2d7a37b66a64542b52a77e0a337655b method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=9eeb13cbfacf4ec5af5fc1ed9d8e2aa0 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=abb15617ba3b4c52ad5ab07de75c648e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4e99df1c95874855ac93993eb247b1c3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=213899ca74f048d3b12d51fe8a426051 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=390c973984074cdcb3afaaf4267c12c3 method=POST status=202
+
+  7) [mobile] › tests\details-open-analytics.spec.ts:26:56 › en: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "price and freshness",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Price and freshness\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Price and freshness\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Price and freshness\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Price and freshness\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "flight and baggage",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Flight and baggage\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Flight and baggage\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Flight and baggage\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Flight and baggage\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-en--fd994-e-one-offer-event-per-visit-mobile\error-context.md
+
+
+
+(node:18808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[11/16] [mobile] › tests\details-open-analytics.spec.ts:26:56 › ru: modal and native flight disclosures share one offer event per visit
+[WebServer] INFO:hoptrip.requests:request_id=0b31a38b569844dd976bcbfa76a00c12 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a1c7968867ec4a8f88784b8b9daabaa4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6d5f92dc237745e5b2aa1575447f8766 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=06de34409f334699aabd49067d6f1319 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b209f9b0b986484fa7eaa1dfd50bbeff method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e0af29b0b75348cebe61d181d051fb02 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=98c832acd95642749789c93fd49cdacc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3d5835691d924dafac6212430dedfe5b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b13d26f7e8ce486e946e67cce3f91848 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=89fa4d71e2eb443b997ea984ebd9e2ba method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=1f5848566b8a4bb59c9938e455c7e046 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=2388934cc81b4d49bf7d9403daaafe7d method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=1135fab41f8c4987b4dd8cd49dfb4fb6 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6eae6dcfd3b94eab8d74936409f33c53 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=404f56238ec9465989d82b270c9c5b4b method=POST status=202
+  8) [mobile] › tests\details-open-analytics.spec.ts:26:56 › ru: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.deal-card').first().locator('.trip-details')
+    Expected: ""
+    Received: serializes to the same string
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('.deal-card').first().locator('.trip-details') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.trip-details')
+        14 × locator resolved to <details class="trip-details">…</details>
+           - unexpected value "null"
+
+
+      37 |  await page.keyboard.press('Escape');await expect(trigger).toBeFocused();
+      38 |  await trigger.click();await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');
+    > 39 |  const summary=card.locator('.trip-details > summary');await summary.focus();await page.keyboard.press('Enter');await expect(card.locator('.trip-details')).toHaveAttribute('open','');
+         |                                                                                                                                                             ^
+      40 |  expect(opened()).toHaveLength(1);expect(events.filter(event=>event.event_name==='DEAL_VIEW')).toHaveLength(0);
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:39:157
+
+    Error Context: test-results\details-open-analytics-ru--c6e24-e-one-offer-event-per-visit-mobile\error-context.md
+
+
+(node:1788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[12/16] [mobile] › tests\details-open-analytics.spec.ts:26:56 › uk: modal and native flight disclosures share one offer event per visit
+[WebServer] INFO:hoptrip.requests:request_id=f4f1dfede9af49e282f812cb0cc1483a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ede8f0548ab64f1d85c5280140aba443 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=39b96ecca0b047f6bfc000686314e09a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9869787baf64c74bb64b94b91b8f9b8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4e1c15df465f448a8ce754e41243340a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=930706a43227498fb3a89943e27dffec method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3c6c8995ebf54359b986515781479dfd method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1a18726343a8418b9fe02c653030c298 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=db774138e0e6410faede1ded837a1a9f method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=16141c27e5064c01b4400d696a75bca4 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=ee60cae6dc2a403aaed8b8530bd9be83 method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d058409f7aa74154a8df7d9093687eee method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=9a252a9a817e474ebbb2e4197e3d59bb method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dd92d66733c54e1a81a5ab85c61d0993 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=207d96fa5636458b9e91e5b20bfa6809 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=8f4ed3aaed4e48e097e7d7198f291b72 method=POST status=202
+  9) [mobile] › tests\details-open-analytics.spec.ts:26:56 › uk: modal and native flight disclosures share one offer event per visit 
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  -  1
+    + Received  + 75
+
+    - Array []
+    + Array [
+    +   Object {
+    +     "description": "Ensure landmarks are unique",
+    +     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    +     "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+    +     "id": "landmark-unique",
+    +     "impact": "moderate",
+    +     "nodes": Array [
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "ціна й актуальність",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Ціна й актуальність\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Ціна й актуальність\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Ціна й актуальність\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Ціна й актуальність\"]",
+    +         ],
+    +       },
+    +       Object {
+    +         "all": Array [],
+    +         "any": Array [
+    +           Object {
+    +             "data": Object {
+    +               "accessibleText": "переліт і багаж",
+    +               "role": "region",
+    +             },
+    +             "id": "landmark-is-unique",
+    +             "impact": "moderate",
+    +             "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +             "relatedNodes": Array [
+    +               Object {
+    +                 "html": "<section aria-label=\"Переліт і багаж\">",
+    +                 "target": Array [
+    +                   "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Переліт і багаж\"]",
+    +                 ],
+    +               },
+    +             ],
+    +           },
+    +         ],
+    +         "failureSummary": "Fix any of the following:
+    +   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable",
+    +         "html": "<section aria-label=\"Переліт і багаж\">",
+    +         "impact": "moderate",
+    +         "none": Array [],
+    +         "target": Array [
+    +           "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Переліт і багаж\"]",
+    +         ],
+    +       },
+    +     ],
+    +     "tags": Array [
+    +       "cat.semantics",
+    +       "best-practice",
+    +     ],
+    +   },
+    + ]
+
+      41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);
+      42 |  expect(opened()[1].deal_slug).not.toBe(slug);
+    > 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);
+         |                                                                                             ^
+      44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
+      46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:43:93
+
+    Error Context: test-results\details-open-analytics-uk--e9070-e-one-offer-event-per-visit-mobile\error-context.md
+
+
+
+(node:30800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[13/16] [mobile] › tests\details-open-analytics.spec.ts:50:5 › direct score calculation is a disclosure; visit and closure are separate
+[WebServer] INFO:hoptrip.requests:request_id=a2ca6e7397e04fcd9ad2210a05caa3d0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f83eaaec9d114cdfa564e77420c4d4c0 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9af2afcad0d244e4a1479795549847d9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=115d1b6912b54b9b90e65436171818cc method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a84378b66336485290a1dc17104675e8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=26b0f9eb7e4e446eb0ddc288533ed860 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=f1880716eb0d4bd296ca674310d8363b method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=838f678f6c0a4076978c4b2dcc64b9eb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=70b973020c6245e491be1c168eaf41ca method=POST status=202
+[14/16] [mobile] › tests\details-open-analytics.spec.ts:60:5 › denial/revocation prevent sends; consent grant does not replay already open panels
+[WebServer] INFO:hoptrip.requests:request_id=264433cd7d1744e59b16ab2b6150e3e3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=70ad99c8dbb345ac9c0936390d5fa3c4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a84155f7134841bdbd8db864823fe9be method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=93b78e0b95174c0ab4cc8e51b2958220 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=53cb1b3eb247426bb6c2a52ad0efb0c9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eee35370d8cf433697b3b13a4ddefbd5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d77db7ec60f843f9a070f8b6beab8bc2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=67fab978de4c493ca70b707b157d2050 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=13d1251049c54f2aa38afe92b2596c25 method=POST status=202
+[WebServer] INFO:hoptrip.requests:request_id=24129032c9e944798897475cc24eb0f6 method=POST status=202
+
+[15/16] [mobile] › tests\details-open-analytics.spec.ts:74:5 › blocked analytics preserves native toggles, modal Escape and focus without retries
+
+[WebServer] INFO:hoptrip.requests:request_id=e0288b7faa7247a883b7c79019132e26 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fb3353b23d5a42ffb6b8ce4203a1f809 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=616f98a7cab74de8b9310eb9c41d3845 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b29c7acfb27445b39f6fc4bfc065f297 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2e4197d3bfc34689b77d1035a0c737b3 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=99af5e22e52146c6a7a99b2897972843 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=48ad5695bafd4fec92f214ac8c1a2bbb method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fa435251472544a8a87ede1df1cb6980 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e2d0bda972854cfb9136d788b7ceb2c2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=027881d3634f47399150a33f26b67e02 method=POST status=202
+
+[16/16] [mobile] › tests\details-open-analytics.spec.ts:83:5 › server-rendered disclosures and score anchor work with JavaScript disabled
+[WebServer] INFO:hoptrip.requests:request_id=b73d7f7c2c95431c9e406dd9ba98acf8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9028ca1a295b496297481f6d4b46e2af method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f488881ecf7042fba546d82b345d7388 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=868978411dcc41cbb10516618df036a3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=423f5d5fdc0a431880460e8ea5bdc0f4 method=GET status=200
+  10) [mobile] › tests\details-open-analytics.spec.ts:83:5 › server-rendered disclosures and score anchor work with JavaScript disabled 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.click: Test ended.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Jak działa pomocniczy wynik sortowania?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      87 |   await page.goto('/deals');const card=page.locator('.deal-card').first();await card.locator('.trip-details > summary').click();await expect(card.locator('.trip-details .price-samples')).toBeVisible();
+      88 |   await card.locator('.score-trigger').click();await expect(page).toHaveURL(/\/deals\/[^/]+#score$/);await expect(page.locator('#score')).toBeVisible();
+    > 89 |   await page.locator('#score .score-calculation > summary').click();await expect(page.locator('#score .score-sum')).toBeVisible();expect(events).toEqual([]);
+         |                                                             ^
+      90 |  }finally{await context.close();}
+      91 | });
+      92 |
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b3-20261106\apps\web\tests\details-open-analytics.spec.ts:89:61
+
+    Error Context: test-results\details-open-analytics-ser-faecc-rk-with-JavaScript-disabled-mobile\error-context.md
+
+
+  10 failed
+    [desktop] › tests\details-open-analytics.spec.ts:26:56 › pl: modal and native flight disclosures share one offer event per visit 
+    [desktop] › tests\details-open-analytics.spec.ts:26:56 › en: modal and native flight disclosures share one offer event per visit 
+    [desktop] › tests\details-open-analytics.spec.ts:26:56 › ru: modal and native flight disclosures share one offer event per visit 
+    [desktop] › tests\details-open-analytics.spec.ts:26:56 › uk: modal and native flight disclosures share one offer event per visit 
+    [desktop] › tests\details-open-analytics.spec.ts:83:5 › server-rendered disclosures and score anchor work with JavaScript disabled 
+    [mobile] › tests\details-open-analytics.spec.ts:26:56 › pl: modal and native flight disclosures share one offer event per visit 
+    [mobile] › tests\details-open-analytics.spec.ts:26:56 › en: modal and native flight disclosures share one offer event per visit 
+    [mobile] › tests\details-open-analytics.spec.ts:26:56 › ru: modal and native flight disclosures share one offer event per visit 
+    [mobile] › tests\details-open-analytics.spec.ts:26:56 › uk: modal and native flight disclosures share one offer event per visit 
+    [mobile] › tests\details-open-analytics.spec.ts:83:5 › server-rendered disclosures and score anchor work with JavaScript disabled 
+  6 passed (2.9m)

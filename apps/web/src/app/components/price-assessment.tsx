@@ -4,14 +4,17 @@ import type {Deal} from "../../lib/api";
 import {priceAssessment,priceObservation} from "../../lib/price-assessment";
 import {dateTime,money} from "../../lib/i18n/format";
 import {scoreText} from "../../lib/i18n/score-copy";
+import {cardCopy} from '../../lib/i18n/card-copy';
+import Link from 'next/link';
+import {localizedHref} from '../../lib/i18n/routing';
 
-export function PriceSummary({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
+export function PriceSummary({deal,locale="pl",compact=false}:{deal:Deal;locale?:Locale;compact?:boolean}) {
   const assessment=priceAssessment(deal,locale);
   return <p className="price-summary"><strong>{assessment.summary}</strong>
-    {assessment.scope && <> {assessment.scope}</>}</p>;
+    {assessment.scope && <> {compact?cardCopy[locale].sample:assessment.scope}</>}</p>;
 }
 
-export function PriceAssessment({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
+export function PriceAssessment({deal,locale="pl",includeMethodologyLink=true}:{deal:Deal;locale?:Locale;includeMethodologyLink?:boolean}) {
   const t=(source:CatalogKey)=>catalogText(locale,source);
   const assessment=priceAssessment(deal,locale);
   const observation=priceObservation(deal,locale);
@@ -19,9 +22,7 @@ export function PriceAssessment({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
     <p className="price-comparison"><strong>{assessment.summary}</strong>
       {assessment.median && <> {t("Mediana:")} {money(assessment.median,locale)}.</>}</p>
     <p className="price-samples">{assessment.sufficiency}</p>
-    <details><summary>{t("Zakres i wiarygodność porównania")}</summary>
-      <p>{scoreText(locale,"grouping")}</p>
-    </details>
+    {includeMethodologyLink&&<Link className="text-link price-methodology-link" href={localizedHref('/info/price-comparison',locale)}>{scoreText(locale,'methodology')} →</Link>}
     <p className="price-observation">{observation.label}: {observation.timestamp ?
       <><time dateTime={observation.timestamp}>{dateTime(observation.timestamp,locale)}</time> ({t("czas w Polsce")}).</> : t("czas nieznany.")}
       {!observation.basis && <> {t("Źródło czasu nieznane.")}</>}</p>

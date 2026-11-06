@@ -17,6 +17,8 @@ import {OfferState} from '../components/offer-state';
 import {searchRecovery} from '../../lib/search-recovery';
 import {stateText} from '../../lib/i18n/state-copy';
 import {AirportContext} from '../components/airport-context';
+import {weekendCopy} from '../../lib/weekend';
+import {destinationTimeCopy} from '../../lib/destination-time';
 export const dynamic="force-dynamic";
 type Props={searchParams:Promise<Record<string,string|string[]|undefined>>;path?:string;locale?:Locale};
 export async function generateMetadata({searchParams,path="/deals",locale="pl"}:Props) {
@@ -48,14 +50,18 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
   if(offers.status==="fulfilled"){deals=offers.value.items;total=offers.value.total;}
   else {
     const e=offers.reason;
-    error=e instanceof ApiError && e.code==="UNKNOWN_DESTINATION" ? filterText(locale,"Nie znaleziono kierunku. Wybierz miasto z podpowiedzi lub zostaw pole puste.") :
+    error=e instanceof ApiError && e.code==='DESTINATION_TIME_QUERY_TOO_BROAD' ? destinationTimeCopy[locale].broad :
+      e instanceof ApiError && e.code==='DESTINATION_TIME_UNSUPPORTED' ? destinationTimeCopy[locale].unsupported :
+      e instanceof ApiError && e.code==='WEEKEND_QUERY_TOO_BROAD' ? weekendCopy[locale].broad :
+      e instanceof ApiError && ['CONFLICTING_WEEKEND_FILTERS','WORK_HOURS_REQUIRE_NO_LEAVE','INVALID_WORK_HOURS'].includes(e.code??'') ? weekendCopy[locale].invalid :
+      e instanceof ApiError && e.code==="UNKNOWN_DESTINATION" ? filterText(locale,"Nie znaleziono kierunku. Wybierz miasto z podpowiedzi lub zostaw pole puste.") :
       e instanceof ApiError && e.code==="AMBIGUOUS_DESTINATION" ? filterText(locale,"Ta nazwa wskazuje kilka kierunków. Wybierz miasto z listy.") :
       e instanceof ApiError && e.code==="UNKNOWN_ORIGIN" ? filterText(locale,"Nie znaleziono lotniska. Sprawdź nazwę miasta lub kod IATA.") :
       e instanceof ApiError && e.code==="AMBIGUOUS_ORIGIN" ? filterText(locale,"To miasto ma kilka lotnisk. Wybierz konkretne lotnisko z listy.") :
       e instanceof ApiError && [404,422].includes(e.status) ? pl.invalid : pl.error;
   }
   const searchError=offers.status==="rejected" && offers.reason instanceof ApiError && [404,422].includes(offers.reason.status) ? "invalid_filters" as const : "unavailable" as const;
-  const temporary=offers.status==='rejected' && offers.reason instanceof ApiError && [502,503,504].includes(offers.reason.status);
+  const temporary=offers.status==='rejected' && offers.reason instanceof ApiError && [502,503,504].includes(offers.reason.status)&&offers.reason.code!=='DESTINATION_TIME_UNSUPPORTED';
   const recovery=searchRecovery(filters).slice(0,3);
   const offset=Number(filters.offset ?? 0);
   function pageLink(next:number) {
@@ -82,7 +88,7 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
       {offset+12>10000 && offset+deals.length<total && <p>{t("Zawęź filtry, aby przejrzeć dalsze oferty.")}</p>}
     </>}
     {!error && path==='/from/warszawa' && <AirportContext airports={airports} deals={deals} filters={filters} locale={locale}/>}
-    <p>{alerts.status==="fulfilled" && alerts.value && <><Link href={localizedHref(`/alerts?${alertQuery}`,locale)}>{filters.origin==="WAW,WMI" ? t("Wybierz lotnisko dla powiadomień") : t("Powiadom mnie o pasujących lotach")}</Link>{" · "}</>}<Link href={localizedHref("/saved",locale)}>{t("Zapisane wyjazdy")}</Link></p>
+    <p>{filters.weekend_mode ? <>{weekendCopy[locale].alert}{' '}<Link href={localizedHref('/alerts',locale)}>{t('Powiadom mnie o pasujących lotach')}</Link>{' · '}</> : alerts.status==="fulfilled" && alerts.value && <><Link href={localizedHref(`/alerts?${alertQuery}`,locale)}>{filters.origin==="WAW,WMI" ? t("Wybierz lotnisko dla powiadomień") : t("Powiadom mnie o pasujących lotach")}</Link>{" · "}</>}<Link href={localizedHref("/saved",locale)}>{t("Zapisane wyjazdy")}</Link></p>
     {landing && <CatalogIntro page={landing} showIntro={false} locale={locale}/> }
     {locale==="pl" && !Object.values(filters).some(Boolean) && <CatalogIntro page={catalogPage("/deals")!}/>}
   </main>;

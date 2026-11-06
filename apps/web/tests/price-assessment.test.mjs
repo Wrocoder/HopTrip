@@ -1,7 +1,20 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
 import {priceAssessment,priceObservation} from "../src/lib/price-assessment.ts";
 import {scoreText} from "../src/lib/i18n/score-copy.ts";
+
+const reference=JSON.parse(readFileSync(new URL('../../api/tests/fixtures/h3-price-comparisons.json',import.meta.url),'utf8'));
+test('API reference comparisons agree with the visible assessment in every locale',()=>{
+ for(const item of reference)for(const locale of ['pl','en','ru','uk']){
+  const result=priceAssessment({flight_price_pln:item.price,price_per_person_pln:item.price,
+   score_explanation:{status:item.status,sample_count:item.count,current_price_pln:item.price,
+    median_price_pln:item.median,price_difference_percent:item.difference}},locale);
+  assert.equal(result.comparable,item.comparable,`${item.name}/${locale}`);
+  assert.equal(result.median,item.comparable ? item.median : null);
+  if(!item.comparable)assert.equal(result.summary,scoreText(locale,'insufficient'));
+ }
+});
 
 test("every locale discloses UTC cohort dates and the currency",()=>{
  for(const locale of ["pl","en","ru","uk"]){

@@ -2,8 +2,11 @@ from datetime import date, datetime
 from decimal import Decimal
 from typing import Literal
 
+from app.schemas.airport_context import AirportContext
+from app.schemas.destination_time import DestinationTime
 from app.schemas.score import ScoreExplanation
-from pydantic import BaseModel, ConfigDict, Field, computed_field
+from app.schemas.weekend import WeekendAssessment
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator
 
 FlightQualityReason = Literal[
     "UNVERIFIED_SOURCE", "MISSING_ORIGIN", "MISSING_DESTINATION", "MISSING_RETURN_AIRPORTS",
@@ -51,7 +54,23 @@ class FlightLeg(BaseModel):
     flight_number: str | None = None
 
 
+class TripTimeline(BaseModel):
+    version: Literal["trip-timeline-v1"] = "trip-timeline-v1"
+    local_outbound_departure_date: date | None = None
+    local_destination_arrival_date: date | None = None
+    local_return_departure_date: date | None = None
+    local_return_arrival_date: date | None = None
+    nights_at_destination: int | None = Field(default=None, ge=0)
+    nights_estimated: bool = False
+    return_arrival_estimated: bool = False
+    return_arrival_day_offset: int | None = None
+    outbound_elapsed_minutes: int | None = Field(default=None, ge=0)
+    return_elapsed_minutes: int | None = Field(default=None, ge=0)
+    journey_elapsed_minutes: int | None = Field(default=None, ge=0)
+
+
 class FlightFacts(BaseModel):
+    timeline: TripTimeline = Field(default_factory=TripTimeline)
     outbound_legs: list[FlightLeg] = Field(default_factory=list)
     return_legs: list[FlightLeg] = Field(default_factory=list)
     origin_timezone: str | None = None
@@ -100,10 +119,21 @@ class DealRead(BaseModel):
     price_basis: str = "FLIGHT_PER_PERSON"
     flight_facts: FlightFacts = Field(default_factory=FlightFacts)
     flight_quality: FlightQuality = Field(default_factory=FlightQuality)
+    weekend_assessment: WeekendAssessment = Field(default_factory=WeekendAssessment)
+    destination_time: DestinationTime = Field(default_factory=DestinationTime)
+    airport_context: AirportContext = Field(default_factory=AirportContext)
     components: list[ComponentRead] = Field(default_factory=list)
     explanation_codes: list[str] = Field(default_factory=list)
     score_version: str = "legacy"
     score_components: dict = Field(default_factory=dict)
+
+    @field_validator("score_components", mode="before")
+    @classmethod
+    def normalize_score_components(cls, value: object) -> dict:
+        # Legacy/corrupt JSON must not break an otherwise available offer.
+        # explain_score separately rejects it; the public contract stays an object.
+        return value if isinstance(value, dict) else {}
+
     score_explanation: ScoreExplanation = Field(default_factory=ScoreExplanation)
     price_freshness: PriceFreshness = Field(default_factory=PriceFreshness)
     slug: str

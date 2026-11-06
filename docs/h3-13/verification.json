@@ -1,0 +1,702 @@
+{
+  "status": "PASS_WITH_KNOWN_OUT_OF_SCOPE_ISSUES",
+  "task": "H3-13",
+  "baseline": {
+    "api": 60,
+    "browser": {
+      "startTime": "2026-11-04T22:27:15.160Z",
+      "duration": 11926.698,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "api": {
+    "passed": 1103,
+    "skipped": 18,
+    "skipReason": "PostgreSQL tests require an isolated PostgreSQL database",
+    "failed": 0,
+    "newCases": 11,
+    "report": "api.xml",
+    "warnings": "2 existing Starlette/httpx deprecations"
+  },
+  "node": {
+    "passed": 309,
+    "failed": 0,
+    "skipped": 0,
+    "newCases": 3,
+    "report": "node.txt"
+  },
+  "browser": {
+    "unique": 66,
+    "passed": 66,
+    "newCases": 14,
+    "regressionCases": 52,
+    "retries": 0,
+    "stats": {
+      "startTime": "2026-11-04T22:36:10.203Z",
+      "duration": 327896.26200000005,
+      "expected": 66,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "event-browsing.spec.ts",
+        "title": "day navigation and pagination reach later events without editing the trip",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-browsing.spec.ts",
+        "title": "late day responses cannot replace a newly selected day even when fetch ignores abort",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-browsing.spec.ts",
+        "title": "day navigation and pagination reach later events without editing the trip",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-browsing.spec.ts",
+        "title": "late day responses cannot replace a newly selected day even when fetch ignores abort",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in pl",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in en",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in ru",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in uk",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "inactive and unknown sales have no booking or add action; mixed options keep their own status",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in pl",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in en",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in ru",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "event context and OTHER filter preserve the plan in uk",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-context.spec.ts",
+        "title": "inactive and unknown sales have no booking or add action; mixed options keep their own status",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "pl: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "en: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "ru: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "uk: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "fit changes reset pages and days; independent dates still require explicit search",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "an older API cannot silently ignore the filter; inconsistent assessments fail closed and can be retried",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "a late filter response cannot replace the currently selected mode even when fetch ignores abort",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "pl: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "en: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "ru: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "uk: filter keeps uncertain events, explains may-fit, preserves the budget and recovers from filtered empty",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "fit changes reset pages and days; independent dates still require explicit search",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "an older API cannot silently ignore the filter; inconsistent assessments fail closed and can be retried",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-fit-filter.spec.ts",
+        "title": "a late filter response cannot replace the currently selected mode even when fetch ignores abort",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-flight-fit.spec.ts",
+        "title": "flight conflicts, tight transfers and unknown durations are visible on event cards",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-flight-fit.spec.ts",
+        "title": "flight conflicts, tight transfers and unknown durations are visible on event cards",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-results.spec.ts",
+        "title": "one session presents independent ticket options while Glasper sessions stay separate",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-results.spec.ts",
+        "title": "empty results explain coverage and recover category or dates without changing the stay",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-results.spec.ts",
+        "title": "one session presents independent ticket options while Glasper sessions stay separate",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "event-results.spec.ts",
+        "title": "empty results explain coverage and recover category or dates without changing the stay",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "stay edits update budget, event search and restored/shared dates together",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "other dates stay independent while use-trip-dates reads the latest stay",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "late responses cannot replace newer stay results even if fetch ignores abort",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "restored dates are used for the first request and long stays are not truncated",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "stay edits update budget, event search and restored/shared dates together",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "other dates stay independent while use-trip-dates reads the latest stay",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "late responses cannot replace newer stay results even if fetch ignores abort",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events-sync.spec.ts",
+        "title": "restored dates are used for the first request and long stays are not truncated",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events.spec.ts",
+        "title": "round trips show catalogue events automatically",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events.spec.ts",
+        "title": "events are fetched on demand with affiliate links and reset when dates change",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events.spec.ts",
+        "title": "provider failure keeps the flight page usable; empty results have no ticket links",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events.spec.ts",
+        "title": "round trips show catalogue events automatically",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events.spec.ts",
+        "title": "events are fetched on demand with affiliate links and reset when dates change",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "events.spec.ts",
+        "title": "provider failure keeps the flight page usable; empty results have no ticket links",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "localized-events.spec.ts",
+        "title": "events and their budget remain translated and shareable in en",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "localized-events.spec.ts",
+        "title": "events and their budget remain translated and shareable in ru",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "localized-events.spec.ts",
+        "title": "events and their budget remain translated and shareable in uk",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "localized-events.spec.ts",
+        "title": "events and their budget remain translated and shareable in en",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "localized-events.spec.ts",
+        "title": "events and their budget remain translated and shareable in ru",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "localized-events.spec.ts",
+        "title": "events and their budget remain translated and shareable in uk",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "planned-events.spec.ts",
+        "title": "selected ticket variants persist and share with independent costs, without double counting",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "planned-events.spec.ts",
+        "title": "different sessions, unknown and zero prices, invalid input and removal keep an honest budget",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "planned-events.spec.ts",
+        "title": "a saved event remains editable when its flight and catalogue no longer exist",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "planned-events.spec.ts",
+        "title": "selected ticket variants persist and share with independent costs, without double counting",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "planned-events.spec.ts",
+        "title": "different sessions, unknown and zero prices, invalid input and removal keep an honest budget",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "planned-events.spec.ts",
+        "title": "a saved event remains editable when its flight and catalogue no longer exist",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "shared-trip.spec.ts",
+        "title": "saved and shared plans survive reload and recipients edit independent copies",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "shared-trip.spec.ts",
+        "title": "invalid, missing and expired offers retain clear states and honest previews",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "shared-trip.spec.ts",
+        "title": "sharing remains available when browser storage and clipboard are blocked",
+        "project": "desktop",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "shared-trip.spec.ts",
+        "title": "saved and shared plans survive reload and recipients edit independent copies",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "shared-trip.spec.ts",
+        "title": "invalid, missing and expired offers retain clear states and honest previews",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      },
+      {
+        "file": "shared-trip.spec.ts",
+        "title": "sharing remains available when browser storage and clipboard are blocked",
+        "project": "mobile",
+        "status": "expected",
+        "attempts": 1,
+        "result": "passed",
+        "retry": 0
+      }
+    ],
+    "executionMode": "development"
+  },
+  "build": {
+    "status": "PASS",
+    "report": "build.txt",
+    "api": "http://127.0.0.1:8125",
+    "site": "http://127.0.0.1:3125"
+  },
+  "lint": {
+    "status": "PASS",
+    "report": "lint.txt"
+  },
+  "types": {
+    "status": "PASS",
+    "report": "types.txt"
+  },
+  "ruff": {
+    "status": "PASS",
+    "report": "ruff.txt",
+    "scope": "2 changed API runtime files and the new API test file"
+  },
+  "mypy": {
+    "status": "PASS",
+    "sourceFiles": 122,
+    "report": "mypy.txt"
+  },
+  "ide": {
+    "status": "PASS",
+    "limitation": "Limited build diagnostics; CLI checks provide compiler evidence"
+  },
+  "sourceParity": "source-parity.json",
+  "cleanup": "cache-cleanup.json",
+  "unchangedContracts": [
+    "Classifier/DST/180-minute threshold/grouping/provider/source freshness",
+    "Saved v2 ID/revisions/session drafts/portable v1 links",
+    "Budget/provenance/profiles/selected events",
+    "SEO/affiliate/consent/analytics/dependencies"
+  ],
+  "knownOutOfScope": [
+    "H3-17b CLS0.137–0.292",
+    "H3-17b first-price1004.14>900",
+    "H3-17b RU/UK desktop CTA920.140625>900",
+    "H3-11a transient cross-tab cause unknown"
+  ],
+  "notRun": [
+    "PostgreSQL",
+    "WebKit/real devices/manual screen reader",
+    "Production CWV/usability/GSC/logs",
+    "Live Ticketmaster/partners/notifications/paid APIs/deployment"
+  ],
+  "nextTask": "H3-15",
+  "executionModeCorrection": {
+    "date": "2026-11-05",
+    "finding": "The original browser runner used next dev, not next start. Original production-browser wording is retracted; original counts remain valid development functional evidence.",
+    "evidence": "../h3-17b1/runtime-mode-audit.json",
+    "productionSpotCheck": {
+      "cases": 14,
+      "report": "../h3-17b1/browser-production.json",
+      "scope": "Current implementation of the new feature cases; not the entire original suite"
+    }
+  }
+}

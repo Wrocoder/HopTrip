@@ -35,11 +35,12 @@ mkdir -p "$release" "$backup"
 previous=$root
 if [[ -L $root/current ]]; then previous=$(readlink -f "$root/current"); fi
 test -f "$previous/docker-compose.yml"
+static_overlay=()
 compose_at() {
   local directory=$1; shift
   docker compose -p hoptrip --env-file "$root/.env.production" \
     -f "$directory/docker-compose.yml" -f "$directory/docker-compose.production.yml" \
-    -f "$directory/docker-compose.domain.yml" --profile worker --profile events "$@"
+    -f "$directory/docker-compose.domain.yml" "${static_overlay[@]}" --profile worker --profile events "$@"
 }
 previous_services=(api worker web)
 new_services=(api worker web)
@@ -74,6 +75,8 @@ stage=extract-source
 tar -xzf "$backup/source.tar.gz" --strip-components=1 -C "$release"
 printf '%s\n' "$sha" > "$release/RELEASE_SHA"
 stage=validate-compose
+test -f "$release/docker-compose.static-cache.yml"
+static_overlay=(-f "$release/docker-compose.static-cache.yml")
 compose_at "$release" config --quiet
 if grep -Eq '^EVENTS_SYNC_ENABLED=(true|1|True)([[:space:]]|$)' "$root/.env.production"; then
   # Consume the producer completely; grep -q may close a pipe early under pipefail.
@@ -89,6 +92,18 @@ done
 printf '%s\n' "$previous" > "$backup/previous-source"
 stage=build-images
 compose_at "$release" build "${new_services[@]}" migrate
+stage=preserve-static
+# Seed both generations before changing services. Old rollback images use the same
+# overlay and can therefore still serve chunks referenced by the failed release.
+mkdir -p "$backup/previous-static"
+docker cp hoptrip-web-1:/app/.next/static/. "$backup/previous-static/"
+for path in / /deals /saved /trip; do
+  curl -fsS --max-time 15 "https://hoptrip.pl$path" >> "$backup/previous-html"
+done
+docker run --rm --network none --entrypoint node \
+  --mount "type=volume,src=hoptrip_next_static,dst=/retained" \
+  --mount "type=bind,src=$backup/previous-static,dst=/previous,readonly" \
+  hoptrip-web:latest /app/retain-static.mjs /retained /previous /app/static-seed > "$backup/static-manifest.json"
 stage=application-preflight
 compose_at "$release" run --rm --no-deps api /usr/local/bin/python -m app.jobs.preflight
 assert_main
@@ -119,6 +134,11 @@ stage=http-postflight
 curl -fsS --retry 10 --retry-all-errors --retry-delay 2 --max-time 15 https://hoptrip.pl/health/ready
 curl -fsS --retry 10 --retry-all-errors --retry-delay 2 --max-time 15 https://hoptrip.pl/ -o /dev/null
 curl -fsS --max-time 15 https://hoptrip.pl/preview/site/home -o /dev/null
+stage=static-postflight
+docker run --rm --entrypoint node \
+  --mount "type=bind,src=$backup/static-manifest.json,dst=/checks/static-manifest.json,readonly" \
+  --mount "type=bind,src=$backup/previous-html,dst=/checks/previous-html,readonly" \
+  hoptrip-web:latest /app/check-static.mjs https://hoptrip.pl /checks/static-manifest.json /checks/previous-html --image-build > "$backup/static-checks.json"
 stage=monitor-postflight
 if check_deployment_health "$release" > "$backup/postflight-checks.json"; then
   cat "$backup/postflight-checks.json"

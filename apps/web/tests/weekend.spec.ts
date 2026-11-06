@@ -1,0 +1,64 @@
+import {test,expect,type Page} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import {localizedHref} from '../src/lib/i18n/routing';
+import {getMessages} from '../src/lib/i18n/messages';
+import {filterText} from '../src/lib/i18n/filter-copy';
+import {weekendCopy} from '../src/lib/weekend';
+const fixture='http://127.0.0.1:8100';
+test.beforeEach(async({page,request})=>{
+ expect((await request.post(`${fixture}/__test__/weekend-fixtures?enabled=true`)).ok()).toBe(true);
+ await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+});
+test.afterEach(async({request})=>{await request.post(`${fixture}/__test__/weekend-fixtures?enabled=false`);});
+async function apply(page:Page,name:string){
+ const response=page.waitForResponse(r=>r.request().method()==='POST'&&!!r.request().headers()['next-action']);
+ await page.locator('.filters').getByRole('button',{name,exact:true}).click();await response;
+ await expect(page.locator('.filters')).toHaveAttribute('aria-busy','false');
+}
+for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: exact modes, work hours, URL history and legacy landing`,async({page})=>{
+ test.setTimeout(120000);
+ const c=weekendCopy[locale],m=getMessages(locale);
+ const url=localizedHref('/deals?destination=weekend-fixture&departure_from=2030-11-01&budget=220&sort=price&weekend_mode=calendar-v1',locale);
+ await page.goto(url);
+ await expect(page.locator('.deal-card')).toHaveCount(4);
+ const monday=page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-monday"]')});
+ await expect(monday.locator('.home-arrival')).toContainText('+1');
+ await expect(monday.locator('.flight-schedule-compact .weekend-assessment')).toContainText(c.compatible);
+ await expect(page.locator('.deal-card').filter({has:page.locator('a[href*="/deals/weekend-fixture-unknown"]')}).locator('.flight-schedule-compact .weekend-assessment')).toHaveText(c.unknown);
+ await page.locator('select[name="weekend_mode"]').selectOption('no-leave-v1');
+ await expect(page.locator('.weekend-options')).toContainText(c.assumption);
+ await apply(page,m.filter);
+ await expect(page.locator('.deal-card')).toHaveCount(1);
+ await expect(page.locator('.deal-card a.deal-card-link')).toHaveAttribute('href',/weekend-fixture-evening/);
+ await page.locator('[name="work_start"]').fill('06:00');await page.locator('[name="work_end"]').fill('07:00');
+ await apply(page,m.filter);await expect(page.locator('.deal-card')).toHaveCount(2);
+ await page.reload();await expect(page.locator('[name="work_end"]')).toHaveValue('07:00');
+ await apply(page,filterText(locale,'2–3 noce'));
+ expect(new URL(page.url()).searchParams.get('work_end')).toBe('07:00');
+ expect(new URL(page.url()).searchParams.get('budget')).toBe('220');
+ await page.goBack();await expect(page.locator('[name="duration_min"]')).toHaveValue('');
+ await page.locator('select[name="weekend_mode"]').selectOption('flexible-v1');await apply(page,m.filter);
+ await expect(page.locator('.deal-card')).toHaveCount(5);
+ expect(new URL(page.url()).searchParams.has('work_end')).toBe(false);
+ await expect(page.locator('.active-filters')).toContainText(c.flexible);
+ expect((await new AxeBuilder({page}).include('.filter-panel').analyze()).violations).toEqual([]);
+ await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.locator('.filter-chips a').filter({hasText:c.mode}).click();
+ await expect(page).not.toHaveURL(/weekend_mode=/);
+ expect(new URL(page.url()).searchParams.get('budget')).toBe('220');
+ await page.goto(localizedHref('/tanie-loty-na-weekend?destination=weekend-fixture&departure_from=2030-11-01&weekend_mode=no-leave-v1',locale));
+ await expect(page.locator('.deal-card')).toHaveCount(1);
+ await page.goto(localizedHref('/tanie-loty-na-weekend?destination=weekend-fixture&departure_from=2030-11-01',locale));
+ await expect(page.locator('select[name="weekend_mode"]')).toHaveValue('legacy');
+ await expect(page.locator('.deal-card')).toHaveCount(4);
+ await page.locator('select[name="weekend_mode"]').selectOption('');await apply(page,m.filter);
+ expect(new URL(page.url()).pathname).toBe(localizedHref('/deals',locale));
+});
+test('too-broad errors are explicit; DST itinerary passes strict mode',async({page})=>{
+ await page.goto('/deals?weekend_mode=no-leave-v1&budget=987651');
+ await expect(page.getByText(weekendCopy.pl.broad,{exact:true})).toBeVisible();
+ await expect(page.locator('.result-count')).toHaveCount(0);
+ await page.goto('/deals?destination=weekend-fixture&departure_to=2030-10-31&weekend_mode=no-leave-v1');
+ await expect(page.locator('.deal-card')).toHaveCount(1);
+ await expect(page.locator('.deal-card a.deal-card-link')).toHaveAttribute('href',/weekend-fixture-dst/);
+});

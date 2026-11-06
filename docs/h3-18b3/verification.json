@@ -1,0 +1,275 @@
+{
+  "scope": "H3-18b3 DEAL_DETAILS_OPEN only",
+  "build": "ipeMMw0Z17AQQjfsoNFEK",
+  "runtimeDelta": [
+    {
+      "path": "apps/api/app/schemas/analytics.py",
+      "before": "aa8e14a7cf8dca41397ebee6c2b0bea6c81ed5bb2edc82732b0f56b0d103d349",
+      "after": "e9d555a1471cbe064e83fed710ee8582f573be4f24a3be2e697708d285436c11"
+    },
+    {
+      "path": "apps/web/src/lib/analytics-context.ts",
+      "before": "1a27b5130974785df289e10c829a9ec545c821b81440c29be078954f882d8ca5",
+      "after": "5224c5d49eb7522abc7a3f30cbeb174fe1a031cb1a7e81e554d0cf0ef015bfb7"
+    },
+    {
+      "path": "apps/web/src/lib/session.ts",
+      "before": "e5becb7b695eacd48a0fefa4e4a4abd1bd90437195fc96f198e068439e170067",
+      "after": "a08ca407fbb6b47d120c79e1419144a646645cafec56b9bd5e079ff992aa990d"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-details.tsx",
+      "before": "c2f1301d09a486c62667464237387ab3f5840b1442dd62fccc72d0fbc8d80d25",
+      "after": "b953a91f2ed3a4c5ab8b5bfd7ae59c65e1eab9159d28b5bb98b6f20f478d4cfc"
+    },
+    {
+      "path": "apps/web/src/app/components/score-trigger.tsx",
+      "before": "e9815274dde71bbbfce94fb2457ab90da70a2c93b736cda5199fae9654afffa8",
+      "after": "b67f3b490507d900d95a9451e3b92b36ca262d48bcdfcd78ccb04b0fd8de1373"
+    },
+    {
+      "path": "apps/web/src/app/components/score-details.tsx",
+      "before": "d7a18bea7b1661833f9e316fe72dfb0a1bb0afd34b222ebda31bb4a30aa58d85",
+      "after": "b4fd6f897611b2fe2bb936a0422ca191f1e9c7182409a893d2f79e0ecfe4286e"
+    },
+    {
+      "path": "apps/web/src/app/components/offer-details-disclosure.tsx",
+      "before": null,
+      "after": "4470c837da9b00c9bd348cc1b6ee741cf9e6cab3da64a590f6280301d353ae0b"
+    }
+  ],
+  "matchingSourceFiles": 676,
+  "matchingTestFiles": 3,
+  "wireEvents": 16,
+  "browser": {
+    "uniqueLatestPassed": 32,
+    "feature": 16,
+    "regression": 16,
+    "initial": "6 passed / 10 failed",
+    "final": "26 passed",
+    "retries": 0,
+    "initialFailures": [
+      {
+        "case": "desktop / pl: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "desktop / en: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "desktop / ru: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "desktop / uk: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "desktop / server-rendered disclosures and score anchor work with JavaScript disabled",
+        "reason": "pointer stability after hash navigation"
+      },
+      {
+        "case": "mobile / pl: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "mobile / en: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "mobile / ru: modal and native flight disclosures share one offer event per visit",
+        "reason": "modal Escape focus barrier"
+      },
+      {
+        "case": "mobile / uk: modal and native flight disclosures share one offer event per visit",
+        "reason": "two-open-card landmark"
+      },
+      {
+        "case": "mobile / server-rendered disclosures and score anchor work with JavaScript disabled",
+        "reason": "pointer stability after hash navigation"
+      }
+    ],
+    "cases": [
+      {
+        "case": "desktop / pl: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / en: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / ru: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / uk: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / direct score calculation is a disclosure; visit and closure are separate",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / denial/revocation prevent sends; consent grant does not replay already open panels",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / blocked analytics preserves native toggles, modal Escape and focus without retries",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "desktop / server-rendered disclosures and score anchor work with JavaScript disabled",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / pl: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / en: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / ru: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / uk: modal and native flight disclosures share one offer event per visit",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / direct score calculation is a disclosure; visit and closure are separate",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / denial/revocation prevent sends; consent grant does not replay already open panels",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / blocked analytics preserves native toggles, modal Escape and focus without retries",
+        "status": "passed",
+        "run": "browser.json"
+      },
+      {
+        "case": "mobile / server-rendered disclosures and score anchor work with JavaScript disabled",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / pl: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / en: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / ru: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / uk: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / pl: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / en: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / ru: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / uk: price explanations before/after, one and many offers",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / pl: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / en: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / ru: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "desktop / uk: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / pl: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / en: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / ru: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      },
+      {
+        "case": "mobile / uk: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+        "status": "passed",
+        "run": "browser-final.json"
+      }
+    ]
+  },
+  "independentBaseline": {
+    "build": "T0SP041Yg88N0Xkfu_QAW",
+    "diagnosticPassed": 2,
+    "finding": "landmark-unique with two primary card disclosures open; unchanged pre-existing labels"
+  },
+  "api": {
+    "targetedPassed": 87,
+    "full": {
+      "passed": 1132,
+      "failed": 1,
+      "skipped": 18
+    },
+    "knownFailure": "Unchanged Telegram fixture departure 2026-11-06T09:00Z already past; see H3-18b2 before/current/future-fixture controls"
+  },
+  "nodePassed": 325,
+  "productionData": false,
+  "deploy": false,
+  "migration": false,
+  "dependenciesAdded": false
+}

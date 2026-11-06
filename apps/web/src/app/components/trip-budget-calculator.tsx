@@ -17,6 +17,11 @@ import {TripDraftProvider,useTripDraft,type TripDraftProps} from "./trip-draft";
 import type {TripOffer} from "../../lib/shared-trip";
 import {PlannedEvents} from './planned-events';
 import {plannedEventsCopy} from '../../lib/i18n/planned-events-copy';
+import {cleanBudgetProvenance,withoutBudgetOrigin,type BudgetMoneyKey} from '../../lib/budget-provenance';
+import {BudgetOrigin} from './budget-origin';
+import {BudgetProfiles} from './budget-profiles';
+import {BudgetProjection} from './budget-projection';
+import {budgetCompletionReady} from '../../lib/budget-completion';
 
 
 
@@ -26,7 +31,7 @@ export function TripBudgetCalculator(props:Props) {
  return shared ? <BudgetCalculator {...props}/> : <TripDraftProvider {...props}><BudgetCalculator {...props}/></TripDraftProvider>;
 }
 function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
- const {draft,save,ready,context,storageMessage}=useTripDraft()!;
+ const {draft,save,saveIfCurrent,ready,context,storageMessage}=useTripDraft()!;
  const {locale}=useLocale();
  const planCopy=plannedEventsCopy[locale];
  const t=(text:string)=>budgetText(locale,text);
@@ -43,7 +48,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
  const lineLabel=(label:string)=>label==='Wydarzenia w planie'?planCopy.budgetLine:t(label);
  const update=(key:keyof BudgetInput,value:string)=>{
   const next={...input,[key]:value};
-  save({...draft,input:next,review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
+  save({...draft,input:next,provenance:withoutBudgetOrigin(draft.provenance,key),review:draft.review || (["people","nights","days"].includes(key) && input[key]!==value)});
   if(value.trim() && value!==input[key] && !calculateBudget(next).errors[key])track("BUDGET_USE");
  };
  const changeDate=(key:"start"|"end",value:string)=>save(changeStayDate(draft,key,value));
@@ -55,9 +60,9 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   <input id={`budget-${key}`} type="text" inputMode={money ? "decimal" : "numeric"}
    value={input[key]} onChange={event=>update(key,event.target.value)} maxLength={money ? 11 : 3}
    aria-invalid={Boolean(result.errors[key])}
-   aria-describedby={`budget-${key}-hint${result.errors[key] ? ` budget-${key}-error` : ""}`}
+   aria-describedby={`budget-${key}-hint${money?` budget-${key}-origin`:''}${result.errors[key] ? ` budget-${key}-error` : ""}`}
    placeholder={money ? t("Nieznane") : undefined}/>
-  {money && <span className={styles.hint}>{t(!input[key].trim()?"Nieznane":result.errors[key]?"Wymaga poprawy":"Wpisana kwota — do weryfikacji")}</span>}
+  {money && <BudgetOrigin input={input} field={key as BudgetMoneyKey} provenance={draft.provenance} locale={locale}/>}
   {result.errors[key] && <span id={`budget-${key}-error`} className={styles.error}>{t(result.errors[key]!)}</span>}
  </div>;
  return <section id="calculator" tabIndex={-1} aria-labelledby="budget-heading" className={styles.calculator}>
@@ -73,7 +78,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   {note && <p>{note}</p>}
   <p>{t("Loty obejmują wszystkie potrzebne odcinki. Ceny na osobę traktujemy jako jednakowe dla całej grupy. Dla noclegu wybierz cenę za noc albo łączną cenę pobytu dla wszystkich gości i pokoi.")}</p>
   </details>
-  <p aria-live="polite" aria-atomic="true">{t(storageMessage)}</p>
+  <p aria-live="polite" aria-atomic="true">{storageMessage}</p>
   <fieldset disabled={!ready} className={styles.controls}>
   <legend>{t("Twój plan podróży")}</legend>
   <div className={styles.grid}>
@@ -95,8 +100,15 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
    <p>{t("Zmieniono daty, długość pobytu, liczbę osób lub dane oferty. Sprawdź ponownie loty, nocleg, transfery i pozostałe wpisane kwoty. Przeliczenie sumy nie potwierdza cen u sprzedawców.")}</p>
    <button type="button" className="button button-secondary" onClick={()=>save({...draft,context,review:false})}>{t("Kwoty sprawdzone dla tego planu")}</button>
   </div>}
+  <BudgetProfiles/>
   <ReferenceCosts destinationSlug={destinationSlug} filled={Boolean(input.local_transport.trim())}
-    onApply={amount=>{if(!input.local_transport.trim()){update("local_transport",amount);setExtraOpen(true);}}}/>
+    onApply={(amount,origin)=>{
+     if(input.local_transport.trim())return false;
+     const nextInput={...input,local_transport:amount};
+     const provenance=cleanBudgetProvenance({version:'budget-provenance-v1',fields:{...draft.provenance?.fields,local_transport:origin}},nextInput);
+     if(!provenance?.fields.local_transport||!saveIfCurrent(draft,{...draft,input:nextInput,provenance}))return false;
+     track('BUDGET_USE');setExtraOpen(true);return true;
+    }}/>
   {locale!=="pl" && destinationSlug && <p><a href={localizedHref('/info/trip-budget',locale)}>{guideUi(locale,'budgetGuide')}</a></p>}
   <h3>{t("Główne koszty")}</h3>
   <div className={styles.grid}>{costFields.filter(cost=>["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>cost.key!=="hotel" ? field(cost.key,cost.label,cost.hint,true) :
@@ -125,8 +137,11 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
     {result.missing.length>0 && <p>{t("Budżet niepełny. Do uzupełnienia:")}{" "}{result.missing.map(lineLabel).join(", ")}.</p>}
    </>}
   </div>
+  <BudgetProjection draft={draft} locale={locale}/>
   {!extraOpen && hiddenErrors && <p className={styles.error}>{t("Błąd w dodatkowych kosztach.")}{" "}<button type="button" onClick={revealError}>{t("Szczegółowy budżet")}</button></p>}
-  {result.valid && !datesInvalid && <details><summary>{t("Rozbicie kosztów całej grupy")}</summary><dl className={styles.breakdown}>
+  {result.valid && !datesInvalid && <details onToggle={event=>{
+   if(ready&&event.target===event.currentTarget&&event.currentTarget.open&&budgetCompletionReady(draft))track('BUDGET_CALCULATED');
+  }}><summary>{t("Rozbicie kosztów całej grupy")}</summary><dl className={styles.breakdown}>
    {result.lines.map(line=><div key={line.key}><dt>{lineLabel(line.label)}</dt><dd>{line.total===null ? t("Nieznane") : format(line.total)+(line.incomplete?planCopy.plusUnknown:'')}</dd></div>)}
   </dl></details>}
   <p className={styles.hint}>{t("To twój plan kosztów, nie oferta ani rezerwacja. Sprawdź końcowe ceny u sprzedawców. Szkic jest dostępny tylko w tej przeglądarce; usunięcie danych witryny usuwa też szkice.")}</p>

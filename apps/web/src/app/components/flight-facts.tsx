@@ -1,7 +1,7 @@
 import type {Locale} from "../../lib/i18n/config";
 import {catalogText,type CatalogKey} from "../../lib/i18n/catalog-copy";
 import type {Deal} from "../../lib/api";
-import {destinationInterval,flightTime,flightLegs} from "../../lib/flight-facts";
+import {flightTime,flightLegs} from "../../lib/flight-facts";
 import {flightRouteCopy} from '../../lib/i18n/flight-route-copy';
 
 export function FlightFacts({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
@@ -9,7 +9,6 @@ export function FlightFacts({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
   const facts=deal.flight_facts;
   const roundTrip=deal.trip_type==="ROUND_TRIP";
   const {inbound}=flightLegs(facts);
-  const interval=destinationInterval(facts?.destination_interval_minutes,locale);
   const outbound=flightTime(facts?.outbound_departure,facts?.origin_timezone,locale);
   const inboundTime=flightTime(inbound.departure,inbound.originZone,locale);
   const connections=[{label:t('Wylot'),legs:facts?.outbound_legs},{label:t('Powrót'),legs:facts?.return_legs}];
@@ -32,7 +31,6 @@ export function FlightFacts({deal,locale="pl"}:{deal:Deal;locale?:Locale}) {
       {roundTrip && <p className="deal-note">{locale==="pl" ? "Powrót — odlot" : t("Wylot powrotny")}: {inboundTime ?? t("Brak danych o godzinie")}; {locale==="pl" ? "przylot" : t("Przylot")}: {flightTime(inbound.arrival,inbound.destinationZone,locale) ?? t("Brak danych o godzinie")}{inbound.calculated && ` · ${t("obliczony z czasu lotu")}`}</p>}
       <p className="deal-note">{locale==="pl" ? "Godziny lokalne przy znanej strefie lotniska; pozostałe oznaczono UTC. Potwierdź rozkład u partnera." : `${t("Godziny lokalne przy znanej strefie lotniska; w pozostałych przypadkach oznaczone UTC.")} ${t("Potwierdź rozkład u partnera.")}`}</p>
     </> : <p className="deal-note">{t("Brak danych o godzinie")}</p>}
-    {roundTrip && interval && <p className="deal-note">{locale==="pl" ? "Między przylotem a odlotem powrotnym:" : t("Między przylotem a odlotem:")} {interval}. {t("Ten okres obejmuje też transfery, odprawę i noclegi.")}</p>}
     <p className="deal-note">{t("Bagaż do sprawdzenia u partnera")}</p>
   </div>;
 }

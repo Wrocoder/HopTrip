@@ -4,6 +4,26 @@ import {filterText} from '../src/lib/i18n/filter-copy';
 import {catalogText} from '../src/lib/i18n/catalog-copy';
 import {getMessages} from '../src/lib/i18n/messages';
 import {localizedHref} from '../src/lib/i18n/routing';
+import {writeFileSync} from 'node:fs';
+import config from '../playwright.config';
+
+const runtimeAudit=process.env.HOPTRIP_RUNTIME_AUDIT==='1';
+const diagnostics=new WeakMap<Page,{kind:string;message:string;location?:unknown}[]>();
+test.beforeEach(async({page})=>{
+ if(!runtimeAudit)return;
+ const entries:{kind:string;message:string;location?:unknown}[]=[];diagnostics.set(page,entries);
+ page.on('console',message=>{if(message.type()==='error')entries.push({kind:'console',message:message.text(),location:message.location()});});
+ page.on('pageerror',error=>entries.push({kind:'pageerror',message:error.stack??error.message}));
+});
+test.afterEach(async({page},info)=>{
+ if(!runtimeAudit)return;
+ const servers=config.webServer;if(!Array.isArray(servers))throw Error('Expected fixture servers');
+ const entries=diagnostics.get(page)??[],conditionalUse=entries.filter(entry=>entry.message.includes('This library called use()'));
+ const report={title:info.title,project:info.project.name,command:servers[1].command,nodeEnv:servers[1].env?.NODE_ENV??'development',entries,conditionalUse};
+ writeFileSync(info.outputPath('runtime-diagnostics.json'),JSON.stringify(report,null,2));
+ await info.attach('runtime-diagnostics',{body:JSON.stringify(report),contentType:'application/json'});
+ if(process.env.HOPTRIP_RUNTIME_ENFORCE==='1')expect(conditionalUse).toEqual([]);
+});
 
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
@@ -13,6 +33,10 @@ async function apply(page:Page,button:Locator){
  await button.click();await reply;
  await expect(page.locator('.filters')).toHaveAttribute('aria-busy','false');
 }
+async function openAdvanced(form:Locator){
+ const details=form.locator('.advanced-filters');
+ if(await details.getAttribute('open')===null)await details.locator('summary').click();
+}
 
 for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: visible primary filters preserve manual overrides, history and reset semantics`,async({page},info)=>{
  test.setTimeout(120000);
@@ -21,6 +45,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: visible prim
  const form=page.locator('.filters'),budget=page.locator('input[name="budget"]');
  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+ await openAdvanced(form);
  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
  // Applying this preset resolves to the current URL; the edited field must
@@ -28,6 +53,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: visible prim
  await apply(page,quickBudget);await expect(budget).toHaveValue('300');
  await expect(quickBudget).toHaveAttribute('aria-pressed','true');
  await budget.fill('125');
+ await openAdvanced(form);
  await form.locator('[name="duration_min"]').fill('5');await form.locator('[name="duration_max"]').fill('8');
  await form.locator('[name="departure_from"]').fill('2030-05-01');
  await apply(page,nights);

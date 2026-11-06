@@ -1,3 +1,4 @@
+import {timelineView,timelineCopy} from "../../lib/trip-timeline";
 import {TripDetails} from "./trip-details";
 import {FlightSchedule} from "./flight-schedule";
 import {CountryFlag} from "./country-flag";
@@ -5,7 +6,7 @@ import {flightPriceBasis} from "../../lib/flight-facts";
 import {cityLabel,originLabel} from "../../lib/cities";
 import Link from "next/link";
 import {Deal} from "../../lib/api";
-import {date,tripNights} from "../../lib/i18n/format";
+import {date} from "../../lib/i18n/format";
 import {getMessages} from "../../lib/i18n/messages";
 import type {Locale} from "../../lib/i18n/config";
 import {catalogText,type CatalogKey} from "../../lib/i18n/catalog-copy";
@@ -26,17 +27,18 @@ export function DealCard({deal,locale="pl",returnTo}:{deal:Deal;locale?:Locale;r
     <Link className="deal-card-link" href={detailHref}>
     <p className="deal-origin">{originLabel(deal.origin_city,deal.origin_code,locale)} ({deal.origin_code}) <span aria-hidden="true">→</span></p>
     <h2>{cityLabel(deal.destination_city,deal.destination_slug,locale)}<CountryFlag code={deal.destination_country_code} locale={locale}/></h2>
-    <p className="deal-dates">{t("Daty oferty:")} {date(deal.trip_start,locale)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end,locale)}`}</p>
-    {tripNights(deal,locale) && <p className="deal-note">{tripNights(deal,locale)}</p>}
+    <p className="deal-dates">{timelineCopy[locale].departures+":"} {date(deal.trip_start,locale)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end,locale)}`}</p>
+    {timelineView(deal,locale).nights && <p className="deal-note">{timelineView(deal,locale).nights}</p>}
     <div className="deal-card-bottom">
-    <p className="deal-price"><Price value={deal.price_per_person_pln} locale={locale}/> <span>{flightPriceBasis(deal,locale)}</span></p>
+    <p className="deal-price"><Price value={deal.price_per_person_pln} locale={locale} showEuro={false}/> <span>{flightPriceBasis(deal,locale)}</span></p>
     <span className="card-cta">{t('Zobacz szczegóły lotu')} <span aria-hidden="true">→</span></span>
     </div>
     </Link>
-    <PriceSummary deal={deal} locale={locale}/>
+    <PriceSummary deal={deal} locale={locale} compact/>
     <PriceFreshness deal={deal} compact locale={locale}/>
     <FlightSchedule deal={deal} compact card locale={locale}/>
-    <p className="deal-note card-cost-scope">{t('Bez noclegu · bagaż do sprawdzenia')}</p>
+    <p className="deal-note card-cost-scope flight-cost-scope">{t('Cena dotyczy lotu. Nocleg nie jest wliczony.')}</p>
+    <p className="deal-note card-baggage-scope flight-baggage-scope">{t('Bagaż do sprawdzenia')}</p>
     <TripDetails deal={deal} locale={locale} qualityDetails/>
     <ScoreTrigger slug={deal.slug} href={`${detailHref}#score`} destination={cityLabel(deal.destination_city,deal.destination_slug,locale)} locale={locale}><ScoreDetails deal={deal} locale={locale}/></ScoreTrigger>
   </article>;

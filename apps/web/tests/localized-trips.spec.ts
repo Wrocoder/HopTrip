@@ -8,7 +8,7 @@ import {encodeTrip,decodeTrip} from "../src/lib/shared-trip";
 import {emptyBudget} from "../src/lib/trip-budget";
 test.setTimeout(90000);
 test.beforeEach(async({page})=>{
- await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+ await page.addInitScript(()=>{try{if(localStorage.getItem("hoptrip.consent.v1")===null)localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()}));}catch{}});
 });
 
 test("catalog to offer to saved plan keeps adults, money and partner parameters across languages",async({page,browser},testInfo)=>{
@@ -26,7 +26,7 @@ test("catalog to offer to saved plan keeps adults, money and partner parameters 
  await page.locator("#budget-hotel-basis").selectOption("stay");
  await page.locator("#budget-hotel_total").fill("900");
  await page.locator('.trip-navigation a[href="#calculator"]').click();
- let token="";
+ let token="",localId="";
  for(const [locale,name] of [["en","English"],["ru","Русский"],["uk","Українська"],["pl","Polski"]] as const){
   if(locale!=="en")await page.locator(".language-switcher").getByRole("link",{name,exact:true}).click();
   await expect(page.locator("html")).toHaveAttribute("lang",locale);
@@ -42,24 +42,26 @@ test("catalog to offer to saved plan keeps adults, money and partner parameters 
   await expect(page.getByTestId("flight-search-limitation")).toContainText("2");
   await page.getByRole("button",{name:tripText(locale,"Zapisz wyjazd"),exact:true}).click();
   await page.getByRole("button",{name:tripText(locale,"Udostępnij"),exact:true}).click();
+  localId=new URLSearchParams(new URL(page.url()).hash.slice(1)).get("local")!;
   const url=new URL(await page.locator("#trip-share-link").inputValue());
   expect(url.pathname).toBe(locale==="pl" ? "/trip" : `/${locale}/trip`);
-  if(token)expect(url.searchParams.get("plan")).toBe(token);
-  token=url.searchParams.get("plan")!;
+  if(token)expect(new URLSearchParams(url.hash.slice(1)).get("plan")).toBe(token);
+  token=new URLSearchParams(url.hash.slice(1)).get("plan")!;
   expect(decodeTrip(token)!.draft.input.hotel_total).toBe("900");
-  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem("hoptrip.saved-trips.v1")!))).toEqual([token]);
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem("hoptrip.saved-plans.v2")!).plans.map((plan:{token:string})=>plan.token))).toEqual([token]);
+  if(locale!=='pl')await page.goBack();
  }
  expect(events).toEqual([]);
  await page.goto("/ru/saved");
  const saved=page.getByRole("main").getByRole("link",{name:/→/});
  await expect(saved).toHaveCount(1);
- await expect(saved).toHaveAttribute("href",`/ru/trip?plan=${token}`);
+ await expect(saved).toHaveAttribute("href",`/ru/trip#local=${localId}`);
  await saved.click();
  await expect(page.locator("#budget-hotel_total")).toHaveValue("900");
  await page.locator("#budget-hotel_total").fill("901");
  await page.locator(".language-switcher").getByRole("link",{name:"Українська",exact:true}).click();
  await expect(page.locator("#budget-hotel_total")).toHaveValue("901");
- expect(new URL(page.url()).searchParams.get("plan")).toBe(token);
+ expect(new URLSearchParams(new URL(page.url()).hash.slice(1)).get("local")).toBe(localId);
  const recipient=await browser.newContext();
  try{
   const copy=await recipient.newPage();
@@ -70,7 +72,7 @@ test("catalog to offer to saved plan keeps adults, money and partner parameters 
  await page.goto("/uk/saved");
  await page.getByRole("button",{name:/Видалити план:/}).click();
  await expect(page.getByRole("main").getByRole("link",{name:/→/})).toHaveCount(0);
- await page.goto(`/uk/trip?plan=${token}`);
+ await page.goto(`/uk/trip#local=${localId}`);
  await expect(page.locator("#budget-hotel_total")).toHaveValue("901");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.screenshot({path:testInfo.outputPath("localized-shared-trip.png")});
@@ -122,7 +124,7 @@ test("localized storage failures still permit sharing and unavailable offers ret
  await page.getByRole("button",{name:tripText("en","Zapisz wyjazd"),exact:true}).click();
  await expect(page.locator("#trip-save")).toContainText(tripText("en","Nie udało się zapisać wyjazdu w przeglądarce. Nadal możesz udostępnić link."));
  await page.getByRole("button",{name:tripText("en","Udostępnij"),exact:true}).click();
- await expect(page.locator("#trip-share-link")).toHaveValue(/\/en\/trip\?plan=/);
+ await expect(page.locator("#trip-share-link")).toHaveValue(/\/en\/trip#plan=/);
  await page.goto("/en/saved");
  await expect(page.getByRole("main")).toContainText(tripText("en","Pamięć przeglądarki jest niedostępna. Otrzymane linki nadal działają."));
  for(const locale of ["en","ru","uk"] as const){
@@ -150,6 +152,7 @@ test("localized partner clicks respect consent and never send the plan or budget
  await budgetEvent;
  await page.getByRole("button",{name:tripText("ru","Zapisz wyjazd"),exact:true}).click();
  await expect.poll(()=>events.filter(e=>e.event_name==="TRIP_SAVE").length).toBe(1);
+ await expect(page).toHaveURL(/#local=/);await page.goBack();await expect(page.locator('#budget-food')).toBeEnabled();
  // Intercept the public redirect boundary; never visit a real seller.
  await context.route(initial!+"*",route=>route.fulfill({contentType:"text/html",body:"<h1>Test partner</h1>"}));
  await outbound.click();

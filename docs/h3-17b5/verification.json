@@ -1,0 +1,61 @@
+{
+  "status": "DONE_DIAGNOSTIC_SCOPE_NOT_A_RUNTIME_FIX",
+  "date": "2026-11-05",
+  "task": "H3-17b5",
+  "hypothesis": "CONFIRMED dev diagnostic in delayed-origin/full-search overlap",
+  "dev": {
+    "stats": {
+      "startTime": "2026-11-05T22:28:56.236Z",
+      "duration": 47386.737,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "diagnosticRuns": 6,
+    "pageErrors": 0
+  },
+  "production": {
+    "stats": {
+      "startTime": "2026-11-05T22:30:47.490Z",
+      "duration": 35947.770000000004,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "diagnosticRuns": 0,
+    "pageErrors": 0,
+    "build": "B03jo9a_4GShaLeB8HAfD",
+    "freshBuild": false
+  },
+  "versions": {
+    "next": "16.4.3",
+    "rootReact": "19.0.0",
+    "bundledReact": "19.3.0-canary-278794d7-20261002"
+  },
+  "sourceProvenance": [
+    {
+      "path": "apps/web/node_modules/next/dist/client/components/layout-router.js",
+      "sha256": "7887177c4d5c69911df9f24dbca2306cb8f4e193d3495165a5341a30a6899a4c"
+    },
+    {
+      "path": "apps/web/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js",
+      "sha256": "a766b78ded5f7e3bf27f7bc3b294130fb036f899a20bd1e7e9bf35fb296b9ce6"
+    }
+  ],
+  "runtimeDelta": [],
+  "checkedFiles": 633,
+  "changedTest": "apps/web/tests/filter-workflow.spec.ts",
+  "node": {
+    "passed": 314
+  },
+  "finding": "Stack points to Next InnerLayoutRouter/useDeferredValue/deferred-RSC/use; warning emitted by bundled React development hook check. Exact upstream cause/fix not established.",
+  "limits": [
+    "Development-only warning check absent in production; no inference that root cause is fixed",
+    "6 executions per mode =2project cases repeated3; not12unique user scenarios",
+    "No dependency upgrade, node_modules patch or log suppression",
+    "Scoped functional assertions pass; no full E2E/WebKit/manualSR/RUM claim"
+  ],
+  "next": "H3-17b6: remaining SSR/cache release checks; dependency diagnostic remains open P2"
+}

@@ -1,0 +1,426 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test saved-plan-identity.spec.ts --trace=off --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [20452]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=a29f38e894cd47c5bcc5062164f6dd62 method=GET status=200
+
+[WebServer] (node:52404) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=5a84617b953643e7ae994801687836ef method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4479434f63d94d1193b72cffe8e42870 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=03a1b75623a14727a5e27445d10f0e36 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8224491dc12747b6b9a32903312687d2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=191aa2e30b6340fbbb84be2028c8ee2e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bbbdd7c4b56045769ddb8111afa90988 method=GET status=200
+
+Running 18 tests using 1 worker
+
+
+(node:19328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+[WebServer] INFO:hoptrip.requests:request_id=2a9a8fe4807f4766ab29747d7dacb760 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ad536b159de648e983d8ed6680a0f326 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=965f348fece54e308add5026ff803916 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=aeb4902d640b4793a5e6668fdf6d3820 method=GET status=404
+
+  1) [desktop] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "Ta kopia jest już zapisana."
+    Received string:    "Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Zapisz i udostępnij wyjazd">…</section>
+        - unexpected value "Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Zapisz i udostępnij wyjazd">…</section>
+           - unexpected value "Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-pl-exp-32013--through-reload-and-opening-desktop\error-context.md
+
+
+(node:34844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=71e881974e4040588daf07e1198d5a3d method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=7cb7912cab994301bc42aba757603d52 method=GET status=404
+  2) [desktop] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "This snapshot is already saved."
+    Received string:    "Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Save and share the trip">…</section>
+        - unexpected value "Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Save and share the trip">…</section>
+           - unexpected value "Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-en-exp-5ce2e--through-reload-and-opening-desktop\error-context.md
+
+
+
+(node:41832) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+[WebServer] INFO:hoptrip.requests:request_id=bb2f3f8e1e9743f39fe4fc78a6f849e6 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=31f9d49f87744355a6d3f99d4cdc7cfd method=GET status=404
+  3) [desktop] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "Эта копия уже сохранена."
+    Received string:    "Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Сохранить поездку и поделиться">…</section>
+        - unexpected value "Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Сохранить поездку и поделиться">…</section>
+           - unexpected value "Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-ru-exp-73d9e--through-reload-and-opening-desktop\error-context.md
+
+
+
+(node:49280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/18] [desktop] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+[WebServer] INFO:hoptrip.requests:request_id=7306886de2624736a0979610b09009c7 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=50706b0224214ef382b738a1ebe6941d method=GET status=404
+
+  4) [desktop] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "Цю копію вже збережено."
+    Received string:    "Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Зберегти подорож і поділитися">…</section>
+        - unexpected value "Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Зберегти подорож і поділитися">…</section>
+           - unexpected value "Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-uk-exp-e96c0--through-reload-and-opening-desktop\error-context.md
+
+
+
+(node:52080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/18] [desktop] › tests\saved-plan-identity.spec.ts:25:5 › fresh saves use v2 only; remove and undo retain identity while advancing revision
+
+[WebServer] INFO:hoptrip.requests:request_id=ddf921ed75fe48f68bd017348cd88ae4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e65941717a88419d884613d07e489ea1 method=GET status=200
+
+[6/18] [desktop] › tests\saved-plan-identity.spec.ts:31:5 › old tabs cannot overwrite v2; importing additions never resurrects an unchanged deleted plan
+[WebServer] INFO:hoptrip.requests:request_id=0f33ea168e07452f9a06d13f596bc6d1 method=GET status=200
+
+[7/18] [desktop] › tests\saved-plan-identity.spec.ts:39:5 › a legacy change while migration waits for the cross-tab lock yields conflict without overwriting either key
+[WebServer] INFO:hoptrip.requests:request_id=0bb0f82aa5354c3f9251bdf86332a6a2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1ab03fddcf2c43d6a44f18388c4d5a28 method=GET status=200
+
+[8/18] [desktop] › tests\saved-plan-identity.spec.ts:48:5 › parallel saves from two tabs retain both plans with distinct IDs
+[WebServer] INFO:hoptrip.requests:request_id=ac058a45ae6a482bb571d8901a3d0de1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca54ee26155d4f1b84feb3cc593af033 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd3d62d5a7d84d8f8dfd4ef38f937031 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fef60641500d466d8bed976bd5b93b2a method=GET status=200
+[9/18] [desktop] › tests\saved-plan-identity.spec.ts:55:5 › failed migration preserves the source; unavailable locking keeps reading and sharing available
+[WebServer] INFO:hoptrip.requests:request_id=cd053d55fe1040599eca51c84005e28b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=436fbc5c70704cec8bdbc558044a80ac method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=74681b124f8d45509123917d36d80cb0 method=GET status=200
+(node:51524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[10/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+[WebServer] INFO:hoptrip.requests:request_id=1460eeefe6b242e4a70f6f9a5d5a2648 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=6e983a6be9ce41588208753fe3aebb5b method=GET status=404
+
+  5) [mobile] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "Ta kopia jest już zapisana."
+    Received string:    "Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Zapisz i udostępnij wyjazd">…</section>
+        - unexpected value "Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Zapisz i udostępnij wyjazd">…</section>
+           - unexpected value "Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-pl-exp-32013--through-reload-and-opening-mobile\error-context.md
+
+
+
+(node:30948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[11/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=67b2230b7efb41c0911ba5ba0e497ebe method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=d0e0e9e2c62d44608d791abefbcc375b method=GET status=404
+  6) [mobile] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "This snapshot is already saved."
+    Received string:    "Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Save and share the trip">…</section>
+        - unexpected value "Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Save and share the trip">…</section>
+           - unexpected value "Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-en-exp-5ce2e--through-reload-and-opening-mobile\error-context.md
+
+
+
+(node:14780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[12/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+
+[WebServer] INFO:hoptrip.requests:request_id=63afa06eec0444f5841589787e6dc364 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=bf0219c73ddc41ccafd31a166a672416 method=GET status=404
+  7) [mobile] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "Эта копия уже сохранена."
+    Received string:    "Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Сохранить поездку и поделиться">…</section>
+        - unexpected value "Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Сохранить поездку и поделиться">…</section>
+           - unexpected value "Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-ru-exp-73d9e--through-reload-and-opening-mobile\error-context.md
+
+
+
+(node:45332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[13/18] [mobile] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening
+[WebServer] INFO:hoptrip.requests:request_id=21e33c74f7c64cb7bee66feb15edf248 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b61cf3be709e4093a788701fab04de51 method=GET status=404
+  8) [mobile] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#trip-save')
+    Expected substring: "Цю копію вже збережено."
+    Received string:    "Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" locator('#trip-save') with timeout 5000ms
+      - waiting for locator('#trip-save')
+        - locator resolved to <section tabindex="-1" id="trip-save" aria-label="Зберегти подорож і поділитися">…</section>
+        - unexpected value "Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…"
+        13 × locator resolved to <section tabindex="-1" id="trip-save" aria-label="Зберегти подорож і поділитися">…</section>
+           - unexpected value "Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей."
+
+
+      21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});
+    > 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);
+         |                                                                                                                                                                                                                                                     ^
+      24 | });
+      25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{
+      26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12b-20261104\apps\web\tests\saved-plan-identity.spec.ts:23:245
+
+    Error Context: test-results\saved-plan-identity-uk-exp-e96c0--through-reload-and-opening-mobile\error-context.md
+
+
+(node:14208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[14/18] [mobile] › tests\saved-plan-identity.spec.ts:25:5 › fresh saves use v2 only; remove and undo retain identity while advancing revision
+
+[WebServer] INFO:hoptrip.requests:request_id=8015612c1d1540798b9b2df64f5fe843 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fa779b6642d14feab187ed9f6dc226c7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f7029060bc3948749a89df8e31a4256a method=GET status=200
+
+[15/18] [mobile] › tests\saved-plan-identity.spec.ts:31:5 › old tabs cannot overwrite v2; importing additions never resurrects an unchanged deleted plan
+
+[WebServer] INFO:hoptrip.requests:request_id=0c3c72a32e1b46678a9982569311c3e6 method=GET status=200
+[16/18] [mobile] › tests\saved-plan-identity.spec.ts:39:5 › a legacy change while migration waits for the cross-tab lock yields conflict without overwriting either key
+[WebServer] INFO:hoptrip.requests:request_id=30078bf269a94b76a596414a212dcf4f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=54ab348749ec41549d6c33ee9cc363a3 method=GET status=200
+
+[17/18] [mobile] › tests\saved-plan-identity.spec.ts:48:5 › parallel saves from two tabs retain both plans with distinct IDs
+[WebServer] INFO:hoptrip.requests:request_id=dfc059e2854b46ef9063705121fd71c3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=be31905e6efa42ed821161091dd680d5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=aabaa69f986d47c2ad7d6fdbcd1bb7b1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=075b07ee73d04c7d9891c3d979828f5c method=GET status=200
+
+[18/18] [mobile] › tests\saved-plan-identity.spec.ts:55:5 › failed migration preserves the source; unavailable locking keeps reading and sharing available
+[WebServer] INFO:hoptrip.requests:request_id=716c4726e7184d41a141af7accbd83af method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fc19b5c420cf48a0b0106af51bc50169 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=90bb516d93bd407db10a64c582df40f3 method=GET status=404
+
+  8 failed
+    [desktop] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [desktop] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [desktop] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [desktop] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [mobile] › tests\saved-plan-identity.spec.ts:13:56 › pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [mobile] › tests\saved-plan-identity.spec.ts:13:56 › en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [mobile] › tests\saved-plan-identity.spec.ts:13:56 › ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+    [mobile] › tests\saved-plan-identity.spec.ts:13:56 › uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening 
+  10 passed (1.4m)

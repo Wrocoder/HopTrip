@@ -1,0 +1,247 @@
+{
+  "synthetic": true,
+  "taxonomy_version": "h3-analytics-baseline-v1",
+  "schema": {
+    "properties": {
+      "event_id": {
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9-]{36}$"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Event Id"
+      },
+      "event_name": {
+        "type": "string",
+        "enum": [
+          "PAGE_VIEW",
+          "DEAL_IMPRESSION",
+          "DEAL_VIEW",
+          "SEARCH",
+          "FILTER_USE",
+          "ACTIVITY_CLICK",
+          "SEARCH_RESULT",
+          "PARTNER_CLICK",
+          "BUDGET_USE",
+          "TRIP_SAVE",
+          "ALERT_CONFIRMED",
+          "TRIP_REMOVE",
+          "EVENT_CLICK",
+          "ALERT_STARTED"
+        ],
+        "title": "Event Name"
+      },
+      "anonymous_session_id": {
+        "type": "string",
+        "maxLength": 120,
+        "minLength": 8,
+        "title": "Anonymous Session Id"
+      },
+      "deal_slug": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 220
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Deal Slug"
+      },
+      "component": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 40
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Component"
+      },
+      "source": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 80
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Source"
+      },
+      "metadata": {
+        "additionalProperties": true,
+        "type": "object",
+        "title": "Metadata"
+      },
+      "activity": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ActivityContext"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "search": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/SearchContext"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "partner": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PartnerContext"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "filter": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/FilterContext"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "type": "object",
+    "required": [
+      "event_name",
+      "anonymous_session_id"
+    ],
+    "title": "AnalyticsEventCreate"
+  },
+  "usage": {
+    "start": "2026-10-01T00:00:00Z",
+    "end": "2026-10-02T00:00:00Z",
+    "observed_events": 17,
+    "observed_sessions": 4,
+    "excluded_events": 0,
+    "invalid_results": 0,
+    "unlinked_detail_views": 0,
+    "metrics": [
+      {
+        "key": "search_initiation",
+        "status": "available",
+        "numerator": 2,
+        "denominator": 4,
+        "percent": "50.00"
+      },
+      {
+        "key": "search_success",
+        "status": "available",
+        "numerator": 1,
+        "denominator": 3,
+        "percent": "33.33"
+      },
+      {
+        "key": "empty_results",
+        "status": "available",
+        "numerator": 1,
+        "denominator": 2,
+        "percent": "50.00"
+      },
+      {
+        "key": "result_errors",
+        "status": "available",
+        "numerator": 1,
+        "denominator": 3,
+        "percent": "33.33"
+      },
+      {
+        "key": "detail_opening",
+        "status": "available",
+        "numerator": 2,
+        "denominator": 4,
+        "percent": "50.00"
+      },
+      {
+        "key": "affiliate_ctr",
+        "status": "available",
+        "numerator": 1,
+        "denominator": 2,
+        "percent": "50.00"
+      },
+      {
+        "key": "trip_save",
+        "status": "available",
+        "numerator": 1,
+        "denominator": 4,
+        "percent": "25.00"
+      },
+      {
+        "key": "budget_usage",
+        "status": "available",
+        "numerator": 1,
+        "denominator": 4,
+        "percent": "25.00"
+      },
+      {
+        "key": "event_engagement",
+        "status": "available",
+        "numerator": 2,
+        "denominator": 4,
+        "percent": "50.00"
+      },
+      {
+        "key": "returning_visitors",
+        "status": "unavailable",
+        "numerator": null,
+        "denominator": null,
+        "percent": null
+      },
+      {
+        "key": "device_funnel",
+        "status": "unavailable",
+        "numerator": null,
+        "denominator": null,
+        "percent": null
+      }
+    ],
+    "page_cohorts": [
+      {
+        "page_type": "catalog",
+        "sessions": 1,
+        "partner_sessions": 0,
+        "percent": "0.00"
+      },
+      {
+        "page_type": "guide",
+        "sessions": 1,
+        "partner_sessions": 0,
+        "percent": "0.00"
+      },
+      {
+        "page_type": "home",
+        "sessions": 1,
+        "partner_sessions": 1,
+        "percent": "100.00"
+      },
+      {
+        "page_type": "not_observed",
+        "sessions": 1,
+        "partner_sessions": null,
+        "percent": null
+      }
+    ]
+  }
+}

@@ -107,7 +107,7 @@ def test_internally_consistent_but_false_snapshot_is_not_explained_as_current(co
     else:
         price = Decimal(300)
     deal = Deal(deal_score=number, score_version=SCORE_VERSION, flight_price_pln=price,
-                historical_baseline_pln=400, score_components={"breakdown": data})
+                price_per_person_pln=price, historical_baseline_pln=400, score_components={"breakdown": data})
     assert explain_score(deal).status == "UNAVAILABLE"
 
 
@@ -186,6 +186,7 @@ def test_saved_calculation_time_is_used_instead_of_rescoring_today():
     score = score_flight_deal(current_price=Decimal(330), baseline_price=Decimal(400),
         sample_count=24, observed_at=NOW - timedelta(hours=24), expires_at=None, now=NOW)
     deal = Deal(deal_score=score.deal_score, score_version=SCORE_VERSION,
+                flight_price_pln=330, price_per_person_pln=330, historical_baseline_pln=400,
                 score_components={"breakdown": score.breakdown.model_dump(mode="json")})
     assert explain_score(deal) == score.breakdown
     deal.score_version = "flight-v3"

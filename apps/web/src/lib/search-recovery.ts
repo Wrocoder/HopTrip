@@ -6,7 +6,7 @@ const choices:readonly {keys:readonly (keyof Filters)[];label:CatalogKey}[]=[
  {keys:['budget'],label:'Usuń limit ceny'},
  {keys:['departure_from','departure_to'],label:'Poszerz wyszukiwanie na inne daty'},
  {keys:['destination'],label:'Pokaż inne kierunki'},
- {keys:['weekend'],label:'Pokaż też inne dni tygodnia'},
+ {keys:['weekend','weekend_mode','work_start','work_end'],label:'Pokaż też inne dni tygodnia'},
  {keys:['duration_min','duration_max'],label:'Usuń ograniczenie liczby nocy'},
  {keys:['origin'],label:'Pokaż inne lotniska wylotu'},
 ];

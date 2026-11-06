@@ -1,0 +1,438 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-explanations.spec.ts --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [49376]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=a1a120472fb0440cbcc3ec9031dd0261 method=GET status=200
+
+[WebServer] (node:30500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:32012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=e79907f6aeb745029dcf478a173fc214 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3811f83a973e4f5e998f5cf9275eccc5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=978b098b77ff40abafe0a1e6ead22e5e method=GET status=200
+
+Running 8 tests using 1 worker
+
+(node:15548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=440ceb3ae193407484e5886614a72cf9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=01e0e67f4e5f4490bc2cffcd848c4fef method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=50786aabc4804c73961f7737e4984ed6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a768a55db24243429601a279e2f03834 method=GET status=200
+
+  1) [desktop] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')
+        2) <p class="price-samples">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:56976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers
+[WebServer] (node:47684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9cd22063e4da4074b2f1864450af3c48 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0894f81dbc614ac08544d9f5c3f54295 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d711d7f041744833a96e064d80dc0ded method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e16ffcd457c54c8fb391fb4b89fdeeb1 method=GET status=200
+
+  2) [desktop] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')
+        2) <p class="price-samples">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:39976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers
+
+[WebServer] INFO:hoptrip.requests:request_id=765e9dc7e9b14f56905d5a7308508eb9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e4219c63afa04c8b8e885856ff7f33dd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=434a9686afa54b92a5a103f41d0064e0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=83aafb87ea0646b59a9a60adb41b5c2b method=GET status=200
+
+
+[WebServer] (node:1936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  3) [desktop] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')
+        2) <p class="price-samples">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:24484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/8] [desktop] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=4b42811925ca435ca0bb2b1620cd691f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fa80763a31494ace912c300cb593b438 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3f8c1dcf76404f5cb17280f45efc10c0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c2957dd2b0784370b054284a18c9d098 method=GET status=200
+
+[WebServer] (node:5476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  4) [desktop] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')
+        2) <p class="price-samples">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:22144) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=46a40ac4e7954b219cd74b36e4b8b420 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5990cd2ccc6b48f38c28ced6f0304b7e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1c09d96f6c964a9aa87a0efc2a97bade method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ad260e290c3746839777f8e3ce57ab2e method=GET status=200
+  5) [mobile] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka getByRole('group', { name: 'Cena na tle historii' }).getByText('Liczba obserwacji: 24. Próg')
+        2) <p class="price-samples">Liczba obserwacji: 24. Próg porównania: 5; próbka…</p> aka locator('dialog').getByText('Liczba obserwacji: 24. Próg')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-pl-price-e-68537-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:8640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=c91d3d931ba04db8b7a4ba661596fdf4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=20a7b537607d4de58d21f6e1fe0aaa11 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bb615d11bf7b442489d616875f2be3ab method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1f4e3d2cbba049859e6f6a901e0e80f0 method=GET status=200
+
+[WebServer] (node:38312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  6) [mobile] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Observations: 24. Comparison threshold: 5; the sa…</p> aka getByRole('region', { name: 'Price and freshness' }).getByText('Observations: 24. Comparison')
+        2) <p class="price-samples">Observations: 24. Comparison threshold: 5; the sa…</p> aka locator('dialog').getByText('Observations: 24. Comparison')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-en-price-e-237d5-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:28140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[7/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers
+[WebServer] INFO:hoptrip.requests:request_id=07418b564a944970b0f88a090c826bd7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=97850372c1c84085933e7dc944d22e44 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4cc91f558570439889950f50e6063a41 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c8f2f9d7bf9740fc8d64302e3943201a method=GET status=200
+
+[WebServer] (node:25624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  7) [mobile] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka getByRole('group', { name: 'Цена на фоне истории' }).getByText('Наблюдений: 24')
+        2) <p class="price-samples">Наблюдений: 24. Порог сравнения: 5; выборка не ох…</p> aka locator('dialog').getByText('Наблюдений: 24')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ru-price-e-e8c66-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:54880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[8/8] [mobile] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers
+
+[WebServer] INFO:hoptrip.requests:request_id=610097aeceb14e5e96699d48c08990d5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eedebc73eb1d4b96be96f4d9e13b8c30 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=09135f5ab7c2463f974c3a03bca4956b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3bd3f12b7dfe42ab8262ef9a1ddbe484 method=GET status=200
+[WebServer] (node:55580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  8) [mobile] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.deal-card').first().locator('.price-samples')
+    Expected: visible
+    Error: strict mode violation: locator('.deal-card').first().locator('.price-samples') resolved to 2 elements:
+        1) <p class="price-samples">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka getByRole('group', { name: 'Ціна на тлі історії' }).getByText('Спостережень: 24')
+        2) <p class="price-samples">Спостережень: 24. Поріг порівняння: 5; вибірка не…</p> aka locator('dialog').getByText('Спостережень: 24')
+
+    Call log:
+      - Expect "toBeVisible" locator('.deal-card').first().locator('.price-samples') with timeout 5000ms
+      - waiting for locator('.deal-card').first().locator('.price-samples')
+
+
+      18 |   await expect(card.locator('.card-cost-scope')).toBeVisible();await expect(card.locator('.price-freshness')).toBeVisible();
+      19 |   await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+    > 20 |   await expect(card.locator('.price-samples')).toBeVisible();await expect(card.locator('.price-observation time')).toBeVisible();
+         |                                                ^
+      21 |   if(before){await card.locator('.price-assessment details > summary').click();await expect(card.locator('.price-assessment').getByText(grouping,{exact:true})).toBeVisible();}
+      22 |   else{await expect(card.locator('.price-methodology-link')).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));await expect(card.locator('.price-assessment details')).toHaveCount(0);}
+      23 |   const expandedHeight=(await card.boundingBox())!.height;
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations.spec.ts:20:48
+
+    Error Context: test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-uk-price-e-83410-e-after-one-and-many-offers-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  8 failed
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+    [desktop] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › pl: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › en: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › ru: price explanations before/after, one and many offers 
+    [mobile] › tests\h3-explanations.spec.ts:8:56 › uk: price explanations before/after, one and many offers 

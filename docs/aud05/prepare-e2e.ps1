@@ -1,5 +1,5 @@
 # Prepare an isolated copy; no existing servers are reused or stopped.
-param([string]$WorkspaceName='aud05-isolated')
+param([string]$WorkspaceName='aud05-isolated',[switch]$Production)
 $ErrorActionPreference='Stop'
 $repoRoot=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 if($WorkspaceName -notmatch '^aud05-[a-zA-Z0-9_-]+$'){throw 'Use a workspace name beginning with aud05- and no path separators.'}
@@ -9,7 +9,7 @@ New-Item -ItemType Directory -Path $copyRoot | Out-Null
 $trackedFiles=@(git -C $repoRoot ls-files apps/web apps/api)
 # Include newly authored runtime/test code before it is committed. Exclude private
 # env/JSON/operator files: only these code extensions in source/spec directories.
-$newCode=@(git -C $repoRoot ls-files --others --exclude-standard -- apps/api/app apps/web/src apps/web/tests | Where-Object {$_ -match '\.(py|ts|tsx|mjs)$'})
+$newCode=@(git -C $repoRoot ls-files --others --exclude-standard -- apps/api/app apps/web/src apps/web/tests | Where-Object {$_ -match '\.(py|ts|tsx|mjs|css)$'})
 $trackedFiles=@(($trackedFiles+$newCode) | Sort-Object -Unique)
 foreach($relative in $trackedFiles){
  $source=Join-Path $repoRoot $relative
@@ -32,4 +32,11 @@ $configPath=Join-Path $copyRoot 'apps/web/next.config.ts'
 $rootLiteral=($repoRoot.Replace('\','/') | ConvertTo-Json -Compress)
 $configText=[IO.File]::ReadAllText($configPath).Replace('output:"standalone",',"output:`"standalone`",`n turbopack:{root:$rootLiteral},")
 [IO.File]::WriteAllText($configPath,$configText)
+if($Production){
+    $runnerPath=Join-Path $copyRoot 'apps/web/playwright.config.ts'
+    $runner=[IO.File]::ReadAllText($runnerPath)
+    if(!$runner.Contains('command:"npm run dev --') -or !$runner.Contains('env:{HOPTRIP_API_URL:')){throw 'Unexpected Playwright runner: cannot configure production mode safely.'}
+    $runner=$runner.Replace('command:"npm run dev --','command:"npm run start --').Replace('env:{HOPTRIP_API_URL:','env:{NODE_ENV:"production",HOPTRIP_API_URL:')
+    [IO.File]::WriteAllText($runnerPath,$runner)
+}
 Write-Output $copyRoot

@@ -1,0 +1,412 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test filter-workflow.spec.ts --grep full search wins --repeat-each=3 --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [2192]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1d2b4ae0cccd49c2ab2081dbd268af68 method=GET status=200
+[WebServer] (node:26312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:11812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=8e386c83369e46a29bd2a7449732424e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=37cc023035a84a29adcf56a17ef17010 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=50d2852e6ccb4752acfd44a7616204fd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b4b7caad02854ddf89436f91dbee459f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0bfd2bf8e5354f8f9e1485b3ffcd3d54 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=68b3a3a86ca6416a995582e19582659e method=GET status=200
+
+
+Running 6 tests using 1 worker
+
+(node:33272) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/6] [desktop] › tests\filter-workflow.spec.ts:90:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=489b3fad302744cf81f46ad40556fdec method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0cd15e97c7b345329a37f29e914518c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a2f3959a0fe04aa9ad5f589c498ebc28 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=44c0e21538234155818c5213be0eea49 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=922456640dcf4df5b129765e49b22be3 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=16b4016a3a18402e99b77983cd3630e7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=aa3b612148e04df4b6987bf8230f657c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=db574d7f53164498bbd90093d154fd6a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=46fa7bd334cd4a3b806dd3e635539cbc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0a46d6f37b824820abf3cb5e0c9bdb64 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8da758fb4f2c47029978935ed6f143f3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7e8758f533454af09a6fa951e347b418 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0be9b90f8d804f5cbf77d1d57d35fa6e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=dbf1f0a571744e1bad08ba6e51ff0d92 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=21103be5cc1c41e1a79f89b3a8d60116 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cfe5ded688144ff78210ba853bc470f8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7e24f2fd65b04539aaf8e4067f67b889 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=956442e4693240608b1ac1a85e523d39 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=11beee4a4045417a8eebe39d076e51ca method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=71537a489c1444908987a75f75398094 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c9684827c43e45d89fb996dadbeca8d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b724013b490e4631b4869e33fabbd18d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=607c0ec4b10742c898d9f690143d4a0d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9e23150c27c44945b8be0046afad8084 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=90f349e28106477089c6102404ddbc94 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c2a4014c2f65477e9e0a1e339c090d48 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=318456f898a84fcea2276806477b65ab method=GET status=200
+
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+[WebServer] INFO:hoptrip.requests:request_id=4b6aac22e4c1453daa64bd2d8b208797 method=GET status=200
+
+(node:34304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/6] [desktop] › tests\filter-workflow.spec.ts:90:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=fbfa1713c53640609532f8901b97c273 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7b0d42b837494ba4acfaadd957e4ee9a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bbb997ee02b14554a13be6798fc0ad2d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=082fee2616194384ba4d18d23a8fcd6c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fd968ac3c84f4b6ca20d102416490255 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6e6bcfdca44c43659557dd069d925ff1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=adbedd2e57364f398be60f67bae62940 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c34e4ba281e438faffe1e55e53abcce method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e1d73059d8dc4ea2bc9442e3e9b834d6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5fa8ca0541e344698ea7a1583613263d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5411cffa93704968a399698a67d82b73 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2259dcaca5e14f9b885468a8e8d8bfa5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0a3ef4f30c964986b0df996d11491f8a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a41e853995ce4cd7b344f57378ea22c7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c479ff21361544e6b10d9dbbcf2e8ddf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=592f84cf54654034a4ce9035399a92dd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=75457f7cccfb4e1f92396fc1a86213ed method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c905c462fe4b47659501e5e4dae55d65 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=97b7d907bccf46a2a2feda0a9e73c3cb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=213c5834f83d413999b1b9d05fed3885 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=886867aa42fb4e9abcde51afdedb1628 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=22dc3c54d0204422a7989082446bd7d3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=422904b84b0b4da499bc7dc911a261f6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d1948bdc44804e7d8532758b87b5fe72 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b26c02e6175b44839de273a75085eace method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=988494007e6f4a5489ade607c7fd475c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=133f6d9f77b14e71b07763f9989771cc method=GET status=200
+
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+[WebServer] INFO:hoptrip.requests:request_id=bdd483777e6b443b9d1d76fb0089b767 method=GET status=200
+
+(node:13960) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/6] [desktop] › tests\filter-workflow.spec.ts:90:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=ba623980349a48748c99d67a385436f7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a03c05e475244a959268dad53a843a0e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bb5c6739593944e1889c1d895e9719bb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=25137c68b8b542a39ca85c27a6d174bf method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=60cc9cab256f468f9deb8d9e04c2d230 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=33cb2e313e824914982213b567ca42cf method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2230fc14483d41ddae5ebcf865283f65 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9c7e1fbd8a34826bbfacf574cd851f8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9e89d931d1b248d8aab2108132a2ce9c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ba25ee36d5b74ee498caae98532a02cc method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b01a6573330844aaba8ae611075bd010 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=eb8d1ece294543ed9331ac6a3925a687 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=699961037da04825a812cdfdac122220 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0bcb282f50fd4ba7aa3bab64071ee09f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f37cdb56833f48eb8062e06646cb8a42 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ad2affca1a21423b883cac61b248d666 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a0173b4c1b1b4fc8b2703b24cdc48feb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8d01b5172f5a4912a4683b99619288dd method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=37b17a8a78144184b6e17dc6712c70db method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0b3680383cec478fa41c161e6761f770 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=38f78218db2c4e9b85edab06a51f94a1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=51231e6068cb4968b4751398fa2c3f34 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=655ea77c6e2f4344843ce02c773e861e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=dbfbdf3144dd46f084d06b8ed66def32 method=GET status=200
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+
+[WebServer] INFO:hoptrip.requests:request_id=21821886fbad49b9ac030af435d47717 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a08518421762404c8a7b8b8f63dcba34 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=783fec4325e04752b7a26ff98efb4cab method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6293bff48a7b403b96c9c0fb89eb6d54 method=GET status=200
+
+
+(node:33840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/6] [mobile] › tests\filter-workflow.spec.ts:90:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=7a01e22cbb9241429b875b3a0f49426b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8140e1ccc1724e7a9ecb4a7976dce7a9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ba3b7a38e6054de2a593e2d68f99e029 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c226c52e8bf744ec81fe3f9a41c31b26 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2d954173938a44d58508e36f44f19cf2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=71c34d2ae24349ceb5fdf12f26da948e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=aa21b13b19cd46aeab03a0e25447e06f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ae82ded32fc848ddb27de8e7c55b71d7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=06634bd57e1b4ba79cda008c7d1562e1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=849b9224196044ec95061ba7fc4b1eb4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8a5125b5d89f4a408710b70aa4ab3799 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1c9e1be5d5574faaa6ddc7570b69b6c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=28e0bfd78c894582b72f7e55ae4aca36 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e32e897a4b1f4470bd7bed99b584e98c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9a0a840452dc4915a05781e9d590f26c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=973e19213a9a439ba1f383cc485038e8 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fa37b168464a463d9a4be2a74c3dd167 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c45ca281ebdd46649271fa1afb8cf274 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=50ebc40136f049799b2ffc26afc64d5d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b0f562eaf3a54ae38773c8e853c91726 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b8ca29cbc14e45999730551b7dbd4287 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a62daa2ed5649f0b818a5df33e9100f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8c975b38cee8414f916b82aeb08c987e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9a655b5083e545d596e75f57be337b53 method=GET status=200
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+
+[WebServer] INFO:hoptrip.requests:request_id=d20699305a464b63831a9e5f9b4eb669 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fb4f91fe945441228370552d7b0b6594 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9a4bd5afcdce438394b012728cd2aa5d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf2bb634d15545198c6528f18966a7c4 method=GET status=200
+
+(node:32996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/6] [mobile] › tests\filter-workflow.spec.ts:90:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=864be591864344a48fad5b21f62bb621 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=97b547e07af042a5b06badafb4ffd034 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9bd236669e134dbcbf7162e1ec544dc2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e7aa19171f454f6ab7dce31d1764c438 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=454d52552946470e9b8bd432f8f8753c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c061e998f63f46e59888fb0625f46fdb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=28b852653ae94048b8eb96ce29856a37 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3194557adb184429a93b38b417549f3d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=080a5295efca4396b3899c0867d07996 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=80254907c35e4b308119e5848dc96fa0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ef1dd50452964c65bc9926578bc42608 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=653554682109495793dea971489a0421 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9d64fb5875bb4923a0a8d8281c23f954 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=071e5a2ee7204d3facdc6095e9bc4b00 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e198b07b4722489d8f170106d47993ac method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2a79816ec35c4dc99bc645f0cd85d012 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=938a077b05064b2a880a01945c5ddcf1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7af6a2a5438b48e4acfb6c111821b499 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1b9f67dac72d4e31841844807c9b85b3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=930a8092026641629fbf7c3393b24ed7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e90d676895cd4d59b0a4ae03ed6a7392 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a8caa98bc4440fc947e7595e74ef76e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ca618ac53a9f48f0812d62a44022da82 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ad040cb177d34a6785e83cd891d24ef7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3e6c954b42ad48a4940af845278f0aa3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f0c3ee0798a74f4faa8819806c4744cd method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=af623a53cb1c40c39d622fbdb3d448fc method=GET status=200
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+
+[WebServer] INFO:hoptrip.requests:request_id=fdeda413ce164953a0533434ab59aa9c method=GET status=200
+
+
+(node:32872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/6] [mobile] › tests\filter-workflow.spec.ts:90:5 › a full search wins over a delayed earlier origin preference response
+
+[WebServer] INFO:hoptrip.requests:request_id=7eb0295f031b4190a16a9994692fba6a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=13598569456f463ca8a6b02fe45e3a22 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4868edd33e3643b7b24fb51093815083 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3a1827f7270342859d58bc876f8df539 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3a34348b5e2b41b699f2c00550228b37 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=28262fb5c570468fa827e59893dbd2e6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d3faa5676e41415fa677f7a1b6526271 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ac2dd687fd8e4aa39e85a0550ba6ad01 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b86d4fe3915c4989a2e534a056b569d7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=26f47a123b864ac4a8a51713364b9537 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dfe0e593270541928f3c5bcf81b1aeaa method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a0096f3619024683aa8e0f5331cfcccb method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1a48dcfc77c2446cade6f55ca814d445 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f469ed90b8214ffa9b1e4471c2a655c7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0de82cbe1ea34c0fa3042488b1e5763c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0869b91aac1e403faec34d3f7714d1b2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=026d1a28b3574fe59d90258bbbbb67c8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dee4cd41b25f400b9d457d7f2ad2314e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=61cf383112154d20b8f28419ffa5542b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a9d2fdb222f74d7bae437781df075ca2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=21f4ca24584043079328d5990c10164a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=44ea5473099645eb91f50672f7e70ec4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=009c171e896e4baab87fa4465b81f3a3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0459c1fe61c24cda99bf91b21aca41d3 method=GET status=200
+
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+
+[WebServer] INFO:hoptrip.requests:request_id=960ba2d6fac34269b9c5d4297b7adab9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f498999bee2e47a9a57722b142a1f531 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8412b74f29cc4fbaa325d4b7e48e9a94 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2f0a0bdfff55455eae528c158bf7626b method=GET status=200
+
+  6 passed (47.4s)

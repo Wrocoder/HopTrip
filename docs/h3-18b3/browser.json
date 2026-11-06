@@ -1,0 +1,928 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "details-open-analytics.spec.ts",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b3-20261106/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b3-20261106/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b3-20261106/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b3-20261106/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b3-20261106/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "details-open-analytics.spec.ts",
+      "file": "details-open-analytics.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2089,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"cena i aktualność\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"lot i bagaż\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"cena i aktualność\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"lot i bagaż\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"cena i aktualność\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"lot i bagaż\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:29.796Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-pl--76980-e-one-offer-event-per-visit-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-4b101cc3c92808158d81",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "en: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2237,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"price and freshness\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"flight and baggage\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"price and freshness\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"flight and baggage\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"price and freshness\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"flight and baggage\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:32.985Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-en--fd994-e-one-offer-event-per-visit-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-3114a1195e1624ae43df",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "ru: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3218,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"цена и актуальность\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Цена и актуальность\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Цена и актуальность\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Цена и актуальность\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Цена и актуальность\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"перелёт и багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Перелёт и багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Перелёт и багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Перелёт и багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Перелёт и багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"цена и актуальность\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Цена и актуальность\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Цена и актуальность\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Цена и актуальность\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Цена и актуальность\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"перелёт и багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Перелёт и багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Перелёт и багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Перелёт и багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Перелёт и багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"цена и актуальность\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Цена и актуальность\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Цена и актуальность\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Цена и актуальность\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Цена и актуальность\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"перелёт и багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Перелёт и багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Перелёт и багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Перелёт и багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Перелёт и багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:36.265Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-ru--c6e24-e-one-offer-event-per-visit-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-c01da3b8cb3ce51d810c",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "uk: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2534,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"ціна й актуальність\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"переліт і багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"ціна й актуальність\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"переліт і багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"ціна й актуальність\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"переліт і багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:40.623Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-uk--e9070-e-one-offer-event-per-visit-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-dc28856a6bbf93d14a3f",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "direct score calculation is a disclosure; visit and closure are separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4063,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:44.336Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-5b68552ee4b5f827a65b",
+          "file": "details-open-analytics.spec.ts",
+          "line": 50,
+          "column": 5
+        },
+        {
+          "title": "denial/revocation prevent sends; consent grant does not replay already open panels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:48.922Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-45a997a4b188f6ccccc6",
+          "file": "details-open-analytics.spec.ts",
+          "line": 60,
+          "column": 5
+        },
+        {
+          "title": "blocked analytics preserves native toggles, modal Escape and focus without retries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:50.562Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-500312497cae4390c1b3",
+          "file": "details-open-analytics.spec.ts",
+          "line": 74,
+          "column": 5
+        },
+        {
+          "title": "server-rendered disclosures and score anchor work with JavaScript disabled",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 60003,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 61,
+                        "line": 89
+                      },
+                      "message": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('#score .score-calculation > summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary>Jak działa pomocniczy wynik sortowania?</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not stable\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\n\n  87 |   await page.goto('/deals');const card=page.locator('.deal-card').first();await card.locator('.trip-details > summary').click();await expect(card.locator('.trip-details .price-samples')).toBeVisible();\n  88 |   await card.locator('.score-trigger').click();await expect(page).toHaveURL(/\\/deals\\/[^/]+#score$/);await expect(page.locator('#score')).toBeVisible();\n> 89 |   await page.locator('#score .score-calculation > summary').click();await expect(page.locator('#score .score-sum')).toBeVisible();expect(events).toEqual([]);\n     |                                                             ^\n  90 |  }finally{await context.close();}\n  91 | });\n  92 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:89:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:37:51.885Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-ser-faecc-rk-with-JavaScript-disabled-desktop\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-304bb1e3978c584c1fbb",
+          "file": "details-open-analytics.spec.ts",
+          "line": 83,
+          "column": 5
+        },
+        {
+          "title": "pl: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3079,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"cena i aktualność\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"lot i bagaż\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"cena i aktualność\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"lot i bagaż\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"cena i aktualność\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Cena i aktualność\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Cena i aktualność\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"lot i bagaż\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Lot i bagaż\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Lot i bagaż\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:38:52.697Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-pl--76980-e-one-offer-event-per-visit-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-aac43fa72ca5e49195bb",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "en: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2864,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"price and freshness\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"flight and baggage\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"price and freshness\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"flight and baggage\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"price and freshness\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Price and freshness\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Price and freshness\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"flight and baggage\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Flight and baggage\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Flight and baggage\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:38:56.990Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-en--fd994-e-one-offer-event-per-visit-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-50b7b1137788520f3c3f",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "ru: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6851,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.deal-card').first().locator('.trip-details')\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: serializes to the same string\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.deal-card').first().locator('.trip-details') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.trip-details')\u001b[22m\n\u001b[2m    14 × locator resolved to <details class=\"trip-details\">…</details>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.deal-card').first().locator('.trip-details')\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: serializes to the same string\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.deal-card').first().locator('.trip-details') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.trip-details')\u001b[22m\n\u001b[2m    14 × locator resolved to <details class=\"trip-details\">…</details>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:39:157",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 157,
+                      "line": 39
+                    },
+                    "snippet": "  37 |  await page.keyboard.press('Escape');await expect(trigger).toBeFocused();\n  38 |  await trigger.click();await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');\n> 39 |  const summary=card.locator('.trip-details > summary');await summary.focus();await page.keyboard.press('Enter');await expect(card.locator('.trip-details')).toHaveAttribute('open','');\n     |                                                                                                                                                             ^\n  40 |  expect(opened()).toHaveLength(1);expect(events.filter(event=>event.event_name==='DEAL_VIEW')).toHaveLength(0);\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 157,
+                        "line": 39
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.deal-card').first().locator('.trip-details')\nExpected: \u001b[32m\"\"\u001b[39m\nReceived: serializes to the same string\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('.deal-card').first().locator('.trip-details') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.deal-card').first().locator('.trip-details')\u001b[22m\n\u001b[2m    14 × locator resolved to <details class=\"trip-details\">…</details>\u001b[22m\n\u001b[2m       - unexpected value \"null\"\u001b[22m\n\n\n  37 |  await page.keyboard.press('Escape');await expect(trigger).toBeFocused();\n  38 |  await trigger.click();await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('Escape');\n> 39 |  const summary=card.locator('.trip-details > summary');await summary.focus();await page.keyboard.press('Enter');await expect(card.locator('.trip-details')).toHaveAttribute('open','');\n     |                                                                                                                                                             ^\n  40 |  expect(opened()).toHaveLength(1);expect(events.filter(event=>event.event_name==='DEAL_VIEW')).toHaveLength(0);\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:39:157"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:39:00.972Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-ru--c6e24-e-one-offer-event-per-visit-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 157,
+                    "line": 39
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-e5ceba60f6ce3c690fe5",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "uk: modal and native flight disclosures share one offer event per visit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2837,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"ціна й актуальність\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"переліт і багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"ціна й актуальність\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"переліт і багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                      "column": 93,
+                      "line": 43
+                    },
+                    "snippet": "  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 93,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 75\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"description\": \"Ensure landmarks are unique\",\u001b[39m\n\u001b[31m+     \"help\": \"Landmarks should have a unique role or role/label/title (i.e. accessible name) combination\",\u001b[39m\n\u001b[31m+     \"helpUrl\": \"https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright\",\u001b[39m\n\u001b[31m+     \"id\": \"landmark-unique\",\u001b[39m\n\u001b[31m+     \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+     \"nodes\": Array [\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"ціна й актуальність\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Ціна й актуальність\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Ціна й актуальність\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+       Object {\u001b[39m\n\u001b[31m+         \"all\": Array [],\u001b[39m\n\u001b[31m+         \"any\": Array [\u001b[39m\n\u001b[31m+           Object {\u001b[39m\n\u001b[31m+             \"data\": Object {\u001b[39m\n\u001b[31m+               \"accessibleText\": \"переліт і багаж\",\u001b[39m\n\u001b[31m+               \"role\": \"region\",\u001b[39m\n\u001b[31m+             },\u001b[39m\n\u001b[31m+             \"id\": \"landmark-is-unique\",\u001b[39m\n\u001b[31m+             \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+             \"message\": \"The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+             \"relatedNodes\": Array [\u001b[39m\n\u001b[31m+               Object {\u001b[39m\n\u001b[31m+                 \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+                 \"target\": Array [\u001b[39m\n\u001b[31m+                   \"article:nth-child(2) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+                 ],\u001b[39m\n\u001b[31m+               },\u001b[39m\n\u001b[31m+             ],\u001b[39m\n\u001b[31m+           },\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+         \"failureSummary\": \"Fix any of the following:\u001b[39m\n\u001b[31m+   The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable\",\u001b[39m\n\u001b[31m+         \"html\": \"<section aria-label=\\\"Переліт і багаж\\\">\",\u001b[39m\n\u001b[31m+         \"impact\": \"moderate\",\u001b[39m\n\u001b[31m+         \"none\": Array [],\u001b[39m\n\u001b[31m+         \"target\": Array [\u001b[39m\n\u001b[31m+           \"article:nth-child(1) > .trip-details[open=\\\"\\\"] > .trip-details-content > section[aria-label=\\\"Переліт і багаж\\\"]\",\u001b[39m\n\u001b[31m+         ],\u001b[39m\n\u001b[31m+       },\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"tags\": Array [\u001b[39m\n\u001b[31m+       \"cat.semantics\",\u001b[39m\n\u001b[31m+       \"best-practice\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  41 |  await other.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(2);\n  42 |  expect(opened()[1].deal_slug).not.toBe(slug);\n> 43 |  expect((await new AxeBuilder({page}).include('.trip-details[open]').analyze()).violations).toEqual([]);\n     |                                                                                             ^\n  44 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  45 |  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);\n  46 |  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:43:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:39:08.918Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-uk--e9070-e-one-offer-event-per-visit-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                    "column": 93,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-65c439ed6e941f61b200",
+          "file": "details-open-analytics.spec.ts",
+          "line": 26,
+          "column": 56
+        },
+        {
+          "title": "direct score calculation is a disclosure; visit and closure are separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:39:12.926Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-d3772513d3131932c608",
+          "file": "details-open-analytics.spec.ts",
+          "line": 50,
+          "column": 5
+        },
+        {
+          "title": "denial/revocation prevent sends; consent grant does not replay already open panels",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:39:17.853Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-5afef0e52b28b2532fee",
+          "file": "details-open-analytics.spec.ts",
+          "line": 60,
+          "column": 5
+        },
+        {
+          "title": "blocked analytics preserves native toggles, modal Escape and focus without retries",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 890,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:39:19.252Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-fc45dfe960a7a6a19a10",
+          "file": "details-open-analytics.spec.ts",
+          "line": 74,
+          "column": 5
+        },
+        {
+          "title": "server-rendered disclosures and score anchor work with JavaScript disabled",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 60016,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts",
+                        "column": 61,
+                        "line": 89
+                      },
+                      "message": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('#score .score-calculation > summary')\u001b[22m\n\u001b[2m    - locator resolved to <summary>Jak działa pomocniczy wynik sortowania?</summary>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not stable\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\n\n  87 |   await page.goto('/deals');const card=page.locator('.deal-card').first();await card.locator('.trip-details > summary').click();await expect(card.locator('.trip-details .price-samples')).toBeVisible();\n  88 |   await card.locator('.score-trigger').click();await expect(page).toHaveURL(/\\/deals\\/[^/]+#score$/);await expect(page.locator('#score')).toBeVisible();\n> 89 |   await page.locator('#score .score-calculation > summary').click();await expect(page.locator('#score .score-sum')).toBeVisible();expect(events).toEqual([]);\n     |                                                             ^\n  90 |  }finally{await context.close();}\n  91 | });\n  92 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\tests\\details-open-analytics.spec.ts:89:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T09:39:20.156Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b3-20261106\\apps\\web\\test-results\\details-open-analytics-ser-faecc-rk-with-JavaScript-disabled-mobile\\error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b9620ed3667913af39d3-446ee57285a924d5aea9",
+          "file": "details-open-analytics.spec.ts",
+          "line": 83,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T09:37:24.583Z",
+    "duration": 176939.932,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 10,
+    "flaky": 0
+  }
+}

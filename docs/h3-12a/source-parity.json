@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "runtimeFiles": 7,
+  "testFiles": 12,
+  "runtime": [
+    {
+      "path": "apps/web/src/app/trip/page.tsx",
+      "sha256": "99a2abaadf498717306734dc4d892a24568864f266824c4663681e4b9aae1059"
+    },
+    {
+      "path": "apps/web/src/app/components/trip-actions.tsx",
+      "sha256": "f6da73a2f2806f22f27c08737c543c58bb36d28f753039fb5b17b038e943b235"
+    },
+    {
+      "path": "apps/web/src/app/components/shared-trip-view.tsx",
+      "sha256": "0ef21a3355a305f49f4ddff10d79b68c3da3492017e52b765e313bc78e6a8a06"
+    },
+    {
+      "path": "apps/web/src/app/components/fragment-trip.tsx",
+      "sha256": "d985f889355d2288ced1774e16217ff040fc84a5d51c329e45e91dd0b5b592bc"
+    },
+    {
+      "path": "apps/web/src/lib/shared-trip.ts",
+      "sha256": "3685baffcaaf870c705e4f20ad5eac3ae1f6cf37a4db5f121afc8c94d4e67995"
+    },
+    {
+      "path": "apps/web/src/lib/trip-fragment.ts",
+      "sha256": "cf276d78e7e0c7d5160c2f13069cb4d0e3c365ef467539330285ba65b06c7c86"
+    },
+    {
+      "path": "apps/web/src/lib/i18n/share-privacy-copy.ts",
+      "sha256": "2aba9e475793597c9f333fbaff6649abf442512184e0f9c34b72d1a11d0b5245"
+    }
+  ],
+  "tests": [
+    "apps/web/tests/budget-provenance.spec.ts",
+    "apps/web/tests/budget-profiles.spec.ts",
+    "apps/web/tests/budget-modes.spec.ts",
+    "apps/web/tests/planned-events.spec.ts",
+    "apps/web/tests/saved-trip-workflow.spec.ts",
+    "apps/web/tests/shared-trip.spec.ts",
+    "apps/web/tests/localized-trips.spec.ts",
+    "apps/web/tests/localized-trips.test.mjs",
+    "apps/web/tests/mobile-workflow.spec.ts",
+    "apps/web/tests/trip-fragment.test.mjs",
+    "apps/web/tests/share-privacy.spec.ts",
+    "apps/web/tests/budget-recovery.spec.ts"
+  ],
+  "normalization": "Only test loopback ports 8100->8125 and3100->3125; runtime byte-identical.",
+  "onlyExpectedWebRuntimeDelta": true,
+  "unchangedSince11b": [
+    "apps/web/src/lib/budget-draft.ts",
+    "apps/web/src/lib/budget-estimates.ts",
+    "apps/web/src/lib/budget-provenance.ts",
+    "apps/web/src/lib/trip-budget.ts",
+    "apps/web/src/app/components/trip-draft.tsx",
+    "apps/web/src/app/components/use-saved-trips.ts",
+    "apps/web/src/app/components/saved-trips.tsx",
+    "apps/web/src/lib/session.ts",
+    "apps/web/src/lib/drive-policy.ts",
+    "apps/web/src/app/components/consent-controls.tsx",
+    "apps/web/package.json",
+    "apps/web/package-lock.json",
+    "apps/web/src/app/sitemap.ts",
+    "apps/api/app/api/catalog.py",
+    "apps/api/app/schemas/deal.py"
+  ]
+}

@@ -1,5 +1,6 @@
 import {readBudgetDraft,budgetDateCounts,type BudgetDraft} from "./budget-draft.ts";
 import {calculateBudget,moneyInGrosz} from "./trip-budget.ts";
+import {invalidProfiles} from './budget-estimates.ts';
 
 export type TripOffer={slug:string;origin:string;destination:string;start:string;end:string;price:string;observedAt:string};
 export type SharedTrip={version:1;offer:TripOffer;draft:BudgetDraft};
@@ -14,7 +15,7 @@ export function cleanSharedTrip(value:unknown):SharedTrip|null {
   !date(o.start) || !date(o.end) || typeof o.price!=="string" || moneyInGrosz(o.price)===undefined ||
   typeof o.observedAt!=="string" || o.observedAt.length>40 || (o.observedAt!=="" && !Number.isFinite(Date.parse(o.observedAt))))return null;
  const draft=readBudgetDraft(JSON.stringify(v.draft));
- if(!draft || !calculateBudget(draft.input,draft.events).valid ||
+ if(!draft || invalidProfiles(draft.estimates).length || !calculateBudget(draft.input,draft.events).valid ||
   (draft.end && !budgetDateCounts(draft.start,draft.end)))return null;
  for(const [key,amount] of Object.entries(draft.input)) {
   if(!["hotel_basis","people","nights","days"].includes(key) && moneyInGrosz(amount)===undefined)return null;
@@ -34,7 +35,9 @@ export function decodeTrip(token:unknown):SharedTrip|null {
  if(typeof token!=="string" || token.length>6000 || !/^[A-Za-z0-9_-]+$/.test(token))return null;
  try {return cleanSharedTrip(JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(Uint8Array.from(atob(token.replaceAll("-","+").replaceAll("_","/")),c=>c.charCodeAt(0)))));}catch{return null;}
 }
-export const tripPath=(token:string)=>`/trip?plan=${token}`;
+// A fragment is not included in the HTTP request or referrer. The payload is
+// still readable by anyone holding the link; it is not encrypted.
+export const tripPath=(token:string)=>`/trip#plan=${token}`;
 export function readSavedTrips(raw:string|null):string[] {
  return readSavedTripsState(raw).tokens;
 }

@@ -30,7 +30,7 @@ test("editorial index exposes every translated guide and keeps language through 
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(5);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content","index, follow");
   await expect(page.locator('meta[property="og:image"]')).toHaveCount(0);
-  await expect(page.locator('time[datetime="2026-09-27"]')).toBeVisible();
+  await expect(page.locator('time[datetime="2026-11-04"]')).toBeVisible();
   await page.locator(`main a[href="/${locale}/info/one-way-round-trip"]`).click();
   await expect(page.locator("html")).toHaveAttribute("lang",locale);
  }
@@ -55,13 +55,13 @@ test("translated score shows the same saved calculation and all uncertainty stat
   await expect(page.locator("#score .score-sum")).toContainText("76/100");
   await expect(page.locator("#score")).toContainText(scoreText(locale,"firstSeen"));
   await expect(page.locator('#score [lang="pl"]')).toHaveCount(0);
-  await page.locator("#score details").last().locator("summary").click();
-  await expect(page.locator("#score")).toContainText(scoreText(locale,"exclusions"));
+  await expect(page.locator('#score').getByText(scoreText(locale,'exclusions'),{exact:true})).toHaveCount(0);
   expect((await new AxeBuilder({page}).include("#score").analyze()).violations).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.locator("#score").screenshot({path:testInfo.outputPath(`score-${locale}.png`)});
   await page.locator("#score a.text-link").click();
   await expect(page.getByRole("heading",{level:1})).toHaveText(priceGuide[locale].title);
+  await expect(page.getByRole('main')).toContainText(scoreText(locale,'exclusions'));
   await page.goto(`/${locale}/deals/browser-2`);
   await expect(page.locator("#score")).toContainText(scoreText(locale,"provisional"));
   await expect(page.locator("#score")).toContainText(scoreText(locale,"provisionalPrice"));

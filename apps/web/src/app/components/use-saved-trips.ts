@@ -1,18 +1,21 @@
 "use client";
-import {useCallback,useEffect,useState} from 'react';
-import {changeSavedTrips,readSavedTripsState,savedTripsKey} from '../../lib/shared-trip';
+import {useCallback,useEffect,useRef,useState} from 'react';
+import {savedTripsKey} from '../../lib/shared-trip';
+import {commitPlanOperation,readPlanCollection,savedPlansKey,type PlanOperation,type PlanResult} from '../../lib/saved-plans';
 
 const changed='hoptrip:saved-trips-changed';
 export function useSavedTrips(){
- const [state,setState]=useState({tokens:[] as string[],ready:false,readError:false,corrupt:false});
+ const [state,setState]=useState({...readPlanCollection(null,null),ready:false,readError:false,lockingAvailable:false});
+ const [busy,setBusy]=useState(false),pending=useRef(false);
  const reload=useCallback(()=>{
-  try{setState({...readSavedTripsState(localStorage.getItem(savedTripsKey)),ready:true,readError:false});}
-  catch{setState(previous=>({...previous,ready:true,readError:true}));}
+  const lockingAvailable=!!navigator.locks;
+  try{setState({...readPlanCollection(localStorage.getItem(savedPlansKey),localStorage.getItem(savedTripsKey)),ready:true,readError:false,lockingAvailable});}
+  catch{setState(previous=>({...previous,ready:true,readError:true,lockingAvailable}));}
  },[]);
  useEffect(()=>{
   // eslint-disable-next-line react-hooks/set-state-in-effect
   reload();
-  const storage=(event:StorageEvent)=>{if(event.key===savedTripsKey||event.key===null)reload();};
+  const storage=(event:StorageEvent)=>{if(event.key===savedTripsKey||event.key===savedPlansKey||event.key===null)reload();};
   window.addEventListener('storage',storage);
   window.addEventListener('focus',reload);
   window.addEventListener('pageshow',reload);
@@ -22,16 +25,17 @@ export function useSavedTrips(){
    window.removeEventListener('pageshow',reload);window.removeEventListener(changed,reload);
   };
  },[reload]);
- function mutate(token:string,action:'save'|'remove'){
+ async function mutate(operation:PlanOperation):Promise<PlanResult>{
+  if(pending.current)return {status:'busy'};
+  pending.current=true;setBusy(true);
   try{
-   // Always read the current collection; a stale tab must not resurrect removed plans.
-   const result=changeSavedTrips(localStorage.getItem(savedTripsKey),token,action);
-   if(result.status==='saved'||result.status==='removed'){
-    localStorage.setItem(savedTripsKey,JSON.stringify(result.tokens));
-    window.dispatchEvent(new Event(changed));
-   }else reload();
-   return result.status;
-  }catch{reload();return 'error' as const;}
+   // The driver takes an exclusive cross-tab lock before reading either key.
+   const result=await commitPlanOperation(localStorage,navigator.locks,operation,()=>crypto.randomUUID());
+   if(result.next)window.dispatchEvent(new Event(changed));else reload();
+   return result;
+  }catch{reload();return {status:'error'};}
+  finally{pending.current=false;setBusy(false);}
  }
- return {...state,mutate};
+ const items=state.format==='v2'?state.plans:state.legacyTokens.map(token=>({id:null,revision:0,token}));
+ return {...state,busy,items,tokens:items.map(plan=>plan.token),requiresMigration:state.format==='legacy'&&!state.corrupt,mutate};
 }

@@ -1,0 +1,76 @@
+{
+  "build": "T0SP041Yg88N0Xkfu_QAW",
+  "violations": [
+    {
+      "id": "landmark-unique",
+      "impact": "moderate",
+      "tags": [
+        "cat.semantics",
+        "best-practice"
+      ],
+      "description": "Ensure landmarks are unique",
+      "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+      "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/landmark-unique?application=playwright",
+      "nodes": [
+        {
+          "any": [
+            {
+              "id": "landmark-is-unique",
+              "data": {
+                "role": "region",
+                "accessibleText": "cena i aktualność"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<section aria-label=\"Cena i aktualność\">",
+                  "target": [
+                    "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]"
+                  ]
+                }
+              ],
+              "impact": "moderate",
+              "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "moderate",
+          "html": "<section aria-label=\"Cena i aktualność\">",
+          "target": [
+            "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Cena i aktualność\"]"
+          ],
+          "failureSummary": "Fix any of the following:\n  The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+        },
+        {
+          "any": [
+            {
+              "id": "landmark-is-unique",
+              "data": {
+                "role": "region",
+                "accessibleText": "lot i bagaż"
+              },
+              "relatedNodes": [
+                {
+                  "html": "<section aria-label=\"Lot i bagaż\">",
+                  "target": [
+                    "article:nth-child(2) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]"
+                  ]
+                }
+              ],
+              "impact": "moderate",
+              "message": "The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+            }
+          ],
+          "all": [],
+          "none": [],
+          "impact": "moderate",
+          "html": "<section aria-label=\"Lot i bagaż\">",
+          "target": [
+            "article:nth-child(1) > .trip-details[open=\"\"] > .trip-details-content > section[aria-label=\"Lot i bagaż\"]"
+          ],
+          "failureSummary": "Fix any of the following:\n  The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+        }
+      ]
+    }
+  ]
+}

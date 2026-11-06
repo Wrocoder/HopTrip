@@ -1,0 +1,40 @@
+# H3-08b — предупреждения об аэропортах в интерфейсе
+
+Дата: 2026-11-04. **H3-08b DONE; H3-08 DONE** по локальным acceptance. Эта часть подключает готовый airport-context-v1 (08a) к card/detail. Следующий отдельный запуск — H3-16. Новых расстояний, источников или live transfer estimates в этой части нет.
+
+## Изменения
+
+В существующий FlightSchedule добавлен AirportContextNotice: удалённый аэропорт с примерным расстоянием до конкретного города, поздний/ранний прилёт, ранний обратный вылет, estimated flag и устаревшая metadata. Время и стоимость доезда явно неизвестны. Значимые предупреждения видимы без раскрытия подробностей. KNOWN remote=false не превращается в обещание удобного/быстрого трансфера.
+
+Действующий returnAirportNotice сохранён в прежней .flight-route-warning. Новое отображение не выводит DIFFERENT_DESTINATION_AIRPORTS/DIFFERENT_HOME_AIRPORTS второй раз: эти случаи уже покрыты существующим предупреждением. Одинаковая airport/city pair для прилёта/обратного вылета дедуплицируется в distance/source блоке; разные аэропорты не смешиваются. H3-07 airport interval, city unknown, no-leave/nights/transit и default price sort сохранены.
+
+В общие TripDetails добавлен AirportContextDetails: опубликованное примерное расстояние или stale/unknown, официальный source URL/hostname, review date, ограничения метода измерения и пороги напоминаний. Порог40км/22:00/06:00/08:00 явно описан как продуктовая политика, не расписание транспорта. Это сведения для принятия решения, не raw machine codes. Источник открывается обычной HTTPS-ссылкой с noopener/noreferrer; affiliate-программой он не становится. Источники и числа в реестре не перепроверялись/не расширялись здесь — проверка датирована08a.
+
+Все новые тексты PL/EN/RU/UK находятся в одном typed helper airport-context.ts. Название целевого города форматируется существующим cityLabel. Новые компоненты — airport-warnings.tsx. Старый одноимённый landing component airport-context.tsx в финальном результате **без diff**.
+
+## Контракты и совместимость
+
+Deal.airport_context optional: старый API продолжает работать. При отсутствии объекта/quality gate false UI не вычисляет remote/clock по названию аэропорта, показывает неизвестные время/стоимость; прежний route warning остаётся. Непроверенные пары и отсутствие расстояния не заменяются нулём. STALE не показывает устаревшие километры/remote, но source/review остаются доступны для проверки.
+
+Runtime validator проверяет версию, поля/enum, допустимые warning codes и пороги v1, IATA/date/local clock, положительное целое расстояние и remote consistency. Travel minutes строго null/UNKNOWN. HTTPS source без credentials; javascript/http/embedded credentials отклоняются. Для eligible контекста проверяется соответствие destination_slug и endpoints данным Deal/FlightFacts. Повреждённый присутствующий объект вызывает INVALID_RESPONSE, вместо показа чужого города/маршрута. Наличие поля не требуется от старого API. Схема backend и source registry не менялись.
+
+Финальный fallback уточнён: отсутствие нового контекста не означает отсутствие известных часов рейса в старом API. Отдельная clock-unknown строка выводится только при соответствующем коде eligible airport-context; generic unknown transfer/metadata остаётся. После этой однострочной правки повторены production build/types и targeted lint; **browser-final:10 passed**, новый набор и unknown details на финальной сборке ([JSON](browser-final.json), [лог](browser-final.txt)). Это повтор уже посчитанных cases, не ещё10 уникальных.
+
+Нет DB migrations, зависимостей, новых analytics events, изменений consent/сохранённых планов/бюджетов/SEO/canonical/URL/affiliate attribution. Дополнительные строки могут увеличить карточку на необходимые условия; геометрия H3-06 не выдаётся за новый before/after замер. Реальные partner redirects, покупки, рассылки, production/deploy/PR/commit не выполнялись.
+
+## Проверки и воспроизведение
+
+- **252 Node passed**, [лог](node.txt), initial smoke также252, [лог](node-initial.txt). Пять новых tests: четыре locale, remote/near/unknown/stale, dedup и estimated/clock; strict v1/source/transfer/policy. Existing API contract test расширен cross-city/unsafe/malformed checks и old API compatibility без нового test count.
+- ESLint pass, [лог](lint.txt). Production build и TypeScript pass, 61 static generation entries, [лог](build.txt). IDE build success с limited diagnostics. Ruff test-only Python fixtures pass, [лог](ruff.txt).
+- Первый build остановился на ошибочно занятом имени существующего airport-context.tsx: отсутствовал export AirportContext. [Первоначальный лог](build-initial.txt) сохранён. Ошибка исправлена восстановлением только удалённого кода явным patch, новые компоненты перенесены в airport-warnings.tsx; старый landing component без diff. Попытка shell-восстановления целого файла из HEAD была отклонена автоматической проверкой из-за риска потери незакоммиченных изменений и **не выполнилась**. После read-only diff использован конкретный исправляющий patch, без reset/checkout. Пользовательского подтверждения не потребовалось, ограничение снято безопасным исправлением.
+- Browser production regression: airport-context.spec.ts, flight-facts.spec.ts и airport-landings.spec.ts, Chrome desktop/mobile; [JSON](browser.json), [лог](browser.txt). Новый набор включает6 synthetic offers: BGY↔MXP/Milan, BVA/Paris, BGY/Bergamo, unknown LCY/London, stale record, estimated arrival; 4locale, card/detail/source links (только href, без перехода), warning dedup, keyboard Enter, 320px overflow и axe .deal-grid. Existing airport landings дополнительно проверяются с JavaScript и без него; existing flight facts — structured/open-jaw/unknown routes. Перед запуском согласованы stale test selectors для browser-13 на странице offset12 и H3-07 interval в .destination-time, без runtime изменений для этих ожиданий.
+- Browser runtime: `.cache/aud05-h3-08b-20261104`, loopback3125/8125, fixture SQLite, production npm start после build, SDK Python3.12.10, Chrome. Prepare-e2e.ps1 + явная копия untracked airport-city-context.json и двух Python fixture modules; источник не опрашивается браузером. Старые процессы не останавливались/не переиспользовались. WebKit, полный сайт, CWV и production usability не проверялись.
+- Backend runtime в08b не менялся: full API/mypy не повторялись. Последний API1092/18 PostgreSQL skipped и mypy122 — историческое08a evidence, не новый прогон. Новая Python fixture создаёт только isolated test offers и временную stale registry entry, очищаемую после test. Это не новый runtime источник.
+
+Первый browser прогон: **30 passed /4 failed из34**, failures только в старых exact-href/page assumptions flight-facts.spec.ts, [JSON](browser.json). После offset12 +prefix href (сохраняет returnTo) и правильного placement H3-07 interval повтор нужных двух тестов desktop/mobile: **4 passed**, [JSON](browser-flight-repeat.json), [лог](browser-flight-repeat.txt). Принимаются **34 уникальных browser cases**, без заявления об одном чистом полном rerun. [8 скриншотов](screenshots/) нового UI сохранены до повторного Playwright run; PL desktop при320px визуально проверен.
+
+Команды: в apps/web `npm run test:unit`, `npm run lint`; в копии `npm run build` с loopback API/site и test operator.json. В копии Playwright config заменяет npm dev на npm start; `npm run test:e2e -- airport-context.spec.ts flight-facts.spec.ts airport-landings.spec.ts --reporter=json`. HOPTRIP_TEST_PYTHON подтверждён python-tools preflight; PLAYWRIGHT_CHANNEL=chrome, PLAYWRIGHT_JSON_OUTPUT_NAME в docs/h3-08b. Ruff: `.venv/Scripts/python.exe -m ruff check --no-cache --fix apps/api/tests/e2e_app.py apps/api/tests/airport_context_browser_fixtures.py`.
+
+## Откат
+
+Удалить только airport-warnings.tsx и web helper/spec/unit tests08b, вернуть delta в API type/validator, FlightSchedule/TripDetails и новых test fixture endpoint/module/согласованных assertions. Сохранить airport-context.tsx landing component, H3-08a schema/services/registry и H3-01–07. Полные общие файлы не сбрасывать. Feature flag/DB rollback не требуются. После обновления прогресса/решений — остановка перед **H3-16**, не начинать её в этом запуске.

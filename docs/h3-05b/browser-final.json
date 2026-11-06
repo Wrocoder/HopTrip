@@ -1,0 +1,648 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "partner-boundaries.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-05b-20261103/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-05b-20261103/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-05b-20261103/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-05b-20261103/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-05b-20261103/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "partner-boundaries.spec.ts",
+      "file": "partner-boundaries.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2322,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')\n    2) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')\n    2) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')\n    2) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:30.569Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-1696e0c188773d0e3a27",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "en: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2552,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')\n    2) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')\n    2) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')\n    2) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:33.953Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-2bd6cc72bfd19e141b39",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "ru: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2489,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n    2) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n    2) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n    2) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:37.938Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-89dfa00adcc3bd92ea87",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "uk: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2477,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n    2) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n    2) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n    2) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:42.007Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-98d60a650b7b541409bb",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "pl: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2475,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')\n    2) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')\n    2) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Zmiany dat i składu grupy w planie nie są automatycznie przekazywane w tym linku. Sprawdź termin, uczestników i cenę u partnera.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka getByRole('complementary', { name: 'Transfer z lotniska' }).getByText('Zmiany dat i składu grupy w')\n    2) <p class=\"partner-context-limitation\">Zmiany dat i składu grupy w planie nie są automat…</p> aka locator('#destination-activities').getByText('Zmiany dat i składu grupy w')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:45.923Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-pl-supp-d9ac6-ticket-changes-are-explicit-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-cbd5f33160448e50aa26",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "en: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2822,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')\n    2) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')\n    2) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Changes to dates and travellers in your plan are not automatically passed through this link. Check the date, participants and price with the partner.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka getByRole('complementary', { name: 'Airport transfer' }).getByText('Changes to dates and')\n    2) <p class=\"partner-context-limitation\">Changes to dates and travellers in your plan are …</p> aka locator('#destination-activities').getByText('Changes to dates and')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:49.883Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-en-supp-739c3-ticket-changes-are-explicit-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-a86418f090d9ba8a9b5a",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "ru: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1993,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n    2) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n    2) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka getByRole('complementary', { name: 'Трансфер из аэропорта' }).getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n    2) <p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматиче…</p> aka locator('#destination-activities').getByText('Изменения дат и состава группы в плане автоматически не передаются по этой ссылк')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:54.347Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-ru-supp-80649-ticket-changes-are-explicit-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-b066b2d29585afdde1d4",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        },
+        {
+          "title": "uk: supported stay context and unsupported ticket changes are explicit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1922,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n    2) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n    2) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                      "column": 60,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                        "column": 60,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.partner-context-limitation')\nExpected: \u001b[32m\"Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. Перевірте дату, учасників і ціну в партнера.\"\u001b[39m\nError: strict mode violation: locator('.partner-context-limitation') resolved to 2 elements:\n    1) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka getByRole('complementary', { name: 'Трансфер з аеропорту' }).getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n    2) <p class=\"partner-context-limitation\">Зміни дат і складу групи в плані автоматично не п…</p> aka locator('#destination-activities').getByText('Зміни дат і складу групи в плані автоматично не передаються за цим посиланням. П')\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('.partner-context-limitation') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.partner-context-limitation')\u001b[22m\n\n\n  23 |  await expect(page.locator('#destination-activities .partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n  24 |  await page.goto(localizedHref('/info/malaga-airport',locale));\n> 25 |  await expect(page.locator('.partner-context-limitation')).toHaveText(partnerContextCopy[locale]);\n     |                                                            ^\n  26 |  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  27 | });\n  28 |\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts:25:60"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T18:14:57.638Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\test-results\\partner-boundaries-uk-supp-1f4d9-ticket-changes-are-explicit-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-05b-20261103\\apps\\web\\tests\\partner-boundaries.spec.ts",
+                    "column": 60,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "81ceb1a9c23227eeee1b-3cf9524e7d9e1c8046e4",
+          "file": "partner-boundaries.spec.ts",
+          "line": 5,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T18:14:25.628Z",
+    "duration": 35606.831,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

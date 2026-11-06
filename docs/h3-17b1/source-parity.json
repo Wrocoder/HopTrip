@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "runtime": [
+    {
+      "path": "apps/web/src/app/globals.css",
+      "sha256": "7a6096fbc867127ec246d9264020cef3ede03dbb49d99bafb226f1726958375b"
+    }
+  ],
+  "testSources": [
+    "apps/web/tests/first-screen-layout.spec.ts",
+    "apps/web/tests/detail-layout.spec.ts",
+    "apps/web/tests/compact-cards.spec.ts",
+    "apps/web/tests/filter-workflow.spec.ts",
+    "apps/web/tests/weekend.spec.ts",
+    "apps/web/tests/event-fit-filter.spec.ts",
+    "apps/web/tests/destination-recovery.spec.ts"
+  ],
+  "onlyExpectedRuntimeDelta": true,
+  "apiRuntimeUnchanged": true,
+  "logicConsentAffiliateStorageSeoUnchanged": true,
+  "testNormalization": "Only loopback test ports8100->8125 and3100->3125",
+  "unchangedSince15": [
+    "apps/web/src/app/layout.tsx",
+    "apps/web/src/app/components/consent-controls.tsx",
+    "apps/web/src/lib/consent.ts",
+    "apps/web/src/app/components/filters.tsx",
+    "apps/web/src/app/deals/page.tsx",
+    "apps/web/src/app/deals/[slug]/page.tsx",
+    "apps/web/src/app/components/catalog.tsx",
+    "apps/web/src/app/components/trip-actions.tsx",
+    "apps/web/src/app/components/trip-draft.tsx",
+    "apps/web/src/lib/saved-plans.ts",
+    "apps/web/src/lib/shared-trip.ts",
+    "apps/web/src/lib/session.ts",
+    "apps/web/src/lib/drive-policy.ts",
+    "apps/web/src/lib/weekend.ts",
+    "apps/web/src/lib/destination-recovery.ts",
+    "apps/web/src/lib/i18n/routing.ts",
+    "apps/web/src/app/sitemap.ts",
+    "apps/web/scripts/seo-pages.json",
+    "apps/web/package.json",
+    "apps/web/package-lock.json",
+    "apps/api/app/api/catalog.py",
+    "apps/api/app/schemas/deal.py",
+    "apps/api/tests/e2e_app.py",
+    "apps/api/tests/destination_browser_fixtures.py"
+  ]
+}

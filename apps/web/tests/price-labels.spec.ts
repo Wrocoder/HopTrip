@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {scoreText} from '../src/lib/i18n/score-copy';
 import {catalogText} from '../src/lib/i18n/catalog-copy';
+import {cardCopy} from '../src/lib/i18n/card-copy';
 
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
@@ -15,7 +16,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: price compar
  await page.goto(path);
  const card=page.locator('.flight-offer-card').filter({has:page.locator(`a.deal-card-link[href^="${localizedHref('/deals/browser-deal?',locale)}"]`)});
  await expect(card.locator('.price-summary')).toBeVisible();
- await expect(card.locator('.price-summary')).toContainText(scoreText(locale,'sampleScope',{count:24}));
+ await expect(card.locator('.price-summary')).toContainText(cardCopy[locale].sample);
  await expect(card.locator('.price-summary')).not.toContainText(/\/100|%/);
  if(locale==='pl')await card.screenshot({path:info.outputPath('comparison-card.png')});
  const trigger=card.locator('.score-trigger');
@@ -38,8 +39,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: price compar
  await expect(dialog.locator('.score-sum')).toContainText(/41[,.]9 \+ 20 \+ 14[,.]1 = 76/);
  await expect(dialog.locator('.score-sum')).toContainText('76/100');
  await expect(dialog.locator('.score-part')).toHaveCount(3);
- await dialog.locator('.score-method').last().locator('summary').click();
- await expect(dialog).toContainText(t('grouping'));
+ await expect(dialog.getByText(t('grouping'),{exact:true})).toHaveCount(0);
  await expect(dialog.getByRole('link',{name:t('methodology'),exact:false})).toHaveAttribute('href',localizedHref('/info/price-comparison',locale));
  expect((await new AxeBuilder({page}).include('dialog[open]').analyze()).violations).toEqual([]);
  await page.setViewportSize({width:320,height:844});

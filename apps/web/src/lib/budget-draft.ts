@@ -1,8 +1,10 @@
 import {emptyBudget,type BudgetInput} from "./trip-budget.ts";
 import {readPlannedEvents,type PlannedEvent} from "./planned-events.ts";
 import {calendarNights,validCalendarDate} from "./calendar-date.ts";
+import {cleanBudgetProvenance,type BudgetProvenance} from './budget-provenance.ts';
+import {readBudgetEstimates,type BudgetEstimates} from './budget-estimates.ts';
 
-export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;context:string;review:boolean;adultsOnly?:boolean;events?:PlannedEvent[]};
+export type BudgetDraft={version:1;input:BudgetInput;start:string;end:string;context:string;review:boolean;adultsOnly?:boolean;events?:PlannedEvent[];provenance?:BudgetProvenance;estimates?:BudgetEstimates;estimatesRecovery?:true};
 export const budgetDraftKey=(tripId?:string)=>`hoptrip.budget.v1:${tripId ? `deal:${tripId}` : "standalone"}`;
 
 export function readBudgetDraft(raw:string|null):BudgetDraft|null {
@@ -40,8 +42,13 @@ function parseBudgetDraft(raw:string|null,local:boolean):BudgetDraft|null {
   if(draft.adultsOnly!==undefined && typeof draft.adultsOnly!=="boolean")return null;
   const events=draft.events===undefined?undefined:readPlannedEvents(draft.events);
   if(events===null)return null;
-  return {version:1,input,start:draft.start,end:draft.end,context:draft.context,review:draft.review,
-   ...(draft.adultsOnly===undefined ? {} : {adultsOnly:draft.adultsOnly}),...(events===undefined?{}:{events})};
+  const provenance=cleanBudgetProvenance(draft.provenance,input);
+  const estimates=draft.estimates===undefined?undefined:readBudgetEstimates(draft.estimates);
+  const recovery=estimates===null||draft.estimatesRecovery===true;
+  if(recovery&&!local)return null;
+  return {version:1,input,start:draft.start,end:draft.end,context:draft.context,review:draft.review||recovery,
+   ...(draft.adultsOnly===undefined ? {} : {adultsOnly:draft.adultsOnly}),...(events===undefined?{}:{events}),...(provenance?{provenance}:{}),
+   ...(estimates?{estimates}:{}),...(recovery?{estimatesRecovery:true as const}:{})};
  } catch {return null;}
 }
 

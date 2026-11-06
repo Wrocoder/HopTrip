@@ -3,6 +3,7 @@
 import {useEffect, useId, useRef, useState, type ReactNode} from "react";
 import type {Locale} from '../../lib/i18n/config';
 import {scoreText} from '../../lib/i18n/score-copy';
+import {track} from '../../lib/session';
 
 export function ScoreTrigger({slug,href,destination,locale='pl',children}:{
   slug:string; href?:string; destination:string; locale?:Locale; children:ReactNode;
@@ -18,6 +19,7 @@ export function ScoreTrigger({slug,href,destination,locale='pl',children}:{
     const opener=trigger.current;
     if(!element) return;
     element.showModal();
+    track('DEAL_DETAILS_OPEN',slug);
     const previous=document.body.style.overflow;
     document.body.style.overflow="hidden";
     return ()=>{
@@ -25,7 +27,7 @@ export function ScoreTrigger({slug,href,destination,locale='pl',children}:{
       document.body.style.overflow=previous;
       opener?.focus({preventScroll:true});
     };
-  },[open]);
+  },[open,slug]);
   return <>
     <a ref={trigger} className="score-badge score-trigger" href={href ?? `/deals/${slug}#score`}
       aria-haspopup="dialog" aria-label={t('triggerLabel')}

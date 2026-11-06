@@ -1,0 +1,174 @@
+{
+  "status": "PASS_FOR_H3_17B2_H3_17_STILL_IN_PROGRESS",
+  "date": "2026-11-05",
+  "beforeBuild": "XcgpuiIKweYr4QakgIavb",
+  "afterBuild": "46MXir80j9pCKG41zwfF5",
+  "runtimeDelta": [
+    "apps/web/src/app/globals.css"
+  ],
+  "unchangedModules": [
+    "apps/web/src/lib/consent.ts",
+    "apps/web/src/app/components/consent-controls.tsx",
+    "apps/web/src/app/layout.tsx",
+    "apps/web/src/lib/session.ts",
+    "apps/web/src/lib/drive-policy.ts",
+    "apps/web/src/lib/saved-plans.ts",
+    "apps/web/src/lib/shared-trip.ts",
+    "apps/web/package.json",
+    "apps/web/package-lock.json",
+    "apps/api/tests/e2e_app.py"
+  ],
+  "newTest": "layout-stability.spec.ts",
+  "testMode": "local next start; NODE_ENV production; served SSR BUILD_ID guards",
+  "browser": {
+    "uniqueAccepted": 40,
+    "firstRun": {
+      "startTime": "2026-11-05T10:53:57.572Z",
+      "duration": 426774.155,
+      "expected": 39,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "detailRerun": {
+      "startTime": "2026-11-05T11:04:33.071Z",
+      "duration": 75952.383,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "initialFailure": "UK desktop detail scrollY remained2 after smooth scroll; test now awaits budget/fonts and explicitly scrolls instant; same strict0/CTA assertions",
+    "newCases": 16,
+    "metricsVisits": 64,
+    "panelWidthHeightChecks": 40,
+    "newPanelAxeScans": 40,
+    "firstScreenAxeScans": 32,
+    "retries": 0,
+    "productionOptInGuard": {
+      "startTime": "2026-11-05T11:06:23.529Z",
+      "duration": 16194.137999999999,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "defaultOptInSkip": {
+      "startTime": "2026-11-05T11:07:37.749Z",
+      "duration": 6086.485,
+      "expected": 0,
+      "skipped": 1,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "navigationCls": {
+    "beforeUnset": {
+      "min": 0.12528949652777777,
+      "max": 0.2927667824074074
+    },
+    "afterAll": {
+      "min": 0,
+      "max": 0.02154059973194766
+    }
+  },
+  "lighthouse": {
+    "before": [
+      {
+        "file": "docs/h3-17b2/lighthouse-before-artifacts/h3-lighthouse-H3-Lighthouse-deals-desktop-desktop/lighthouse.json",
+        "route": "/deals",
+        "device": "desktop",
+        "cls": 0.15549852079847,
+        "lcpMs": 271.7635,
+        "performance": 0.94,
+        "accessibility": 1,
+        "warnings": []
+      },
+      {
+        "file": "docs/h3-17b2/lighthouse-before-artifacts/h3-lighthouse-H3-Lighthouse-deals-mobile-desktop/lighthouse.json",
+        "route": "/deals",
+        "device": "mobile",
+        "cls": 0.2892897137137196,
+        "lcpMs": 1058.607,
+        "performance": 0.78,
+        "accessibility": 1,
+        "warnings": []
+      },
+      {
+        "file": "docs/h3-17b2/lighthouse-before-artifacts/h3-lighthouse-H3-Lighthouse-desktop-desktop/lighthouse.json",
+        "route": "/",
+        "device": "desktop",
+        "cls": 0.1369597677105746,
+        "lcpMs": 250.222,
+        "performance": 0.95,
+        "accessibility": 1,
+        "warnings": []
+      },
+      {
+        "file": "docs/h3-17b2/lighthouse-before-artifacts/h3-lighthouse-H3-Lighthouse-mobile-desktop/lighthouse.json",
+        "route": "/",
+        "device": "mobile",
+        "cls": 0.2917166408421905,
+        "lcpMs": 975.459,
+        "performance": 0.83,
+        "accessibility": 1,
+        "warnings": []
+      }
+    ],
+    "after": [
+      {
+        "file": "docs/h3-17b2/lighthouse-after-artifacts/h3-lighthouse-H3-Lighthouse-deals-desktop-desktop/lighthouse.json",
+        "route": "/deals",
+        "device": "desktop",
+        "cls": 0,
+        "lcpMs": 267.53200000000004,
+        "performance": 1,
+        "accessibility": 1,
+        "warnings": []
+      },
+      {
+        "file": "docs/h3-17b2/lighthouse-after-artifacts/h3-lighthouse-H3-Lighthouse-deals-mobile-desktop/lighthouse.json",
+        "route": "/deals",
+        "device": "mobile",
+        "cls": 0,
+        "lcpMs": 937.0465,
+        "performance": 0.98,
+        "accessibility": 1,
+        "warnings": []
+      },
+      {
+        "file": "docs/h3-17b2/lighthouse-after-artifacts/h3-lighthouse-H3-Lighthouse-desktop-desktop/lighthouse.json",
+        "route": "/",
+        "device": "desktop",
+        "cls": 0,
+        "lcpMs": 264.14750000000004,
+        "performance": 1,
+        "accessibility": 1,
+        "warnings": []
+      },
+      {
+        "file": "docs/h3-17b2/lighthouse-after-artifacts/h3-lighthouse-H3-Lighthouse-mobile-desktop/lighthouse.json",
+        "route": "/",
+        "device": "mobile",
+        "cls": 0,
+        "lcpMs": 960.1815,
+        "performance": 0.98,
+        "accessibility": 1,
+        "warnings": []
+      }
+    ]
+  },
+  "node": {
+    "passed": 314,
+    "failed": 0
+  },
+  "limits": [
+    "Local synthetic lab, not deployed site/field p75",
+    "1200ms observation after fonts.ready; not lifetime CLS",
+    "LCP/TBT scores diagnostic, no INP/RUM",
+    "Baseline Lighthouse overlapped after-build; do not claim comparative LCP or total performance uplift",
+    "WebKit/manual SR/real devices/whole release sweep not performed",
+    "Cross-tab11a and dev conditional-use cause not investigated"
+  ],
+  "next": "H3-17b3 remaining quality gate"
+}

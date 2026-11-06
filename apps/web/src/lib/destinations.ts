@@ -7,19 +7,19 @@ export function normalizeDestination(value:string):string {
   .replace(/\p{M}/gu,"").replace(/\s+/g," ");
 }
 export const destinationLabel=(destination:Destination,locale:Locale="pl")=>cityLabel(locale==="pl" ? destination.display_name || destination.city : destination.city,destination.slug,locale);
-const terms=(d:Destination)=>[d.slug,d.city,...locales.map(locale=>destinationLabel(d,locale)),...(d.aliases??[]),...(d.iata_codes??[])].map(normalizeDestination);
+export const destinationSearchTerms=(d:Destination)=>[d.slug,d.city,...locales.map(locale=>destinationLabel(d,locale)),...(d.aliases??[]),...(d.iata_codes??[])].map(normalizeDestination);
 export function matchingDestinations(destinations:Destination[],value:string):Destination[] {
  const normalized=normalizeDestination(value);
  if(!normalized)return [];
  const active=destinations.filter(d=>d.is_active);
  const exact=active.filter(d=>d.slug===value.trim());
- return exact.length ? exact : active.filter(d=>terms(d).includes(normalized));
+ return exact.length ? exact : active.filter(d=>destinationSearchTerms(d).includes(normalized));
 }
 export function destinationSuggestions(destinations:Destination[],value:string):Destination[] {
  const normalized=normalizeDestination(value);
  const suggestions:Destination[]=[];
  for(const destination of destinations){
-  if(destination.is_active&&(!normalized||terms(destination).some(term=>term.includes(normalized)))){
+  if(destination.is_active&&(!normalized||destinationSearchTerms(destination).some(term=>term.includes(normalized)))){
    suggestions.push(destination);
    if(suggestions.length===12)break;
   }

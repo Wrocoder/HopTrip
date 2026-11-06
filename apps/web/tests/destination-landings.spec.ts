@@ -16,7 +16,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`destination remains use
  const response=await page.goto(localizedHref('/destinations/milan',locale));expect(response?.status()).toBe(200);
  await expect(page.locator('main h1')).toHaveCount(1);
  await expect(page.locator('[data-state="empty"]')).toContainText(destinationCopy[locale].empty);
- await expect(page.locator('.deal-card')).toHaveCount(0);
+ await expect(page.locator('[aria-labelledby="destination-flights-heading"] .deal-card')).toHaveCount(0);
  const planning=page.locator('[data-destination-planning]');await expect(planning).toContainText('IT');
  await expect(planning.getByRole('link',{name:destinationCopy[locale].source})).toHaveAttribute('href',/^https:\/\/www2\.comune\.milano\.it\//);
  await expect(page.locator('[data-destination-guides] .related-reason')).toHaveCount(2);
@@ -54,8 +54,8 @@ test.describe('ordinary browser without JavaScript',()=>{
    await expect(page.locator('[data-destination-planning]')).toBeVisible();
    await expect(page.locator('[data-destination-guides] .related-reason').first()).toBeVisible();
    await expect(page.locator('[data-destination-attractions]')).toBeVisible();
-   if(hasOffers){await expect(page.locator('.deal-card').first()).toBeVisible();await expect(page.locator('[data-state="empty"]')).toHaveCount(0);}
-   else{await expect(page.locator('[data-state="empty"]')).toBeVisible();await expect(page.locator('.deal-card')).toHaveCount(0);}
+   if(hasOffers){await expect(page.locator('[aria-labelledby="destination-flights-heading"] .deal-card').first()).toBeVisible();await expect(page.locator('[data-state="empty"]')).toHaveCount(0);}
+   else{await expect(page.locator('[data-state="empty"]')).toBeVisible();await expect(page.locator('[aria-labelledby="destination-flights-heading"] .deal-card')).toHaveCount(0);}
    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',index?'index, follow':'noindex, follow');
    const attractions=page.locator('[data-destination-attractions]'),guideURL=new URL((await attractions.getAttribute('href'))!,info.project.use.baseURL).href;
    await Promise.all([page.waitForURL(guideURL),attractions.click()]);

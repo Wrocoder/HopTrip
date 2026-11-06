@@ -7,7 +7,8 @@ import {savedTripCopy} from '../src/lib/i18n/saved-trip-copy';
 import {stateText} from '../src/lib/i18n/state-copy';
 import {filterText} from '../src/lib/i18n/filter-copy';
 import {catalogText} from '../src/lib/i18n/catalog-copy';
-import {savedTripsKey} from '../src/lib/shared-trip';
+import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
+import {savedPlansKey as savedTripsKey} from '../src/lib/saved-plans';
 
 type ClipboardHarness={writes:string[];settle:(ok:boolean)=>void};
 const copying={pl:'Kopiujemy link…',en:'Copying link…',ru:'Копируем ссылку…',uk:'Копіюємо посилання…'};
@@ -33,7 +34,7 @@ for(const locale of ['pl','en','ru','uk'] as const){
   const actions=page.locator('#trip-save'),share=actions.getByRole('button',{name:t('Udostępnij'),exact:true});
   const save=actions.getByRole('button',{name:t('Zapisz wyjazd'),exact:true}),feedback=actions.locator('[aria-live="polite"]');
   await expect(save).toBeEnabled();await save.click();
-  await expect(feedback).toHaveText(t('Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.'));
+  await expect(page).toHaveURL(/#local=/);await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy[locale].saved);
   await share.click();await expect(feedback).toHaveText(copying[locale]);
   await expect(share).toBeDisabled();await expect(share).toHaveAttribute('aria-busy','true');
   expect(await page.evaluate(()=>(window as typeof window&{clipboardHarness:ClipboardHarness}).clipboardHarness.writes.length)).toBe(1);
@@ -55,10 +56,10 @@ for(const locale of ['pl','en','ru','uk'] as const){
   await page.evaluate(()=>(window as typeof window&{clipboardHarness:ClipboardHarness}).clipboardHarness.settle(true));
   await expect(feedback).toBeEmpty();await expect(page.getByTestId('share-version')).toHaveText(savedTripCopy[locale].linkOld);
   await share.click();await expect(feedback).toHaveText(copying[locale]);
-  // Saving supersedes an in-flight copy message for the same snapshot.
-  await save.click();await expect(feedback).toHaveText(t('Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.'));
+  // Updating supersedes an in-flight copy message for the same snapshot.
+  await actions.getByRole('button',{name:planEditorCopy[locale].update,exact:true}).click();await expect(feedback).toHaveText(planEditorCopy[locale].updated);
   await page.evaluate(()=>(window as typeof window&{clipboardHarness:ClipboardHarness}).clipboardHarness.settle(false));
-  await expect(feedback).toHaveText(t('Zapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.'));
+  await expect(feedback).toHaveText(planEditorCopy[locale].updated);
   await expect(share).toHaveAttribute('aria-busy','false');
   expect((await new AxeBuilder({page}).include('#trip-save').analyze()).violations).toEqual([]);
  });
@@ -68,7 +69,9 @@ for(const locale of ['pl','en','ru','uk'] as const){
   await page.goto(localizedHref('/deals/browser-deal#calculator',locale));
   const actions=page.locator('#trip-save'),save=actions.getByRole('button',{name:t('Zapisz wyjazd'),exact:true});
   await expect(save).toBeEnabled();await page.locator('#budget-hotel').fill('321');await save.click();
+  await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy[locale].saved);
   const saved=await page.evaluate(key=>localStorage.getItem(key),savedTripsKey);
+  expect(saved).not.toBe(null);
   await actions.getByRole('button',{name:t('Udostępnij'),exact:true}).click();
   await page.evaluate(()=>(window as typeof window&{clipboardHarness:ClipboardHarness}).clipboardHarness.settle(true));
   const link=await page.locator('#trip-share-link').inputValue();
@@ -81,15 +84,15 @@ for(const locale of ['pl','en','ru','uk'] as const){
   await expect(page.getByTestId('share-version')).toHaveText(savedTripCopy[locale].linkOld);
   if(locale==='pl')await storage.screenshot({path:info.outputPath('reset.png')});
   await page.reload();await expect(page.locator('#budget-hotel')).toHaveValue('');
-  await expect(save).toBeEnabled();await page.locator('#budget-hotel').fill('456');
-  const before=await page.evaluate(()=>Object.fromEntries(Object.entries(localStorage).filter(([key])=>key.includes('budget'))));
+  await expect(actions.getByRole('button',{name:planEditorCopy[locale].update,exact:true})).toBeEnabled();await page.locator('#budget-hotel').fill('456');
+  const before=await page.evaluate(()=>Object.fromEntries(Object.entries(sessionStorage).filter(([key])=>key.startsWith('hoptrip.plan-draft.v1:'))));
   await page.evaluate(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){
-   if(key.includes('budget'))throw new DOMException('Synthetic quota','QuotaExceededError');return original.call(this,key,value);
+   if(key.startsWith('hoptrip.plan-draft.v1:'))throw new DOMException('Synthetic quota','QuotaExceededError');return original.call(this,key,value);
   };});
   await page.getByRole('button',{name:b('Wyczyść kalkulator'),exact:true}).click();
-  await expect(storage).toHaveText(b('Nie udało się zapisać zmian. Po odświeżeniu najnowsze kwoty mogą zostać utracone.'));
+  await expect(storage).toHaveText(planEditorCopy[locale].sessionError);
   await expect(storage).not.toHaveText(b(reset));
-  expect(await page.evaluate(()=>Object.fromEntries(Object.entries(localStorage).filter(([key])=>key.includes('budget'))))).toEqual(before);
+  expect(await page.evaluate(()=>Object.fromEntries(Object.entries(sessionStorage).filter(([key])=>key.startsWith('hoptrip.plan-draft.v1:'))))).toEqual(before);
   await expect(page.locator('#budget-hotel')).toHaveValue('');
   expect((await new AxeBuilder({page}).include('#calculator').analyze()).violations).toEqual([]);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

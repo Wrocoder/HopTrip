@@ -1,0 +1,1429 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "saved-revisit-observability.spec.ts",
+      "trip-update-analytics.spec.ts",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "saved-revisit-observability.spec.ts",
+      "file": "saved-revisit-observability.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3966,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b03abf25-d960-4c36-8788-1dcb30b4453c\"\u001b[39m\nReceived: \u001b[31m\"189f611d-a57b-4dfd-b911-935f6920729e\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b03abf25-d960-4c36-8788-1dcb30b4453c\"\u001b[39m\nReceived: \u001b[31m\"189f611d-a57b-4dfd-b911-935f6920729e\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b03abf25-d960-4c36-8788-1dcb30b4453c\"\u001b[39m\nReceived: \u001b[31m\"189f611d-a57b-4dfd-b911-935f6920729e\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:23.179Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-27f33-ew-before-any-manual-return-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-650684b8d8488e517c39",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "en: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3726,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"9591f37e-5368-4853-a60a-ce0f2099dad7\"\u001b[39m\nReceived: \u001b[31m\"f5786999-07fe-40d8-b317-7d6b5f0c8023\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"9591f37e-5368-4853-a60a-ce0f2099dad7\"\u001b[39m\nReceived: \u001b[31m\"f5786999-07fe-40d8-b317-7d6b5f0c8023\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"9591f37e-5368-4853-a60a-ce0f2099dad7\"\u001b[39m\nReceived: \u001b[31m\"f5786999-07fe-40d8-b317-7d6b5f0c8023\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:28.238Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-0604d-ew-before-any-manual-return-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-65bf50d5c1e3b60b8017",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "ru: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3833,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"aede07ad-138c-48ec-b239-ad657dbc60b5\"\u001b[39m\nReceived: \u001b[31m\"63bd9bfe-8677-412b-9643-39bed7ea367c\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"aede07ad-138c-48ec-b239-ad657dbc60b5\"\u001b[39m\nReceived: \u001b[31m\"63bd9bfe-8677-412b-9643-39bed7ea367c\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"aede07ad-138c-48ec-b239-ad657dbc60b5\"\u001b[39m\nReceived: \u001b[31m\"63bd9bfe-8677-412b-9643-39bed7ea367c\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:33.330Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-d4ce1-ew-before-any-manual-return-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-557e97b65d150e169070",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "uk: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3592,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"8ded58db-94cb-4ed9-b454-64b9cf3b6c97\"\u001b[39m\nReceived: \u001b[31m\"5fee402f-c8ea-44c2-8332-cb031522b8cc\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"8ded58db-94cb-4ed9-b454-64b9cf3b6c97\"\u001b[39m\nReceived: \u001b[31m\"5fee402f-c8ea-44c2-8332-cb031522b8cc\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"8ded58db-94cb-4ed9-b454-64b9cf3b6c97\"\u001b[39m\nReceived: \u001b[31m\"5fee402f-c8ea-44c2-8332-cb031522b8cc\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:38.304Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-15308-ew-before-any-manual-return-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-17a4739dffca8d912be4",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1370,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"anonymous_session_id\": \"4dfad23f-6757-44e1-ab62-9a999479ca04\",\u001b[39m\n\u001b[31m+   \"anonymous_session_id\": \"6f938172-b60a-4a87-beab-4d2b1fa7065f\",\u001b[39m\n\u001b[2m    \"event_name\": \"PAGE_VIEW\",\u001b[22m\n\u001b[2m    \"metadata\": Object {\u001b[22m\n\u001b[2m      \"page_type\": \"saved_trip\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"anonymous_session_id\": \"4dfad23f-6757-44e1-ab62-9a999479ca04\",\u001b[39m\n\u001b[31m+   \"anonymous_session_id\": \"6f938172-b60a-4a87-beab-4d2b1fa7065f\",\u001b[39m\n\u001b[2m    \"event_name\": \"PAGE_VIEW\",\u001b[22m\n\u001b[2m    \"metadata\": Object {\u001b[22m\n\u001b[2m      \"page_type\": \"saved_trip\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:56:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 46,
+                      "line": 56
+                    },
+                    "snippet": "  54 |  await page.goto('about:blank');await page.goto('/trip#plan='+a);await expect(page.locator('#budget-food')).toBeEnabled();await expect(page.locator('#budget-food')).toHaveValue('10');await expect(page.getByTestId('plan-edit-state')).toHaveCount(0);await expect.poll(()=>views().length).toBe(5);\n  55 |  const normalized=views().map(({event_id,...event})=>{void event_id;return event;});\n> 56 |  for(const shape of normalized)expect(shape).toEqual(normalized[0]);\n     |                                              ^\n  57 |  expect(Object.keys(views()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);\n  58 |  await page.evaluate(id=>{location.hash='local='+id;},idA);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy.pl.saved);expect(views()).toHaveLength(5);\n  59 |  expect(JSON.stringify(views())).not.toMatch(/plan=|local=|plan_id|revision|navigation_cause/);expect(errors).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 46,
+                        "line": 56
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"anonymous_session_id\": \"4dfad23f-6757-44e1-ab62-9a999479ca04\",\u001b[39m\n\u001b[31m+   \"anonymous_session_id\": \"6f938172-b60a-4a87-beab-4d2b1fa7065f\",\u001b[39m\n\u001b[2m    \"event_name\": \"PAGE_VIEW\",\u001b[22m\n\u001b[2m    \"metadata\": Object {\u001b[22m\n\u001b[2m      \"page_type\": \"saved_trip\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  54 |  await page.goto('about:blank');await page.goto('/trip#plan='+a);await expect(page.locator('#budget-food')).toBeEnabled();await expect(page.locator('#budget-food')).toHaveValue('10');await expect(page.getByTestId('plan-edit-state')).toHaveCount(0);await expect.poll(()=>views().length).toBe(5);\n  55 |  const normalized=views().map(({event_id,...event})=>{void event_id;return event;});\n> 56 |  for(const shape of normalized)expect(shape).toEqual(normalized[0]);\n     |                                              ^\n  57 |  expect(Object.keys(views()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);\n  58 |  await page.evaluate(id=>{location.hash='local='+id;},idA);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy.pl.saved);expect(views()).toHaveLength(5);\n  59 |  expect(JSON.stringify(views())).not.toMatch(/plan=|local=|plan_id|revision|navigation_cause/);expect(errors).toEqual([]);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:56:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:42.914Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-cbff6--only-changes-can-be-missed-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 46,
+                    "line": 56
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-5aba846da4afccc9b2df",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "the same retained plan can reopen with a new anonymous session after idle expiry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 850,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:45.531Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-4afbbc33f2aff65e487d",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "denied analytics still allows Save and an actual reopen with no received browser events",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3813,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:46.760Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-2cbf90915e01bbe4a8a0",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 72,
+          "column": 5
+        },
+        {
+          "title": "pl: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1065,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"f7887c30-b990-4c5e-9fc9-91a0fa67f613\"\u001b[39m\nReceived: \u001b[31m\"392d5d73-f005-4906-98a9-327544d2f538\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"f7887c30-b990-4c5e-9fc9-91a0fa67f613\"\u001b[39m\nReceived: \u001b[31m\"392d5d73-f005-4906-98a9-327544d2f538\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"f7887c30-b990-4c5e-9fc9-91a0fa67f613\"\u001b[39m\nReceived: \u001b[31m\"392d5d73-f005-4906-98a9-327544d2f538\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:59.366Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-27f33-ew-before-any-manual-return-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-aff768bb845a503bf163",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "en: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4510,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"bb141316-5a92-47d5-82bb-d7f634325842\"\u001b[39m\nReceived: \u001b[31m\"485c668f-ff9a-49f7-8fc1-bcaa5b869bd3\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"bb141316-5a92-47d5-82bb-d7f634325842\"\u001b[39m\nReceived: \u001b[31m\"485c668f-ff9a-49f7-8fc1-bcaa5b869bd3\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"bb141316-5a92-47d5-82bb-d7f634325842\"\u001b[39m\nReceived: \u001b[31m\"485c668f-ff9a-49f7-8fc1-bcaa5b869bd3\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:01.525Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-0604d-ew-before-any-manual-return-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-cebc1e52d29f8f666cf5",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "ru: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4711,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b6b70f39-ba44-4fd9-a5d0-7a8b5d73df4c\"\u001b[39m\nReceived: \u001b[31m\"687dc079-f320-4137-b00b-fec69479bfb8\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b6b70f39-ba44-4fd9-a5d0-7a8b5d73df4c\"\u001b[39m\nReceived: \u001b[31m\"687dc079-f320-4137-b00b-fec69479bfb8\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b6b70f39-ba44-4fd9-a5d0-7a8b5d73df4c\"\u001b[39m\nReceived: \u001b[31m\"687dc079-f320-4137-b00b-fec69479bfb8\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:07.013Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-d4ce1-ew-before-any-manual-return-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-eafe364a04bf97e8a368",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "uk: Save automatically emits a saved-page view before any manual return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4920,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mc5a8aa8f-0bbd\u001b[27m-4\u001b[7mb\u001b[27m0f-\u001b[7m8d7c-65dbf7e5b161\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m7e5b3fb4-5800\u001b[27m-4\u001b[7m8\u001b[27m0f-\u001b[7m9ff6-40e60105684f\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mc5a8aa8f-0bbd\u001b[27m-4\u001b[7mb\u001b[27m0f-\u001b[7m8d7c-65dbf7e5b161\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m7e5b3fb4-5800\u001b[27m-4\u001b[7m8\u001b[27m0f-\u001b[7m9ff6-40e60105684f\u001b[27m\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 120,
+                      "line": 36
+                    },
+                    "snippet": "  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 120,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mc5a8aa8f-0bbd\u001b[27m-4\u001b[7mb\u001b[27m0f-\u001b[7m8d7c-65dbf7e5b161\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m7e5b3fb4-5800\u001b[27m-4\u001b[7m8\u001b[27m0f-\u001b[7m9ff6-40e60105684f\u001b[27m\"\u001b[39m\n\n  34 |  const {events,views,errors}=await capture(page);const id=await save(page,locale);await expect.poll(()=>views().length).toBe(1);\n  35 |  const saved=events.findIndex(event=>event.event_name==='TRIP_SAVE'),opened=events.findIndex(event=>event===views()[0]);\n> 36 |  expect(saved).toBeGreaterThanOrEqual(0);expect(opened).toBeGreaterThan(saved);expect(views()[0].anonymous_session_id).toBe(events[saved].anonymous_session_id);\n     |                                                                                                                        ^\n  37 |  expect(JSON.stringify(views())).not.toContain(id);expect(errors).toEqual([]);\n  38 |  writeFileSync(info.outputPath('auto-open.json'),JSON.stringify({locale,manualReturnPerformed:false,naiveSaveThenSavedViewWouldBePositive:true,trace:safe(events)},null,2));\n  39 | });\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:36:120"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:12.783Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-15308-ew-before-any-manual-return-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 120,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-c50e15bd4a7536902057",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 33,
+          "column": 56
+        },
+        {
+          "title": "reload, different local plan and shared copy have the same observable view shape; hash-only changes can be missed",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1241,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"anonymous_session_id\": \"a9140c6b-7693-4b53-b676-a3256a824a21\",\u001b[39m\n\u001b[31m+   \"anonymous_session_id\": \"4dd2016f-a4e5-4283-814c-ee5c16a62412\",\u001b[39m\n\u001b[2m    \"event_name\": \"PAGE_VIEW\",\u001b[22m\n\u001b[2m    \"metadata\": Object {\u001b[22m\n\u001b[2m      \"page_type\": \"saved_trip\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"anonymous_session_id\": \"a9140c6b-7693-4b53-b676-a3256a824a21\",\u001b[39m\n\u001b[31m+   \"anonymous_session_id\": \"4dd2016f-a4e5-4283-814c-ee5c16a62412\",\u001b[39m\n\u001b[2m    \"event_name\": \"PAGE_VIEW\",\u001b[22m\n\u001b[2m    \"metadata\": Object {\u001b[22m\n\u001b[2m      \"page_type\": \"saved_trip\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:56:46",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                      "column": 46,
+                      "line": 56
+                    },
+                    "snippet": "  54 |  await page.goto('about:blank');await page.goto('/trip#plan='+a);await expect(page.locator('#budget-food')).toBeEnabled();await expect(page.locator('#budget-food')).toHaveValue('10');await expect(page.getByTestId('plan-edit-state')).toHaveCount(0);await expect.poll(()=>views().length).toBe(5);\n  55 |  const normalized=views().map(({event_id,...event})=>{void event_id;return event;});\n> 56 |  for(const shape of normalized)expect(shape).toEqual(normalized[0]);\n     |                                              ^\n  57 |  expect(Object.keys(views()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);\n  58 |  await page.evaluate(id=>{location.hash='local='+id;},idA);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy.pl.saved);expect(views()).toHaveLength(5);\n  59 |  expect(JSON.stringify(views())).not.toMatch(/plan=|local=|plan_id|revision|navigation_cause/);expect(errors).toEqual([]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                        "column": 46,
+                        "line": 56
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[32m-   \"anonymous_session_id\": \"a9140c6b-7693-4b53-b676-a3256a824a21\",\u001b[39m\n\u001b[31m+   \"anonymous_session_id\": \"4dd2016f-a4e5-4283-814c-ee5c16a62412\",\u001b[39m\n\u001b[2m    \"event_name\": \"PAGE_VIEW\",\u001b[22m\n\u001b[2m    \"metadata\": Object {\u001b[22m\n\u001b[2m      \"page_type\": \"saved_trip\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  54 |  await page.goto('about:blank');await page.goto('/trip#plan='+a);await expect(page.locator('#budget-food')).toBeEnabled();await expect(page.locator('#budget-food')).toHaveValue('10');await expect(page.getByTestId('plan-edit-state')).toHaveCount(0);await expect.poll(()=>views().length).toBe(5);\n  55 |  const normalized=views().map(({event_id,...event})=>{void event_id;return event;});\n> 56 |  for(const shape of normalized)expect(shape).toEqual(normalized[0]);\n     |                                              ^\n  57 |  expect(Object.keys(views()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);\n  58 |  await page.evaluate(id=>{location.hash='local='+id;},idA);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy.pl.saved);expect(views()).toHaveLength(5);\n  59 |  expect(JSON.stringify(views())).not.toMatch(/plan=|local=|plan_id|revision|navigation_cause/);expect(errors).toEqual([]);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts:56:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:19.052Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\saved-revisit-observabilit-cbff6--only-changes-can-be-missed-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\saved-revisit-observability.spec.ts",
+                    "column": 46,
+                    "line": 56
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-206578937fc76cc61e29",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "the same retained plan can reopen with a new anonymous session after idle expiry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:21.206Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-d8c8342fafa4dcd4695f",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "denied analytics still allows Save and an actual reopen with no received browser events",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4846,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:22.523Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8a57dc5c76fa35f89f61-b616d87d3fc2103290d9",
+          "file": "saved-revisit-observability.spec.ts",
+          "line": 72,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "trip-update-analytics.spec.ts",
+      "file": "trip-update-analytics.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5264,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:50.600Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-9223e7cd213f3b1847be",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "en: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:09:55.937Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-f741720b4300ba0646a8",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "ru: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5344,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:01.654Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-81dc89fb04148da8f056",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "uk: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5360,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:07.015Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-3e06477271932d004855",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "denial and revocation suppress successful updates; accepting has no replay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8921,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:12.401Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-ee0d660563d9e71e2e7f",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 58,
+          "column": 5
+        },
+        {
+          "title": "consent revoked while Update waits for the lock prevents a send after commit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10963,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:21.350Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-79b29f7acd63c7a10531",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "failed storage commit and blocked analytics leave editor recovery intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3335,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:32.346Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-d267cdc0b3101e147d0a",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "lock wait emits only after commit; concurrent no-op and conflict emit nothing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22990,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:10:35.701Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-e3fb3b8f5c90df35878d",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 97,
+          "column": 5
+        },
+        {
+          "title": "pl: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6229,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:27.419Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-1acedc2320c8988d735c",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "en: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5767,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:33.717Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-9f28bdc8849bace41fcf",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "ru: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6997,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:39.518Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-1babee5979fa1a35b33e",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "uk: successful Update alone sends one private event; opening/reload/share/duplicate do not",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:46.535Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-9b79bcdd8d80fe8aec62",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 39,
+          "column": 56
+        },
+        {
+          "title": "denial and revocation suppress successful updates; accepting has no replay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8849,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:50.401Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-a7c3644a531f6fde71e7",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 58,
+          "column": 5
+        },
+        {
+          "title": "consent revoked while Update waits for the lock prevents a send after commit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12135,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:11:59.264Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-c05e79e0674dade523d9",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "failed storage commit and blocked analytics leave editor recovery intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5984,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:12:11.410Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-ffa7bf8664e6c82aee30",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "lock wait emits only after commit; concurrent no-op and conflict emit nothing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21062,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T13:12:17.413Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "766884141a4dba4f766e-d4f655eef79cae23a70b",
+          "file": "trip-update-analytics.spec.ts",
+          "line": 97,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T13:09:17.454Z",
+    "duration": 202519.656,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 10,
+    "flaky": 0
+  }
+}

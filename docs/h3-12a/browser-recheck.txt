@@ -1,0 +1,67 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test localized-trips.spec.ts -g flight detail languages expose --trace=off --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [49004]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=701261422c034178a7fefe621283b00f method=GET status=200
+
+
+[WebServer] (node:16716) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=29e10017937b4a03a92fcbf24758e2dd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8c980d088bb0439597ce8e28a5f581cc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5dd6ec6a4e4444909d9d71009bb38328 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4227de4575f44c74a0d1c7bcce161c47 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=44f755d4337f4c64894f338c726a934d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7a886f3ee5e94eae8f876d739338142e method=GET status=200
+
+
+Running 2 tests using 1 worker
+
+
+(node:27364) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/2] [desktop] › tests\localized-trips.spec.ts:97:5 › flight detail languages expose local times, metadata, accessible controls and labelled Polish references
+[WebServer] INFO:hoptrip.requests:request_id=ec007f7d49c94b3894b9d68e4ba7c425 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4e5257c5173f4a3d9b33e55245bc42a5 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=b66b97b8fe1e4c05b6285ceaf95b0863 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c74aba1f3fd7423a846c80df551a27e5 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=0ae2f000bd9b4ac9a1b455dfd7b6cde8 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=81d7aa9324bb45f2a45d944fea75051d method=GET status=404
+
+
+(node:39652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/2] [mobile] › tests\localized-trips.spec.ts:97:5 › flight detail languages expose local times, metadata, accessible controls and labelled Polish references
+[WebServer] INFO:hoptrip.requests:request_id=59bcdedb5e0143a99f22179f67d5ffe1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f65d29010e93413c984731a5d6fb210a method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=fe93b095fe0b4350b7501e2ae2191619 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=05043ebd5b3942bc95f978815c14c771 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=f40e6b2d61f4461cb95a51905781cede method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=677082f5f6a4433d96f5732f1c9402be method=GET status=404
+
+  2 passed (21.0s)

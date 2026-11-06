@@ -3,6 +3,8 @@ import AxeBuilder from '@axe-core/playwright';
 import {homeText} from '../src/lib/i18n/home-copy';
 import {localizedHref,pageLocales} from '../src/lib/i18n/routing';
 import type {Airport,Destination} from '../src/lib/api';
+import {destinationImage} from '../src/lib/destination-imagery';
+import {directoryCopy} from '../src/lib/i18n/directory-copy';
 
 test.beforeEach(async({page,request})=>{
  await request.post('http://127.0.0.1:8100/__test__/short-trips?enabled=true');
@@ -15,18 +17,26 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: search, offe
  await page.goto(localizedHref('/?origin=KTW',locale));
  await expect(page.locator('html')).toHaveAttribute('lang',locale);
  await expect(page.locator('.catalog-section .deal-card')).toHaveCount(2);
- await expect(page.locator('main .deal-card')).toHaveCount(2);
+ await expect(page.locator('.home-collections [data-collection="under-300"] .deal-card')).toHaveCount(2);
+ await expect(page.locator('.home-collections [data-collection="upcoming-short"] .deal-card')).toHaveCount(2);
+ const weekendRows=await(await request.get('http://127.0.0.1:8100/api/v1/deals?origin=KTW&round_trip=true&weekend_mode=calendar-v1&limit=100')).json();
+ const weekendCount=Math.min(3,weekendRows.filter((row:{flight_quality?:{recommendation_eligible:boolean}})=>row.flight_quality?.recommendation_eligible).length);
+ await expect(page.locator('.home-collections [data-collection="calendar-weekend"] .deal-card')).toHaveCount(weekendCount);
+ await expect(page.locator('main .deal-card')).toHaveCount(6+weekendCount);
  const order=['.hero','.catalog-section','section:has(> #home-collections)','section:has(> #home-destinations)','section:has(> #home-planning)','section:has(> #home-how)','section:has(> #home-guides)'];
  expect(await page.evaluate(selectors=>selectors.every((s,i)=>!i || !!(document.querySelector(selectors[i-1])!.compareDocumentPosition(document.querySelector(s)!) & Node.DOCUMENT_POSITION_FOLLOWING)),order)).toBe(true);
  for(const [id,key] of [['home-collections','Kolekcje na krótki wyjazd'],['home-planning','Zaplanuj podróż'],['home-how','Jak działa HopTrip'],['home-guides','Poradniki i pomoc']] as const)
   await expect(page.locator('#'+id)).toHaveText(homeText(locale,key));
  for(const route of ['/city-break','/tanie-loty-na-weekend','/from/warszawa','/deals','/info/trip-budget#calculator','/saved','/info/price-comparison','/info/partners','/info'])
-  await expect(page.locator(`.home-section a[href="${localizedHref(route,locale)}"]`)).toHaveCount(1);
- // Every old airport/destination SEO link remains, even inside the collapsed list.
+  await expect(page.locator(`.home-section > .route-link-grid > a[href="${localizedHref(route,locale)}"], .home-section > p > a[href="${localizedHref(route,locale)}"]`)).toHaveCount(1);
+ // Homepage stays bounded; the directory owns the complete destination registry.
  const airports:Airport[]=await(await request.get('http://127.0.0.1:8100/api/v1/airports')).json();
  const destinations:Destination[]=await(await request.get('http://127.0.0.1:8100/api/v1/destinations')).json();
- for(const d of destinations){const route=pageLocales(`/destinations/${d.slug}`).includes(locale)?`/destinations/${d.slug}`:`/deals?destination=${encodeURIComponent(d.slug)}`;
+ const pictured=destinations.filter(d=>d.is_active&&destinationImage(d.slug)).slice(0,3);
+ for(const d of pictured){const route=pageLocales(`/destinations/${d.slug}`).includes(locale)?`/destinations/${d.slug}`:`/deals?destination=${encodeURIComponent(d.slug)}`;
   await expect(page.locator(`.destination-links a[href="${localizedHref(route,locale)}"]`)).toHaveCount(1);}
+ await expect(page.locator('.destination-links li')).toHaveCount(pictured.length);
+ await expect(page.locator('.destination-links').getByRole('link',{name:directoryCopy[locale].all})).toHaveAttribute('href',localizedHref('/destinations',locale));
  const summary=page.locator('.home-airports summary');await summary.focus();await summary.press('Enter');
  for(const a of airports){const route=pageLocales(`/from/${a.iata_code}`).includes(locale)?`/from/${a.iata_code}`:`/deals?origin=${a.iata_code}`;
   await expect(page.locator(`.home-airports a[href="${localizedHref(route,locale)}"]`)).toBeVisible();}

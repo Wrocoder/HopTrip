@@ -1,6 +1,7 @@
 """Explicit local-only browser fixture app, never imported by production entrypoint."""
 
 import asyncio
+import json
 import os
 import tempfile
 from copy import deepcopy
@@ -28,6 +29,7 @@ from app.services.events import event_service
 from app.services.flight_facts import flight_facts
 from app.services.flight_quality import classify_flight_quality
 from app.services.scoring import SCORE_VERSION, score_flight_deal
+from fastapi import Query
 from helpers import approved_program, catalog_fixture
 from pydantic import SecretStr
 from sqlalchemy import create_engine, delete, select
@@ -479,6 +481,68 @@ def tracking():
 
 
 catalog_unavailable = False
+home_collection_scenario = 'normal'
+home_collection_deadline = None
+directory_fixture_state = 'normal'
+flight_link_snapshot = None
+
+
+@app.post('/__test__/flight-link-binding')
+def flight_link_binding(scenario: Literal['valid', 'stale', 'reset']):
+    from urllib.parse import urlencode
+
+    from app.models.affiliate import AffiliateProgram, AffiliateProvider
+    from app.services.partner_links import PLACEMENT_SUB_ID, source_url
+
+    global flight_link_snapshot
+    with Session(engine) as db:
+        deal = db.scalar(select(Deal).where(Deal.slug == 'browser-13'))
+        component = db.scalar(select(DealComponent).where(DealComponent.deal_id == deal.id,
+                                                          DealComponent.component_type == 'FLIGHT'))
+        offer = db.get(TravelOffer, component.travel_offer_id)
+        if scenario == 'reset':
+            if flight_link_snapshot:
+                component.affiliate_program_id, component.metadata_json, offer.raw_payload = deepcopy(flight_link_snapshot)
+                flight_link_snapshot = None
+            db.commit()
+            return {'scenario': scenario}
+        if flight_link_snapshot is None:
+            flight_link_snapshot = deepcopy((component.affiliate_program_id, component.metadata_json, offer.raw_payload))
+        provider = db.scalar(select(AffiliateProvider).where(AffiliateProvider.code == 'travelpayouts'))
+        program = db.scalar(select(AffiliateProgram).where(AffiliateProgram.provider_id == provider.id,
+                                                          AffiliateProgram.code == 'aviasales'))
+        if not program:
+            program = AffiliateProgram(provider_id=provider.id, code='aviasales', name='Synthetic Aviasales',
+                onboarding_status='APPROVED', is_active=True, capabilities_json=['AFFILIATE_LINK'],
+                allowed_hosts=['tp.media'], tracking_param=None)
+            db.add(program)
+            db.flush()
+        component.affiliate_program_id = program.id
+        original = '/search/WRO0101BCN04011?t=synthetic-current-ticket'
+        component.metadata_json = {'outbound_url': 'https://tp.media/r?' + urlencode({
+            'marker': 123, 'trs': 456, 'sub_id': PLACEMENT_SUB_ID, 'u': source_url(original)})}
+        offer.raw_payload = {**offer.raw_payload, 'link': original if scenario == 'valid'
+                             else '/search/KRK0202ROM05021?t=synthetic-new-ticket'}
+        db.commit()
+    return {'scenario': scenario}
+
+
+@app.post('/__test__/weekend-fixtures')
+def set_weekend_fixtures(enabled: bool, nights: int | None = Query(None, ge=0, le=3)):
+    from weekend_browser_fixtures import weekend_fixtures
+
+    with Session(engine) as db:
+        weekend_fixtures(db, enabled, nights=nights)
+    return {'enabled': enabled}
+
+
+@app.post('/__test__/airport-context-fixtures')
+def set_airport_context_fixtures(enabled: bool):
+    from airport_context_browser_fixtures import airport_context_fixtures
+
+    with Session(engine) as db:
+        airport_context_fixtures(db, enabled)
+    return {'enabled': enabled}
 
 
 @app.post('/__test__/catalog-state')
@@ -488,14 +552,56 @@ def set_catalog_state(unavailable: bool):
     return {'unavailable': catalog_unavailable}
 
 
+@app.post('/__test__/home-collections')
+def set_home_collection_scenario(scenario: Literal['normal', 'one', 'weekend-error', 'weekend-broad', 'expiring', 'delay']):
+    global home_collection_scenario, home_collection_deadline
+    home_collection_scenario = scenario
+    home_collection_deadline = (datetime.now(UTC) + timedelta(seconds=15)).isoformat()
+    return {'scenario': scenario, 'deadline': home_collection_deadline}
+
+
+@app.post('/__test__/directory')
+def set_directory_fixture(state: Literal['normal', 'large', 'empty', 'unavailable']):
+    global directory_fixture_state
+    directory_fixture_state = state
+    with Session(engine) as db:
+        db.execute(delete(Destination).where(Destination.slug.like('directory-fixture-%')))
+        if state == 'large':
+            for index in range(21):
+                db.add(Destination(slug=f'directory-fixture-{index}',
+                    city=f'Synthetic directory city {index:02}', country='Synthetic fixture',
+                    country_code=['PL', 'ES', 'FR'][index % 3], is_active=index != 20))
+        db.commit()
+    return {'state': state}
+
+
 @app.middleware("http")
 async def catalog_state_fixture(request, call_next):
     # Isolated E2E app only: deterministic transport delay/failure for SSR fetches.
+    if request.url.path == '/api/v1/destinations':
+        if directory_fixture_state == 'empty':
+            return JSONResponse([])
+        if directory_fixture_state == 'unavailable':
+            return JSONResponse({'detail': 'Synthetic directory unavailable'}, status_code=503)
     if request.url.path == "/api/v1/deals/invalid-contract-fixture":
         return JSONResponse({"slug": "invalid-contract-fixture", "components": None})
     if request.url.path == "/api/v1/deals/unavailable-fixture":
         return JSONResponse({"detail": "Fixture unavailable"}, status_code=503)
     if request.url.path == "/api/v1/deals":
+        collection_preview = request.query_params.get('limit') == '100' and request.query_params.get('round_trip') == 'true'
+        if collection_preview and request.query_params.get('weekend_mode'):
+            if home_collection_scenario == 'weekend-error':
+                return JSONResponse({'detail': 'Synthetic collection failure'}, status_code=503)
+            if home_collection_scenario == 'weekend-broad':
+                return JSONResponse({'detail': {'code': 'WEEKEND_QUERY_TOO_BROAD'}}, status_code=422)
+        if home_collection_scenario == 'delay' and request.query_params.get('origin') == 'GDN':
+            await asyncio.sleep(2)
+        if request.query_params.get('sort') == 'destination_time' and request.query_params.get('budget') == '987650':
+            return JSONResponse({'detail': {'code': 'DESTINATION_TIME_QUERY_TOO_BROAD'}}, status_code=422)
+        if request.query_params.get('sort') == 'destination_time' and request.query_params.get('budget') == '987649':
+            return JSONResponse({'detail': [{'loc': ['query', 'sort'], 'type': 'literal_error'}]}, status_code=422)
+        if request.query_params.get('budget') == '987651' and request.query_params.get('weekend_mode'):
+            return JSONResponse({'detail': {'code': 'WEEKEND_QUERY_TOO_BROAD'}}, status_code=422)
         if request.query_params.get("budget") == "987652":
             return JSONResponse({"items": None, "total": 0, "offset": 0, "limit": 12})
         if catalog_unavailable:
@@ -504,6 +610,17 @@ async def catalog_state_fixture(request, call_next):
             await asyncio.sleep(2)
         if request.query_params.get("budget") == "987653":
             return JSONResponse({"detail": "Fixture unavailable"}, status_code=503)
+        if collection_preview and home_collection_scenario in ('one', 'expiring'):
+            response = await call_next(request)
+            if response.status_code != 200:
+                return response
+            rows = json.loads(b''.join([part async for part in response.body_iterator]))
+            if home_collection_scenario == 'one':
+                rows = rows[:1]
+            else:
+                for row in rows:
+                    row['price_freshness']['hidden_after'] = home_collection_deadline
+            return JSONResponse(rows)
     return await call_next(request)
 
 
@@ -556,3 +673,8 @@ def short_trip_fixtures(enabled: bool):
                                      travel_offer_id=flight.id, price_pln=180 + index))
         db.commit()
     return {"enabled": True}
+
+
+from destination_browser_fixtures import install_destination_recovery_fixture  # noqa: E402
+
+install_destination_recovery_fixture(app, engine)

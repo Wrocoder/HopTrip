@@ -1,0 +1,29 @@
+{
+  "version": "h3-analytics-taxonomy-v4",
+  "date": "2026-11-06",
+  "kind": "additive wire event; no DB schema change",
+  "previous": "../h3-18b3/taxonomy.json",
+  "baseline": "../h3-18a/taxonomy.json",
+  "wire_events": ["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN", "BUDGET_CALCULATED"],
+  "changed_h3_mapping": {
+    "name": "budget_calculated",
+    "wire": "BUDGET_CALCULATED",
+    "status": "mapped",
+    "meaning": "Observed explicit opening of the existing group-cost breakdown for a fully specified, valid, reviewed personal calculation",
+    "eligibility": ["hydration/storage restoration ready", "own native details toggle to open", "calculateBudget(input, events).valid", "no missing or incomplete cost lines", "review=false", "dates both omitted or valid budgetDateCounts"],
+    "zero": "Explicit zero is known; blank is unknown even for zero nights. Existing selected lodging basis determines the active amount",
+    "excluded": ["reactive totals", "partial known subtotal", "projected estimate ranges without exact manual costs", "unknown/invalid event costs", "invalid dates/counts/money", "review-required plan", "initial mount or restored/shared snapshot alone", "draft edits/acknowledgement while breakdown already open", "closing", "consent grant alone"],
+    "payload": "Existing random event_id/anonymous_session_id and bounded page_type/source/campaign only. No deal_slug, amounts, dates, labels, events, totals, profile, plan ID/revision/token, URL/query/hash or completion fields",
+    "deduplication": "Existing viewEvents: once per observed URL visit + anonymous session, not per plan or input revision; hash changes alone do not reset",
+    "consent": "Existing analyticsAllowed at send time, no replay of an already-open breakdown on grant; revocation clears existing session/dedup state",
+    "delivery": "Best effort, no retry. Blocked send stays deduplicated for the visit; calculation/storage are unaffected",
+    "metric": "Existing protected summary.by_event.BUDGET_CALCULATED; existing budget_usage remains BUDGET_USE",
+    "limitations": "Inputs/acknowledgement are user assertions, not verified supplier prices or actual spending. No guarantee of deliberate user action if opened programmatically; interactions before hydration can be missed. Public POST cannot verify client eligibility. Restored budgets can complete without BUDGET_USE in the same period"
+  },
+  "unchanged_h3_mappings": "TRIP_UPDATE retains v2, DEAL_DETAILS_OPEN retains v3; all other baseline definitions/proxies remain unchanged",
+  "missing_h3_events": [],
+  "remaining": ["protected engagement dashboard metrics with explicit denominators", "privacy-safe cohorts", "save/revisit observations", "comparable real before/after periods", "controlled experiments"],
+  "unavailable_dimensions": ["device", "locale", "returning visitor", "exact search-to-booking attribution"],
+  "production_activation": "not deployed or observed",
+  "production_baseline": "not collected"
+}

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="66" time="4.675" timestamp="2026-11-03T22:01:11.129229+01:00" hostname="wave"><testcase classname="apps.api.tests.test_destination_time_sort" name="test_global_order_before_offset_and_total[None]" time="0.273" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_global_order_before_offset_and_total[calendar-v1]" time="0.128" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_global_order_before_offset_and_total[no-leave-v1]" time="0.176" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_estimated_huge_window_and_unknown_follow_known_with_price_fallback" time="0.096" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_all_unknown_or_estimated_use_price_without_dropping_results" time="0.078" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_equal_intervals_use_price_then_date_then_id" time="0.068"><failure message="sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: travel_offers.data_provider_id, travel_offers.external_id&#10;[SQL: INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, product_type, origin_airport_id, destination_id, depart_at, return_at, original_price, original_currency, price_pln, exchange_rate, exchange_rate_at, source, raw_payload, route_details, fetched_at, last_verified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at]&#10;[parameters: (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', 1, 1, '2030-11-01 17:00:00.000000', '2030-11-03 19:00:00.000000', 200.0, 'PLN', 200.0, None, None, 'travelpayouts_data', '{&quot;origin&quot;: &quot;WRO&quot;, &quot;destination&quot;: &quot;LON&quot;, &quot;origin_airport&quot;: &quot;WRO&quot;, &quot;destination_airport&quot;: &quot;STN&quot;, &quot;departure_at&quot;: &quot;2030-11-01T18:00:00+01:00&quot;, &quot;return_a ... (193 characters truncated) ... rn_transfers&quot;: 0, &quot;link&quot;: &quot;/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z&quot;, &quot;duration_to&quot;: 120, &quot;duration_back&quot;: 120}', '{&quot;source&quot;: &quot;travelpayouts_graphql&quot;, &quot;ticket_key&quot;: &quot;049116ad3210fa779deb69dee933d38a3e7eb92dd1ce3998ebbdb212eb4b39eb&quot;, &quot;departure_at&quot;: &quot;2030-11-01T18: ... (534 characters truncated) ... igin&quot;: &quot;LTN&quot;, &quot;destination&quot;: &quot;WRO&quot;, &quot;departure_at&quot;: &quot;2030-11-03T19:00:00Z&quot;, &quot;arrival_at&quot;: &quot;2030-11-03T21:00:00+00:00&quot;, &quot;operating_carrier&quot;: &quot;FR&quot;}]}]}', '2026-11-03 21:01:12.158287', '2026-11-03 21:01:12.158287', '2026-11-04 21:01:12.158287')]&#10;(Background on this error at: https://sqlalche.me/e/20/gkpj)">self = &lt;sqlalchemy.engine.base.Connection object at 0x0000013964812CC0&gt;
+dialect = &lt;sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000139646A8080&gt;
+context = &lt;sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000013964842330&gt;
+statement = &lt;sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x00000139647C35C0&gt;
+parameters = [(1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', ...)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -&gt; CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+&gt;                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000139646A8080&gt;
+cursor = &lt;sqlite3.Cursor object at 0x00000139648200C0&gt;
+statement = 'INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, p...rified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at'
+parameters = (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', ...)
+context = &lt;sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000013964842330&gt;
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+&gt;       cursor.execute(statement, parameters)
+E       sqlite3.IntegrityError: UNIQUE constraint failed: travel_offers.data_provider_id, travel_offers.external_id
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: IntegrityError
+
+The above exception was the direct cause of the following exception:
+
+api_client = &lt;starlette.testclient.TestClient object at 0x00000139646A8140&gt;
+isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x00000139646A8200&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x00000139647F3100&gt;
+
+    def test_equal_intervals_use_price_then_date_then_id(api_client, isolated_db, catalog):
+        expensive = catalog(300)
+        later = catalog(200, start='2030-11-08T18:00:00+01:00', back='2030-11-10T19:00:00Z')
+        first = catalog(200)
+&gt;       second = catalog(200)
+                 ^^^^^^^^^^^^
+
+apps\api\tests\test_destination_time_sort.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\tests\test_weekend_catalog.py:52: in create
+    db.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1643: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000139646A8080&gt;
+cursor = &lt;sqlite3.Cursor object at 0x00000139648200C0&gt;
+statement = 'INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, p...rified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at'
+parameters = (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', ...)
+context = &lt;sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000013964842330&gt;
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+&gt;       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: travel_offers.data_provider_id, travel_offers.external_id
+E       [SQL: INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, product_type, origin_airport_id, destination_id, depart_at, return_at, original_price, original_currency, price_pln, exchange_rate, exchange_rate_at, source, raw_payload, route_details, fetched_at, last_verified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at]
+E       [parameters: (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', 1, 1, '2030-11-01 17:00:00.000000', '2030-11-03 19:00:00.000000', 200.0, 'PLN', 200.0, None, None, 'travelpayouts_data', '{"origin": "WRO", "destination": "LON", "origin_airport": "WRO", "destination_airport": "STN", "departure_at": "2030-11-01T18:00:00+01:00", "return_a ... (193 characters truncated) ... rn_transfers": 0, "link": "/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z", "duration_to": 120, "duration_back": 120}', '{"source": "travelpayouts_graphql", "ticket_key": "049116ad3210fa779deb69dee933d38a3e7eb92dd1ce3998ebbdb212eb4b39eb", "departure_at": "2030-11-01T18: ... (534 characters truncated) ... igin": "LTN", "destination": "WRO", "departure_at": "2030-11-03T19:00:00Z", "arrival_at": "2030-11-03T21:00:00+00:00", "operating_carrier": "FR"}]}]}', '2026-11-03 21:01:12.158287', '2026-11-03 21:01:12.158287', '2026-11-04 21:01:12.158287')]
+E       (Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: IntegrityError</failure></testcase><testcase classname="apps.api.tests.test_destination_time_sort" name="test_critical_source_cannot_rank_as_reliable[multiple]" time="0.085" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_critical_source_cannot_rank_as_reliable[origin]" time="0.080" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_critical_source_cannot_rank_as_reliable[destination]" time="0.098" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_critical_source_cannot_rank_as_reliable[source]" time="0.087" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_candidate_cap_is_explicit_and_filters_can_narrow_it[params0]" time="0.165" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_candidate_cap_is_explicit_and_filters_can_narrow_it[params1]" time="0.085" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_candidate_cap_is_explicit_and_filters_can_narrow_it[params2]" time="0.101" /><testcase classname="apps.api.tests.test_destination_time_sort" name="test_batched_snapshot_matches_public_serializer_without_n_plus_one" time="0.055" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_filter_runs_before_pagination_and_counts_all_matches" time="0.179" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_custom_hours_change_filter_and_returned_assessment" time="0.082" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_public_order_and_tie_breaks_survive_metadata_join[price]" time="0.080" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_public_order_and_tie_breaks_survive_metadata_join[departure]" time="0.078" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_public_order_and_tie_breaks_survive_metadata_join[score]" time="0.183" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_join_fanout_does_not_consume_candidate_limit" time="0.069" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change0]" time="0.058" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change1]" time="0.051" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change2]" time="0.062" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change3]" time="0.051" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change4]" time="0.055" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params0-None]" time="0.024" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params1-CONFLICTING_WEEKEND_FILTERS]" time="0.026" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params2-WORK_HOURS_REQUIRE_NO_LEAVE]" time="0.026" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params3-WORK_HOURS_REQUIRE_NO_LEAVE]" time="0.024" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params4-INVALID_WORK_HOURS]" time="0.025" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params5-INVALID_WORK_HOURS]" time="0.027" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params6-INVALID_WORK_HOURS]" time="0.027" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params7-None]" time="0.025" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_unknown_estimated_or_other_home_airport_is_not_no_leave[unknown-WRO]" time="0.073" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_unknown_estimated_or_other_home_airport_is_not_no_leave[estimated-WRO]" time="0.067" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_unknown_estimated_or_other_home_airport_is_not_no_leave[known-KRK]" time="0.182" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_multiple_flight_components_cannot_certify_a_convenient_offer" time="0.060" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_broad_query_is_explicit_error_not_a_partial_total" time="0.104" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_candidate_sql_count_is_constant_and_does_not_serialize_full_catalog" time="0.320" /><testcase classname="apps.api.tests.test_destination_time" name="test_twenty_hour_airport_window_is_not_city_time_nights_or_transit" time="0.001" /><testcase classname="apps.api.tests.test_destination_time" name="test_dst_and_same_day_use_utc_elapsed_minutes[2030-03-31T01:30:00+01:00-2030-03-31T03:30:00+02:00-60]" time="0.001" /><testcase classname="apps.api.tests.test_destination_time" name="test_dst_and_same_day_use_utc_elapsed_minutes[2030-10-27T02:30:00+02:00-2030-10-27T02:30:00+01:00-60]" time="0.001" /><testcase classname="apps.api.tests.test_destination_time" name="test_dst_and_same_day_use_utc_elapsed_minutes[2030-05-04T01:30:00+02:00-2030-05-04T01:30:00+02:00-0]" time="0.001" /><testcase classname="apps.api.tests.test_destination_time" name="test_dst_and_same_day_use_utc_elapsed_minutes[2030-05-04T01:30:00+02:00-2030-05-04T01:30:59+02:00-0]" time="0.002" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch0-MISSING_OR_INVALID_TIMES]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch1-MISSING_OR_INVALID_TIMES]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch2-MISSING_OR_INVALID_TIMES]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch3-MISSING_OR_INVALID_TIMES]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch4-MISSING_OR_INVALID_TIMES]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch5-MISSING_OR_INVALID_TIMES]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch6-UNKNOWN_TIMEZONE]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch7-UNKNOWN_TIMEZONE]" time="0.001" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch8-MISSING_AIRPORTS]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_missing_naive_reversed_or_unknown_endpoints_cannot_rank_as_known[patch9-MISSING_AIRPORTS]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_estimated_arrival_never_becomes_reliable_sort_but_home_estimate_is_independent" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_bad_source_context_wins_over_plausible_timestamps" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_airport_switch_exposes_endpoints_without_inventing_transfer_or_city_time" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_v1_cannot_claim_unsupported_city_minutes_or_buffers[patch0]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_v1_cannot_claim_unsupported_city_minutes_or_buffers[patch1]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_v1_cannot_claim_unsupported_city_minutes_or_buffers[patch2]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_v1_cannot_claim_unsupported_city_minutes_or_buffers[patch3]" time="0.000" /><testcase classname="apps.api.tests.test_destination_time" name="test_real_connected_segments_use_final_arrival_not_initial_departure_or_home" time="0.069" /><testcase classname="apps.api.tests.test_destination_time" name="test_source_without_flight_metadata_publishes_explicit_unknown" time="0.037" /><testcase classname="apps.api.tests.test_default_sort" name="test_default_is_price_and_explicit_score_remains_compatible[/api/v1/deals]" time="0.096" /><testcase classname="apps.api.tests.test_default_sort" name="test_default_is_price_and_explicit_score_remains_compatible[/api/v1/departures/WRO/deals]" time="0.064" /><testcase classname="apps.api.tests.test_default_sort" name="test_default_is_price_and_explicit_score_remains_compatible[/api/v1/destinations/barcelona/deals]" time="0.066" /></testsuite></testsuites>

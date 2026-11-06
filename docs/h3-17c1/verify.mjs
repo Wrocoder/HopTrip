@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const out='docs/h3-17c1/',read=p=>readFileSync(out+p,'utf8'),json=p=>JSON.parse(read(p));
+const hash=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const runtime=json('before-source.json');for(const r of runtime)assert.equal(hash(r.path),r.sha256,r.path);
+assert.match(read('before.txt'),/1 failed/);assert.match(read('clock.txt'),/2 passed/);
+assert.match(read('notifications-final.txt'),/113 passed/);assert.match(read('ruff.txt'),/All checks passed/);
+assert.match(read('full-api.txt'),/1255 passed/);assert(!/\bfailed\b|\bskipped\b/.test(read('full-api.txt')));
+const junit=read('full-api.xml');assert.match(junit,/failures="0"/);assert.match(junit,/errors="0"/);assert.match(junit,/skipped="0"/);
+assert.equal((junit.match(/<testcase[^>]*classname="apps\.api\.tests\.test_postgres"/g)||[]).length,18);
+const pg=json('postgres.json');assert.equal(pg.database,'hoptrip_test');assert.equal(pg.migrationHead,'0021_telegram_alerts');assert.equal(pg.image,'postgres:16-alpine');assert.equal(pg.label,'H3-17c1');assert.equal(pg.persistentMounts.length,0);assert(pg.tmpfs['/var/lib/postgresql/data']);assert(pg.publishedPorts['5432/tcp'].every(p=>p.HostIp==='127.0.0.1'));
+const cleanup=json('postgres-cleanup.json');assert.equal(cleanup.testSchemasRemaining,0);assert(cleanup.ownedContainerStopped&&cleanup.ownedContainerRemoved);
+const parity=json('parity-summary.json');assert.equal(parity.runtimeDelta,0);assert.equal(hash(parity.testFile),parity.testAfter);
+const result={task:'H3-17c1',status:'DONE: local API release gate',applicationBehaviorChanged:false,runtimeDelta:0,unchangedRuntimeAndDependencyFiles:runtime.length,testFile:parity.testFile,beforeFailed:1,controlledClockCasesPassed:2,notificationTestsPassed:113,fullApiPassed:1255,postgresTestsPassed:18,failures:0,skips:0,warnings:2,ruff:'PASS',migrationHead:pg.migrationHead,postgresImage:pg.image,isolatedDatabase:pg.database,ephemeralDatabaseCleaned:true,realNotificationsSent:false,productionDeployed:false,overallReleaseReady:false,next:'H3-17c2: review/freeze release candidate, build current images and rehearse deployment/rollback'};
+writeFileSync(out+'verification.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

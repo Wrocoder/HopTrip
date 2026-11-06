@@ -1,3 +1,4 @@
+import {staticAffiliateUrl} from './static-affiliate-url.ts';
 export type AirportTransfer = {
  city:string;
  affiliateHref:string;
@@ -18,7 +19,7 @@ export function transferForGuide(slug:string) {
  if(!transfer?.verifiedAt) return undefined;
  try {
   const url=new URL(transfer.affiliateHref);
-  if(url.protocol!=="https:" || url.username || url.password) return undefined;
+  if(url.protocol!=="https:" || !staticAffiliateUrl(transfer.affiliateHref,'transfer')) return undefined;
   return transfer;
  } catch {return undefined;}
 }

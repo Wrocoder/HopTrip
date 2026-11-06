@@ -1,7 +1,8 @@
+import {DEFAULT_SORT} from "./catalog-order.ts";
 import type {Filters} from "./api";
 
 export type SearchRaw=Record<string,string|string[]|undefined>;
-export const searchKeys=["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","offset","sort"] as const;
+export const searchKeys=["origin","destination","departure_from","departure_to","budget","duration_min","duration_max","weekend","weekend_mode","work_start","work_end","offset","sort","round_trip"] as const;
 export function scenarioFilters(path:string):Filters {
   if(path==="/routes/krakow-rome")return {origin:"KRK",destination:"rome"};
   if(path==="/city-break")return {duration_min:"2",duration_max:"4"};
@@ -14,7 +15,9 @@ export function searchFilters(raw:SearchRaw,path="/deals"):Filters {
   if(result.origin && /^[a-z]{3}(,[a-z]{3})?$/i.test(result.origin))result.origin=result.origin.toUpperCase();
   if(result.origin==="WMI,WAW")result.origin="WAW,WMI";
   if(result.weekend && ["1","on","yes"].includes(result.weekend.toLowerCase()))result.weekend="true";
+  if(result.round_trip && ["1","on","yes"].includes(result.round_trip.toLowerCase()))result.round_trip="true";
   Object.assign(result,scenarioFilters(path));
+  if(path==='/tanie-loty-na-weekend'&&result.weekend_mode&&!raw.weekend)delete result.weekend;
   if(path==="/from/warszawa" && !["WAW","WMI"].includes(result.origin??""))result.origin="WAW,WMI";
   return result;
 }
@@ -32,8 +35,9 @@ export function searchSeo(raw:SearchRaw,path="/deals") {
     delete filters.offset;
 
   }
-  if(filters.sort==="score")delete filters.sort;
+  if(filters.sort===DEFAULT_SORT)delete filters.sort;
   if(filters.weekend && ["false","0","off","no"].includes(filters.weekend.toLowerCase()))delete filters.weekend;
+  if(filters.round_trip && ["false","0","off","no"].includes(filters.round_trip.toLowerCase()))delete filters.round_trip;
   const canonical=searchUrl(path,filters);
   return {canonical,index:canonical===path};
 }

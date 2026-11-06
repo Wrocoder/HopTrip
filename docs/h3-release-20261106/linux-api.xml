@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="1.900" timestamp="2026-11-06T23:03:44.957005+00:00" hostname="ff653aedc179"><testcase classname="" name="apps.api.tests.test_activity_links" time="0.000"><error message="collection failure">tests/test_activity_links.py:7: in &lt;module&gt;
+    links = module("check-activity-links")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_operations_schedule.py:18: in module
+    spec.loader.exec_module(result)
+&lt;frozen importlib._bootstrap_external&gt;:995: in exec_module
+    ???
+&lt;frozen importlib._bootstrap_external&gt;:1132: in get_code
+    ???
+&lt;frozen importlib._bootstrap_external&gt;:1190: in get_data
+    ???
+E   FileNotFoundError: [Errno 2] No such file or directory: '/app/scripts/check-activity-links.py'</error></testcase></testsuite></testsuites>

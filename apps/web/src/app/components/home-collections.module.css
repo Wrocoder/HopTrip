@@ -1,0 +1,12 @@
+.collection{margin-block:var(--space-6);padding-block:var(--space-4);border-top:1px solid var(--border);min-width:0;overflow-wrap:anywhere}
+.collection h3{font-size:1.375rem;margin-block:0 var(--space-3)}
+.criteria{max-width:80ch}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:var(--space-5);list-style:none;padding:0;margin-block:var(--space-4)}
+.offer{min-width:0;border:1px solid var(--border);border-radius:var(--radius-card);background:var(--surface);box-shadow:var(--shadow-card)}
+.offer :global(.deal-card){border:0;border-radius:0 0 var(--radius-card) var(--radius-card);box-shadow:none;margin:0}
+.cover{min-width:0}
+.caption{font-size:var(--text-xs);color:var(--secondary);padding-inline:var(--space-4)}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4)}
+.actions a{display:inline-flex;align-items:center;min-height:var(--target-height);max-width:100%;overflow-wrap:anywhere}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.grid{grid-template-columns:minmax(0,1fr)}}

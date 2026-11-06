@@ -1,0 +1,580 @@
+
+> hoptrip-web@0.1.0 test:unit
+> node --experimental-strip-types --test tests/*.test.mjs
+
+(node:34372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/config.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ EUR annotation exposes the full existing explanation as text in every locale (222.1465ms)
+✔ missing rate or unknown flight price does not invent an EUR annotation (88.053ms)
+(node:36260) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/accommodation-links.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Stay22 preserves destination, edited dates and guests with HopTrip attribution (4.3372ms)
+✔ no outbound link for missing checkout, same-day or reversed stay and invalid guests (0.8378ms)
+✔ month boundary, Unicode and maximum adults preserve a bounded supported query (0.8076ms)
+(node:35484) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/airport-context.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ pl: remote/late/early/estimated remain separate from unknown transfer and airport switch (2.9891ms)
+✔ en: remote/late/early/estimated remain separate from unknown transfer and airport switch (0.8047ms)
+✔ ru: remote/late/early/estimated remain separate from unknown transfer and airport switch (0.3149ms)
+✔ uk: remote/late/early/estimated remain separate from unknown transfer and airport switch (0.236ms)
+✔ v1 contract rejects unsafe source, invented transfer, inconsistent distance and unknown policies (2.601ms)
+(node:37828) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/airports.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ city spelling, code and display label resolve to the same active airport (9.7252ms)
+✔ ambiguous cities expose all airports and codes select just one (6.1993ms)
+✔ partial matches are suggestions, never an implicit airport choice (3.8259ms)
+(node:32968) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/analytics-context.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ all alert languages suppress automatic tracking and keep capability pages private (7.6104ms)
+✔ filters and campaign labels never copy arbitrary URL fields (3.2626ms)
+✔ consent, rerenders, navigation and different partner categories (1.0623ms)
+(node:11584) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/session.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ consent expiry, future timestamps and malformed flags fail closed at the transport boundary (7.657ms)
+✔ session expires after thirty idle minutes and a renewed session can record the same page (3.693ms)
+✔ blocked analytics fetch stays best effort without retries or blocking later visits (5.3568ms)
+✔ malformed 200 catalog page is an unavailable response, never an empty result (47.7505ms)
+✔ weekend mode and hours reach API without silently dropping exact conditions (1.6491ms)
+✔ too broad weekend error keeps a stable distinct API code (1.3619ms)
+✔ an older or inconsistent API cannot silently ignore an exact weekend mode (64.3078ms)
+✔ unsupported sort and too-broad keep actionable codes, unrelated invalid dates do not masquerade as unsupported (1.4721ms)
+✔ 200 null detail is not confused with a genuine 404 (0.701ms)
+✔ malformed airport registry is rejected before a selector can use it (0.7418ms)
+✔ malformed alert status fails closed instead of accepting a truthy string (6.7712ms)
+✔ invalid JSON is classified without leaking its body (1.1094ms)
+✔ network rejection has a stable API error and is attempted only once (0.9674ms)
+✔ timeout rejection has a stable API error and is not retried (0.7616ms)
+✔ HTTP errors preserve status/code and genuine 404 detail remains null (1.1623ms)
+✔ valid empty pages beyond total keep offset and do not invent results (0.4753ms)
+✔ invalid pagination metadata is rejected before rendering (15.1754ms)
+✔ an abort while consuming the body is classified as a timeout (3.5661ms)
+✔ query allowlist, original decimals, no-store and encoded slugs are preserved (1.3203ms)
+(node:5124) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/api-contract.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ legacy deal omits optional facts honestly; additive fields are retained (4.964ms)
+✔ page consistency never infers a total or inserts a missing item (0.5881ms)
+✔ optional registry aliases may be absent but cannot replace arrays with strings (0.3092ms)
+✔ minimal event response tolerates absent optional metadata without making it up (0.4579ms)
+✔ malformed event rows, fit and currency cannot escape into render (5.1206ms)
+✔ event page bounds retain empty pages beyond total and reject contradictory nonempty pages (0.5932ms)
+✔ alert mutations require their actual success shape before UI status changes (0.8688ms)
+(node:35760) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/article-imagery.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every translated guide and price-method article has an explicitly chosen illustration in all four languages (3.1263ms)
+✔ real encoded files match reviewed source manifests, image budgets and reusable licence conditions (92.2566ms)
+✔ airport covers identify the city and glacier illustrations have explicit contextual placement (0.6533ms)
+(node:35116) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/budget-draft.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ draft roundtrip preserves unknown, zero, decimal and both lodging modes (9.6057ms)
+✔ malformed or incompatible drafts cannot replace valid defaults (0.5566ms)
+✔ date counts respect calendar days, same-day stays and invalid ranges (0.5291ms)
+✔ legacy groups stay unclassified; adult confirmation and amounts survive date edits (0.5925ms)
+(node:31628) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/budget-estimates.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ personal profiles start unknown and do not invent market prices or alter exact inputs (4.4599ms)
+✔ scenario uses group nights, person days and group transfers with a single flight subtotal (0.5527ms)
+✔ manual zero and amounts override scenarios; inactive lodging amount is never double counted (0.8086ms)
+✔ date/party changes recalculate assumptions and preserve manual values; per-person bounds enclose fractional grosz (4.4261ms)
+✔ seed copies only explicit user amounts into empty bounds and respects lodging units (0.5999ms)
+✔ incomplete, inverted, invalid or non-PLN ranges never yield a misleading projection or share token (2.3268ms)
+✔ v1 restores profiles and source annotations without leaking arbitrary extras; legacy exact budgets are unchanged (3.0961ms)
+✔ local typos survive reload; malformed models preserve exact budget with explicit recovery and cannot be silently shared (0.8649ms)
+✔ partially priced events remain partial and their known amounts are added only once (0.7829ms)
+(node:35984) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/trip-budget.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ old local drafts and raw shared/saved tokens retain every legacy amount and unknown new costs (8.8843ms)
+✔ new fields preserve strict validation while legacy required fields remain required (1.2021ms)
+✔ taxes and emergency buffer are group totals, retain grosz and do not multiply by nights or people (1.2873ms)
+✔ empty and explicit zero remain distinct for both added categories (0.3773ms)
+✔ budget modes, new categories, confidence and correction copy exist in all locales (0.8034ms)
+(node:16908) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/budget-provenance.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ observed, assumed, manual, unknown, invalid and intentional zero remain distinct without changing totals (6.1739ms)
+✔ legacy drafts are never relabelled observed merely because their flight matches a current offer (1.9816ms)
+✔ manual edits remove only their annotation; date/party/basis changes keep unit amounts with existing review semantics (0.5997ms)
+✔ reference binding checks dated allowlisted tariff, quantity, rate and rounding without accepting arbitrary URLs (0.5337ms)
+✔ corrupt annotations fail closed per field without losing any valid budget, including recoverable local dates (0.8518ms)
+✔ v1 sharing and old saved lists preserve safe metadata and amounts, stripping notes, URLs and arbitrary nested fields (3.27ms)
+(node:6624) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/calendar-date.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ invalid calendar dates never reach formatting, counts, event requests or stay links (5.3279ms)
+✔ calendar validity is independent of duration limits and supports leap days (0.9037ms)
+✔ correcting an invalid edited date restores counts and preserves expenses (0.3554ms)
+✔ local flags cover ISO countries and the reviewed destination catalog (89.441ms)
+✔ shared token contract retains the installed brand and explicit typography/spacing/control roles (1.4059ms)
+✔ normal text color pairs meet 4.5:1 without rounding a failing ratio up (1.9391ms)
+✔ control borders and focus colors have at least 3:1 on their adjacent surfaces (0.4015ms)
+(node:8528) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/destination-directory.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ directory reuses multilingual aliases, diacritics and IATA without the suggestion cap (64.3132ms)
+✔ groups use localized country and city order, exclude inactive rows and leave source arrays intact (3.0287ms)
+✔ directory has explicit canonical-language routes and preserves existing city browse targets (1.408ms)
+✔ directory query is bounded, single-valued and treats empty input as the full list (0.4051ms)
+(node:35144) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/destination-imagery.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ editorial photo allowlist fails closed for unknown/prototype/path values and has complete localized descriptions (2.0115ms)
+✔ shipped photographs decode with reserved aspect ratio, bounded bytes and complete on-disk attribution (22.2017ms)
+✔ same-country cities precede other countries, with integer-grosz order and one offer per destination (18.6058ms)
+✔ alternatives exclude the target, unknown/inactive registry cities, stale, one-way and unverified observations (1.0142ms)
+✔ the candidate/display bounds do not invent replacements or global availability counts (1.9596ms)
+✔ related catalogue failure is isolated; alert opt-in requires both registration and delivery to be active (40.4129ms)
+✔ missing alerts cannot hide real alternatives; valid empty is distinct from unavailable (4.7844ms)
+(node:30360) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/destination-time.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ pl: airport interval, estimates, zero and old API keep city time unknown (3.8676ms)
+✔ en: airport interval, estimates, zero and old API keep city time unknown (0.4427ms)
+✔ ru: airport interval, estimates, zero and old API keep city time unknown (0.2623ms)
+✔ uk: airport interval, estimates, zero and old API keep city time unknown (0.3683ms)
+✔ destination sort and pagination survive URLs and keep filtered canonical noindex (2.7014ms)
+(node:36028) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/destinations.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ canonical destination, English, Polish and IATA resolve identically (7.8728ms)
+✔ suggestions do not silently resolve partial, unknown or ambiguous input (1.4034ms)
+✔ diacritics and repeated whitespace normalize without changing display labels (0.6012ms)
+(node:32436) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/trip-copy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ detail navigation adds only enabled destinations and keeps shared-plan defaults (21.6202ms)
+✔ all critical reasons are outside disclosure in detail mode while other contexts retain their policy (4.5075ms)
+(node:30712) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/drive-policy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Drive page policy protects managed links independent of consent (1.9189ms)
+(node:16912) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/event-dates.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ calendar windows preserve the edited stay and allow up to 31 inclusive days (4.3418ms)
+✔ date modes have complete labels in every supported language (0.496ms)
+✔ day navigation includes both ends and stays on calendar dates across clock changes (1.7764ms)
+(node:31524) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/event-flight-fit.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ flight compatibility warnings and unknowns are translated in every language (1.9279ms)
+✔ the compact warning prioritises conflicts over missing data and tight intervals (0.7946ms)
+(node:35088) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/api-contract.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ legacy all responses remain readable; possible requires a supported mode and an assessment for every card (4.0595ms)
+✔ an unknown filter mode is rejected and filtered empty results retain scope and partial coverage (0.5921ms)
+✔ all four locales explain uncertainty and provide explicit recovery instead of promising attendance (1.8625ms)
+(node:37588) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/event-presentation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ source sale states do not invent inventory; inactive/unknown parent or option cannot be planned (3.0283ms)
+✔ missing or invalid event zones remain unknown rather than defaulting to UTC (26.6298ms)
+✔ catalogue check timestamps require a valid aware calendar instant (1.0246ms)
+✔ event confidence/missing fields/status copy is complete in all four locales (0.5243ms)
+(node:33824) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/exchange-rate.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ PLN is divided by PLN per EUR, rounded to whole euros (25.0536ms)
+✔ NBP validation accepts Friday on Saturday but rejects invalid or stale rates (4.0902ms)
+✔ concurrent cards share a request and refresh after an hour (43.3285ms)
+✔ outage retains a recent quote but never one over seven days old (0.9202ms)
+✔ initial failure hides EUR and backs off before retry (0.7462ms)
+(node:3460) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/flight-facts.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ impossible calendar dates and clocks cannot silently roll into another flight day (32.0183ms)
+✔ compact clocks retain local rollover and explicit UTC for unknown zones (2.1561ms)
+✔ price scope and known zero differ from unknown facts (0.442ms)
+✔ schedule explicitly uses UTC across day and DST boundary (1.0531ms)
+✔ known zero-offset airports use a stable GMT label in every supported locale (10.2783ms)
+✔ HTR-01: local home arrival crosses midnight without adding a hotel night (2.9753ms)
+✔ IANA rules handle spring and autumn DST and different airport zones (4.5584ms)
+✔ offset-aware values are converted once; unknown clocks and zones stay explicit (3.1978ms)
+✔ unknown or invalid destination intervals never become zero (0.4767ms)
+✔ outbound and return airports and timezones are independent (1.4126ms)
+(node:6764) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/flight-quality.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ automatic recommendations require known quality and exclude critical or legacy data (1.3049ms)
+✔ complete data need no warning; partial, critical and unknown data remain explicit (1.264ms)
+✔ all source-quality reasons are translated without exposing technical codes (0.6555ms)
+(node:33612) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/search-policy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three definitions use supported exact filters and round-trip catalog links (4.9792ms)
+✔ three concurrent API reads produce independent previews, preserving upstream order and no-store (47.3137ms)
+✔ zero and one offer never fabricate content or total market counts (2.9019ms)
+✔ budget is inclusive to the grosz and concerns flight per person, not a whole trip (13.4263ms)
+✔ quality, origin, return type, expiry and bounded nights are safety guards, not a second ranking (13.6367ms)
+✔ all-airport request remains explicit and permits several origins (1.4704ms)
+✔ one failed exact weekend request does not erase successful or empty collections (1.9797ms)
+✔ unsupported weekend semantics, malformed responses and failures are errors, never empty inventory (1.527ms)
+✔ the first 100 rows are only a bounded preview; a later eligible row is not silently scanned (15.8806ms)
+✔ concurrent airport switches cannot relabel an older snapshot (3.2318ms)
+✔ round-trip search normalization, removal and canonical semantics preserve explicit intent (0.7596ms)
+(node:34440) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/config.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ home copy retains placeholders and homepage locale is selected by URL (4.9848ms)
+✔ translated guides preserve every source, date, number and section (14.888ms)
+✔ all activity selections have complete translations with unchanged quantities (2.44ms)
+✔ reference fare translations preserve amounts, eligibility and conversion (5.4104ms)
+(node:13952) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/config.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ only ready pages expose translations and retain analytics and affiliate policy (2.9636ms)
+✔ budget copy covers every declared message in all languages (1.5899ms)
+✔ all four dictionaries have every Polish key and explanation, without empty translations (1.4486ms)
+✔ language URLs preserve filters, pagination, fragments and stable slugs (0.5135ms)
+✔ unpublished translations never appear in default language alternatives (0.5189ms)
+✔ formatting follows language but keeps PLN, unknowns and the same trip dates (38.9157ms)
+(node:33832) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/legal-content.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ legal translations preserve all sections, numeric terms and storage identifiers (5.2093ms)
+(node:31780) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/budget-draft.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ local recovery preserves all editable costs, people and tickets; shared input stays strict (57.1769ms)
+✔ recovery retains schema, version, size and ticket link protections (1.0269ms)
+(node:18800) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/config.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ catalog translations retain placeholders and never contain empty values (4.3882ms)
+✔ all catalog languages preserve local midnight, DST, missing clocks and seven nights (77.9695ms)
+✔ translated price conclusions preserve neutrality, comparison boundaries and missing history (9.2319ms)
+(node:35644) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/config.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Received `false` for a non-boolean attribute `prefetch`.
+
+If you want to write it to the DOM, pass a string instead: prefetch="false" or prefetch={value.toString()}.
+
+If you used to conditionally omit it with prefetch={condition && value}, pass prefetch={condition ? value : undefined} instead.
+✔ filter forms render all languages, localized values and links without changing identifiers (71.8518ms)
+✔ localized search resolves original IATA and slugs, preserving unknown and ambiguous results (7.8021ms)
+✔ sorting describes the applied URL and connects its rule to the selector in every locale (26.1166ms)
+✔ invalid sort has no invented applied order and the hero does not gain sorting controls (8.1322ms)
+(node:36812) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/trip-copy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ trip copy covers all languages and traveller instructions preserve count and children (5.2255ms)
+✔ offer and private plan locales retain identifiers but never enter sitemap registry (3.1813ms)
+✔ old snapshot format and storage tokens are unchanged across display languages (14.9744ms)
+(node:32948) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/navigation.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ navigation boundary /deals (28.4262ms)
+✔ navigation boundary /deals/offer (0.3455ms)
+✔ navigation boundary /from/WRO (0.1924ms)
+✔ navigation boundary /routes/krakow-rome (0.1969ms)
+✔ navigation boundary /city-break (0.1979ms)
+✔ navigation boundary /tanie-loty-na-weekend (0.18ms)
+✔ navigation boundary /destinations (0.219ms)
+✔ navigation boundary /destinations/milan (1.9478ms)
+✔ navigation boundary /#home-destinations (0.3217ms)
+✔ navigation boundary /destinations-extra (0.3238ms)
+✔ navigation boundary /#other (0.1539ms)
+✔ navigation boundary /deals#home-destinations (0.1878ms)
+✔ navigation boundary /saved (0.1342ms)
+✔ navigation boundary /info/trip-budget (0.1049ms)
+✔ navigation boundary /info/trip-budget-extra (0.0795ms)
+✔ navigation boundary /deals-extra (0.0869ms)
+✔ navigation boundary /info/price-comparison (0.1386ms)
+✔ search action saves the optional origin and redirects to the exact localized catalog query (435.3824ms)
+✔ search action rejects external and unrelated navigation before any cookie write (12.9457ms)
+✔ an unavailable preference store does not block the actual search (19.907ms)
+(node:30656) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/origin-preference.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ origin policy: first visit (1.6029ms)
+✔ origin policy: saved valid code (0.473ms)
+✔ origin policy: explicit code wins (0.2443ms)
+✔ origin policy: explicit clear wins (0.1579ms)
+✔ origin policy: stale cookie ignored (0.1718ms)
+✔ origin policy: unknown registry preserves saved code (0.2937ms)
+✔ origin policy: available empty registry (0.1855ms)
+✔ origin policy: explicit unknown goes to normal validation (0.2905ms)
+✔ origin policy: duplicate query is not a saved preference (2.7542ms)
+✔ shared short-trip selection keeps origin, quality, round-trip and 2–4-night gates (2.0035ms)
+(node:11588) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/passenger-label.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ partner instruction uses Polish accusative and does not invent group counts (1.4625ms)
+(node:21852) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/plan-editor.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ local ID URLs are strictly separate from portable snapshots, including sections and malformed inputs (5.5097ms)
+✔ local base revisions stay in opaque context and are stripped from shared payloads (4.1764ms)
+✔ legacy missing adultsOnly equals false for dirty checking without rewriting saved bytes (2.4431ms)
+✔ editor states distinguish committed, uncommitted, conflicting and deleted plans (1.2596ms)
+✔ rebinding preserves the latest local edits and intentional zeros, including pending-save or reset contents (0.4462ms)
+✔ bounded editor recovery snapshots cannot resolve another ID or malformed token (1.2521ms)
+✔ changed source notice compares known flight amounts and dates, never replaces manual budget values (0.4342ms)
+(node:24368) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/planned-events.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ tickets use integer grosz and their own quantity, once, independent of people and nights (2.5567ms)
+✔ known ticket costs contribute while unknown prices keep the budget incomplete; zero stays known (1.4325ms)
+✔ invalid event quantities and money never produce a plausible total or shared link (36.6169ms)
+✔ adding the same offer preserves manual costs; premium and separate sessions keep distinct IDs (2.2975ms)
+✔ local draft, date changes and shared snapshot preserve event facts and costs without private extras (18.7923ms)
+✔ legacy v1 links without events still restore identical budgets and saved-list entries (5.4461ms)
+✔ shared links cannot introduce scripts, credentialed URLs or arbitrary redirect targets (2.7864ms)
+✔ invalid event dates, clocks, zones, oversized arrays and corrupted event structures are rejected (20.4272ms)
+✔ unknown clocks and explicit zero survive sharing without inferred prices or dates (4.6733ms)
+✔ oversized share fails explicitly without dropping events from a valid local draft (15.1563ms)
+(node:14868) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/cities.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ city presentation preserves unknown names and distinguishes Warsaw airports (1.513ms)
+✔ Polish dates include weekdays, timestamps use Warsaw and invalid dates stay unknown (31.281ms)
+✔ calendar nights handle Polish plurals, DST, unknown one-way and reversed dates (1.6579ms)
+(node:22100) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/price-assessment.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ API reference comparisons agree with the visible assessment in every locale (25.7314ms)
+✔ every locale discloses UTC cohort dates and the currency (0.7321ms)
+✔ visible sample context uses the validated comparison count in all locales (4.1264ms)
+✔ untrusted and non-current comparisons do not gain a current sample label (0.4522ms)
+✔ comparison entry and collapsed methodology do not expose a numerical rating (0.7747ms)
+✔ saved below, equal and above-median comparisons retain their direction (1.1096ms)
+✔ sub-zloty differences are neutral; display boundaries use rounded grosz (1.3732ms)
+✔ incomplete, legacy and provisional history cannot advertise a discount (0.9065ms)
+✔ a score for a different price is not attached to the current offer (0.8795ms)
+✔ source time and first-seen time are explicit and never replaced with retrieval time (2.0907ms)
+✔ missing and legacy timestamps do not gain invented provenance (0.6064ms)
+(node:18552) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/price-assessment.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ expiry fallback uses the earliest TTL, source expiry or departure, never fetch time (3.2924ms)
+✔ explicit snapshot provenance wins over score calculation and new delivery (0.5407ms)
+✔ freshness explanation, expiry and delivery copy is available in all locales (0.3917ms)
+(node:37844) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/session.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new actions require analytics consent independently of marketing and stop on withdrawal (11.258ms)
+✔ filter apply, remove and reset each count once without a second wire event (2.2486ms)
+✔ localized signup start is explicit, once per visit and suppressed on capability pages (1.3546ms)
+✔ saved list has a bounded locale-independent page type and analytics failure does not block actions (0.752ms)
+(node:260) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/reference-costs.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ reference fares convert each person's tickets to integer grosz (1.5179ms)
+✔ stale, future and invalid references cannot fill the calculator (0.4967ms)
+✔ A/B publication keeps previous bytes, supports rollback and is idempotent (515.5607ms)
+✔ conflicting URL aborts before publishing any unrelated new files (173.936ms)
+✔ two source generations cannot disagree on a public URL (19.4623ms)
+✔ source and target directory links are rejected (25.9525ms)
+✔ entrypoint seeds the cache before starting even a legacy server module (191.0707ms)
+✔ production entrypoint refuses to start without its dedicated volume (97.5777ms)
+✔ postflight checks previous/current URLs, rejects corrupt bytes and unsafe HTML cache (411.1041ms)
+(node:37524) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/saved-plans.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ legacy plans remain readable but require explicit migration; corrupt and unknown versions never silently become empty writable lists (12.8683ms)
+✔ migration is explicit, checks the latest legacy source, preserves exact tokens and keeps a byte-exact backup (12.8582ms)
+✔ save and explicit update retain a permanent ID while replacing the budget and advancing the revision (2.2416ms)
+✔ duplicate has a distinct identity even with identical contents; update/delete/undo operate by ID and prevent stale revisions (5.6077ms)
+✔ capacity never evicts a plan; an update of an existing identity is allowed in a full collection (46.0832ms)
+✔ invalid IDs, duplicate IDs, invalid backups, unknown fields and malformed records block writes while valid records can still be shown (4.6851ms)
+✔ legacy writes cannot replace v2 plans; explicit import adds only new source snapshots and cannot resurrect unchanged deleted or updated plans (21.3338ms)
+✔ failed or full legacy import leaves the entire active collection intact; a damaged old source does not erase valid v2 data (31.87ms)
+✔ import preserves the order of multiple source additions and retains the original order of existing plans (4.2791ms)
+✔ exclusive driver serializes concurrent saves and stale updates without losing unrelated plans or writing the legacy key (4.0894ms)
+✔ driver rejects absent locks and storage/lock failures without pretending a write succeeded (1.2601ms)
+(node:8880) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/shared-trip.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ duplicate snapshots are retrieved once without losing a distinct plan (4.6371ms)
+✔ missing storage is empty, corrupted or unsupported storage is reported and never rewritten (12.1218ms)
+✔ save, duplicate save, capacity and removal preserve all independent snapshots (71.3517ms)
+✔ a fresh mutation after another tab removed a snapshot cannot resurrect it or overwrite new plans (2.7518ms)
+✔ saved mutations retain exact v1 snapshot, manual values, unknown and zero fields (3.2644ms)
+✔ local storage, snapshot, undo and stale-link messages exist in four locales (1.1984ms)
+(node:37232) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/i18n/score-copy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ score translations retain numeric rules and interpolation slots (4.0105ms)
+✔ translated methodology retains the complete example and all sections (0.9537ms)
+(node:16512) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/search-context.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ offer return context preserves catalog conditions, pagination and normalizes origin (2.6155ms)
+✔ offer return context never accepts another route, external URL, oversized or malformed input (0.6729ms)
+(node:16888) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/search-policy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ scenario conditions cannot be overridden by arbitrary URL parameters (4.0641ms)
+✔ canonical drops tracking, empty values and equivalent defaults; filtered pages remain noindex (0.9468ms)
+✔ pagination and sorting keep all conditions and landing scenario (0.7086ms)
+(node:11400) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/search-recovery.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ recovery changes only the selected criterion and pagination, without mutating the applied search (3.825ms)
+✔ a zero budget is restrictive and can be removed (0.4132ms)
+✔ a single date bound can be relaxed while retaining airport and sort (0.3327ms)
+✔ sort, pagination and a false weekend flag do not invent recovery criteria (0.3269ms)
+✔ active weekend true has an explicit recovery option (0.3406ms)
+✔ active weekend 1 has an explicit recovery option (0.3286ms)
+✔ active weekend on has an explicit recovery option (0.1772ms)
+✔ active weekend yes has an explicit recovery option (0.1539ms)
+✔ translated article metadata is enabled only for reviewed translated routes (1.9027ms)
+✔ published multilingual inventory passes without a hard-coded sitemap count (45.3425ms)
+✔ audit rejects removed mandatory pages, private/filtered URLs, duplicates and other origins (9.5686ms)
+✔ audit detects wrong canonical, language, status, headings, indexing and missing metadata (1.7076ms)
+✔ missing self/x-default, wrong targets and a broken reciprocal language pair fail (4.0622ms)
+(node:5280) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/shared-trip.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ adult confirmation survives sharing while old plans do not infer ages (7.0562ms)
+✔ shared snapshot preserves Polish labels, unknowns and zero while stripping private fields (2.2381ms)
+✔ rejects broken, oversized, unsafe and invalid snapshots including inactive money fields (4.5025ms)
+(node:31844) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/static-affiliate-url.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ every reviewed static affiliate URL is accepted unchanged (3.3067ms)
+✔ unsafe or unsupported redirect forms fail closed without rewriting attribution (0.4908ms)
+✔ unsupported static links disappear or fall back to the separate official product (0.2489ms)
+✔ unsupported plan context disclaimer is localized in all four languages (0.8971ms)
+(node:22608) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/flight-facts.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ overnight arrival starts the stay locally; next-day arrival home does not add a hotel night (30.9243ms)
+✔ local dates use real zones across DST and the date line, not UTC calendar days (4.5025ms)
+✔ unknown zones, naive clocks, invalid dates and out-of-contract years do not invent local dates (10.2428ms)
+✔ return origin uses its own zone and unknown return zones never copy the outbound zone (2.265ms)
+✔ explicit application changes only suggested dates, duration counts and review, preserving entered money and people (2.0856ms)
+✔ one-way suggestion preserves manual checkout or leaves an unknown checkout empty (0.8978ms)
+✔ same-day schedule does not silently invent a night or a searchable stay (0.4651ms)
+✔ all stay context copy is localized without changing the provider name (0.5143ms)
+(node:11072) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/airports.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ bounded airport suggestions retain the former full-scan results, order and object identity (107.6106ms)
+✔ bounded destination suggestions preserve multilingual aliases and inactive exclusions (32.681ms)
+(node:19472) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/trip-budget.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ trip budget uses flight cost and calendar nights, including same-day trips (2.997ms)
+✔ one-way and invalid dates do not claim a known stay, unknown flight stays empty (0.6124ms)
+✔ shared hotel and transport are not multiplied by people (1.1841ms)
+✔ unknown expenses remain incomplete while explicit zero is known (0.4551ms)
+✔ comma input uses integer grosz and per-person rounding (0.3327ms)
+✔ invalid amounts and counts cannot produce a plausible total (0.6009ms)
+✔ whole-stay lodging keeps every grosz and ignores nightly price and headcount (0.961ms)
+(node:33680) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/trip-filters.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ weekend toggles, resets pagination and preserves unrelated conditions (3.2882ms)
+✔ nights toggles, resets pagination and preserves unrelated conditions (0.445ms)
+✔ budget toggles, resets pagination and preserves unrelated conditions (0.3295ms)
+✔ presets replace only their own bounds and can be combined (0.3465ms)
+✔ false weekend and partial night range are not selected; decimal budget is selected (0.2537ms)
+(node:37448) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/trip-fragment.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new links put the unchanged v1 token in the fragment on all four locales (9.6024ms)
+✔ section navigation retains the token and validates section identifiers (1.4029ms)
+✔ malformed, duplicate, oversized, unsupported and ambiguous fragments fail closed (0.9339ms)
+✔ privacy copy and metadata describe a copy without embedding plan values (0.5733ms)
+(node:36272) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/trip-timeline.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ pl: legacy facts and authoritative timeline keep unknowns and actual airport (41.9723ms)
+✔ en: legacy facts and authoritative timeline keep unknowns and actual airport (7.841ms)
+✔ ru: legacy facts and authoritative timeline keep unknowns and actual airport (10.0726ms)
+✔ uk: legacy facts and authoritative timeline keep unknowns and actual airport (9.9891ms)
+(node:35236) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/analytics-context.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ current frontend and API event names agree; baseline v1 remains historical (3.6557ms)
+✔ trip updates use existing consent, action dedup and private transport without backfill (12.0367ms)
+(node:32184) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/src/lib/search-policy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ exact modes and work hours survive general and legacy landing URL roundtrips (6.8947ms)
+✔ form normalization removes conflicts and stale work hours; unrelated presets keep selected mode (1.1471ms)
+✔ recovery removes the whole weekend group without changing manual constraints (0.7407ms)
+✔ pl has distinct modes and explicit airport-only caveats (0.3879ms)
+✔ en has distinct modes and explicit airport-only caveats (0.282ms)
+✔ ru has distinct modes and explicit airport-only caveats (0.1509ms)
+✔ uk has distinct modes and explicit airport-only caveats (0.1081ms)
+ℹ tests 323
+ℹ suites 0
+ℹ pass 323
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3877.3885

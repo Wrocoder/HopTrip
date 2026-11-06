@@ -1,0 +1,71 @@
+F
+================================== FAILURES ===================================
+__________ test_filter_runs_before_pagination_and_counts_all_matches __________
+
+api_client = <starlette.testclient.TestClient object at 0x000002B94CF83FE0>
+isolated_db = <sqlalchemy.orm.session.Session object at 0x000002B94CDFFEF0>
+catalog = <function catalog.<locals>.create at 0x000002B94D45AFC0>
+
+    def test_filter_runs_before_pagination_and_counts_all_matches(api_client, isolated_db, catalog):
+>       unknown = catalog(100, kind="unknown")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+apps\api\tests\test_weekend_catalog.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+price = 100
+
+    def create(price, *, start="2030-11-01T18:00:00+01:00",
+               back="2030-11-03T19:00:00Z", home="WRO", kind="known"):
+        depart, returning = datetime.fromisoformat(start), datetime.fromisoformat(back)
+        outbound_arrival, return_arrival = depart + timedelta(hours=2), returning + timedelta(hours=2)
+        link = f"/search/fixture?t=synthetic-{price}-{start}-{back}"
+        payload = dict(origin="WRO", destination="LON", origin_airport="WRO", destination_airport="STN",
+            departure_at=start, return_at=back, price=price, currency="PLN", airline="FR",
+            flight_number="8406", transfers=0, return_transfers=0, link=link)
+        if kind != "unknown":
+            payload.update(duration_to=120, duration_back=120)
+        offer = TravelOffer(data_provider_id=template.data_provider_id, external_id=link,
+            source="travelpayouts_data", departure_precision="TIME",
+            origin_airport_id=template.origin_airport_id, destination_id=template.destination_id,
+            depart_at=depart, return_at=returning, original_price=Decimal(price),
+            original_currency="PLN", price_pln=Decimal(price), raw_payload=payload,
+            last_verified_at=now, fetched_at=now, expires_at=now + timedelta(hours=24))
+        if kind == "known":
+            offer.route_details = dict(source="travelpayouts_graphql", ticket_key=ticket_key(link),
+                departure_at=start, return_at=return_arrival.isoformat(), value=price,
+                currency="PLN", origin_airport_iata="WRO", destination_airport_iata="STN",
+                segments=[dict(departure_at=start, arrival_at=outbound_arrival.isoformat(),
+                    flight_legs=[dict(origin="WRO", destination="STN", departure_at=start,
+                        arrival_at=outbound_arrival.isoformat(), operating_carrier="FR")]),
+                    dict(departure_at=back, arrival_at=return_arrival.isoformat(),
+                    flight_legs=[dict(origin="LTN", destination=home, departure_at=back,
+                        arrival_at=return_arrival.isoformat(), operating_carrier="FR")])])
+        db.add(offer)
+        db.flush()
+        deal = generate_flight_deal(db, offer, now)
+        db.commit()
+        assert deal is not None
+        view = serialize_deal(db, deal)
+>       assert view.weekend_assessment.calendar == "ELIGIBLE", (view.flight_quality, view.flight_facts)
+E       AssertionError: (FlightQuality(version='flight-quality-v1', status='CRITICAL_INCOMPLETE', reasons=['MISSING_RETURN_AIRPORTS', 'INVALID...me.datetime(2030, 11, 3, 19, 0, tzinfo=datetime.timezone.utc), return_arrival=None, destination_interval_minutes=None))
+E       assert 'UNKNOWN' == 'ELIGIBLE'
+E         
+E         - ELIGIBLE
+E         + UNKNOWN
+
+apps\api\tests\test_weekend_catalog.py:56: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_weekend_catalog.py::test_filter_runs_before_pagination_and_counts_all_matches
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 2 warnings in 0.28s

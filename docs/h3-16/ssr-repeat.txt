@@ -1,0 +1,395 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-explanations-ssr.spec.ts --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [31360]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=7219a17d3917426b8fd914a81aec363f method=GET status=200
+[WebServer] (node:36776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=6bed9d263dd5423dbdb144f4d759c40b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=178bbe68b90a4ce1a261796900b5b763 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8b6da3389ec14061aedd3075e5bc41f7 method=GET status=200
+
+Running 8 tests using 1 worker
+
+(node:10176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › pl: SSR help and native disclosures work without JavaScript
+[WebServer] INFO:hoptrip.requests:request_id=85963576e0a442caa6db26cbc0958213 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=822b83a317874eceabb5f46c1567febf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a84cc97d74d64c549081d2f7d3495cc2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1d54417947a04b2da03ae88a8abba5ba method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8e730a38ab1d4ffab350a743c4d61b54 method=GET status=200
+[2/8] [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › en: SSR help and native disclosures work without JavaScript
+
+[WebServer] INFO:hoptrip.requests:request_id=4c533a55dbd1450daa5e562a7e89d509 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=30fecba3ef514f059b132487b620243e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fa100fd3af284d15adc736482abd6b2f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6647d056b85541ffa238ca1afb13fc23 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=190b419495924738b90cf8ef14fc498e method=GET status=200
+
+  1) [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › en: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>How does the supporting ranking score work?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-en-SSR-97e14-res-work-without-JavaScript-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-en-SSR-97e14-res-work-without-JavaScript-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-en-SSR-97e14-res-work-without-JavaScript-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:34616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/8] [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › ru: SSR help and native disclosures work without JavaScript
+
+[WebServer] INFO:hoptrip.requests:request_id=4f26502e7e7a4beaa0ba343c5d10aab6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=490cd8e0488b477b8240639b9775a6ee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=62ecdc23814d4fc49eef0a2cbfaaf2bf method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8d8f925cb36c42fc977905ff659c8550 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fec89daffe9342b0a9bc98939edd5a22 method=GET status=200
+  2) [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › ru: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Как устроен вспомогательный балл сортировки?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-ru-SSR-86c45-res-work-without-JavaScript-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-ru-SSR-86c45-res-work-without-JavaScript-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-ru-SSR-86c45-res-work-without-JavaScript-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:36692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[4/8] [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › uk: SSR help and native disclosures work without JavaScript
+[WebServer] INFO:hoptrip.requests:request_id=148c0c4e7f6d46d493858a27e7d20264 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1096343367cb44a5a3646c3235c87090 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a3c02da9095b413da9c55302492bf9ee method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3446a427b6ba43a68f2c5bfe111e541a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=69257a13a64f433abf20f3c5a5fbfdc7 method=GET status=200
+  3) [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › uk: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Як працює допоміжний бал сортування?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-uk-SSR-a76c8-res-work-without-JavaScript-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-uk-SSR-a76c8-res-work-without-JavaScript-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-uk-SSR-a76c8-res-work-without-JavaScript-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:15416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/8] [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › pl: SSR help and native disclosures work without JavaScript
+
+[WebServer] INFO:hoptrip.requests:request_id=e3428f4d76c44a8f950804c5d6459325 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9cce6b6e67cb47c698d4a059b7a350b3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b33cffda5af44bd988dd3f75c3c205cd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9fda3321f9074466acba6b35619614fb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a35922b429f243568e9cdfdda1ef3e19 method=GET status=200
+  4) [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › pl: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Jak działa pomocniczy wynik sortowania?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-pl-SSR-21bfe-res-work-without-JavaScript-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-pl-SSR-21bfe-res-work-without-JavaScript-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-pl-SSR-21bfe-res-work-without-JavaScript-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:13476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[6/8] [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › en: SSR help and native disclosures work without JavaScript
+[WebServer] INFO:hoptrip.requests:request_id=93e2081e29a049e49a82a71427c862ee method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=70ada9dad67642a5bb5b8c8f002d6542 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2c3a864853af4bcdaaec124d8122374d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1abb26e61f674af2b6ab1ab23da01625 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=017150f5269a41278cccb5a31545c2e3 method=GET status=200
+  5) [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › en: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>How does the supporting ranking score work?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-en-SSR-97e14-res-work-without-JavaScript-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-en-SSR-97e14-res-work-without-JavaScript-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-en-SSR-97e14-res-work-without-JavaScript-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:11704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[7/8] [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › ru: SSR help and native disclosures work without JavaScript
+
+[WebServer] INFO:hoptrip.requests:request_id=756d73eb4dba48e0bc16026699ccaf76 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c9bd5bfb70314ad1acd74a31625d6b95 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9c1fabacdc924130a61e8c2ebca0636b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b816db748b874987ba8578a14c663431 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=857f019b870a43088e9fd20a3259d239 method=GET status=200
+
+  6) [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › ru: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Как устроен вспомогательный балл сортировки?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-ru-SSR-86c45-res-work-without-JavaScript-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-ru-SSR-86c45-res-work-without-JavaScript-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-ru-SSR-86c45-res-work-without-JavaScript-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:41972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[8/8] [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › uk: SSR help and native disclosures work without JavaScript
+[WebServer] INFO:hoptrip.requests:request_id=078aa2537b4f406e8fab143df005089f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6b078914730d4dba9b20bd762903b4f9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=098e5434da1442588a1f329e22807ec9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=11be609ac9384705a7f798837da9a36e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0b1e3e6155204bada42dec5ecfc6ea75 method=GET status=200
+
+  7) [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › uk: SSR help and native disclosures work without JavaScript 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for locator('#score .score-calculation > summary')
+        - locator resolved to <summary>Як працює допоміжний бал сортування?</summary>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not stable
+        - retrying click action
+        - waiting 20ms
+
+
+      13 |  await expect(page).toHaveURL(/#score$/);
+      14 |  await expect(page.locator('#score .score-sum')).not.toBeVisible();
+    > 15 |  await page.locator('#score .score-calculation > summary').click();
+         |                                                            ^
+      16 |  await expect(page.locator('#score .score-sum')).toContainText('76/100');
+      17 |  await page.locator('#score a.text-link').click();
+      18 |  await expect(page.locator('main')).toContainText(scoreText(locale,'grouping'));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-16-20261104\apps\web\tests\h3-explanations-ssr.spec.ts:15:60
+
+    Error Context: test-results\h3-explanations-ssr-uk-SSR-a76c8-res-work-without-JavaScript-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\h3-explanations-ssr-uk-SSR-a76c8-res-work-without-JavaScript-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\h3-explanations-ssr-uk-SSR-a76c8-res-work-without-JavaScript-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  7 failed
+    [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › en: SSR help and native disclosures work without JavaScript 
+    [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › ru: SSR help and native disclosures work without JavaScript 
+    [desktop] › tests\h3-explanations-ssr.spec.ts:5:56 › uk: SSR help and native disclosures work without JavaScript 
+    [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › pl: SSR help and native disclosures work without JavaScript 
+    [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › en: SSR help and native disclosures work without JavaScript 
+    [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › ru: SSR help and native disclosures work without JavaScript 
+    [mobile] › tests\h3-explanations-ssr.spec.ts:5:56 › uk: SSR help and native disclosures work without JavaScript 
+  1 passed (3.8m)

@@ -1,0 +1,224 @@
+.....F............................................................       [100%]
+================================== FAILURES ===================================
+______________ test_equal_intervals_use_price_then_date_then_id _______________
+
+self = <sqlalchemy.engine.base.Connection object at 0x0000013964812CC0>
+dialect = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000139646A8080>
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000013964842330>
+statement = <sqlalchemy.dialects.sqlite.base.SQLiteCompiler object at 0x00000139647C35C0>
+parameters = [(1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', ...)]
+
+    def _exec_single_context(
+        self,
+        dialect: Dialect,
+        context: ExecutionContext,
+        statement: Union[str, Compiled],
+        parameters: Optional[_AnyMultiExecuteParams],
+    ) -> CursorResult[Any]:
+        """continue the _execute_context() method for a single DBAPI
+        cursor.execute() or cursor.executemany() call.
+    
+        """
+        if dialect.bind_typing is BindTyping.SETINPUTSIZES:
+            generic_setinputsizes = context._prepare_set_input_sizes()
+    
+            if generic_setinputsizes:
+                try:
+                    dialect.do_set_input_sizes(
+                        context.cursor, generic_setinputsizes, context
+                    )
+                except BaseException as e:
+                    self._handle_dbapi_exception(
+                        e, str(statement), parameters, None, context
+                    )
+    
+        cursor, str_statement, parameters = (
+            context.cursor,
+            context.statement,
+            context.parameters,
+        )
+    
+        effective_parameters: Optional[_AnyExecuteParams]
+    
+        if not context.executemany:
+            effective_parameters = parameters[0]
+        else:
+            effective_parameters = parameters
+    
+        if self._has_events or self.engine._has_events:
+            for fn in self.dispatch.before_cursor_execute:
+                str_statement, effective_parameters = fn(
+                    self,
+                    cursor,
+                    str_statement,
+                    effective_parameters,
+                    context,
+                    context.executemany,
+                )
+    
+        if self._echo:
+            self._log_info(str_statement)
+    
+            stats = context._get_cache_stats()
+    
+            if not self.engine.hide_parameters:
+                self._log_info(
+                    "[%s] %r",
+                    stats,
+                    sql_util._repr_params(
+                        effective_parameters,
+                        batches=10,
+                        ismulti=context.executemany,
+                    ),
+                )
+            else:
+                self._log_info(
+                    "[%s] [SQL parameters hidden due to hide_parameters=True]",
+                    stats,
+                )
+    
+        evt_handled: bool = False
+        try:
+            if context.execute_style is ExecuteStyle.EXECUTEMANY:
+                effective_parameters = cast(
+                    "_CoreMultiExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_executemany:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_executemany(
+                        cursor,
+                        str_statement,
+                        effective_parameters,
+                        context,
+                    )
+            elif not effective_parameters and context.no_parameters:
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute_no_params:
+                        if fn(cursor, str_statement, context):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+                    self.dialect.do_execute_no_params(
+                        cursor, str_statement, context
+                    )
+            else:
+                effective_parameters = cast(
+                    "_CoreSingleExecuteParams", effective_parameters
+                )
+                if self.dialect._has_events:
+                    for fn in self.dialect.dispatch.do_execute:
+                        if fn(
+                            cursor,
+                            str_statement,
+                            effective_parameters,
+                            context,
+                        ):
+                            evt_handled = True
+                            break
+                if not evt_handled:
+>                   self.dialect.do_execute(
+                        cursor, str_statement, effective_parameters, context
+                    )
+
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000139646A8080>
+cursor = <sqlite3.Cursor object at 0x00000139648200C0>
+statement = 'INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, p...rified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at'
+parameters = (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', ...)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000013964842330>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlite3.IntegrityError: UNIQUE constraint failed: travel_offers.data_provider_id, travel_offers.external_id
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: IntegrityError
+
+The above exception was the direct cause of the following exception:
+
+api_client = <starlette.testclient.TestClient object at 0x00000139646A8140>
+isolated_db = <sqlalchemy.orm.session.Session object at 0x00000139646A8200>
+catalog = <function catalog.<locals>.create at 0x00000139647F3100>
+
+    def test_equal_intervals_use_price_then_date_then_id(api_client, isolated_db, catalog):
+        expensive = catalog(300)
+        later = catalog(200, start='2030-11-08T18:00:00+01:00', back='2030-11-10T19:00:00Z')
+        first = catalog(200)
+>       second = catalog(200)
+                 ^^^^^^^^^^^^
+
+apps\api\tests\test_destination_time_sort.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\tests\test_weekend_catalog.py:52: in create
+    db.flush()
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4353: in flush
+    self._flush(objects)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4488: in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:122: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\session.py:4449: in _flush
+    flush_context.execute()
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:465: in execute
+    rec.execute(self)
+.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py:641: in execute
+    util.preloaded.orm_persistence.save_obj(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:94: in save_obj
+    _emit_insert_statements(
+.venv\Lib\site-packages\sqlalchemy\orm\persistence.py:1234: in _emit_insert_statements
+    result = connection.execute(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\elements.py:526: in _execute_on_connection
+    return connection._execute_clauseelement(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1643: in _execute_clauseelement
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <sqlalchemy.dialects.sqlite.pysqlite.SQLiteDialect_pysqlite object at 0x00000139646A8080>
+cursor = <sqlite3.Cursor object at 0x00000139648200C0>
+statement = 'INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, p...rified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at'
+parameters = (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', ...)
+context = <sqlalchemy.dialects.sqlite.base.SQLiteExecutionContext object at 0x0000013964842330>
+
+    def do_execute(self, cursor, statement, parameters, context=None):
+>       cursor.execute(statement, parameters)
+E       sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: travel_offers.data_provider_id, travel_offers.external_id
+E       [SQL: INSERT INTO travel_offers (data_provider_id, external_id, source_observed_at, observation_key, departure_precision, product_type, origin_airport_id, destination_id, depart_at, return_at, original_price, original_currency, price_pln, exchange_rate, exchange_rate_at, source, raw_payload, route_details, fetched_at, last_verified_at, expires_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id, created_at]
+E       [parameters: (1, '/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z', None, None, 'TIME', 'FLIGHT', 1, 1, '2030-11-01 17:00:00.000000', '2030-11-03 19:00:00.000000', 200.0, 'PLN', 200.0, None, None, 'travelpayouts_data', '{"origin": "WRO", "destination": "LON", "origin_airport": "WRO", "destination_airport": "STN", "departure_at": "2030-11-01T18:00:00+01:00", "return_a ... (193 characters truncated) ... rn_transfers": 0, "link": "/search/fixture?t=synthetic-200-2030-11-01T18:00:00+01:00-2030-11-03T19:00:00Z", "duration_to": 120, "duration_back": 120}', '{"source": "travelpayouts_graphql", "ticket_key": "049116ad3210fa779deb69dee933d38a3e7eb92dd1ce3998ebbdb212eb4b39eb", "departure_at": "2030-11-01T18: ... (534 characters truncated) ... igin": "LTN", "destination": "WRO", "departure_at": "2030-11-03T19:00:00Z", "arrival_at": "2030-11-03T21:00:00+00:00", "operating_carrier": "FR"}]}]}', '2026-11-03 21:01:12.158287', '2026-11-03 21:01:12.158287', '2026-11-04 21:01:12.158287')]
+E       (Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: IntegrityError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\docs\h3-07b\targeted.xml -
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_destination_time_sort.py::test_equal_intervals_use_price_then_date_then_id
+1 failed, 65 passed, 2 warnings in 4.68s

@@ -19,7 +19,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: card exposes
  for(const scenario of ['complete','partial','critical'] as const){
   const response=await request.post(`http://127.0.0.1:8100/__test__/quality?scenario=${scenario}`);
   const {quality}=await response.json();
-  await page.goto(localizedHref('/deals',locale));
+  await page.goto(localizedHref('/deals?offset=12',locale));
   const card=page.locator('.flight-offer-card').filter({has:page.locator(`a.deal-card-link[href^="${localizedHref('/deals/browser-13',locale)}"]`)});
   await expect(card).toHaveCount(1);
   await expect(card.locator('.deal-origin')).toContainText('WRO');

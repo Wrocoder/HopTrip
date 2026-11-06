@@ -52,7 +52,7 @@
 
 Общий :focus-visible включает links/buttons/input/select/textarea/summary/tabindex targets. Outline3px primary, offset3px и белая separating shadow. Это не только изменение цвета border. На inverse brand surface прежний yellow focus остаётся контрастным вариантом. Existing trip field :focus также использует эти tokens. Forced-colors получает системный Highlight outline без box-shadow; custom trip select сохраняет native appearance в этом режиме.
 
-Skip-link скрывается fixed top:-100vh, без transform/transition. При keyboard focus top возвращается в12px; Enter ведёт в прежний #content с tabindex=-1; после потери focus ссылка снова за экраном. Это изменение механизма визуального focus, не новый навигационный маршрут. Keyboard/live computed rect и mobile capture проверяются в [UI-01 отчёте](ui01/README.md).
+Skip-link скрывается fixed top:-100vh, без transform/transition. При keyboard focus top возвращается в12px; Enter ведёт в прежний #content с tabindex=-1; после потери focus ссылка снова за экраном. Это изменение механизма визуального focus, не новый навигационный маршрут. Keyboard/live computed rect и mobile capture проверяются в UI-01 отчёте (`docs/ui01/README.md`; исторический файл удалён).
 
 prefers-reduced-motion сохраняет прежнее отключение animation/transition, дополнительно убирает hover transform с article deal-card. Loading marker не требует анимации для понимания текста состояния. Native roles/labels и handlers не заменяются декоративными div.
 
@@ -60,6 +60,6 @@ prefers-reduced-motion сохраняет прежнее отключение an
 
 Для обычного текста проверяем4.5:1, для необходимых control boundaries/focus cues —3:1, без округления пограничных результатов вверх. Основание: [W3C text contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum), [W3C non-text contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html). Декоративная граница карточки не приравнивается к border поля; inactive controls имеют отдельные условия стандарта.
 
-[Вычисленные пары и before/after](ui01/contrast.json), [Node contract tests](../apps/web/tests/design-tokens.test.mjs) и browser computed styles/axe покрывают выбранные состояния. Это не декларация полной WCAG conformant accessibility для всего сайта. Проверять обычный/hover/disabled/focus/invalid и оба surface типа; при новой semantic role добавить её в таблицу тестов, сохранить текстовое описание.
+Вычисленные пары и before/after (`docs/ui01/contrast.json`; исторический файл удалён), [Node contract tests](../apps/web/tests/design-tokens.test.mjs) и browser computed styles/axe покрывают выбранные состояния. Это не декларация полной WCAG conformant accessibility для всего сайта. Проверять обычный/hover/disabled/focus/invalid и оба surface типа; при новой semantic role добавить её в таблицу тестов, сохранить текстовое описание.
 
-Для повторного применения использовать существующий class/компонент и token, не копировать local hex/radius. Проверить4 языка, стандартный и узкий viewport, keyboard/Escape, reduced motion/forced colors; убедиться, что визуальное изменение не изменило search/purchase/consent/plan state. [Результаты, границы и rollback UI-01](ui01/README.md).
+Для повторного применения использовать существующий class/компонент и token, не копировать local hex/radius. Проверить4 языка, стандартный и узкий viewport, keyboard/Escape, reduced motion/forced colors; убедиться, что визуальное изменение не изменило search/purchase/consent/plan state. Результаты, границы и rollback UI-01 (`docs/ui01/README.md`; исторический файл удалён).

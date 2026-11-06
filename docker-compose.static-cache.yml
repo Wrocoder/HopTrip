@@ -1,0 +1,9 @@
+# The deployer also applies this overlay to rollback releases with older images.
+services:
+  web:
+    volumes:
+      - next_static:/app/.next/static
+volumes:
+  next_static:
+    name: hoptrip_next_static
+    external: true

@@ -241,11 +241,20 @@ def test_digest_requires_current_confirmed_opt_in(isolated_db, state):
     assert sender.messages == []
 
 
-def test_real_api_to_queue_to_mock_telegram_journey(api_client, isolated_db):
-    now, settings, sender = datetime.now(UTC), config(), Sender()
+@pytest.mark.parametrize('now', [NOW, datetime(2031, 12, 31, 22, 59, 55, tzinfo=UTC)],
+                         ids=['fixed-clock', 'warsaw-new-year-boundary'])
+def test_real_api_to_queue_to_mock_telegram_journey(api_client, isolated_db, monkeypatch, now):
+    class FrozenDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return now.astimezone(tz) if tz is not None else now.replace(tzinfo=None)
+
+    # Exercise the real webhook/service path with the same clock as the dispatcher.
+    monkeypatch.setattr(subscriptions, 'datetime', FrozenDatetime)
+    settings, sender = config(), Sender()
     settings.alerts_digest_hour = settings.alerts_digest_minute = 0
     app.dependency_overrides[get_settings] = lambda: settings
-    deal = offer(isolated_db)
+    deal = offer(isolated_db, departure=now + timedelta(days=25))
     deal.last_verified_at, deal.expires_at = now, now + timedelta(hours=2)
     for travel in isolated_db.scalars(select(TravelOffer)):
         travel.last_verified_at = now
@@ -258,7 +267,7 @@ def test_real_api_to_queue_to_mock_telegram_journey(api_client, isolated_db):
         assert response.status_code == 200
 
     post('/subscribe origin=WRO budget=190 frequency=daily', 1)
-    # Webhook timestamps its queue row after the request begins; dispatch after it is due.
+    # Dispatch after the command's fixed queue timestamp, without wall-clock timing races.
     assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=1))['sent'] == 1
     assert message('confirm', 'pl') in sender.messages[-1][1]
     post('/confirm', 2)
@@ -268,6 +277,9 @@ def test_real_api_to_queue_to_mock_telegram_journey(api_client, isolated_db):
     delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=7))
     assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=9))['sent'] == 1
     assert deal.slug in sender.messages[-1][1]
+    digest = isolated_db.scalar(select(TelegramDelivery).where(TelegramDelivery.kind == 'DIGEST'))
+    assert digest.status == 'SENT' and digest.deal_ids == [deal.id]
+    assert delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=10))['sent'] == 0
     post('/stop', 4)
     delivery.deliver_once(isolated_db, settings, sender, now + timedelta(seconds=11))
     assert isolated_db.scalar(select(TelegramSubscription)).status == 'STOPPED'

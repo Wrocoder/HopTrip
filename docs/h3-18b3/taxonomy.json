@@ -1,0 +1,28 @@
+{
+  "version": "h3-analytics-taxonomy-v3",
+  "date": "2026-11-06",
+  "kind": "additive wire event; no DB schema change",
+  "previous": "../h3-18b2/taxonomy.json",
+  "baseline": "../h3-18a/taxonomy.json",
+  "wire_events": ["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN"],
+  "changed_h3_mapping": {
+    "name": "offer_details_opened",
+    "wire": "DEAL_DETAILS_OPEN",
+    "status": "mapped",
+    "meaning": "Observed opening of primary flight disclosure, price comparison modal, or score calculation disclosure after hydration",
+    "surfaces": ["TripDetails native details on existing DealCard surfaces and deal page", "ScoreTrigger successful showModal", "ScoreDetails native score-calculation details"],
+    "excluded": ["automatic PAGE_VIEW/DEAL_VIEW", "closed panels", "closing", "rerender", "modified-link navigation", "budget/events/accommodation/consent disclosures", "JavaScript-disabled native fallback"],
+    "payload": "Existing event_id, anonymous_session_id, public deal_slug and bounded page_type/source/campaign; no content labels, URLs, query/hash, tokens, dates, prices, plan identity or surface fingerprint",
+    "deduplication": "Existing visit viewEvents: one per offer + path/query + anonymous session across these surfaces. Reopen remains one, another offer or observed URL visit can count again; hash alone does not reset",
+    "consent": "Existing analyticsAllowed at send time; no consent means no send, grant does not replay panels already open, withdrawal clears existing session/dedup state",
+    "delivery": "Existing best-effort fetch, no retries, failed view remains deduplicated for its visit",
+    "metric": "Protected summary.by_event.DEAL_DETAILS_OPEN; not a DEAL_VIEW visit, visual attention, booking, or exact search attribution",
+    "limitations": "Primary offer surfaces only, no breakdown between surface types; programmatic native opening can trigger toggle, interactions before hydration can be missed"
+  },
+  "unchanged_h3_mappings": "TRIP_UPDATE retains v2; all other baseline definitions remain unchanged",
+  "missing_h3_events": ["budget_calculated"],
+  "usage_compatibility": "Existing detail_opening metric and ordered-session-funnel-v1 retain DEAL_VIEW definition; received-session population includes new event",
+  "production_activation": "not deployed or observed",
+  "production_baseline": "not collected",
+  "unavailable_dimensions": ["device", "locale", "returning visitor", "exact search-to-booking attribution"]
+}

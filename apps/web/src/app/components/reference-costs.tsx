@@ -6,8 +6,10 @@ import {getEurRate} from "../../lib/exchange-rate";
 import {useLocale} from './locale-provider';
 import {intlLocales} from '../../lib/i18n/config';
 import {referenceText,referenceTicket,type ReferenceKey} from '../../lib/i18n/reference-copy';
+import {referenceBudgetOrigin,type ReferenceBudgetOrigin} from '../../lib/budget-provenance';
+import {budgetOriginCopy} from '../../lib/i18n/budget-origin-copy';
 
-export function ReferenceCosts({destinationSlug,onApply,filled}:{destinationSlug?:string;onApply:(amount:string)=>void;filled:boolean}) {
+export function ReferenceCosts({destinationSlug,onApply,filled}:{destinationSlug?:string;onApply:(amount:string,origin:ReferenceBudgetOrigin)=>boolean;filled:boolean}) {
   const {locale}=useLocale(),intl=intlLocales[locale];
   const t=(key:ReferenceKey,values?:Record<string,string>)=>referenceText(locale,key,values);
   const choices=destinationSlug ? referenceCosts.filter(cost=>cost.city===destinationSlug) : referenceCosts;
@@ -24,7 +26,8 @@ export function ReferenceCosts({destinationSlug,onApply,filled}:{destinationSlug
     const value=rate ? referenceGrosz(selected,Number(quantity),rate) : null;
     setLoading(false);
     if(value===null || !rate) {setMessage(t('error'));return;}
-    onApply((value/100).toFixed(2));
+    const amount=(value/100).toFixed(2);
+    if(!onApply(amount,referenceBudgetOrigin(selected,Number(quantity),rate,amount))){setMessage(budgetOriginCopy[locale].changed);return;}
     setMessage(t('converted',{eur:(selected.euroCents/100).toLocaleString(intl,{minimumFractionDigits:2}),quantity,date:date(rate.date,locale),rate:rate.plnPerEuro.toLocaleString(intl,{maximumFractionDigits:4})}));
   }
   return <details className="reference-costs"><summary>{t('title')}</summary>

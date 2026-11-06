@@ -1,0 +1,1661 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "layout-stability.spec.ts",
+      "consent.spec.ts",
+      "first-screen-layout.spec.ts",
+      "detail-layout.spec.ts",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b2-20261105/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b2-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b2-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b2-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b2-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "consent.spec.ts",
+      "file": "consent.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "optional analytics are off until consent and withdrawal clears the session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:04.171Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c3655b771a06a90fa845-d589fb29669eefb4bfef",
+          "file": "consent.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "expired or inaccessible consent storage fails closed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1591,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:06.972Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c3655b771a06a90fa845-5ede63c501b8d3684a90",
+          "file": "consent.spec.ts",
+          "line": 38,
+          "column": 5
+        },
+        {
+          "title": "managed partner pages do not load Drive even with marketing consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1907,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:08.582Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c3655b771a06a90fa845-0b2a5d74ad71e29d7561",
+          "file": "consent.spec.ts",
+          "line": 53,
+          "column": 5
+        },
+        {
+          "title": "optional analytics are off until consent and withdrawal clears the session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2082,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:47.025Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c3655b771a06a90fa845-0840d9e5d68b3363f51d",
+          "file": "consent.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "expired or inaccessible consent storage fails closed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:49.626Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c3655b771a06a90fa845-fb788b299819a2683182",
+          "file": "consent.spec.ts",
+          "line": 38,
+          "column": 5
+        },
+        {
+          "title": "managed partner pages do not load Drive even with marketing consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1260,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:50.978Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c3655b771a06a90fa845-3f3a25be0133bc6b3731",
+          "file": "consent.spec.ts",
+          "line": 53,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "detail-layout.spec.ts",
+      "file": "detail-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14411,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:10.667Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8ce058e6b95363de41c4",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9451,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:25.104Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8bffa2e52a583b862558",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9685,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:34.581Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-cf80001c64bb78de1951",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10277,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\tests\\detail-layout.spec.ts:68:52",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\tests\\detail-layout.spec.ts",
+                      "column": 52,
+                      "line": 68
+                    },
+                    "snippet": "  66 |  await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n  67 |  await page.evaluate(()=>scrollTo(0,0));\n> 68 |  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);\n     |                                                    ^\n  69 |  if(locale==='pl')await expect(summary.locator('.deal-price')).toBeInViewport({ratio:1});\n  70 |  if(info.project.name==='desktop')await expect(booking.locator('a.cta')).toBeInViewport({ratio:1});\n  71 |  if(locale==='pl'){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\tests\\detail-layout.spec.ts",
+                        "column": 52,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m2\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  66 |  await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();\n  67 |  await page.evaluate(()=>scrollTo(0,0));\n> 68 |  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);\n     |                                                    ^\n  69 |  if(locale==='pl')await expect(summary.locator('.deal-price')).toBeInViewport({ratio:1});\n  70 |  if(info.project.name==='desktop')await expect(booking.locator('a.cta')).toBeInViewport({ratio:1});\n  71 |  if(locale==='pl'){\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\tests\\detail-layout.spec.ts:68:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:44.292Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\test-results\\detail-layout-uk-flight-de-5edfc-s-or-losing-the-shared-plan-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b2-20261105\\apps\\web\\tests\\detail-layout.spec.ts",
+                    "column": 52,
+                    "line": 68
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-ac6a2e36831f7e9d66a9",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "critical flight detail and navigation fit 320px in every locale",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4049,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:54:56.102Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-ae1c244e6e7e7de661f8",
+          "file": "detail-layout.spec.ts",
+          "line": 109,
+          "column": 5
+        },
+        {
+          "title": "pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:52.355Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-5fd41c2594441af02f3d",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8028,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:03.021Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-57b98f2c97cf62045d3f",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8793,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:11.071Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-8d51dde76fd622cd0f50",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7697,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:19.882Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-685f557859cb07502eac",
+          "file": "detail-layout.spec.ts",
+          "line": 18,
+          "column": 56
+        },
+        {
+          "title": "critical flight detail and navigation fit 320px in every locale",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3505,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:27.597Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae699603f96b78a6bc8f-3b3526e2a23e12a9a42c",
+          "file": "detail-layout.spec.ts",
+          "line": 109,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "first-screen-layout.spec.ts",
+      "file": "first-screen-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12821,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:55:00.558Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-a3343dd6cbb06bc85c0f",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "en: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13537,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:55:13.403Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-d83c1908fa7fe349475f",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "ru: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17954,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:55:26.986Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-3c5ae5a2ec421a442714",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "uk: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20078,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:55:44.963Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-c6fdd0fd5ed13d675f7b",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "pl: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13297,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:31.133Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-e6023e687260ba772232",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "en: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14035,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:44.450Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-3915102785df613785ff",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "ru: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13702,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:58:58.505Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-d82f1030222c15c2f36f",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        },
+        {
+          "title": "uk: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11576,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:59:12.225Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwicHJvZHVjdGlvblJlcXVpcmVkIjp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-6871e1d332299130218a",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "layout-stability.spec.ts",
+      "file": "layout-stability.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20468,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:56:05.080Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-fb18fbb0ae83477a8e5c",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "pl: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6314,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:56:25.568Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-8045bc03da99a5c5747c",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "en: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20775,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:56:31.923Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-42cceb4a9e2759f05e41",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "en: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:56:53.009Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-b2b1a405bf9a56f2ece7",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "ru: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:56:59.043Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-dd68332550a660817f83",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "ru: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:18.526Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-3f4b928df7706fbe0770",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "uk: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17866,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:23.993Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-480a6e2061a57efe9674",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "uk: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4279,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:57:41.886Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-96753d691384600b171c",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "pl: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17578,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:59:23.843Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-8f375e0cfd218e9f216b",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "pl: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8470,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:59:41.439Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-50fdfd8131128af201af",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "en: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T10:59:49.938Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-4ead1db09f83188cdff4",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "en: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5776,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T11:00:08.858Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-91b115b9d76b365615d3",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "ru: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19344,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T11:00:14.661Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-b7e3dde68dc14699e353",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "ru: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6021,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T11:00:34.018Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-3632e3585243f9ee39ff",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        },
+        {
+          "title": "uk: consent hydration has stable home and catalogue layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17676,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T11:00:40.059Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-5d87fb7d5743088cce6b",
+          "file": "layout-stability.spec.ts",
+          "line": 22,
+          "column": 6
+        },
+        {
+          "title": "uk: privacy panel fits short viewports and preserves keyboard choices",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5085,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T11:00:57.750Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiI0Nk1YaXI4MGo5cENLRzQxendmRjUifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "432086b0c76b8d709d07-f1aa7fc2df13175fa2d9",
+          "file": "layout-stability.spec.ts",
+          "line": 75,
+          "column": 6
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T10:53:57.572Z",
+    "duration": 426774.155,
+    "expected": 39,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

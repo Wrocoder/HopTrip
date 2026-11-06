@@ -1,0 +1,185 @@
+FF.............FFF.FF                                                    [100%]
+================================== FAILURES ===================================
+__________ test_filter_runs_before_pagination_and_counts_all_matches __________
+
+api_client = <starlette.testclient.TestClient object at 0x0000029CC3284170>
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000029CC3493D70>
+catalog = <function catalog.<locals>.create at 0x0000029CC38AAE80>
+
+    def test_filter_runs_before_pagination_and_counts_all_matches(api_client, isolated_db, catalog):
+        unknown = catalog(100, kind="unknown")
+        morning = catalog(150, start="2030-11-01T08:00:00+01:00")
+        evening = catalog(200)
+        monday = catalog(250, back="2030-11-03T23:00:00Z")
+        monday_departure = catalog(300, back="2030-11-04T19:00:00Z")
+        second = catalog(350)
+        params = {"weekend_mode": "no-leave-v1", "limit": 1}
+        first = result(api_client, **params)
+>       assert first["total"] == 2 and first["items"][0]["id"] == evening.id
+E       assert (0 == 2)
+
+apps\api\tests\test_weekend_catalog.py:75: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=50401e03e8e24fc7b8f3f04e798458f4 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1&limit=1 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=50401e03e8e24fc7b8f3f04e798458f4 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1&limit=1 "HTTP/1.1 200 OK"
+___________ test_custom_hours_change_filter_and_returned_assessment ___________
+
+api_client = <starlette.testclient.TestClient object at 0x0000029CC36C3920>
+catalog = <function catalog.<locals>.create at 0x0000029CC3A685E0>
+
+    def test_custom_hours_change_filter_and_returned_assessment(api_client, catalog):
+        deal = catalog(200, start="2030-11-01T16:00:00+01:00")
+        assert result(api_client, weekend_mode="no-leave-v1")["total"] == 0
+        custom = result(api_client, weekend_mode="no-leave-v1", work_start="07:00", work_end="15:00")
+>       assert custom["items"][0]["id"] == deal.id
+               ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+apps\api\tests\test_weekend_catalog.py:100: IndexError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=977ed5fe6f9f421d8a4e80315f547909 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1 "HTTP/1.1 200 OK"
+INFO:hoptrip.requests:request_id=51e8c993f3084d2e80e75619f417a840 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1&work_start=07%3A00&work_end=15%3A00 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=977ed5fe6f9f421d8a4e80315f547909 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1 "HTTP/1.1 200 OK"
+INFO     hoptrip.requests:security.py:33 request_id=51e8c993f3084d2e80e75619f417a840 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1&work_start=07%3A00&work_end=15%3A00 "HTTP/1.1 200 OK"
+__ test_unknown_estimated_or_other_home_airport_is_not_no_leave[unknown-WRO] __
+
+api_client = <starlette.testclient.TestClient object at 0x0000029CC3E708C0>
+catalog = <function catalog.<locals>.create at 0x0000029CC3F174C0>
+kind = 'unknown', home = 'WRO'
+
+    @pytest.mark.parametrize("kind,home", [("unknown", "WRO"), ("estimated", "WRO"), ("known", "KRK")])
+    def test_unknown_estimated_or_other_home_airport_is_not_no_leave(api_client, catalog, kind, home):
+        catalog(200, kind=kind, home=home)
+>       assert result(api_client, weekend_mode="calendar-v1")["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:135: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=bf9339ef7097480681b01a80b95bbfd7 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=calendar-v1 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=bf9339ef7097480681b01a80b95bbfd7 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=calendar-v1 "HTTP/1.1 200 OK"
+_ test_unknown_estimated_or_other_home_airport_is_not_no_leave[estimated-WRO] _
+
+api_client = <starlette.testclient.TestClient object at 0x0000029CC3E70FE0>
+catalog = <function catalog.<locals>.create at 0x0000029CC3FFE5C0>
+kind = 'estimated', home = 'WRO'
+
+    @pytest.mark.parametrize("kind,home", [("unknown", "WRO"), ("estimated", "WRO"), ("known", "KRK")])
+    def test_unknown_estimated_or_other_home_airport_is_not_no_leave(api_client, catalog, kind, home):
+        catalog(200, kind=kind, home=home)
+>       assert result(api_client, weekend_mode="calendar-v1")["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:135: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=56ffc403734345b88c6e6b87e44148a5 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=calendar-v1 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=56ffc403734345b88c6e6b87e44148a5 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=calendar-v1 "HTTP/1.1 200 OK"
+___ test_unknown_estimated_or_other_home_airport_is_not_no_leave[known-KRK] ___
+
+api_client = <starlette.testclient.TestClient object at 0x0000029CC3E715B0>
+catalog = <function catalog.<locals>.create at 0x0000029CC40B25C0>
+kind = 'known', home = 'KRK'
+
+    @pytest.mark.parametrize("kind,home", [("unknown", "WRO"), ("estimated", "WRO"), ("known", "KRK")])
+    def test_unknown_estimated_or_other_home_airport_is_not_no_leave(api_client, catalog, kind, home):
+        catalog(200, kind=kind, home=home)
+>       assert result(api_client, weekend_mode="calendar-v1")["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:135: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=0310f1b8a1634505ab3031af6cbfff81 method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=calendar-v1 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=0310f1b8a1634505ab3031af6cbfff81 method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=calendar-v1 "HTTP/1.1 200 OK"
+___________ test_broad_query_is_explicit_error_not_a_partial_total ____________
+
+api_client = <starlette.testclient.TestClient object at 0x0000029CC40B7A70>
+catalog = <function catalog.<locals>.create at 0x0000029CC5238720>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029CC41BB860>
+
+    def test_broad_query_is_explicit_error_not_a_partial_total(api_client, catalog, monkeypatch):
+        from app.services import weekend_catalog
+    
+        catalog(200)
+        catalog(300)
+        monkeypatch.setattr(weekend_catalog, "MAX_WEEKEND_CANDIDATES", 1)
+        response = api_client.get("/api/v1/deals?weekend_mode=no-leave-v1&limit=1")
+        assert response.status_code == 422 and response.json()["detail"]["code"] == "WEEKEND_QUERY_TOO_BROAD"
+>       assert result(api_client, weekend_mode="no-leave-v1", budget=200)["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:156: AssertionError
+---------------------------- Captured stderr call -----------------------------
+INFO:hoptrip.requests:request_id=fe74437b6e0647d784864c3b7f10285a method=GET status=422
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?weekend_mode=no-leave-v1&limit=1 "HTTP/1.1 422 Unprocessable Entity"
+INFO:hoptrip.requests:request_id=f5b4df4766d8448485ce7a80f961dc3e method=GET status=200
+INFO:httpx:HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1&budget=200 "HTTP/1.1 200 OK"
+------------------------------ Captured log call ------------------------------
+INFO     hoptrip.requests:security.py:33 request_id=fe74437b6e0647d784864c3b7f10285a method=GET status=422
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?weekend_mode=no-leave-v1&limit=1 "HTTP/1.1 422 Unprocessable Entity"
+INFO     hoptrip.requests:security.py:33 request_id=f5b4df4766d8448485ce7a80f961dc3e method=GET status=200
+INFO     httpx:_client.py:1025 HTTP Request: GET http://testserver/api/v1/deals?include_total=true&weekend_mode=no-leave-v1&budget=200 "HTTP/1.1 200 OK"
+__ test_candidate_sql_count_is_constant_and_does_not_serialize_full_catalog ___
+
+isolated_db = <sqlalchemy.orm.session.Session object at 0x0000029CC521D220>
+catalog = <function catalog.<locals>.create at 0x0000029CC53563E0>
+
+    def test_candidate_sql_count_is_constant_and_does_not_serialize_full_catalog(isolated_db, catalog):
+        catalog(200)
+        engine = isolated_db.get_bind()
+        statements = []
+    
+        def record(*args):
+            statements.append(args[2])
+    
+        def check():
+            statements.clear()
+            event.listen(engine, "before_cursor_execute", record)
+            try:
+                started = perf_counter()
+                matches = weekend_matches(isolated_db, available_deals_query(), "no-leave-v1", WorkHours())
+                duration = perf_counter() - started
+            finally:
+                event.remove(engine, "before_cursor_execute", record)
+            assert len(statements) == 1
+            return len(matches), duration
+    
+>       assert check()[0] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:180: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\docs\h3-01b\targeted.xml -
+=========================== short test summary info ===========================
+FAILED apps/api/tests/test_weekend_catalog.py::test_filter_runs_before_pagination_and_counts_all_matches
+FAILED apps/api/tests/test_weekend_catalog.py::test_custom_hours_change_filter_and_returned_assessment
+FAILED apps/api/tests/test_weekend_catalog.py::test_unknown_estimated_or_other_home_airport_is_not_no_leave[unknown-WRO]
+FAILED apps/api/tests/test_weekend_catalog.py::test_unknown_estimated_or_other_home_airport_is_not_no_leave[estimated-WRO]
+FAILED apps/api/tests/test_weekend_catalog.py::test_unknown_estimated_or_other_home_airport_is_not_no_leave[known-KRK]
+FAILED apps/api/tests/test_weekend_catalog.py::test_broad_query_is_explicit_error_not_a_partial_total
+FAILED apps/api/tests/test_weekend_catalog.py::test_candidate_sql_count_is_constant_and_does_not_serialize_full_catalog
+7 failed, 14 passed, 2 warnings in 1.13s

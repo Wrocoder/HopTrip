@@ -1,0 +1,793 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "h3-card.spec.ts",
+      "price-freshness.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-06-20261103/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-card.spec.ts",
+      "file": "h3-card.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8069,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })\n    2) <h2 id=\"_R_l54lfivdb_\">Cena na tle historii</h2> aka locator('[id=\"_R_l54lfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })\n    2) <h2 id=\"_R_l54lfivdb_\">Cena na tle historii</h2> aka locator('[id=\"_R_l54lfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })\n    2) <h2 id=\"_R_l54lfivdb_\">Cena na tle historii</h2> aka locator('[id=\"_R_l54lfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:35:47.810Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-143d6197ef596b63996c",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "en: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9272,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Price against history</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Price against history</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Price against history</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:35:59.942Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-b2c2e0d732cd7b4bb117",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "ru: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8195,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Цена на фоне истории</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Цена на фоне истории</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Цена на фоне истории</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:36:12.360Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-6616876142b87427d1f0",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "uk: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9347,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Ціна на тлі історії</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Ціна на тлі історії</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Ціна на тлі історії</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:36:23.441Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-49ed55527f63ba87385d",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "pl: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9405,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })\n    2) <h2 id=\"_R_l54lfivdb_\">Cena na tle historii</h2> aka locator('[id=\"_R_l54lfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })\n    2) <h2 id=\"_R_l54lfivdb_\">Cena na tle historii</h2> aka locator('[id=\"_R_l54lfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Hiszpania Daty wylotów: czw., 3 gru 2026 – niedz., 6' })\n    2) <h2 id=\"_R_l54lfivdb_\">Cena na tle historii</h2> aka locator('[id=\"_R_l54lfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:36:52.245Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-pl-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-c84e89f1bc0a65034bb9",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "en: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9130,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Price against history</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Price against history</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Wrocław (WRO) Barcelona Spain Departure dates: Thu, 3 Dec 2026 – Sun, 6 Dec' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Price against history</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/en/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:37:04.771Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-en-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-0349364745abcf00c6c8",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "ru: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9543,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Цена на фоне истории</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Цена на фоне истории</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Испания Даты вылетов: чт, 3 дек. 2026 г. – вс, 6 дек.' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Цена на фоне истории</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/ru/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:37:17.037Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-ru-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-3a756efb8c972e0a030a",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "uk: card hierarchy preserves critical information",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10299,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Ціна на тлі історії</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Ціна на тлі історії</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                      "column": 29,
+                      "line": 38
+                    },
+                    "snippet": "  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                        "column": 29,
+                        "line": 38
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2') resolved to 2 elements:\n    1) <h2>…</h2> aka getByRole('link', { name: 'Вроцлав (WRO) Барселона Іспанія Дати вильотів: чт, 3 груд. 2026 р. – нд, 6' })\n    2) <h2 id=\"_R_aiianpfivdb_\">Ціна на тлі історії</h2> aka locator('[id=\"_R_aiianpfivdb_\"]')\n\nCall log:\n\u001b[2m  - waiting for locator('.flight-offer-card').filter({ has: locator('a.deal-card-link[href^=\"/uk/deals/browser-13\"]') }).locator('h2')\u001b[22m\n\n\n  36 |    await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');await expect(card.locator('.flight-facts')).toBeVisible();\n  37 |    await page.keyboard.press('Enter');expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);\n> 38 |    await card.locator('h2').evaluate(el=>el.textContent='Santiago de Compostela — bardzo długa nazwa kierunku');\n     |                             ^\n  39 |    await card.locator('.deal-price').evaluate(el=>el.textContent='999 999,99 PLN');\n  40 |    await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  41 |    await card.screenshot({path:info.outputPath('card-long-320.png')});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts:38:29"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:37:29.617Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\test-results\\h3-card-uk-card-hierarchy-preserves-critical-information-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-06-20261103\\apps\\web\\tests\\h3-card.spec.ts",
+                    "column": 29,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "31a0591b84eb0704a87c-7dc36637b41beac99181",
+          "file": "h3-card.spec.ts",
+          "line": 9,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "price-freshness.spec.ts",
+      "file": "price-freshness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7981,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:36:36.189Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-01a103906105a3e529fc",
+          "file": "price-freshness.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4708,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:36:45.073Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-0a49966619700448c2a4",
+          "file": "price-freshness.spec.ts",
+          "line": 34,
+          "column": 5
+        },
+        {
+          "title": "observation and seller caveat are visible next to the price without opening details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4840,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:37:43.401Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-6cdc8dedc666bef22564",
+          "file": "price-freshness.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "delivery time is separate and an open tab removes the partner link at the deadline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2666,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-03T19:37:48.820Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beddfd59d1bd3c270aa9-036e25ee3898819aa814",
+          "file": "price-freshness.spec.ts",
+          "line": 34,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T19:35:38.400Z",
+    "duration": 135356.568,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

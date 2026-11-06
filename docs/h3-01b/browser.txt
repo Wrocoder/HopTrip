@@ -1,0 +1,638 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test filter-workflow.spec.ts local-flight-time.spec.ts --reporter=json
+
+
+[WebServer] INFO:     Started server process [25452]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=80727bac8dff4846a53f48a185779484 method=GET status=200
+
+[WebServer] (node:2984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:24236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=aa3b01e89fd147679df69133b1d84a18 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=50dd794a3c0648d5bbf72f97becbed68 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1964d9c6135e4d12856293cd3cf8a3d3 method=GET status=200
+
+
+Running 14 tests using 1 worker
+
+(node:7200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/14] [desktop] › tests\filter-workflow.spec.ts:17:56 › pl: visible primary filters preserve manual overrides, history and reset semantics
+[WebServer] INFO:hoptrip.requests:request_id=1f7e0d55886c4cd19a17f19193e64f89 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a01339f25857493a82e300666263c48a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cd1ce99a11a0478dae1525d2ea9085af method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3f7e322a90b14e5f9c1a1703cf2af8d4 method=GET status=200
+  1) [desktop] › tests\filter-workflow.spec.ts:17:56 › pl: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        13 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-pl-visible-48e56-history-and-reset-semantics-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-pl-visible-48e56-history-and-reset-semantics-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-pl-visible-48e56-history-and-reset-semantics-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:27624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[2/14] [desktop] › tests\filter-workflow.spec.ts:17:56 › en: visible primary filters preserve manual overrides, history and reset semantics
+[WebServer] (node:27972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9ff682b63bad4bacb8cde0a93ca2d384 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=50c7f5153b2b4b3d9a578feb4d6b26bc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2b065a96cde24039b269d37ee0c3e901 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5c45fdb7e61e4f1fb21ce2a9d25195f9 method=GET status=200
+  2) [desktop] › tests\filter-workflow.spec.ts:17:56 › en: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        12 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-en-visible-9c482-history-and-reset-semantics-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-en-visible-9c482-history-and-reset-semantics-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-en-visible-9c482-history-and-reset-semantics-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:47932) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/14] [desktop] › tests\filter-workflow.spec.ts:17:56 › ru: visible primary filters preserve manual overrides, history and reset semantics
+
+[WebServer] INFO:hoptrip.requests:request_id=bb0be104540a41639c256ded84f47a54 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5cc676b72684472abd073879e691ee0b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=33f082653a1c404d814f9c59143bd265 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f8f7189c91dc4bd7bcd689c597a051fa method=GET status=200
+
+[WebServer] (node:33240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  3) [desktop] › tests\filter-workflow.spec.ts:17:56 › ru: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        12 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-ru-visible-26bd9-history-and-reset-semantics-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-ru-visible-26bd9-history-and-reset-semantics-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-ru-visible-26bd9-history-and-reset-semantics-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:43160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/14] [desktop] › tests\filter-workflow.spec.ts:17:56 › uk: visible primary filters preserve manual overrides, history and reset semantics
+
+[WebServer] INFO:hoptrip.requests:request_id=7d35ec814b5b49ecb43332e972e631c2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ba689e79347e4d96b2e6a1d99ff489fd method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9327af8c831b4e81b7e6cfed11d84db2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f798650921f74ac69264c4e5f0999b0e method=GET status=200
+
+[WebServer] (node:52984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  4) [desktop] › tests\filter-workflow.spec.ts:17:56 › uk: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        13 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-uk-visible-d1d9e-history-and-reset-semantics-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-uk-visible-d1d9e-history-and-reset-semantics-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-uk-visible-d1d9e-history-and-reset-semantics-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:44788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/14] [desktop] › tests\filter-workflow.spec.ts:64:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=264f9c3ef392437284c99b37377644df method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d3ba49b0dc124113ae87370d683ee08c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7ace51a07d87476aabc1400718361681 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=61862b68ff4944c4957654fb45396a71 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=02c34e77050047e6b70a0faa0459ccb4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=caad94405f6c49d0b888bfd49f97665b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a70e8f4e9ae348318e0e05e2c9d61e6c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=be2a48b3b0ec46289b4000189d8f8c03 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=889d8c3944414cbaabd31521588ddbda method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2c121a43c6da44f0b83b9fd4f432b807 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=60188a485b9b4501a11983aa2321c57e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a50fcd67279442c789d6eb68e48ca953 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=00628c1bc9114f679a2b5d98700bb958 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5a09514901a844058c5a6f1bd73b22c0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=22df2d16c3a445e9b8a363bc4f3a8c14 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1e6d44648e30447289616d43d5b736f2 method=GET status=200
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+
+[6/14] [desktop] › tests\filter-workflow.spec.ts:89:5 › removing a fixed landing constraint opens the general catalog without losing unrelated conditions
+[WebServer] INFO:hoptrip.requests:request_id=9f3b7f842ca14c0793008705029a5652 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca7134e90e054df88ef12cfd21dbdcda method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=25541ebbda1749dd954b91d589e98a3d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=867be6aa225747d194e3ace954d16f90 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e8b3395c30e947b0b48a12ccc56fb0be method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f7888c89fb0d4ed5b467e42d9a4e2470 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c865876300064fa29d6aa70d2842861f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=64230ec0ce3f4b4698cc29d71168f23f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=397d94d5c8fc44c29324c5944e8bc5a2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=57bce811e09b482f853e065a81bfc971 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1d0ace73c5a746299c438e9453a21264 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=11ce8cab05094dc899cf186e77b25ad7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=983480b5fbae4134850f509cdfa55b4e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=14da6636a577415c93049efe601a4231 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7a3869677502441cac56416fdee5118a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e8a3c03229a2443bbba8298137ee836b method=GET status=200
+[7/14] [desktop] › tests\local-flight-time.spec.ts:3:5 › audit midnight arrival is visible while seven hotel nights and manual money survive sharing
+[WebServer] (node:42148) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=78cd1576276a4c95815a86619227a5df method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9eb8d790e81b40608c4b0c17a230b75f method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=6ab03698591745fd830619f465e6c12c method=GET status=200
+
+[WebServer] (node:5872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=9b1be52ecd324d398be6c0d17636ac80 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dc5b97f028844d4e89473eabff89b4a3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=95215863121747f7a9ffa3878932f317 method=GET status=200
+
+[WebServer] (node:13384) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=4d0d1252f6444da58926d9aa786417ae method=GET status=404
+
+
+(node:18076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[8/14] [mobile] › tests\filter-workflow.spec.ts:17:56 › pl: visible primary filters preserve manual overrides, history and reset semantics
+[WebServer] INFO:hoptrip.requests:request_id=688686925d704f468b245d3e9c79a031 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b1a15957666b4cf2b6e66cc81980ab3e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=db02dbb8975347699d76c4ae8c6f392b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f5b8b159b53b405cba3ea791fb47910b method=GET status=200
+
+  5) [mobile] › tests\filter-workflow.spec.ts:17:56 › pl: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        13 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-pl-visible-48e56-history-and-reset-semantics-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-pl-visible-48e56-history-and-reset-semantics-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-pl-visible-48e56-history-and-reset-semantics-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:18512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[9/14] [mobile] › tests\filter-workflow.spec.ts:17:56 › en: visible primary filters preserve manual overrides, history and reset semantics
+[WebServer] INFO:hoptrip.requests:request_id=5736f69438ee4ab9a84d3a35c158d64e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0f90cf7e6ae2426cbd083c165a254973 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c3bdbdea1e7b469cabab251cd5cfa669 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7115ecf9ac8c485ba85b6d7d2cb530c8 method=GET status=200
+
+[WebServer] (node:57160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  6) [mobile] › tests\filter-workflow.spec.ts:17:56 › en: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        13 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-en-visible-9c482-history-and-reset-semantics-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-en-visible-9c482-history-and-reset-semantics-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-en-visible-9c482-history-and-reset-semantics-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:52928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[10/14] [mobile] › tests\filter-workflow.spec.ts:17:56 › ru: visible primary filters preserve manual overrides, history and reset semantics
+[WebServer] INFO:hoptrip.requests:request_id=ef5a4a7255db44798a7d090928b3803c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d65b51e912d94f0cb441991b872d08d9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b396a0c39c4248078b6073288654262f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e6bfeb1d1bb74b2bb31fd27e7557f394 method=GET status=200
+
+[WebServer] (node:33308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  7) [mobile] › tests\filter-workflow.spec.ts:17:56 › ru: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        13 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-ru-visible-26bd9-history-and-reset-semantics-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-ru-visible-26bd9-history-and-reset-semantics-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-ru-visible-26bd9-history-and-reset-semantics-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:31120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[11/14] [mobile] › tests\filter-workflow.spec.ts:17:56 › uk: visible primary filters preserve manual overrides, history and reset semantics
+[WebServer] INFO:hoptrip.requests:request_id=612e13fec7d04761b0a0edfe73289eb8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=88932e36198e476c8bb7a269c8914ab2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=de46a09bba654e5387e381161c3dd9ae method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=92354c07d6cb4111a6eac0d3e6b3e358 method=GET status=200
+
+[WebServer] (node:48848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+  8) [mobile] › tests\filter-workflow.spec.ts:17:56 › uk: visible primary filters preserve manual overrides, history and reset semantics 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.filters').locator('[name="departure_from"]')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.filters').locator('[name="departure_from"]') with timeout 5000ms
+      - waiting for locator('.filters').locator('[name="departure_from"]')
+        13 × locator resolved to <input type="date" aria-invalid="false" name="departure_from"/>
+           - unexpected value "hidden"
+
+
+      22 |  const quickBudget=form.getByRole('button',{name:t('Loty do 300 zł'),exact:true});
+      23 |  const nights=form.getByRole('button',{name:t('2–3 noce'),exact:true});
+    > 24 |  for(const name of ['departure_from','departure_to','duration_min','duration_max'])await expect(form.locator(`[name="${name}"]`)).toBeVisible();
+         |                                                                                                                                   ^
+      25 |  await budget.fill('150');await expect(quickBudget).toHaveAttribute('aria-pressed','false');
+      26 |  // Applying this preset resolves to the current URL; the edited field must
+      27 |  // still become 300, without relying on a route-key remount.
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-01b-20261103\apps\web\tests\filter-workflow.spec.ts:24:131
+
+    Error Context: test-results\filter-workflow-uk-visible-d1d9e-history-and-reset-semantics-mobile\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\filter-workflow-uk-visible-d1d9e-history-and-reset-semantics-mobile\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\filter-workflow-uk-visible-d1d9e-history-and-reset-semantics-mobile\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+
+(node:4488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[12/14] [mobile] › tests\filter-workflow.spec.ts:64:5 › a full search wins over a delayed earlier origin preference response
+[WebServer] INFO:hoptrip.requests:request_id=a8f3cb9b9d80495e8bec90de5d4622f6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fd1801a578394ff2b92e5cfc2bc4559b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=36a99a3a1d6e4f0f8735ad3be29c7112 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1367c7ca620a4096abddf39c23193018 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b0737994d8b84eeca0c1d48bc50e5b07 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0fcc07e7038d4f16b4fe0ca0c5efc5d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bca8b1b398cd4a99bf056a4b3a5b2553 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=93549b3fb1374177be96d46406d455d9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0197b16d75ac42b6a1b8802df6c73b10 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e6a0c16e1ff042e1bf30f4a800c1b768 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=cd9577c91add4eb9ab3962a33272bd2b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2c20160491134d1197ddec817daece38 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=86abeb94afa443d8b16f4dcc670ca0d1 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=017f50a78c0b40bd8c593aaca3f911ff method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e3437b92ca604c3a8d3bc80cfd89955c method=GET status=200
+
+[WebServer] [browser] Error: This library called use() to suspend in a previous render but did not call use() when it finished. This indicates an incorrect use of use(). Learn more: https://react.dev/warnings/conditional-use-of-use
+
+[WebServer] INFO:hoptrip.requests:request_id=3e57ee1712244378bbfc56f05265c508 method=GET status=200
+
+[13/14] [mobile] › tests\filter-workflow.spec.ts:89:5 › removing a fixed landing constraint opens the general catalog without losing unrelated conditions
+[WebServer] INFO:hoptrip.requests:request_id=1587fda9d3974351843fdb387fe6f72f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=85483674380645b480a2929a95e6e365 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=06c741830f764dd2bca2f1c328cab4f1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d16a74eea0bb4c379928c5e5e0afe678 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=850b65c2f1994fb1a5ed32f3eae7658b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=520711894f9b451399d6c81d4f7b9d23 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c2115a1c7ebd4df4a26dbef40a69004b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=257d851f0bf44c0083a2a725ba998ddc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f914956fe1514587a1c54aec616ceb46 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6e3ee41642f44935be1dfdac61493bc2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=541b99f47e7a4d468caf4116b17848e2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f7931330b2094c89b4ef94d220a175d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=14bb95eef4c4441aa87ec5865fa6cf0f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f481b258c542407a8f5745883cbb8b37 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7b7584fa2f05485f9f7674239972c06a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1f82abdfdf704244947c37c8b41d063e method=GET status=200
+
+[14/14] [mobile] › tests\local-flight-time.spec.ts:3:5 › audit midnight arrival is visible while seven hotel nights and manual money survive sharing
+[WebServer] INFO:hoptrip.requests:request_id=35002ed7d2804e22a23f61e49230eb7b method=GET status=200
+
+[WebServer] (node:33936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:hoptrip.requests:request_id=fa3ed0679b9b4a09b74db3ebeb4b15cd method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8761d1ede0ff4ddc9723e6af535fe814 method=GET status=200
+[WebServer] (node:21868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=77e0debc5768459791eb59e0f950518d method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=ff8ee6e9bac247319a4959266e0b0c5c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6d0ff51b15c741fdaad7d8ed1c39be96 method=GET status=200
+
+
+[WebServer] (node:52128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=63a5c827516f4f369f96b7c6b91d0026 method=GET status=404
+  8 failed
+    [desktop] › tests\filter-workflow.spec.ts:17:56 › pl: visible primary filters preserve manual overrides, history and reset semantics 
+    [desktop] › tests\filter-workflow.spec.ts:17:56 › en: visible primary filters preserve manual overrides, history and reset semantics 
+    [desktop] › tests\filter-workflow.spec.ts:17:56 › ru: visible primary filters preserve manual overrides, history and reset semantics 
+    [desktop] › tests\filter-workflow.spec.ts:17:56 › uk: visible primary filters preserve manual overrides, history and reset semantics 
+    [mobile] › tests\filter-workflow.spec.ts:17:56 › pl: visible primary filters preserve manual overrides, history and reset semantics 
+    [mobile] › tests\filter-workflow.spec.ts:17:56 › en: visible primary filters preserve manual overrides, history and reset semantics 
+    [mobile] › tests\filter-workflow.spec.ts:17:56 › ru: visible primary filters preserve manual overrides, history and reset semantics 
+    [mobile] › tests\filter-workflow.spec.ts:17:56 › uk: visible primary filters preserve manual overrides, history and reset semantics 
+  6 passed (2.3m)

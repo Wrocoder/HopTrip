@@ -8,6 +8,7 @@ import {tripText} from "../../lib/i18n/trip-copy";
 import {activityText} from '../../lib/i18n/activity-copy';
 import {activityUi,type ActivityUiKey} from '../../lib/i18n/activity-ui';
 import {cityLabel} from '../../lib/cities';
+import {partnerContextCopy} from '../../lib/i18n/partner-context-copy';
 
 export function DestinationActivities({slug,inTrip=false,locale="pl"}:{slug:string;inTrip?:boolean;locale?:Locale}) {
   const source=activitiesForDestination(slug);
@@ -44,6 +45,7 @@ export function DestinationActivities({slug,inTrip=false,locale="pl"}:{slug:stri
       </li>)}
     </ul>
     <p className="muted">{t('exclude')}</p>
+    <p className="partner-context-limitation">{partnerContextCopy[locale]}</p>
     {(slug==="barcelona" || selection.heading) && <>
       {slug==="barcelona" && <p className="muted">{t('snapshot',{date:date(selection.checkedAt,locale)})}</p>}
       <p>{t('costs')}</p>

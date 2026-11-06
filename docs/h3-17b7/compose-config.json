@@ -1,0 +1,381 @@
+{
+  "name": "hoptrip",
+  "networks": {
+    "default": {
+      "name": "hoptrip_default"
+    }
+  },
+  "services": {
+    "alerts-worker": {
+      "build": {
+        "context": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip",
+        "dockerfile": "apps/api/Dockerfile"
+      },
+      "command": [
+        "python",
+        "-m",
+        "app.jobs.alert_scheduler"
+      ],
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "environment": [
+        "ADMIN_TOKEN=${ADMIN_TOKEN:?ADMIN_TOKEN is required}",
+        "ALERTS_DIGEST_ENABLED=${ALERTS_DIGEST_ENABLED:-false}",
+        "ALERTS_DIGEST_HOUR=${ALERTS_DIGEST_HOUR:-9}",
+        "ALERTS_DIGEST_MINUTE=${ALERTS_DIGEST_MINUTE:-0}",
+        "ALERTS_DIGEST_WEEKDAY=${ALERTS_DIGEST_WEEKDAY:-0}",
+        "ALERTS_ENABLED=${ALERTS_ENABLED:-false}",
+        "ALERTS_SIGNING_KEY=${ALERTS_SIGNING_KEY:-}",
+        "ALERTS_SITE_URL=${ALERTS_SITE_URL:-http://localhost:3000}",
+        "APP_ENV=production",
+        "DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}",
+        "SMTP_HOST=${SMTP_HOST:-}",
+        "SMTP_PASSWORD=${SMTP_PASSWORD:-}",
+        "SMTP_PORT=${SMTP_PORT:-465}",
+        "SMTP_SECURITY=${SMTP_SECURITY:-ssl}",
+        "SMTP_SENDER=${SMTP_SENDER:-}",
+        "SMTP_USER=${SMTP_USER:-}"
+      ],
+      "networks": {
+        "default": null
+      },
+      "profiles": [
+        "alerts"
+      ],
+      "restart": "on-failure"
+    },
+    "api": {
+      "build": {
+        "context": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip",
+        "dockerfile": "apps/api/Dockerfile"
+      },
+      "command": [
+        "uvicorn",
+        "app.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--no-access-log",
+        "--no-proxy-headers"
+      ],
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "environment": [
+        "ADMIN_TOKEN=${ADMIN_TOKEN:?ADMIN_TOKEN is required}",
+        "AFFILIATE_ALLOWED_HOSTS=${AFFILIATE_ALLOWED_HOSTS:-}",
+        "AFFILIATE_TRACKING_QUERY_PARAM=${AFFILIATE_TRACKING_QUERY_PARAM:-}",
+        "ALERTS_DAILY_SIGNUP_LIMIT=${ALERTS_DAILY_SIGNUP_LIMIT:-200}",
+        "ALERTS_ENABLED=${ALERTS_ENABLED:-false}",
+        "ALERTS_SIGNING_KEY=${ALERTS_SIGNING_KEY:-}",
+        "ALERTS_SITE_URL=${ALERTS_SITE_URL:-http://localhost:3000}",
+        "ANALYTICS_RETENTION_DAYS=${ANALYTICS_RETENTION_DAYS:-90}",
+        "APP_ENV=production",
+        "DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}",
+        "EDITOR_ENABLED=${EDITOR_ENABLED:-false}",
+        "EDITOR_ORIGIN=${EDITOR_ORIGIN:-http://localhost:8000}",
+        "EDITOR_OWNER=${EDITOR_OWNER:-owner}",
+        "EDITOR_PASSWORD_HASH=${EDITOR_PASSWORD_HASH:-}",
+        "EVENTS_COUNTRIES=${EVENTS_COUNTRIES:-AT,BE,CH,CY,CZ,DE,DK,ES,FI,FR,GB,GR,IE,IT,NL,NO,PL,SE,TR}",
+        "EVENTS_DAILY_REQUEST_LIMIT=${EVENTS_DAILY_REQUEST_LIMIT:-4000}",
+        "EVENTS_ENABLED=${EVENTS_ENABLED:-false}",
+        "EVENTS_MAX_AGE_HOURS=${EVENTS_MAX_AGE_HOURS:-30}",
+        "FLIGHT_PRICE_REFRESH_GROUPS=${FLIGHT_PRICE_REFRESH_GROUPS:-40}",
+        "INGESTION_ORIGINS=${INGESTION_ORIGINS:-WRO,WAW,WMI,KRK,GDN,KTW,POZ}",
+        "PIPELINE_MAX_ATTEMPTS=${PIPELINE_MAX_ATTEMPTS:-3}",
+        "PIPELINE_RETRY_DELAY_SECONDS=${PIPELINE_RETRY_DELAY_SECONDS:-30}",
+        "PROVIDER_MAX_PAGES=${PROVIDER_MAX_PAGES:-5}",
+        "PUBLIC_RATE_LIMIT=${PUBLIC_RATE_LIMIT:-120}",
+        "SMTP_HOST=${SMTP_HOST:-}",
+        "SMTP_PASSWORD=${SMTP_PASSWORD:-}",
+        "SMTP_PORT=${SMTP_PORT:-465}",
+        "SMTP_SECURITY=${SMTP_SECURITY:-ssl}",
+        "SMTP_SENDER=${SMTP_SENDER:-}",
+        "SMTP_USER=${SMTP_USER:-}",
+        "TICKETMASTER_AFFILIATE_ID=${TICKETMASTER_AFFILIATE_ID:-7853869}",
+        "TICKETMASTER_API_KEY=${TICKETMASTER_API_KEY:-}",
+        "TRAVELPAYOUTS_API_BASE_URL=${TRAVELPAYOUTS_API_BASE_URL:-https://api.travelpayouts.com}",
+        "TRAVELPAYOUTS_API_TOKEN=${TRAVELPAYOUTS_API_TOKEN:-}",
+        "TRAVELPAYOUTS_LINKS_ENABLED=${TRAVELPAYOUTS_LINKS_ENABLED:-false}",
+        "TRAVELPAYOUTS_MARKER=${TRAVELPAYOUTS_MARKER:-0}",
+        "TRAVELPAYOUTS_MARKET=${TRAVELPAYOUTS_MARKET:-us}",
+        "TRAVELPAYOUTS_PROJECT_ID=${TRAVELPAYOUTS_PROJECT_ID:-0}",
+        "CORS_ORIGINS=https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}"
+      ],
+      "expose": [
+        "8000"
+      ],
+      "healthcheck": {
+        "interval": "10s",
+        "retries": 10,
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready', timeout=3)"
+        ],
+        "timeout": "5s"
+      },
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped"
+    },
+    "caddy": {
+      "depends_on": {
+        "api": {
+          "condition": "service_started",
+          "required": true
+        },
+        "web": {
+          "condition": "service_started",
+          "required": true
+        }
+      },
+      "environment": {
+        "ACME_EMAIL": "${ACME_EMAIL:?ACME_EMAIL is required}",
+        "HOPTRIP_DOMAIN": "${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}"
+      },
+      "image": "caddy:2-alpine",
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "protocol": "tcp",
+          "published": "80",
+          "target": 80
+        },
+        {
+          "mode": "ingress",
+          "protocol": "tcp",
+          "published": "443",
+          "target": 443
+        }
+      ],
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "bind": {
+            "create_host_path": true
+          },
+          "read_only": true,
+          "source": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\infrastructure\\Caddyfile",
+          "target": "/etc/caddy/Caddyfile",
+          "type": "bind"
+        },
+        {
+          "source": "caddy_data",
+          "target": "/data",
+          "type": "volume",
+          "volume": {}
+        },
+        {
+          "source": "caddy_config",
+          "target": "/config",
+          "type": "volume",
+          "volume": {}
+        }
+      ]
+    },
+    "db": {
+      "environment": [
+        "POSTGRES_DB=${POSTGRES_DB:-hoptrip}",
+        "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}",
+        "POSTGRES_USER=${POSTGRES_USER:-hoptrip}"
+      ],
+      "healthcheck": {
+        "interval": "5s",
+        "retries": 10,
+        "test": [
+          "CMD-SHELL",
+          "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"
+        ],
+        "timeout": "5s"
+      },
+      "image": "postgres:16-alpine",
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "source": "postgres_data",
+          "target": "/var/lib/postgresql/data",
+          "type": "volume",
+          "volume": {}
+        }
+      ]
+    },
+    "events-worker": {
+      "build": {
+        "context": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip",
+        "dockerfile": "apps/api/Dockerfile"
+      },
+      "command": [
+        "python",
+        "-m",
+        "app.jobs.event_scheduler"
+      ],
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "environment": [
+        "ADMIN_TOKEN=${ADMIN_TOKEN:?ADMIN_TOKEN is required}",
+        "APP_ENV=production",
+        "DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}",
+        "EVENTS_COUNTRIES=${EVENTS_COUNTRIES:-AT,BE,CH,CY,CZ,DE,DK,ES,FI,FR,GB,GR,IE,IT,NL,NO,PL,SE,TR}",
+        "EVENTS_DAILY_REQUEST_LIMIT=${EVENTS_DAILY_REQUEST_LIMIT:-4000}",
+        "EVENTS_ENABLED=${EVENTS_ENABLED:-false}",
+        "EVENTS_HORIZON_DAYS=${EVENTS_HORIZON_DAYS:-365}",
+        "EVENTS_RUN_REQUEST_LIMIT=${EVENTS_RUN_REQUEST_LIMIT:-1000}",
+        "EVENTS_SYNC_ENABLED=${EVENTS_SYNC_ENABLED:-false}",
+        "TICKETMASTER_AFFILIATE_ID=${TICKETMASTER_AFFILIATE_ID:-7853869}",
+        "TICKETMASTER_API_KEY=${TICKETMASTER_API_KEY:-}"
+      ],
+      "networks": {
+        "default": null
+      },
+      "profiles": [
+        "events"
+      ],
+      "restart": "unless-stopped"
+    },
+    "migrate": {
+      "build": {
+        "context": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip",
+        "dockerfile": "apps/api/Dockerfile"
+      },
+      "command": [
+        "alembic",
+        "upgrade",
+        "head"
+      ],
+      "depends_on": {
+        "db": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "environment": [
+        "DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}",
+        "ADMIN_TOKEN=${ADMIN_TOKEN:?ADMIN_TOKEN is required}",
+        "APP_ENV=production"
+      ],
+      "networks": {
+        "default": null
+      },
+      "restart": "no"
+    },
+    "web": {
+      "build": {
+        "args": {
+          "NEXT_PUBLIC_API_URL": "https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}",
+          "NEXT_PUBLIC_SITE_URL": "https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}"
+        },
+        "context": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web",
+        "dockerfile": "Dockerfile"
+      },
+      "depends_on": {
+        "api": {
+          "condition": "service_started",
+          "required": true
+        }
+      },
+      "environment": [
+        "HOPTRIP_API_URL=http://api:8000",
+        "NEXT_PUBLIC_API_URL=https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}",
+        "NEXT_PUBLIC_SITE_URL=https://${HOPTRIP_DOMAIN:?HOPTRIP_DOMAIN is required}",
+        "HOPTRIP_STATIC_VOLUME_REQUIRED=1"
+      ],
+      "expose": [
+        "3000"
+      ],
+      "networks": {
+        "default": null
+      },
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "source": "next_static",
+          "target": "/app/.next/static",
+          "type": "volume",
+          "volume": {}
+        }
+      ]
+    },
+    "worker": {
+      "build": {
+        "context": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip",
+        "dockerfile": "apps/api/Dockerfile"
+      },
+      "command": [
+        "python",
+        "-m",
+        "app.jobs.scheduler"
+      ],
+      "depends_on": {
+        "migrate": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "environment": [
+        "ADMIN_TOKEN=${ADMIN_TOKEN:?ADMIN_TOKEN is required}",
+        "AFFILIATE_ALLOWED_HOSTS=${AFFILIATE_ALLOWED_HOSTS:-}",
+        "AFFILIATE_TRACKING_QUERY_PARAM=${AFFILIATE_TRACKING_QUERY_PARAM:-}",
+        "ANALYTICS_RETENTION_DAYS=${ANALYTICS_RETENTION_DAYS:-90}",
+        "APP_ENV=production",
+        "DATABASE_URL=postgresql+psycopg://${POSTGRES_USER:-hoptrip}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}@db:5432/${POSTGRES_DB:-hoptrip}",
+        "FLIGHT_PRICE_REFRESH_GROUPS=${FLIGHT_PRICE_REFRESH_GROUPS:-40}",
+        "INGESTION_ORIGINS=${INGESTION_ORIGINS:-WRO,WAW,WMI,KRK,GDN,KTW,POZ}",
+        "PIPELINE_INTERVAL_SECONDS=${PIPELINE_INTERVAL_SECONDS:-7200}",
+        "PIPELINE_MAX_ATTEMPTS=${PIPELINE_MAX_ATTEMPTS:-3}",
+        "PIPELINE_RETRY_DELAY_SECONDS=${PIPELINE_RETRY_DELAY_SECONDS:-30}",
+        "PROVIDER_MAX_PAGES=${PROVIDER_MAX_PAGES:-5}",
+        "PUBLIC_RATE_LIMIT=${PUBLIC_RATE_LIMIT:-120}",
+        "TRAVELPAYOUTS_API_BASE_URL=${TRAVELPAYOUTS_API_BASE_URL:-https://api.travelpayouts.com}",
+        "TRAVELPAYOUTS_API_TOKEN=${TRAVELPAYOUTS_API_TOKEN:-}",
+        "TRAVELPAYOUTS_LINKS_ENABLED=${TRAVELPAYOUTS_LINKS_ENABLED:-false}",
+        "TRAVELPAYOUTS_MARKER=${TRAVELPAYOUTS_MARKER:-0}",
+        "TRAVELPAYOUTS_MARKET=${TRAVELPAYOUTS_MARKET:-us}",
+        "TRAVELPAYOUTS_PROJECT_ID=${TRAVELPAYOUTS_PROJECT_ID:-0}",
+        "PIPELINE_SCHEDULE_TIMEZONE=Europe/Warsaw"
+      ],
+      "networks": {
+        "default": null
+      },
+      "profiles": [
+        "worker"
+      ],
+      "restart": "unless-stopped"
+    }
+  },
+  "volumes": {
+    "caddy_config": {
+      "name": "hoptrip_caddy_config"
+    },
+    "caddy_data": {
+      "name": "hoptrip_caddy_data"
+    },
+    "next_static": {
+      "external": true,
+      "name": "hoptrip_next_static"
+    },
+    "postgres_data": {
+      "name": "hoptrip_postgres_data"
+    }
+  }
+}

@@ -9,7 +9,7 @@ import {changeStayDate} from "../../lib/budget-draft";
 import {validCalendarDate} from "../../lib/calendar-date";
 import {dateCopy} from "../../lib/i18n/date-copy";
 import type {Deal} from "../../lib/api";
-import {stay22Link} from "../../lib/accommodation-links";
+import {stay22Link,stay22MaxAdults} from "../../lib/accommodation-links";
 import {date,tripNights} from "../../lib/i18n/format";
 import {flightLegs,flightTime} from "../../lib/flight-facts";
 import {staySuggestion,applyStaySuggestion} from '../../lib/stay-context';
@@ -26,10 +26,10 @@ export function TripAccommodation({deal}:{deal:Deal}) {
  const setCheckout=(value:string)=>save(changeStayDate(draft,"end",value));
  const setAdults=(value:string)=>save({...draft,input:{...draft.input,people:value},adultsOnly:true,review:true});
  const record=()=>track("PARTNER_CLICK",deal.slug,undefined,{partner:{category:"stay",provider:"stay22"}});
- const href=ready && draft.adultsOnly && Number(adults)<=50 ? stay22Link({city:deal.destination_city,checkin,checkout,adults}) : null;
+ const href=ready && draft.adultsOnly ? stay22Link({city:deal.destination_city,checkin,checkout,adults}) : null;
  const datesValid=Boolean(stay22Link({city:deal.destination_city,checkin,checkout,adults:"1"}));
  const malformed=[checkin,checkout].some(value=>value!==''&&!validCalendarDate(value));
- const adultsValid=Boolean(draft.adultsOnly && /^[1-9]\d*$/.test(adults) && Number.isSafeInteger(Number(adults)) && Number(adults)<=50);
+ const adultsValid=Boolean(draft.adultsOnly && /^[1-9]\d*$/.test(adults) && Number.isSafeInteger(Number(adults)) && Number(adults)<=stay22MaxAdults);
  const suggestion=staySuggestion(deal);
  const canApply=Boolean(suggestion.checkin&&suggestion.checkin!==checkin||suggestion.checkout&&suggestion.checkout!==checkout);
  const {outbound,inbound}=flightLegs(deal.flight_facts);
@@ -65,7 +65,7 @@ export function TripAccommodation({deal}:{deal:Deal}) {
     <input id="stay-checkout" type="date" min={validCalendarDate(checkin)?checkin:'0001-01-01'} max="9999-12-31" value={checkout} aria-invalid={!datesValid} aria-describedby={!datesValid ? "stay-dates-error" : undefined} onChange={event=>setCheckout(event.target.value)}/>
    {!datesValid && <span className={styles.error} id="stay-dates-error" role="status">{malformed?dateCopy[locale].invalid:t("Wybierz datę wymeldowania późniejszą niż zameldowanie.")}</span>}</div>
    <div className={styles.field}><label htmlFor="stay-adults">{t("Dorośli")}</label>
-    <input id="stay-adults" type="number" min="1" max="50" step="1" value={draft.adultsOnly ? adults : ""} aria-invalid={!adultsValid} aria-describedby={!adultsValid ? "stay-adults-error" : undefined} onChange={event=>setAdults(event.target.value)}/>
+    <input id="stay-adults" type="number" min="1" max={stay22MaxAdults} step="1" value={draft.adultsOnly ? adults : ""} aria-invalid={!adultsValid} aria-describedby={!adultsValid ? "stay-adults-error" : undefined} onChange={event=>setAdults(event.target.value)}/>
    {!adultsValid && <span className={styles.error} id="stay-adults-error" role="status">{t("Wpisz liczbę całkowitą: od 1 do 50 dorosłych.")}</span>}</div>
    </div>
    </fieldset>

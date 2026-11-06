@@ -1,6 +1,10 @@
 import type {Locale} from "./config.ts";
 
 export const filterCopy:Record<string,readonly [string,string,string]>={
+ "Rodzaj lotu":["Flight type","Тип перелёта","Тип перельоту"],
+ "Najwięcej czasu na miejscu":["Most time at destination","Больше времени на месте","Більше часу на місці"],
+ "Według znanego czasu między przylotem a odlotem powrotnym, malejąco. To nie czas w mieście. Remis: cena, data, stała kolejność. Nieznane i szacowane na końcu według ceny.":["Known time between arrival and return departure, longest first. City time is unknown. Ties: price, date, stable order. Unknown and estimated intervals follow, ordered by price.","По известному времени между прилётом и обратным вылетом, сначала больше. Время в городе неизвестно. При равенстве: цена, дата, постоянный порядок. Неизвестные и расчётные интервалы в конце по цене.","За відомим часом між прильотом і зворотним вильотом, спочатку більше. Час у місті невідомий. За рівності: ціна, дата, сталий порядок. Невідомі й розрахункові інтервали наприкінці за ціною."],
+ "Cena, historia, świeżość ↓":["Price, history, freshness ↓","Цена, история, свежесть ↓","Ціна, історія, свіжість ↓"],
  "Wynik pomocniczy ↓":["Supporting score ↓","Вспом. балл ↓","Допоміжний бал ↓"],
  "Cena/os. (PLN) ↑":["Price/person (PLN) ↑","Цена/чел. (PLN) ↑","Ціна/особу (PLN) ↑"],
  "Data wylotu ↑":["Departure date ↑","Дата вылета ↑","Дата вильоту ↑"],

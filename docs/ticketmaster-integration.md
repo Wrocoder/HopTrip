@@ -12,7 +12,7 @@
 
 Дополнительные скрипты проверки завершены отдельно от продуктовой логики.
 Сохранён существующий DST-тест; старое удаление теста и пустая строка не перенесены.
-Полный протокол: [проверка событий](releases/2026-10-29-events-verification.md).
+Полный протокол: проверка событий (`docs/releases/2026-10-29-events-verification.md`; исторический файл удалён).
 
 ## Каталог и расписание исходного выпуска 24 октября
 
@@ -133,7 +133,7 @@ EVENTS_HORIZON_DAYS=365
 - Ruff, mypy, ESLint и Next.js production build с TypeScript прошли.
 - Production Compose валиден; bash-синтаксис deploy-скрипта проверен.
 
-Предыдущая живая проверка адаптера: [снимок](ticketmaster-integration-smoke.json),
+Предыдущая живая проверка адаптера: снимок (`docs/ticketmaster-integration-smoke.json`; исторический файл удалён),
 [география](ticketmaster-markets.md). Она не заменяет проверку нового worker на сервере.
 
 

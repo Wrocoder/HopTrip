@@ -1,6 +1,8 @@
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import {encodeTrip} from "../src/lib/shared-trip";
+import {sharePrivacyCopy} from "../src/lib/i18n/share-privacy-copy";
+import {savedTripCopy} from "../src/lib/i18n/saved-trip-copy";
 import {emptyBudget} from "../src/lib/trip-budget";
 
 test("saved and shared plans survive reload and recipients edit independent copies",async({page,browser},testInfo)=>{
@@ -11,7 +13,7 @@ test("saved and shared plans survive reload and recipients edit independent copi
  await page.locator("#budget-people").fill("3");
  await page.locator("#budget-hotel").fill("123,45");
  await page.getByRole("button",{name:"Zapisz wyjazd",exact:true}).click();
- await expect(page.locator("#calculator")).toContainText("Zapisano wyjazd");
+ await expect(page).toHaveURL(/#local=/);await expect(page.getByTestId("saved-plan-state")).toHaveText(savedTripCopy.pl.saved);
  await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
  const url=await page.locator("#trip-share-link").inputValue();
  const recipient=await browser.newContext({viewport:testInfo.project.name==="mobile" ? {width:390,height:844} : {width:1280,height:900}});
@@ -22,8 +24,8 @@ test("saved and shared plans survive reload and recipients edit independent copi
   await expect(copy.locator("#budget-hotel")).toHaveValue("123,45");
   await expect(copy.getByTestId("budget-total")).toHaveText(/847,65/);
   await expect(copy.getByRole("main")).toContainText("Kopia zapisanego planu");
-  await expect(copy.locator('meta[property="og:title"]')).toHaveAttribute("content",/zapisany plan/);
-  await expect(copy.locator('meta[property="og:description"]')).toHaveAttribute("content",/Plan pobytu:.*2027.*weryfikacji/);
+  await expect(copy.locator('meta[property="og:title"]')).toHaveAttribute("content",sharePrivacyCopy.pl.title+" | HopTrip");
+  await expect(copy.locator('meta[property="og:description"]')).toHaveAttribute("content",sharePrivacyCopy.pl.description);
   await copy.locator("#budget-people").fill("4");
   await copy.reload();
   await expect(copy.locator("#budget-people")).toHaveValue("4");
@@ -50,8 +52,8 @@ test("invalid, missing and expired offers retain clear states and honest preview
  await page.goto(`/trip?plan=${encodeTrip(trip)}`);
  await expect(page.getByRole("main").getByRole("status").first()).toContainText("nie jest już dostępna");
  await expect(page.locator("#budget-hotel")).toHaveValue("100");
- await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content","Wrocław → Mediolan — zapisany plan | HopTrip");
- await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content",/2090/);
+ await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content",sharePrivacyCopy.pl.title+" | HopTrip");
+ await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content",sharePrivacyCopy.pl.description);
  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content",/noindex/);
  await page.goto(`/trip?plan=${encodeTrip({...trip,offer:{...trip.offer,start:"2020-01-15",end:"2020-01-17"}})}`);
  await expect(page.getByRole("main").getByRole("status").first()).toContainText("już minął");
@@ -66,6 +68,6 @@ test("sharing remains available when browser storage and clipboard are blocked",
  await page.getByRole("button",{name:"Zapisz wyjazd",exact:true}).click();
  await expect(page.locator("#calculator")).toContainText("Nie udało się zapisać wyjazdu");
  await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
- await expect(page.locator("#trip-share-link")).toHaveValue(/\/trip\?plan=/);
+ await expect(page.locator("#trip-share-link")).toHaveValue(/\/trip#plan=/);
  await expect(page.locator("#calculator")).toContainText("Skopiuj link z pola");
 });

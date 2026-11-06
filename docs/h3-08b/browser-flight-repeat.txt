@@ -1,0 +1,101 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test flight-facts.spec.ts --grep round trip facts|different return airports --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [47000]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=307d2757f23149ad8eef0c1a2db128cc method=GET status=200
+[WebServer] (node:55452) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+
+[WebServer] INFO:hoptrip.requests:request_id=20de3454f67a476f9b3d124809b156db method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b583671335da463cb4c9d9103dcbe967 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1e0df22d4501402e9620bb0c235e8a94 method=GET status=200
+
+Running 4 tests using 1 worker
+
+
+(node:33240) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/4] [desktop] › tests\flight-facts.spec.ts:52:5 › round trip facts agree between card and detail without mobile overflow
+[WebServer] INFO:hoptrip.requests:request_id=b9fb51eee3584280a729737ce5755ed3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=71dec7d83a524aba91ff696b8c06593a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5617fd547a1d4d268c0fd5ca42a3907a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f462028894cf48aca9d8dc84ab6836bf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9e870f5b8a9640869fde7860d785427a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=387d48ff45624d8d87b60a7b3209827d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8201f3d63f7a49d5993281f267b001f1 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ad9091b74bbe4b0e868787b9a9738736 method=GET status=200
+
+[2/4] [desktop] › tests\flight-facts.spec.ts:82:5 › different return airports stay independent on cards and details
+
+[WebServer] INFO:hoptrip.requests:request_id=99d0377984d44d309446d5b048369bf3 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=96756a368672493385f4850fc9ff8687 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=be74e6696c8c478ebe6338763106a95e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9d7304876ef4bc1a7e6ab811bfdee03 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=455d3bcdc34c4ed3b4ea6fb15faec2a4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=139a751c0fb14f30a804c1f43867f469 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fec6aa8827c145f6be0c9a8804bd73d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b1f11b646cd3446fa85de72102958cb9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=11636f4e42a04b4891c321b7ccd9dfb9 method=POST status=200
+
+
+(node:46416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[3/4] [mobile] › tests\flight-facts.spec.ts:52:5 › round trip facts agree between card and detail without mobile overflow
+
+[WebServer] INFO:hoptrip.requests:request_id=8c5c21fbc0db4c9eb13af129c4c492c1 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1dc4566723894600b2ad4f6f2dd8b520 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ecf20531d8264b8daa6fab8693a50909 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fadcdb53afdb40078f15065eafcd0dd2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cb9760293cb04991b2b49a367186b079 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=57a34ff860ff4f649ff776a95b2548ae method=GET status=200
+[4/4] [mobile] › tests\flight-facts.spec.ts:82:5 › different return airports stay independent on cards and details
+[WebServer] INFO:hoptrip.requests:request_id=c2ccf095fcd74891ab25a2b0aa5a1fa0 method=POST status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5beaa9b5fc5b433ba1212261362b15e4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=053db12eb551451c82a095c8904d941e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8bcb3018ec5e40ef8f39d11a2db02572 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4bdd9624f56143958cca6c7281b8321f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b59449de9a164ec086c6e6df41c23962 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7f43dcbfc54749689d20c24aac49de83 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c36d9bf612db41d39764f5ada11e313d method=POST status=200
+  4 passed (14.6s)

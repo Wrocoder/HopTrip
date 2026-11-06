@@ -1,0 +1,580 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test plan-lifecycle.spec.ts --trace=off --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [42536]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=f3fcb4b88537456e8724c633c49777ff method=GET status=200
+[WebServer] (node:45992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=fd8eb9ddad9141da84c7f3b58f19a019 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0bf1cab95d354403864654c903d3a523 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=72d372db50184f71afad70a983e3e6c5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=40052306270e405693aa959a23ff44f8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=76f644d018f444aea9f3a033bd24e744 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dc226daa82d0496cb2ce32f783893676 method=GET status=200
+
+Running 20 tests using 1 worker
+
+
+(node:16072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/20] [desktop] › tests\plan-lifecycle.spec.ts:21:56 › pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+[WebServer] INFO:hoptrip.requests:request_id=743d2c3aeec94cb3b97db8992a03c86d method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2de12c45368f450f9687c5da701a3712 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9cbd2def3094da5991517866f54aeb7 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=0b589c318ce145e28c0df3ae1bd0f101 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0a2689d54b0341f7babca45208c93cf0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8137d22d89124b46a1f10f3012eb5896 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=75747f30872b4f8fa6a6dc4dd6e7c2ae method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6e74a7ed065f4cb990b13c6afbc96b69 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fb178c1ae94c4aa6a3570868a9258c66 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3b504afe739047ae8ee22df8ed373ca7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca1a28817304408caba8eddd189f7df1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=04a074d003074e2295390c681f075914 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=39ee805bc6dd4ae391415be90949c1b8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bc4c503837bc4f33af261f0fae76f81c method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=71f0bfc25d414ccd97c5f58a85b6b04a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=86ab9b86e2684008807364486bb33ab7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1676e1beb1754a20901b1f1467224799 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=804a1e2b00cc41a79021e68a33044e4c method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=fd079e3d9328464f8301ceae8d94eef5 method=GET status=200
+[2/20] [desktop] › tests\plan-lifecycle.spec.ts:21:56 › en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+[WebServer] INFO:hoptrip.requests:request_id=6a46b8679f8a4b2f8fcdcd773f57fac2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4e38076d3ad14ae58461cbc457554592 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=abe6d75a7d5346eaa14751c4fb3cb586 method=GET status=200
+  1) [desktop] › tests\plan-lifecycle.spec.ts:21:56 › en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('plan-edit-state')
+    Expected: "This plan is saved."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" getByTestId('plan-edit-state') with timeout 5000ms
+      - waiting for getByTestId('plan-edit-state')
+
+
+      17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){
+      18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');
+    > 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);
+         |                                                                                                                                                                                                          ^
+      20 | }
+      21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{
+      22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();
+        at create (C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:19:202)
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:22:39
+
+    Error Context: test-results\plan-lifecycle-en-Save-ope-7252a-hare-preserve-the-lifecycle-desktop\error-context.md
+
+
+
+(node:11688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[3/20] [desktop] › tests\plan-lifecycle.spec.ts:21:56 › ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+
+[WebServer] INFO:hoptrip.requests:request_id=3e7c2bdd91bb4b46939df1933d9aed66 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=14372d7e5a85434c90d78b42ccdf71f6 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=ca9eb60cadb74042b8a37ff035c9ac4c method=GET status=200
+  2) [desktop] › tests\plan-lifecycle.spec.ts:21:56 › ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('plan-edit-state')
+    Expected: "Этот план сохранён."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" getByTestId('plan-edit-state') with timeout 5000ms
+      - waiting for getByTestId('plan-edit-state')
+
+
+      17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){
+      18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');
+    > 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);
+         |                                                                                                                                                                                                          ^
+      20 | }
+      21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{
+      22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();
+        at create (C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:19:202)
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:22:39
+
+    Error Context: test-results\plan-lifecycle-ru-Save-ope-4d9ff-hare-preserve-the-lifecycle-desktop\error-context.md
+
+
+
+(node:49844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[4/20] [desktop] › tests\plan-lifecycle.spec.ts:21:56 › uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+[WebServer] INFO:hoptrip.requests:request_id=ee7182fa03dc431abc8d22ec9b1d0987 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=32f38131fe5b4cf38c22978d003505dd method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=d728c790760d4b7cb5c9bec4f15c1e96 method=GET status=200
+
+  3) [desktop] › tests\plan-lifecycle.spec.ts:21:56 › uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('plan-edit-state')
+    Expected: "Цей план збережено."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" getByTestId('plan-edit-state') with timeout 5000ms
+      - waiting for getByTestId('plan-edit-state')
+
+
+      17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){
+      18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');
+    > 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);
+         |                                                                                                                                                                                                          ^
+      20 | }
+      21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{
+      22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();
+        at create (C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:19:202)
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:22:39
+
+    Error Context: test-results\plan-lifecycle-uk-Save-ope-c38a1-hare-preserve-the-lifecycle-desktop\error-context.md
+
+
+
+(node:20732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[5/20] [desktop] › tests\plan-lifecycle.spec.ts:35:5 › two tabs retain independent drafts through conflicts, reload, explicit discard and deletion recovery
+[WebServer] INFO:hoptrip.requests:request_id=b0f910b8a17b4ddca4c1f7d00b6663d6 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5119b5f064d1421587e582e1973409b6 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=31b94c4cb6964a94870c2ec317fcb39f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=074945adf8994d82be24abe2bc2e8ab6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=57364e0110004b3aaa064e2f7ea9c994 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=08592c1bef9744078b1e3ecc31df4030 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=3a9a67a094bc4e07933e8cd2ec1c322b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3a4df2801403432e97e9a0a6ef1da77f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=795e8e9467d94dd5a824a881355e7964 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ad3dc18f9c354eb0b00881f92797158e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7947f446eb0a4dfcaea3bc33a2be413c method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=345398373c6d4bad907c46cb23e79a38 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ea87d15160ad4df1966fa576d9cc6681 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7be44132bf4f4398bdaa5ebf250be780 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b5c1820d44fe46b5a2bb2475f5139bcb method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3c4042a6727f4b52a7fa4534c7317f59 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=199fc308fcc64fe7b3eb781a6c570205 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a3391e324bc0488f925563f873f9b46f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a387ef4526bf4ef9b211e70cbf477d12 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=fb75e2be9ed0441d81f3a3f6f8d3719d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2468c7e9c3d34079b4b3cd2b6656fdbd method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=b2769b9173744c1a86e8572beff825b8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5769024ed10a4f188bb31e77c8501446 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=4698a8542d2747aebe16d6bac46fdb48 method=GET status=200
+
+[6/20] [desktop] › tests\plan-lifecycle.spec.ts:46:5 › edits and reset during an update waiting for the lock are retained while only the captured snapshot is committed
+[WebServer] INFO:hoptrip.requests:request_id=167393babe7048ca93049eeea8b19aaf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3de531aea23d470f900b35e0391f847c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a5561bd0c2d04474986ea888330e096e method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=a6753c3bc6454446a803080bd4238567 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b674bb436324454f8d111810e4c3901b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=820cb3ce48154f38aebc5a2e09280db1 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=4c51da142e3f419c995d1ce135661dfd method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=15c7ca64f3b3475ebfb02f450c2239dd method=GET status=200
+[7/20] [desktop] › tests\plan-lifecycle.spec.ts:63:5 › changed, missing, unavailable and expired offers retain amounts and can still be updated
+[WebServer] INFO:hoptrip.requests:request_id=bea77181bdc04e2b82326f98fe519e57 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fd7650dc4a6843408e13e4546514a37f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f48a64fc05804e209ddb7e153bc2c329 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=35742ccbc6b04d1797e7512ea28a6719 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=43251febf2cf4f49bea677a37cc801b4 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=13bd819b1127481cb0d051e3bf3528d1 method=GET status=404
+
+[8/20] [desktop] › tests\plan-lifecycle.spec.ts:69:5 › local links are device-bound; malformed or missing IDs do not request offers
+[9/20] [desktop] › tests\plan-lifecycle.spec.ts:74:5 › capacity blocks Duplicate without blocking Update; source profiles, events and legacy-copy work survive opening
+[WebServer] INFO:hoptrip.requests:request_id=1e19443206294470afd7ddd134b8d977 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=6e2082406e9742b79cfad676834691d7 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=bbd96ac99d1c4d888376100699d1a3cc method=GET status=200
+
+[10/20] [desktop] › tests\plan-lifecycle.spec.ts:82:5 › unavailable locks and draft storage keep reading and independent sharing available
+[WebServer] INFO:hoptrip.requests:request_id=c8359cfdfd844b67a3f6c25289be7f74 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e9299498824f48dda2564cd2d70f6cd0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5bd5cdc6d8ab4eb8bac21a4c85e951c3 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=8f6a1bf4c10040a5b2f0bb2ba4de8408 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=65a656f3aeef4108adfcc1c7c71b5a13 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b6e52cc2e5de48978c75c00a751cbfb2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=65790bd15dbb438f88db1cf20fb667ca method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=80266c2ee2824414809f775a4703e715 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=47369b5230724b64969098bb9800617c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2c2ee870a0dc45169624776640593eb1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=47daa26422594a4ebbe1f9b00844884c method=GET status=422
+
+(node:35872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[11/20] [mobile] › tests\plan-lifecycle.spec.ts:21:56 › pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+[WebServer] INFO:hoptrip.requests:request_id=c0fac4b731224286a2f73c5a7fd06d12 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6dda258027324bdbb60ac87ba89d5e17 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7dab26741fdb4d1c8416538334563e82 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=97723229512442058cb13457549c8903 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=30de9d0e01674db0863af6b84b0b5713 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d9ce69f480de4ff8b97dc1f44d57f482 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=82c4681f06694a3bb007429a275f3e12 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=9c3c2c2249e4410aae44b9849c249f23 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2427e3a9392343aebfa0449b33b898f1 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=514b2cacf9534ef58c4e88ec540415b8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3fd79a66680743f28764522772b3a0d5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d63a87a778db419381910a9facb6f8c0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=46b0b96b5fa04d05bf87540fd002f6fb method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=28a21ac3517543d2a5fe1acb4831bc7c method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4ac8713365814d0c9962b4a2573a64bc method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=4cccc45e87494b4393bb4ff196b109b1 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=871c207198c04515be414e4581418b72 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=2459c15cdb6f43cf862498f0d5a608be method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=c00c44b743b9423c80a3812caf2a2b36 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f4e811256f274b428a9f0f5b215ae3fb method=GET status=200
+
+[12/20] [mobile] › tests\plan-lifecycle.spec.ts:21:56 › en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+[WebServer] INFO:hoptrip.requests:request_id=3c7f9108e45849b18a328bebeeb486d7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e4642ec6610e42ab86ede146c0d7dc50 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=11fea0a3228d4222ab6320056e30616a method=GET status=200
+
+  4) [mobile] › tests\plan-lifecycle.spec.ts:21:56 › en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('plan-edit-state')
+    Expected: "This plan is saved."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" getByTestId('plan-edit-state') with timeout 5000ms
+      - waiting for getByTestId('plan-edit-state')
+
+
+      17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){
+      18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');
+    > 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);
+         |                                                                                                                                                                                                          ^
+      20 | }
+      21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{
+      22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();
+        at create (C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:19:202)
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:22:39
+
+    Error Context: test-results\plan-lifecycle-en-Save-ope-7252a-hare-preserve-the-lifecycle-mobile\error-context.md
+
+
+(node:41976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[13/20] [mobile] › tests\plan-lifecycle.spec.ts:21:56 › ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+
+[WebServer] INFO:hoptrip.requests:request_id=a4dd89c1fdfc4512915bd2ad6bb69b93 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=af59c69194814c79a03c3e359f38e5fa method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=b5ec3f2d6d044b439261440120fd1ac1 method=GET status=200
+
+  5) [mobile] › tests\plan-lifecycle.spec.ts:21:56 › ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('plan-edit-state')
+    Expected: "Этот план сохранён."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" getByTestId('plan-edit-state') with timeout 5000ms
+      - waiting for getByTestId('plan-edit-state')
+
+
+      17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){
+      18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');
+    > 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);
+         |                                                                                                                                                                                                          ^
+      20 | }
+      21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{
+      22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();
+        at create (C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:19:202)
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:22:39
+
+    Error Context: test-results\plan-lifecycle-ru-Save-ope-4d9ff-hare-preserve-the-lifecycle-mobile\error-context.md
+
+
+(node:18064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[14/20] [mobile] › tests\plan-lifecycle.spec.ts:21:56 › uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle
+[WebServer] INFO:hoptrip.requests:request_id=412a6efb06af4aca9b6097ea0aa0b139 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=08e7fff55c0d42cc9a391ac1ae5a002f method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=702c5b06a3e44b9381ceea29a00a503b method=GET status=200
+
+  6) [mobile] › tests\plan-lifecycle.spec.ts:21:56 › uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: getByTestId('plan-edit-state')
+    Expected: "Цей план збережено."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" getByTestId('plan-edit-state') with timeout 5000ms
+      - waiting for getByTestId('plan-edit-state')
+
+
+      17 | async function create(page:Page,locale:'pl'|'en'|'ru'|'uk'='pl'){
+      18 |  await page.goto(localizedHref('/deals/browser-deal',locale));await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');await page.locator('#budget-people').fill('2');await page.locator('#budget-flight').fill('100.25');await page.locator('#budget-hotel').fill('0');await page.locator('#budget-food').fill('10');
+    > 19 |  await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page).toHaveURL(/\/trip#local=[0-9a-f-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);return currentId(page);
+         |                                                                                                                                                                                                          ^
+      20 | }
+      21 | for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle`,async({page,browser},info)=>{
+      22 |  const copy=planEditorCopy[locale],id=await create(page,locale),update=page.getByRole('button',{name:copy.update,exact:true});await expect(update).toBeDisabled();
+        at create (C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:19:202)
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-12c-20261104\apps\web\tests\plan-lifecycle.spec.ts:22:39
+
+    Error Context: test-results\plan-lifecycle-uk-Save-ope-c38a1-hare-preserve-the-lifecycle-mobile\error-context.md
+
+
+(node:56020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[15/20] [mobile] › tests\plan-lifecycle.spec.ts:35:5 › two tabs retain independent drafts through conflicts, reload, explicit discard and deletion recovery
+
+[WebServer] INFO:hoptrip.requests:request_id=b15b17af30374a0cbfc22a5d461d5961 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a3939728cf474dd980ae934c74560390 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c9e5a9253236492aad51355353a98631 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=f002cfac2f7c43e480c18dd21be886bd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8239f1b8708d4ae4855bf50d2ad46ca4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5e83c9aa62f44a81931a288c11f0a685 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=48b1677b3e71436f83025ae1cd74458e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=199a2653080f4e9f847a8decb84718b0 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d8bc859017b24cd69ead447b3e368026 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ffaca665fae948a5af6ca3af61220244 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=37587ff1c6c744f88e057d295741d9af method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a1df46df5657466f94df656579b569e2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e964af617976432db921cf6948228987 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0350840129aa41ca9cdec042139a2651 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=89423cf2a5c847c9b13b4ad600efd81e method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fcc9de9350f54eb78bc2a8c24f01ee89 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=900761d38f314831a6864934c6b1f473 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bc44901a493e406c8b01b825300eb4a7 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7ca1ef54c8074fbcb2be81d872f58ec9 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=72e1e6a1c36c46019557c4e0c5542852 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d54ed663d08949c48bd7dc288854c765 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=47bacace5dab44a6892962a32cafbad2 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b71cd29b8c5346f397ded6aa1942eb28 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fe7bb429dc0d4d39abf2911bc926aa35 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a0b0e698276f41a2b49a4841491d52fe method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d0739fac03cc47c6acd5a7cd20d4511f method=GET status=200
+[16/20] [mobile] › tests\plan-lifecycle.spec.ts:46:5 › edits and reset during an update waiting for the lock are retained while only the captured snapshot is committed
+
+[WebServer] INFO:hoptrip.requests:request_id=41d98a7c8be444b398a877528b886874 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b6a90f18dac24159bb87622a73471ae4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9769164f31d44efbb78f536aa53f4116 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=3a5d6b2d1d1049199c3cf8ee814f40bf method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ac881dcacb6b4c46b982d500ff39d493 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c96b2cdaccbf4f0ba8cea4ef23547da1 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=8e1dfb15255e4c9caa7e93b9fb5a0746 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e592c141632f40ca8fc15c6743bf9c46 method=GET status=200
+[17/20] [mobile] › tests\plan-lifecycle.spec.ts:63:5 › changed, missing, unavailable and expired offers retain amounts and can still be updated
+[WebServer] INFO:hoptrip.requests:request_id=779aba4db8cd41bb89183542e32d0d0c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3781864196ac4572a358ca805e0f52bc method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=36d8783f583342fda8f7b7bdc47713b4 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d6ce2bc6cec24a8286cea8a8441d8786 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=2086fd99c16743d3afae97cb066fccd2 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=80b67a263cb444f297c9abeb0f72ab25 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=78df15f674ea4e04a31b35c125548c57 method=GET status=404
+
+[18/20] [mobile] › tests\plan-lifecycle.spec.ts:69:5 › local links are device-bound; malformed or missing IDs do not request offers
+[19/20] [mobile] › tests\plan-lifecycle.spec.ts:74:5 › capacity blocks Duplicate without blocking Update; source profiles, events and legacy-copy work survive opening
+[WebServer] INFO:hoptrip.requests:request_id=c8d7fff4afb0487bae5e1b50d48e2083 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=5a885ab840d147ad88f72c56215fe1f9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3388f3fa8cc449918b7a78ddc624629b method=GET status=404
+
+[20/20] [mobile] › tests\plan-lifecycle.spec.ts:82:5 › unavailable locks and draft storage keep reading and independent sharing available
+[WebServer] INFO:hoptrip.requests:request_id=aace85a876a6405d8c48b6ffae8c1258 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c4390263fc1e4d1c89cf7560be4c4a07 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ac5bdb8880ff4398b98163e91b30bb74 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3299b1983c9c41ad81bc8143fbe02a6f method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=45364686d87e44a4b076ef6d665c9b3a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=388a7e39eb8049ef9b744c49058cd4c6 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=0eb07da82d344406b4604a1d091b66cc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=21ce8307a2344ff5b1dff14caa5ee20f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=10c9baf07573414783be2317ab90a9f8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=966c0563bc7c4e0e95623471663ad9c7 method=GET status=422
+
+  6 failed
+    [desktop] › tests\plan-lifecycle.spec.ts:21:56 › en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+    [desktop] › tests\plan-lifecycle.spec.ts:21:56 › ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+    [desktop] › tests\plan-lifecycle.spec.ts:21:56 › uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+    [mobile] › tests\plan-lifecycle.spec.ts:21:56 › en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+    [mobile] › tests\plan-lifecycle.spec.ts:21:56 › ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+    [mobile] › tests\plan-lifecycle.spec.ts:21:56 › uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle 
+  14 passed (3.6m)

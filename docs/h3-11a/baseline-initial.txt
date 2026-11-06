@@ -1,0 +1,67 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test h3-11a-baseline.spec.ts --project=desktop --trace=off --reporter=json
+
+
+[WebServer] INFO:     Started server process [50816]
+[WebServer] INFO:     Waiting for application startup.
+
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=d7d3b0e854b6490fa844c5ba5296f100 method=GET status=200
+
+[WebServer] (node:26712) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=c2c06af6d9b44be294f577ec246f24d8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ab0b8847c6fc4e7da6bb3d2f7a6f66f4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3f3a0fbbf5a2428ea3d37155cb741526 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9f47132c5b1b48c2ba5290ab980623fc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b7661a5651114c2fbf6fa61fd1da99ff method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf7dadfdf812404fbda79eb68f219340 method=GET status=200
+
+
+Running 1 test using 1 worker
+
+
+(node:19876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\h3-11a-baseline.spec.ts:3:5 › H3-11a baseline: copied flight is labelled manual, unknown still differs from zero
+
+[WebServer] INFO:hoptrip.requests:request_id=dea24627b37c48469971dada725f41a3 method=GET status=200
+  1) [desktop] › tests\h3-11a-baseline.spec.ts:3:5 › H3-11a baseline: copied flight is labelled manual, unknown still differs from zero 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('budget-total')
+    Expected substring: "200,25"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('budget-total') with timeout 5000ms
+      - waiting for getByTestId('budget-total')
+
+
+       6 |  await page.goto('/deals/browser-deal#calculator');await expect(page.locator('#budget-flight')).toHaveValue('200.25');
+       7 |  const hint=page.locator('#budget-flight').locator('..');await expect(hint).toContainText('Wpisana kwota — do weryfikacji');
+    >  8 |  await expect(page.getByTestId('budget-total')).toContainText('200,25');
+         |                                                 ^
+       9 |  await expect(page.locator('#calculator [role="status"]')).toContainText('Budżet niepełny');
+      10 |  await page.locator('#budget-hotel').fill('0');await expect(page.getByTestId('budget-total')).toContainText('200,25');
+      11 |  writeFileSync(process.env.HOPTRIP_H3_AUDIT_DIR+'/baseline-observation.json',JSON.stringify({flight:'200.25',label:await hint.textContent(),missingIsNotZero:true},null,2));
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-10-20261104\apps\web\tests\h3-11a-baseline.spec.ts:8:49
+
+    Error Context: test-results\h3-11a-baseline-H3-11a-bas-420a1-own-still-differs-from-zero-desktop\error-context.md
+
+
+  1 failed
+    [desktop] › tests\h3-11a-baseline.spec.ts:3:5 › H3-11a baseline: copied flight is labelled manual, unknown still differs from zero 

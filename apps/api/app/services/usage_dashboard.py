@@ -3,11 +3,58 @@
 from html import escape
 from typing import Literal
 
-from app.schemas.usage import UsageReport
+from app.schemas.analytics import AnalyticsLocale
+from app.schemas.usage import UsageMetric, UsageReport
 
-DashboardLocale = Literal["pl", "en", "ru", "uk"]
+DashboardLocale = AnalyticsLocale
 LANG_INDEX = {"pl": 0, "en": 1, "ru": 2, "uk": 3}
+FUNNEL = {
+    "title": ("Sekwencja sesji", "Ordered session funnel", "Последовательная воронка сессий", "Послідовна воронка сесій"),
+    "note": (
+        "Kolejność odebranych zdarzeń w tym okresie. Bez identyfikatora wyszukiwania nie łączy wyniku z konkretnym zapytaniem. Kliknięcie dotyczy wcześniej otwartej oferty, nie potwierdza rezerwacji. Sesje bez PAGE_VIEW nie wchodzą do lejka.",
+        "Order of received events within this period. Without a search ID, results cannot be attributed to a specific query. The click follows a view of the same offer; it is not a booking. Sessions without PAGE_VIEW are outside this funnel.",
+        "Порядок полученных событий внутри периода. Без search ID результат нельзя связать с конкретным запросом. Клик следует за просмотром того же предложения; это не бронь. Сессии без PAGE_VIEW не входят в воронку.",
+        "Порядок отриманих подій у межах періоду. Без search ID результат не можна пов’язати з конкретним запитом. Клік іде після перегляду тієї самої пропозиції; це не бронювання. Сесії без PAGE_VIEW не входять до воронки.",
+    ),
+    "step": ("Etap", "Stage", "Этап", "Етап"),
+    "previous": ("Sesje na poprzednim etapie", "Previous-stage sessions", "Сессии предыдущего этапа", "Сесії попереднього етапу"),
+    "page_view": ("Wyświetlenie strony", "Page view", "Просмотр страницы", "Перегляд сторінки"),
+    "search": ("Wysłanie wyszukiwania", "Search submitted", "Отправка поиска", "Надсилання пошуку"),
+    "positive_results": ("Niepusty wynik", "Nonempty results", "Непустой результат", "Непорожній результат"),
+    "deal_view": ("Otwarcie oferty", "Offer viewed", "Просмотр предложения", "Перегляд пропозиції"),
+    "partner_click": ("Kliknięcie tej samej oferty", "Same-offer partner click", "Клик по тому же предложению", "Клік за тією самою пропозицією"),
+}
 UI = {
+    "locale_cohorts": ("Język pierwszego odebranego zdarzenia", "First received event language", "Язык первого полученного события", "Мова першої отриманої події"),
+    "locale": ("Język strony", "Page language", "Язык страницы", "Мова сторінки"),
+    "locale_unknown": ("Nieznany lub niezaobserwowany", "Unknown or not observed", "Неизвестен или не наблюдался", "Невідомий або не спостерігався"),
+    "locale_note": (
+        "Kohorta to język strony z pierwszego zdarzenia produktu odebranego w tym okresie (czas serwera, potem ID zapisu), także bez PAGE_VIEW. Brak lub błędny język pozostaje nieznany; późniejsze zdarzenia i zmiana języka nie przenoszą sesji. Starszych danych nie uzupełniamy. To nie język przeglądarki, osoby ani konkretnego działania. Każda sesja należy do jednej kohorty. Udział: sesje kohorty / wszystkie obserwowane sesje. Działania: sesje ze zdarzeniem w całym oknie / sesje kohorty. To podział opisowy, nie atrybucja ani konwersja między etapami. Porównuj okresy z takim samym zakresem zbierania zdarzeń; zero odebranych działań nie dowodzi braku użycia.",
+        "The cohort uses page language from the first product event received in this period (server time, then record ID), including sessions without PAGE_VIEW. Missing or invalid language stays unknown; later events and language switches do not move the session. Legacy data is not backfilled. This is not browser, person or action language. Every session belongs to one cohort. Share: cohort sessions / all observed sessions. Actions: sessions with the event anywhere in the window / cohort sessions. This is a descriptive split, not attribution or step conversion. Compare periods with matching collection coverage; zero received actions does not prove no usage.",
+        "Когорта использует язык страницы из первого продуктового события, полученного за период (время сервера, затем ID записи), включая сессии без PAGE_VIEW. Отсутствующий или неверный язык остаётся неизвестным; поздние события и смена языка не переносят сессию. Старые данные не дополняются. Это не язык браузера, человека или конкретного действия. Каждая сессия входит в одну когорту. Доля: сессии когорты / все наблюдаемые сессии. Действия: сессии с событием во всём окне / сессии когорты. Это описательный разрез, не атрибуция и не межэтапная конверсия. Сравнивайте периоды с одинаковым сбором; ноль полученных действий не доказывает отсутствие использования.",
+        "Когорта використовує мову сторінки з першої продуктової події, отриманої за період (час сервера, потім ID запису), зокрема без PAGE_VIEW. Відсутня або хибна мова лишається невідомою; пізніші події й зміна мови не переносять сесію. Старі дані не доповнюються. Це не мова браузера, людини або конкретної дії. Кожна сесія входить до однієї когорти. Частка: сесії когорти / усі спостережувані сесії. Дії: сесії з подією в усьому вікні / сесії когорти. Це описовий розріз, не атрибуція й не міжетапна конверсія. Порівнюйте періоди з однаковим збиранням; нуль отриманих дій не доводить відсутність використання.",
+    ),
+    "origin_cohorts": ("Pierwszy kontekst lotniska wylotu", "First search origin context", "Первый контекст аэропорта вылета", "Перший контекст аеропорту вильоту"),
+    "origin_note": (
+        "Kohorta to origin z pierwszego SEARCH lub SEARCH_RESULT odebranego w tym okresie (czas serwera, potem ID zapisu). Brak, błędny lub nieobsługiwany origin pozostaje nieznany, nawet po późniejszym wyszukiwaniu. Używamy 15 kodów z rejestru polskich lotnisk i osobnej grupy WAW/WMI; grupy nie rozdzielamy. Każda obserwowana sesja należy do jednej kohorty, także bez wyszukiwania lub PAGE_VIEW. Udział kohorty: jej sesje / wszystkie sesje. Komórki działań: sesje ze zdarzeniem / sesje kohorty oraz procent. Uwzględniają całe okno, także działania sprzed wyszukiwania; to podział opisowy, nie atrybucja ani konwersja między etapami.",
+        "The cohort uses origin from the first SEARCH or SEARCH_RESULT received in this period (server time, then record ID). Missing, invalid or unsupported origin stays unknown even after a later search. We use 15 codes from the Polish airport registry and the separate WAW/WMI group, without splitting it. Every observed session belongs to one cohort, including no-search or no-PAGE_VIEW sessions. Cohort share: its sessions / all sessions. Action cells: sessions with the event / cohort sessions, plus percentage. The whole window counts, including actions before the search; this is a descriptive split, not attribution or step conversion.",
+        "Когорта берётся из origin первого SEARCH или SEARCH_RESULT, полученного за период (время сервера, затем ID записи). Отсутствующий, неверный или неподдерживаемый origin остаётся неизвестным даже после позднего поиска. Используются 15 кодов из реестра польских аэропортов и отдельная группа WAW/WMI без разделения. Каждая наблюдаемая сессия входит в одну когорту, включая сессии без поиска или PAGE_VIEW. Доля когорты: её сессии / все сессии. Ячейки действий: сессии с событием / сессии когорты и процент. Учитывается всё окно, включая действия до поиска; это описательный разрез, не атрибуция и не межэтапная конверсия.",
+        "Когорта береться з origin першого SEARCH або SEARCH_RESULT, отриманого за період (час сервера, потім ID запису). Відсутній, хибний або непідтримуваний origin лишається невідомим навіть після пізнішого пошуку. Використовуються 15 кодів з реєстру польських аеропортів та окрема група WAW/WMI без поділу. Кожна спостережувана сесія входить до однієї когорти, зокрема без пошуку або PAGE_VIEW. Частка когорти: її сесії / усі сесії. Комірки дій: сесії з подією / сесії когорти та відсоток. Враховується все вікно, зокрема дії до пошуку; це описовий розріз, не атрибуція й не міжетапна конверсія.",
+    ),
+    "origin": ("Lotnisko lub grupa", "Airport or group", "Аэропорт или группа", "Аеропорт або група"),
+    "origin_unknown": ("Nieznany lub niezaobserwowany", "Unknown or not observed", "Неизвестен или не наблюдался", "Невідомий або не спостерігався"),
+    "origin_group": ("WAW/WMI — grupa", "WAW/WMI — group", "WAW/WMI — группа", "WAW/WMI — група"),
+    "origin_share": ("Udział sesji kohorty", "Share of all sessions", "Доля сессий когорты", "Частка сесій когорти"),
+    "origin_details": ("Szczegóły w kohorcie", "Details in cohort", "Сведения в когорте", "Відомості в когорті"),
+    "origin_budget": ("Pełny budżet w kohorcie", "Complete budget in cohort", "Полный бюджет в когорте", "Повний бюджет у когорті"),
+    "origin_update": ("Aktualizacje w kohorcie", "Updates in cohort", "Обновление в когорте", "Оновлення в когорті"),
+    "engagement": ("Szczegóły, budżet i aktualizacje planu", "Details, budget and plan updates", "Сведения, бюджет и обновления плана", "Відомості, бюджет і оновлення плану"),
+    "engagement_note": (
+        "Mianownik: wszystkie zaobserwowane sesje produktu w tym okresie. Każda sesja liczy się raz na wskaźnik, także bez PAGE_VIEW. To udziały sesji z odebranymi działaniami, nie konwersja między etapami ani odsetek wszystkich osób. Przywrócony budżet lub aktualizacja mogą nie mieć wcześniejszego rozpoczęcia lub zapisu w tym oknie. Zero oznacza brak odebranego działania, nie dowód braku użycia. Porównuj okresy z takim samym zakresem zbierania zdarzeń.",
+        "Denominator: all observed product sessions in this period. Each session counts once per metric, including sessions without PAGE_VIEW. These are shares of sessions with received actions, not step conversions or percentages of all people. A restored budget or update may have no earlier start or save in this window. Zero means no received action, not proof of no usage. Compare periods with matching event collection coverage.",
+        "Знаменатель: все наблюдаемые продуктовые сессии за период. Каждая сессия учитывается один раз на показатель, включая сессии без PAGE_VIEW. Это доли сессий с полученными действиями, не конверсия между этапами и не доля всех людей. У восстановленного бюджета или обновления может не быть начала или сохранения в этом окне. Ноль означает отсутствие полученного действия, а не доказанное отсутствие использования. Сравнивайте периоды с одинаковым сбором событий.",
+        "Знаменник: усі спостережувані продуктові сесії за період. Кожна сесія враховується один раз на показник, зокрема без PAGE_VIEW. Це частки сесій з отриманими діями, не конверсія між етапами й не частка всіх людей. Відновлений бюджет або оновлення можуть не мати початку чи збереження в цьому вікні. Нуль означає відсутність отриманої дії, а не доведену відсутність використання. Порівнюйте періоди з однаковим збиранням подій.",
+    ),
     "title": ("HopTrip — korzystanie z serwisu", "HopTrip — product usage", "HopTrip — использование сервиса", "HopTrip — використання сервісу"),
     "skip": ("Przejdź do raportu", "Skip to report", "К отчёту", "До звіту"),
     "period": ("Okres obserwacji (UTC)", "Observation period (UTC)", "Период наблюдений (UTC)", "Період спостережень (UTC)"),
@@ -30,6 +77,12 @@ UI = {
     "limits": ("Nie porównuj różnych definicji i okresów zbierania. Brak identyfikatora wyszukiwania wyklucza dokładną atrybucję. Kliknięcie nie oznacza rezerwacji ani prowizji. Dane przy wejściu publicznym nie stanowią dowodu zgody.", "Compare only matching definitions and collection periods. There is no search identifier for exact attribution. A click is not a booking or commission. Public event submissions do not prove consent.", "Сравнивайте только одинаковые определения и периоды сбора. Идентификатора поиска для точной атрибуции нет. Клик не означает бронь или комиссию. Публичная отправка событий не доказывает согласие.", "Порівнюйте лише однакові визначення й періоди збору. Ідентифікатора пошуку для точної атрибуції немає. Клік не означає бронювання чи комісію. Публічне надсилання подій не доводить згоду."),
 }
 METRICS = {
+    "detail_disclosure": (("Rozwinięcie dodatkowych szczegółów", "Additional details disclosed", "Раскрытие дополнительных сведений", "Розкриття додаткових відомостей"),
+        ("Sesje z DEAL_DETAILS_OPEN / wszystkie obserwowane sesje. Rozwinięcie danych lotu lub porównania ceny, nie samo wejście DEAL_VIEW.", "Sessions with DEAL_DETAILS_OPEN / all observed sessions. Flight details or price comparison opened, not merely a DEAL_VIEW visit.", "Сессии с DEAL_DETAILS_OPEN / все наблюдаемые сессии. Раскрытие данных рейса или сравнения цены, не просто посещение DEAL_VIEW.", "Сесії з DEAL_DETAILS_OPEN / усі спостережувані сесії. Розкриття даних рейсу чи порівняння ціни, не лише відвідування DEAL_VIEW.")),
+    "budget_completion": (("Wyświetlenie pełnego obliczenia budżetu", "Complete budget calculation viewed", "Просмотр полного расчёта бюджета", "Перегляд повного розрахунку бюджету"),
+        ("Sesje z BUDGET_CALCULATED / wszystkie obserwowane sesje. Otwarcie pełnego, poprawnego i sprawdzonego przez użytkownika zestawienia; nie sama edycja BUDGET_USE ani potwierdzenie cen u sprzedawców.", "Sessions with BUDGET_CALCULATED / all observed sessions. A complete, valid, user-reviewed breakdown opened; not merely BUDGET_USE editing or verified supplier prices.", "Сессии с BUDGET_CALCULATED / все наблюдаемые сессии. Открытие полной валидной разбивки после проверки пользователем; не просто правка BUDGET_USE и не подтверждение цен у продавцов.", "Сесії з BUDGET_CALCULATED / усі спостережувані сесії. Відкриття повної коректної розбивки після перевірки користувачем; не лише редагування BUDGET_USE й не підтвердження цін продавців.")),
+    "trip_update": (("Aktualizacja zapisanego planu", "Saved plan updated", "Обновление сохранённого плана", "Оновлення збереженого плану"),
+        ("Sesje z TRIP_UPDATE / wszystkie obserwowane sesje. Zmiana zapisana jawnym Update, nie utworzenie nowego planu TRIP_SAVE ani dowód powrotu tej samej osoby.", "Sessions with TRIP_UPDATE / all observed sessions. A change committed by explicit Update, not a new-plan TRIP_SAVE or proof of a returning person.", "Сессии с TRIP_UPDATE / все наблюдаемые сессии. Изменение записано явным Update; это не создание нового плана TRIP_SAVE и не доказательство возвращения человека.", "Сесії з TRIP_UPDATE / усі спостережувані сесії. Зміну записано явним Update; це не створення нового плану TRIP_SAVE й не доказ повернення людини.")),
     "search_initiation": (("Rozpoczęcie wyszukiwania", "Search initiation", "Начало поиска", "Початок пошуку"),
         ("Sesje z wysłanym wyszukiwaniem / wszystkie zaobserwowane sesje produktu.", "Sessions with a submitted search / all observed product sessions.", "Сессии с отправленным поиском / все наблюдаемые сессии продукта.", "Сесії з надісланим пошуком / усі спостережувані сесії продукту.")),
     "search_success": (("Niepuste wyniki", "Non-empty results", "Непустые результаты", "Непорожні результати"),
@@ -82,18 +135,68 @@ def render_usage(report: UsageReport, locale: DashboardLocale = "pl") -> str:
     def rate(value) -> str:
         return "—" if value is None else escape(f"{value:.2f}".replace(".", "," if locale != "en" else ".")) + "%"
 
-    cards = []
-    for item in report.metrics:
-        labels, descriptions = METRICS[item.key]
-        detail = (f"{item.numerator} / {item.denominator}" if item.status == "available"
-                  else t("unavailable" if item.status == "unavailable" else "no_data"))
-        cards.append(f'<li data-metric="{escape(item.key)}"><h2>{escape(labels[index])}</h2>'
-                     f'<p class="rate">{rate(item.percent)}</p><p>{t("count")}: {detail}</p>'
-                     f'<p>{escape(descriptions[index])}</p></li>')
+    def metric_cards(items: list[UsageMetric], heading: Literal["h2", "h3"] = "h2") -> str:
+        cards = []
+        for item in items:
+            labels, descriptions = METRICS[item.key]
+            detail = (f"{item.numerator} / {item.denominator}" if item.status == "available"
+                      else t("unavailable" if item.status == "unavailable" else "no_data"))
+            cards.append(f'<li data-metric="{escape(item.key)}"><{heading}>{escape(labels[index])}</{heading}>'
+                         f'<p class="rate">{rate(item.percent)}</p><p>{t("count")}: {detail}</p>'
+                         f'<p>{escape(descriptions[index])}</p></li>')
+        return "".join(cards)
+
+    cards = metric_cards(report.metrics)
+    engagement = ""
+    if report.engagement is not None:
+        engagement = f'''<section data-engagement="{escape(report.engagement.version)}"><h2>{t("engagement")}</h2>
+<p class="notice">{t("engagement_note")}</p><ul class="metrics">{metric_cards(report.engagement.metrics, "h3")}</ul></section>'''
+    origins = ""
+    if report.origin_cohorts is not None:
+        origin_rows = []
+        for row in report.origin_cohorts.rows:
+            label = (t("origin_unknown") if row.origin == "unknown" else t("origin_group")
+                     if row.origin == "WAW,WMI" else escape(row.origin))
+            cells = "".join(f'<td>{item.numerator} / {item.denominator}<br>{rate(item.percent)}</td>'
+                            for item in row.metrics)
+            origin_rows.append(f'<tr><th scope="row">{label}</th><td>{row.sessions}</td>'
+                               f'<td>{rate(row.percent)}</td>{cells}</tr>')
+        origin_table = (f'''<div class="table-scroll" role="region" aria-label="{t("origin_cohorts")}" tabindex="0">
+<table><caption>{t("origin_cohorts")}</caption><thead><tr><th scope="col">{t("origin")}</th><th scope="col">{t("sessions")}</th><th scope="col">{t("origin_share")}</th><th scope="col">{t("origin_details")}</th><th scope="col">{t("origin_budget")}</th><th scope="col">{t("origin_update")}</th></tr></thead><tbody>{"".join(origin_rows)}</tbody></table></div>'''
+                        if origin_rows else f'<p class="notice">{t("no_data")}</p>')
+        origins = f'''<section data-origin-cohorts="{escape(report.origin_cohorts.version)}"><h2>{t("origin_cohorts")}</h2>
+<p class="notice">{t("origin_note")}</p>{origin_table}</section>'''
+    languages = ""
+    if report.locale_cohorts is not None:
+        locale_rows = []
+        for language_row in report.locale_cohorts.rows:
+            label = t("locale_unknown") if language_row.locale == "unknown" else escape(language_row.locale.upper())
+            cells = "".join(f'<td>{item.numerator} / {item.denominator}<br>{rate(item.percent)}</td>'
+                            for item in language_row.metrics)
+            locale_rows.append(f'<tr><th scope="row">{label}</th><td>{language_row.sessions}</td>'
+                               f'<td>{rate(language_row.percent)}</td>{cells}</tr>')
+        locale_table = (f'''<div class="table-scroll" role="region" aria-label="{t("locale_cohorts")}" tabindex="0">
+<table><caption>{t("locale_cohorts")}</caption><thead><tr><th scope="col">{t("locale")}</th><th scope="col">{t("sessions")}</th><th scope="col">{t("origin_share")}</th><th scope="col">{t("origin_details")}</th><th scope="col">{t("origin_budget")}</th><th scope="col">{t("origin_update")}</th></tr></thead><tbody>{"".join(locale_rows)}</tbody></table></div>'''
+                        if locale_rows else f'<p class="notice">{t("no_data")}</p>')
+        languages = f'''<section data-locale-cohorts="{escape(report.locale_cohorts.version)}"><h2>{t("locale_cohorts")}</h2>
+<p class="notice">{t("locale_note")}</p>{locale_table}</section>'''
     rows = "".join(f'<tr><th scope="row">{escape(PAGES[row.page_type][index])}</th>'
                    f'<td>{row.sessions}</td><td>{row.partner_sessions if row.partner_sessions is not None else "—"}</td>'
                    f'<td>{rate(row.percent)}</td></tr>' for row in report.page_cohorts)
+    cohorts = (f'''<div class="table-scroll" role="region" aria-label="{t("entry")}" tabindex="0">
+<table><caption>{t("entry")}</caption><thead><tr><th scope="col">{t("page")}</th><th scope="col">{t("sessions")}</th><th scope="col">{t("partner")}</th><th scope="col">{t("rate")}</th></tr></thead><tbody>{rows}</tbody></table></div>'''
+               if report.page_cohorts else f'<p class="notice">{t("no_data")}</p>')
     empty = f'<p class="notice">{t("empty")}</p>' if not report.observed_events else ""
+    funnel = ""
+    if report.ordered_funnel is not None:
+        steps = "".join(
+            f'<tr><th scope="row">{escape(FUNNEL[row.key][index])}</th><td>{row.sessions}</td>'
+            f'<td>{row.previous_sessions if row.previous_sessions is not None else "—"}</td>'
+            f'<td>{rate(row.percent)}</td></tr>' for row in report.ordered_funnel.steps
+        )
+        funnel = f'''<section><h2 id="ordered-funnel">{escape(FUNNEL["title"][index])}</h2>
+<p>{escape(FUNNEL["note"][index])}</p><div class="table-scroll" role="region" aria-label="{escape(FUNNEL["title"][index])}" tabindex="0">
+<table data-funnel="ordered-session-funnel-v1"><caption>{escape(FUNNEL["title"][index])}</caption><thead><tr><th scope="col">{escape(FUNNEL["step"][index])}</th><th scope="col">{t("sessions")}</th><th scope="col">{escape(FUNNEL["previous"][index])}</th><th scope="col">{t("rate")}</th></tr></thead><tbody>{steps}</tbody></table></div></section>'''
     return f'''<!doctype html>
 <html lang="{locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow,nosnippet"><meta name="referrer" content="no-referrer">
@@ -101,7 +204,7 @@ def render_usage(report: UsageReport, locale: DashboardLocale = "pl") -> str:
 <title>{t("title")}</title><style>
 :root{{color-scheme:light}}*{{box-sizing:border-box}}body{{margin:0;background:#f4f6f4;color:#203332;font:1rem/1.6 system-ui,sans-serif}}
 a{{color:#135c42}}a:focus-visible,[tabindex]:focus-visible{{outline:3px solid #704800;outline-offset:4px}}main{{max-width:80rem;margin:auto;padding:1.5rem}}
-h1{{font-size:clamp(1.7rem,5vw,2.5rem);line-height:1.25}}h2{{font-size:1.2rem}}p{{overflow-wrap:anywhere}}.skip{{display:block;padding:.5rem 1.5rem}}
+h1{{font-size:clamp(1.7rem,5vw,2.5rem);line-height:1.25}}h2,.metrics h3{{font-size:1.2rem}}p{{overflow-wrap:anywhere}}.skip{{display:block;padding:.5rem 1.5rem}}
 .metrics{{list-style:none;margin:1.5rem 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}}
 .metrics li,.notice{{border:1px solid #b8c6be;border-radius:.75rem;padding:1rem;background:#fff}}.rate{{font-size:2rem;font-weight:700;margin:.3rem 0}}
 .table-scroll{{overflow-x:auto}}table{{width:100%;border-collapse:collapse;background:#fff}}th,td{{text-align:left;padding:.7rem;border-bottom:1px solid #b8c6be}}
@@ -109,8 +212,11 @@ caption{{text-align:left;font-weight:700;padding:.5rem 0}}dt{{font-weight:600}}d
 </style></head><body><a class="skip" href="#report">{t("skip")}</a><main id="report" tabindex="-1">
 <h1>{t("title")}</h1><p>{t("period")}: {escape(report.start.isoformat())} ≤ t &lt; {escape(report.end.isoformat())}</p>
 <p>{t("sessions")}: <strong>{report.observed_sessions}</strong> · {t("events")}: <strong>{report.observed_events}</strong></p>
-<p class="notice">{t("coverage")}</p>{empty}<ul class="metrics">{"".join(cards)}</ul>
-<h2>{t("entry")}</h2><p>{t("proxy")}</p><div class="table-scroll" role="region" aria-label="{t("entry")}" tabindex="0">
-<table><caption>{t("entry")}</caption><thead><tr><th scope="col">{t("page")}</th><th scope="col">{t("sessions")}</th><th scope="col">{t("partner")}</th><th scope="col">{t("rate")}</th></tr></thead><tbody>{rows}</tbody></table></div>
+<p class="notice">{t("coverage")}</p>{empty}<ul class="metrics">{cards}</ul>
+{engagement}
+{funnel}
+{origins}
+{languages}
+<h2>{t("entry")}</h2><p>{t("proxy")}</p>{cohorts}
 <h2>{t("quality")}</h2><dl><dt>{t("excluded")}</dt><dd>{report.excluded_events}</dd><dt>{t("invalid")}</dt><dd>{report.invalid_results}</dd><dt>{t("unlinked")}</dt><dd>{report.unlinked_detail_views}</dd></dl>
 <p>{t("limits")}</p></main></body></html>'''

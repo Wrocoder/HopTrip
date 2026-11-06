@@ -17,14 +17,17 @@ LEGACY_WEIGHTS = {
 
 
 def explain_score(deal: Deal) -> ScoreExplanation:
-    data = deal.score_components or {}
+    data = deal.score_components
+    if not isinstance(data, dict):
+        return ScoreExplanation()
     if deal.score_version == SCORE_VERSION:
         try:
             result = ScoreExplanation.model_validate(data.get("breakdown"))
             if (result.current_price_pln is None or result.sample_count is None
                     or result.calculated_at is None
-                    or (deal.flight_price_pln is not None and deal.flight_price_pln != result.current_price_pln)
-                    or (deal.historical_baseline_pln is not None and deal.historical_baseline_pln != result.median_price_pln)
+                    or deal.flight_price_pln != result.current_price_pln
+                    or deal.price_per_person_pln != result.current_price_pln
+                    or deal.historical_baseline_pln != result.median_price_pln
                     or ("sample_count" in data and data["sample_count"] != result.sample_count)):
                 return ScoreExplanation()
             # Replay only the saved calculation time/inputs, never today's clock.

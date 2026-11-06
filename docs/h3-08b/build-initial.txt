@@ -1,0 +1,42 @@
+
+> hoptrip-web@0.1.0 build
+> next build
+
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 128ms
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./.cache/aud05-h3-08b-20261104/apps/web/src/app/deals/page.tsx:19:1
+Error: Export AirportContext doesn't exist in target module
+  17 | import {searchRecovery} from '../../lib/search-recovery';
+  18 | import {stateText} from '../../lib/i18n/state-copy';
+> 19 | import {AirportContext} from '../components/airport-context';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  20 | import {weekendCopy} from '../../lib/weekend';
+  21 | import {destinationTimeCopy} from '../../lib/destination-time';
+  22 | export const dynamic="force-dynamic";
+
+The export AirportContext was not found in module [project]/.cache/aud05-h3-08b-20261104/apps/web/src/app/components/airport-context.tsx [app-rsc] (ecmascript).
+Did you mean to import AirportContextNotice?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+
+./.cache/aud05-h3-08b-20261104/apps/web/src/app/from/[iata_code]/page.tsx:13:1
+Error: Export AirportContext doesn't exist in target module
+  11 | import {catalogPage,socialMetadata} from "../../../lib/catalog-pages";
+  12 | import {CatalogIntro} from "../../components/catalog-intro";
+> 13 | import {AirportContext} from '../../components/airport-context';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  14 | import {OfferState} from '../../components/offer-state';
+  15 | import {airportCopy} from '../../../lib/i18n/airport-copy';
+  16 | import {catalogText} from '../../../lib/i18n/catalog-copy';
+
+The export AirportContext was not found in module [project]/.cache/aud05-h3-08b-20261104/apps/web/src/app/components/airport-context.tsx [app-rsc] (ecmascript).
+Did you mean to import AirportContextNotice?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+
+    at ignore-listed frames

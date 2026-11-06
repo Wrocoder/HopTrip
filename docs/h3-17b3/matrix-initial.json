@@ -1,0 +1,310 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "h3-baseline.spec.ts",
+      "--project=desktop",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-17b3-20261105/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-baseline.spec.ts",
+      "file": "h3-baseline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H3 baseline pages and widths: pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 38598,
+                  "error": {
+                    "message": "Error: /info/trip-budget failed assets\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 6\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"failure\": \"net::ERR_ABORTED\",\u001b[39m\n\u001b[31m+     \"url\": \"/_next/image\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: /info/trip-budget failed assets\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 6\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"failure\": \"net::ERR_ABORTED\",\u001b[39m\n\u001b[31m+     \"url\": \"/_next/image\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\tests\\h3-baseline.spec.ts:76:55",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\tests\\h3-baseline.spec.ts",
+                      "column": 55,
+                      "line": 76
+                    },
+                    "snippet": "  74 |    expect.soft(response?.status(),href).toBe(200);\n  75 |    expect.soft(axe.violations.map(v=>v.id),`${href} axe`).toEqual([]);\n> 76 |    expect.soft(assetFailures,`${href} failed assets`).toEqual([]);\n     |                                                       ^\n  77 |    expect.soft(httpErrors,`${href} HTTP errors`).toEqual([]);\n  78 |   }catch(error){records.push({path,href,error:String(error)});expect.soft(false,`${href}: ${String(error)}`).toBe(true);}\n  79 |   finally{save();}"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\tests\\h3-baseline.spec.ts",
+                        "column": 55,
+                        "line": 76
+                      },
+                      "message": "Error: /info/trip-budget failed assets\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 6\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"failure\": \"net::ERR_ABORTED\",\u001b[39m\n\u001b[31m+     \"url\": \"/_next/image\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  74 |    expect.soft(response?.status(),href).toBe(200);\n  75 |    expect.soft(axe.violations.map(v=>v.id),`${href} axe`).toEqual([]);\n> 76 |    expect.soft(assetFailures,`${href} failed assets`).toEqual([]);\n     |                                                       ^\n  77 |    expect.soft(httpErrors,`${href} HTTP errors`).toEqual([]);\n  78 |   }catch(error){records.push({path,href,error:String(error)});expect.soft(false,`${href}: ${String(error)}`).toBe(true);}\n  79 |   finally{save();}\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\tests\\h3-baseline.spec.ts:76:55"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T13:43:17.811Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiJCMDNqbzlhXzRHU2hhTGVCOEhBZkQifQ=="
+                    },
+                    {
+                      "name": "baseline-pl",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\test-results\\h3-baseline-H3-baseline-pages-and-widths-pl-desktop\\attachments\\baseline-pl-5e01ecc9501a2fdcc83341d207dd62537ed72114.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\test-results\\h3-baseline-H3-baseline-pages-and-widths-pl-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\tests\\h3-baseline.spec.ts",
+                    "column": 55,
+                    "line": 76
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-4c554cf1e4f6ed92cab1",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        },
+        {
+          "title": "H3 baseline pages and widths: en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26122,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T13:43:57.568Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiJCMDNqbzlhXzRHU2hhTGVCOEhBZkQifQ=="
+                    },
+                    {
+                      "name": "baseline-en",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\test-results\\h3-baseline-H3-baseline-pages-and-widths-en-desktop\\attachments\\baseline-en-dcccd33c3f7f6980b63437e03c487219ad14c5d8.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-e317bd64a314343007ee",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        },
+        {
+          "title": "H3 baseline pages and widths: ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27477,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T13:44:24.022Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiJCMDNqbzlhXzRHU2hhTGVCOEhBZkQifQ=="
+                    },
+                    {
+                      "name": "baseline-ru",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\test-results\\h3-baseline-H3-baseline-pages-and-widths-ru-desktop\\attachments\\baseline-ru-137a017140cfe9dfd267d268774aab067e818b24.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-02161aed6179eb408e50",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        },
+        {
+          "title": "H3 baseline pages and widths: uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-05T13:44:51.551Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBzdGFydCAtLSAtLWhvc3RuYW1lIDEyNy4wLjAuMSAtLXBvcnQgMzEyNSIsIm5vZGVFbnYiOiJwcm9kdWN0aW9uIiwiYnVpbGQiOiJCMDNqbzlhXzRHU2hhTGVCOEhBZkQifQ=="
+                    },
+                    {
+                      "name": "baseline-uk",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-17b3-20261105\\apps\\web\\test-results\\h3-baseline-H3-baseline-pages-and-widths-uk-desktop\\attachments\\baseline-uk-fef2916894256ab8985ed45d455c37e7b2b12d70.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-ff873f36751b01151d50",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T13:43:12.286Z",
+    "duration": 128885.932,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,5 +1,6 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import {cardCopy} from '../src/lib/i18n/card-copy';
 
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
@@ -9,8 +10,12 @@ test('observation and seller caveat are visible next to the price without openin
  await page.goto('/from/WRO');
  const card=page.locator('.deal-card').filter({has:page.locator('a[href="/deals/browser-deal"]')});
  const notice=card.locator('.price-freshness');
- await expect(notice.getByText(/Pierwszy zapis tej ceny/)).toBeVisible();
- await expect(notice.getByText(/Dostępność i ostateczną cenę/)).toBeVisible();
+ await expect(notice.locator('> p').first()).toContainText(cardCopy.pl.first);
+ await expect(notice.getByText(cardCopy.pl.notLive,{exact:true})).toBeVisible();
+ await card.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
+ await expect(card.locator('.trip-details .price-observation')).toBeVisible();
+ await expect(card.locator('.trip-details .price-observation')).toContainText(/Pierwszy zapis tej ceny/);
+ await page.keyboard.press('Enter');
  await expect(card.locator('.trip-details')).not.toHaveAttribute('open','');
  const observed=await notice.locator('> p time').getAttribute('datetime');
  await card.locator('.deal-card-link').click();

@@ -1,0 +1,74 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test consent-session-navigation.spec.ts --project=desktop --grep pl: accepted --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [40084]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=28a739441a4142ada9c3cbeba3ca6bf9 method=GET status=200
+
+
+[WebServer] (node:40864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=e163bc0ef063495f85e8108d9e487146 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=155434c615c449418ff6579ed916cdbc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=28c8bc89060f475392e2aebfa078e916 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b80561aaa19c409c86984d55ebe589bd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f87de3db64614999955790f3f4031f4b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b64c0c49feb34d77850de06873800e1d method=GET status=200
+
+Running 1 test using 1 worker
+
+(node:3272) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\consent-session-navigation.spec.ts:50:56 › pl: accepted session survives reload, Save auto-open and full navigation
+[WebServer] INFO:hoptrip.requests:request_id=9b79b410a2e94dd1aeda6292bb1a9bb9 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=71d2267be5ce45c1af905aba0897c6ed method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=acb411537336459da5cde8b0600b24b5 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=7ebb497877934ae29b25d72c7509bd06 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6f7f79e416c747069ff8ad7c10d98d75 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=cc5a721db4534e2a80dc9ba44fc61353 method=POST status=202
+
+[WebServer] INFO:hoptrip.requests:request_id=12f786f4b0d64668b1560e8db132b8fa method=POST status=202
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3d276a67720c434ab1c356d441a54358 method=GET status=200
+  1) [desktop] › tests\consent-session-navigation.spec.ts:50:56 › pl: accepted session survives reload, Save auto-open and full navigation 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "989635b6-381e-4f66-a06b-859717a0dfc6"
+    Received: "6a6e69f4-255c-4663-b388-2cd1226883cf"
+
+      53 |  const first=views()[0].anonymous_session_id,document=await documentId(page);
+      54 |  await page.reload();await expect(page.locator('#budget-start')).toBeEnabled();await expect.poll(()=>views().length).toBe(2);await flush();
+    > 55 |  expect(await documentId(page)).not.toBe(document);expect(await storedId(page)).toBe(first);expect(views()[1].anonymous_session_id).toBe(first);
+         |                                                                                 ^
+      56 |  await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');
+      57 |  await page.locator('#trip-save').getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();
+      58 |  await expect(page).toHaveURL(/\/trip#local=[a-f0-9-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);await expect.poll(()=>views().length).toBe(3);await flush();
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-18b7-20261106\apps\web\tests\consent-session-navigation.spec.ts:55:81
+
+    Error Context: test-results\consent-session-navigation-da62f-to-open-and-full-navigation-desktop\error-context.md
+
+
+  1 failed
+    [desktop] › tests\consent-session-navigation.spec.ts:50:56 › pl: accepted session survives reload, Save auto-open and full navigation 

@@ -77,7 +77,7 @@ test('legacy plan and new taxes/buffer survive save/share without reallocating o
  await expect(page.locator('#budget-buffer')).toHaveValue('');
  await expect(page.getByTestId('budget-total')).toContainText('350,00');
  await page.locator('#budget-taxes').fill('12,34');await page.locator('#budget-buffer').fill('100');
- await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
+ await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page).toHaveURL(/#local=/);
  await page.getByRole('button',{name:'Udostępnij',exact:true}).click();
  const url=await page.locator('#trip-share-link').inputValue();
  const context=await browser.newContext();
@@ -90,6 +90,6 @@ test('legacy plan and new taxes/buffer survive save/share without reallocating o
   await copy.locator('#budget-buffer').fill('200');
   await expect(copy.getByTestId('budget-total')).toContainText('562,34');
  }finally{await context.close();}
- await page.goto('/saved');await page.locator('main a[href^="/trip?plan="]').first().click();
+ await page.goto('/saved');await page.locator('main a[href^="/trip#local="]').first().click();
  await expect(page.getByTestId('budget-total')).toContainText('462,34');
 });

@@ -1,0 +1,167 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "consent-session-navigation.spec.ts",
+      "--project=desktop",
+      "--grep",
+      "pl: accepted",
+      "--trace=off",
+      "--reporter=line,json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-18b7-20261106/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "consent-session-navigation.spec.ts",
+      "file": "consent-session-navigation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: accepted session survives reload, Save auto-open and full navigation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7814,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7m989635b6-381e\u001b[27m-4\u001b[7mf\u001b[27m66\u001b[7m-a06b-859717a0dfc6\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m6a6e69f4-255c\u001b[27m-466\u001b[7m3-b388-2cd1226883cf\u001b[27m\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7m989635b6-381e\u001b[27m-4\u001b[7mf\u001b[27m66\u001b[7m-a06b-859717a0dfc6\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m6a6e69f4-255c\u001b[27m-466\u001b[7m3-b388-2cd1226883cf\u001b[27m\"\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\consent-session-navigation.spec.ts:55:81",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\consent-session-navigation.spec.ts",
+                      "column": 81,
+                      "line": 55
+                    },
+                    "snippet": "  53 |  const first=views()[0].anonymous_session_id,document=await documentId(page);\n  54 |  await page.reload();await expect(page.locator('#budget-start')).toBeEnabled();await expect.poll(()=>views().length).toBe(2);await flush();\n> 55 |  expect(await documentId(page)).not.toBe(document);expect(await storedId(page)).toBe(first);expect(views()[1].anonymous_session_id).toBe(first);\n     |                                                                                 ^\n  56 |  await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');\n  57 |  await page.locator('#trip-save').getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  58 |  await expect(page).toHaveURL(/\\/trip#local=[a-f0-9-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);await expect.poll(()=>views().length).toBe(3);await flush();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\consent-session-navigation.spec.ts",
+                        "column": 81,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7m989635b6-381e\u001b[27m-4\u001b[7mf\u001b[27m66\u001b[7m-a06b-859717a0dfc6\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m6a6e69f4-255c\u001b[27m-466\u001b[7m3-b388-2cd1226883cf\u001b[27m\"\u001b[39m\n\n  53 |  const first=views()[0].anonymous_session_id,document=await documentId(page);\n  54 |  await page.reload();await expect(page.locator('#budget-start')).toBeEnabled();await expect.poll(()=>views().length).toBe(2);await flush();\n> 55 |  expect(await documentId(page)).not.toBe(document);expect(await storedId(page)).toBe(first);expect(views()[1].anonymous_session_id).toBe(first);\n     |                                                                                 ^\n  56 |  await page.locator('#budget-start').fill('2030-05-01');await page.locator('#budget-end').fill('2030-05-03');\n  57 |  await page.locator('#trip-save').getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  58 |  await expect(page).toHaveURL(/\\/trip#local=[a-f0-9-]{36}$/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);await expect.poll(()=>views().length).toBe(3);await flush();\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\consent-session-navigation.spec.ts:55:81"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T18:49:17.689Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\test-results\\consent-session-navigation-da62f-to-open-and-full-navigation-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-18b7-20261106\\apps\\web\\tests\\consent-session-navigation.spec.ts",
+                    "column": 81,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8c0851e5431cc29a778b-cf48a3d79c158c02b436",
+          "file": "consent-session-navigation.spec.ts",
+          "line": 50,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T18:48:34.873Z",
+    "duration": 180203.049,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

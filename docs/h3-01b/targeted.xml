@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="21" time="1.127" timestamp="2026-11-03T17:50:28.929309+01:00" hostname="wave"><testcase classname="apps.api.tests.test_weekend_catalog" name="test_filter_runs_before_pagination_and_counts_all_matches" time="0.150"><failure message="assert (0 == 2)">api_client = &lt;starlette.testclient.TestClient object at 0x0000029CC3284170&gt;
+isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000029CC3493D70&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC38AAE80&gt;
+
+    def test_filter_runs_before_pagination_and_counts_all_matches(api_client, isolated_db, catalog):
+        unknown = catalog(100, kind="unknown")
+        morning = catalog(150, start="2030-11-01T08:00:00+01:00")
+        evening = catalog(200)
+        monday = catalog(250, back="2030-11-03T23:00:00Z")
+        monday_departure = catalog(300, back="2030-11-04T19:00:00Z")
+        second = catalog(350)
+        params = {"weekend_mode": "no-leave-v1", "limit": 1}
+        first = result(api_client, **params)
+&gt;       assert first["total"] == 2 and first["items"][0]["id"] == evening.id
+E       assert (0 == 2)
+
+apps\api\tests\test_weekend_catalog.py:75: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_weekend_catalog" name="test_custom_hours_change_filter_and_returned_assessment" time="0.053"><failure message="IndexError: list index out of range">api_client = &lt;starlette.testclient.TestClient object at 0x0000029CC36C3920&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC3A685E0&gt;
+
+    def test_custom_hours_change_filter_and_returned_assessment(api_client, catalog):
+        deal = catalog(200, start="2030-11-01T16:00:00+01:00")
+        assert result(api_client, weekend_mode="no-leave-v1")["total"] == 0
+        custom = result(api_client, weekend_mode="no-leave-v1", work_start="07:00", work_end="15:00")
+&gt;       assert custom["items"][0]["id"] == deal.id
+               ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+apps\api\tests\test_weekend_catalog.py:100: IndexError</failure></testcase><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change0]" time="0.045" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change1]" time="0.042" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change2]" time="0.047" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change3]" time="0.084" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_ordinary_filters_remain_intersections[change4]" time="0.045" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params0-None]" time="0.020" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params1-CONFLICTING_WEEKEND_FILTERS]" time="0.020" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params2-WORK_HOURS_REQUIRE_NO_LEAVE]" time="0.019" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params3-WORK_HOURS_REQUIRE_NO_LEAVE]" time="0.020" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params4-INVALID_WORK_HOURS]" time="0.024" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params5-INVALID_WORK_HOURS]" time="0.020" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params6-INVALID_WORK_HOURS]" time="0.020" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_invalid_or_conflicting_contract_is_422[params7-None]" time="0.022" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_unknown_estimated_or_other_home_airport_is_not_no_leave[unknown-WRO]" time="0.044"><failure message="assert 0 == 1">api_client = &lt;starlette.testclient.TestClient object at 0x0000029CC3E708C0&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC3F174C0&gt;
+kind = 'unknown', home = 'WRO'
+
+    @pytest.mark.parametrize("kind,home", [("unknown", "WRO"), ("estimated", "WRO"), ("known", "KRK")])
+    def test_unknown_estimated_or_other_home_airport_is_not_no_leave(api_client, catalog, kind, home):
+        catalog(200, kind=kind, home=home)
+&gt;       assert result(api_client, weekend_mode="calendar-v1")["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:135: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_weekend_catalog" name="test_unknown_estimated_or_other_home_airport_is_not_no_leave[estimated-WRO]" time="0.044"><failure message="assert 0 == 1">api_client = &lt;starlette.testclient.TestClient object at 0x0000029CC3E70FE0&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC3FFE5C0&gt;
+kind = 'estimated', home = 'WRO'
+
+    @pytest.mark.parametrize("kind,home", [("unknown", "WRO"), ("estimated", "WRO"), ("known", "KRK")])
+    def test_unknown_estimated_or_other_home_airport_is_not_no_leave(api_client, catalog, kind, home):
+        catalog(200, kind=kind, home=home)
+&gt;       assert result(api_client, weekend_mode="calendar-v1")["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:135: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_weekend_catalog" name="test_unknown_estimated_or_other_home_airport_is_not_no_leave[known-KRK]" time="0.045"><failure message="assert 0 == 1">api_client = &lt;starlette.testclient.TestClient object at 0x0000029CC3E715B0&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC40B25C0&gt;
+kind = 'known', home = 'KRK'
+
+    @pytest.mark.parametrize("kind,home", [("unknown", "WRO"), ("estimated", "WRO"), ("known", "KRK")])
+    def test_unknown_estimated_or_other_home_airport_is_not_no_leave(api_client, catalog, kind, home):
+        catalog(200, kind=kind, home=home)
+&gt;       assert result(api_client, weekend_mode="calendar-v1")["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:135: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_weekend_catalog" name="test_multiple_flight_components_cannot_certify_a_convenient_offer" time="0.046" /><testcase classname="apps.api.tests.test_weekend_catalog" name="test_broad_query_is_explicit_error_not_a_partial_total" time="0.054"><failure message="assert 0 == 1">api_client = &lt;starlette.testclient.TestClient object at 0x0000029CC40B7A70&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC5238720&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000029CC41BB860&gt;
+
+    def test_broad_query_is_explicit_error_not_a_partial_total(api_client, catalog, monkeypatch):
+        from app.services import weekend_catalog
+    
+        catalog(200)
+        catalog(300)
+        monkeypatch.setattr(weekend_catalog, "MAX_WEEKEND_CANDIDATES", 1)
+        response = api_client.get("/api/v1/deals?weekend_mode=no-leave-v1&amp;limit=1")
+        assert response.status_code == 422 and response.json()["detail"]["code"] == "WEEKEND_QUERY_TOO_BROAD"
+&gt;       assert result(api_client, weekend_mode="no-leave-v1", budget=200)["total"] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:156: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_weekend_catalog" name="test_candidate_sql_count_is_constant_and_does_not_serialize_full_catalog" time="0.032"><failure message="assert 0 == 1">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000029CC521D220&gt;
+catalog = &lt;function catalog.&lt;locals&gt;.create at 0x0000029CC53563E0&gt;
+
+    def test_candidate_sql_count_is_constant_and_does_not_serialize_full_catalog(isolated_db, catalog):
+        catalog(200)
+        engine = isolated_db.get_bind()
+        statements = []
+    
+        def record(*args):
+            statements.append(args[2])
+    
+        def check():
+            statements.clear()
+            event.listen(engine, "before_cursor_execute", record)
+            try:
+                started = perf_counter()
+                matches = weekend_matches(isolated_db, available_deals_query(), "no-leave-v1", WorkHours())
+                duration = perf_counter() - started
+            finally:
+                event.remove(engine, "before_cursor_execute", record)
+            assert len(statements) == 1
+            return len(matches), duration
+    
+&gt;       assert check()[0] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_weekend_catalog.py:180: AssertionError</failure></testcase></testsuite></testsuites>

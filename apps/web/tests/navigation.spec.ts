@@ -2,6 +2,7 @@ import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {navigation} from '../src/lib/i18n/navigation';
 import {localizedHref} from '../src/lib/i18n/routing';
+import {directoryCopy} from '../src/lib/i18n/directory-copy';
 
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
@@ -20,15 +21,19 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: primary jour
   await expect(nav.locator('[aria-current]')).toHaveCount(1);
  }
  await nav.getByRole('link',{name:labels.destinations,exact:true}).click();
+ await expect(page).toHaveURL(new URL(localizedHref('/destinations',locale),info.project.use.baseURL).href);
+ await expect(page.getByRole('heading',{level:1})).toHaveText(directoryCopy[locale].heading);
+ await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','page');
+ await page.goBack();await expect(nav.getByRole('link',{name:labels.flights,exact:true})).toHaveAttribute('aria-current','page');
+ await page.goForward();await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','page');
+ // Country anchors keep the directory selected; legacy home bookmarks still work.
+ await page.evaluate(()=>{location.hash='country-IT';});
+ await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','page');
+ await page.goto(localizedHref('/#home-destinations',locale));
  await expect(page.locator('#home-destinations')).toBeInViewport();
  await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','location');
- await page.goBack();await expect(nav.getByRole('link',{name:labels.flights,exact:true})).toHaveAttribute('aria-current','page');
- await page.goForward();await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','location');
- // Same-page native hash changes must clear and restore the selected section.
- await page.evaluate(()=>{location.hash='hero-title';});
- await expect(nav.locator('[aria-current]')).toHaveCount(0);
  await nav.getByRole('link',{name:labels.destinations,exact:true}).click();
- await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','location');
+ await expect(nav.getByRole('link',{name:labels.destinations,exact:true})).toHaveAttribute('aria-current','page');
  const footer=page.locator('.footer-nav');
  for(const route of ['/info','/info/about','/info/contact','/info/privacy','/info/terms','/info/partners','/alerts','/city-break','/from/warszawa'])
   await expect(footer.locator(`a[href="${localizedHref(route,locale)}"]`)).toHaveCount(1);

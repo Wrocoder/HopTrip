@@ -16,4 +16,7 @@
 .breakdown div { display: flex; justify-content: space-between; gap:var(--space-3); padding-block: 8px; border-bottom: 1px solid var(--border); }
 .breakdown dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
 .calculator summary { cursor: pointer; min-height:var(--target-height); padding-block: 10px; }
+.profiles { margin-block:20px; padding-block:16px; border-block:1px solid var(--border); min-width:0; overflow-wrap:anywhere; }
+.range { border:1px solid var(--border); border-radius:var(--radius-control); padding:12px; min-width:0; }
+.range .field { margin-block:8px; }
 @media (max-width: 600px) { .grid { grid-template-columns: minmax(0, 1fr); } .breakdown div { flex-direction: column; gap: 4px; } .breakdown dd { text-align: left; } }

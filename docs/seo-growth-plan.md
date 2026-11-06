@@ -29,7 +29,7 @@ Next.js 16.3.6 App Router / React 19, FastAPI / SQLAlchemy / PostgreSQL;
 Публичный сайт прочитан через HTTPS 2026-10-16 13:51 UTC: все 11 исходных
 страниц/вариантов отвечают 200. KRK/WAW/WMI/Рим — noindex; WRO, общий каталог
 и руководства индексируемы. `/from/ZZZ` отдаёт 200 + noindex (soft 404).
-Исходный отчёт: [seo-growth-public-audit.json](seo-growth-public-audit.json).
+Исходный отчёт: seo-growth-public-audit.json (`docs/seo-growth-public-audit.json`; исторический файл удалён).
 Web tool не смог открыть сайт, но прямое чтение через Invoke-WebRequest удалось.
 
 ## Реализация — выполнена и проверена локально
@@ -217,7 +217,7 @@ Chromium (Edge): поиск → фильтры/пагинация → оферт
 | Sitemap/robots/canonical/404, HTML без JS | 8 E2E passed, desktop; все URL sitemap, ссылки /info, реальные PNG, noindex и ошибки |
 | Основной browser-прогон | 25 passed, 6 намеренных skipped для исключения дублирования viewport; 5 первоначальных failures разобраны и повторены ниже |
 | Повтор новых сценариев и полного цикла подписки | 11 passed, 1 failure теста гонки навигации; исправлен и повторён ниже |
-| Финальные сценарии city break и Warsaw | 4 passed, desktop + mobile; [машинный отчёт](seo-growth/browser-final.json) |
+| Финальные сценарии city break и Warsaw | 4 passed, desktop + mobile; машинный отчёт (`docs/seo-growth/browser-final.json`; исторический файл удалён) |
 
 Причины первоначальных сбоев: тест пытался заполнить теперь свёрнутые даты;
 слишком короткий тестовый token давал 422 вместо ожидаемого 404; ожидание URL
@@ -234,20 +234,20 @@ Chromium (Edge): поиск → фильтры/пагинация → оферт
 удалено, общая оговорка о времени на месте вынесена из каждой карточки к выдаче.
 
 Снимки на тестовых данных (не предложения production):
-[city break desktop](seo-growth/city-break-desktop.png),
-[city break mobile](seo-growth/city-break-mobile.png),
-[Warsaw desktop](seo-growth/warsaw-desktop.png),
-[Warsaw mobile](seo-growth/warsaw-mobile.png),
-[план/жильё 375](seo-growth/journey-stay-375.png),
-[копия 390](seo-growth/journey-copy-390.png),
-[каталог 1366](seo-growth/journey-catalog-1366.png).
+city break desktop (`docs/seo-growth/city-break-desktop.png`; исторический файл удалён),
+city break mobile (`docs/seo-growth/city-break-mobile.png`; исторический файл удалён),
+Warsaw desktop (`docs/seo-growth/warsaw-desktop.png`; исторический файл удалён),
+Warsaw mobile (`docs/seo-growth/warsaw-mobile.png`; исторический файл удалён),
+план/жильё 375 (`docs/seo-growth/journey-stay-375.png`; исторический файл удалён),
+копия 390 (`docs/seo-growth/journey-copy-390.png`; исторический файл удалён),
+каталог 1366 (`docs/seo-growth/journey-catalog-1366.png`; исторический файл удалён).
 Просмотрены desktop city break и окончательный mobile Warsaw; размеры/переполнение
 и доступность действий дополнительно проверялись браузерными сценариями.
 Значок Next.js на снимках относится к локальному dev-окружению.
 
 Один navigation sample на каждый профиль в локальном Next dev + SQLite:
 desktop TTFB 269 ms / DOMContentLoaded 1339,5 ms, mobile 496,4 / 1862,8 ms;
-HTML transfer 25 701 / 25 725 байт. [Исходные замеры](seo-growth/navigation-timing.json).
+HTML transfer 25 701 / 25 725 байт. Исходные замеры (`docs/seo-growth/navigation-timing.json`; исторический файл удалён).
 Это не Lighthouse, не production CWV и не доказательство ускорения; сопоставимого
 production baseline нет. После релиза нужны полевые данные Search Console/CrUX.
 
@@ -289,7 +289,7 @@ Commit/push, deployment, миграции production и публикация ч�
   preview и предусмотренные скриптом ссылки/пустые адреса.
 - Четыре новые страницы проверены в Edge Chromium на ширинах 390 и 1366 px:
   HTTP 200, ожидаемые H1/canonical, без горизонтального переполнения.
-  [Результаты production-проверки](seo-growth/production-landings.json).
+  Результаты production-проверки (`docs/seo-growth/production-landings.json`; исторический файл удалён).
 
 Актуальный статус: **опубликовано / проверено на production в указанном объёме**.
 Google-индексация и рост трафика **не подтверждены в Search Console**.
@@ -328,7 +328,7 @@ editorial.spec.ts: учитываются существующие city-break и
 Ручная браузерная проверка Edge Chromium: обе статьи на 390/1366 px, HTTP 200,
 один H1, собственный canonical, index/follow, без горизонтального переполнения;
 9 и 6 внутренних ссылок на руководства соответственно возвращают 200.
-[Машинный отчёт](seo-growth/articles-local-check.json); снимки страниц лежат рядом.
+Машинный отчёт (`docs/seo-growth/articles-local-check.json`; исторический файл удалён); снимки страниц лежат рядом.
 Визуально просмотрен мобильный первый экран сезонной статьи.
 Production, Search Console и внешние бронирования этим пакетом не проверялись.
 
@@ -356,7 +356,7 @@ breadcrumbs, preview и sitemap. Всего с четырьмя новыми с�
 на desktop/mobile passed. Браузер Edge Chromium, 390/1366 px: обе статьи 200,
 один H1, собственный canonical, index/follow, присутствуют в sitemap, preview 200,
 нет горизонтального переполнения; 6 и 5 ссылок на руководства соответственно — 200.
-Просмотрен мобильный снимок статьи Норвегии. [Отчёт](seo-growth/nordic-local-check.json).
+Просмотрен мобильный снимок статьи Норвегии. Отчёт (`docs/seo-growth/nordic-local-check.json`; исторический файл удалён).
 Не проверены production-публикация и индекс Google.
 
 [Пошаговая инструкция владельцу для публикации и Search Console](nordic-articles-indexing.md).
@@ -374,7 +374,7 @@ breadcrumbs, preview и sitemap. Всего с четырьмя новыми с�
 Backup: `/opt/hoptrip/backups/deploy-20261017T215851Z-6941a9b246ed01924affe9c2b7917244d4618732`.
 
 Production SEO-аудит: **61 страница, failures: []**. Все четыре статьи возвращают
-200, собственные canonical и index/follow; входят в sitemap. [HTTP-отчёт](seo-growth/articles-production-check.json).
+200, собственные canonical и index/follow; входят в sitemap. HTTP-отчёт (`docs/seo-growth/articles-production-check.json`; исторический файл удалён).
 Статус обоих редакционных пакетов теперь **опубликовано / проверено на production**,
 но **не подтверждено в Search Console**. Инструкция владельцу актуализирована.
 Следующий коммит отчёта содержит только документацию; приложение на сервере — 6941a9b.
@@ -526,4 +526,4 @@ Production-аудит 06:56 UTC: 323/323 предложения проверен
 старая карточка возвращает 404. Существующая защита already_done, код не менялся.
 16 локальных API-тестов passed. Причина стороннего комментария без точного URL
 не установлена; Search Console не проверялась. Полный отчёт:
-[expired-deals-audit-2026-10-19.md](expired-deals-audit-2026-10-19.md).
+expired-deals-audit-2026-10-19.md (`docs/expired-deals-audit-2026-10-19.md`; исторический файл удалён).

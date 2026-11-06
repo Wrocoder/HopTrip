@@ -15,11 +15,13 @@ import {FilterForm} from './filters';
 import {OfferState} from './offer-state';
 import {stateText} from '../../lib/i18n/state-copy';
 import {searchUrl} from '../../lib/search-policy';
+import {collectionsMatchOrigin,type HomeCollection} from '../../lib/home-collections';
+import {collectionCopy} from '../../lib/i18n/collection-copy';
 
 type Props={airports:Airport[];destinations:Destination[];initialOrigin:string;initialFilters:Filters;
- count:number;children:ReactNode;initialFailed:boolean;locale:Locale};
+ count:number;children:ReactNode;initialFailed:boolean;locale:Locale;collections:HomeCollection[];collectionPreviews:ReactNode};
 
-export function HomeOrigin({airports,destinations,initialOrigin,initialFilters,count,children,initialFailed,locale}:Props){
+export function HomeOrigin({airports,destinations,initialOrigin,initialFilters,count,children,initialFailed,locale,collections,collectionPreviews}:Props){
  const router=useRouter(),query=useSearchParams(),[pending,startTransition]=useTransition();
  const queryOrigin=query.has('origin') ? (query.getAll('origin').length===1 ? query.get('origin') : []) : undefined;
  const baseOrigin=selectedOrigin(queryOrigin,initialOrigin,null);
@@ -68,6 +70,14 @@ export function HomeOrigin({airports,destinations,initialOrigin,initialFilters,c
    </>}
    <p>{pl.flightOnly} {t('Sprawdź godziny lotów i potrzebne dni urlopu.')}</p>
    <p><Link href={catalogHref}>{t('Zobacz wszystkie loty na 2–4 noce →')}</Link></p>
+  </section>
+  <section className="home-section home-collections" aria-labelledby="home-collections" aria-busy={!current||!collectionsMatchOrigin(collections,origin)}>
+   <h2 id="home-collections">{t('Kolekcje na krótki wyjazd')}</h2>
+   <p>{t('Wylot:')} {origin||t('dowolne lotnisko')}</p>
+   <p className="catalog-note">{collectionCopy[locale].preview}</p>
+   {current&&collectionsMatchOrigin(collections,origin)?collectionPreviews:<OfferState kind="loading" heading="h3" title={pl.loading}><p>{stateText(locale,'Pobieramy oferty. Warunki wyszukiwania pozostają w adresie strony.')}</p></OfferState>}
+   <nav className="route-link-grid" aria-label={t('Pomysły na krótki wyjazd')}>{([['/city-break','City break na 2–4 noce'],['/tanie-loty-na-weekend','Tanie loty na weekend'],['/from/warszawa','Warszawa — oba lotniska']] as const).map(([href,label])=><Link prefetch={false} key={href} href={localizedHref(href,locale)} hrefLang={locale}>{t(label)}</Link>)}</nav>
+   <p><Link prefetch={false} href={localizedHref('/deals',locale)}>{t('Zobacz loty ze wszystkich lotnisk →')}</Link></p>
   </section>
  </>;
 }

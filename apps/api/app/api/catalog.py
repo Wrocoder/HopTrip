@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, time
 from decimal import Decimal
 from typing import Literal
 
@@ -13,10 +13,12 @@ from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
 from app.schemas.deal import DealPage, DealRead
 from app.schemas.location import AirportRead, DestinationRead
+from app.schemas.weekend import WeekendMode, WorkHours
 from app.services.airports import matching_airports
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.destination_search import destination_search_fields, matching_destinations
+from app.services.weekend_catalog import WeekendQueryTooBroad, itinerary_matches
 
 router = APIRouter(prefix="/api/v1", tags=["catalog"])
 
@@ -25,7 +27,9 @@ router = APIRouter(prefix="/api/v1", tags=["catalog"])
 def list_deals(
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0, le=10000),
-    sort: Literal["score", "price", "departure"] = Query("score"),
+    sort: Literal["score", "price", "departure", "destination_time"] = Query(
+        "price", description="destination_time: reliable airport interval descending, then price/date/id; unknown or estimated last. Maximum 500 filtered candidates."
+    ),
     include_total: bool = Query(False),
     origin: str | None = Query(
         None, min_length=1, max_length=240, description="Departure airport IATA code or city name"
@@ -37,9 +41,21 @@ def list_deals(
     duration_min: int | None = Query(None, ge=0, le=365),
     duration_max: int | None = Query(None, ge=0, le=365),
     weekend: bool = Query(False, description="Friday/Saturday departure, return the same Sunday"),
+    weekend_mode: WeekendMode | None = Query(None, description="Opt-in exact weekend-v1 mode; mutually exclusive with weekend=true"),
+    work_start: time | None = Query(None, description="Origin-local weekday work start; only with no-leave-v1"),
+    work_end: time | None = Query(None, description="Origin-local weekday work end; only with no-leave-v1"),
     round_trip: bool = Query(False, description="Only offers with a known return flight"),
     db: Session = Depends(get_db),
 ) -> list[DealRead] | DealPage:
+    if weekend and weekend_mode:
+        raise HTTPException(422, detail={"code": "CONFLICTING_WEEKEND_FILTERS"})
+    if (work_start is not None or work_end is not None) and weekend_mode != "no-leave-v1":
+        raise HTTPException(422, detail={"code": "WORK_HOURS_REQUIRE_NO_LEAVE"})
+    try:
+        hours = WorkHours(start=work_start if work_start is not None else time(9),
+                          end=work_end if work_end is not None else time(17))
+    except ValueError:
+        raise HTTPException(422, detail={"code": "INVALID_WORK_HOURS"}) from None
     query = _filtered_deals_query(
         db,
         origin=origin,
@@ -75,6 +91,36 @@ def list_deals(
             days.between(1, 2),
         )
     query = query.order_by(None)
+    if weekend_mode or sort == "destination_time":
+        # Match against source evidence, not cached Deal dates. All ordinary SQL
+        # filters above still apply; exact mode runs before offset/limit/total.
+        try:
+            matches = itinerary_matches(db, query.order_by(*_deal_order(Deal, "price" if sort == "destination_time" else sort)), weekend_mode, hours)
+        except WeekendQueryTooBroad:
+            code = "DESTINATION_TIME_QUERY_TOO_BROAD" if sort == "destination_time" else "WEEKEND_QUERY_TOO_BROAD"
+            raise HTTPException(422, detail={"code": code}) from None
+        # The metadata join groups by ID; restore the public deterministic order.
+        if sort == "destination_time":
+            # Only reliable airport intervals participate. Unknown/estimated
+            # values share the price fallback, even if their estimate is huge.
+            matches.sort(key=lambda pair: (
+                not pair[2].sort_eligible,
+                -pair[2].airport_interval_minutes if pair[2].sort_eligible and pair[2].airport_interval_minutes is not None else 0,
+                pair[0].price_per_person_pln, pair[0].trip_start, pair[0].id,
+            ))
+        elif sort == "price":
+            matches.sort(key=lambda pair: (pair[0].price_per_person_pln, pair[0].trip_start, pair[0].id))
+        elif sort == "departure":
+            matches.sort(key=lambda pair: (pair[0].trip_start, pair[0].price_per_person_pln, pair[0].id))
+        else:
+            matches.sort(key=lambda pair: (-pair[0].deal_score, pair[0].trip_start, pair[0].id))
+        items = []
+        for deal, assessment, interval in matches[offset:offset + limit]:
+            serialized = serialize_deal(db, deal)
+            serialized.weekend_assessment = assessment
+            serialized.destination_time = interval
+            items.append(serialized)
+        return DealPage(items=items, total=len(matches), offset=offset, limit=limit) if include_total else items
     if not include_total:
         page_query = query.order_by(*_deal_order(Deal, sort)).offset(offset).limit(limit)
         return [serialize_deal(db, d) for d in db.scalars(page_query)]
@@ -117,6 +163,7 @@ def get_deal(slug: str, db: Session = Depends(get_db)) -> DealRead:
 def list_departure_deals(
     iata_code: str,
     limit: int = Query(50, ge=1, le=100),
+    sort: Literal["score", "price", "departure"] = Query("price"),
     db: Session = Depends(get_db),
 ) -> list[DealRead]:
     airport = db.scalar(select(Airport).where(Airport.iata_code == iata_code.upper()))
@@ -127,7 +174,7 @@ def list_departure_deals(
         .where(
             Deal.origin_airport_id == airport.id,
         )
-        .order_by(Deal.deal_score.desc(), Deal.trip_start, Deal.id)
+        .order_by(*_deal_order(Deal, sort))
         .limit(limit)
     )
     return [serialize_deal(db, d) for d in db.scalars(query)]
@@ -137,6 +184,7 @@ def list_departure_deals(
 def list_destination_deals(
     slug: str,
     limit: int = Query(50, ge=1, le=100),
+    sort: Literal["score", "price", "departure"] = Query("price"),
     db: Session = Depends(get_db),
 ) -> list[DealRead]:
     destination = db.scalar(select(Destination).where(Destination.slug == slug))
@@ -147,7 +195,7 @@ def list_destination_deals(
         .where(
             Deal.destination_id == destination.id,
         )
-        .order_by(Deal.deal_score.desc(), Deal.trip_start, Deal.id)
+        .order_by(*_deal_order(Deal, sort))
         .limit(limit)
     )
     return [serialize_deal(db, d) for d in db.scalars(query)]
@@ -184,7 +232,7 @@ def _filtered_deals_query(
         query = query.where(Deal.trip_start <= departure_to)
     if departure_from and departure_to and departure_from > departure_to:
         raise HTTPException(status_code=422, detail="departure_from must be before departure_to")
-    return query.order_by(Deal.deal_score.desc(), Deal.trip_start, Deal.id)
+    return query
 
 
 @router.get("/airports", response_model=list[AirportRead])

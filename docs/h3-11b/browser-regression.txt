@@ -1,0 +1,625 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test budget-modes.spec.ts budget-provenance.spec.ts shared-trip.spec.ts budget-recovery.spec.ts planned-events.spec.ts saved-trip-workflow.spec.ts --trace=off --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [3112]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=332de048c4c54ea4b59943157e1de37b method=GET status=200
+[WebServer] (node:44508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+
+[WebServer] INFO:hoptrip.requests:request_id=0c6a1f21001d4579b055fe2f202f611c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=71a91bf8346d48bc96bd585efb2248de method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=99abd35ef89d4a8497a9ec43f4fc865e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ad2098b989cd455ea864c3b5ade7e405 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9467b07c554641e981e951467ab5fa78 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=b1049dc45611427f81593251cb3ea3a0 method=GET status=200
+
+
+Running 60 tests using 1 worker
+
+(node:32700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/60] [desktop] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in pl
+
+[WebServer] INFO:hoptrip.requests:request_id=edeb0c8da74d4e55b9e09f3a41f961f4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=57847f839eff47b4944ede9987f0a587 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1ce87cf9fa2443bf8bacc328453bdca7 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=b672561d553a4f2cb97124bded7c2ea7 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=7b8cc089b14747989d095e8503f36e3f method=GET status=422
+[2/60] [desktop] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in en
+
+[WebServer] INFO:hoptrip.requests:request_id=80d54553813f422dbda2ccdb3291ff6f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=71df557be68a4df2972875899a0e7e62 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=88bc253d42df4490b842318759048dd6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=1b49eef9091c4529b24a54def593bb1a method=GET status=422
+[3/60] [desktop] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in ru
+
+[WebServer] INFO:hoptrip.requests:request_id=245157b3c4a548cc889cbfdb191194eb method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=d8c378a2998c4fffbe3691ff61db41c5 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=27d5dc56cee74302b73cdee130b334ca method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=35d0ea75fa3f41a882ffa9eb5547a0d0 method=GET status=422
+
+[4/60] [desktop] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in uk
+
+[WebServer] INFO:hoptrip.requests:request_id=0117c43f5fc749efae659eb8c4d0cc70 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=2817f9db5beb43aa98eda72d8efd7b1c method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=f769a34ce8c24d38bb1cef9bbaeba39f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=aee54560aedc4b87bc8c013db7ce9d20 method=GET status=422
+[5/60] [desktop] › tests\budget-modes.spec.ts:48:5 › hidden invalid detailed costs can be reached and corrected from quick budget
+[6/60] [desktop] › tests\budget-modes.spec.ts:67:5 › legacy plan and new taxes/buffer survive save/share without reallocating old contingency
+[WebServer] INFO:hoptrip.requests:request_id=bf266bbc347046548bb8267cf6b59402 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=da5b75866b9d479e9c1be7f95e403271 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=955ffc03fc9442919f07cab220fcbaea method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c945b194905c40ac8ef6d5092589d558 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=580e48c219b24da1a875f9d75408d83f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f926d7d53560431d995a5a076373073f method=GET status=200
+
+[7/60] [desktop] › tests\budget-provenance.spec.ts:17:56 › pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+[WebServer] INFO:hoptrip.requests:request_id=ea3880c053e44a689c35998a8db760e4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d771bb5b3b1242f9a631b10464e0bb1b method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=a9ae858126f24eabaa1f47a149843ccd method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ec9e4b7de03b4e8783cbd692cc6551ee method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=0f4e83d9664e4e5a80b42d049ce929ec method=GET status=200
+[8/60] [desktop] › tests\budget-provenance.spec.ts:17:56 › en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+
+[WebServer] INFO:hoptrip.requests:request_id=c08a2ae824a4483c8ee030a4924dc608 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c8ac1a0d71244b0ca8a0ea7c8b37bc1e method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=a1cac48db2f34ea2a9e6f32815266225 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d3b94889a3b740beb967acff65e4e985 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=24d1e071d5d341eb966b926d97371be3 method=GET status=200
+[9/60] [desktop] › tests\budget-provenance.spec.ts:17:56 › ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+[WebServer] INFO:hoptrip.requests:request_id=16d63220b071445d8039b4cc17d5bfdd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=8ee51ae57e13441d8e40e7fd59d78ae3 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=bebd134292144143be351fd2d7818715 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a3e09735f321450e84a7af70ad50bd26 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=085d5c846b394562bd5c4705be2bf3fe method=GET status=200
+
+[10/60] [desktop] › tests\budget-provenance.spec.ts:17:56 › uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+
+[WebServer] INFO:hoptrip.requests:request_id=4a62eee66bcc43588bf53776a09a3bec method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=9ac4ce1a3541431bb1484015acfba251 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=6e86ded7a5bc42a6a145adfb2bdfaa33 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=1b34de60c5154cb4a66ab47a9a493622 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d0f8f72a5c4444618f7c11346f06867b method=GET status=200
+[11/60] [desktop] › tests\budget-provenance.spec.ts:52:53 › late reference conversion cannot overwrite manual
+[12/60] [desktop] › tests\budget-provenance.spec.ts:52:53 › late reference conversion cannot overwrite reset
+[13/60] [desktop] › tests\budget-provenance.spec.ts:67:5 › legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes
+
+[WebServer] INFO:hoptrip.requests:request_id=244b84fb5da74aa284bdcde60482d326 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=4d9a100c852744d7b1f2168a1b420759 method=GET status=200
+
+[14/60] [desktop] › tests\budget-provenance.spec.ts:78:5 › new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original
+
+[WebServer] INFO:hoptrip.requests:request_id=e4c43fa38bac41549ceb3cd2bfff16d5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=aef0243f6f524e979e0b1b88e3dfb3c5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7cac9e53e5d1472facccd2a9baf959a9 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=30679d53abec4a3fa2e3685f0a08452f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3cace0d6729f40e3a95e82d5b7bf0f32 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d662ac1074f24bf4b4416c37d4e6867d method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=5915c521a66245b7b6cd39995b7c6bf9 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=132299dec1734039a9256d2a91cd4d98 method=GET status=200
+
+[15/60] [desktop] › tests\budget-recovery.spec.ts:5:5 › 321 PLN, travellers and selected tickets survive an invalid date, reload and language changes
+[WebServer] INFO:hoptrip.requests:request_id=e7873ecc419449f988c640dc1ce9613c method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=925830023a4f411c8392a6c5161bd410 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5b4c55be18dc490bb86e67db1ac8cf15 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5e9cdf324d6947adb9cd24917ffd71fc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2a0a1f1f0ad14dd6b1e77586b8e9d09c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2d2ce59981f2424383c62c43369787fc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=cf22dfcb67674c03a8e6fd685a5933e0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ae5fb3f6351640c6b03eb242b57bd989 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ca913ca5e9e74a26ae3a02d71c16672a method=GET status=200
+
+[16/60] [desktop] › tests\planned-events.spec.ts:26:5 › selected ticket variants persist and share with independent costs, without double counting
+[WebServer] INFO:hoptrip.requests:request_id=e2f6a969aa924f7e857490b8bc8787b0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=9abf565aa6da46c896ca9e3c1cf92825 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3a016c6e32fb44f4ac07092ae3001fdc method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6dfc98e4b0d54bad991a753c3ac041d2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c2855b4bce09456cb0735a2648e8f36f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5b517d4cdd1d4aeda55ae0078758ce44 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=fbbe7ac83aa043758daae9927d654be6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=4613d28413e84b2bbf7b24ddcf7c70da method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=87c42cde368a4248a6dc7e7d37e55c5b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=971ab857810a44fe99d2c3ac9a6b2160 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d792232657274f50baba6390c9d73da5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5d7de99091b0477fae5d4579511b8284 method=GET status=200
+[17/60] [desktop] › tests\planned-events.spec.ts:74:5 › different sessions, unknown and zero prices, invalid input and removal keep an honest budget
+
+[WebServer] INFO:hoptrip.requests:request_id=b94065e44e7147ed9083aa4a17995d65 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e88ccd043aa04a3392c805cb8f0a1a51 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f9133bfb79594e9db875008d02200a66 method=GET status=200
+[18/60] [desktop] › tests\planned-events.spec.ts:101:5 › a saved event remains editable when its flight and catalogue no longer exist
+[WebServer] INFO:hoptrip.requests:request_id=a39fb3189cab4c5bb2f354adc762f82f method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=1ebf105785d94c43a66ae9d99f088b50 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=0761e6e1cf42411dad5a0c87eab68608 method=GET status=200
+
+[19/60] [desktop] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in pl
+[WebServer] INFO:hoptrip.requests:request_id=ce1bfd76357c415fbbe938141c4e6971 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f9c4d262641e42b09c84379a9633d23e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=881b0445f74240858ed9fde9e6ed8534 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=dd820dcc65d341348c56fe6f88531ffb method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=66388bf32aae449ba8fe322125a09fc7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=a7b456a030c446fc9f98b63c15ceeabe method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=8584ed21848b4c928c1ca0359ea39c1c method=GET status=200
+[20/60] [desktop] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in en
+[WebServer] INFO:hoptrip.requests:request_id=97b7e6d8fc1b4913b9494cd43a92a12e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=a55564de633f407faa4cefad91191f5e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=f1c42e10538d4e00b08a38d521236738 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=5bb14467be7c4df0922d8996219d3e13 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c665638f0ca94d6da32e6f5a4bc97723 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f5ce36f81d97429d9a762b6566b361a3 method=GET status=200
+
+[21/60] [desktop] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in ru
+
+[WebServer] INFO:hoptrip.requests:request_id=64b0d7e45ca14d5bb4a5750c6bc3bc0d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e0a15da9e0654e1abb5c3201dea72e3f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=afd9080cbcb64d7cbecbbf2658146d74 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6ea8367c6b53432eac607c8725a5597e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=93b9422b34c24d87a04fbc4668fa6abd method=GET status=200
+
+[22/60] [desktop] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in uk
+
+[WebServer] INFO:hoptrip.requests:request_id=f7f4433e1d9c4e40be96e3de24596504 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5ebb064572714d51aaede625c6892d95 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=14b423c52cf64e80aa4609e54235b7fe method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=92e37a274a524cce8b30a5f25e01ea26 method=GET status=200
+
+[23/60] [desktop] › tests\saved-trip-workflow.spec.ts:74:5 › storage events keep two tabs in sync and undo preserves another tab’s new snapshot
+[WebServer] INFO:hoptrip.requests:request_id=c07f5a706aea465eb957d6f834d6b302 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=934e9eb870534362826fdb979b4d0b84 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3866fb85db6444dead6fcd00da470de5 method=GET status=200
+[24/60] [desktop] › tests\saved-trip-workflow.spec.ts:91:5 › corrupt storage is explained, preserved and never presented as an empty list
+
+[WebServer] INFO:hoptrip.requests:request_id=83d531793bb34eb6913ef28cbe90018e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8761df3e034a408c9a747047ff63b300 method=GET status=200
+
+[25/60] [desktop] › tests\saved-trip-workflow.spec.ts:106:5 › capacity never evicts a plan and failed undo leaves the latest collection intact
+
+[WebServer] INFO:hoptrip.requests:request_id=3a61208aa56b417e8b1c4d58b1981afa method=GET status=200
+[26/60] [desktop] › tests\saved-trip-workflow.spec.ts:121:5 › failed removal keeps the list; a later successful removal clears its error and can be undone
+[WebServer] INFO:hoptrip.requests:request_id=f575443f79fb4e65860f57232e6b23a4 method=GET status=200
+
+[27/60] [desktop] › tests\saved-trip-workflow.spec.ts:136:5 › unavailable, missing and past flight snapshots keep all manual settings and honest saved previews
+
+[WebServer] INFO:hoptrip.requests:request_id=a19cbdcf240e4a8b89a344a7ea5ec72e method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=cf1d898c8c85494fa32b20b8cff70b19 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=840ad6ba30524b948fbb4f312e1f2684 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1328e8d46ec44d93a54e50976dc7319e method=GET status=200
+[28/60] [desktop] › tests\shared-trip.spec.ts:6:5 › saved and shared plans survive reload and recipients edit independent copies
+[WebServer] INFO:hoptrip.requests:request_id=5fc37bd86fdf495698e949a9cad286d0 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dd2708c86a0b4466a7faf4401bcb641b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=197dc4be25f446e089c953bce79f9799 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5630ab023fa34d858e11632f1845c3e5 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bf649a204a6c4669b2256cdaaf9f5dbc method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=29749116efec4bd28fa7bb1d30b52192 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=eb68ff400025446b89f7566b8f31cd74 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fed85479f0db4d5e90685a15baa6afcb method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=dce0e2b9f7fa4c08833e8a3c8705ce84 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=82015998f2504c2eac06cbd0cb44d165 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=47a515a2941c49eeb9a070e41813ef8c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f0467844506f4b3790e837e7a3c0fe2b method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=65929b71c1fc42c48204c2cc2111f816 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7271d687685f403fafa9c9d2e1c25ee6 method=GET status=200
+
+[29/60] [desktop] › tests\shared-trip.spec.ts:46:5 › invalid, missing and expired offers retain clear states and honest previews
+[WebServer] INFO:hoptrip.requests:request_id=58d6ccb7457d45a4bcdbc634f87f55cc method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=526ba826aae145b0930e84b2d764e5d5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c5a0b6795f74f5292ea5813808ab8d9 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=d3f94a9e88bc452285302c584b189914 method=GET status=200
+
+[30/60] [desktop] › tests\shared-trip.spec.ts:60:5 › sharing remains available when browser storage and clipboard are blocked
+[WebServer] INFO:hoptrip.requests:request_id=55bbb6c05a4e4069b0325b85bdaf6340 method=GET status=200
+
+(node:42536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[31/60] [mobile] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in pl
+
+[WebServer] INFO:hoptrip.requests:request_id=6e00c789b94d4193a62e19522d676c69 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e900c3f8005c4f379c8836ccd2b8242b method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=65776c402cfa4a8da50ee5acb3a4bd51 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=787bac880d624acd967be48b89070b0f method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=795a549a03c3435b9b4825c42f68b1c7 method=GET status=422
+[32/60] [mobile] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in en
+[WebServer] INFO:hoptrip.requests:request_id=76ee3d7a6a33470bbcaa1189a3145a04 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3e350b6d1118407fb8cf0aed84878221 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=409d1c4922b54376989be8c5b4636484 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=034e2dd30073486da776ba3ea7577325 method=GET status=422
+[33/60] [mobile] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in ru
+[WebServer] INFO:hoptrip.requests:request_id=303050db2aa44674a18b9cd2edb6fd81 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ee6d0f4740c646d49308067c50d0f0f6 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ff0c0a998d3645cbb3019a81382c90e5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6fdaba0c3c974da2ada44c5c39fdb41f method=GET status=422
+
+[34/60] [mobile] › tests\budget-modes.spec.ts:12:56 › quick and detailed budgets retain all costs in uk
+[WebServer] INFO:hoptrip.requests:request_id=ba0a9e1f916b4259935a468a377942db method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=56140d4281a945d49a74401948fdd9ac method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=3727269bbbd34d1ab713f412354b70f4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=15e139721f4c42f3862db2284bfff433 method=GET status=422
+
+[35/60] [mobile] › tests\budget-modes.spec.ts:48:5 › hidden invalid detailed costs can be reached and corrected from quick budget
+[36/60] [mobile] › tests\budget-modes.spec.ts:67:5 › legacy plan and new taxes/buffer survive save/share without reallocating old contingency
+[WebServer] INFO:hoptrip.requests:request_id=e362d3c369d945b4a3c69e913df49e48 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7ea624a8fb7348c5ba04a8bf50152074 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=f2cccb58aacb442e964e4c17e6bc0368 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9d139c46bd8e4f868750109856e03ffd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=f6d60c4d38db4aa0830df969b1b60bc7 method=GET status=200
+
+[37/60] [mobile] › tests\budget-provenance.spec.ts:17:56 › pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+[WebServer] INFO:hoptrip.requests:request_id=c03f48e5663045c6a1068a3bd423ea22 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=37efcf4e2fb946c5b5b0d53476416bfb method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=e23d30acb4df485285925f9a39383254 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=972eabef8a2f4582a367bbd8ea897709 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=eb7853682a63484898f3b38263fa463f method=GET status=200
+
+[38/60] [mobile] › tests\budget-provenance.spec.ts:17:56 › en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+
+[WebServer] INFO:hoptrip.requests:request_id=30f4baa0a4964e6e8a5e6b0f8d32ec16 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=35ab5c68da0e42038e03008f1d55e4e8 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=a5c2c2b47dc54b42b63da52fd5f11e42 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c830435f9b994094937b780cd4535ce9 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=eb569b1530294a66b9b5d78566ba37fe method=GET status=200
+
+[39/60] [mobile] › tests\budget-provenance.spec.ts:17:56 › ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+[WebServer] INFO:hoptrip.requests:request_id=e350111ea2e74c03bcea9709c115efa4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b4a27e2de43c4e85a463c4e38c6aa70c method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=fad8983b927a4632b88b9dd3e8753517 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=3ee1e2da05824f82bf7b956510da3f39 method=GET status=422
+[WebServer] INFO:hoptrip.requests:request_id=ef8f92035ae74623a59ebe5a320e88b8 method=GET status=200
+
+[40/60] [mobile] › tests\budget-provenance.spec.ts:17:56 › uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest
+[WebServer] INFO:hoptrip.requests:request_id=1eeca398776c47f183ac55268548b88e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fd5e5cb29ffb44c2996250f16d51c794 method=GET status=422
+
+
+[WebServer] INFO:hoptrip.requests:request_id=db36f17d2402413c9868cf79ac5bfbc1 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=6aa6c9e6f9f241dea9ef864cc38a0978 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=2c90bbbfff294a68838ec5f06d6bb0ec method=GET status=200
+
+[41/60] [mobile] › tests\budget-provenance.spec.ts:52:53 › late reference conversion cannot overwrite manual
+[42/60] [mobile] › tests\budget-provenance.spec.ts:52:53 › late reference conversion cannot overwrite reset
+[43/60] [mobile] › tests\budget-provenance.spec.ts:67:5 › legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes
+[WebServer] INFO:hoptrip.requests:request_id=c12d14c3e2e143dab4819e260a048f28 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fede291dd7eb46efae022deb9d68882b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=60b3d46e43a4498e92f7bd3d6dc72f48 method=GET status=422
+[44/60] [mobile] › tests\budget-provenance.spec.ts:78:5 › new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original
+
+[WebServer] INFO:hoptrip.requests:request_id=f9ef993d9b884e838b7b5db231e88108 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d192a95f21654923857edfd48a5e4129 method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=e9673ed109b04f6abb40f49939a55677 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=ba71ce03a87b497382d85be3937ec549 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=cd73dfd4fb2a45f0aa794f2077d3403d method=GET status=422
+
+[WebServer] INFO:hoptrip.requests:request_id=df71e0c6ec7e43b988686949c50ddeea method=GET status=200
+[45/60] [mobile] › tests\budget-recovery.spec.ts:5:5 › 321 PLN, travellers and selected tickets survive an invalid date, reload and language changes
+
+[WebServer] INFO:hoptrip.requests:request_id=6555cc39152b4a6c8cc19c063aca7c9a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=0336667a27574d88888d1ab6b3045f0a method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=20f36fccf6a844239c518cb3f063a03a method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=1a21a674d1704013b25c884d15e4e6b3 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=73a104b0ca9c4579b6ea28199ca5f38c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=df4ce607651a4096aadce136243f14c2 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=2c010e7c63f24376adba86dff33e8211 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=06add489d41a4645baa8998cd98137c5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=3b836ac54ff8448f9c4b97800fabaaa9 method=GET status=200
+
+[46/60] [mobile] › tests\planned-events.spec.ts:26:5 › selected ticket variants persist and share with independent costs, without double counting
+[WebServer] INFO:hoptrip.requests:request_id=8cd424e263554cfbb522cc9c7a54053f method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=3f44cfc50d904feba88f99a2dd3668d0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e59c2f94fc784f5f9561a32ca563d6ed method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=972899ab839c419c9cb9afa6c039c7e8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c2a143411d3a4b33a25689432c579356 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=817de02e5473435fbd04ae6a8f7371f5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=80f03479156f4299af73efef9990b461 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=d4fd3df81bb94dd6837b48f3126886cb method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5b208433740e414dadbd0de990988fb8 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=f3c05348e3c54c2a950be3fe3116dae6 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0c25aaca6dd24699abf4346ff65e0888 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b60946a6ea634346a8b71f770778cdfe method=GET status=200
+
+
+[47/60] [mobile] › tests\planned-events.spec.ts:74:5 › different sessions, unknown and zero prices, invalid input and removal keep an honest budget
+[WebServer] INFO:hoptrip.requests:request_id=fd058507ed104e9b8c7c5a8283311250 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=09e672cb271647099989a9aa1fd060b0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=fc394340f9614c8183a954aeda8b8595 method=GET status=200
+
+[48/60] [mobile] › tests\planned-events.spec.ts:101:5 › a saved event remains editable when its flight and catalogue no longer exist
+[WebServer] INFO:hoptrip.requests:request_id=65df1b1694734c98a4c23e9d7b386213 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=70c3a6ead4b34a35a498596969051441 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=52a45ef54cfd4f2eae44aede58ace583 method=GET status=200
+[49/60] [mobile] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in pl
+
+[WebServer] INFO:hoptrip.requests:request_id=07e5e117b5c44c86b1fc0b8ac8729dc7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=e999b4b7e188423d90dba5105e2c12fd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=22773141263c4a538985511b7953dcf3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=6f729a4e9d37427194ace2ebd88caee0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=374840b5fa89434987a4fdcf614a7406 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=e2fbc46b9de44ffb89720f3c42db765d method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=30b3200ab0f642bca95bca5a3da1dce3 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c1bb69327f9f4f68852f68685fd9e167 method=GET status=200
+
+[50/60] [mobile] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in en
+[WebServer] INFO:hoptrip.requests:request_id=cba2903761fa4b4b9899029ba6031fd0 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=806ab836b8c84bd79c486d2afcc6b0a8 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=277abdbc49474aedb5841f600dd2f814 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=bd2b7cc4f3494c3ab3a97e3b7f8a594e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=cea1c9e6e4f44801b231ee909c42d36a method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=cb0666252a2140eaaf2c10eda563869c method=GET status=200
+
+[51/60] [mobile] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in ru
+
+[WebServer] INFO:hoptrip.requests:request_id=1c4a85b7ed2f475d92657b97602614b5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=7e7ce431c7a44a87936a4a806e66bd77 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ff9aaba8429f41c8bca24c099c525649 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=9de316c4f8664569a15d1fdb6ce838bd method=GET status=200
+
+[52/60] [mobile] › tests\saved-trip-workflow.spec.ts:21:56 › saved snapshot feedback, undo and local restoration in uk
+[WebServer] INFO:hoptrip.requests:request_id=73fac370fee94c4882d0d54a7a055eec method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=5908711ae91445a2afb9b208769993fc method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=c8a9e1db493844c6b333906311d6841e method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=ab01ae023eb94a0e9196e580ae8f7fdd method=GET status=200
+[53/60] [mobile] › tests\saved-trip-workflow.spec.ts:74:5 › storage events keep two tabs in sync and undo preserves another tab’s new snapshot
+
+[WebServer] INFO:hoptrip.requests:request_id=eda20bc19dba4dd394ff33ccef58bd4c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7727926887974c43950ad7b3c739a8a4 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=7456ba045e96452d9e0525fe4527dfe9 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=bd73d4091cd64e67b9173d6f2c5073f9 method=GET status=200
+
+[54/60] [mobile] › tests\saved-trip-workflow.spec.ts:91:5 › corrupt storage is explained, preserved and never presented as an empty list
+
+[WebServer] INFO:hoptrip.requests:request_id=09f9b036568e41eaa86ab0bfdadeaf83 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5325b590b0154e16a77d0caf74b2d59e method=GET status=200
+[55/60] [mobile] › tests\saved-trip-workflow.spec.ts:106:5 › capacity never evicts a plan and failed undo leaves the latest collection intact
+[WebServer] INFO:hoptrip.requests:request_id=09f71f4147de4a10bb0363f590f8384b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=c2ebb6433760449cb19ace6806edeaf3 method=GET status=200
+[56/60] [mobile] › tests\saved-trip-workflow.spec.ts:121:5 › failed removal keeps the list; a later successful removal clears its error and can be undone
+[57/60] [mobile] › tests\saved-trip-workflow.spec.ts:136:5 › unavailable, missing and past flight snapshots keep all manual settings and honest saved previews
+[WebServer] INFO:hoptrip.requests:request_id=029af79e85c845e887bbd6594ee5213c method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=74bd6de2434a4f489890e7d8cee00db6 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b5e1de26f1a14dbe88f6186f93f82805 method=GET status=404
+[WebServer] INFO:hoptrip.requests:request_id=34220eaf5f204bb3b906166a2117c19e method=GET status=200
+
+[58/60] [mobile] › tests\shared-trip.spec.ts:6:5 › saved and shared plans survive reload and recipients edit independent copies
+[WebServer] INFO:hoptrip.requests:request_id=bc9642a539fd446abc610764ca0aa339 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=0244ab21476847108c33597a6f2ff67e method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=215591565adf4ae0a0a72369b5e2d10b method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=95621de751714d9085674dc14b9aa467 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=39828e3d701e4f109897d3923de2c4ff method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=528747198b92461da0cfdc67fd9bd4ad method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=5ebf771b21e74971aec2726465ebae03 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=ee3b1e84175e43cdb90326d3869409b4 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=b3a2ac0b6f49441fb84622f0bf318554 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=bc23ed61aa54479b8b51ca6441fdfceb method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b8881c6ebe6343259c139342eb020397 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=c6d8935c4a154672b905ff751745c297 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=791a47d440c443e88ee9e2d2cb7f7f05 method=GET status=200
+[59/60] [mobile] › tests\shared-trip.spec.ts:46:5 › invalid, missing and expired offers retain clear states and honest previews
+[WebServer] INFO:hoptrip.requests:request_id=fb110587bfa1428fad77710c7013b682 method=GET status=404
+
+
+[WebServer] INFO:hoptrip.requests:request_id=0271a3fb066d4c1fa2d89d297e8ce0c7 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=8cd50d04696b41a7a3e53d07b4e9fab4 method=GET status=404
+
+[WebServer] INFO:hoptrip.requests:request_id=934cb695638347de813cdc1262eb0095 method=GET status=200
+
+[60/60] [mobile] › tests\shared-trip.spec.ts:60:5 › sharing remains available when browser storage and clipboard are blocked
+
+[WebServer] INFO:hoptrip.requests:request_id=cbbbee97001d4b76996140aebd459c14 method=GET status=200
+  60 passed (5.3m)

@@ -1,4 +1,5 @@
 import expansion from "./activity-expansion.json";
+import {staticAffiliateUrl} from './static-affiliate-url.ts';
 
 export type DestinationActivity = {
   id:string;
@@ -23,5 +24,7 @@ export const activitySelections:Readonly<Record<string,{
 }>> = expansion as Record<string,{city:string;checkedAt:string;items:DestinationActivity[]}>;
 
 export function activitiesForDestination(slug:string) {
-  return Object.hasOwn(activitySelections,slug) ? activitySelections[slug] : undefined;
+  if(!Object.hasOwn(activitySelections,slug))return undefined;
+  const source=activitySelections[slug];
+  return {...source,items:source.items.map(item=>item.affiliateHref?{...item,affiliateHref:staticAffiliateUrl(item.affiliateHref,'activity')??undefined}:item)};
 }

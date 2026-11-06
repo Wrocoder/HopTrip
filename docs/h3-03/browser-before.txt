@@ -1,0 +1,64 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test accommodation-inclusion.spec.ts --project=desktop --grep pl: --reporter=json
+
+
+
+[WebServer] INFO:     Started server process [45192]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+[WebServer] INFO:hoptrip.requests:request_id=c061c66404ca484f95a15b5fa5236ebd method=GET status=200
+
+
+[WebServer] (node:31612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[WebServer] INFO:hoptrip.requests:request_id=6511854c13b54184b748cb218ca6b8b5 method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=31a58e0d919e43d5a1cae33457a2a268 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=bf475b6d91e44aa6b6805e3084f0ba92 method=GET status=200
+
+Running 1 test using 1 worker
+
+(node:25564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] [desktop] › tests\accommodation-inclusion.spec.ts:13:56 › pl: flight price excludes accommodation for 0, 1 and 3 nights
+
+[WebServer] INFO:hoptrip.requests:request_id=afdac3ee1bac41e79d8e60a05a86cb87 method=POST status=422
+[WebServer] INFO:hoptrip.requests:request_id=8910703577c24f97a65c2b5de6d33dd9 method=POST status=200
+
+  1) [desktop] › tests\accommodation-inclusion.spec.ts:13:56 › pl: flight price excludes accommodation for 0, 1 and 3 nights 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      15 |  const copy=expected[locale];
+      16 |  for(const nights of [0,1,3]){
+    > 17 |   expect((await request.post(`http://127.0.0.1:8125/__test__/weekend-fixtures?enabled=true&nights=${nights}`)).ok()).toBe(true);
+         |                                                                                                                      ^
+      18 |   await page.goto(localizedHref('/deals?destination=weekend-fixture',locale));
+      19 |   const card=page.locator('.deal-card');await expect(card).toHaveCount(1);
+      20 |   await expect(card.locator('.card-cost-scope')).toHaveText(copy.scope);
+        at C:\Users\DmitriyKiselev\PycharmProjects\HopTrip\.cache\aud05-h3-03-20261103\apps\web\tests\accommodation-inclusion.spec.ts:17:118
+
+    Error Context: test-results\accommodation-inclusion-pl-62498-dation-for-0-1-and-3-nights-desktop\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\accommodation-inclusion-pl-62498-dation-for-0-1-and-3-nights-desktop\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\accommodation-inclusion-pl-62498-dation-for-0-1-and-3-nights-desktop\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [desktop] › tests\accommodation-inclusion.spec.ts:13:56 › pl: flight price excludes accommodation for 0, 1 and 3 nights 

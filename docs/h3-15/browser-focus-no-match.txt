@@ -1,0 +1,34 @@
+
+> hoptrip-web@0.1.0 test:e2e
+> playwright test destination-recovery.spec.ts --grep ^pl: zero, one and many --trace=off --reporter=line,json
+
+
+[WebServer] INFO:     Started server process [28124]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8125 (Press CTRL+C to quit)
+
+[WebServer] INFO:hoptrip.requests:request_id=6137645098524f38a3f97e373d26e84d method=GET status=200
+
+[WebServer] (node:47388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:30732) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] INFO:hoptrip.requests:request_id=f6736699e1914a43bfdc99bc4f199b2c method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=b5e3fee754f44e368d44cb2b0398c734 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=93bfd9558f3a4b61a86d04fab3cdadbd method=GET status=200
+
+[WebServer] INFO:hoptrip.requests:request_id=939544312e044f2a8ee8437928c530f5 method=GET status=200
+[WebServer] INFO:hoptrip.requests:request_id=25e05a595d9940299c9c6da0253307b1 method=GET status=200
+
+
+[WebServer] INFO:hoptrip.requests:request_id=d75e212172b54c4ca0bc468d10cf6272 method=GET status=200
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+

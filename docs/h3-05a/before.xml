@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="12" skipped="0" tests="13" time="0.876" timestamp="2026-11-03T18:53:31.195582+01:00" hostname="wave"><testcase classname="apps.api.tests.test_flight_link_binding" name="test_source_changes_disable_stored_link_immediately[source0]" time="0.082"><failure message="AssertionError: assert (not True)&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5B2...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC5C4C6B0&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...950&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC5C4FB90&gt;, &lt;app.models.deal.Deal object at 0x0000023CC6093740&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC5D212B0&gt;
+source = {'link': '/search/KRK0202ROM05021?t=new-ticket'}
+
+    @pytest.mark.parametrize("source", [
+        {"link": "/search/KRK0202ROM05021?t=new-ticket"},
+        {"link": "/search/WRO0101BCN04011?t=another-ticket"},
+        {"link": None}, {}, ["not-an-object"],
+    ])
+    def test_source_changes_disable_stored_link_immediately(isolated_db, link_fixture, monkeypatch, source):
+        _, component, offer, _ = synced(isolated_db, link_fixture, monkeypatch)
+        saved_url = component.metadata_json["outbound_url"]
+        offer.raw_payload = source
+        isolated_db.commit()
+        policy = affiliate.component_policy(isolated_db, component)
+&gt;       assert not policy.available and policy.reason == "ITINERARY_LINK_MISMATCH"
+E       AssertionError: assert (not True)
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5B2...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+
+apps\api\tests\test_flight_link_binding.py:34: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_source_changes_disable_stored_link_immediately[source1]" time="0.037"><failure message="AssertionError: assert (not True)&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5FF...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC5AB1280&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...C40&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC6136C30&gt;, &lt;app.models.deal.Deal object at 0x0000023CC5F6EC30&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC5F6E7B0&gt;
+source = {'link': '/search/WRO0101BCN04011?t=another-ticket'}
+
+    @pytest.mark.parametrize("source", [
+        {"link": "/search/KRK0202ROM05021?t=new-ticket"},
+        {"link": "/search/WRO0101BCN04011?t=another-ticket"},
+        {"link": None}, {}, ["not-an-object"],
+    ])
+    def test_source_changes_disable_stored_link_immediately(isolated_db, link_fixture, monkeypatch, source):
+        _, component, offer, _ = synced(isolated_db, link_fixture, monkeypatch)
+        saved_url = component.metadata_json["outbound_url"]
+        offer.raw_payload = source
+        isolated_db.commit()
+        policy = affiliate.component_policy(isolated_db, component)
+&gt;       assert not policy.available and policy.reason == "ITINERARY_LINK_MISMATCH"
+E       AssertionError: assert (not True)
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5FF...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+
+apps\api\tests\test_flight_link_binding.py:34: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_source_changes_disable_stored_link_immediately[source2]" time="0.037"><failure message="AssertionError: assert (not True)&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC61F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC60E7BC0&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...4E0&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC6229B50&gt;, &lt;app.models.deal.Deal object at 0x0000023CC615A870&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC5FF4680&gt;
+source = {'link': None}
+
+    @pytest.mark.parametrize("source", [
+        {"link": "/search/KRK0202ROM05021?t=new-ticket"},
+        {"link": "/search/WRO0101BCN04011?t=another-ticket"},
+        {"link": None}, {}, ["not-an-object"],
+    ])
+    def test_source_changes_disable_stored_link_immediately(isolated_db, link_fixture, monkeypatch, source):
+        _, component, offer, _ = synced(isolated_db, link_fixture, monkeypatch)
+        saved_url = component.metadata_json["outbound_url"]
+        offer.raw_payload = source
+        isolated_db.commit()
+        policy = affiliate.component_policy(isolated_db, component)
+&gt;       assert not policy.available and policy.reason == "ITINERARY_LINK_MISMATCH"
+E       AssertionError: assert (not True)
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC61F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+
+apps\api\tests\test_flight_link_binding.py:34: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_source_changes_disable_stored_link_immediately[source3]" time="0.036"><failure message="AssertionError: assert (not True)&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5FF...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC62292B0&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...ED0&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC5FF54C0&gt;, &lt;app.models.deal.Deal object at 0x0000023CC6136C90&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC6228E30&gt;
+source = {}
+
+    @pytest.mark.parametrize("source", [
+        {"link": "/search/KRK0202ROM05021?t=new-ticket"},
+        {"link": "/search/WRO0101BCN04011?t=another-ticket"},
+        {"link": None}, {}, ["not-an-object"],
+    ])
+    def test_source_changes_disable_stored_link_immediately(isolated_db, link_fixture, monkeypatch, source):
+        _, component, offer, _ = synced(isolated_db, link_fixture, monkeypatch)
+        saved_url = component.metadata_json["outbound_url"]
+        offer.raw_payload = source
+        isolated_db.commit()
+        policy = affiliate.component_policy(isolated_db, component)
+&gt;       assert not policy.available and policy.reason == "ITINERARY_LINK_MISMATCH"
+E       AssertionError: assert (not True)
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5FF...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+
+apps\api\tests\test_flight_link_binding.py:34: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_source_changes_disable_stored_link_immediately[source4]" time="0.035"><failure message="AssertionError: assert (not True)&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC61F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC5F6D100&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...B30&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC635DF10&gt;, &lt;app.models.deal.Deal object at 0x0000023CC62AB8C0&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC61F5160&gt;
+source = ['not-an-object']
+
+    @pytest.mark.parametrize("source", [
+        {"link": "/search/KRK0202ROM05021?t=new-ticket"},
+        {"link": "/search/WRO0101BCN04011?t=another-ticket"},
+        {"link": None}, {}, ["not-an-object"],
+    ])
+    def test_source_changes_disable_stored_link_immediately(isolated_db, link_fixture, monkeypatch, source):
+        _, component, offer, _ = synced(isolated_db, link_fixture, monkeypatch)
+        saved_url = component.metadata_json["outbound_url"]
+        offer.raw_payload = source
+        isolated_db.commit()
+        policy = affiliate.component_policy(isolated_db, component)
+&gt;       assert not policy.available and policy.reason == "ITINERARY_LINK_MISMATCH"
+E       AssertionError: assert (not True)
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC61F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+
+apps\api\tests\test_flight_link_binding.py:34: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_stale_click_is_not_redirected_or_counted_and_catalog_hides_link" time="0.078"><failure message="assert (not True)">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC635D370&gt;
+api_client = &lt;starlette.testclient.TestClient object at 0x0000023CC635C890&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...BF0&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC62AB170&gt;, &lt;app.models.deal.Deal object at 0x0000023CC62ABA70&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC641C560&gt;
+
+    def test_stale_click_is_not_redirected_or_counted_and_catalog_hides_link(isolated_db, api_client, link_fixture, monkeypatch):
+        _, component, offer, deal = synced(isolated_db, link_fixture, monkeypatch)
+        offer.raw_payload = {"link": "/search/WRO0303BCN06031?t=new"}
+        isolated_db.commit()
+        response = api_client.get(f"/api/v1/deals/{deal.slug}")
+        assert response.status_code == 200
+        item = response.json()["components"][0]
+&gt;       assert not item["available"] and item["redirect_path"] is None
+E       assert (not True)
+
+apps\api\tests\test_flight_link_binding.py:45: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_attribution_must_match_current_project[travelpayouts_marker-999]" time="0.077"><failure message="AssertionError: assert not True&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5F6...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available&#10; +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5F6...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC626D940&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC63D5D00&gt;)&#10; +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC626D940&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...D00&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC635D610&gt;, &lt;app.models.deal.Deal object at 0x0000023CC64471D0&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC6446660&gt;
+name = 'travelpayouts_marker', value = 999
+
+    @pytest.mark.parametrize("name,value", [("travelpayouts_marker", 999), ("travelpayouts_project_id", 999),
+                                           ("travelpayouts_marker", None), ("travelpayouts_project_id", None)])
+    def test_attribution_must_match_current_project(isolated_db, link_fixture, monkeypatch, name, value):
+        settings, component, _, _ = synced(isolated_db, link_fixture, monkeypatch)
+        setattr(settings, name, value)
+&gt;       assert not affiliate.component_policy(isolated_db, component).available
+E       AssertionError: assert not True
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5F6...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+E        +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC5F6...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC626D940&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC63D5D00&gt;)
+E        +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy
+
+apps\api\tests\test_flight_link_binding.py:58: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_attribution_must_match_current_project[travelpayouts_project_id-999]" time="0.033"><failure message="AssertionError: assert not True&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC647...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available&#10; +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC647...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC65498E0&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC63D7B60&gt;)&#10; +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC65498E0&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...B60&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC6479430&gt;, &lt;app.models.deal.Deal object at 0x0000023CC63D61B0&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC64798E0&gt;
+name = 'travelpayouts_project_id', value = 999
+
+    @pytest.mark.parametrize("name,value", [("travelpayouts_marker", 999), ("travelpayouts_project_id", 999),
+                                           ("travelpayouts_marker", None), ("travelpayouts_project_id", None)])
+    def test_attribution_must_match_current_project(isolated_db, link_fixture, monkeypatch, name, value):
+        settings, component, _, _ = synced(isolated_db, link_fixture, monkeypatch)
+        setattr(settings, name, value)
+&gt;       assert not affiliate.component_policy(isolated_db, component).available
+E       AssertionError: assert not True
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC647...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+E        +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC647...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC65498E0&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC63D7B60&gt;)
+E        +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy
+
+apps\api\tests\test_flight_link_binding.py:58: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_attribution_must_match_current_project[travelpayouts_marker-None]" time="0.041"><failure message="AssertionError: assert not True&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available&#10; +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC59D46E0&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC63D7D10&gt;)&#10; +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC59D46E0&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...D10&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC62FB1A0&gt;, &lt;app.models.deal.Deal object at 0x0000023CC63D45F0&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC63D78C0&gt;
+name = 'travelpayouts_marker', value = None
+
+    @pytest.mark.parametrize("name,value", [("travelpayouts_marker", 999), ("travelpayouts_project_id", 999),
+                                           ("travelpayouts_marker", None), ("travelpayouts_project_id", None)])
+    def test_attribution_must_match_current_project(isolated_db, link_fixture, monkeypatch, name, value):
+        settings, component, _, _ = synced(isolated_db, link_fixture, monkeypatch)
+        setattr(settings, name, value)
+&gt;       assert not affiliate.component_policy(isolated_db, component).available
+E       AssertionError: assert not True
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+E        +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62F...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC59D46E0&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC63D7D10&gt;)
+E        +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy
+
+apps\api\tests\test_flight_link_binding.py:58: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_attribution_must_match_current_project[travelpayouts_project_id-None]" time="0.032"><failure message="AssertionError: assert not True&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62A...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available&#10; +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62A...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC6320E30&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC6159C10&gt;)&#10; +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC6320E30&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...C10&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC64790D0&gt;, &lt;app.models.deal.Deal object at 0x0000023CC61D3740&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC62FB0B0&gt;
+name = 'travelpayouts_project_id', value = None
+
+    @pytest.mark.parametrize("name,value", [("travelpayouts_marker", 999), ("travelpayouts_project_id", 999),
+                                           ("travelpayouts_marker", None), ("travelpayouts_project_id", None)])
+    def test_attribution_must_match_current_project(isolated_db, link_fixture, monkeypatch, name, value):
+        settings, component, _, _ = synced(isolated_db, link_fixture, monkeypatch)
+        setattr(settings, name, value)
+&gt;       assert not affiliate.component_policy(isolated_db, component).available
+E       AssertionError: assert not True
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62A...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal').available
+E        +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC62A...u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=hoptrip_web_deal') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC6320E30&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC6159C10&gt;)
+E        +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy
+
+apps\api\tests\test_flight_link_binding.py:58: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_click_keeps_opaque_context_currency_and_attribution_without_refresh_token" time="0.035"><failure message="app.providers.base.ProviderPermanentError: Invalid partner links response">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC61D0B60&gt;
+api_client = &lt;starlette.testclient.TestClient object at 0x0000023CC6159B50&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...8E0&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC6596C90&gt;, &lt;app.models.deal.Deal object at 0x0000023CC6597890&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC6596B70&gt;
+
+    def test_click_keeps_opaque_context_currency_and_attribution_without_refresh_token(isolated_db, api_client, link_fixture, monkeypatch):
+        settings, _, component, offer, deal = link_fixture
+        # These are synthetic source parameters, not newly invented supported fields.
+        opaque = "/search/WRO0101BCN04011?" + urlencode([
+            ("t", "opaque-ticket"), ("t", "connection-open-jaw"), ("label", "Málaga &amp; Łódź"),
+            ("adults", "1"), ("currency", "eur"), ("expected_price_currency", "usd"),
+        ])
+        offer.raw_payload = {"link": opaque}
+        isolated_db.commit()
+&gt;       synced(isolated_db, link_fixture, monkeypatch)
+
+apps\api\tests\test_flight_link_binding.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+apps\api\tests\test_flight_link_binding.py:18: in synced
+    asyncio.run(partner_links.sync_partner_links(db, transport=httpx.MockTransport(success)))
+..\..\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC61D0B60&gt;
+
+    async def sync_partner_links(
+        db: Session, *, transport: httpx.AsyncBaseTransport | None = None
+    ) -&gt; LinkSyncResult:
+        settings = get_settings()
+        result = LinkSyncResult(enabled=settings.travelpayouts_links_enabled)
+        if not result.enabled:
+            return result
+        marker, project = settings.travelpayouts_marker, settings.travelpayouts_project_id
+        if not settings.travelpayouts_api_token or not marker or not project:
+            raise ProviderNotConfigured("Partner link credentials are incomplete")
+        program = db.scalar(
+            select(AffiliateProgram)
+            .join(AffiliateProvider)
+            .where(
+                AffiliateProvider.code == "travelpayouts",
+                AffiliateProgram.code == "aviasales",
+                AffiliateProvider.is_active.is_(True),
+                AffiliateProgram.is_active.is_(True),
+                AffiliateProvider.onboarding_status == "APPROVED",
+                AffiliateProgram.onboarding_status == "APPROVED",
+            )
+        )
+        if program is None:
+            raise ProviderNotConfigured("Aviasales program is not approved and active")
+        provider = db.get(AffiliateProvider, program.provider_id)
+        if (
+            provider is None
+            or "AFFILIATE_LINK" not in provider.capabilities_json
+            or "AFFILIATE_LINK" not in program.capabilities_json
+            or "tp.media" not in program.allowed_hosts
+            or program.adapter_code != "stored_link"
+            or program.tracking_param is not None
+        ):
+            raise ProviderNotConfigured("Unsupported Aviasales link policy")
+        active_ids = available_deals_query().with_only_columns(Deal.id)
+        rows = db.execute(
+            select(DealComponent, TravelOffer)
+            .join(TravelOffer, DealComponent.travel_offer_id == TravelOffer.id)
+            .where(
+                DealComponent.deal_id.in_(active_ids),
+                DealComponent.component_type == "FLIGHT",
+                TravelOffer.source == "travelpayouts_data",
+            )
+            .order_by(DealComponent.id)
+        ).all()
+        pending: list[tuple[DealComponent, str]] = []
+        for component, offer in rows:
+            # Explicit manual binding to another program takes precedence.
+            if component.affiliate_program_id not in (None, program.id):
+                continue
+            metadata = dict(component.metadata_json or {})
+            try:
+                direct = source_url(offer.raw_payload.get("link"))
+            except ValueError:
+                metadata.pop("outbound_url", None)
+                component.metadata_json = metadata
+                result.invalid_sources += 1
+                continue
+            if component.affiliate_program_id == program.id and valid_partner(
+                metadata.get("outbound_url"), direct, marker, project
+            ):
+                result.unchanged += 1
+                continue
+            # An old URL must not keep advertising previous dates/prices if conversion fails.
+            metadata.pop("outbound_url", None)
+            component.metadata_json = metadata
+            pending.append((component, direct))
+        db.commit()
+        async with httpx.AsyncClient(timeout=30, transport=transport, follow_redirects=False) as client:
+            for start in range(0, len(pending), 10):
+                if start:
+                    await asyncio.sleep(0.7)  # Below 100 requests/minute; pipeline lock is shared.
+                batch = pending[start : start + 10]
+                requested = {direct for _, direct in batch}
+                try:
+                    response = await client.post(
+                        "https://api.travelpayouts.com/links/v1/create",
+                        headers={"X-Access-Token": settings.travelpayouts_api_token},
+                        json={
+                            "trs": project,
+                            "marker": marker,
+                            "shorten": False,
+                            "links": [
+                                {"url": direct, "sub_id": PLACEMENT_SUB_ID}
+                                for direct in sorted(requested)
+                            ],
+                        },
+                    )
+                except httpx.TransportError:
+                    raise ProviderTransientError("Partner links transport failure") from None
+                if response.status_code == 429 or response.status_code &gt;= 500:
+                    raise ProviderTransientError(
+                        f"Partner links HTTP {response.status_code}",
+                        _retry_after(response.headers.get("Retry-After")),
+                    )
+                if response.status_code != 200:
+                    raise ProviderPermanentError(f"Partner links HTTP {response.status_code}")
+                try:
+                    body = response.json()
+                    if body.get("code") != "success":
+                        raise ValueError
+                    converted: dict[str, str] = {}
+                    for item in body["result"]["links"]:
+                        direct, partner = item["url"], item["partner_url"]
+                        if (
+                            item["code"] != "success"
+                            or direct not in requested
+                            or not valid_partner(partner, direct, marker, project)
+                        ):
+                            raise ValueError
+                        converted[direct] = partner
+                    if set(converted) != requested:
+                        raise ValueError
+                except (ValueError, TypeError, KeyError, AttributeError):
+&gt;                   raise ProviderPermanentError("Invalid partner links response") from None
+E                   app.providers.base.ProviderPermanentError: Invalid partner links response
+
+apps\api\app\services\partner_links.py:192: ProviderPermanentError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_tracking_override_and_missing_source_cannot_bypass_identity_gate" time="0.033"><failure message="AssertionError: assert not True&#10; +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC615...456&amp;u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=ht-synthetic').available&#10; +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC615...456&amp;u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=ht-synthetic') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC65E0500&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC65964B0&gt;, 'ht-synthetic')&#10; +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023CC65E0500&gt;
+link_fixture = (Settings(app_name='HopTrip API', app_env='development', log_level='INFO', database_url='postgresql+psycopg://hoptrip:...4B0&gt;, &lt;app.models.offer.TravelOffer object at 0x0000023CC661FC20&gt;, &lt;app.models.deal.Deal object at 0x0000023CC61F6B70&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023CC6136B40&gt;
+
+    def test_tracking_override_and_missing_source_cannot_bypass_identity_gate(isolated_db, link_fixture, monkeypatch):
+        _, program, component, _, _ = link_fixture
+        synced(isolated_db, link_fixture, monkeypatch)
+        program.tracking_param = "sub_id"
+        isolated_db.commit()
+&gt;       assert not affiliate.component_policy(isolated_db, component, "ht-synthetic").available
+E       AssertionError: assert not True
+E        +  where True = LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC615...456&amp;u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=ht-synthetic').available
+E        +    where LinkPolicy(available=True, reason='AVAILABLE', program=&lt;app.models.affiliate.AffiliateProgram object at 0x0000023CC615...456&amp;u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FWRO0101BCN04011%3Fa%3D1%26b%3D2%26currency%3Dpln&amp;sub_id=ht-synthetic') = &lt;function component_policy at 0x0000023CC57EC220&gt;(&lt;sqlalchemy.orm.session.Session object at 0x0000023CC65E0500&gt;, &lt;app.models.deal.DealComponent object at 0x0000023CC65964B0&gt;, 'ht-synthetic')
+E        +      where &lt;function component_policy at 0x0000023CC57EC220&gt; = affiliate.component_policy
+
+apps\api\tests\test_flight_link_binding.py:95: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_flight_link_binding" name="test_url_query_order_does_not_change_same_source_identity" time="0.034" /></testsuite></testsuites>

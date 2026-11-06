@@ -26,21 +26,22 @@ def deal_events(
     category: EventCategory = "ALL", db: Session = Depends(get_db),
     date_mode: Literal["flight", "stay", "other"] = "flight",
     event_date: date | None = None, page: int = Query(1, ge=1, le=84),
+    fit_mode: Literal["all", "possible"] = "all",
 ) -> EventResults:
     settings = get_settings()
     if not settings.events_enabled:
-        return EventResults(status="DISABLED", date_mode=date_mode)
+        return EventResults(status="DISABLED", date_mode=date_mode, fit_mode=fit_mode)
     deal = db.scalar(available_deals_query().where(Deal.slug == slug))
     if deal is None:
         raise HTTPException(404, "Deal not found")
     context = serialize_deal(db, deal)
     if not context.events_supported:
-        return EventResults(status="UNSUPPORTED", date_mode=date_mode)
+        return EventResults(status="UNSUPPORTED", date_mode=date_mode, fit_mode=fit_mode)
     destination = db.get(Destination, deal.destination_id)
     city = event_city(context.destination_slug, context.destination_country_code, settings.events_countries,
                       destination.city if destination else '', destination.timezone if destination else None)
     if city is None:
-        return EventResults(status="UNSUPPORTED", date_mode=date_mode)
+        return EventResults(status="UNSUPPORTED", date_mode=date_mode, fit_mode=fit_mode)
     zone = ZoneInfo(city.timezone)
     facts = context.flight_facts
     arrival = facts.outbound_arrival
@@ -54,7 +55,7 @@ def deal_events(
         if date_mode != "flight":
             raise HTTPException(422, "Explicit stay or independent search dates are required")
         if context.trip_type == "ONE_WAY":
-            return EventResults(status="NEEDS_DATES")
+            return EventResults(status="NEEDS_DATES", fit_mode=fit_mode)
         start_date, end_date = trip_start, min(trip_end, trip_start + timedelta(days=30))
     now = datetime.now(UTC)
     today = now.astimezone(zone).date()
@@ -73,11 +74,12 @@ def deal_events(
     search_start, search_end = (event_date, event_date) if event_date else (start_date, end_date)
     if search_end < start_date:
         return EventResults(status="EMPTY", start_date=start_date, end_date=end_date,
-                            date_mode=date_mode, event_date=event_date, page=page)
+                            date_mode=date_mode, fit_mode=fit_mode, event_date=event_date, page=page)
     # Read the selected day directly: a busy first day must not consume the catalogue limit
     # and hide later dates. Public requests still read only the local catalogue.
     result = event_service.search(settings, deal.destination_id, search_start, search_end, category, db)
     result.date_mode = date_mode
+    result.fit_mode = fit_mode
     result.start_date, result.end_date = start_date, end_date
     result.event_date, result.page = event_date, page
     if result.status not in {"READY", "EMPTY"}:
@@ -99,11 +101,19 @@ def deal_events(
                 continue
         eligible.append(event)
     grouped = group_events(eligible)
+    # Only definite conflicts are excluded. Unknowns and tight margins remain visible.
+    # Assess grouped ticket options before pagination so totals/pages describe this mode.
+    assessments = {}
+    if fit_mode == "possible":
+        assessments = {event.id: combined_flight_fit(
+            event, facts, trip_start, trip_end if context.trip_type == "ROUND_TRIP" else None,
+        ) for event in grouped}
+        grouped = [event for event in grouped if assessments[event.id].status != "CONFLICT"]
     result.total = len(grouped)
     offset = (page - 1) * result.page_size
     result.events = grouped[offset:offset + result.page_size]
     result.has_more = offset + result.page_size < result.total
-    result.flight_fit = {event.id: combined_flight_fit(
+    result.flight_fit = {event.id: assessments.get(event.id) or combined_flight_fit(
         event, facts, trip_start, trip_end if context.trip_type == "ROUND_TRIP" else None,
     ) for event in result.events}
     result.status = "READY" if result.events else "EMPTY"

@@ -1,0 +1,949 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "saved-plan-identity.spec.ts",
+      "--trace=off",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12b-20261104/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12b-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12b-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12b-20261104/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/aud05-h3-12b-20261104/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "saved-plan-identity.spec.ts",
+      "file": "saved-plan-identity.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7463,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mTa kopia jest już zapisana\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mZachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mTa kopia jest już zapisana\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mZachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mTa kopia jest już zapisana\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mZachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:07.306Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-pl-exp-32013--through-reload-and-opening-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-9ec8063e35c4c4fa5960",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6791,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mThis snapshot is already saved\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mKeep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mThis snapshot is already saved\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mKeep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mThis snapshot is already saved\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mKeep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:15.974Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-en-exp-5ce2e--through-reload-and-opening-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-1b157e792396e01c5d95",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6551,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЭта копия уже сохранена\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mСохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЭта копия уже сохранена\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mСохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЭта копия уже сохранена\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mСохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:24.011Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-ru-exp-73d9e--through-reload-and-opening-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-f54e3ed90b8d7e35cafa",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6598,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЦю копію вже збережено\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mЗбережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЦю копію вже збережено\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mЗбережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЦю копію вже збережено\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mЗбережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:31.761Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-uk-exp-e96c0--through-reload-and-opening-desktop\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-b531dd4d026df5d6e63e",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "fresh saves use v2 only; remove and undo retain identity while advancing revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:39.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-8c2cc770553c69215286",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "old tabs cannot overwrite v2; importing additions never resurrects an unchanged deleted plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 688,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:41.217Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-0ef268155851f88b3cc4",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 31,
+          "column": 5
+        },
+        {
+          "title": "a legacy change while migration waits for the cross-tab lock yields conflict without overwriting either key",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 813,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:41.920Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-d72efd8224d50040c6cc",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 39,
+          "column": 5
+        },
+        {
+          "title": "parallel saves from two tabs retain both plans with distinct IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3199,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:42.747Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-6d638fba8fd0fca15f7c",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "failed migration preserves the source; unavailable locking keeps reading and sharing available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 981,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:45.963Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-9074b5cdee3dfa202a57",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 55,
+          "column": 5
+        },
+        {
+          "title": "pl: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6789,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mTa kopia jest już zapisana\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mZachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mTa kopia jest już zapisana\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mZachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mTa kopia jest już zapisana\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mZachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta wersja nie jest jeszcze na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisujemy zmiany…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Zapisz i udostępnij wyjazd\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Zachowaj plan podróżyZapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis dodaje kopię do listy. Zmiany kalkulatora zapisujemy osobno w tej przeglądarce; zapisz ponownie, aby zachować nową kopię. Otwarcie kopii przywraca też jej lokalny szkic kalkulatora, jeśli istnieje.Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.Nowe linki przechowują plan po # w adresie, poza żądaniem wysyłanym do witryny. Link nie jest szyfrowany: każdy odbiorca może odczytać plan. Przeglądarka i usługa, w której wkleisz link, mogą zachować cały adres.Ta kopia jest na liście zapisanych wyjazdów.Zapisz wyjazdUdostępnijZapisane wyjazdyZapisano wyjazd w tej przeglądarce. Znajdziesz go na liście zapisanych wyjazdów.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:47.596Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-pl-exp-32013--through-reload-and-opening-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-1b8b9160e2a114c042f3",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "en: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6600,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mThis snapshot is already saved\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mKeep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mThis snapshot is already saved\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mKeep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mThis snapshot is already saved\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mKeep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This version is not in your saved trips yet.Save tripShareSaved tripsSaving changes…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Save and share the trip\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Keep your trip planSaved only in this browser profile on this device. Clearing site data removes your plans. Keep a share link to open a copy elsewhere.Saving adds a snapshot to the list. Calculator edits are saved separately in this browser; save again to keep a new snapshot. Opening a snapshot also restores its local calculator draft, if present.The link contains the route, dates, traveller count and entered budget. Anyone with it can view these details. It is a plan snapshot, not a current seller offer.New links keep the plan after # in the address, outside the request sent to the site. The link is not encrypted: anyone who receives it can read the plan. Your browser and the service you paste it into may retain the full link.This snapshot is in your saved trips.Save tripShareSaved tripsTrip saved in this browser. Find it in your saved trips.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T18:59:55.525Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-en-exp-5ce2e--through-reload-and-opening-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-dd61d077c56f105ec220",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "ru: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6400,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЭта копия уже сохранена\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mСохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЭта копия уже сохранена\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mСохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЭта копия уже сохранена\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mСохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Этой версии ещё нет в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиСохраняем изменения…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Сохранить поездку и поделиться\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Сохраните план поездкиСохранено только в этом профиле браузера на этом устройстве. Удаление данных сайта удалит планы. Сохраните ссылку, чтобы открыть копию в другом месте.Сохранение добавляет копию в список. Правки калькулятора сохраняются отдельно в этом браузере; сохраните план ещё раз, чтобы добавить новую копию. При открытии копии также восстанавливается её локальный черновик калькулятора, если он есть.Ссылка содержит маршрут, даты, число людей и введённый бюджет. Любой получатель может увидеть эти данные. Это копия плана, а не актуальное предложение продавца.Новые ссылки хранят план после # в адресе, вне запроса к сайту. Ссылка не зашифрована: любой получатель может прочитать план. Браузер и сервис, куда вы вставите ссылку, могут сохранить полный адрес.Эта копия есть в сохранённых поездках.Сохранить поездкуПоделитьсяСохранённые поездкиПоездка сохранена в этом браузере. Она доступна в списке сохранённых поездок.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:03.164Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-ru-exp-73d9e--through-reload-and-opening-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-81cb28f86083650ed895",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "uk: explicit legacy migration preserves tokens, backup and permanent IDs through reload and opening",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6630,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЦю копію вже збережено\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mЗбережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЦю копію вже збережено\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mЗбережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей.\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                      "column": 245,
+                      "line": 23
+                    },
+                    "snippet": "  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                        "column": 245,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save')\nExpected substring: \u001b[32m\"\u001b[7mЦю копію вже збережено\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7mЗбережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" locator('#trip-save') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save')\u001b[22m\n\u001b[2m    - locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m    - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Цієї версії ще немає у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіЗберігаємо зміни…\"\u001b[22m\n\u001b[2m    13 × locator resolved to <section tabindex=\"-1\" id=\"trip-save\" aria-label=\"Зберегти подорож і поділитися\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"Збережіть план подорожіЗбережено лише в цьому профілі браузера на цьому пристрої. Видалення даних сайту видалить плани. Збережіть посилання, щоб відкрити копію в іншому місці.Збереження додає копію до списку. Правки калькулятора зберігаються окремо в цьому браузері; збережіть план ще раз, щоб додати нову копію. Відкриття копії також відновлює її локальну чернетку калькулятора, якщо вона є.Посилання містить маршрут, дати, кількість людей і введений бюджет. Будь-який отримувач може побачити ці дані. Це копія плану, а не актуальна пропозиція продавця.Нові посилання зберігають план після # в адресі, поза запитом до сайту. Посилання не зашифроване: кожен отримувач може прочитати план. Браузер і сервіс, куди ви вставите посилання, можуть зберегти повну адресу.Ця копія є у збережених подорожах.Зберегти подорожПоділитисяЗбережені подорожіПодорож збережено в цьому браузері. Вона доступна у списку збережених подорожей.\"\u001b[22m\n\n\n  21 |  expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  22 |  if(locale==='pl')await page.locator('main').screenshot({path:info.outputPath('identity-320.png'),scale:'css',animations:'disabled'});\n> 23 |  await cards(page).first().getByRole('link').click();await expect(page.locator('#budget-food')).toHaveValue('0');await page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();await expect(page.locator('#trip-save')).toContainText(savedTripCopy[locale].already);\n     |                                                                                                                                                                                                                                                     ^\n  24 | });\n  25 | test('fresh saves use v2 only; remove and undo retain identity while advancing revision',async({page})=>{\n  26 |  await page.goto('/deals/browser-deal');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();await expect(page.getByTestId('saved-plan-state')).toHaveText(savedTripCopy.pl.saved);\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts:23:245"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:10.690Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\test-results\\saved-plan-identity-uk-exp-e96c0--through-reload-and-opening-mobile\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\aud05-h3-12b-20261104\\apps\\web\\tests\\saved-plan-identity.spec.ts",
+                    "column": 245,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-b36d927eabaf93d35734",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 13,
+          "column": 56
+        },
+        {
+          "title": "fresh saves use v2 only; remove and undo retain identity while advancing revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1134,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:18.254Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-2ca0a8de5b1db04229fe",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "old tabs cannot overwrite v2; importing additions never resurrects an unchanged deleted plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 586,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:19.729Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-0eb762449b81116240ab",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 31,
+          "column": 5
+        },
+        {
+          "title": "a legacy change while migration waits for the cross-tab lock yields conflict without overwriting either key",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 745,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:20.327Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-ea3dbaf203bd66c58af8",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 39,
+          "column": 5
+        },
+        {
+          "title": "parallel saves from two tabs retain both plans with distinct IDs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3004,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:21.091Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-4436b106946b25fce1a5",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "failed migration preserves the source; unavailable locking keeps reading and sharing available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 844,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T19:00:24.108Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "eb39d5618c928f31b16e-599cf89ccceafe5a1f76",
+          "file": "saved-plan-identity.spec.ts",
+          "line": 55,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T18:59:02.991Z",
+    "duration": 83295.531,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

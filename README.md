@@ -8,12 +8,13 @@ policy, idempotent ingestion, PostgreSQL pipeline locking, sessions/conversion a
 protected moderation, CI and isolated browser/backup checks. Real data access, program
 approval, domain/Oracle deployment and actual commission attribution remain external acceptance.
 
-- [Current implementation and verification](docs/implementation-status.md)
-- [18 internal tasks and completion log](docs/independent-development-tasks.md)
+- [Active H3 implementation plan](docs/HOPTRIP_CORTEX_IMPLEMENTATION_PLAN_V3.md)
+- [H3 progress and verification](docs/HOPTRIP_H3_PROGRESS.md)
+- [H3 decisions](docs/HOPTRIP_H3_DECISIONS.md)
 - [Пошаговые действия владельца: домен, аккаунты, ссылки](docs/owner-action-guide.md)
 - [План соцсетей: создание аккаунтов, проверка постов и автопубликация](docs/social-publishing-plan.md)
 - [Operations and safe migration/backup procedures](docs/operations.md)
-- [Original audit](docs/project-audit-and-plan.md)
+- [Documentation index](docs/README.md)
 
 ## Run locally
 
