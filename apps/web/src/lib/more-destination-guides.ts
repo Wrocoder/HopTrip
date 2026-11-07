@@ -33,8 +33,8 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],routes:[{label:"Sprawdź aktualny katalog lotów",href:"/deals?destination=valencia"}],related:["alicante-airport","madrid-airport","baggage"],
  },
  "alicante-airport":{
-  title:"Alicante: autobus C6 i dalsza droga po Costa Blanca",
-  description:"Dojazd z ALC do Alicante, przesiadka na TRAM i wybór transferu do innej miejscowości wybrzeża.",
+  title:"Lotnisko Alicante: dojazd do centrum autobusem C6",
+  description:"Jak dojechać z lotniska Alicante do centrum: autobus C6, przesiadka na TRAM, taxi i transfer. Sprawdź rozkład, taryfę i drogę powrotną.",
   draft:false,reviewedAt:"2026-09-24",category:"destinations",
   paragraphs:["Lotnisko Alicante-Elche (ALC) może być początkiem pobytu w Alicante albo wyjazdu do innej miejscowości Costa Blanca. Rozdziel te scenariusze: autobus do centrum nie zawsze jest najlepszym pierwszym etapem do hotelu poza miastem. Zapisz pełną nazwę miejscowości i adres."],
   sections:[

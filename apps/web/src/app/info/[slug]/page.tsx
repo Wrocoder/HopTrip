@@ -19,6 +19,7 @@ import {LegalSources} from "../../components/legal-sources";
 import {hasGuideTranslation} from '../../../lib/i18n/guide-slugs';
 import {ArticleIllustration} from '../../components/article-illustration';
 import {articleInlineSection} from '../../../lib/article-imagery';
+import {AlicanteArrival} from '../../components/alicante-arrival';
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
@@ -62,10 +63,11 @@ export default async function InfoPage({params}:Props) {
  </section>}
  {slug==="privacy" && <LegalSources locale="pl"/>}
  {page.reviewedAt && <p className="muted">HopTrip · Sprawdzono <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
+ {slug==='alicante-airport'&&<AlicanteArrival/>}
  {page.draft && <p role="note">{pl.draft}</p>}{page.paragraphs.map(p=><p key={p}>{p}</p>)}
  {!page.draft && !page.noindex && <ArticleIllustration slug={slug}/>}
  {slug==="trip-budget" && <TripBudgetCalculator/>}
- {page.sections?.map((section,index)=><section key={section.title}><h2>{section.title}</h2>{section.paragraphs.map(p=><p key={p}>{p}</p>)}
+ {page.sections?.map((section,index)=><section key={section.title} id={slug==='alicante-airport'?`alicante-section-${index}`:undefined}><h2>{section.title}</h2>{section.paragraphs.map(p=><p key={p}>{p}</p>)}
   {section.links && <ul>{section.links.map(link=><li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}</ul>}
   {section.sourceIds && <ul aria-label={`Źródła: ${section.title}`}>{section.sourceIds.map(id=>{
    const source=page.sources?.[id];
