@@ -1,8 +1,16 @@
 import type {Locale} from './i18n/config.ts';
+import photos from './article-photo-data.json' with {type:'json'};
+import {articlePhotoCaption} from './article-photo-captions.ts';
 
-type DestinationImage={src:string;title:string;author:string;source:string;license:string;licenseUrl:string;alt:Record<Locale,string>};
+type DestinationImage={src:string;title:string;author:string;source:string;license:string;licenseUrl:string;alt:Record<Locale,string>;authorUrl?:string;attribution?:string;shareAlike?:boolean};
+// Reuse reviewed local city photographs and their attribution, never generic article covers.
+const cityPhotoKeys=['paris','milan','stockholm','oslo','lisbon','athens','london','madrid','valencia','alicante','malaga','porto','vienna','prague','copenhagen','amsterdam'] as const;
+const cityImages:Record<string,DestinationImage>=Object.fromEntries(cityPhotoKeys.map(key=>[key,{
+ ...photos[key],alt:{pl:articlePhotoCaption(key,'pl'),en:articlePhotoCaption(key,'en'),ru:articlePhotoCaption(key,'ru'),uk:articlePhotoCaption(key,'uk')},
+}]));
 // Editorial images only: this allowlist never changes catalog eligibility or ranking.
 export const destinationImages:Readonly<Record<string,DestinationImage>>={
+ ...cityImages,
  barcelona:{src:'/media/destinations/barcelona.webp',title:'Parc guell - panoramio.jpg',author:'essetefano',
   source:'https://commons.wikimedia.org/wiki/File:Parc_guell_-_panoramio.jpg',license:'CC BY 3.0',licenseUrl:'https://creativecommons.org/licenses/by/3.0/',
   alt:{pl:'Pawilony wejściowe Parku Güell z panoramą Barcelony',en:'Entrance pavilions of Park Güell overlooking Barcelona',ru:'Входные павильоны парка Гуэль на фоне Барселоны',uk:'Вхідні павільйони парку Ґуель на тлі Барселони'}},

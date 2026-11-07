@@ -88,6 +88,7 @@ test('origin transitions hide previous snapshots, last selection wins and Back r
 });
 
 test('one real offer per preview needs no filler and missing licensed image keeps the flight action',async({page,request})=>{
+ await page.route('**/_next/image?*',route=>route.abort('failed'));
  await request.post(`${fixture}/__test__/home-collections?scenario=one`);
  await page.goto('/?origin=WRO');
  for(const id of homeCollectionIds){

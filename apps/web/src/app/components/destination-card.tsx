@@ -3,6 +3,7 @@ import {useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {destinationImage,imageryCopy} from '../../lib/destination-imagery';
+import {articlePhotoCopy} from '../../lib/article-photo-captions';
 import type {Locale} from '../../lib/i18n/config';
 import styles from './destination-card.module.css';
 
@@ -19,7 +20,10 @@ export function DestinationPhoto({slug,locale}:{slug:string;locale:Locale}) {
 export function DestinationPhotoCredit({slug,locale}:{slug:string;locale:Locale}) {
  const image=destinationImage(slug),copy=imageryCopy[locale];
  return image?<details className={styles.credit}><summary>{copy.photo}: {image.author}</summary>
+   {image.authorUrl&&<p><a href={image.authorUrl} rel="noreferrer">{image.author}</a></p>}
    <p><a href={image.source} rel="noreferrer">{image.title}</a> · <a href={image.licenseUrl} rel="noreferrer">{image.license}</a><br/>{copy.edited}</p>
+   {image.attribution&&<p>{image.attribution}</p>}
+   {image.shareAlike&&<p>{articlePhotoCopy[locale].adapted}</p>}
   </details>:null;
 }
 

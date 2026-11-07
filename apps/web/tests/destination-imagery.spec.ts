@@ -64,7 +64,7 @@ test('all local WebP assets and credits ship with bounded responsive responses',
  const sizes=[];
  for(const image of Object.values(destinationImages)){
   const original=await request.get(image.src);expect(original.status()).toBe(200);expect(original.headers()['content-type']).toContain('image/webp');
-  expect((await original.body()).length).toBeLessThanOrEqual(110000);
+  expect((await original.body()).length).toBeLessThanOrEqual(image.src.startsWith('/media/articles/')?360000:110000);
   for(const width of [384,640]){
    const response=await request.get(`/_next/image?url=${encodeURIComponent(image.src)}&w=${width}&q=75`,{headers:{accept:'image/webp'}});
    expect(response.status()).toBe(200);expect(response.headers()['content-type']).toContain('image/webp');
