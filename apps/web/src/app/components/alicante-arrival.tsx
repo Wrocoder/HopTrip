@@ -1,6 +1,7 @@
 import type {Locale} from '../../lib/i18n/config';
 import {localizedHref} from '../../lib/i18n/routing';
 import styles from './alicante-arrival.module.css';
+import {guideUi} from '../../lib/i18n/guide-ui';
 
 const copy={
  pl:{ticket:'za zwykły bilet jednorazowy C6 na osobę. Bilet kupisz w autobusie; przygotuj odliczoną gotówkę.',checked:'Cena sprawdzona',source:'Źródło: Alicante City & Beach',
@@ -44,6 +45,6 @@ export function AlicanteArrival({locale='pl'}:{locale?:Locale}){
    </table><p><a href="https://www.aena.es/en/alicante-elche-miguel-hernandez/how-to-get-there/taxi.html">{text.taxi}</a></p>
   </section>
   <section aria-labelledby="alicante-night"><h2 id="alicante-night">{text.nightTitle}</h2><p>{text.night}</p></section>
-  <ul><li><a href={localizedHref('/info/alicante-weekend',locale)}>{text.weekend}</a></li><li><a href={localizedHref('/deals?destination=alicante',locale)}>{text.flights}</a></li></ul>
+  <ul><li><a href={localizedHref('/info/alicante-weekend',locale)}>{text.weekend}</a></li><li><a href={localizedHref('/deals?destination=alicante',locale)}>{text.flights}</a></li><li><a href={localizedHref('/info/trip-budget#calculator',locale)}>{guideUi(locale,'budgetLink')}</a></li></ul>
  </div>;
 }

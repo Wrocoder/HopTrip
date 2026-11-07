@@ -11,7 +11,7 @@ import {filterText} from "../../lib/i18n/filter-copy";
 import {DealGrid} from "../components/catalog";
 import {FilterForm} from "../components/filters";
 import {catalogPage,socialMetadata} from "../../lib/catalog-pages";
-import {CatalogIntro} from "../components/catalog-intro";
+import {CatalogIntro,CatalogLinks} from "../components/catalog-intro";
 import {landingPage,landingMetadata} from "../../lib/i18n/landing-copy";
 import {OfferState} from '../components/offer-state';
 import {searchRecovery} from '../../lib/search-recovery';
@@ -71,6 +71,7 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
   return <main className="page-shell catalog-page"><header className="page-heading"><p className="eyebrow">{t("Loty z Polski")}</p><h1>{landing?.heading ?? pl.deals}</h1><p className="lead">{landing?.intro ?? pl.flightOnly}</p></header>
 
     <SearchResultTracker context={{filters:analyticsFilters(filters,airports,destinations),...(error ? {error:searchError} : {result_count:deals.length})}}/>
+    {path==='/tanie-loty-na-weekend'&&landing&&<CatalogLinks page={landing} locale={locale} filters={filters}/>}
     <FilterForm key={new URLSearchParams(filters).toString()} filters={filters} airports={airports} destinations={destinations} path={catalogPath}/>
     {error ? <OfferState kind="error" title={searchError==="invalid_filters" ? t("Sprawdź parametry wyszukiwania") : t("Nie udało się pobrać ofert")} actions={<>
       {searchError==="unavailable" ? <a href={localizedHref(searchUrl(path,filters),locale)}>{t("Spróbuj ponownie")}</a> : <a href="#search-filters">{stateText(locale,'Popraw wybrane filtry')}</a>}
@@ -89,7 +90,7 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
     </>}
     {!error && path==='/from/warszawa' && <AirportContext airports={airports} deals={deals} filters={filters} locale={locale}/>}
     <p>{filters.weekend_mode ? <>{weekendCopy[locale].alert}{' '}<Link href={localizedHref('/alerts',locale)}>{t('Powiadom mnie o pasujących lotach')}</Link>{' · '}</> : alerts.status==="fulfilled" && alerts.value && <><Link href={localizedHref(`/alerts?${alertQuery}`,locale)}>{filters.origin==="WAW,WMI" ? t("Wybierz lotnisko dla powiadomień") : t("Powiadom mnie o pasujących lotach")}</Link>{" · "}</>}<Link href={localizedHref("/saved",locale)}>{t("Zapisane wyjazdy")}</Link></p>
-    {landing && <CatalogIntro page={landing} showIntro={false} locale={locale}/> }
+    {landing && <CatalogIntro page={landing} showIntro={false} showLinks={path!=='/tanie-loty-na-weekend'} locale={locale}/> }
     {locale==="pl" && !Object.values(filters).some(Boolean) && <CatalogIntro page={catalogPage("/deals")!}/>}
   </main>;
 }

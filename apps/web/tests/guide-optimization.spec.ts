@@ -40,9 +40,10 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`guide search CTAs keep 
  for(const [slug,destination] of [['rome-3-days','rome'],['lisbon-3-days','lisbon']] as const){
   await page.goto(localizedHref(`/info/${slug}`,locale));
   const links=page.getByRole('navigation',{name:guideUi(locale,'routes'),exact:true}).getByRole('link');
-  await expect(links).toHaveCount(2);
+  await expect(links).toHaveCount(3);
   await expect(links.nth(0)).toHaveAttribute('href',availableHref(`/destinations/${destination}`,locale));
   await expect(links.nth(1)).toHaveAttribute('href',localizedHref('/deals',locale));
+  await expect(links.nth(2)).toHaveAttribute('href',localizedHref('/info/trip-budget#calculator',locale));
  }
  await info.attach('guide-ctas',{body:JSON.stringify(evidence,null,2),contentType:'application/json'});
  expect((await request.post(`${api}/__test__/catalog-state?unavailable=true`)).ok()).toBe(true);
@@ -65,8 +66,10 @@ test.describe('ordinary browser without JavaScript',()=>{
    await Promise.all([page.waitForURL(expected),link.click()]);await expect(page).toHaveURL(expected);
    if(destination==='milan')await expect(page.locator('.result-count')).toContainText('0');
    else await expect(page.locator('[data-destination-search]')).toHaveAttribute('href','/deals?destination=rome');
-   await expect(page.locator('.deal-card')).toHaveCount(0);
-   await expect(page.locator('[data-state="empty"]')).toBeVisible();
+   // A destination may offer other cities below its empty primary catalogue.
+   const primary=destination==='rome'?page.locator('[aria-labelledby="destination-flights-heading"]'):page.locator('main');
+   await expect(primary.locator('.deal-card')).toHaveCount(0);
+   await expect(primary.locator('[data-state="empty"]')).toBeVisible();
   }
  });
 });

@@ -22,6 +22,8 @@ import {articleInlineSection} from '../../../lib/article-imagery';
 import {AlicanteArrival} from '../../components/alicante-arrival';
 import {AirportArrival} from '../../components/airport-arrival';
 import {hasArrivalGuide} from '../../../lib/airport-arrival';
+import {earlyGuideRoutes} from '../../../lib/guide-journey';
+import {GuideRoutes} from '../../components/guide-routes';
 type Props={params:Promise<{slug:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata> {
  const {slug}=await params; const page=getInfoContent(slug);
@@ -67,6 +69,7 @@ export default async function InfoPage({params}:Props) {
  {page.reviewedAt && <p className="muted">HopTrip · Sprawdzono <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
  {slug==='alicante-airport'&&<AlicanteArrival/>}
  {hasArrivalGuide(slug)&&<AirportArrival slug={slug}/>}
+ {earlyGuideRoutes.includes(slug)&&page.routes&&<GuideRoutes slug={slug} routes={page.routes}/>}
  {page.draft && <p role="note">{pl.draft}</p>}{page.paragraphs.map(p=><p key={p}>{p}</p>)}
  {!page.draft && !page.noindex && <ArticleIllustration slug={slug}/>}
  {slug==="trip-budget" && <TripBudgetCalculator/>}
@@ -83,10 +86,7 @@ export default async function InfoPage({params}:Props) {
   <p>Informacje sprawdzono {page.reviewedAt}. Rozkłady, ceny, godziny otwarcia i zasady wstępu mogą się zmienić.
   Linki do oficjalnych źródeł znajdują się przy odpowiednich częściach poradnika. Sprawdź je dla daty swojej podróży.</p>
  </section>}
- {page.routes && <nav aria-label="Powiązane trasy"><h2>Sprawdź loty w katalogu</h2>
-  <p>Katalog pokazuje dostępne obserwacje cen. Może być pusty; poradnik nie potwierdza dostępności konkretnego połączenia.</p>
-  <ul>{page.routes.map(route=><li key={route.href}><Link href={route.href}>{route.label}</Link></li>)}</ul>
- </nav>}
+ {!earlyGuideRoutes.includes(slug)&&page.routes&&<GuideRoutes slug={slug} routes={page.routes}/>}
  {destination && <DestinationActivities slug={destination.slug}/>}
  {slug==="islandia-wieloryby-lodowce-atrakcje" && <>
   <p>Poniższe wycieczki zaczynają się w Reykjavíku. Dojazd z lotniska i innych części Islandii planujesz osobno.</p>

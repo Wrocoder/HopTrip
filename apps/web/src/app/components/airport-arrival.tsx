@@ -2,6 +2,7 @@ import {arrivalCopy,arrivalSources,arrivalUi,type ArrivalSlug} from '../../lib/a
 import type {Locale} from '../../lib/i18n/config';
 import {localizedHref} from '../../lib/i18n/routing';
 import styles from './airport-arrival.module.css';
+import {guideUi} from '../../lib/i18n/guide-ui';
 
 export function AirportArrival({slug,locale='pl'}:{slug:ArrivalSlug;locale?:Locale}){
  const text=arrivalCopy[slug][locale],ui=arrivalUi[locale];
@@ -18,6 +19,6 @@ export function AirportArrival({slug,locale='pl'}:{slug:ArrivalSlug;locale?:Loca
    </table>
   </section>
   <section aria-labelledby={`${slug}-details`}><h2 id={`${slug}-details`}>{ui.details}</h2><p>{text.detail}</p></section>
-  <ul><li><a href={localizedHref(`/info/${plan}`,locale)}>{ui.plan}</a></li><li><a href={localizedHref(`/deals?destination=${city}`,locale)}>{ui.flights}</a></li></ul>
+  <ul><li><a href={localizedHref(`/info/${plan}`,locale)}>{ui.plan}</a></li><li><a href={localizedHref(`/deals?destination=${city}`,locale)}>{ui.flights}</a></li><li><a href={localizedHref('/info/trip-budget#calculator',locale)}>{guideUi(locale,'budgetLink')}</a></li></ul>
  </div>;
 }

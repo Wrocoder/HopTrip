@@ -22,6 +22,8 @@ import {articleInlineSection} from '../../lib/article-imagery';
 import {AlicanteArrival} from './alicante-arrival';
 import {AirportArrival} from './airport-arrival';
 import {hasArrivalGuide} from '../../lib/airport-arrival';
+import {earlyGuideRoutes} from '../../lib/guide-journey';
+import {GuideRoutes} from './guide-routes';
 
 function guide(slug:string,locale:Locale){
  const source=getInfoContent(slug);
@@ -50,6 +52,7 @@ export function GuideInfo({slug,locale}:{slug:string;locale:Locale}){
    {page.reviewedAt&&<p className="muted">HopTrip · {text.reviewed} <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
    {slug==='alicante-airport'&&<AlicanteArrival locale={locale}/>}
    {hasArrivalGuide(slug)&&<AirportArrival slug={slug} locale={locale}/>}
+   {earlyGuideRoutes.includes(slug)&&page.routes&&<GuideRoutes slug={slug} routes={page.routes} locale={locale}/>}
    {page.paragraphs.map((p,i)=><p key={i}>{p}</p>)}
    <ArticleIllustration slug={slug} locale={locale}/>
    {slug==='trip-budget'&&<TripBudgetCalculator/>}
@@ -60,7 +63,7 @@ export function GuideInfo({slug,locale}:{slug:string;locale:Locale}){
    </section>)}
    <AirportTransfer slug={slug} locale={locale}/>
    {page.sources&&<section aria-label={t('updates')}><h2>{t('updatesTitle')}</h2><p>{t('updatesText',{date:page.reviewedAt??''})}</p></section>}
-   {page.routes&&<nav aria-label={t('routes')}><h2>{t('catalog')}</h2><p>{t('catalogNote')}</p><ul>{page.routes.map(item=><li key={item.href}>{link(item.href,item.label)}</li>)}</ul></nav>}
+   {!earlyGuideRoutes.includes(slug)&&page.routes&&<GuideRoutes slug={slug} routes={page.routes} locale={locale}/>}
    {destination&&<DestinationActivities slug={destination.slug} locale={locale}/>}
    {slug==='islandia-wieloryby-lodowce-atrakcje'&&<><p>{t('icelandPickup')}</p><DestinationActivities slug="reykjavik" locale={locale}/></>}
    {!!relatedInfoPages(slug).length&&<nav aria-label={text.related}><h2>{text.related}</h2><ul>{relatedInfoPages(slug).map(({slug:key,page:related})=>{

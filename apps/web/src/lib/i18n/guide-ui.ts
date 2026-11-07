@@ -1,5 +1,6 @@
 import type {Locale} from './config.ts';
 const copy={
+ budgetLink:['Policz lot, nocleg i dojazdy','Calculate flights, accommodation and transport','Рассчитать перелёт, жильё и трансферы','Розрахувати переліт, житло й трансфери'],
  budgetGuide:['Pełny poradnik budżetu podróży','Full trip budget guide','Полное руководство по бюджету поездки','Повний посібник із бюджету подорожі'],
  home:['Strona główna','Home','Главная','Головна'],
  breadcrumbs:['Ścieżka nawigacji','Breadcrumbs','Навигационная цепочка','Навігаційний ланцюжок'],

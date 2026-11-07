@@ -7,5 +7,6 @@ export function ArticleIllustration({slug,locale='pl',placement='cover'}:{
 }){
  const selected=articlePhoto(slug,locale,placement);
  return selected?<ArticlePhoto image={selected.image} caption={selected.caption}
-  locale={locale} placement={placement} cityContext={selected.cityContext}/>:null;
+  locale={locale} placement={placement} cityContext={selected.cityContext}
+  deferCover={['alicante-airport','malaga-airport','lisbon-airport'].includes(slug)}/>:null;
 }

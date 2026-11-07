@@ -30,6 +30,8 @@ export function landingMetadata(metadata:Metadata,path:string,locale:Locale):Met
 }
 
 const ui={
+ "Podgląd obejmuje do 12 ofert. Otwórz pełne wyszukiwanie, aby ustawić daty i przejrzeć kolejne wyniki.":["This preview shows up to 12 offers. Open the full search to set dates and browse further results.","В этом обзоре до 12 предложений. Откройте полный поиск, чтобы задать даты и посмотреть остальные результаты.","У цьому огляді до 12 пропозицій. Відкрийте повний пошук, щоб задати дати й переглянути решту результатів."],
+ "Wszystkie wyniki z KRK — ustaw daty i budżet":["All results from KRK — set dates and budget","Все результаты из KRK — задать даты и бюджет","Усі результати з KRK — задати дати й бюджет"],
  "Zaplanuj podróż":["Plan your trip","Спланируйте поездку","Сплануйте подорож"],
  "Oferty lotów z Wrocławia":["Flight offers from Wrocław","Предложения перелётов из Вроцлава","Пропозиції перельотів із Вроцлава"],
  "Ceny pochodzą z zapisanych obserwacji. Sprawdź datę odświeżenia i zakres lotu; dostępność oraz końcową cenę potwierdzisz u sprzedawcy.":["Prices come from saved observations. Check when the price was refreshed and what the flight covers; confirm availability and the final price with the seller.","Цены взяты из сохранённых наблюдений. Проверьте дату обновления и состав перелёта; наличие и итоговую цену уточните у продавца.","Ціни взято зі збережених спостережень. Перевірте дату оновлення та склад перельоту; наявність і остаточну ціну уточніть у продавця."],

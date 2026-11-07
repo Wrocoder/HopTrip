@@ -22,7 +22,7 @@ type Props={params:Promise<{iata_code:string}>;locale?:Locale};
 const load=cache(async(value:string)=>{
   try{
     const record=(await getAirports()).find(r=>r.iata_code === value);
-    const deals=record?await getDeals({origin:value}):[];
+    const deals=record?await getDeals({origin:value,...(value==='KRK'?{limit:'12'}:{})}):[];
     return {record,deals,failed:false};
   }catch{return {record:undefined,deals:[],failed:true};}
 });
@@ -47,11 +47,13 @@ export default async function RoutePage({params,locale="pl"}:Props) {
     {page && <CatalogIntro page={page} linksFirst locale={locale}/>}
     {["WAW","WMI"].includes(value) && <p><Link href="/from/warszawa">Porównaj loty z Chopina i Modlina</Link></p>}
     <section aria-labelledby="airport-offers"><h2 id="airport-offers">{messages.deals}</h2>
+      {value==='KRK'&&<p>{landingText(locale,'Podgląd obejmuje do 12 ofert. Otwórz pełne wyszukiwanie, aby ustawić daty i przejrzeć kolejne wyniki.')}</p>}
       <p>{landingText(locale,"Ceny pochodzą z zapisanych obserwacji. Sprawdź datę odświeżenia i zakres lotu; dostępność oraz końcową cenę potwierdzisz u sprzedawcy.")}</p>
       {deals.length ? <DealGrid deals={deals} locale={locale}/> : <OfferState kind="empty" title={catalogText(locale,'Brak aktualnych ofert')} actions={<>
         <Link href={localizedHref(`/deals?origin=${encodeURIComponent(value)}`,locale)}>{airportCopy[locale].search}</Link>
         <Link href={localizedHref('/deals',locale)}>{stateText(locale,'Wybierz inne lotnisko')}</Link>
       </>}><p>{airportCopy[locale].empty}</p></OfferState>}
+      {value==='KRK'&&deals.length>0&&<p><Link href={localizedHref('/deals?origin=KRK',locale)}>{landingText(locale,'Wszystkie wyniki z KRK — ustaw daty i budżet')}</Link></p>}
     </section>
     <AirportContext airports={[record]} deals={deals} filters={{origin:value}} locale={locale}/>
     </main>;
