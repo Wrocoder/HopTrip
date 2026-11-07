@@ -53,8 +53,8 @@ export const destinationGuides:Record<string,InfoContent> = {
   ],routes:[{label:"Loty do Rzymu w katalogu",href:"/destinations/rome"}],related:["trip-budget","connections","milan-airports"],
  },
  "lisbon-airport":{
-  title:"Lizbona: dojazd z LIS i powrót do terminala",
-  description:"Lotnisko blisko miasta, metro oraz osobny transfer do Terminala 2 przed odlotem.",
+  title:"Lotnisko Lizbona: metro do centrum i dojazd do T2",
+  description:"Dojazd z lotniska Lizbona: metro, płatność contactless, taxi i bezpłatny shuttle do T2. Sprawdź ceny, przesiadki oraz godziny terminala.",
   draft:false,reviewedAt:"2026-09-23",category:"destinations",
   paragraphs:["W Lizbonie krótka odległość od lotniska nie oznacza, że można pominąć plan transferu. Sprawdź stację najbliższą noclegowi i terminal odlotu. Powrót może wymagać dodatkowego odcinka, którego nie było w twoim planie po przylocie."],
   sections:[

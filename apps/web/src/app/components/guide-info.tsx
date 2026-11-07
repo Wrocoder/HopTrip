@@ -20,6 +20,8 @@ import {DestinationActivities} from './destination-activities';
 import {ArticleIllustration} from './article-illustration';
 import {articleInlineSection} from '../../lib/article-imagery';
 import {AlicanteArrival} from './alicante-arrival';
+import {AirportArrival} from './airport-arrival';
+import {hasArrivalGuide} from '../../lib/airport-arrival';
 
 function guide(slug:string,locale:Locale){
  const source=getInfoContent(slug);
@@ -47,10 +49,11 @@ export function GuideInfo({slug,locale}:{slug:string;locale:Locale}){
   <article className="deal-detail"><h1>{page.title}</h1>
    {page.reviewedAt&&<p className="muted">HopTrip · {text.reviewed} <time dateTime={page.reviewedAt}>{page.reviewedAt}</time></p>}
    {slug==='alicante-airport'&&<AlicanteArrival locale={locale}/>}
+   {hasArrivalGuide(slug)&&<AirportArrival slug={slug} locale={locale}/>}
    {page.paragraphs.map((p,i)=><p key={i}>{p}</p>)}
    <ArticleIllustration slug={slug} locale={locale}/>
    {slug==='trip-budget'&&<TripBudgetCalculator/>}
-   {page.sections?.map((section,i)=><section key={i} id={slug==='alicante-airport'?`alicante-section-${i}`:undefined}><h2>{section.title}</h2>{section.paragraphs.map((p,j)=><p key={j}>{p}</p>)}
+   {page.sections?.map((section,i)=><section key={i} id={slug==='alicante-airport'?`alicante-section-${i}`:hasArrivalGuide(slug)?`${slug}-section-${i}`:undefined}><h2>{section.title}</h2>{section.paragraphs.map((p,j)=><p key={j}>{p}</p>)}
     {section.links&&<ul>{section.links.map(item=><li key={item.href}>{link(item.href,item.label)}</li>)}</ul>}
     {section.sourceIds&&<ul aria-label={`${t('sources')}: ${section.title}`}>{section.sourceIds.map(id=>{const source=page.sources?.[id];return source?<li key={id}><a href={source.href}>{source.label}</a></li>:null;})}</ul>}
     {i===articleInlineSection(slug)&&<ArticleIllustration slug={slug} locale={locale} placement="inline"/>}

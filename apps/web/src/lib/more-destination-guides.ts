@@ -48,8 +48,8 @@ export const moreDestinationGuides:Record<string,InfoContent>={
   ],routes:[{label:"Loty do Alicante w katalogu",href:"/destinations/alicante"}],related:["valencia-airport","malaga-airport","baggage"],
  },
  "malaga-airport":{
-  title:"Malaga: kolej C1, centrum i Costa del Sol",
-  description:"AGP, María Zambrano i Fuengirola — wybierz właściwy kierunek dojazdu zamiast automatycznie jechać do centrum.",
+  title:"Lotnisko Malaga: dojazd do centrum koleją C1 i autobusem",
+  description:"Jak dojechać z lotniska Malaga do centrum: C1, autobus Express, bilety i czas jazdy. Wybierz kierunek, sprawdź rozkład i zaplanuj powrót.",
   draft:false,reviewedAt:"2026-09-24",category:"destinations",
   paragraphs:["Po przylocie do Málaga-Costa del Sol (AGP) możesz jechać do Malagi lub dalej na wybrzeże. Najważniejsze jest położenie noclegu względem transportu. Nie zakładaj, że każdy kurort opisany jako Costa del Sol znajduje się przy jednej linii kolejowej."],
   sections:[
