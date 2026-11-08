@@ -3,6 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import {catalogText} from "../src/lib/i18n/catalog-copy";
 import {filterText} from "../src/lib/i18n/filter-copy";
 import {getMessages} from "../src/lib/i18n/messages";
+import {writeFileSync} from 'node:fs';
 
 test.setTimeout(90000);
 
@@ -28,9 +29,15 @@ test("catalog languages preserve filters, pages, consent and server language",as
    await expect(page.locator(".deal-card-link").first()).toHaveAttribute("href",new RegExp(`^/${locale}/deals/`));
    await expect(page.locator(".deal-card").first()).not.toContainText("Daty oferty");
   }
-  await page.evaluate(()=>scrollTo(0,0));
+  await page.evaluate(()=>document.fonts.ready);
+  await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
   if(testInfo.project.name==="desktop"){
    const price=await page.locator('.deal-price').first().boundingBox();
+   if(locale==='uk'){
+    const fields=await page.locator('.filter-panel > *,form.filters > *, .filter-panel .field-hint,.page-heading,.result-count').evaluateAll(nodes=>nodes.map(node=>{const r=node.getBoundingClientRect(),s=getComputedStyle(node);return {tag:node.tagName,class:node.className,top:r.top,bottom:r.bottom,width:r.width,height:r.height,lineHeight:s.lineHeight,font:s.fontSize,text:node.textContent?.slice(0,300)};}));
+    writeFileSync(testInfo.outputPath('catalog-uk-geometry.json'),JSON.stringify({price,fields},null,2));
+    await page.screenshot({path:testInfo.outputPath('catalog-uk-first-screen.png'),scale:'css',animations:'disabled'});
+   }
    expect(price!.y+price!.height).toBeLessThan(900);
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -93,7 +100,7 @@ test("localized empty, invalid, unavailable and loading results keep conditions"
 test("catalog canonical and alternates preserve normalized queries without indexing filters",async({page,request})=>{
  for(const locale of ["en","ru","uk"] as const){
   await page.goto(`/${locale}/deals?origin=wro&sort=price&utm_source=test`);
-  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/${locale}/deals?origin=WRO&sort=price`);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",`http://127.0.0.1:3100/${locale}/deals?origin=WRO`);
   await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(5);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content",/noindex/);
   await page.goto(`/${locale}/deals`);

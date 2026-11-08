@@ -5,6 +5,7 @@ import {offerDeadline} from './offer-expiry.ts';
 import {searchUrl} from './search-policy.ts';
 import {shortTripSelection} from './short-trip-selection.ts';
 import {moneyInGrosz} from './trip-budget.ts';
+import {stayRecommendationEligible} from './weekend-stay.ts';
 
 export const homeCollectionIds=['calendar-weekend','under-300','upcoming-short'] as const;
 export type HomeCollectionId=typeof homeCollectionIds[number];
@@ -33,6 +34,7 @@ function preview(items:Deal[],definition:HomeCollectionDefinition,now:number):De
  const ids=new Set<number>(),slugs=new Set<string>();
  return items.slice(0,collectionCandidateLimit).filter(deal=>{
   if(!recommendationEligible(deal)||definition.origin&&deal.origin_code!==definition.origin||deal.trip_type!=='ROUND_TRIP')return false;
+  if(!stayRecommendationEligible(deal,definition.id==='calendar-weekend'))return false;
   const deadline=offerDeadline(deal);
   const departure=Date.parse(deal.flight_facts?.outbound_departure??`${deal.trip_start}T00:00:00Z`);
   if(!deadline||Date.parse(deadline)<=now||!Number.isFinite(departure)||departure<=now)return false;

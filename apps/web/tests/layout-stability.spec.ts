@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {readFileSync,writeFileSync} from 'node:fs';
-import config from '../playwright.config';
+
 import {localizedHref} from '../src/lib/i18n/routing';
 import {shell} from '../src/lib/i18n/shell';
 
@@ -12,12 +12,12 @@ type MetricsWindow=Window & {layoutShifts:Shift[];lastLcp:number};
 test.skip(process.env.HOPTRIP_H3_PRODUCTION!=='1','CLS requires the isolated production runner; preserve the default dev suite.');
 
 test.beforeEach(async({request},info)=>{
- const servers=config.webServer;if(!Array.isArray(servers))throw Error('Expected isolated fixture servers');
+ const config=readFileSync(info.config.configFile!,'utf8');expect(config).toContain('npm run start --');expect(config).toContain("NODE_ENV:'production'");
  expect(process.env.HOPTRIP_H3_PRODUCTION).toBe('1');
- expect(servers[1].command).toContain('npm run start --');expect(servers[1].env?.NODE_ENV).toBe('production');
+
  const build=readFileSync('.next/BUILD_ID','utf8').trim();
  expect(await (await request.get('/deals')).text()).toContain(build);
- await info.attach('execution-mode',{body:JSON.stringify({command:servers[1].command,nodeEnv:servers[1].env?.NODE_ENV,build}),contentType:'application/json'});
+ await info.attach('execution-mode',{body:JSON.stringify({configFile:info.config.configFile,configSource:config,build}),contentType:'application/json'});
 });
 
 for(const locale of ['pl','en','ru','uk'] as const){

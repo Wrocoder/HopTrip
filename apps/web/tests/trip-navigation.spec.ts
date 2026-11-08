@@ -1,5 +1,6 @@
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import {tripSectionCopy} from '../src/lib/i18n/trip-section-copy';
 test("trip anchors focus sections and the two-adult budget survives sharing",async({page},info)=>{
  await page.addInitScript(()=>localStorage.setItem("hoptrip.consent.v1",JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
  await page.setViewportSize(info.project.name==="desktop"?{width:1366,height:900}:{width:390,height:844});
@@ -8,19 +9,19 @@ test("trip anchors focus sections and the two-adult budget survives sharing",asy
  await page.evaluate(()=>document.fonts.ready);
  await page.addStyleTag({content:"nextjs-portal {display:none}"});
  expect((await new AxeBuilder({page}).include("#trip-flight").include(".trip-navigation").analyze()).violations).toEqual([]);
- await page.screenshot({path:`../../docs/htui02/after-${info.project.name}.png`,fullPage:true,scale:"css"});
- await page.locator("#accommodation").screenshot({path:`../../docs/htui02/form-${info.project.name}.png`,scale:"css"});
+ await page.screenshot({path:info.outputPath('trip.png'),fullPage:true,scale:"css"});
+ await page.locator("#accommodation").screenshot({path:info.outputPath('accommodation.png'),scale:"css"});
  const navigate=async(label:string,id:string)=>{
   await page.getByRole("navigation",{name:"Sekcje planu podróży"}).getByRole("link",{name:label,exact:true}).focus();
   await page.keyboard.press("Enter");
   await expect(page.locator(id)).toBeFocused();
   await expect.poll(async()=>(await page.locator(id).boundingBox())?.y??-1).toBeGreaterThanOrEqual(0);
  };
- await navigate("Nocleg","#accommodation");
+ await navigate(tripSectionCopy.pl.stay,"#trip-stay");
  await page.locator("#stay-checkin").fill("2027-01-15");
  await page.locator("#stay-checkout").fill("2027-01-22");
  await page.locator("#stay-adults").fill("2");
- await navigate("Budżet","#calculator");
+ await navigate(tripSectionCopy.pl.budget,"#calculator");
  await page.locator("#budget-flight").fill("256");
  await page.locator("#budget-hotel").fill("200");
  await page.locator("#budget-food").fill("50");
@@ -31,14 +32,14 @@ test("trip anchors focus sections and the two-adult budget survives sharing",asy
  await expect(page.locator("#calculator")).toContainText("Budżet niepełny");
  await page.reload();
  await expect(page.getByTestId("budget-total")).toHaveText(/2\s*712,00/);
- await navigate("Zapisz","#trip-save");
+ await navigate(tripSectionCopy.pl.save,"#trip-save");
  await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
  await page.goto(await page.locator("#trip-share-link").inputValue());
  await expect(page.getByTestId("budget-total")).toHaveText(/2\s*712,00/);
- await navigate("Lot","#trip-flight");
- await navigate("Nocleg","#accommodation");
+ await navigate(tripSectionCopy.pl.flight,"#trip-flight");
+ await navigate(tripSectionCopy.pl.stay,"#trip-stay");
  const href=await page.getByRole("link",{name:/przez Stay22/}).getAttribute("href");
  expect(Object.fromEntries(new URL(href!).searchParams)).toMatchObject({adults:"2",checkin:"2027-01-15",checkout:"2027-01-22",aid:"hoptrip",campaign:"hoptrip_accommodation"});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- await page.screenshot({path:`../../docs/htui02/shared-${info.project.name}.png`,fullPage:true,scale:"css"});
+ await page.screenshot({path:info.outputPath('shared.png'),fullPage:true,scale:"css"});
 });

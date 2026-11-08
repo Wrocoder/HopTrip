@@ -1,0 +1,311 @@
+{
+  "task": "V4-11",
+  "date": "2026-11-08",
+  "status": "DONE_LOCAL",
+  "node_version": "v24.19.0",
+  "python": "3.12.10, configured PyCharm SDK",
+  "checks": {
+    "baseline": {
+      "tests": 145,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres": 0
+    },
+    "regressions_before_fix": {
+      "tests": 4,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0,
+      "postgres": 0
+    },
+    "focused": {
+      "tests": 155,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres": 6
+    },
+    "full_api": {
+      "tests": 1370,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres": 20
+    },
+    "postgres_schema_cleanup": {
+      "id": "ccf8215d2813f3d5764ed5850d0dd5fdf77aba279d5026efbd19a6bb077e0a3c",
+      "task": "V4-11",
+      "ownership_verified": true,
+      "test_schemas_remaining": 0,
+      "migration_head": "0021_telegram_alerts",
+      "stopped": true,
+      "removed": true,
+      "persistent_volume_created": false,
+      "production_access": false
+    },
+    "node": {
+      "pass": 377,
+      "fail": 0,
+      "skipped": 0
+    },
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "eslint": "PASS",
+    "production_build": "PASS",
+    "final_tsc": "PASS",
+    "browser": {
+      "stats": {
+        "startTime": "2026-11-08T15:58:52.498Z",
+        "duration": 100484.105,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "file": "alerts.spec.ts",
+          "title": "subscription preserves filters, confirms email, updates and stops",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "disabled registration has no email form or nonworking submit button",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "invalid confirmation does not report success",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "catalog subscription keeps filters and delivery status follows configuration",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "delivery error never reports accepted signup",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "email and capability pages never start tracking after saved consent",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "subscription preserves filters, confirms email, updates and stops",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "disabled registration has no email form or nonworking submit button",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "invalid confirmation does not report success",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "catalog subscription keeps filters and delivery status follows configuration",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "delivery error never reports accepted signup",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "alerts.spec.ts",
+          "title": "email and capability pages never start tracking after saved consent",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "localized-alerts.spec.ts",
+          "title": "localized signup, confirmation and management preserve contracts and private tokens",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "localized-alerts.spec.ts",
+          "title": "localized errors never confirm a subscription and disabled signup stays honest",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "localized-alerts.spec.ts",
+          "title": "catalog filters, locale switches and private route SEO stay consistent",
+          "project": "desktop",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "localized-alerts.spec.ts",
+          "title": "localized signup, confirmation and management preserve contracts and private tokens",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "localized-alerts.spec.ts",
+          "title": "localized errors never confirm a subscription and disabled signup stays honest",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "localized-alerts.spec.ts",
+          "title": "catalog filters, locale switches and private route SEO stay consistent",
+          "project": "mobile",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    "locales": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "widths": [
+      320,
+      375,
+      390,
+      768,
+      1440
+    ],
+    "axe": "PASS, scoped alert panels",
+    "manual_visual": [
+      "PL signup 320 px",
+      "RU management 320 px"
+    ]
+  },
+  "compatibility": {
+    "runtime_files_checked": 429,
+    "runtime_files_unchanged": 428,
+    "only_runtime_change": "apps/api/app/services/alert_digests.py",
+    "all_v4_10_sources_unchanged": true,
+    "api_contracts_changed": false,
+    "models_changed": false,
+    "configuration_changed": false,
+    "source_consent_version_changed": false,
+    "next_env_restored": true,
+    "new_dependencies": false,
+    "new_migrations": false,
+    "existing_migrations_applied_only_to_disposable_test_db": true,
+    "activation": false,
+    "real_notifications": false,
+    "deploy": false,
+    "test_servers_stopped": true
+  },
+  "source_changes": [
+    {
+      "file": "apps/api/app/services/alert_digests.py",
+      "sha256": "25e9ac489916b37e23612d52fb222830320972cab4ed7fbe3b6ffbf651496584",
+      "before_sha256": "937a6dec762ab19d66ae3948d637cd48395a755b39338b1cea06b8cd79e964ab"
+    },
+    {
+      "file": "apps/api/tests/test_alert_digests.py",
+      "sha256": "a34e007c1992296b850470cb0cd427965e8e517f056d3ad14c1ea4bf5fe82491",
+      "before_sha256": "e0dca6fe8ed70eaf95dd09608f8f04528e47b1b83009771672b37c299962ea5d"
+    },
+    {
+      "file": "apps/api/tests/test_alert_readiness.py",
+      "sha256": "77f01f198876496723e07a9c9a919ffe09d8393d4cc1134b19ee0d405a8be56a",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/api/tests/test_postgres.py",
+      "sha256": "438a6f4e14d6ac759f7a4bcf4761f91a1ed80c54bead212fb2c78835811ce7f7",
+      "before_sha256": "7c951e2016378b45d2914570fe9dbf1ce75ebeba4a9d64fe2ee0829a52443774"
+    },
+    {
+      "file": "apps/web/tests/alerts.spec.ts",
+      "sha256": "ef603594348368e31fd1316e8a6435464a8cea3a4090b9e896f85d8680bfde9a",
+      "before_sha256": "07d3670888bca9f9ae1f4af7408a97838df4cd48a98987d118d385746aea385c"
+    },
+    {
+      "file": "apps/web/tests/localized-alerts.spec.ts",
+      "sha256": "c007e8f5541e4c57ebfe820883b62708c8b4bdb94a468a3e1b190145687b1744",
+      "before_sha256": "c8f499d271e256abbade6a7db1577a166780ee0be762c855e46e9ed8fc021d1a"
+    }
+  ],
+  "limits": [
+    "Synthetic/local delivery only, not real SMTP deliverability or live Telegram account validation",
+    "No WebKit, physical devices, manual screen reader or field CWV",
+    "No automatic activation or permission to contact real recipients inferred from tests",
+    "At-most-once ambiguous-attempt policy can lose a notification after crash; successful transport submission is not proof of user receipt"
+  ],
+  "readiness": "readiness.json",
+  "tracker_done": 11,
+  "tracker_total": 14,
+  "next_task": "V4-12",
+  "next_task_started": false
+}

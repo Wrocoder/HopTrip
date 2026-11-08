@@ -1,0 +1,930 @@
+{
+  "task": "V4-10",
+  "date": "2026-11-08",
+  "status": "DONE_LOCAL",
+  "node_version": "v24.19.0",
+  "checks": {
+    "node": {
+      "baseline": 18,
+      "focused": 24,
+      "full": 377,
+      "fail": 0,
+      "skipped": 0,
+      "initial_focused": {
+        "pass": 23,
+        "fail": 1,
+        "reason": "Incorrect new test expectation counted 18 airport-guide cities; actual seed contains 17, plus Oslo without an airport guide. All per-city content comparisons passed."
+      }
+    },
+    "eslint": "PASS",
+    "production_build": "PASS",
+    "final_tsc": "PASS",
+    "browser": {
+      "final_pass": 42,
+      "final_fail": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "runs": [
+        {
+          "name": "browser",
+          "stats": {
+            "startTime": "2026-11-08T15:28:06.356Z",
+            "duration": 6215.632,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [
+            {
+              "message": "SyntaxError: Cannot use 'import.meta' outside a module",
+              "stack": "SyntaxError: Cannot use 'import.meta' outside a module"
+            }
+          ],
+          "cases": []
+        },
+        {
+          "name": "browser-run",
+          "stats": {
+            "startTime": "2026-11-08T15:29:00.574Z",
+            "duration": 195944.597,
+            "expected": 34,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in pl",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in en",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in ru",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in uk",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in pl",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in en",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in ru",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in uk",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "empty and populated destinations have honest content and working search links",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "empty and populated destinations have honest content and working search links",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "real offer detail, city search and destination directory are reachable without scripts",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "real offer detail, city search and destination directory are reachable without scripts",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "pl: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "en: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "ru: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "uk: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "all 69 seed city URLs retain SSR canonical and reviewed index policy; generic templates are recorded separately",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "pl: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "en: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "ru: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "uk: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "all 69 seed city URLs retain SSR canonical and reviewed index policy; generic templates are recorded separately",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "browser-final",
+          "stats": {
+            "startTime": "2026-11-08T15:35:01.351Z",
+            "duration": 442428.136,
+            "expected": 42,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in pl",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in en",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in ru",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in uk",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in pl",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in en",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in ru",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "destination remains useful without offers in uk",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "empty and populated destinations have honest content and working search links",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-landings.spec.ts",
+              "title": "empty and populated destinations have honest content and working search links",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "pl: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "en: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "ru: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "uk: zero, one and many observations preserve the city and offer real alternative destinations",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "empty, unavailable and stale alternatives are distinct; active alerts are opt-in and optional failure can recover",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "an expired open selection removes all alternative prices and can be refreshed without losing city context",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "destination content and coverage inventory records individual index decisions without inventing GSC metrics",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "real offer detail, city search and destination directory are reachable without scripts",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-recovery.spec.ts",
+              "title": "real offer detail, city search and destination directory are reachable without scripts",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "pl: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "en: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "ru: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "uk: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "all 69 seed city URLs retain SSR canonical and reviewed index policy; generic templates are recorded separately",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "pl: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "en: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "ru: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "uk: price feed failure retains city content, arrival advice and reviewed metadata",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "destination-seo-review.spec.ts",
+              "title": "all 69 seed city URLs retain SSR canonical and reviewed index policy; generic templates are recorded separately",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "technical-seo.spec.ts",
+              "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "technical-seo.spec.ts",
+              "title": "robots allows crawlers to see noindex while excluding redirects and API",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "technical-seo.spec.ts",
+              "title": "expired and nonexistent pages are noindex without a bookable price",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "technical-seo.spec.ts",
+              "title": "every sitemap page has server-rendered unique metadata and reachable editorial links",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "technical-seo.spec.ts",
+              "title": "robots allows crawlers to see noindex while excluding redirects and API",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "technical-seo.spec.ts",
+              "title": "expired and nonexistent pages are noindex without a bookable price",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        }
+      ],
+      "seed_inventory": [
+        {
+          "project": "desktop",
+          "file": "seed-ssr-desktop.json",
+          "rows": 69,
+          "with_guides": 19,
+          "with_arrival": 17
+        },
+        {
+          "project": "mobile",
+          "file": "seed-ssr-mobile.json",
+          "rows": 69,
+          "with_guides": 19,
+          "with_arrival": 17
+        }
+      ],
+      "sitemap": [
+        {
+          "project": "desktop",
+          "pages": 248,
+          "editorial_links": 54,
+          "file": "sitemap-desktop.json"
+        },
+        {
+          "project": "mobile",
+          "pages": 248,
+          "editorial_links": 54,
+          "file": "sitemap-mobile.json"
+        }
+      ]
+    },
+    "locales": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "widths": [
+      320,
+      375,
+      390,
+      768,
+      1440
+    ],
+    "axe": "PASS, scoped main/planning/guides/recovery",
+    "manual_visual": [
+      "RU arrival planning 320 px",
+      "Reykjavik 320 px"
+    ]
+  },
+  "compatibility": {
+    "unchanged_policy_files": [
+      {
+        "file": "apps/web/src/lib/catalog-pages.ts",
+        "sha256": "b400cdf7b458190aa90a1b4d188341dfae8cd45ed4037def1a1eb9e5447b575a",
+        "unchanged": true
+      },
+      {
+        "file": "apps/web/src/lib/growth-pages.ts",
+        "sha256": "06c062d2d6e608a3f1485bfea09924eb0b32d87c8899713d76b743468f1eac45",
+        "unchanged": true
+      },
+      {
+        "file": "apps/web/src/lib/i18n/routing.ts",
+        "sha256": "ff90e59c8411c435b9399cf88136682db242c567256bb23210372715ea6ac0f2",
+        "unchanged": true
+      },
+      {
+        "file": "apps/web/src/lib/i18n/landing-copy.json",
+        "sha256": "ec5cd414f625fcda2e64774f28b8999f4626d7ddb460491a29da013a88564dc7",
+        "unchanged": true
+      },
+      {
+        "file": "apps/web/src/app/sitemap.ts",
+        "sha256": "fd8a00d3dbbb03581e127abc6c3bee261aea86142e70bde55e31b3dd56654d02",
+        "unchanged": true
+      },
+      {
+        "file": "apps/web/src/app/robots.ts",
+        "sha256": "815a028c7ded2784fe315856a87c6a5aed4688b54a89836ed43cdf8f5c6515b5",
+        "unchanged": true
+      }
+    ],
+    "next_env_restored": true,
+    "prior_v4_09_other_sources_preserved": true,
+    "api_changed": false,
+    "new_dependencies": false,
+    "migrations": false,
+    "deploy": false,
+    "real_notifications": false,
+    "test_servers_stopped": true
+  },
+  "source_changes": [
+    {
+      "file": "apps/web/src/lib/destination-page.ts",
+      "sha256": "2d95e5ff228103867022b095b9780636047be73bb2e89818eb336ebeec942d54",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/web/src/lib/destination-arrival-summary.ts",
+      "sha256": "0912696b0e2ae69835ac431f8ad12fb3d9a8c8cddec72f8d6519eed3f7fd3a4d",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/web/src/lib/guide-destinations.ts",
+      "sha256": "4ff32b8ed4078cfe714b53d8cf764076d11b2a2374f4f74304032417ddc2e60f",
+      "before_sha256": "87358432345243b2a16de1677affee97977c5138b90274b205910b7fff94ea93"
+    },
+    {
+      "file": "apps/web/src/app/destinations/[slug]/page.tsx",
+      "sha256": "e8ee27e9c898cd259f914d484e2149e7c03d1ed17f8662a94ce845a084625c1a",
+      "before_sha256": "1d16e137052a68e48780ba6909799b55f788455a9ef8e29914617ecaa1c6deee"
+    },
+    {
+      "file": "apps/web/src/app/components/destination-planning.tsx",
+      "sha256": "fdb184345002257e120edf4b5eaa46c6d92d49ed358cbd4e2046a0cb39f22a38",
+      "before_sha256": "51c5445fd02cb2dede410c82b134f2cec88131dc0bb2cc630d0b1e8aba2f4213"
+    },
+    {
+      "file": "apps/web/tests/destination-page.test.mjs",
+      "sha256": "ac71e845d545275722d501c365c30d3d0c852eab20c9aa6ad3a5c21b82492b27",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/web/tests/destination-seo-review.spec.ts",
+      "sha256": "2a1f2855c757f2ca425036ea512e1631bb07092d2e7bd6081c79cbf205290763",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/web/tests/destination-landings.spec.ts",
+      "sha256": "60a7109f04cd0a574a5c5c14a3b14e90d0ca12f26e42b2a19d9497c445a66aa3",
+      "before_sha256": "64e5d258b6f27f115c0eed978d49626add9f77a518bda5ad5e61ea6de51bc6cb"
+    }
+  ],
+  "external_follow_up": {
+    "provided_register": "docs/seo-growth-20261107/indexing/review.csv",
+    "rows": 15,
+    "pending": 15,
+    "actual_url_inspection_results": 0,
+    "connected_gsc_tool_available": false,
+    "new_search_performance_exports": false,
+    "decision": "No indexation expansion or Google/traffic claims"
+  },
+  "limits": [
+    "69 seed URLs are a repository/synthetic SSR audit, not production DB coverage or availability",
+    "No Google index/ranking/traffic or CWV improvement claimed",
+    "No provider facts revalidation, real partner checkout, delivery activation, WebKit, physical devices or manual screen reader",
+    "No separate pytest/PG run: API and fixtures unchanged"
+  ],
+  "tracker_done": 10,
+  "tracker_total": 14,
+  "next_task": "V4-11",
+  "next_task_started": false
+}

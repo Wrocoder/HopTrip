@@ -25,6 +25,7 @@ type FilterKey="origin"|"destination"|"budget"|"departure_from"|"departure_to"|"
 const filterKeys:FilterKey[]=["origin","destination","budget","departure_from","departure_to","duration_min","duration_max","weekend","weekend_mode","work_start","work_end","round_trip"];
 const advancedKeys=["departure_from","departure_to","duration_min","duration_max"] as const;
 const sortOptions=[
+  {value:'recommended',label:'Polecane',rule:'Według modelu wygody podróży, malejąco: dane, czas lotów i pobytu, przesiadki, lotniska i urlop. Nieznane dane nie dostają punktów. Bez oceny na końcu. Remis: cena, data, stała kolejność. Cena historyczna oceniana osobno.'},
   {value:'destination_time',label:'Najwięcej czasu na miejscu',rule:'Według znanego czasu między przylotem a odlotem powrotnym, malejąco. To nie czas w mieście. Remis: cena, data, stała kolejność. Nieznane i szacowane na końcu według ceny.'},
   {value:'score',label:'Cena, historia, świeżość ↓',rule:'Malejąco według zapisanego wyniku złożonego, nie samej różnicy od mediany ani jakości podróży. Remis: wcześniejsza data wylotu, potem stała kolejność.'},
   {value:'price',label:'Cena — najniższa',rule:'Rosnąco według ceny lotu na osobę w PLN, bez przybliżenia w EUR. Remis: wcześniejsza data wylotu, potem stała kolejność.'},

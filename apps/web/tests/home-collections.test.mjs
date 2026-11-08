@@ -17,7 +17,7 @@ function load(file){
 const {loadHomeCollections,homeCollectionDefinitions,collectionsMatchOrigin}=load(path.resolve('src/lib/home-collections.ts'));
 const now=Date.parse('2030-04-01T00:00:00Z');
 function deal(id=1,patch={}){
- return {id,slug:`synthetic-${id}`,trip_start:'2030-05-03',trip_end:'2030-05-05',origin_airport_id:1,destination_id:1,origin_code:'WRO',origin_city:'Wrocław',destination_city:'London',destination_slug:'london',trip_type:'ROUND_TRIP',price_basis:'FLIGHT_PER_PERSON',components:[],flight_price_pln:'200.25',hotel_price_pln:null,total_estimated_pln:'200.25',price_per_person_pln:'200.25',historical_baseline_pln:null,discount_percent:null,deal_score:0,confidence:'0',explanation_codes:[],score_version:'synthetic',score_components:{},last_verified_at:'2030-04-01T00:00:00Z',expires_at:'2030-04-01T02:00:00Z',flight_quality:{version:'flight-quality-v1',status:'PARTIAL',reasons:['UNKNOWN_CARRIER'],recommendation_eligible:true},weekend_assessment:{version:'weekend-v1',work_hours:{start:'09:00:00',end:'17:00:00'},work_timezone:'Europe/Warsaw',actual_return_local_date:'2030-05-05',airport_arrival_day_offset:0,confidence:'KNOWN',calendar:'ELIGIBLE',flexible:'ELIGIBLE',no_leave:'UNKNOWN',might_require_leave:null,airport_times_only:true,reasons:[]},...patch};
+ return {id,slug:`synthetic-${id}`,trip_start:'2030-05-03',trip_end:'2030-05-05',origin_airport_id:1,destination_id:1,origin_code:'WRO',origin_city:'Wrocław',destination_city:'London',destination_slug:'london',trip_type:'ROUND_TRIP',price_basis:'FLIGHT_PER_PERSON',components:[],flight_price_pln:'200.25',hotel_price_pln:null,total_estimated_pln:'200.25',price_per_person_pln:'200.25',historical_baseline_pln:null,discount_percent:null,deal_score:0,confidence:'0',explanation_codes:[],score_version:'synthetic',score_components:{},last_verified_at:'2030-04-01T00:00:00Z',expires_at:'2030-04-01T02:00:00Z',flight_quality:{version:'flight-quality-v1',status:'PARTIAL',reasons:['UNKNOWN_CARRIER'],recommendation_eligible:true},weekend_assessment:{version:'weekend-v1',work_hours:{start:'09:00:00',end:'17:00:00'},work_timezone:'Europe/Warsaw',actual_return_local_date:'2030-05-05',airport_arrival_day_offset:0,confidence:'KNOWN',calendar:'ELIGIBLE',flexible:'ELIGIBLE',stay:{version:'weekend-stay-v1',eligibility:'ELIGIBLE',airport_interval_minutes:2820,usable_minutes:1380,night_arrival:false,early_return:false,policy:{min_airport_minutes:1440,min_usable_minutes:720,arrival_buffer_minutes:120,departure_buffer_minutes:120},reasons:[]},no_leave:'ELIGIBLE',might_require_leave:false,airport_times_only:true,reasons:[]},...patch};
 }
 async function withFetch(fetcher,run){const original=globalThis.fetch;globalThis.fetch=fetcher;try{await run();}finally{globalThis.fetch=original;}}
 test('three definitions use supported exact filters and round-trip catalog links',()=>{
@@ -92,4 +92,20 @@ test('round-trip search normalization, removal and canonical semantics preserve 
  assert.equal(searchFilters({round_trip:'yes'}).round_trip,'true');
  assert.equal(searchFilters(Object.fromEntries(new URL(searchUrl('/deals',{round_trip:'true',budget:'300'}),'http://test').searchParams)).round_trip,'true');
  assert.equal(searchSeo({round_trip:'false'}).canonical,'/deals');assert.equal(searchSeo({round_trip:'true'}).index,false);
+});
+
+test('recommendations exclude unsuitable, unknown and legacy stays; weekend additionally excludes leave and Monday arrival',()=>{
+ const assessment=deal().weekend_assessment;
+ return withFetch(async()=>Response.json([
+  deal(1,{weekend_assessment:{...assessment,stay:{...assessment.stay,eligibility:'INELIGIBLE',night_arrival:true,reasons:['NIGHT_ARRIVAL']}}}),
+  deal(2,{weekend_assessment:{...assessment,stay:{...assessment.stay,eligibility:'UNKNOWN'}}}),
+  deal(3,{weekend_assessment:{...assessment,stay:undefined}}),
+  deal(4,{weekend_assessment:{...assessment,no_leave:'INELIGIBLE',might_require_leave:true}}),
+  deal(5,{weekend_assessment:{...assessment,no_leave:'INELIGIBLE',actual_return_local_date:'2030-05-06'}}),
+  deal(6),
+ ]),async()=>{
+  const [weekend,budget,upcoming]=await loadHomeCollections('WRO',now);
+  assert.deepEqual(weekend.offers.map(d=>d.id),[6]);
+  for(const collection of [budget,upcoming])assert.deepEqual(collection.offers.map(d=>d.id),[4,5,6]);
+ });
 });

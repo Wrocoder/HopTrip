@@ -19,7 +19,7 @@ import {bindPlanDraft,localPlanPath,planDraftKey,planSeedKey,readPlanBase,planEd
 import type {PlanResult,SavedPlan} from '../../lib/saved-plans';
 import {useTripDraft} from './trip-draft';
 
-export function TripActions({offer,draft,ready}:{offer:TripOffer;draft:BudgetDraft;ready:boolean}) {
+export function TripActions({offer,draft,ready,standalone=false}:{offer:TripOffer;draft:BudgetDraft;ready:boolean;standalone?:boolean}) {
  const {locale}=useLocale(),context=useTripDraft();
  const t=(source:TripKey)=>tripText(locale,source);
  const copy=savedTripCopy[locale],storage=planStorageCopy[locale],editor=planEditorCopy[locale],store=useSavedTrips();
@@ -95,8 +95,8 @@ export function TripActions({offer,draft,ready}:{offer:TripOffer;draft:BudgetDra
   finally {if(request===operation.current)setCopying(null);}
  }
  const sharing=copying?.token===token,disabled=!ready||!store.ready||store.corrupt||store.busy||store.requiresMigration||!store.lockingAvailable;
- return <section id="trip-save" tabIndex={-1} aria-label={t("Zapisz i udostępnij wyjazd")}>
-  <h3>{local?editor.title:t("Zachowaj plan podróży")}</h3>
+ return <section id="trip-save" tabIndex={-1} className={standalone?'trip-save-section':undefined} aria-label={t("Zapisz i udostępnij wyjazd")}>
+  {standalone?<h2>{local?editor.title:t("Zachowaj plan podróży")}</h2>:<h3>{local?editor.title:t("Zachowaj plan podróży")}</h3>}
   <p className={styles.note}>{copy.localOnly}</p><p className={styles.note}>{local?editor.sessionHint:copy.snapshotHint}</p>
   <p>{t("Link zawiera trasę, daty, liczbę osób i wpisany budżet. Każdy, kto go otrzyma, może zobaczyć te dane. Jest to kopia planu, nie aktualna oferta sprzedawcy.")}</p>
   <p>{sharePrivacyCopy[locale].privacy}</p>

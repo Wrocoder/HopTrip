@@ -4,6 +4,7 @@ import {writeFileSync} from 'node:fs';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {tripText} from '../src/lib/i18n/trip-copy';
 import {savedPlansKey} from "../src/lib/saved-plans";
+import {DEFAULT_SORT} from '../src/lib/catalog-order';
 
 async function fit(control:Locator) {
  await control.scrollIntoViewIfNeeded();
@@ -53,7 +54,9 @@ for(const width of [320,375,390,768,1440])test.describe(`${width}px`,()=>{
   await page.waitForURL(/\/deals\?/);await expect(page.locator('.sort-control select')).toBeEnabled();
   const selected={origin:'WRO',destination:'barcelona',departure_from:start,departure_to:start,budget:'500'};
   for(const [key,value] of Object.entries(selected))expect(new URL(page.url()).searchParams.get(key)).toBe(value);
-  const sort=page.locator('.sort-control select');await sort.selectOption('price');await expect(page).toHaveURL(/sort=price/);
+  const sort=page.locator('.sort-control select');await sort.selectOption('recommended');await expect(page).toHaveURL(/sort=recommended/);
+  await sort.selectOption('price');await expect(sort).toHaveValue('price');
+  await expect.poll(()=>(new URL(page.url()).searchParams.get('sort')??DEFAULT_SORT)).toBe('price');
   const applied=new URL(page.url());
   for(const field of await page.locator('.filters input:not([type="hidden"]),.filters select').all())if(await field.isVisible())await fit(field);
   await overflow('catalog');
@@ -64,7 +67,7 @@ for(const width of [320,375,390,768,1440])test.describe(`${width}px`,()=>{
   await page.keyboard.press('Escape');await expect(trigger).toBeFocused();await activate(card.locator('.deal-card-link'));
   await page.waitForURL(/\/deals\/browser-deal\?/);
   await expect(page.locator('#budget-start')).toBeEnabled();await fit(page.locator('.back-link'));await overflow('detail');
-  for(const id of ['trip-booking','accommodation','trip-events','calculator']){
+  for(const id of ['trip-flight','trip-stay','calculator','trip-save']){
    const link=page.locator(`.trip-navigation a[href="#${id}"]`);await link.focus();await page.keyboard.press('Enter');await expect(page.locator('#'+id)).toBeFocused();
   }
   await fit(page.locator('#trip-booking .cta'));const sellerHref=await page.locator('#trip-booking .cta').getAttribute('href');
@@ -84,8 +87,9 @@ for(const width of [320,375,390,768,1440])test.describe(`${width}px`,()=>{
   await expect(page.locator('#budget-flight')).toHaveAttribute('inputmode','decimal');await overflow('short-viewport');
   await page.setViewportSize({width,height:844});
   const actions=page.locator('#trip-save .trip-actions button');await activate(actions.nth(0));
+  await expect(page).toHaveURL(/#local=/);await expect(page.locator('#budget-flight')).toHaveValue('123,45');
   await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'null')?.plans.length??0,savedPlansKey)).toBe(1);
-  await expect(page).toHaveURL(/#local=/);await activate(page.getByRole('button',{name:tripText(locale,'Udostępnij'),exact:true}));const shared=page.locator('#trip-share-link');await expect(shared).toHaveValue(/\/trip#plan=/);await fit(shared);
+  await activate(page.getByRole('button',{name:tripText(locale,'Udostępnij'),exact:true}));const shared=page.locator('#trip-share-link');await expect(shared).toHaveValue(/\/trip#plan=/);await fit(shared);
   if(width===320||width===1440)expect((await new AxeBuilder({page}).include('.site-header').include('#calculator').include('#accommodation').include('#trip-events').analyze()).violations).toEqual([]);
   if(locale==='pl')await page.locator('#calculator').screenshot({path:info.outputPath(`calculator-${width}.png`),scale:'css',animations:'disabled'});
   await page.reload();await expect(page.locator('#budget-flight')).toHaveValue('123,45');await expect(page.getByTestId('budget-total')).toContainText(/646[,.]90/);

@@ -3,10 +3,11 @@ import {test,expect,type Page,type BrowserContext} from '@playwright/test';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {tripText} from '../src/lib/i18n/trip-copy';
 import {alertText} from '../src/lib/i18n/alert-copy';
+import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
 import type {Locale} from '../src/lib/i18n/config';
 import type {AnalyticsEventName} from '../src/lib/analytics-context';
 
-type Event={event_name:AnalyticsEventName;deal_slug?:string;filter?:{action:string};metadata:Record<string,string>};
+type Event={event_id:string;event_name:AnalyticsEventName;deal_slug?:string;filter?:{action:string};metadata:Record<string,string>};
 const ticket='https://ticketmaster.evyy.net/synthetic?private=private-ticket-secret';
 async function setup(page:Page,context:BrowserContext,allowed=true){
  await page.addInitScript(allowed=>{if(!localStorage.getItem('hoptrip.consent.v1'))localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:allowed,marketing:false,at:Date.now()}));},allowed);
@@ -16,12 +17,12 @@ async function setup(page:Page,context:BrowserContext,allowed=true){
   const item={id:'private-event-id',name:'Synthetic concert',category:'MUSIC',venue:'Synthetic venue',city:'Barcelona',start_date:new URL(route.request().url()).searchParams.get('start_date'),end_date:null,local_time:'20:00:00',timezone:'Europe/Madrid',status:'onsale',url:ticket,price_from:null,currency:null};
   return route.fulfill({json:{status:'READY',events:[item,{...item,id:'variant-fixture',name:'Synthetic variants',ticket_options:[{id:'private-option',name:'Synthetic standard',ticket_kind:'STANDARD',url:ticket,price_from:null,currency:null}]},{...item,id:'cancelled-fixture',name:'Synthetic cancelled',status:'cancelled'}],partial:false,checked_at:null}});
  });
- const events:Event[]=[],statuses:number[]=[],externalTrackers:string[]=[];
+ const events:Event[]=[],statuses:{name:AnalyticsEventName;status:number}[]=[],externalTrackers:string[]=[];
  page.on('request',request=>{
   if(request.url().endsWith('/analytics/events')&&request.method()==='POST')events.push(request.postDataJSON());
   if(/emrld\.ltd|api\.telegram\.org/.test(request.url()))externalTrackers.push(request.url());
  });
- page.on('response',response=>{if(response.url().endsWith('/analytics/events')&&response.request().method()==='POST')statuses.push(response.status());});
+ page.on('response',response=>{if(response.url().endsWith('/analytics/events')&&response.request().method()==='POST')statuses.push({name:response.request().postDataJSON().event_name,status:response.status()});});
  return {events,statuses,externalTrackers};
 }
 const count=(events:Event[],name:AnalyticsEventName)=>events.filter(e=>e.event_name===name).length;
@@ -41,10 +42,15 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`product taxonomy follow
  test.setTimeout(120000);
  const {events,statuses,externalTrackers}=await setup(page,context);
  const flush=async()=>{
-  // Navigation can enqueue more events while earlier responses are still in flight.
-  // Sample both counters together instead of freezing the expected request count.
-  await expect.poll(()=>events.length>0&&statuses.length===events.length).toBe(true);
-  expect(statuses.every(s=>s===202)).toBe(true);
+  // A keepalive response can outlive its Page document. Verify actual persistence,
+  // including TRIP_SAVE, rather than equating Page responses with sent requests.
+  await expect.poll(async()=>{
+   const response=await request.get('http://127.0.0.1:8100/__test__/tracking');
+   expect(response.ok()).toBe(true);
+   const stored:{event_id:string}[]=(await response.json()).events;
+   return events.length>0&&events.every(event=>stored.filter(row=>row.event_id===event.event_id).length===1);
+  }).toBe(true);
+  expect(statuses.every(s=>s.status===202)).toBe(true);
  };
  await page.goto(localizedHref('/deals?origin=WRO&budget=300&sort=price',locale));
  await page.locator('.filter-chip').last().click();
@@ -62,7 +68,14 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`product taxonomy follow
  await page.locator('#budget-hotel').fill('200');
  await expect.poll(()=>count(events,'BUDGET_USE')).toBe(1);
  const save=page.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true});
- await save.click();await expect.poll(()=>count(events,'TRIP_SAVE')).toBe(1);await save.click();
+ await save.click();await expect(page).toHaveURL(/\/trip#local=/);await expect.poll(()=>count(events,'TRIP_SAVE')).toBe(1);
+ await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);
+ await flush();
+ await page.goto(localizedHref('/deals/browser-13',locale));await page.locator('#budget-hotel').fill('200');
+ await save.click();await expect(page).toHaveURL(/\/trip#local=/);expect(count(events,'TRIP_SAVE')).toBe(1);
+ await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);
+ await flush();
+ await page.goto(localizedHref('/deals/browser-13',locale));
  await clickTicket(page);
  await expect.poll(()=>count(events,'EVENT_CLICK')).toBe(1);
  expect(events.find(e=>e.event_name==='EVENT_CLICK')?.deal_slug).toBe('browser-13');
@@ -116,6 +129,7 @@ test('denied consent suppresses filter, ticket, save, remove and signup analytic
  await page.goto('/deals?budget=300');await page.locator('.filter-reset').click();
  await page.goto('/deals/browser-13');await clickTicket(page);
  await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
+ await expect(page).toHaveURL(/\/trip#local=/);
  await page.goto('/saved');await page.locator('main ul li button').click();
  await page.route('**/api/v1/alerts',route=>route.fulfill({status:503,json:{detail:'Synthetic unavailable'}}));
  await page.goto('/alerts?origin=WRO');await signup(page,'pl','denied@example.test');
@@ -126,6 +140,7 @@ test('denied consent suppresses filter, ticket, save, remove and signup analytic
 test('failed saved-trip write emits no remove and leaves the plan available',async({page,context})=>{
  const {events}=await setup(page,context);
  await page.goto('/deals/browser-13');await page.getByRole('button',{name:'Zapisz wyjazd',exact:true}).click();
+ await expect(page).toHaveURL(/\/trip#local=/);
  await page.goto('/saved');await expect(page.locator('main ul li button')).toHaveCount(1);
  await page.evaluate(()=>{const original=Storage.prototype.setItem;Storage.prototype.setItem=function(key,value){if(key.includes('saved'))throw Error('Synthetic storage failure');return original.call(this,key,value);};});
  await page.locator('main ul li button').click();

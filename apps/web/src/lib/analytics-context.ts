@@ -10,6 +10,11 @@ export type FilterContext={action:"apply"|"remove"|"reset"};
 export const analyticsEvents=["PAGE_VIEW","DEAL_IMPRESSION","DEAL_VIEW","SEARCH","FILTER_USE","ACTIVITY_CLICK","SEARCH_RESULT","PARTNER_CLICK","BUDGET_USE","TRIP_SAVE","ALERT_CONFIRMED","TRIP_REMOVE","EVENT_CLICK","ALERT_STARTED","TRIP_UPDATE","DEAL_DETAILS_OPEN","BUDGET_CALCULATED"] as const;
 export type AnalyticsEventName=typeof analyticsEvents[number];
 export type EventContext={search?:SearchContext;partner?:PartnerContext;filter?:FilterContext};
+export type AnalyticsViewport='small'|'medium'|'large';
+export function analyticsViewport(width:unknown):AnalyticsViewport|undefined {
+ if(typeof width!=='number'||!Number.isFinite(width)||width<=0)return undefined;
+ return width<768?'small':width<1024?'medium':'large';
+}
 export function analyticsFilters(filters:Filters,airports:Airport[],destinations:Destination[]):Filters {
  const result:Filters={};
  if(filters.origin==="WAW,WMI" || airports.some(a=>a.iata_code===filters.origin))result.origin=filters.origin;

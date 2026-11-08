@@ -1,0 +1,418 @@
+{
+  "task": "V4-05",
+  "date": "2026-11-07",
+  "timezone": "Europe/Warsaw",
+  "status": "DONE",
+  "scope": "LOCAL",
+  "next_task": "V4-06",
+  "inventory": {
+    "artifact": "docs/v4-05/inventory.json",
+    "assets": 34,
+    "all_decoded": true,
+    "all_hashes_match": true,
+    "credits_present": true,
+    "bytes": 4288600,
+    "registry_entries": 27,
+    "seed_destinations": 69,
+    "pictured_before": 18,
+    "pictured_after": 26,
+    "unpictured": 43,
+    "registry_outside_seed": [
+      "amsterdam"
+    ],
+    "new_destination_mappings": [
+      "wroclaw",
+      "warsaw",
+      "krakow",
+      "gdansk",
+      "katowice",
+      "poznan",
+      "bergen",
+      "reykjavik"
+    ],
+    "new_image_files": 0
+  },
+  "tests": {
+    "initial_node": {
+      "tests": 4,
+      "passed": 2,
+      "failed_before_fix": 2,
+      "artifact": ".cache/v4-05-before.txt"
+    },
+    "focused_node": {
+      "passed": 7,
+      "artifact": ".cache/v4-05-focused.txt"
+    },
+    "full_node": {
+      "passed": 357,
+      "failed": 0,
+      "skipped": 0,
+      "artifact": ".cache/v4-05-node.txt"
+    },
+    "eslint": "PASS",
+    "next_build_and_types": "PASS",
+    "final_tsc": "PASS",
+    "ruff": {
+      "status": "PASS",
+      "scope": "apps/api/tests/destination_image_browser_fixtures.py"
+    },
+    "api_pytest": "NOT_RUN: application API unchanged; local fixture exercised by browser tests",
+    "postgres": "NOT_RUN",
+    "browser": {
+      "runs": [
+        {
+          "file": ".cache/v4-05-browser.json",
+          "stats": {
+            "startTime": "2026-11-07T22:36:02.892Z",
+            "duration": 229027.839,
+            "expected": 38,
+            "skipped": 0,
+            "unexpected": 4,
+            "flaky": 0
+          }
+        },
+        {
+          "file": ".cache/v4-05-browser-final.json",
+          "stats": {
+            "startTime": "2026-11-07T22:40:45.842Z",
+            "duration": 71249.912,
+            "expected": 8,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          }
+        }
+      ],
+      "initial_failure_reason": "Four assertions assumed exactly one initial image request. Installed Next Image reassigns src during hydration. Test now verifies requests stop after fallback and remain stable across resize.",
+      "latest_distinct": 42,
+      "latest_passed": 42,
+      "cases": [
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "all local photo files are served and non-editorial pages do not acquire generic photography",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "article photographs and credits remain available without JavaScript",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in en with keyboard credits and no layout overflow",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in pl with keyboard credits and no layout overflow",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in ru with keyboard credits and no layout overflow",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in uk with keyboard credits and no layout overflow",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "missing image preserves its reserved frame, caption and original licence links",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "all local photo files are served and non-editorial pages do not acquire generic photography",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "article photographs and credits remain available without JavaScript",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in en with keyboard credits and no layout overflow",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in pl with keyboard credits and no layout overflow",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in ru with keyboard credits and no layout overflow",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "licensed article photographs render in uk with keyboard credits and no layout overflow",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "article-imagery.spec.ts",
+          "title": "missing image preserves its reserved frame, caption and original licence links",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "all local WebP assets and credits ship with bounded responsive responses",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in en",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in pl",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in ru",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in uk",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "en: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "en: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "failed local image retains destination action and layout without retry or remote fallback",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "pl: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "pl: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "ru: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "ru: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "uk: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "uk: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "all local WebP assets and credits ship with bounded responsive responses",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in en",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in pl",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in ru",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "destination photographs preserve links, reserved layout and credits in uk",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "en: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "en: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "failed local image retains destination action and layout without retry or remote fallback",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "pl: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "pl: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "ru: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "ru: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "uk: HTTP, network and decode errors retain the destination action and reserved frame",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "destination-imagery.spec.ts",
+          "title": "uk: mapped city photographs and unpictured destinations preserve navigation",
+          "project": "mobile",
+          "status": "expected"
+        }
+      ],
+      "fallback_widths": [
+        320,
+        375,
+        390,
+        768,
+        1440
+      ],
+      "locales": [
+        "pl",
+        "en",
+        "ru",
+        "uk"
+      ],
+      "projects": [
+        "desktop",
+        "mobile"
+      ]
+    }
+  },
+  "visual_review": {
+    "contact_sheet": "docs/v4-05/contact-sheet.png",
+    "new_city_photos_reviewed": 8,
+    "fallback_capture": "docs/v4-05/fallback-mobile.png",
+    "fallback_capture_viewport_css_width": 1440,
+    "note": "Capture uses mobile project after responsive loop; narrow widths validated by assertions"
+  },
+  "dependencies": {
+    "new_packages": false,
+    "migrations": false,
+    "service_activation": false,
+    "uses_existing": [
+      "Next Image",
+      "sharp",
+      "Playwright/axe",
+      "reviewed local assets and manifests",
+      "configured Python SDK for guarded E2E fixture"
+    ]
+  },
+  "cleanup": {
+    "next_env_restored": true,
+    "fixture_servers_stopped": true
+  },
+  "source_hashes": [
+    {
+      "file": "apps/web/src/lib/destination-imagery.ts",
+      "sha256": "aaa85bd47b1ba08619675ccf095480a1fe9366fa2317f5f3079a938386c612d8"
+    },
+    {
+      "file": "apps/web/src/app/components/destination-card.tsx",
+      "sha256": "84cdba0a57518315f6e43a333df8486bd0dc2a1cd99a87c46ec87c04b3fd9b49"
+    },
+    {
+      "file": "apps/web/tests/destination-imagery.test.mjs",
+      "sha256": "b02e401a7e969831aba56f54d8a80f9bbb7d9d39a6271e3c6372da02f69c5ef2"
+    },
+    {
+      "file": "apps/web/tests/destination-imagery.spec.ts",
+      "sha256": "fd3a4fe3fb251cf09bb7c84807c01e32067c846400c5a02ef2698a23fb7321d2"
+    },
+    {
+      "file": "apps/api/tests/e2e_app.py",
+      "sha256": "66efaa0717aa8f0e409aa3aad6dd6565039a18827a44dfe82f56f5448219316a"
+    },
+    {
+      "file": "apps/api/tests/destination_image_browser_fixtures.py",
+      "sha256": "b41d20adce03767c79ffbb9dd772300578ba249beff5c555da2a160df17faf98"
+    }
+  ],
+  "limits": [
+    "Inventory covers repository seed catalog, not production DB",
+    "43 destinations intentionally retain navigation without a reviewed photograph",
+    "Existing license provenance audited locally; no fresh external rights/source check",
+    "No full API/PostgreSQL regression, full browser inventory or field CWV run",
+    "No production changes, deployment, external affiliate transitions or notifications"
+  ]
+}

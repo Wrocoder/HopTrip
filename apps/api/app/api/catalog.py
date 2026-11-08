@@ -18,7 +18,10 @@ from app.services.airports import matching_airports
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.destination_search import destination_search_fields, matching_destinations
-from app.services.weekend_catalog import WeekendQueryTooBroad, itinerary_matches
+from app.services.weekend_catalog import (
+    WeekendQueryTooBroad,
+    ranked_itinerary_matches,
+)
 
 router = APIRouter(prefix="/api/v1", tags=["catalog"])
 
@@ -27,8 +30,8 @@ router = APIRouter(prefix="/api/v1", tags=["catalog"])
 def list_deals(
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0, le=10000),
-    sort: Literal["score", "price", "departure", "destination_time"] = Query(
-        "price", description="destination_time: reliable airport interval descending, then price/date/id; unknown or estimated last. Maximum 500 filtered candidates."
+    sort: Literal["score", "price", "departure", "destination_time", "recommended"] = Query(
+        "price", description="recommended: modelled convenience descending, unscored last; destination_time: reliable airport interval descending, unknown/estimated last. Both use price/date/id tie-breaks and at most 500 filtered candidates."
     ),
     include_total: bool = Query(False),
     origin: str | None = Query(
@@ -91,16 +94,21 @@ def list_deals(
             days.between(1, 2),
         )
     query = query.order_by(None)
-    if weekend_mode or sort == "destination_time":
+    if weekend_mode or sort in ("destination_time", "recommended"):
         # Match against source evidence, not cached Deal dates. All ordinary SQL
         # filters above still apply; exact mode runs before offset/limit/total.
         try:
-            matches = itinerary_matches(db, query.order_by(*_deal_order(Deal, "price" if sort == "destination_time" else sort)), weekend_mode, hours)
+            matches = ranked_itinerary_matches(db, query.order_by(*_deal_order(Deal, "price" if sort in ("destination_time", "recommended") else sort)), weekend_mode, hours)
         except WeekendQueryTooBroad:
-            code = "DESTINATION_TIME_QUERY_TOO_BROAD" if sort == "destination_time" else "WEEKEND_QUERY_TOO_BROAD"
+            code = "TRIP_QUALITY_QUERY_TOO_BROAD" if sort == "recommended" else "DESTINATION_TIME_QUERY_TOO_BROAD" if sort == "destination_time" else "WEEKEND_QUERY_TOO_BROAD"
             raise HTTPException(422, detail={"code": code}) from None
         # The metadata join groups by ID; restore the public deterministic order.
-        if sort == "destination_time":
+        if sort == "recommended":
+            # Full filtered snapshot before pagination; price/history never enter the model.
+            matches.sort(key=lambda row: (row[3].score is None,
+                -(row[3].score if row[3].score is not None else 0),
+                row[0].price_per_person_pln, row[0].trip_start, row[0].id))
+        elif sort == "destination_time":
             # Only reliable airport intervals participate. Unknown/estimated
             # values share the price fallback, even if their estimate is huge.
             matches.sort(key=lambda pair: (
@@ -115,10 +123,11 @@ def list_deals(
         else:
             matches.sort(key=lambda pair: (-pair[0].deal_score, pair[0].trip_start, pair[0].id))
         items = []
-        for deal, assessment, interval in matches[offset:offset + limit]:
+        for deal, assessment, interval, ranking in matches[offset:offset + limit]:
             serialized = serialize_deal(db, deal)
             serialized.weekend_assessment = assessment
             serialized.destination_time = interval
+            serialized.trip_quality, serialized.trip_quality_score = ranking, ranking.score
             items.append(serialized)
         return DealPage(items=items, total=len(matches), offset=offset, limit=limit) if include_total else items
     if not include_total:

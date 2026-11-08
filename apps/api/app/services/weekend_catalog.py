@@ -1,15 +1,19 @@
 """Exact itinerary filtering/ranking with one bounded metadata snapshot."""
 from dataclasses import dataclass, field
 
+from app.config import get_settings
 from app.models.deal import Deal, DealComponent
 from app.models.location import Airport, Destination, DestinationAlias
 from app.models.offer import TravelOffer
 from app.schemas.deal import FlightFacts
 from app.schemas.destination_time import DestinationTime
+from app.schemas.trip_quality import TripQualityAssessment
 from app.schemas.weekend import WeekendAssessment, WeekendMode, WorkHours
+from app.services.connections import assess_connections
 from app.services.destination_time import destination_time
 from app.services.flight_facts import flight_facts
 from app.services.flight_quality import classify_flight_quality
+from app.services.trip_quality import trip_quality
 from app.services.weekend import assess_weekend
 from sqlalchemy import Select, select
 from sqlalchemy.orm import Session, aliased
@@ -39,6 +43,12 @@ def weekend_matches(db: Session, query: Select[tuple[Deal]], mode: WeekendMode,
 
 def itinerary_matches(db: Session, query: Select[tuple[Deal]], mode: WeekendMode | None,
                       hours: WorkHours) -> list[tuple[Deal, WeekendAssessment, DestinationTime]]:
+    return [(deal, assessment, interval) for deal, assessment, interval, _ in
+            ranked_itinerary_matches(db, query, mode, hours)]
+
+
+def ranked_itinerary_matches(db: Session, query: Select[tuple[Deal]], mode: WeekendMode | None,
+                            hours: WorkHours) -> list[tuple[Deal, WeekendAssessment, DestinationTime, TripQualityAssessment]]:
     # The caller supplies deterministic ordering. LIMIT applies to deals, not to
     # the component/alias join, so fan-out cannot truncate an itinerary.
     candidates = aliased(Deal, query.limit(MAX_WEEKEND_CANDIDATES + 1).cte("weekend_candidates"))
@@ -74,15 +84,21 @@ def itinerary_matches(db: Session, query: Select[tuple[Deal]], mode: WeekendMode
                  if provider in (offer.source if offer else "", "*")}
         if context.destination and context.destination.iata_code:
             codes.add(context.destination.iata_code)
+        conflicting = len(flights) > 1 or bool(offer and (
+            offer.origin_airport_id is not None and offer.origin_airport_id != context.deal.origin_airport_id
+            or offer.destination_id is not None and offer.destination_id != context.deal.destination_id))
         quality = classify_flight_quality(offer, facts,
             origin_code=context.origin.iata_code if context.origin else None,
             destination_codes=codes,
-            conflicting_context=len(flights) > 1 or bool(offer and (
-                offer.origin_airport_id is not None and offer.origin_airport_id != context.deal.origin_airport_id
-                or offer.destination_id is not None and offer.destination_id != context.deal.destination_id)))
+            conflicting_context=conflicting)
         assessment = assess_weekend(facts, work_hours=hours,
-                                    itinerary_eligible=quality.recommendation_eligible)
+            itinerary_eligible=quality.recommendation_eligible,
+            stay_policy=get_settings().weekend_stay_policy)
         if key is None or getattr(assessment, key) == "ELIGIBLE":
             interval = destination_time(facts, itinerary_eligible=quality.recommendation_eligible)
-            matches.append((context.deal, assessment, interval))
+            settings = get_settings()
+            connections = assess_connections(offer, policy=settings.connection_policy,
+                itinerary_context_valid=not conflicting and "AIRPORT_MISMATCH" not in quality.reasons)
+            ranking = trip_quality(facts, quality, assessment, connections, policy=settings.trip_quality_policy)
+            matches.append((context.deal, assessment, interval, ranking))
     return matches

@@ -114,6 +114,7 @@ test("flight links to the budget calculator",async({page})=>{
 test("reference fare fills only local transport and preserves manual amounts",async({page})=>{
  await page.route("https://api.nbp.pl/**",route=>route.fulfill({json:{table:"A",currency:"euro",code:"EUR",rates:[{no:"fixture",effectiveDate:new Date().toISOString().slice(0,10),mid:4}]}}));
  await page.goto("/deals/browser-deal#calculator");
+ await expect(page.locator("#budget-flight")).toBeEnabled();
  await page.setViewportSize({width:320,height:740});
  await page.getByText("Sprawdź orientacyjne koszty na miejscu",{exact:true}).click();
  await page.getByRole("button",{name:"Uzupełnij transport miejski w PLN"}).click();

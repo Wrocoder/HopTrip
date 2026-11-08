@@ -64,7 +64,7 @@ export const tripCopy={
  "Wczytywanie zapisanych planów…":["Loading saved plans…","Загрузка сохранённых планов…","Завантаження збережених планів…"],
  "Pamięć przeglądarki jest niedostępna. Otrzymane linki nadal działają.":["Browser storage is unavailable. Received links still work.","Хранилище браузера недоступно. Полученные ссылки продолжают работать.","Сховище браузера недоступне. Отримані посилання й надалі працюють."],
  "Nie udało się usunąć planu. Spróbuj ponownie.":["Could not remove the plan. Try again.","Не удалось удалить план. Попробуйте снова.","Не вдалося видалити план. Спробуйте знову."],
- "Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.":["You have no saved trips yet. Open an offer and choose Save trip next to the calculator.","У вас пока нет сохранённых поездок. Откройте предложение и выберите «Сохранить поездку» рядом с калькулятором.","У вас поки немає збережених подорожей. Відкрийте пропозицію та виберіть «Зберегти подорож» поруч із калькулятором."],
+ "Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” w sekcji „{section}”.":["You have no saved trips yet. Open an offer and choose “Save trip” in “{section}”.","У вас пока нет сохранённых поездок. Откройте предложение и выберите «Сохранить поездку» в разделе «{section}».","У вас поки немає збережених подорожей. Відкрийте пропозицію та виберіть «Зберегти подорож» у розділі «{section}»."],
  "plan pobytu:":["stay plan:","план пребывания:","план перебування:"],
  "daty nieustalone":["dates not set","даты не заданы","дати не задані"],
  "Usuń plan:":["Remove plan:","Удалить план:","Видалити план:"],

@@ -16,6 +16,8 @@ test("subscription preserves filters, confirms email, updates and stops",async({
  await expect(page.getByLabel(/Tylko weekendy/)).toBeChecked();
  await expect(page.getByLabel("Częstotliwość")).toHaveValue("weekly");
  await page.getByLabel("Email",{exact:true}).fill(email);
+ for(const width of [320,375,390,768,1440]){await page.setViewportSize({width,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
+ await page.setViewportSize({width:320,height:740});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  expect((await new AxeBuilder({page}).include(".alert-panel").analyze()).violations).toEqual([]);
  await page.locator(".alert-panel").screenshot({path:testInfo.outputPath("alert-preferences.png")});

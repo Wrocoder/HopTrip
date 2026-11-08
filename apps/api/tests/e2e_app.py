@@ -153,6 +153,7 @@ with Session(engine) as db:
     )
     db.add(scheduled_offer)
     db.flush()
+    scheduled_deal.depart_at = scheduled_departure
     scheduled_component.travel_offer_id = scheduled_offer.id
     db.commit()
 
@@ -474,7 +475,7 @@ def tracking():
                 for c in db.scalars(select(AffiliateClick))
             ],
             "events": [
-                {"session": e.anonymous_session_id, "name": e.event_name}
+                {"event_id": str(e.event_id), "session": e.anonymous_session_id, "name": e.event_name}
                 for e in db.scalars(select(AnalyticsEvent))
             ],
         }
@@ -488,7 +489,7 @@ flight_link_snapshot = None
 
 
 @app.post('/__test__/flight-link-binding')
-def flight_link_binding(scenario: Literal['valid', 'stale', 'reset']):
+def flight_link_binding(scenario: Literal['valid', 'stale', 'date-conflict', 'reset']):
     from urllib.parse import urlencode
 
     from app.models.affiliate import AffiliateProgram, AffiliateProvider
@@ -502,12 +503,16 @@ def flight_link_binding(scenario: Literal['valid', 'stale', 'reset']):
         offer = db.get(TravelOffer, component.travel_offer_id)
         if scenario == 'reset':
             if flight_link_snapshot:
-                component.affiliate_program_id, component.metadata_json, offer.raw_payload = deepcopy(flight_link_snapshot)
+                component.affiliate_program_id, component.metadata_json, offer.raw_payload = deepcopy(flight_link_snapshot[:3])
+                get_settings().travelpayouts_marker, get_settings().travelpayouts_project_id = flight_link_snapshot[3:]
                 flight_link_snapshot = None
             db.commit()
             return {'scenario': scenario}
         if flight_link_snapshot is None:
-            flight_link_snapshot = deepcopy((component.affiliate_program_id, component.metadata_json, offer.raw_payload))
+            flight_link_snapshot = deepcopy((component.affiliate_program_id, component.metadata_json, offer.raw_payload,
+                get_settings().travelpayouts_marker, get_settings().travelpayouts_project_id))
+        get_settings().travelpayouts_marker = 123
+        get_settings().travelpayouts_project_id = 456
         provider = db.scalar(select(AffiliateProvider).where(AffiliateProvider.code == 'travelpayouts'))
         program = db.scalar(select(AffiliateProgram).where(AffiliateProgram.provider_id == provider.id,
                                                           AffiliateProgram.code == 'aviasales'))
@@ -521,18 +526,30 @@ def flight_link_binding(scenario: Literal['valid', 'stale', 'reset']):
         original = '/search/WRO0101BCN04011?t=synthetic-current-ticket'
         component.metadata_json = {'outbound_url': 'https://tp.media/r?' + urlencode({
             'marker': 123, 'trs': 456, 'sub_id': PLACEMENT_SUB_ID, 'u': source_url(original)})}
-        offer.raw_payload = {**offer.raw_payload, 'link': original if scenario == 'valid'
-                             else '/search/KRK0202ROM05021?t=synthetic-new-ticket'}
+        offer.raw_payload = {**deepcopy(flight_link_snapshot[2]),
+            'link': '/search/KRK0202ROM05021?t=synthetic-new-ticket' if scenario == 'stale' else original}
+        if scenario == 'date-conflict':
+            offer.raw_payload = {**offer.raw_payload,
+                'departure_at': (offer.depart_at.replace(tzinfo=UTC) + timedelta(days=1)).isoformat()}
         db.commit()
     return {'scenario': scenario}
 
 
 @app.post('/__test__/weekend-fixtures')
-def set_weekend_fixtures(enabled: bool, nights: int | None = Query(None, ge=0, le=3)):
+def set_weekend_fixtures(enabled: bool, nights: int | None = Query(None, ge=0, le=3), recommendations: bool = False):
     from weekend_browser_fixtures import weekend_fixtures
 
     with Session(engine) as db:
-        weekend_fixtures(db, enabled, nights=nights)
+        weekend_fixtures(db, enabled, nights=nights, recommendations=recommendations)
+    return {'enabled': enabled}
+
+
+@app.post('/__test__/connection-fixtures')
+def set_connection_fixtures(enabled: bool):
+    from connection_browser_fixtures import connection_fixtures
+
+    with Session(engine) as db:
+        connection_fixtures(db, enabled)
     return {'enabled': enabled}
 
 
@@ -600,6 +617,10 @@ async def catalog_state_fixture(request, call_next):
             return JSONResponse({'detail': {'code': 'DESTINATION_TIME_QUERY_TOO_BROAD'}}, status_code=422)
         if request.query_params.get('sort') == 'destination_time' and request.query_params.get('budget') == '987649':
             return JSONResponse({'detail': [{'loc': ['query', 'sort'], 'type': 'literal_error'}]}, status_code=422)
+        if request.query_params.get('sort') == 'recommended' and request.query_params.get('budget') == '987648':
+            return JSONResponse({'detail': {'code': 'TRIP_QUALITY_QUERY_TOO_BROAD'}}, status_code=422)
+        if request.query_params.get('sort') == 'recommended' and request.query_params.get('budget') == '987647':
+            return JSONResponse({'detail': [{'loc': ['query', 'sort'], 'type': 'literal_error'}]}, status_code=422)
         if request.query_params.get('budget') == '987651' and request.query_params.get('weekend_mode'):
             return JSONResponse({'detail': {'code': 'WEEKEND_QUERY_TOO_BROAD'}}, status_code=422)
         if request.query_params.get("budget") == "987652":
@@ -616,7 +637,12 @@ async def catalog_state_fixture(request, call_next):
                 return response
             rows = json.loads(b''.join([part async for part in response.body_iterator]))
             if home_collection_scenario == 'one':
-                rows = rows[:1]
+                # Pick one suitable example; the cheapest calendar match may
+                # overlap work hours and intentionally fail recommendation rules.
+                rows = [row for row in rows
+                        if row['weekend_assessment']['stay']['eligibility'] == 'ELIGIBLE'
+                        and (not request.query_params.get('weekend_mode')
+                             or row['weekend_assessment']['no_leave'] == 'ELIGIBLE')][:1]
             else:
                 for row in rows:
                     row['price_freshness']['hidden_after'] = home_collection_deadline
@@ -648,7 +674,7 @@ def short_trip_fixtures(enabled: bool):
                 db.add(airport)
             db.flush()
             for index, nights in enumerate(lengths):
-                start = datetime.now(UTC) + timedelta(days=30)
+                start = (datetime.now(UTC) + timedelta(days=30)).replace(hour=12, minute=0, second=0, microsecond=0)
                 end = start + timedelta(days=nights)
                 trip = Deal(slug=f"short-{code}-{index}", origin_airport_id=airport.id,
                             destination_id=deal.destination_id, trip_start=start.date(),
@@ -667,6 +693,21 @@ def short_trip_fixtures(enabled: bool):
                                            "departure_at": start.isoformat(), "return_at": end.isoformat(),
                                            "duration_to": 120, "duration_back": 120,
                                            "airline": "FR", "transfers": 0, "return_transfers": 0})
+                # Explicit same-ticket synthetic schedule; recommendations must
+                # not certify REST's calculated arrivals as known times.
+                from app.services.flight_routes import ticket_key
+
+                link = f'/search/fixture?t=short-{code}-{index}'
+                flight.raw_payload['link'] = link
+                arrival, home = start + timedelta(hours=2), end + timedelta(hours=2)
+                flight.route_details = dict(source='travelpayouts_graphql', ticket_key=ticket_key(link),
+                    departure_at=start.isoformat(), return_at=home.isoformat(),
+                    value=str(180 + index), currency='PLN', origin_airport_iata=code,
+                    destination_airport_iata='BCN', segments=[
+                        dict(departure_at=start.isoformat(), arrival_at=arrival.isoformat(), flight_legs=[
+                            dict(origin=code, destination='BCN', departure_at=start.isoformat(), arrival_at=arrival.isoformat(), operating_carrier='FR')]),
+                        dict(departure_at=end.isoformat(), arrival_at=home.isoformat(), flight_legs=[
+                            dict(origin='BCN', destination=code, departure_at=end.isoformat(), arrival_at=home.isoformat(), operating_carrier='FR')])])
                 db.add_all([trip, flight])
                 db.flush()
                 db.add(DealComponent(deal_id=trip.id, component_type="FLIGHT",
@@ -676,5 +717,7 @@ def short_trip_fixtures(enabled: bool):
 
 
 from destination_browser_fixtures import install_destination_recovery_fixture  # noqa: E402
+from destination_image_browser_fixtures import install_destination_image_fixture  # noqa: E402
 
 install_destination_recovery_fixture(app, engine)
+install_destination_image_fixture(app)

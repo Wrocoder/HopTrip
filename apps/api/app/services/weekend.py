@@ -1,9 +1,15 @@
 """Pure weekend-v1 predicates. All work hours refer to the outbound origin zone."""
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime, time, timedelta
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from app.schemas.deal import FlightFacts
-from app.schemas.weekend import Eligibility, WeekendAssessment, WorkHours
+from app.schemas.weekend import (
+    Eligibility,
+    WeekendAssessment,
+    WeekendStayAssessment,
+    WeekendStayPolicy,
+    WorkHours,
+)
 from app.services.trip_timeline import elapsed, trip_timeline
 
 
@@ -20,13 +26,69 @@ def eligibility(matches: bool) -> Eligibility:
     return "ELIGIBLE" if matches else "INELIGIBLE"
 
 
+def assess_stay(facts: FlightFacts, policy: WeekendStayPolicy, *,
+                itinerary_eligible: bool) -> WeekendStayAssessment:
+    result = WeekendStayAssessment(policy=policy)
+    if not itinerary_eligible:
+        result.reasons.append("UNVERIFIED_ITINERARY")
+        return result
+    arrival = local(facts.outbound_arrival, facts.destination_timezone)
+    back = local(facts.return_departure, facts.return_origin_timezone)
+    if arrival is None or back is None:
+        result.reasons.append("MISSING_TIMES_OR_TIMEZONE")
+        return result
+    result.night_arrival = arrival.hour < 6
+    result.early_return = back.hour < 8
+    if result.night_arrival:
+        result.reasons.append("NIGHT_ARRIVAL")
+    if result.early_return:
+        result.reasons.append("EARLY_RETURN")
+    if (not facts.destination_airport or not facts.return_origin_airport
+            or facts.destination_airport != facts.return_origin_airport
+            or facts.destination_timezone != facts.return_origin_timezone):
+        result.reasons.append("DESTINATION_AIRPORT_UNCONFIRMED_OR_DIFFERENT")
+        return result
+    # A complete, consistently zoned journey is required for an endorsement.
+    if (trip_timeline(facts).journey_elapsed_minutes is None
+            or local(facts.outbound_departure, facts.origin_timezone) is None
+            or local(facts.return_arrival, facts.return_destination_timezone) is None):
+        result.reasons.append("INCOMPLETE_OR_INVALID_ITINERARY")
+        return result
+    span = (back.date() - arrival.date()).days
+    if not 0 <= span <= 7:
+        result.reasons.append("OUTSIDE_SHORT_TRIP_WINDOW")
+        return result
+    result.airport_interval_minutes = elapsed(arrival, back)
+    start = arrival.astimezone(UTC) + timedelta(minutes=policy.arrival_buffer_minutes)
+    end = back.astimezone(UTC) - timedelta(minutes=policy.departure_buffer_minutes)
+    seconds = 0.0
+    for index in range(span + 1):
+        day = arrival.date() + timedelta(days=index)
+        opening = datetime.combine(day, time(8), arrival.tzinfo).astimezone(UTC)
+        closing = datetime.combine(day, time(22), arrival.tzinfo).astimezone(UTC)
+        seconds += max(0, (min(end, closing) - max(start, opening)).total_seconds())
+    result.usable_minutes = int(seconds // 60)
+    if (result.airport_interval_minutes is None
+            or result.airport_interval_minutes < policy.min_airport_minutes
+            or result.usable_minutes < policy.min_usable_minutes):
+        result.reasons.append("INSUFFICIENT_STAY")
+    if facts.outbound_arrival_calculated or facts.return_arrival_calculated:
+        result.reasons.append("ESTIMATED_TIMES")
+        return result
+    result.eligibility = eligibility(not result.reasons)
+    return result
+
+
 def assess_weekend(facts: FlightFacts, *, work_hours: WorkHours | None = None,
-                   itinerary_eligible: bool = True) -> WeekendAssessment:
+                   itinerary_eligible: bool = True,
+                   stay_policy: WeekendStayPolicy | None = None) -> WeekendAssessment:
     hours = work_hours or WorkHours()
     timeline = trip_timeline(facts)
     result = WeekendAssessment(work_hours=hours, work_timezone=facts.origin_timezone,
         actual_return_local_date=timeline.local_return_arrival_date,
-        airport_arrival_day_offset=timeline.return_arrival_day_offset)
+        airport_arrival_day_offset=timeline.return_arrival_day_offset,
+        stay=assess_stay(facts, stay_policy or WeekendStayPolicy(),
+                         itinerary_eligible=itinerary_eligible))
     start = local(facts.outbound_departure, facts.origin_timezone)
     back = local(facts.return_departure, facts.return_origin_timezone)
     home = local(facts.return_arrival, facts.return_destination_timezone)

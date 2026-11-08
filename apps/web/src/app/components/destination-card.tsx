@@ -11,7 +11,7 @@ export function DestinationPhoto({slug,locale}:{slug:string;locale:Locale}) {
  const image=destinationImage(slug),copy=imageryCopy[locale];
  const [failed,setFailed]=useState(false);
  return <span className={styles.frame}>
-    {image&&!failed?<Image src={image.src} alt={image.alt[locale]} width={960} height={600}
+    {image&&!failed?<Image src={image.src} alt={image.alt[locale]} width={image.width} height={image.height}
      sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 60px) / 2), (max-width: 1224px) calc((100vw - 104px) / 3), 374px"
      loading="lazy" onError={()=>setFailed(true)}/>:<span className={styles.fallback}>{copy.unavailable}</span>}
    </span>;

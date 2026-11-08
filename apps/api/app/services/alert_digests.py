@@ -12,7 +12,7 @@ from app.models.location import Destination
 from app.schemas.alert import AlertFilters
 from app.services.alert_mail import send_alert_mail
 from app.services.alert_matching import candidate_deals
-from app.services.alerts import alert_link, utc
+from app.services.alerts import CONSENT_VERSION, alert_link, utc
 from app.services.catalog import serialize_deal
 from app.services.destination_search import destination_search_fields
 from app.services.trip_timeline_text import timeline_text
@@ -112,6 +112,7 @@ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None
         except ValidationError:
             filters = None
         if (alert is None or alert.status != "ACTIVE" or alert.confirmed_at is None
+                or alert.consent_version != CONSENT_VERSION
                 or filters is None or not due(settings, filters, alert.last_digest_at, checked_at)):
             db.rollback()
             counts["skipped"] += 1
@@ -130,7 +131,8 @@ def deliver_digests(db: Session, settings: Settings, now: datetime | None = None
         db.commit()
         alert = db.scalar(select(DealAlert).where(DealAlert.id == alert_id)
                           .with_for_update().execution_options(populate_existing=True))
-        if alert is None or alert.status != "ACTIVE" or alert.filters != original_filters:
+        if (alert is None or alert.status != "ACTIVE" or alert.confirmed_at is None
+                or alert.consent_version != CONSENT_VERSION or alert.filters != original_filters):
             delivery.status = "CANCELLED"
             counts["cancelled"] += 1
             db.commit()

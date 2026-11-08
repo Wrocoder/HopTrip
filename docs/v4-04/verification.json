@@ -1,0 +1,373 @@
+{
+  "task": "V4-04",
+  "date": "2026-11-07",
+  "timezone": "Europe/Warsaw",
+  "status": "DONE",
+  "scope": "LOCAL",
+  "next_task": "V4-05",
+  "backend": {
+    "initial_regression": {
+      "tests": 22,
+      "failed_before_fix": 19,
+      "passed_before_fix": 3,
+      "artifact": ".cache/v4-04-before.xml"
+    },
+    "new_cases": 27,
+    "context": {
+      "passed": 27,
+      "artifact": ".cache/v4-04-context.xml"
+    },
+    "focused_before_last_structured_return_case": {
+      "passed": 85,
+      "artifact": ".cache/v4-04-focused.xml"
+    },
+    "full": {
+      "passed": 1346,
+      "skipped_postgres": 18,
+      "warnings": 2,
+      "artifact": ".cache/v4-04-api-final.xml"
+    },
+    "ruff": "PASS",
+    "ruff_scope": "apps/api/app and apps/api/tests/test_booking_context.py",
+    "mypy": {
+      "status": "PASS",
+      "source_files": 127
+    }
+  },
+  "web": {
+    "node_passed": 356,
+    "eslint": "PASS",
+    "build_and_types": "PASS",
+    "browser": {
+      "runs": [
+        {
+          "file": ".cache/v4-04-browser.json",
+          "stats": {
+            "startTime": "2026-11-07T22:18:21.713Z",
+            "duration": 224682.698,
+            "expected": 30,
+            "skipped": 0,
+            "unexpected": 8,
+            "flaky": 0
+          }
+        },
+        {
+          "file": ".cache/v4-04-browser-final.json",
+          "stats": {
+            "startTime": "2026-11-07T22:23:32.272Z",
+            "duration": 80017.125,
+            "expected": 16,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          }
+        }
+      ],
+      "initial_failure_reason": "Synthetic Aviasales fixture did not configure marker/trs. Fixed with snapshot/restore, then rerun.",
+      "latest_distinct": 38,
+      "latest_passed": 38,
+      "cases": [
+        {
+          "file": "accommodation.spec.ts",
+          "title": "known flight schedule uses airport local time and stay dates remain editable",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "accommodation.spec.ts",
+          "title": "stay summary, accessible errors and manual budget cost survive the journey",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "accommodation.spec.ts",
+          "title": "Stay22 lets travellers edit their stay before an attributed outbound click",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "accommodation.spec.ts",
+          "title": "known flight schedule uses airport local time and stay dates remain editable",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "accommodation.spec.ts",
+          "title": "stay summary, accessible errors and manual budget cost survive the journey",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "accommodation.spec.ts",
+          "title": "Stay22 lets travellers edit their stay before an attributed outbound click",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in en",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in pl",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in ru",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in uk",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "analytics network failure preserves localized affiliate navigation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "declining analytics keeps localized affiliate and official navigation without events",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "middle click on single event ticket is consent-gated and opens unchanged URL",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "middle click on variant event ticket is consent-gated and opens unchanged URL",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in en",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in pl",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in ru",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "affiliate context preserves destination and accepted tracking in uk",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "analytics network failure preserves localized affiliate navigation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "declining analytics keeps localized affiliate and official navigation without events",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "middle click on single event ticket is consent-gated and opens unchanged URL",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "affiliate-context.spec.ts",
+          "title": "middle click on variant event ticket is consent-gated and opens unchanged URL",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "en: stale ticket and contradictory dates disable booking",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "pl: stale ticket and contradictory dates disable booking",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "ru: stale ticket and contradictory dates disable booking",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "uk: stale ticket and contradictory dates disable booking",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "en: stale ticket and contradictory dates disable booking",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "pl: stale ticket and contradictory dates disable booking",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "ru: stale ticket and contradictory dates disable booking",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-link-binding.spec.ts",
+          "title": "uk: stale ticket and contradictory dates disable booking",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "en: supported stay context and unsupported ticket changes are explicit",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "pl: supported stay context and unsupported ticket changes are explicit",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "ru: supported stay context and unsupported ticket changes are explicit",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "uk: supported stay context and unsupported ticket changes are explicit",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "en: supported stay context and unsupported ticket changes are explicit",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "pl: supported stay context and unsupported ticket changes are explicit",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "ru: supported stay context and unsupported ticket changes are explicit",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "partner-boundaries.spec.ts",
+          "title": "uk: supported stay context and unsupported ticket changes are explicit",
+          "project": "mobile",
+          "status": "expected"
+        }
+      ]
+    }
+  },
+  "inventory": {
+    "activity_destinations": 69,
+    "activity_items": 78,
+    "tiqets_affiliate_items": 40,
+    "welcome_pickups_links": 3,
+    "other_integrations": [
+      "Aviasales/Travelpayouts",
+      "Stay22",
+      "Ticketmaster",
+      "approved stored-link programs"
+    ]
+  },
+  "dependencies": {
+    "new_packages": false,
+    "migrations": false,
+    "service_activation": false,
+    "uses_existing": [
+      "approved stored-link adapter",
+      "source ticket binding",
+      "flight quality and trip dates",
+      "DestinationAlias",
+      "local SQLite/API/Playwright fixtures"
+    ]
+  },
+  "cleanup": {
+    "next_env_restored": true,
+    "fixture_servers_stopped": true
+  },
+  "changes": {
+    "source_hashes": [
+      {
+        "file": "apps/api/app/services/booking_context.py",
+        "sha256": "a85881049847b8c7c1292e82d6fa3f2df064cd0ca04785d9b620a1809f88bb2e"
+      },
+      {
+        "file": "apps/api/app/services/affiliate.py",
+        "sha256": "3396d4d88ba5249ca409da07c83bb6275b6983af7c0e25b179efa39a49220b20"
+      },
+      {
+        "file": "apps/api/app/services/partner_links.py",
+        "sha256": "f4ad1ffd65b632b565eedc1227f3631f9159d4a89bfedd9df01672b9fe512bfc"
+      },
+      {
+        "file": "apps/api/app/api/affiliate.py",
+        "sha256": "de818cf94d6d5c12a8f131b336a24e70c4b593551e5a5904726f41b1799adea0"
+      },
+      {
+        "file": "apps/api/tests/test_booking_context.py",
+        "sha256": "54b6f9afc4d4cba8613b6139e837eca7052bbc435026facea901ea8384aaab07"
+      },
+      {
+        "file": "apps/api/tests/e2e_app.py",
+        "sha256": "24e17b7dfc0d74f6cfea63e4861135a8cd96b61dfbeb6ecbc9d06a99882f6ce1"
+      },
+      {
+        "file": "apps/web/tests/flight-link-binding.spec.ts",
+        "sha256": "f4cc99d877c0bcee0be111bfd04d44125fd307821120aa99c8ad6fa2f1b410cd"
+      }
+    ],
+    "docs": [
+      "docs/HOPTRIP_V4_PROGRESS.md",
+      "docs/v4-04/README.md",
+      "docs/v4-04/verification.json"
+    ]
+  },
+  "limits": [
+    "No live provider redirects or booking availability confirmation",
+    "No commission or account attribution verification",
+    "Opaque source passenger fields preserved without inventing URL grammar",
+    "No PostgreSQL run",
+    "No production changes, deployments, activation or notifications"
+  ]
+}

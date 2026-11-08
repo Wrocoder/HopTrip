@@ -2,6 +2,7 @@ import type {Airport,Deal,DealResults,Destination} from './api';
 import type {EventFlightFit} from './event-flight-fit';
 import {validCalendarDate} from './calendar-date.ts';
 import {isAirportContext,type AirportContext} from './airport-context.ts';
+import type {TripQuality} from './trip-quality';
 
 type Check=(value:unknown)=>boolean;
 const text:Check=v=>typeof v==='string';
@@ -22,6 +23,32 @@ function shape(v:unknown,required:Record<string,Check>,optional:Record<string,Ch
   Object.entries(optional).every(([key,check])=>v[key]===undefined||check(v[key]));
 }
 const basis=nullable(oneOf('SOURCE','FIRST_SEEN'));
+const tripQualityKeys=['completeness','travel','usable_time','connections','airports','leave'] as const;
+const qualityScore:Check=v=>integer(v)&&Number(v)<=100;
+const tripQuality:Check=v=>{
+ if(!shape(v,{version:oneOf('trip-quality-v1'),status:oneOf('KNOWN','PARTIAL','UNKNOWN'),score:nullable(qualityScore),reasons:array(text),
+  policy:p=>shape(p,{weights:w=>shape(w,Object.fromEntries(tripQualityKeys.map(key=>[key,qualityScore]))),
+   good_travel_minutes:integer,bad_travel_minutes:integer,target_usable_minutes:integer,
+   inconvenient_stay_percent:qualityScore,night_home_travel_percent:qualityScore,connection_penalty_percent:qualityScore,long_connection_penalty_percent:qualityScore,
+   night_connection_penalty_percent:qualityScore,risky_connection_penalty_percent:qualityScore,airport_change_penalty_percent:qualityScore}),
+  components:array(c=>shape(c,{key:oneOf(...tripQualityKeys),points:integer,max_points:qualityScore,known:bool})),
+ }))return false;
+ const q=v as unknown as TripQuality,total=Object.values(q.policy.weights).reduce((a,b)=>a+b,0);
+ if(total<=0||q.policy.bad_travel_minutes<=q.policy.good_travel_minutes||q.policy.target_usable_minutes<=0)return false;
+ if(q.status==='UNKNOWN')return q.score===null&&q.components.length===0;
+ return q.score!==null&&q.components.length===6&&new Set(q.components.map(c=>c.key)).size===6&&
+  q.components.every(c=>c.max_points===q.policy.weights[c.key]&&c.points<=c.max_points&&(c.known||c.points===0))&&
+  q.score===Math.floor(q.components.reduce((sum,c)=>sum+c.points,0)*100/total);
+};
+const direction=oneOf('OUTBOUND','RETURN');
+const connectionAssessment:Check=v=>shape(v,{
+ version:oneOf('connections-v1'),status:oneOf('KNOWN','PARTIAL','UNKNOWN'),
+ policy:p=>shape(p,{long_layover_minutes:x=>integer(x)&&Number(x)>=1&&Number(x)<=10080,short_transfer_minutes:x=>integer(x)&&Number(x)>=1&&Number(x)<=10080}),
+ connections:array(c=>shape(c,{direction,after_leg:x=>integer(x)&&Number(x)>=1&&Number(x)<=20,
+  arrival_airport:x=>typeof x==='string'&&/^[A-Z]{3}$/.test(x),departure_airport:x=>typeof x==='string'&&/^[A-Z]{3}$/.test(x),
+  duration_minutes:integer,overnight:nullable(bool),airport_change:bool,long_layover:bool,risky_transfer:bool,protection:oneOf('UNKNOWN')})),
+ unknown_directions:array(direction),
+});
 const component:Check=v=>shape(v,{id:integer,component_type:text,price_pln:nullable(decimal),available:bool,reason:text,redirect_path:nullable(text)},{partner_name:nullable(text)});
 const leg:Check=v=>shape(v,{origin_airport:text,destination_airport:text,departure:timestamp,arrival:timestamp},
  {origin_timezone:nullable(text),destination_timezone:nullable(text),airline_code:nullable(text),airline_name:nullable(text),flight_number:nullable(text)});
@@ -47,6 +74,11 @@ const weekend:Check=v=>shape(v,{
  work_timezone:nullable(text),actual_return_local_date:nullable(calendar),airport_arrival_day_offset:nullable(x=>number(x)&&Number.isSafeInteger(x)),
  confidence:oneOf('KNOWN','ESTIMATED','UNKNOWN'),calendar:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),flexible:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),no_leave:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),
  might_require_leave:nullable(bool),airport_times_only:oneOf(true),reasons:array(text),
+},{stay:x=>shape(x,{
+ version:oneOf('weekend-stay-v1'),eligibility:oneOf('ELIGIBLE','INELIGIBLE','UNKNOWN'),
+ airport_interval_minutes:nullable(integer),usable_minutes:nullable(integer),night_arrival:nullable(bool),early_return:nullable(bool),reasons:array(text),
+ policy:p=>shape(p,{min_airport_minutes:integer,min_usable_minutes:integer,arrival_buffer_minutes:integer,departure_buffer_minutes:integer}),
+})
 });
 const destinationTime:Check=v=>{
  if(!shape(v,{version:oneOf('destination-time-v1'),scope:oneOf('AIRPORT_ARRIVAL_TO_RETURN_DEPARTURE'),status:oneOf('KNOWN','ESTIMATED','UNKNOWN'),
@@ -63,8 +95,10 @@ export function isDeal(v:unknown):v is Deal{
   id:integer,slug:text,trip_start:calendar,trip_end:calendar,origin_airport_id:integer,destination_id:integer,origin_code:text,origin_city:text,destination_city:text,destination_slug:text,
   trip_type:oneOf('ONE_WAY','ROUND_TRIP'),price_basis:text,components:array(component),flight_price_pln:nullable(decimal),hotel_price_pln:nullable(decimal),total_estimated_pln:decimal,price_per_person_pln:decimal,
   historical_baseline_pln:nullable(decimal),discount_percent:nullable(decimal),deal_score:number,confidence:decimal,explanation_codes:array(text),score_version:text,score_components:object,last_verified_at:timestamp,expires_at:nullable(timestamp),
- },{airport_context:isAirportContext,destination_time:destinationTime,weekend_assessment:weekend,destination_country_code:text,events_supported:bool,flight_quality:quality,price_freshness:freshness,flight_facts:facts,score_explanation:explanation});
+ },{trip_quality:tripQuality,trip_quality_score:nullable(qualityScore),connection_assessment:connectionAssessment,airport_context:isAirportContext,destination_time:destinationTime,weekend_assessment:weekend,destination_country_code:text,events_supported:bool,flight_quality:quality,price_freshness:freshness,flight_facts:facts,score_explanation:explanation});
  if(!valid)return false;
+ const q=v.trip_quality as TripQuality|undefined;
+ if(q&&v.trip_quality_score!==undefined&&q.score!==v.trip_quality_score)return false;
  const c=v.airport_context as AirportContext|undefined;
  if(!c?.itinerary_verified)return true;
  const f=v.flight_facts as Deal['flight_facts'];

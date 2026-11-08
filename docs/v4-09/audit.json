@@ -1,0 +1,104 @@
+{
+  "task": "V4-09",
+  "date": "2026-11-08",
+  "method": "Heuristic TypeScript AST/JSON inventory followed by source comparison and focused semantic/browser review; not independent native-editor proof",
+  "inventory": {
+    "files": 252,
+    "candidate_strings": 8495,
+    "by_locale": {
+      "pl": 684,
+      "en": 2537,
+      "ru": 2637,
+      "uk": 2637
+    },
+    "placeholder_mismatches": []
+  },
+  "flag_classification": [
+    {
+      "file": "apps/web/src/lib/weekend-pilot-guides.ts",
+      "key": "/paragraphs",
+      "locale": "en",
+      "text": "Plan zakłada dwa pełne dni w mieście. Przy późnym przylocie wybierz tylko wieczorny spacer; przy wczesnym powrocie pomiń drugi dzień. Najpierw ustal godzinę wyjazdu na lotnisko i odbiór bagażu, potem rezerwuj atrakcje.",
+      "reasons": [
+        "possible-polish-text"
+      ],
+      "result": "false_positive",
+      "reason": "Monolingual Polish array of three source paragraphs mistaken for an EN/RU/UK variant array"
+    }
+  ],
+  "raw_jsx_classification": [
+    {
+      "file": "apps\\web\\src\\app\\destinations\\[slug]\\page.tsx",
+      "text": "Loty Kraków — Rzym",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\app\\from\\[iata_code]\\page.tsx",
+      "text": "Porównaj loty z Chopina i Modlina",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\app\\info\\[slug]\\page.tsx",
+      "text": "Dane kontaktowe są chwilowo niedostępne. Spróbuj ponownie później.",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\app\\info\\[slug]\\page.tsx",
+      "text": "Przed podróżą sprawdź aktualizacje",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\app\\info\\[slug]\\page.tsx",
+      "text": ". Rozkłady, ceny, godziny otwarcia i zasady wstępu mogą się zmienić.\r\n  Linki do oficjalnych źródeł znajdują się przy odpowiednich częściach poradnika. Sprawdź je dla daty swojej podróży.",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\app\\info\\[slug]\\page.tsx",
+      "text": "Poniższe wycieczki zaczynają się w Reykjavíku. Dojazd z lotniska i innych części Islandii planujesz osobno.",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\lib\\share-image.tsx",
+      "text": "Praktyczny poradnik podróżnika",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\lib\\share-image.tsx",
+      "text": "Plan → podróż",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    },
+    {
+      "file": "apps\\web\\src\\lib\\travel-preview.tsx",
+      "text": "Lot · nocleg · plan podróży",
+      "result": "intentional_polish_branch_or_polish_social_template",
+      "reason": "Localized routes use translated content; Polish-only publication/OG policy unchanged"
+    }
+  ],
+  "guides": {
+    "total": 46,
+    "changed": 43,
+    "corrected_fragments": 355,
+    "en": 155,
+    "ru": 200,
+    "uk": 0,
+    "source_hashes_unchanged": true,
+    "digit_sequences_unchanged": true,
+    "all_locale_array_lengths_unchanged": true
+  },
+  "partner_language": {
+    "stay22": "Existing lang=pl provider contract retained; external partner language not guaranteed"
+  },
+  "limits": [
+    "Candidate inventory is heuristic, not a guarantee of semantic correctness of every sentence",
+    "Current provider tariffs, timetables and entry conditions were not revalidated",
+    "Polish-only unpublished translations and suppressed non-PL social images remain governed by existing publication policy"
+  ]
+}

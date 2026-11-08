@@ -5,7 +5,9 @@ from app.config import get_settings
 from app.models.affiliate import AffiliateProgram, AffiliateProvider
 from app.models.deal import DealComponent
 from app.models.offer import TravelOffer
+from app.services.booking_context import flight_link_context_valid
 from app.services.partner_links import source_url, valid_partner
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 
@@ -39,9 +41,17 @@ def component_policy(
         or program.adapter_code != "stored_link"
     ):
         return LinkPolicy(False, "UNSUPPORTED_CAPABILITY", program, provider)
+    siblings = list(db.scalars(select(DealComponent.id).where(
+        DealComponent.deal_id == component.deal_id,
+        func.upper(DealComponent.component_type) == component.component_type.upper(),
+    ).limit(2)))
+    if len(siblings) > 1:
+        return LinkPolicy(False, "AMBIGUOUS_COMPONENT", program, provider)
+    if not isinstance(component.metadata_json, dict):
+        return LinkPolicy(False, "INVALID_LINK", program, provider)
     try:
         url = build_deep_link(
-            (component.metadata_json or {}).get("outbound_url"),
+            component.metadata_json.get("outbound_url"),
             allowed_hosts=program.allowed_hosts,
             tracking_param=program.tracking_param,
             tracking_id=tracking_id,
@@ -61,7 +71,8 @@ def component_policy(
         marker, project = settings.travelpayouts_marker, settings.travelpayouts_project_id
         try:
             if (offer is None or offer.source != "travelpayouts_data"
-                    or not isinstance(offer.raw_payload, dict) or not marker or not project):
+                    or not isinstance(offer.raw_payload, dict) or not marker or not project
+                    or not flight_link_context_valid(db, component, offer)):
                 raise ValueError
             direct = source_url(offer.raw_payload.get("link"))
             if not valid_partner(url, direct, marker, project):

@@ -11,7 +11,7 @@ from app.services.flight_routes import ticket_key
 from sqlalchemy import delete, select
 
 
-def weekend_fixtures(db, enabled: bool, *, nights: int | None = None):
+def weekend_fixtures(db, enabled: bool, *, nights: int | None = None, recommendations: bool = False):
     ids = select(Deal.id).where(Deal.slug.like('weekend-fixture-%'))
     db.execute(delete(DealComponent).where(DealComponent.deal_id.in_(ids)))
     db.execute(delete(Deal).where(Deal.slug.like('weekend-fixture-%')))
@@ -35,6 +35,12 @@ def weekend_fixtures(db, enabled: bool, *, nights: int | None = None):
         ('unknown', '2030-11-01T18:00:00+01:00', '2030-11-03T19:00:00Z'),
         ('dst', '2030-10-25T18:00:00+02:00', '2030-10-27T19:00:00Z'),
     ]
+    if recommendations:
+        cases += [
+            ('night', '2030-11-01T23:30:00Z', '2030-11-03T19:00:00Z'),
+            ('early', '2030-11-01T18:00:00+01:00', '2030-11-03T06:00:00Z'),
+            ('short', '2030-11-02T20:00:00Z', '2030-11-03T12:00:00Z'),
+        ]
     if nights is not None:
         # Inclusion-copy checks need real timeline facts for same-day/overnight stays.
         back = datetime(2030, 11, 1, 21, tzinfo=UTC) + timedelta(days=nights)

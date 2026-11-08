@@ -11,8 +11,9 @@ const consentKey='hoptrip.consent.v1',sessionKey='hoptrip.session.v2';
 const staleId='00000000-0000-4000-8000-000000000088';
 test.setTimeout(60000);
 test.skip(process.env.HOPTRIP_H3_PRODUCTION!=='1','Session hydration regression requires the isolated production build');
-test.beforeAll(async({request})=>{
- const config=readFileSync('playwright.config.ts','utf8');expect(config).toContain('command:"npm run start --');expect(config).toContain('NODE_ENV:"production"');expect(config).not.toContain('reuseExistingServer:true');
+test.beforeAll(async({request},info)=>{
+ const config=readFileSync(info.config.configFile!,'utf8');expect(config).toContain('npm run start --');expect(config).toContain("NODE_ENV:'production'");expect(config).not.toContain('reuseExistingServer:true');
+ expect(readFileSync('playwright.config.ts','utf8')).not.toContain('reuseExistingServer:true');
  expect(await (await request.get('/saved')).text()).toContain(readFileSync('.next/BUILD_ID','utf8').trim());
 });
 async function setup(page:Page,initial:Initial='allow',stale=false,storage?:'session-only'|'all'){

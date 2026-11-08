@@ -1,4 +1,5 @@
 import type {EurRate} from "./exchange-rate";
+import {validCalendarDate} from './calendar-date.ts';
 
 export type ReferenceCost={id:string;city:string;label:string;euroCents:number;notes:string;source:string;checkedAt:string};
 export const referenceCosts:ReferenceCost[]=[
@@ -14,8 +15,11 @@ export const referenceCosts:ReferenceCost[]=[
 ];
 
 export function referenceGrosz(cost:ReferenceCost,quantity:number,rate:EurRate,now=Date.now()):number|null {
+  if(!validCalendarDate(cost.checkedAt)||!validCalendarDate(rate.date)||
+    !Number.isSafeInteger(cost.euroCents)||cost.euroCents<=0||!Number.isFinite(now))return null;
   const checked=Date.parse(cost.checkedAt+"T00:00:00Z"),published=Date.parse(rate.date+"T00:00:00Z");
   if(!Number.isInteger(quantity)||quantity<1||quantity>365||!Number.isFinite(rate.plnPerEuro)||rate.plnPerEuro<=0||
     !Number.isFinite(checked)||checked>now||now-checked>90*86400000||!Number.isFinite(published)||published>now||now-published>7*86400000)return null;
-  return Math.round(cost.euroCents*quantity*Math.round(rate.plnPerEuro*10000)/10000);
+  const total=Math.round(cost.euroCents*quantity*Math.round(rate.plnPerEuro*10000)/10000);
+  return Number.isSafeInteger(total)&&total>0?total:null;
 }

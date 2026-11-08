@@ -1,0 +1,304 @@
+{
+  "task": "V4-02",
+  "date": "2026-11-07",
+  "status": "DONE",
+  "backend": {
+    "full": {
+      "passed": 1294,
+      "skipped_postgres": 18,
+      "warnings": 2
+    },
+    "targeted_passed": 66,
+    "new_cases": 35,
+    "ruff": "PASS",
+    "mypy": {
+      "status": "PASS",
+      "files": 124
+    }
+  },
+  "web": {
+    "node_passed": 349,
+    "eslint": "PASS",
+    "build_and_types": "PASS",
+    "browser": {
+      "runs": [
+        {
+          "file": ".cache/v4-02-browser.json",
+          "stats": {
+            "startTime": "2026-11-07T21:09:14.752Z",
+            "duration": 164176.191,
+            "expected": 26,
+            "skipped": 0,
+            "unexpected": 10,
+            "flaky": 0
+          }
+        },
+        {
+          "file": ".cache/v4-02-browser-final.json",
+          "stats": {
+            "startTime": "2026-11-07T21:14:17.781Z",
+            "duration": 82403.074,
+            "expected": 12,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          }
+        },
+        {
+          "file": ".cache/v4-02-browser-quality-final.json",
+          "stats": {
+            "startTime": "2026-11-07T21:16:23.236Z",
+            "duration": 37812.967000000004,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          }
+        },
+        {
+          "file": ".cache/v4-02-browser-quality-pagination.json",
+          "stats": {
+            "startTime": "2026-11-07T21:18:19.815Z",
+            "duration": 30774.789999999997,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          }
+        }
+      ],
+      "latest_distinct": 36,
+      "latest_passed": 36,
+      "cases": [
+        {
+          "file": "connections.spec.ts",
+          "title": "pl: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "en: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "ru: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "uk: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "server rendered warnings remain readable without JavaScript",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "pl: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "en: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "ru: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "uk: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "server rendered warnings remain readable without JavaScript",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "structured return shows the actual airports, clocks and connecting flights",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "unknown flight details remain explicit before the partner click",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "round trip facts agree between card and detail without mobile overflow",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "different return airports stay independent on cards and details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "missing return airports use explicit unknowns and UTC without copying outbound airports",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "structured return shows the actual airports, clocks and connecting flights",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "unknown flight details remain explicit before the partner click",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "round trip facts agree between card and detail without mobile overflow",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "different return airports stay independent on cards and details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-facts.spec.ts",
+          "title": "missing return airports use explicit unknowns and UTC without copying outbound airports",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-quality.spec.ts",
+          "title": "complete, partial and critical source data have distinct presentation and recommendation policy",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-quality.spec.ts",
+          "title": "critical warnings are localized and readable on narrow screens",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "flight-quality.spec.ts",
+          "title": "complete, partial and critical source data have distinct presentation and recommendation policy",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "flight-quality.spec.ts",
+          "title": "critical warnings are localized and readable on narrow screens",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "local-flight-time.spec.ts",
+          "title": "audit midnight arrival is visible while seven hotel nights and manual money survive sharing",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "local-flight-time.spec.ts",
+          "title": "audit midnight arrival is visible while seven hotel nights and manual money survive sharing",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "real API collections exclude unsuitable stays and leave; general search retains every example",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "pl: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "en: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "ru: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "uk: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "real API collections exclude unsuitable stays and leave; general search retains every example",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "pl: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "en: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "ru: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "uk: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        }
+      ]
+    }
+  },
+  "scope": {
+    "production_changed": false,
+    "notifications_sent": false,
+    "new_dependencies": false,
+    "migrations": false
+  },
+  "limitations": [
+    "No PostgreSQL run",
+    "No live provider acceptance or protected-transfer data",
+    "No full browser inventory, WebKit or field CWV",
+    "Known connection data does not confirm transfer protection"
+  ]
+}

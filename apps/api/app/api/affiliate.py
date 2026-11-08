@@ -28,14 +28,17 @@ def outbound_click(
     deal = db.scalar(available_deals_query().where(Deal.slug == slug))
     if deal is None:
         raise HTTPException(404, "Deal not found")
-    part = db.scalar(
+    parts = list(db.scalars(
         select(DealComponent).where(
             DealComponent.deal_id == deal.id,
             func.upper(DealComponent.component_type) == component.upper(),
-        )
-    )
-    if part is None:
+        ).limit(2)
+    ))
+    if not parts:
         raise HTTPException(404, "Deal component not found")
+    if len(parts) > 1:
+        raise HTTPException(503, "AMBIGUOUS_COMPONENT")
+    part = parts[0]
     policy = component_policy(db, part)
     if not policy.available:
         raise HTTPException(503, policy.reason)
@@ -45,7 +48,7 @@ def outbound_click(
         source = campaign = None
     tracking_id = "ht-" + uuid4().hex
     policy = component_policy(db, part, tracking_id)
-    if not policy.url or not policy.program or not policy.provider:
+    if not policy.available or not policy.url or not policy.program or not policy.provider:
         raise HTTPException(503, "Affiliate link unavailable")
     db.add(
         AffiliateClick(

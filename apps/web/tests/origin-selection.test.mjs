@@ -17,9 +17,12 @@ for(const [name,query,saved,codes,expected] of [
 
 test('shared short-trip selection keeps origin, quality, round-trip and 2–4-night gates',()=>{
  const offer={slug:'good',origin_code:'KTW',trip_start:'2030-01-01',trip_end:'2030-01-03',trip_type:'ROUND_TRIP',
+  weekend_assessment:{stay:{version:'weekend-stay-v1',eligibility:'ELIGIBLE'}},
   flight_quality:{version:'flight-quality-v1',status:'PARTIAL',recommendation_eligible:true}};
  const input=[offer,{...offer,slug:'wrong-origin',origin_code:'WRO'},{...offer,slug:'long',trip_end:'2030-01-09'},
-  {...offer,slug:'one-way',trip_type:'ONE_WAY'},{...offer,slug:'critical',flight_quality:{...offer.flight_quality,status:'CRITICAL_INCOMPLETE',recommendation_eligible:false}}];
+  {...offer,slug:'one-way',trip_type:'ONE_WAY'},{...offer,slug:'critical',flight_quality:{...offer.flight_quality,status:'CRITICAL_INCOMPLETE',recommendation_eligible:false}},
+  {...offer,slug:'unknown-stay',weekend_assessment:undefined},
+  {...offer,slug:'short-stay',weekend_assessment:{stay:{version:'weekend-stay-v1',eligibility:'INELIGIBLE'}}}];
  const before=structuredClone(input);
  assert.deepEqual(shortTripSelection(input,'KTW').map(d=>d.slug),['good']);
  assert.equal(shortTripSelection(Array(10).fill(offer),'').length,6);

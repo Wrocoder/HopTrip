@@ -1,0 +1,41 @@
+{
+  "task": "V4-08",
+  "checked_on": "2026-11-08",
+  "scope": "Read-only checks of official reference pages; no bookings or paid integrations",
+  "sources": [
+    {
+      "url": "https://www.atm.it/en/ViaggiaConNoi/Biglietti/Pages/tickets_milan.aspx",
+      "publisher": "ATM Milano",
+      "reference_ids": ["milan-day", "milan-three-days"],
+      "confirmed_eur_cents": [760, 1550],
+      "scope_note": "Mi1-Mi3 ordinary tickets. Daily ticket lasts 24 hours; the three-day ticket ends with service on the third consecutive service day, not after a fixed 72 hours.",
+      "application_amounts_changed": false
+    },
+    {
+      "url": "https://www.tmb.cat/en/barcelona-fares-metro-bus/transport-ticket-fares",
+      "publisher": "TMB",
+      "reference_ids": ["barcelona-ten"],
+      "confirmed_eur_cents": [1300],
+      "scope_note": "2026 one-zone T-casual fare, effective from 15 January 2026.",
+      "application_amounts_changed": false
+    },
+    {
+      "url": "https://www.tmb.cat/en/barcelona-fares-metro-bus/t-casual",
+      "publisher": "TMB",
+      "scope_note": "Single-person ten-journey ticket; excludes Aeroport T1 and Aeroport T2 metro stations on L9 Sud. Media and other journeys may cost extra."
+    },
+    {
+      "url": "https://parisjetaime.com/eng/article/24-bistros-to-try-in-paris-a1614",
+      "publisher": "Paris je t'aime Tourist Office",
+      "confirmed_lunch_eur_range": [15, 25],
+      "confirmed_evening_meal_eur_range": [25, 45],
+      "scope_note": "Reference bistro meal ranges, not a whole-day food budget. Not automatically inserted into a personal profile."
+    }
+  ],
+  "compatibility": "Existing checkedAt=2026-10-07 and reference IDs are kept: saved provenance binds to this recorded version. Current source verification is recorded separately here.",
+  "limits": [
+    "Reference fares are not guarantees for a traveller's future dates or route",
+    "No verified market accommodation or whole-day food ranges were added",
+    "Profiles remain explicit personal assumptions with exact manual inputs taking priority"
+  ]
+}

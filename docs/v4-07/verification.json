@@ -1,0 +1,1007 @@
+{
+  "task": "V4-07",
+  "date": "2026-11-08",
+  "status": "DONE_LOCAL",
+  "node_version": "v24.19.0",
+  "checks": {
+    "node": {
+      "initial": {
+        "pass": 365,
+        "fail": 1,
+        "reason": "Existing VM component test needed the new copy import mapped and navigation expectations updated"
+      },
+      "final": {
+        "pass": 367,
+        "fail": 0,
+        "skipped": 0
+      }
+    },
+    "eslint": "PASS",
+    "production_build": "PASS",
+    "final_tsc": "PASS",
+    "browser": {
+      "latest_unique_pass": 66,
+      "runs": [
+        {
+          "name": "pilot",
+          "stats": {
+            "startTime": "2026-11-08T09:46:14.073Z",
+            "duration": 41399.689,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > pl: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "browser",
+          "stats": {
+            "startTime": "2026-11-08T09:47:41.207Z",
+            "duration": 1213197.8369999998,
+            "expected": 52,
+            "skipped": 0,
+            "unexpected": 12,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > pl: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > en: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > ru: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > uk: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > pl: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > en: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > ru: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > uk: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > critical flight detail and navigation fit 320px in every locale",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > critical flight detail and navigation fit 320px in every locale",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > two tabs retain independent drafts through conflicts, reload, explicit discard and deletion recovery",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > edits and reset during an update waiting for the lock are retained while only the captured snapshot is committed",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > changed, missing, unavailable and expired offers retain amounts and can still be updated",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > local links are device-bound; malformed or missing IDs do not request offers",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > capacity blocks Duplicate without blocking Update; source profiles, events and legacy-copy work survive opening",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > unavailable locks and draft storage keep reading and independent sharing available",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > local sections, language switching and Back preserve the ID and uncommitted tab draft",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > failed Update preserves the dirty draft and committed version, then recovers without a new ID",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > two tabs retain independent drafts through conflicts, reload, explicit discard and deletion recovery",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > edits and reset during an update waiting for the lock are retained while only the captured snapshot is committed",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > changed, missing, unavailable and expired offers retain amounts and can still be updated",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > local links are device-bound; malformed or missing IDs do not request offers",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > capacity blocks Duplicate without blocking Update; source profiles, events and legacy-copy work survive opening",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > unavailable locks and draft storage keep reading and independent sharing available",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > local sections, language switching and Back preserve the ID and uncommitted tab draft",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "plan-lifecycle.spec.ts",
+              "title": "plan-lifecycle.spec.ts > failed Update preserves the dirty draft and committed version, then recovers without a new ID",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > trip details reveal comparison on demand without navigating or opening other cards",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "timedOut"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > insufficient and historical data never advertise a price advantage",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > methodology explains the UTC cohort in every supported locale",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > trip details reveal comparison on demand without navigating or opening other cards",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "timedOut"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > insufficient and historical data never advertise a price advantage",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > methodology explains the UTC cohort in every supported locale",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > saved and shared plans survive reload and recipients edit independent copies",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > invalid, missing and expired offers retain clear states and honest previews",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > sharing remains available when browser storage and clipboard are blocked",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > saved and shared plans survive reload and recipients edit independent copies",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > invalid, missing and expired offers retain clear states and honest previews",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > sharing remains available when browser storage and clipboard are blocked",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "trip-navigation.spec.ts",
+              "title": "trip-navigation.spec.ts > trip anchors focus sections and the two-adult budget survives sharing",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-navigation.spec.ts",
+              "title": "trip-navigation.spec.ts > trip anchors focus sections and the two-adult budget survives sharing",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > pl: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > en: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > ru: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > uk: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > pl: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > en: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > ru: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-sections.spec.ts",
+              "title": "trip-sections.spec.ts > uk: four sections retain anchors, shared state and usable unavailable plans",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "repeat",
+          "stats": {
+            "startTime": "2026-11-08T10:08:57.667Z",
+            "duration": 292520.124,
+            "expected": 18,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > critical flight detail and navigation fit 320px in every locale",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > pl: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > en: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > ru: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > uk: flight decision precedes planning without hiding critical warnings or losing the shared plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "detail-layout.spec.ts",
+              "title": "detail-layout.spec.ts > critical flight detail and navigation fit 320px in every locale",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > trip details reveal comparison on demand without navigating or opening other cards",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > insufficient and historical data never advertise a price advantage",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > methodology explains the UTC cohort in every supported locale",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > trip details reveal comparison on demand without navigating or opening other cards",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > insufficient and historical data never advertise a price advantage",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "price-assessment.spec.ts",
+              "title": "price-assessment.spec.ts > methodology explains the UTC cohort in every supported locale",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > sharing remains available when browser storage and clipboard are blocked",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "shared-trip.spec.ts",
+              "title": "shared-trip.spec.ts > sharing remains available when browser storage and clipboard are blocked",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "layout",
+          "stats": {
+            "startTime": "2026-11-08T10:14:33.744Z",
+            "duration": 94970.605,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "first-screen-layout.spec.ts",
+              "title": "first-screen-layout.spec.ts > pl: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "mobile-workflow.spec.ts",
+              "title": "mobile-workflow.spec.ts > 320px > ru: mobile discovery, planning and return context",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "layout-final",
+          "stats": {
+            "startTime": "2026-11-08T10:17:45.533Z",
+            "duration": 52378.018,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "mobile-workflow.spec.ts",
+              "title": "mobile-workflow.spec.ts > 320px > ru: mobile discovery, planning and return context",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "layout-recovery",
+          "stats": {
+            "startTime": "2026-11-08T10:19:41.926Z",
+            "duration": 55354.26,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "mobile-workflow.spec.ts",
+              "title": "mobile-workflow.spec.ts > 320px > ru: mobile discovery, planning and return context",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "navigation": {
+      "before_maximum": 8,
+      "after": 4,
+      "baseline": "Source inspection of pre-task snapshot; no before screenshot or performance measurement"
+    },
+    "widths": [
+      320,
+      375,
+      390,
+      768,
+      1440
+    ],
+    "locales": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "axe": "PASS, scoped main/detail/navigation",
+    "manual_visual": [
+      "RU 320 px",
+      "RU 1440 px",
+      "PL desktop flight section"
+    ]
+  },
+  "compatibility": {
+    "next_env_restored": true,
+    "saved_share_schema_changed": false,
+    "api_changed": false,
+    "new_dependencies": false,
+    "migrations": false,
+    "deploy": false,
+    "real_notifications": false
+  },
+  "source_changes": [
+    {
+      "file": "apps/web/src/app/deals/[slug]/page.tsx",
+      "sha256": "f4d56dad27c02d695b3db6f6b1bc5fd5478e09fc03f00b92cd6ab898b0b448ed",
+      "before_sha256": "4bf6f8e0704aaed02df796fa57523571c7ed353d27b5cada862d1211046f1a3e"
+    },
+    {
+      "file": "apps/web/src/app/components/shared-trip-view.tsx",
+      "sha256": "220bff888d40a74b574d0efd272a9e40f16b998fcee78575a5eec25593ceb571",
+      "before_sha256": "4e782f1e17ebfa211a1ea0cec0da47e378e929c6d9a1c32a03e1708c4539d092"
+    },
+    {
+      "file": "apps/web/src/app/components/trip-navigation.tsx",
+      "sha256": "7ab44ac977c3452a8ae9503e3d4fe9491b0c4961e5d5763bd8cccb678467e3c0",
+      "before_sha256": "fad493431642bc9ad972c38771dd980d02557c0ba22ac921ddb7377fe0e49be2"
+    },
+    {
+      "file": "apps/web/src/app/components/trip-budget-calculator.tsx",
+      "sha256": "29fbaf0f8a7ea7b549d21f0dbb61c776b9e541ab62a2f57a228e851e68146a4e",
+      "before_sha256": "fab90018aed2b65a4cc4d1aacc6d1c29be434b26242401bc9a3e94cbe0158ccf"
+    },
+    {
+      "file": "apps/web/src/app/components/trip-actions.tsx",
+      "sha256": "f39912243f99356950abc91714435b3e6584008939da74ea22a24dd1093dce6f",
+      "before_sha256": "92760acb85cefb4571ebdbea865a8ee8f5579b33111bcbd95df8dcfe158aba90"
+    },
+    {
+      "file": "apps/web/src/app/globals.css",
+      "sha256": "312b4925ab66ca2a181769c69ffea5e91db5fa560624b34d208af050724693ad",
+      "before_sha256": "e4a76f4e65351c4ba56c6487c4e94733426f146af84af3f62d03b73210fb8846"
+    },
+    {
+      "file": "apps/web/src/lib/i18n/trip-section-copy.ts",
+      "sha256": "82c26646961e19c56d81b2b2b5cf0cadc780b5a6c7b78930f8d77df3c8f09e8c",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/web/tests/detail-presentation.test.mjs",
+      "sha256": "1ca0270221d3ed6e57a015ccb904b647b723315e7a284e8c262e6965a876864a",
+      "before_sha256": "29cd879638d64d24825b5be5b78e0e6977a7209eaa6ec9551efab9410e468565"
+    },
+    {
+      "file": "apps/web/tests/trip-sections.spec.ts",
+      "sha256": "f883a6ab3bfd8d5703f226b9eeb67a20055574f55a1ebdba7ff3c7d3a2738942",
+      "before_sha256": null
+    },
+    {
+      "file": "apps/web/tests/detail-layout.spec.ts",
+      "sha256": "4351ddac1530d8cdcea55fcc9a84e376e3841e9a73ad73558a40fcdc261eaef8",
+      "before_sha256": "0819f13dd3a9283871a029a34227a8caba08fbeaa60817fb9f97b7427ff8b728"
+    },
+    {
+      "file": "apps/web/tests/trip-navigation.spec.ts",
+      "sha256": "7e29ea9ac83cb994d33b6a47ba6df70102e1675370071821463950af632215bb",
+      "before_sha256": "1b9ec347769afd92d1994d634c46bf8b0ad1231c6bfe748e5d89aa37d5dc4086"
+    },
+    {
+      "file": "apps/web/tests/first-screen-layout.spec.ts",
+      "sha256": "4e74456f828f3b5069e0045356a272750ec3b0559ffa939411f16f822927e651",
+      "before_sha256": "8deb490cf13ecdf9bb8e7bd23c0767b1d7981f532d18a7fa9d5261ef94f25973"
+    },
+    {
+      "file": "apps/web/tests/mobile-workflow.spec.ts",
+      "sha256": "6525ef424d4b5d68943dcb8cc8fcbdcd850932b38ddc07812de56906cc029fc2",
+      "before_sha256": "9df48e721b3eeba50eb16d5ab5534a64422a419a6bb7d948dff0c5c47817b491"
+    },
+    {
+      "file": "apps/web/tests/price-assessment.spec.ts",
+      "sha256": "9c641c7ed89e6a95be16f46965f757a45f048157e35bc95f05b68066dab07e21",
+      "before_sha256": "61f250d72bb6ab2bd1f99a980e3e89d1503aebc4e40681ca5c6dcc070a27bf37"
+    },
+    {
+      "file": "apps/web/tests/shared-trip.spec.ts",
+      "sha256": "e9262e93edb57783debd9ec8e89cc2cb860cb18ed79a490cab6c662c5eda2fe3",
+      "before_sha256": "a66088bf61e65999232df6d69abbd51df4caf7460783ab786074fa2f3c64db69"
+    }
+  ],
+  "limits": [
+    "Scoped Chromium desktop/mobile, no full application browser sweep",
+    "No WebKit, physical devices, manual screen reader, field CWV or participant usability study",
+    "No separate pytest/PG run: application API unchanged",
+    "Screenshot and geometry results are local; no conversion or performance improvement claimed"
+  ],
+  "next_task": "V4-09",
+  "next_task_started": false
+}

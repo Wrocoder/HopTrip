@@ -1,0 +1,2276 @@
+{
+  "task": "V4-10",
+  "date": "2026-11-08",
+  "scope": "All 69 repository seed destinations, existing editorial sources and URL policy; not a production DB, live availability or Google index audit",
+  "seed_verified_on": "2026-09-25",
+  "summary": {
+    "seed_destinations": 69,
+    "with_guide_before": 18,
+    "with_guide_after": 19,
+    "generic_templates_retained_noindex": 50,
+    "with_arrival_summary": 17,
+    "index_intended_city_slugs": 1,
+    "index_intended_city_language_urls": 4,
+    "existing_polish_city_urls": 69,
+    "localized_city_urls": 3,
+    "new_city_urls": 0
+  },
+  "unseeded_guide": {
+    "amsterdam": "Existing airport article has no seed city; mapping not activated, avoiding a new link to an unregistered destination"
+  },
+  "regional_guide": "Iceland linked from Reykjavik; reverse city-only classification unchanged to preserve the existing single Reykjavik activities block",
+  "unchanged_policy_files": [
+    {
+      "file": "apps/web/src/lib/catalog-pages.ts",
+      "sha256": "b400cdf7b458190aa90a1b4d188341dfae8cd45ed4037def1a1eb9e5447b575a",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/src/lib/growth-pages.ts",
+      "sha256": "06c062d2d6e608a3f1485bfea09924eb0b32d87c8899713d76b743468f1eac45",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/src/lib/i18n/routing.ts",
+      "sha256": "ff90e59c8411c435b9399cf88136682db242c567256bb23210372715ea6ac0f2",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/src/lib/i18n/landing-copy.json",
+      "sha256": "ec5cd414f625fcda2e64774f28b8999f4626d7ddb460491a29da013a88564dc7",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/src/app/sitemap.ts",
+      "sha256": "fd8a00d3dbbb03581e127abc6c3bee261aea86142e70bde55e31b3dd56654d02",
+      "unchanged": true
+    },
+    {
+      "file": "apps/web/src/app/robots.ts",
+      "sha256": "815a028c7ded2784fe315856a87c6a5aed4688b54a89836ed43cdf8f5c6515b5",
+      "unchanged": true
+    }
+  ],
+  "google_evidence": {
+    "provided_register": "docs/seo-growth-20261107/indexing/review.csv",
+    "rows": 15,
+    "pending": 15,
+    "actual_url_inspection_results": 0,
+    "connected_gsc_tool_available": false,
+    "new_search_performance_exports": false,
+    "decision": "No indexation expansion or Google/traffic claims"
+  },
+  "pages": [
+    {
+      "slug": "reykjavik",
+      "path": "/destinations/reykjavik",
+      "country_code": "IS",
+      "iata_codes": [
+        "KEF",
+        "RKV"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [
+        "islandia-wieloryby-lodowce-atrakcje"
+      ],
+      "arrival_summary": false,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/reykjavik",
+        "en": "/en/deals?destination=reykjavik",
+        "ru": "/ru/deals?destination=reykjavik",
+        "uk": "/uk/deals?destination=reykjavik"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/islandia-wieloryby-lodowce-atrakcje",
+          "reviewed_at": "2026-10-17",
+          "source_count": 7
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "barcelona",
+      "path": "/destinations/barcelona",
+      "country_code": "ES",
+      "iata_codes": [
+        "BCN"
+      ],
+      "before_guide_slugs": [
+        "barcelona-airports",
+        "barcelona-3-days"
+      ],
+      "guide_slugs": [
+        "barcelona-airports",
+        "barcelona-3-days"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/barcelona",
+        "en": "/en/deals?destination=barcelona",
+        "ru": "/ru/deals?destination=barcelona",
+        "uk": "/uk/deals?destination=barcelona"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/barcelona-airports",
+          "reviewed_at": "2026-09-23",
+          "source_count": 3
+        },
+        {
+          "path": "/info/barcelona-3-days",
+          "reviewed_at": "2026-10-13",
+          "source_count": 3
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "rome",
+      "path": "/destinations/rome",
+      "country_code": "IT",
+      "iata_codes": [
+        "FCO",
+        "CIA"
+      ],
+      "before_guide_slugs": [
+        "rome-airports",
+        "rome-3-days"
+      ],
+      "guide_slugs": [
+        "rome-airports",
+        "rome-3-days"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/rome",
+        "en": "/en/deals?destination=rome",
+        "ru": "/ru/deals?destination=rome",
+        "uk": "/uk/deals?destination=rome"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/rome-airports",
+          "reviewed_at": "2026-09-23",
+          "source_count": 3
+        },
+        {
+          "path": "/info/rome-3-days",
+          "reviewed_at": "2026-10-13",
+          "source_count": 3
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "lisbon",
+      "path": "/destinations/lisbon",
+      "country_code": "PT",
+      "iata_codes": [
+        "LIS"
+      ],
+      "before_guide_slugs": [
+        "lisbon-airport",
+        "lisbon-3-days"
+      ],
+      "guide_slugs": [
+        "lisbon-airport",
+        "lisbon-3-days"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/lisbon",
+        "en": "/en/deals?destination=lisbon",
+        "ru": "/ru/deals?destination=lisbon",
+        "uk": "/uk/deals?destination=lisbon"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/lisbon-airport",
+          "reviewed_at": "2026-09-23",
+          "source_count": 3
+        },
+        {
+          "path": "/info/lisbon-3-days",
+          "reviewed_at": "2026-10-13",
+          "source_count": 3
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "malaga",
+      "path": "/destinations/malaga",
+      "country_code": "ES",
+      "iata_codes": [
+        "AGP"
+      ],
+      "before_guide_slugs": [
+        "malaga-weekend",
+        "malaga-airport"
+      ],
+      "guide_slugs": [
+        "malaga-weekend",
+        "malaga-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/malaga",
+        "en": "/en/deals?destination=malaga",
+        "ru": "/ru/deals?destination=malaga",
+        "uk": "/uk/deals?destination=malaga"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/malaga-weekend",
+          "reviewed_at": "2026-10-07",
+          "source_count": 2
+        },
+        {
+          "path": "/info/malaga-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "alicante",
+      "path": "/destinations/alicante",
+      "country_code": "ES",
+      "iata_codes": [
+        "ALC"
+      ],
+      "before_guide_slugs": [
+        "alicante-weekend",
+        "alicante-airport"
+      ],
+      "guide_slugs": [
+        "alicante-weekend",
+        "alicante-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/alicante",
+        "en": "/en/deals?destination=alicante",
+        "ru": "/ru/deals?destination=alicante",
+        "uk": "/uk/deals?destination=alicante"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/alicante-weekend",
+          "reviewed_at": "2026-10-07",
+          "source_count": 2
+        },
+        {
+          "path": "/info/alicante-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "athens",
+      "path": "/destinations/athens",
+      "country_code": "GR",
+      "iata_codes": [
+        "ATH"
+      ],
+      "before_guide_slugs": [
+        "athens-airport"
+      ],
+      "guide_slugs": [
+        "athens-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/athens",
+        "en": "/en/deals?destination=athens",
+        "ru": "/ru/deals?destination=athens",
+        "uk": "/uk/deals?destination=athens"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/athens-airport",
+          "reviewed_at": "2026-09-23",
+          "source_count": 3
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "milan",
+      "path": "/destinations/milan",
+      "country_code": "IT",
+      "iata_codes": [
+        "MXP",
+        "LIN",
+        "BGY"
+      ],
+      "before_guide_slugs": [
+        "milan-weekend",
+        "milan-airports"
+      ],
+      "guide_slugs": [
+        "milan-weekend",
+        "milan-airports"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": true,
+      "published_page_locales": [
+        "pl",
+        "ru",
+        "en",
+        "uk"
+      ],
+      "sitemap_city_paths": [
+        "/destinations/milan",
+        "/ru/destinations/milan",
+        "/en/destinations/milan",
+        "/uk/destinations/milan"
+      ],
+      "directory_targets": {
+        "pl": "/destinations/milan",
+        "en": "/en/destinations/milan",
+        "ru": "/ru/destinations/milan",
+        "uk": "/uk/destinations/milan"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/milan-weekend",
+          "reviewed_at": "2026-10-02",
+          "source_count": 2
+        },
+        {
+          "path": "/info/milan-airports",
+          "reviewed_at": "2026-09-23",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "paris",
+      "path": "/destinations/paris",
+      "country_code": "FR",
+      "iata_codes": [
+        "CDG",
+        "ORY",
+        "BVA"
+      ],
+      "before_guide_slugs": [
+        "paris-weekend",
+        "paris-airports"
+      ],
+      "guide_slugs": [
+        "paris-weekend",
+        "paris-airports"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/paris",
+        "en": "/en/deals?destination=paris",
+        "ru": "/ru/deals?destination=paris",
+        "uk": "/uk/deals?destination=paris"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/paris-weekend",
+          "reviewed_at": "2026-10-02",
+          "source_count": 2
+        },
+        {
+          "path": "/info/paris-airports",
+          "reviewed_at": "2026-09-23",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "london",
+      "path": "/destinations/london",
+      "country_code": "GB",
+      "iata_codes": [
+        "LHR",
+        "LGW",
+        "LTN",
+        "STN",
+        "LCY",
+        "SEN"
+      ],
+      "before_guide_slugs": [
+        "london-airports"
+      ],
+      "guide_slugs": [
+        "london-airports"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/london",
+        "en": "/en/deals?destination=london",
+        "ru": "/ru/deals?destination=london",
+        "uk": "/uk/deals?destination=london"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/london-airports",
+          "reviewed_at": "2026-09-23",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "brussels",
+      "path": "/destinations/brussels",
+      "country_code": "BE",
+      "iata_codes": [
+        "BRU",
+        "CRL"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/brussels",
+        "en": "/en/deals?destination=brussels",
+        "ru": "/ru/deals?destination=brussels",
+        "uk": "/uk/deals?destination=brussels"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "chisinau",
+      "path": "/destinations/chisinau",
+      "country_code": "MD",
+      "iata_codes": [
+        "RMO"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/chisinau",
+        "en": "/en/deals?destination=chisinau",
+        "ru": "/ru/deals?destination=chisinau",
+        "uk": "/uk/deals?destination=chisinau"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "sofia",
+      "path": "/destinations/sofia",
+      "country_code": "BG",
+      "iata_codes": [
+        "SOF"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/sofia",
+        "en": "/en/deals?destination=sofia",
+        "ru": "/ru/deals?destination=sofia",
+        "uk": "/uk/deals?destination=sofia"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "basel",
+      "path": "/destinations/basel",
+      "country_code": "CH",
+      "iata_codes": [
+        "BSL",
+        "MLH"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/basel",
+        "en": "/en/deals?destination=basel",
+        "ru": "/ru/deals?destination=basel",
+        "uk": "/uk/deals?destination=basel"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "podgorica",
+      "path": "/destinations/podgorica",
+      "country_code": "ME",
+      "iata_codes": [
+        "TGD"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/podgorica",
+        "en": "/en/deals?destination=podgorica",
+        "ru": "/ru/deals?destination=podgorica",
+        "uk": "/uk/deals?destination=podgorica"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "gdansk",
+      "path": "/destinations/gdansk",
+      "country_code": "PL",
+      "iata_codes": [
+        "GDN"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/gdansk",
+        "en": "/en/deals?destination=gdansk",
+        "ru": "/ru/deals?destination=gdansk",
+        "uk": "/uk/deals?destination=gdansk"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "budapest",
+      "path": "/destinations/budapest",
+      "country_code": "HU",
+      "iata_codes": [
+        "BUD"
+      ],
+      "before_guide_slugs": [
+        "budapest-airport"
+      ],
+      "guide_slugs": [
+        "budapest-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/budapest",
+        "en": "/en/deals?destination=budapest",
+        "ru": "/ru/deals?destination=budapest",
+        "uk": "/uk/deals?destination=budapest"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/budapest-airport",
+          "reviewed_at": "2026-09-23",
+          "source_count": 3
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "venice",
+      "path": "/destinations/venice",
+      "country_code": "IT",
+      "iata_codes": [
+        "VCE",
+        "TSF"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/venice",
+        "en": "/en/deals?destination=venice",
+        "ru": "/ru/deals?destination=venice",
+        "uk": "/uk/deals?destination=venice"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "larnaca",
+      "path": "/destinations/larnaca",
+      "country_code": "CY",
+      "iata_codes": [
+        "LCA"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/larnaca",
+        "en": "/en/deals?destination=larnaca",
+        "ru": "/ru/deals?destination=larnaca",
+        "uk": "/uk/deals?destination=larnaca"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "palermo",
+      "path": "/destinations/palermo",
+      "country_code": "IT",
+      "iata_codes": [
+        "PMO"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/palermo",
+        "en": "/en/deals?destination=palermo",
+        "ru": "/ru/deals?destination=palermo",
+        "uk": "/uk/deals?destination=palermo"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "nice",
+      "path": "/destinations/nice",
+      "country_code": "FR",
+      "iata_codes": [
+        "NCE"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/nice",
+        "en": "/en/deals?destination=nice",
+        "ru": "/ru/deals?destination=nice",
+        "uk": "/uk/deals?destination=nice"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "agadir",
+      "path": "/destinations/agadir",
+      "country_code": "MA",
+      "iata_codes": [
+        "AGA"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/agadir",
+        "en": "/en/deals?destination=agadir",
+        "ru": "/ru/deals?destination=agadir",
+        "uk": "/uk/deals?destination=agadir"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "warsaw",
+      "path": "/destinations/warsaw",
+      "country_code": "PL",
+      "iata_codes": [
+        "WAW",
+        "WMI"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/warsaw",
+        "en": "/en/deals?destination=warsaw",
+        "ru": "/ru/deals?destination=warsaw",
+        "uk": "/uk/deals?destination=warsaw"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "valencia",
+      "path": "/destinations/valencia",
+      "country_code": "ES",
+      "iata_codes": [
+        "VLC"
+      ],
+      "before_guide_slugs": [
+        "valencia-airport"
+      ],
+      "guide_slugs": [
+        "valencia-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/valencia",
+        "en": "/en/deals?destination=valencia",
+        "ru": "/ru/deals?destination=valencia",
+        "uk": "/uk/deals?destination=valencia"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/valencia-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "stockholm",
+      "path": "/destinations/stockholm",
+      "country_code": "SE",
+      "iata_codes": [
+        "ARN",
+        "BMA",
+        "NYO",
+        "VST"
+      ],
+      "before_guide_slugs": [
+        "stockholm-weekend",
+        "stockholm-airports"
+      ],
+      "guide_slugs": [
+        "stockholm-weekend",
+        "stockholm-airports"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/stockholm",
+        "en": "/en/deals?destination=stockholm",
+        "ru": "/ru/deals?destination=stockholm",
+        "uk": "/uk/deals?destination=stockholm"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/stockholm-weekend",
+          "reviewed_at": "2026-10-02",
+          "source_count": 3
+        },
+        {
+          "path": "/info/stockholm-airports",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "tirana",
+      "path": "/destinations/tirana",
+      "country_code": "AL",
+      "iata_codes": [
+        "TIA"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/tirana",
+        "en": "/en/deals?destination=tirana",
+        "ru": "/ru/deals?destination=tirana",
+        "uk": "/uk/deals?destination=tirana"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "pisa",
+      "path": "/destinations/pisa",
+      "country_code": "IT",
+      "iata_codes": [
+        "PSA"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/pisa",
+        "en": "/en/deals?destination=pisa",
+        "ru": "/ru/deals?destination=pisa",
+        "uk": "/uk/deals?destination=pisa"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "dublin",
+      "path": "/destinations/dublin",
+      "country_code": "IE",
+      "iata_codes": [
+        "DUB"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/dublin",
+        "en": "/en/deals?destination=dublin",
+        "ru": "/ru/deals?destination=dublin",
+        "uk": "/uk/deals?destination=dublin"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "bologna",
+      "path": "/destinations/bologna",
+      "country_code": "IT",
+      "iata_codes": [
+        "BLQ"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/bologna",
+        "en": "/en/deals?destination=bologna",
+        "ru": "/ru/deals?destination=bologna",
+        "uk": "/uk/deals?destination=bologna"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "oslo",
+      "path": "/destinations/oslo",
+      "country_code": "NO",
+      "iata_codes": [
+        "OSL",
+        "TRF"
+      ],
+      "before_guide_slugs": [
+        "oslo-weekend"
+      ],
+      "guide_slugs": [
+        "oslo-weekend"
+      ],
+      "arrival_summary": false,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/oslo",
+        "en": "/en/deals?destination=oslo",
+        "ru": "/ru/deals?destination=oslo",
+        "uk": "/uk/deals?destination=oslo"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/oslo-weekend",
+          "reviewed_at": "2026-10-02",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "palma",
+      "path": "/destinations/palma",
+      "country_code": "ES",
+      "iata_codes": [
+        "PMI"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/palma",
+        "en": "/en/deals?destination=palma",
+        "ru": "/ru/deals?destination=palma",
+        "uk": "/uk/deals?destination=palma"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "bari",
+      "path": "/destinations/bari",
+      "country_code": "IT",
+      "iata_codes": [
+        "BRI"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/bari",
+        "en": "/en/deals?destination=bari",
+        "ru": "/ru/deals?destination=bari",
+        "uk": "/uk/deals?destination=bari"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "paphos",
+      "path": "/destinations/paphos",
+      "country_code": "CY",
+      "iata_codes": [
+        "PFO"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/paphos",
+        "en": "/en/deals?destination=paphos",
+        "ru": "/ru/deals?destination=paphos",
+        "uk": "/uk/deals?destination=paphos"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "bratislava",
+      "path": "/destinations/bratislava",
+      "country_code": "SK",
+      "iata_codes": [
+        "BTS"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/bratislava",
+        "en": "/en/deals?destination=bratislava",
+        "ru": "/ru/deals?destination=bratislava",
+        "uk": "/uk/deals?destination=bratislava"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "vilnius",
+      "path": "/destinations/vilnius",
+      "country_code": "LT",
+      "iata_codes": [
+        "VNO"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/vilnius",
+        "en": "/en/deals?destination=vilnius",
+        "ru": "/ru/deals?destination=vilnius",
+        "uk": "/uk/deals?destination=vilnius"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "prague",
+      "path": "/destinations/prague",
+      "country_code": "CZ",
+      "iata_codes": [
+        "PRG"
+      ],
+      "before_guide_slugs": [
+        "prague-weekend",
+        "prague-airport"
+      ],
+      "guide_slugs": [
+        "prague-weekend",
+        "prague-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/prague",
+        "en": "/en/deals?destination=prague",
+        "ru": "/ru/deals?destination=prague",
+        "uk": "/uk/deals?destination=prague"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/prague-weekend",
+          "reviewed_at": "2026-10-07",
+          "source_count": 3
+        },
+        {
+          "path": "/info/prague-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "vienna",
+      "path": "/destinations/vienna",
+      "country_code": "AT",
+      "iata_codes": [
+        "VIE"
+      ],
+      "before_guide_slugs": [
+        "vienna-airport"
+      ],
+      "guide_slugs": [
+        "vienna-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/vienna",
+        "en": "/en/deals?destination=vienna",
+        "ru": "/ru/deals?destination=vienna",
+        "uk": "/uk/deals?destination=vienna"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/vienna-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "dubrovnik",
+      "path": "/destinations/dubrovnik",
+      "country_code": "HR",
+      "iata_codes": [
+        "DBV"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/dubrovnik",
+        "en": "/en/deals?destination=dubrovnik",
+        "ru": "/ru/deals?destination=dubrovnik",
+        "uk": "/uk/deals?destination=dubrovnik"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "bucharest",
+      "path": "/destinations/bucharest",
+      "country_code": "RO",
+      "iata_codes": [
+        "OTP",
+        "BBU"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/bucharest",
+        "en": "/en/deals?destination=bucharest",
+        "ru": "/ru/deals?destination=bucharest",
+        "uk": "/uk/deals?destination=bucharest"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "tallinn",
+      "path": "/destinations/tallinn",
+      "country_code": "EE",
+      "iata_codes": [
+        "TLL"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/tallinn",
+        "en": "/en/deals?destination=tallinn",
+        "ru": "/ru/deals?destination=tallinn",
+        "uk": "/uk/deals?destination=tallinn"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "bourgas",
+      "path": "/destinations/bourgas",
+      "country_code": "BG",
+      "iata_codes": [
+        "BOJ"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/bourgas",
+        "en": "/en/deals?destination=bourgas",
+        "ru": "/ru/deals?destination=bourgas",
+        "uk": "/uk/deals?destination=bourgas"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "malta",
+      "path": "/destinations/malta",
+      "country_code": "MT",
+      "iata_codes": [
+        "MLA"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/malta",
+        "en": "/en/deals?destination=malta",
+        "ru": "/ru/deals?destination=malta",
+        "uk": "/uk/deals?destination=malta"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "birmingham",
+      "path": "/destinations/birmingham",
+      "country_code": "GB",
+      "iata_codes": [
+        "BHX"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/birmingham",
+        "en": "/en/deals?destination=birmingham",
+        "ru": "/ru/deals?destination=birmingham",
+        "uk": "/uk/deals?destination=birmingham"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "copenhagen",
+      "path": "/destinations/copenhagen",
+      "country_code": "DK",
+      "iata_codes": [
+        "CPH"
+      ],
+      "before_guide_slugs": [
+        "copenhagen-airport"
+      ],
+      "guide_slugs": [
+        "copenhagen-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/copenhagen",
+        "en": "/en/deals?destination=copenhagen",
+        "ru": "/ru/deals?destination=copenhagen",
+        "uk": "/uk/deals?destination=copenhagen"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/copenhagen-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "memmingen",
+      "path": "/destinations/memmingen",
+      "country_code": "DE",
+      "iata_codes": [
+        "FMM"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/memmingen",
+        "en": "/en/deals?destination=memmingen",
+        "ru": "/ru/deals?destination=memmingen",
+        "uk": "/uk/deals?destination=memmingen"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "krakow",
+      "path": "/destinations/krakow",
+      "country_code": "PL",
+      "iata_codes": [
+        "KRK"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/krakow",
+        "en": "/en/deals?destination=krakow",
+        "ru": "/ru/deals?destination=krakow",
+        "uk": "/uk/deals?destination=krakow"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "riga",
+      "path": "/destinations/riga",
+      "country_code": "LV",
+      "iata_codes": [
+        "RIX"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/riga",
+        "en": "/en/deals?destination=riga",
+        "ru": "/ru/deals?destination=riga",
+        "uk": "/uk/deals?destination=riga"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "split",
+      "path": "/destinations/split",
+      "country_code": "HR",
+      "iata_codes": [
+        "SPU"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/split",
+        "en": "/en/deals?destination=split",
+        "ru": "/ru/deals?destination=split",
+        "uk": "/uk/deals?destination=split"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "turku",
+      "path": "/destinations/turku",
+      "country_code": "FI",
+      "iata_codes": [
+        "TKU"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/turku",
+        "en": "/en/deals?destination=turku",
+        "ru": "/ru/deals?destination=turku",
+        "uk": "/uk/deals?destination=turku"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "aarhus",
+      "path": "/destinations/aarhus",
+      "country_code": "DK",
+      "iata_codes": [
+        "AAR"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/aarhus",
+        "en": "/en/deals?destination=aarhus",
+        "ru": "/ru/deals?destination=aarhus",
+        "uk": "/uk/deals?destination=aarhus"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "wroclaw",
+      "path": "/destinations/wroclaw",
+      "country_code": "PL",
+      "iata_codes": [
+        "WRO"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/wroclaw",
+        "en": "/en/deals?destination=wroclaw",
+        "ru": "/ru/deals?destination=wroclaw",
+        "uk": "/uk/deals?destination=wroclaw"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "billund",
+      "path": "/destinations/billund",
+      "country_code": "DK",
+      "iata_codes": [
+        "BLL"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/billund",
+        "en": "/en/deals?destination=billund",
+        "ru": "/ru/deals?destination=billund",
+        "uk": "/uk/deals?destination=billund"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "bergen",
+      "path": "/destinations/bergen",
+      "country_code": "NO",
+      "iata_codes": [
+        "BGO"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/bergen",
+        "en": "/en/deals?destination=bergen",
+        "ru": "/ru/deals?destination=bergen",
+        "uk": "/uk/deals?destination=bergen"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "zadar",
+      "path": "/destinations/zadar",
+      "country_code": "HR",
+      "iata_codes": [
+        "ZAD"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/zadar",
+        "en": "/en/deals?destination=zadar",
+        "ru": "/ru/deals?destination=zadar",
+        "uk": "/uk/deals?destination=zadar"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "aalesund",
+      "path": "/destinations/aalesund",
+      "country_code": "NO",
+      "iata_codes": [
+        "AES"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/aalesund",
+        "en": "/en/deals?destination=aalesund",
+        "ru": "/ru/deals?destination=aalesund",
+        "uk": "/uk/deals?destination=aalesund"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "tromso",
+      "path": "/destinations/tromso",
+      "country_code": "NO",
+      "iata_codes": [
+        "TOS"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/tromso",
+        "en": "/en/deals?destination=tromso",
+        "ru": "/ru/deals?destination=tromso",
+        "uk": "/uk/deals?destination=tromso"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "dortmund",
+      "path": "/destinations/dortmund",
+      "country_code": "DE",
+      "iata_codes": [
+        "DTM"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/dortmund",
+        "en": "/en/deals?destination=dortmund",
+        "ru": "/ru/deals?destination=dortmund",
+        "uk": "/uk/deals?destination=dortmund"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "hamburg",
+      "path": "/destinations/hamburg",
+      "country_code": "DE",
+      "iata_codes": [
+        "HAM"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/hamburg",
+        "en": "/en/deals?destination=hamburg",
+        "ru": "/ru/deals?destination=hamburg",
+        "uk": "/uk/deals?destination=hamburg"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "madrid",
+      "path": "/destinations/madrid",
+      "country_code": "ES",
+      "iata_codes": [
+        "MAD"
+      ],
+      "before_guide_slugs": [
+        "madrid-airport"
+      ],
+      "guide_slugs": [
+        "madrid-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/madrid",
+        "en": "/en/deals?destination=madrid",
+        "ru": "/ru/deals?destination=madrid",
+        "uk": "/uk/deals?destination=madrid"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/madrid-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "brasov",
+      "path": "/destinations/brasov",
+      "country_code": "RO",
+      "iata_codes": [
+        "GHV"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/brasov",
+        "en": "/en/deals?destination=brasov",
+        "ru": "/ru/deals?destination=brasov",
+        "uk": "/uk/deals?destination=brasov"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "kutaisi",
+      "path": "/destinations/kutaisi",
+      "country_code": "GE",
+      "iata_codes": [
+        "KUT"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/kutaisi",
+        "en": "/en/deals?destination=kutaisi",
+        "ru": "/ru/deals?destination=kutaisi",
+        "uk": "/uk/deals?destination=kutaisi"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "catania",
+      "path": "/destinations/catania",
+      "country_code": "IT",
+      "iata_codes": [
+        "CTA"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/catania",
+        "en": "/en/deals?destination=catania",
+        "ru": "/ru/deals?destination=catania",
+        "uk": "/uk/deals?destination=catania"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "reggio-calabria",
+      "path": "/destinations/reggio-calabria",
+      "country_code": "IT",
+      "iata_codes": [
+        "REG"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/reggio-calabria",
+        "en": "/en/deals?destination=reggio-calabria",
+        "ru": "/ru/deals?destination=reggio-calabria",
+        "uk": "/uk/deals?destination=reggio-calabria"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "naples",
+      "path": "/destinations/naples",
+      "country_code": "IT",
+      "iata_codes": [
+        "NAP"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/naples",
+        "en": "/en/deals?destination=naples",
+        "ru": "/ru/deals?destination=naples",
+        "uk": "/uk/deals?destination=naples"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "eindhoven",
+      "path": "/destinations/eindhoven",
+      "country_code": "NL",
+      "iata_codes": [
+        "EIN"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/eindhoven",
+        "en": "/en/deals?destination=eindhoven",
+        "ru": "/ru/deals?destination=eindhoven",
+        "uk": "/uk/deals?destination=eindhoven"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "poznan",
+      "path": "/destinations/poznan",
+      "country_code": "PL",
+      "iata_codes": [
+        "POZ"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/poznan",
+        "en": "/en/deals?destination=poznan",
+        "ru": "/ru/deals?destination=poznan",
+        "uk": "/uk/deals?destination=poznan"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "katowice",
+      "path": "/destinations/katowice",
+      "country_code": "PL",
+      "iata_codes": [
+        "KTW"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/katowice",
+        "en": "/en/deals?destination=katowice",
+        "ru": "/ru/deals?destination=katowice",
+        "uk": "/uk/deals?destination=katowice"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    },
+    {
+      "slug": "porto",
+      "path": "/destinations/porto",
+      "country_code": "PT",
+      "iata_codes": [
+        "OPO"
+      ],
+      "before_guide_slugs": [
+        "porto-airport"
+      ],
+      "guide_slugs": [
+        "porto-airport"
+      ],
+      "arrival_summary": true,
+      "classification": "existing_editorial_support",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/porto",
+        "en": "/en/deals?destination=porto",
+        "ru": "/ru/deals?destination=porto",
+        "uk": "/uk/deals?destination=porto"
+      },
+      "editorial_links": [
+        {
+          "path": "/info/porto-airport",
+          "reviewed_at": "2026-09-24",
+          "source_count": 2
+        }
+      ],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Keep existing policy; review live observations and editorial sources separately"
+    },
+    {
+      "slug": "berlin",
+      "path": "/destinations/berlin",
+      "country_code": "DE",
+      "iata_codes": [
+        "BER"
+      ],
+      "before_guide_slugs": [],
+      "guide_slugs": [],
+      "arrival_summary": false,
+      "classification": "generic_template_noindex",
+      "normal_index_intended": false,
+      "published_page_locales": [
+        "pl"
+      ],
+      "sitemap_city_paths": [],
+      "directory_targets": {
+        "pl": "/destinations/berlin",
+        "en": "/en/deals?destination=berlin",
+        "ru": "/ru/deals?destination=berlin",
+        "uk": "/uk/deals?destination=berlin"
+      },
+      "editorial_links": [],
+      "observed_offer_count": null,
+      "production_http_status": null,
+      "gsc_index_status": null,
+      "follow_up": "Retain noindex and search links; only add researched city content when justified by demand/evidence"
+    }
+  ]
+}

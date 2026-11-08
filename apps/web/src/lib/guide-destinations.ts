@@ -1,6 +1,6 @@
 import {getInfoContent} from "./content";
 
-const destinations:Record<string,{name:string;guides:string[]}>= {
+const destinations:Record<string,{name:string;guides:string[];regional?:boolean}>= {
  milan:{name:"Mediolan",guides:["milan-weekend","milan-airports"]},
  paris:{name:"Paryż",guides:["paris-weekend","paris-airports"]},
  stockholm:{name:"Sztokholm",guides:["stockholm-weekend","stockholm-airports"]},
@@ -19,10 +19,12 @@ const destinations:Record<string,{name:string;guides:string[]}>= {
  vienna:{name:"Wiedeń",guides:["vienna-airport"]},
  prague:{name:"Praga",guides:["prague-weekend","prague-airport"]},
  copenhagen:{name:"Kopenhaga",guides:["copenhagen-airport"]},
+ reykjavik:{name:"Reykjavík",guides:["islandia-wieloryby-lodowce-atrakcje"],regional:true},
 };
 
 export function destinationForGuide(slug:string) {
- const entry=Object.entries(destinations).find(([,destination])=>destination.guides.includes(slug));
+ // A regional guide can help a city page without becoming a city-only article.
+ const entry=Object.entries(destinations).find(([,destination])=>!destination.regional&&destination.guides.includes(slug));
  return entry ? {slug:entry[0],name:entry[1].name} : undefined;
 }
 

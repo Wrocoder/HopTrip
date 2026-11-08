@@ -1,5 +1,5 @@
 import {localizedHref,pathLocale} from "./i18n/routing.ts";
-import {analyticsPageType,campaignLabel,sourceLabel,type AnalyticsEventName,type EventContext} from "./analytics-context.ts";
+import {analyticsPageType,analyticsViewport,campaignLabel,sourceLabel,type AnalyticsEventName,type EventContext} from "./analytics-context.ts";
 import {analyticsAllowed} from "./consent.ts";
 const KEY = "hoptrip.session.v2";
 const TIMEOUT = 30 * 60 * 1000;
@@ -51,7 +51,7 @@ function sendEvent(event_name:AnalyticsEventName,deal_slug?:string,activity?:Act
  void fetch(publicApi("/api/v1/analytics/events"),{
    method:"POST",headers:{"Content-Type":"application/json"},keepalive:true,referrerPolicy:"no-referrer",
    body:JSON.stringify({event_id:crypto.randomUUID(),event_name,deal_slug,activity,...context,
-     anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign,page_type:analyticsPageType(location.pathname),locale:pathLocale(location.pathname)}}),
+     anonymous_session_id:session.id,source:session.source,metadata:{campaign:session.campaign,page_type:analyticsPageType(location.pathname),locale:pathLocale(location.pathname),viewport:analyticsViewport(window.innerWidth)}}),
  }).catch(()=>undefined);
 }
 export function track(event_name:AnalyticsEventName,deal_slug?:string,activity?:ActivityContext,context:EventContext={}) {

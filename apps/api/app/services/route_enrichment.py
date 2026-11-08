@@ -6,7 +6,12 @@ from datetime import UTC, datetime, timedelta
 from app.models.offer import TravelOffer
 from app.providers.base import ProviderError
 from app.providers.travelpayouts_routes import PAGE_SIZE, TravelpayoutsRouteProvider
-from app.services.flight_routes import instant, ticket_key, validated_segments
+from app.services.flight_routes import (
+    connection_warning_segments,
+    instant,
+    ticket_key,
+    validated_segments,
+)
 from app.services.price_lifetime import fresh_price_clause
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -18,6 +23,7 @@ class RouteEnrichmentResult:
     already_known: int = 0
     deferred: int = 0
     enriched: int = 0
+    warning_routes: int = 0
     unmatched: int = 0
     rejected: int = 0
     requests: int = 0
@@ -41,7 +47,7 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
     ).order_by(TravelOffer.depart_at, TravelOffer.id)).all()
     groups: dict[tuple[str, str | None], list[TravelOffer]] = defaultdict(list)
     for offer in offers:
-        if validated_segments(offer, offer.route_details):
+        if connection_warning_segments(offer, offer.route_details):
             result.already_known += 1
         elif (isinstance(offer.route_details, dict)
               and offer.route_details.get("ticket_key") == ticket_key(offer.raw_payload.get("link"))
@@ -111,10 +117,13 @@ async def enrich_routes(db: Session, provider: TravelpayoutsRouteProvider | None
                             "currency", "value", "segments")}
                         evidence.update(source="travelpayouts_graphql", ticket_key=key,
                                         fetched_at=checked.isoformat())
-                        if current and validated_segments(current, evidence):
+                        if current and connection_warning_segments(current, evidence):
                             current.route_details = {**(current.route_details or {}), **evidence}
                             completed.add(offer_id)
-                            result.enriched += 1
+                            if validated_segments(current, evidence):
+                                result.enriched += 1
+                            else:
+                                result.warning_routes += 1
                         else:
                             result.rejected += 1
                 db.commit()

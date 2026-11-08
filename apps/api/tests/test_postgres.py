@@ -126,6 +126,45 @@ def test_concurrent_digest_workers_send_one_message(pg_factory, monkeypatch):
         assert len(list(db.scalars(select(AlertDelivery)))) == 1
 
 
+@pytest.mark.parametrize('mutation', ['confirmation-revoked', 'consent-revoked'])
+def test_email_opt_in_revoked_by_other_session_cancels_reserved_digest(
+    pg_factory, monkeypatch, mutation,
+):
+    from app.models.alert import AlertDelivery, DealAlert
+    from app.services import alert_digests
+    from test_alert_digests import NOW, offer, settings, subscription
+
+    factory, _ = pg_factory
+    with factory() as db:
+        alert = subscription(db)
+        alert_id = alert.id
+        offer(db)
+    messages = []
+    monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+    with factory() as db:
+        commit = db.commit
+
+        def revoke_after_reservation():
+            reserved = any(isinstance(item, AlertDelivery) for item in db.new)
+            commit()
+            if reserved:
+                with factory() as other:
+                    changed = other.get(DealAlert, alert_id)
+                    if mutation == 'confirmation-revoked':
+                        changed.confirmed_at = None
+                    else:
+                        changed.consent_version = 'unrecognized-consent'
+                    other.commit()
+
+        monkeypatch.setattr(db, 'commit', revoke_after_reservation)
+        result = alert_digests.deliver_digests(db, settings(), NOW)
+        assert result['cancelled'] == 1
+        assert result['sent'] == 0
+    assert messages == []
+    with factory() as db:
+        assert db.scalar(select(AlertDelivery)).status == 'CANCELLED'
+
+
 @pytest.fixture
 def pg_factory():
     url = os.getenv("TEST_DATABASE_URL")

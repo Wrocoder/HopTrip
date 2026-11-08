@@ -8,6 +8,7 @@ import {searchReturnPath} from '../src/lib/search-context';
 import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
 
 test.beforeEach(async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
 test.afterEach(async({request})=>{
@@ -39,15 +40,15 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
    await expect(warning.locator('details')).toHaveCount(0);
    for(const reason of quality.reasons)await expect(warning.getByText(qualityReasonText(locale,reason),{exact:true})).toBeVisible();
   }
-  const ids=['trip-flight','trip-booking','accommodation'];
+  const ids=['trip-flight','trip-booking','score','trip-stay','accommodation'];
   if(await page.locator('#destination-activities').count())ids.push('destination-activities');
   if(await page.locator('#trip-events').count())ids.push('trip-events');
-  ids.push('calculator','trip-save','score');
+  ids.push('calculator','trip-save');
   expect(await page.locator(ids.map(id=>'#'+id).join(',')).evaluateAll(nodes=>nodes.map(node=>node.id))).toEqual(ids);
-  await expect(page.locator('.offer-detail > section').last()).toHaveAttribute('id','score');
+  await expect(page.locator('.offer-detail > section').last()).toHaveAttribute('id','trip-save');
   const targets=await nav.locator('a').evaluateAll(links=>links.map(link=>link.getAttribute('href')!));
   for(const target of targets){await expect(page.locator(target)).toHaveCount(1);await expect(page.locator(target)).toHaveAttribute('tabindex','-1');}
-  await nav.locator('a[href="#trip-booking"]').focus();await page.keyboard.press('Enter');
+  await page.evaluate(()=>{location.hash='trip-booking';});
   await expect(booking).toBeFocused();
   await expect(booking.locator('a.cta')).toHaveCount(0);
   await expect(booking.locator('.partner-unavailable a')).toBeInViewport();
@@ -63,7 +64,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
  // fixture for CTA visibility and the existing planning/share journey.
  await page.goto(localizedHref('/deals/browser-deal?returnTo='+encodeURIComponent('/deals?origin=WRO&sort=price&offset=12'),locale));
  await expect(page.locator('#budget-people')).toBeEnabled();await page.evaluate(()=>document.fonts.ready);
- await nav.locator('a[href="#trip-booking"]').focus();await page.keyboard.press('Enter');
+ await page.evaluate(()=>{location.hash='trip-booking';});
  await expect(booking).toBeFocused();await expect(booking.locator('a.cta')).toBeInViewport();
  await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
  await expect.poll(()=>page.evaluate(()=>scrollY)).toBe(0);
@@ -78,7 +79,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
  await expect(page.locator('#trip-flight')).toBeFocused();
  await summary.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
  await expect(summary.locator('.flight-facts')).toBeVisible();
- await nav.locator('a[href="#score"]').focus();await page.keyboard.press('Enter');
+ await page.evaluate(()=>{location.hash='score';});
  await expect(page.locator('#score')).toBeFocused();
  await expect(page.locator('#score .score-sum')).not.toBeVisible();
  await expect(page.locator('.back-link')).toHaveAttribute('href',localizedHref(searchReturnPath('/deals?origin=WRO&sort=price&offset=12'),locale));

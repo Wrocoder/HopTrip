@@ -6,6 +6,8 @@ import {homeCollectionDefinitions,homeCollectionIds} from '../src/lib/home-colle
 import {localizedHref} from '../src/lib/i18n/routing';
 import {chooseOrigin} from './origin-helpers';
 import {writeFileSync} from 'node:fs';
+import {stayRecommendationEligible} from '../src/lib/weekend-stay';
+import type {Deal} from '../src/lib/api';
 
 const fixture='http://127.0.0.1:8100';
 test.setTimeout(90000);
@@ -35,7 +37,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: real preview
   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
   const response=await request.get(`${fixture}/api/v1/deals?${new URLSearchParams({...definition.filters,limit:'100'})}`);
   expect(response.ok()).toBe(true);
-  const eligible=(await response.json()).filter((row:{flight_quality?:{recommendation_eligible:boolean}})=>row.flight_quality?.recommendation_eligible);
+  const eligible=(await response.json()).filter((row:Deal)=>row.flight_quality?.recommendation_eligible&&stayRecommendationEligible(row,definition.id==='calendar-weekend'));
   await expect(collection).toHaveAttribute('data-state',eligible.length?'ready':'empty');
   await expect(collection.locator('.deal-card')).toHaveCount(Math.min(3,eligible.length));
  }

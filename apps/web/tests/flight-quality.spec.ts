@@ -18,10 +18,17 @@ test('complete, partial and critical source data have distinct presentation and 
    else await expect(warning).toHaveAttribute('data-quality',status);
    expect((await new AxeBuilder({page}).include('.detail-summary').analyze()).violations).toEqual([]);
    await page.goto('/');
-   const recommended=page.locator('a.deal-card-link[href="/deals/browser-13"]');
-   await expect(recommended).toHaveCount(scenario==='critical'?0:1);
-   await page.goto('/deals');
-   const card=page.locator('.deal-card').filter({has:page.locator('a[href="/deals/browser-13"]')});
+   const recommended=page.locator('.catalog-section a.deal-card-link[href="/deals/browser-13"]');
+   // V4-01: partial REST arrivals are estimates; only the complete fixture
+   // certifies stay suitability. Separate collections may repeat the same offer.
+   await expect(recommended).toHaveCount(scenario==='complete'?1:0);
+   const listing=await request.get('http://127.0.0.1:8100/api/v1/deals?limit=100&sort=price');
+   expect(listing.ok()).toBe(true);
+   const index=(await listing.json()).findIndex((deal:{slug:string})=>deal.slug==='browser-13');
+   expect(index).toBeGreaterThanOrEqual(0);
+   // The ordinary catalog has 12 results per page; this fixture need not be cheapest.
+   await page.goto(`/deals?sort=price&offset=${Math.floor(index/12)*12}`);
+   const card=page.locator('.deal-card').filter({has:page.locator('a.deal-card-link[href^="/deals/browser-13"]')});
    await expect(card).toHaveCount(1); // Standard discovery retains the record.
    if(scenario!=='complete')await expect(card.locator('.flight-quality')).toHaveAttribute('data-quality',status);
   }

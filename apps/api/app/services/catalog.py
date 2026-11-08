@@ -7,12 +7,14 @@ from app.models.offer import TravelOffer
 from app.schemas.deal import ComponentRead, DealRead
 from app.services.affiliate import component_policy
 from app.services.airport_context import airport_context
+from app.services.connections import assess_connections
 from app.services.destination_time import destination_time
 from app.services.event_destinations import event_city
 from app.services.flight_facts import flight_facts
 from app.services.flight_quality import classify_flight_quality
 from app.services.price_freshness import price_freshness
 from app.services.score_explanation import explain_score
+from app.services.trip_quality import trip_quality
 from app.services.weekend import assess_weekend
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -75,20 +77,26 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
     )))
     if destination and destination.iata_code:
         codes.add(destination.iata_code)
+    conflicting_context = len([c for c in components if c.component_type == "FLIGHT"]) > 1 or bool(source_offer and (
+        source_offer.origin_airport_id is not None and source_offer.origin_airport_id != deal.origin_airport_id
+        or source_offer.destination_id is not None and source_offer.destination_id != deal.destination_id))
     result.flight_quality = classify_flight_quality(
         source_offer, result.flight_facts, origin_code=origin.iata_code if origin else None,
         destination_codes=codes,
-        conflicting_context=(len([c for c in components if c.component_type == "FLIGHT"]) > 1
-            or bool(source_offer and (
-                source_offer.origin_airport_id is not None and source_offer.origin_airport_id != deal.origin_airport_id
-                or source_offer.destination_id is not None and source_offer.destination_id != deal.destination_id))),
+        conflicting_context=conflicting_context,
     )
+    result.connection_assessment = assess_connections(source_offer, policy=settings.connection_policy,
+        itinerary_context_valid=not conflicting_context and "AIRPORT_MISMATCH" not in result.flight_quality.reasons)
     result.weekend_assessment = assess_weekend(
         result.flight_facts, itinerary_eligible=result.flight_quality.recommendation_eligible,
+        stay_policy=settings.weekend_stay_policy,
     )
     result.destination_time = destination_time(
         result.flight_facts, itinerary_eligible=result.flight_quality.recommendation_eligible,
     )
+    result.trip_quality = trip_quality(result.flight_facts, result.flight_quality,
+        result.weekend_assessment, result.connection_assessment, policy=settings.trip_quality_policy)
+    result.trip_quality_score = result.trip_quality.score
     result.is_featured = deal.is_featured and result.flight_quality.recommendation_eligible
     result.airport_context = airport_context(
         result.flight_facts, destination_slug=result.destination_slug, round_trip=result.trip_type == "ROUND_TRIP",

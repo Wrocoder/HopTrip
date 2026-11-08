@@ -5,6 +5,7 @@ from typing import Any, Literal
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 AnalyticsLocale = Literal["pl", "en", "ru", "uk"]
+AnalyticsViewport = Literal["small", "medium", "large"]
 
 EventName = Literal["PAGE_VIEW", "DEAL_IMPRESSION", "DEAL_VIEW", "SEARCH", "FILTER_USE", "ACTIVITY_CLICK", "SEARCH_RESULT", "PARTNER_CLICK", "BUDGET_USE", "TRIP_SAVE", "ALERT_CONFIRMED", "TRIP_REMOVE", "EVENT_CLICK", "ALERT_STARTED", "TRIP_UPDATE", "DEAL_DETAILS_OPEN", "BUDGET_CALCULATED"]
 

@@ -2,7 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Literal
 
-from app.schemas.analytics import AnalyticsLocale
+from app.schemas.analytics import AnalyticsLocale, AnalyticsViewport
 from pydantic import BaseModel, Field
 
 
@@ -75,6 +75,22 @@ class LocaleCohortReport(BaseModel):
     rows: list[LocaleCohort]
 
 
+ViewportKey = Literal[AnalyticsViewport, "unknown"]
+
+
+class ViewportCohort(BaseModel):
+    viewport: ViewportKey
+    sessions: int = Field(ge=0)
+    percent: Decimal | None = Field(default=None, ge=0, le=100)
+    ordered_funnel: OrderedFunnel
+    metrics: list[UsageMetric]
+
+
+class ViewportCohortReport(BaseModel):
+    version: Literal["first-received-viewport-cohorts-v1"] = "first-received-viewport-cohorts-v1"
+    rows: list[ViewportCohort]
+
+
 class UsageReport(BaseModel):
     start: datetime
     end: datetime
@@ -89,3 +105,4 @@ class UsageReport(BaseModel):
     engagement: EngagementReport | None = None
     origin_cohorts: OriginCohortReport | None = None
     locale_cohorts: LocaleCohortReport | None = None
+    viewport_cohorts: ViewportCohortReport | None = None

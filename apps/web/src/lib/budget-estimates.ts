@@ -74,3 +74,9 @@ export function projectBudget(input:BudgetInput,events:PlannedEvent[]|undefined,
  return {profile:estimates.selected,valid,errors,lines,modeled,overridden,missing:lines.filter(line=>line.unknown).map(line=>line.label),
   min:valid?min:null,max:valid?max:null,personMin:valid?Math.floor(min/Number(input.people)):null,personMax:valid?Math.ceil(max/Number(input.people)):null};
 }
+
+// Compare independently: no selected-profile switch or write to the saved draft.
+export function compareBudgetProfiles(input:BudgetInput,events:PlannedEvent[]|undefined,estimates?:BudgetEstimates){
+ return budgetProfileIds.map(id=>({id,result:estimates?.profiles[id]
+  ?projectBudget(input,events,{...estimates,selected:id}):null}));
+}

@@ -1,0 +1,521 @@
+{
+  "task": "V4-06",
+  "started_date": "2026-11-07",
+  "date": "2026-11-08",
+  "timezone": "Europe/Warsaw",
+  "status": "DONE",
+  "scope": "LOCAL",
+  "next_eligible_task": "V4-08",
+  "deferred_task": "V4-07 depends on V4-08 budget before regrouping detail page",
+  "tests": {
+    "node_focused": {
+      "passed": 21,
+      "artifact": ".cache/v4-06-focused.txt"
+    },
+    "node_full": {
+      "passed": 363,
+      "failed": 0,
+      "skipped": 0,
+      "new_cases": 6,
+      "artifact": ".cache/v4-06-node.txt"
+    },
+    "eslint": "PASS",
+    "next_build_and_types": "PASS",
+    "final_tsc": "PASS",
+    "api_pytest": "NOT_RUN: application API unchanged",
+    "postgres": "NOT_RUN",
+    "browser": {
+      "runs": [
+        {
+          "file": ".cache/v4-06-browser.json",
+          "stats": {
+            "startTime": "2026-11-07T23:02:31.167Z",
+            "duration": 398338.238,
+            "expected": 52,
+            "skipped": 0,
+            "unexpected": 8,
+            "flaky": 0
+          }
+        },
+        {
+          "file": ".cache/v4-06-browser-final.json",
+          "stats": {
+            "startTime": "2026-11-07T23:09:57.012Z",
+            "duration": 70292.05900000001,
+            "expected": 10,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          }
+        }
+      ],
+      "initial_failure_reason": "Eight new cases did not enable the recommendations fixture containing the night itinerary. Added recommendations=true and an explicit departure window. Application warning behavior was unchanged.",
+      "latest_distinct": 60,
+      "latest_passed": 60,
+      "cases": [
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "duration and disclosure remain usable without JavaScript",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "en: cards prioritize source journey duration and keep technical data in native details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "pl: cards prioritize source journey duration and keep technical data in native details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "ru: cards prioritize source journey duration and keep technical data in native details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "uk: cards prioritize source journey duration and keep technical data in native details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "duration and disclosure remain usable without JavaScript",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "en: cards prioritize source journey duration and keep technical data in native details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "pl: cards prioritize source journey duration and keep technical data in native details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "ru: cards prioritize source journey duration and keep technical data in native details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "card-simplification.spec.ts",
+          "title": "uk: cards prioritize source journey duration and keep technical data in native details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "compact-cards.spec.ts",
+          "title": "compact cards preserve clocks, missing facts, keyboard access and long names",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "compact-cards.spec.ts",
+          "title": "next-day home arrival is visible without expanding details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "compact-cards.spec.ts",
+          "title": "compact cards preserve clocks, missing facts, keyboard access and long names",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "compact-cards.spec.ts",
+          "title": "next-day home arrival is visible without expanding details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "en: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "pl: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "ru: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "server rendered warnings remain readable without JavaScript",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "uk: connection warnings are visible outside disclosures on cards and detail",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "en: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "pl: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "ru: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "server rendered warnings remain readable without JavaScript",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "connections.spec.ts",
+          "title": "uk: connection warnings are visible outside disclosures on cards and detail",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "en: card hierarchy preserves critical information",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "pl: card hierarchy preserves critical information",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "ru: card hierarchy preserves critical information",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "uk: card hierarchy preserves critical information",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "en: card hierarchy preserves critical information",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "pl: card hierarchy preserves critical information",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "ru: card hierarchy preserves critical information",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "h3-card.spec.ts",
+          "title": "uk: card hierarchy preserves critical information",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "an open card announces expiry without requiring technical details",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "en: card exposes price, CTA and material warnings for every quality state",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "pl: card exposes price, CTA and material warnings for every quality state",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "ru: card exposes price, CTA and material warnings for every quality state",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "uk: card exposes price, CTA and material warnings for every quality state",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "an open card announces expiry without requiring technical details",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "en: card exposes price, CTA and material warnings for every quality state",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "pl: card exposes price, CTA and material warnings for every quality state",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "ru: card exposes price, CTA and material warnings for every quality state",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "offer-card.spec.ts",
+          "title": "uk: card exposes price, CTA and material warnings for every quality state",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "en: price comparison shows sample limits before the optional numerical calculation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "pl: price comparison shows sample limits before the optional numerical calculation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "ru: price comparison shows sample limits before the optional numerical calculation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "uk: price comparison shows sample limits before the optional numerical calculation",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "en: price comparison shows sample limits before the optional numerical calculation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "pl: price comparison shows sample limits before the optional numerical calculation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "ru: price comparison shows sample limits before the optional numerical calculation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "price-labels.spec.ts",
+          "title": "uk: price comparison shows sample limits before the optional numerical calculation",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "en: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "pl: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "real API collections exclude unsuitable stays and leave; general search retains every example",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "ru: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "uk: warnings stay visible on general-search cards and detail at 320px",
+          "project": "desktop",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "en: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "pl: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "real API collections exclude unsuitable stays and leave; general search retains every example",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "ru: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        },
+        {
+          "file": "weekend-recommendations.spec.ts",
+          "title": "uk: warnings stay visible on general-search cards and detail at 320px",
+          "project": "mobile",
+          "status": "expected"
+        }
+      ],
+      "locales": [
+        "pl",
+        "en",
+        "ru",
+        "uk"
+      ],
+      "widths": [
+        320,
+        375,
+        390,
+        768,
+        1440
+      ],
+      "projects": [
+        "desktop",
+        "mobile"
+      ]
+    }
+  },
+  "measurements": {
+    "baseline": {
+      "artifact": ".cache/v4-06-baseline.json",
+      "stats": {
+        "startTime": "2026-11-07T22:57:39.465Z",
+        "duration": 32819.379,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "counted_separately_from_current_cases": true
+    },
+    "cases": 24,
+    "all_smaller": true,
+    "min_reduction_px": 15.41,
+    "max_reduction_px": 98.0,
+    "min_reduction_percent": 1.7,
+    "max_reduction_percent": 7.96,
+    "artifacts": [
+      "docs/v4-06/before-metrics.json",
+      "docs/v4-06/after-metrics.json",
+      "docs/v4-06/comparison.json"
+    ],
+    "limits": "Local fixture card height, not conversion or Core Web Vitals; observation date rolled over at Warsaw midnight while flight calendar dates stayed unchanged"
+  },
+  "cleanup": {
+    "next_env_restored": true,
+    "fixture_servers_stopped": true
+  },
+  "dependencies": {
+    "new_packages": false,
+    "migrations": false,
+    "service_activation": false,
+    "uses_existing": [
+      "V4-01-03 flight quality, stay and connection data",
+      "V4-04 booking boundary",
+      "shared native disclosure and card",
+      "Playwright/axe and guarded local fixture"
+    ]
+  },
+  "source_hashes": [
+    {
+      "file": "apps/web/src/app/components/catalog.tsx",
+      "sha256": "fd8db0fb82ef3ae3f51c2295d5bc1ad9708af0088bf00ed77915cf2ea0bee34f"
+    },
+    {
+      "file": "apps/web/src/app/components/flight-schedule.tsx",
+      "sha256": "10cbe6e5a1b4463a7b51920686144a35764916b7463909476a1c100af3c20718"
+    },
+    {
+      "file": "apps/web/src/app/components/trip-details.tsx",
+      "sha256": "4d160d1ad138d3ec5a950ab8dadded36cf9eed199779a6c3867b5cac02932ad7"
+    },
+    {
+      "file": "apps/web/src/app/globals.css",
+      "sha256": "e4a76f4e65351c4ba56c6487c4e94733426f146af84af3f62d03b73210fb8846"
+    },
+    {
+      "file": "apps/web/src/lib/flight-facts.ts",
+      "sha256": "a8062aff5d158a06bd8b0eb4bb055da75f3347baf415ae50baf6b7b48dadfe52"
+    },
+    {
+      "file": "apps/web/src/lib/weekend-stay.ts",
+      "sha256": "44a8716fbcae0dd99f862561d615a429e79b32e50cb8e142b4adae1bcca57e19"
+    },
+    {
+      "file": "apps/web/src/lib/i18n/card-copy.ts",
+      "sha256": "55eaed1ced378163fd1f19e156fae993013a187d092fcc9ec428c309546f9b1e"
+    },
+    {
+      "file": "apps/web/tests/card-duration.test.mjs",
+      "sha256": "ad8671eda295480f4d59e75d8790c9585d7c2d7513ca6ef14bbdaeac0cf08259"
+    },
+    {
+      "file": "apps/web/tests/card-simplification.spec.ts",
+      "sha256": "5903760e8319d1367fee659639a7dc3adae45b9bcf3ebdd11df18d2e02843532"
+    }
+  ],
+  "limits": [
+    "Recorded/estimated times and prices do not confirm live availability",
+    "No full API/PostgreSQL regression, full browser inventory, WebKit/device testing or field CWV",
+    "No production changes, deployment, activation, affiliate transitions or notifications",
+    "V4-07 and V4-08 not started"
+  ]
+}

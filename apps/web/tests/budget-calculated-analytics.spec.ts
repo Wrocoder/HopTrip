@@ -10,9 +10,9 @@ import {encodeTrip} from '../src/lib/shared-trip';
 type Locale='pl'|'en'|'ru'|'uk';
 type WireEvent={event_name:string;metadata:Record<string,unknown>};
 test.setTimeout(60000);
-test.beforeAll(async({request})=>{
+test.beforeAll(async({request},info)=>{
  if(process.env.HOPTRIP_H3_PRODUCTION!=='1')return;
- const runner=readFileSync('playwright.config.ts','utf8');expect(runner).toContain('command:"npm run start --');expect(runner).toContain('NODE_ENV:"production"');expect(runner).not.toContain('reuseExistingServer:true');
+ const runner=readFileSync(info.config.configFile!,'utf8');expect(runner).toContain('npm run start --');expect(runner).toContain("NODE_ENV:'production'");expect(runner).not.toContain('reuseExistingServer:true');
  expect(await (await request.get('/info/trip-budget')).text()).toContain(readFileSync('.next/BUILD_ID','utf8').trim());
 });
 
@@ -40,7 +40,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: explicit com
  await expect(page.locator('#calculator [role=status]')).not.toContainText(budgetText(locale,'Budżet niepełny. Do uzupełnienia:'));
  const accepted=page.waitForResponse(response=>response.url().endsWith('/api/v1/analytics/events')&&response.request().postDataJSON().event_name==='BUDGET_CALCULATED');
  await toggle(page,true,locale);expect((await accepted).status()).toBe(202);await expect.poll(()=>completed().length).toBe(1);
- expect(completed()[0].metadata).toEqual({page_type:'budget',locale});expect(Object.keys(completed()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
+ expect(completed()[0].metadata).toEqual({page_type:'budget',locale,viewport:expect.stringMatching(/^(small|medium|large)$/)});expect(Object.keys(completed()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
  expect(events.filter(event=>event.event_name==='BUDGET_USE')).toHaveLength(1);
  await toggle(page,false,locale);await toggle(page,true,locale);expect(completed()).toHaveLength(1);
  expect((await new AxeBuilder({page}).include('#calculator').analyze()).violations).toEqual([]);
@@ -87,6 +87,6 @@ test('a restored shared plan with unknown ticket price stays incomplete and expo
  await page.getByRole('button',{name:budgetText('pl','Kwoty sprawdzone dla tego planu'),exact:true}).click();await expect(page.getByTestId('budget-review')).toHaveCount(0);
  await toggle(page,true);expect(completed()).toEqual([]);await page.locator('#planned-private-ticket-price').fill('0');await expect(summary(page).locator('..')).toHaveAttribute('open','');expect(completed()).toEqual([]);
  await toggle(page,false);await toggle(page,true);await expect.poll(()=>completed().length).toBe(1);
- expect(completed()[0].metadata).toEqual({page_type:'saved_trip',locale:'pl'});expect(Object.keys(completed()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
+ expect(completed()[0].metadata).toEqual({page_type:'saved_trip',locale:'pl',viewport:expect.stringMatching(/^(small|medium|large)$/)});expect(Object.keys(completed()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
  expect(JSON.stringify(completed())).not.toMatch(/private|Private|token|plan=|deal_slug|total|quantity|price/);expect(JSON.stringify(completed())).not.toContain(token);expect(errors).toEqual([]);
 });

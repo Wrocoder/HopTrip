@@ -6,7 +6,7 @@ from decimal import ROUND_HALF_UP, Decimal
 from typing import cast, get_args
 
 from app.models.analytics import AnalyticsEvent
-from app.schemas.analytics import AnalyticsLocale, EventName
+from app.schemas.analytics import AnalyticsLocale, AnalyticsViewport, EventName
 from app.schemas.usage import (
     EngagementReport,
     FunnelStage,
@@ -21,6 +21,9 @@ from app.schemas.usage import (
     PageCohort,
     UsageMetric,
     UsageReport,
+    ViewportCohort,
+    ViewportCohortReport,
+    ViewportKey,
 )
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -33,6 +36,12 @@ PAGE_TYPES = frozenset({
 PRODUCT_EVENTS = frozenset(get_args(EventName))
 ORIGIN_KEYS = frozenset(get_args(OriginKey))
 LOCALE_KEYS = frozenset(get_args(AnalyticsLocale))
+VIEWPORT_KEYS = frozenset(get_args(AnalyticsViewport))
+VIEWPORT_ACTIONS = (
+    ("filter_use", "FILTER_USE"), ("trip_save", "TRIP_SAVE"),
+    ("budget_completion", "BUDGET_CALCULATED"), ("alert_started", "ALERT_STARTED"),
+    ("alert_confirmed", "ALERT_CONFIRMED"),
+)
 ENGAGEMENT_EVENTS = (
     ("detail_disclosure", "DEAL_DETAILS_OPEN"),
     ("budget_completion", "BUDGET_CALCULATED"),
@@ -161,6 +170,30 @@ def locale_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -
     ) for locale, members in sorted(groups.items())])
 
 
+def viewport_cohorts(events: list[AnalyticsEvent], by_name: dict[str, set[str]]) -> ViewportCohortReport:
+    """First received event fixes a coarse viewport cohort; never infer hardware or backfill."""
+    first: dict[str, ViewportKey] = {}
+    for row in events:
+        if row.anonymous_session_id not in first:
+            metadata = row.metadata_json if isinstance(row.metadata_json, dict) else {}
+            value = metadata.get("viewport")
+            first[row.anonymous_session_id] = (
+                cast(ViewportKey, value)
+                if isinstance(value, str) and value in VIEWPORT_KEYS else "unknown"
+            )
+    groups: dict[ViewportKey, set[str]] = defaultdict(set)
+    for session, viewport in first.items():
+        groups[viewport].add(session)
+    return ViewportCohortReport(rows=[ViewportCohort(
+        viewport=viewport, sessions=len(members), percent=percent(len(members), len(first)),
+        ordered_funnel=ordered_funnel([
+            row for row in events if row.anonymous_session_id in members
+        ]),
+        metrics=[metric(key, len(members & by_name[event]), len(members))
+                 for key, event in VIEWPORT_ACTIONS],
+    ) for viewport, members in sorted(groups.items())])
+
+
 def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
     """Window is [start,end); stable DB order disambiguates equal timestamps."""
     start, end = usage_window(start, end)
@@ -238,4 +271,5 @@ def usage_report(db: Session, start: datetime, end: datetime) -> UsageReport:
         ]),
         origin_cohorts=origin_cohorts(events, by_name),
         locale_cohorts=locale_cohorts(events, by_name),
+        viewport_cohorts=viewport_cohorts(events, by_name),
     )

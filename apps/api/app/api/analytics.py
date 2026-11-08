@@ -22,6 +22,7 @@ from app.schemas.analytics import (
     AnalyticsEventCreate,
     AnalyticsLocale,
     AnalyticsSummary,
+    AnalyticsViewport,
 )
 from app.schemas.usage import UsageReport
 from app.services.usage_dashboard import DashboardLocale, render_usage
@@ -87,6 +88,9 @@ def record_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     locale = payload.metadata.get("locale")
     if isinstance(locale, str) and locale in get_args(AnalyticsLocale):
         metadata["locale"] = locale
+    viewport = payload.metadata.get("viewport")
+    if isinstance(viewport, str) and viewport in get_args(AnalyticsViewport):
+        metadata["viewport"] = viewport
     if payload.activity:
         metadata["activity"] = payload.activity.model_dump()
     if payload.search:

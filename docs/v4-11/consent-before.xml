@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="4" time="0.552" timestamp="2026-11-08T16:53:31.166130+01:00" hostname="wave"><testcase classname="apps.api.tests.test_alert_readiness" name="test_email_requires_recognized_consent_before_reservation[]" time="0.108"><failure message="assert 1 == 0">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023E54867A10&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023E54806630&gt;
+version = ''
+
+    @pytest.mark.parametrize('version', ['', 'unrecognized-consent'])
+    def test_email_requires_recognized_consent_before_reservation(isolated_db, monkeypatch, version):
+        alert = subscription(isolated_db)
+        alert.consent_version = version
+        isolated_db.commit()
+        offer(isolated_db)
+        messages = []
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+&gt;       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['sent'] == 0
+E       assert 1 == 0
+
+apps\api\tests\test_alert_readiness.py:19: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_alert_readiness" name="test_email_requires_recognized_consent_before_reservation[unrecognized-consent]" time="0.049"><failure message="assert 1 == 0">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023E54A3FD40&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023E54924260&gt;
+version = 'unrecognized-consent'
+
+    @pytest.mark.parametrize('version', ['', 'unrecognized-consent'])
+    def test_email_requires_recognized_consent_before_reservation(isolated_db, monkeypatch, version):
+        alert = subscription(isolated_db)
+        alert.consent_version = version
+        isolated_db.commit()
+        offer(isolated_db)
+        messages = []
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+&gt;       assert alert_digests.deliver_digests(isolated_db, settings(), NOW)['sent'] == 0
+E       assert 1 == 0
+
+apps\api\tests\test_alert_readiness.py:19: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_alert_readiness" name="test_email_rechecks_opt_in_after_reservation[confirmation-revoked]" time="0.052"><failure message="assert 0 == 1">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023E54B8B8C0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023E54A75820&gt;
+mutation = 'confirmation-revoked'
+
+    @pytest.mark.parametrize('mutation', ['confirmation-revoked', 'consent-revoked'])
+    def test_email_rechecks_opt_in_after_reservation(isolated_db, monkeypatch, mutation):
+        alert = subscription(isolated_db)
+        alert.consent_version = CONSENT_VERSION
+        isolated_db.commit()
+        offer(isolated_db)
+        commit = isolated_db.commit
+    
+        def change_after_reservation():
+            reserved = any(isinstance(item, AlertDelivery) for item in isolated_db.new)
+            commit()
+            if reserved:
+                if mutation == 'confirmation-revoked':
+                    alert.confirmed_at = None
+                else:
+                    alert.consent_version = 'unrecognized-consent'
+                commit()
+    
+        messages = []
+        monkeypatch.setattr(isolated_db, 'commit', change_after_reservation)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+        result = alert_digests.deliver_digests(isolated_db, settings(), NOW)
+&gt;       assert result['cancelled'] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_alert_readiness.py:47: AssertionError</failure></testcase><testcase classname="apps.api.tests.test_alert_readiness" name="test_email_rechecks_opt_in_after_reservation[consent-revoked]" time="0.054"><failure message="assert 0 == 1">isolated_db = &lt;sqlalchemy.orm.session.Session object at 0x0000023E54C378C0&gt;
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000023E5471E1E0&gt;
+mutation = 'consent-revoked'
+
+    @pytest.mark.parametrize('mutation', ['confirmation-revoked', 'consent-revoked'])
+    def test_email_rechecks_opt_in_after_reservation(isolated_db, monkeypatch, mutation):
+        alert = subscription(isolated_db)
+        alert.consent_version = CONSENT_VERSION
+        isolated_db.commit()
+        offer(isolated_db)
+        commit = isolated_db.commit
+    
+        def change_after_reservation():
+            reserved = any(isinstance(item, AlertDelivery) for item in isolated_db.new)
+            commit()
+            if reserved:
+                if mutation == 'confirmation-revoked':
+                    alert.confirmed_at = None
+                else:
+                    alert.consent_version = 'unrecognized-consent'
+                commit()
+    
+        messages = []
+        monkeypatch.setattr(isolated_db, 'commit', change_after_reservation)
+        monkeypatch.setattr(alert_digests, 'send_alert_mail', lambda *args: messages.append(args))
+        result = alert_digests.deliver_digests(isolated_db, settings(), NOW)
+&gt;       assert result['cancelled'] == 1
+E       assert 0 == 1
+
+apps\api\tests\test_alert_readiness.py:47: AssertionError</failure></testcase></testsuite></testsuites>

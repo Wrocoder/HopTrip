@@ -5,6 +5,7 @@ from typing import Literal
 
 from app.schemas.analytics import AnalyticsLocale
 from app.schemas.usage import UsageMetric, UsageReport
+from app.services.viewport_dashboard import render_viewports
 
 DashboardLocale = AnalyticsLocale
 LANG_INDEX = {"pl": 0, "en": 1, "ru": 2, "uk": 3}
@@ -217,6 +218,7 @@ caption{{text-align:left;font-weight:700;padding:.5rem 0}}dt{{font-weight:600}}d
 {funnel}
 {origins}
 {languages}
+{render_viewports(report.viewport_cohorts, locale)}
 <h2>{t("entry")}</h2><p>{t("proxy")}</p>{cohorts}
 <h2>{t("quality")}</h2><dl><dt>{t("excluded")}</dt><dd>{report.excluded_events}</dd><dt>{t("invalid")}</dt><dd>{report.invalid_results}</dd><dt>{t("unlinked")}</dt><dd>{report.unlinked_detail_views}</dd></dl>
 <p>{t("limits")}</p></main></body></html>'''

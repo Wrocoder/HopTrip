@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {readFileSync,writeFileSync} from 'node:fs';
-import config from '../playwright.config';
+
 import {availableHref} from '../src/lib/i18n/routing';
 
 // Baseline observation, not an approval of existing defects. Artifacts survive failures.
@@ -11,10 +11,10 @@ const paths=['/','/deals','/tanie-loty-na-weekend','/city-break',
 const widths=[320,375,390,768,1440];
 test.beforeEach(async({request},info)=>{
  if(process.env.HOPTRIP_H3_PRODUCTION!=='1')return;
- const servers=config.webServer;if(!Array.isArray(servers))throw Error('Expected fixture servers');
- expect(servers[1].command).toContain('npm run start --');expect(servers[1].env?.NODE_ENV).toBe('production');
+ const config=readFileSync(info.config.configFile!,'utf8');expect(config).toContain('npm run start --');expect(config).toContain("NODE_ENV:'production'");
+
  const build=readFileSync('.next/BUILD_ID','utf8').trim();expect(await (await request.get('/deals')).text()).toContain(build);
- await info.attach('execution-mode',{body:JSON.stringify({command:servers[1].command,nodeEnv:servers[1].env?.NODE_ENV,build}),contentType:'application/json'});
+ await info.attach('execution-mode',{body:JSON.stringify({configFile:info.config.configFile,configSource:config,build}),contentType:'application/json'});
 });
 for(const locale of ['pl','en','ru','uk'] as const)test(`H3 baseline pages and widths: ${locale}`,async({page,context},info)=>{
  test.skip(info.project.name!=='desktop','The explicit width matrix runs once; touch journeys run separately.');

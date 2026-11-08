@@ -1,0 +1,270 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "localized-catalog.spec.ts",
+      "--grep",
+      "catalog languages|catalog canonical",
+      "--output=../../.cache/v4-09-repeat-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-09-repeat-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-09-repeat-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "localized-catalog.spec.ts",
+      "file": "localized-catalog.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "catalog languages preserve filters, pages, consent and server language",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11354,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m900\u001b[39m\nReceived:   \u001b[31m908.046875\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m900\u001b[39m\nReceived:   \u001b[31m908.046875\u001b[39m\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\localized-catalog.spec.ts:35:35",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\localized-catalog.spec.ts",
+                      "column": 35,
+                      "line": 35
+                    },
+                    "snippet": "  33 |   if(testInfo.project.name===\"desktop\"){\n  34 |    const price=await page.locator('.deal-price').first().boundingBox();\n> 35 |    expect(price!.y+price!.height).toBeLessThan(900);\n     |                                   ^\n  36 |   }\n  37 |   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  38 |   await page.screenshot({path:testInfo.outputPath(`catalog-${locale}.png`)});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\localized-catalog.spec.ts",
+                        "column": 35,
+                        "line": 35
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m900\u001b[39m\nReceived:   \u001b[31m908.046875\u001b[39m\n\n  33 |   if(testInfo.project.name===\"desktop\"){\n  34 |    const price=await page.locator('.deal-price').first().boundingBox();\n> 35 |    expect(price!.y+price!.height).toBeLessThan(900);\n     |                                   ^\n  36 |   }\n  37 |   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);\n  38 |   await page.screenshot({path:testInfo.outputPath(`catalog-${locale}.png`)});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\localized-catalog.spec.ts:35:35"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T11:08:16.968Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-09-repeat-results\\localized-catalog-catalog--7fd0f-consent-and-server-language-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-09-repeat-results\\localized-catalog-catalog--7fd0f-consent-and-server-language-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\localized-catalog.spec.ts",
+                    "column": 35,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "abb60f012c49eb42c47c-da2d4923bc0d0daeb321",
+          "file": "localized-catalog.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7513,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T11:08:30.045Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "abb60f012c49eb42c47c-acdb8240a45f48f1ae17",
+          "file": "localized-catalog.spec.ts",
+          "line": 94,
+          "column": 5
+        },
+        {
+          "title": "catalog languages preserve filters, pages, consent and server language",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20139,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T11:08:38.422Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "abb60f012c49eb42c47c-5f097d18a4456a3b0f56",
+          "file": "localized-catalog.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7601,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T11:08:58.967Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "abb60f012c49eb42c47c-776ca3003bf086d94145",
+          "file": "localized-catalog.spec.ts",
+          "line": 94,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T11:08:11.474Z",
+    "duration": 56626.529,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

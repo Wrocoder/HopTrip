@@ -1,0 +1,24 @@
+INFO  [alembic.runtime.migration] Context impl PostgresqlImpl.
+INFO  [alembic.runtime.migration] Will assume transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 0001_foundation, Create foundation catalog and affiliate tables.
+INFO  [alembic.runtime.migration] Running upgrade 0001_foundation -> 0002_offers_and_price_history, Add normalized travel offers and durable price observations.
+INFO  [alembic.runtime.migration] Running upgrade 0002_offers_and_price_history -> 0003_destination_iata, Add optional IATA city code for destination resolution.
+INFO  [alembic.runtime.migration] Running upgrade 0003_destination_iata -> 0004_route_statistics, Add explainable route price statistics.
+INFO  [alembic.runtime.migration] Running upgrade 0004_route_statistics -> 0005_deals, Add consumer-facing flight deals and components.
+INFO  [alembic.runtime.migration] Running upgrade 0005_deals -> 0006_analytics_events, Add first-party analytics events.
+INFO  [alembic.runtime.migration] Running upgrade 0006_analytics_events -> 0007_affiliate_clicks, Add tracked affiliate click attempts.
+INFO  [alembic.runtime.migration] Running upgrade 0007_affiliate_clicks -> 0008_seed_destination_catalog, Seed a small destination catalog for route resolution and SEO pages.
+INFO  [alembic.runtime.migration] Running upgrade 0008_seed_destination_catalog -> 0009_job_runs, Add persistent background job execution history.
+INFO  [alembic.runtime.migration] Running upgrade 0009_job_runs -> 0010_affiliate_conversions, Add affiliate conversion and revenue records.
+INFO  [alembic.runtime.migration] Running upgrade 0010_affiliate_conversions -> 0011_affiliate_click_tracking, Add provider sub-ID tracking to affiliate clicks.
+INFO  [alembic.runtime.migration] Running upgrade 0011_affiliate_click_tracking -> 0012_provider_capabilities, Track affiliate provider capabilities and health errors.
+INFO  [alembic.runtime.migration] Running upgrade 0012_provider_capabilities -> 0013_integrity_and_affiliates, Add data identity and affiliate policy without removing existing records.
+INFO  [alembic.runtime.migration] Running upgrade 0013_integrity_and_affiliates -> 0014_deal_alerts, Confirmed daily deal alerts; sending remains disabled until explicitly configured.
+INFO  [alembic.runtime.migration] Running upgrade 0014_deal_alerts -> 0015_events_catalog, Persistent event catalog and successful city/date coverage.
+INFO  [alembic.runtime.migration] Running upgrade 0015_events_catalog -> 0016_flight_route_details, Separate route evidence from cached price observations.
+INFO  [alembic.runtime.migration] Running upgrade 0015_events_catalog -> 0016_editorial, Private editorial drafts, immutable revisions, sessions and approval audit.
+INFO  [alembic.runtime.migration] Running upgrade 0016_editorial, 0016_flight_route_details -> 0017_routes_editorial_merge, Join the independent editorial and flight-route schema additions.
+INFO  [alembic.runtime.migration] Running upgrade 0017_routes_editorial_merge -> 0018_editorial_rehearsal, Persist scheduled dry-run rehearsals; never authorizes external delivery.
+INFO  [alembic.runtime.migration] Running upgrade 0018_editorial_rehearsal -> 0019_observation_expiry, Retain cached observation deadlines across intervening price changes.
+INFO  [alembic.runtime.migration] Running upgrade 0019_observation_expiry -> 0020_statistics_method, Distinguish validated historical cohorts from unverified derived cache.
+INFO  [alembic.runtime.migration] Running upgrade 0020_statistics_method -> 0021_telegram_alerts, Separate opt-in personal Telegram subscriptions, receipts and delivery journal.

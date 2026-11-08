@@ -37,8 +37,8 @@ export function DealCard({deal,locale="pl",returnTo}:{deal:Deal;locale?:Locale;r
     <PriceSummary deal={deal} locale={locale} compact/>
     <PriceFreshness deal={deal} compact locale={locale}/>
     <FlightSchedule deal={deal} compact card locale={locale}/>
-    <p className="deal-note card-cost-scope flight-cost-scope">{t('Cena dotyczy lotu. Nocleg nie jest wliczony.')}</p>
-    <p className="deal-note card-baggage-scope flight-baggage-scope">{t('Bagaż do sprawdzenia')}</p>
+    <p className="deal-note card-conditions"><span className="card-cost-scope flight-cost-scope">{t('Cena dotyczy lotu. Nocleg nie jest wliczony.')}</span>{' '}
+     <span className="card-baggage-scope flight-baggage-scope">{t('Bagaż do sprawdzenia')}</span></p>
     <TripDetails deal={deal} locale={locale} qualityDetails/>
     <ScoreTrigger slug={deal.slug} href={`${detailHref}#score`} destination={cityLabel(deal.destination_city,deal.destination_slug,locale)} locale={locale}><ScoreDetails deal={deal} locale={locale}/></ScoreTrigger>
   </article>;

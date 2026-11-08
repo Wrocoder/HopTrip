@@ -1,0 +1,69 @@
+{
+  "task": "V4-11",
+  "date": "2026-11-08",
+  "status": "LOCAL_VALIDATED_NOT_ACTIVATED",
+  "local_checks": {
+    "api": {
+      "tests": 1370,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres": 20
+    },
+    "focused": {
+      "tests": 155,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "postgres": 6
+    },
+    "browser": 18,
+    "node": 377,
+    "ruff": "PASS",
+    "mypy": "PASS",
+    "eslint": "PASS",
+    "production_build": "PASS",
+    "final_tsc": "PASS"
+  },
+  "defaults": {
+    "alerts_enabled": false,
+    "alerts_digest_enabled": false,
+    "telegram_enabled": false,
+    "telegram_delivery_enabled": false
+  },
+  "boundaries": {
+    "runtime_environment_read": false,
+    "production_settings_changed": false,
+    "production_database_access": false,
+    "real_messages_sent": false,
+    "new_dependencies": false,
+    "new_migrations": false,
+    "deploy": false
+  },
+  "channels": {
+    "email": {
+      "registration_flag": "alerts_enabled",
+      "digest_flag": "alerts_digest_enabled",
+      "confirmation_window_hours": 48,
+      "language": "pl, disclosed in other UI languages",
+      "consent_version": "personal-alerts-2026-10-12",
+      "transport_in_tests": "fake SMTP / monkeypatched mail function"
+    },
+    "telegram": {
+      "bot_flag": "telegram_enabled",
+      "digest_flag": "telegram_delivery_enabled",
+      "confirmation_window_hours": 24,
+      "important": "Enabling the bot alone permits requested command replies; it is also an external activation",
+      "transport_in_tests": "in-memory Sender / mocked fixed-host TLS transport"
+    }
+  },
+  "pending_external_gates": [
+    "Explicit separate authorization for real activation and agreed recipients",
+    "Review exact release candidate, SMTP sender/authentication/TLS and separate bot/webhook settings without logging secrets",
+    "Controlled staging opt-in and confirmation with agreed real test recipients; verify real inbox/bot behavior and unsubscribe/stop",
+    "Monitor aggregate SENT/UNCERTAIN/CANCELLED; preserve no-replay policy after an ambiguous submission",
+    "Keep stop/disable and rollback procedures ready; no blind retries or automatic resubscribe"
+  ],
+  "activation_requested": false,
+  "activation_performed": false
+}

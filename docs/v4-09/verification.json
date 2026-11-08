@@ -1,0 +1,676 @@
+{
+  "task": "V4-09",
+  "date": "2026-11-08",
+  "status": "DONE_LOCAL",
+  "node_version": "v24.19.0",
+  "checks": {
+    "node": {
+      "focused": 18,
+      "full": 371,
+      "fail": 0,
+      "skipped": 0
+    },
+    "eslint": "PASS",
+    "production_build": "PASS",
+    "final_tsc": "PASS",
+    "browser": {
+      "final_pass": 22,
+      "final_fail": 0,
+      "final_skipped": 0,
+      "final_flaky": 0,
+      "runs": [
+        {
+          "name": "pilot",
+          "stats": {
+            "startTime": "2026-11-08T10:57:45.497Z",
+            "duration": 16549.083,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "localization-review.spec.ts",
+              "title": "ru: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "browser",
+          "stats": {
+            "startTime": "2026-11-08T11:02:51.973Z",
+            "duration": 230659.075,
+            "expected": 19,
+            "skipped": 0,
+            "unexpected": 3,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "localization-review.spec.ts",
+              "title": "pl: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "en: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "ru: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "uk: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "pl: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "en: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "ru: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "uk: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "translated details and offer links retain the catalog language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "localized empty, invalid, unavailable and loading results keep conditions",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "translated details and offer links retain the catalog language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "localized empty, invalid, unavailable and loading results keep conditions",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in en",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in ru",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in uk",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in en",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in ru",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in uk",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "repeat",
+          "stats": {
+            "startTime": "2026-11-08T11:08:11.474Z",
+            "duration": 56626.529,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "geometry-before",
+          "stats": {
+            "startTime": "2026-11-08T11:12:39.969Z",
+            "duration": 21455.189,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "desktop",
+              "status": "unexpected",
+              "results": [
+                "failed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "browser-final",
+          "stats": {
+            "startTime": "2026-11-08T11:16:47.231Z",
+            "duration": 225522.123,
+            "expected": 22,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "localization-review.spec.ts",
+              "title": "pl: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "en: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "ru: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "uk: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "pl: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "en: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "ru: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localization-review.spec.ts",
+              "title": "uk: countries, guide meaning, money, warnings and private plan keep their language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "translated details and offer links retain the catalog language",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "localized empty, invalid, unavailable and loading results keep conditions",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog languages preserve filters, pages, consent and server language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "translated details and offer links retain the catalog language",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "localized empty, invalid, unavailable and loading results keep conditions",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-catalog.spec.ts",
+              "title": "catalog canonical and alternates preserve normalized queries without indexing filters",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in en",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in ru",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in uk",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in en",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in ru",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "localized-events.spec.ts",
+              "title": "events and their budget remain translated and shareable in uk",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "locales": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "widths": [
+      320,
+      375,
+      390,
+      768,
+      1440
+    ],
+    "axe": "PASS, scoped main",
+    "manual_visual": [
+      "RU country 320 px",
+      "RU navigation 320 px",
+      "UK catalogue 1366x900 after correction"
+    ],
+    "geometry": {
+      "viewport_height": 900,
+      "price_bottom_before": 908.046875,
+      "price_bottom_after": 890.046875,
+      "hint_height_before": [
+        36,
+        36
+      ],
+      "hint_height_after": [
+        18,
+        18
+      ]
+    }
+  },
+  "compatibility": {
+    "frozen_files": [
+      {
+        "file": "apps/web/src/lib/i18n/config.ts",
+        "sha256": "7a3d9bba821e08d32b907f08651beb958424a7fccf728b275f6df129b0789cf1"
+      },
+      {
+        "file": "apps/web/src/lib/i18n/routing.ts",
+        "sha256": "ff90e59c8411c435b9399cf88136682db242c567256bb23210372715ea6ac0f2"
+      },
+      {
+        "file": "apps/web/src/lib/i18n/guide-ui.ts",
+        "sha256": "b71f6298a068ad01b71dfa9cbe78393954890e6db4d02c6b2c17d2b4cf4be87e"
+      },
+      {
+        "file": "apps/web/next-env.d.ts",
+        "sha256": "1b59d4c6b83807db275d43f3cf2cc8e9323f465fab764eea091cc5becd5bad37"
+      }
+    ],
+    "next_env_restored": true,
+    "guide_source_hashes_preserved": true,
+    "guide_digit_sequences_preserved": true,
+    "route_and_seo_policies_changed": false,
+    "translated_metadata_descriptions_corrected": true,
+    "api_changed": false,
+    "saved_share_schema_changed": false,
+    "new_dependencies": false,
+    "migrations": false,
+    "deploy": false,
+    "real_notifications": false,
+    "test_servers_stopped": true
+  },
+  "source_changes": [
+    {
+      "file": "apps/web/src/lib/country-label.ts",
+      "sha256": "f17c9cf5e209b7c0afa80bf6e056a6d61096af21b404cb8b52952bd483cb0cd7",
+      "before_sha256": null,
+      "baseline_kind": "new file"
+    },
+    {
+      "file": "apps/web/src/lib/destination-directory.ts",
+      "sha256": "5f7ffaadd37e24b4dd712c623f16e5367c478975a9493878d9d7fe920616234a",
+      "before_sha256": "f6f3aca5115f713547c26472c2d5142415a0385e86d2501315750f0237c38fb0",
+      "baseline_kind": "pre-task snapshot"
+    },
+    {
+      "file": "apps/web/src/app/components/destination-planning.tsx",
+      "sha256": "51c5445fd02cb2dede410c82b134f2cec88131dc0bb2cc630d0b1e8aba2f4213",
+      "before_sha256": "91a8babe1e4e97c1c9b8d82fb4ac90626a25478b25363520cff66cd5203d32d5",
+      "baseline_kind": "pre-task snapshot"
+    },
+    {
+      "file": "apps/web/src/app/components/country-flag.tsx",
+      "sha256": "6831b30cb6a012e0b529ff2ec6e7fe8bbc6943d2dd31928f2b733d66cd80effe",
+      "before_sha256": "651d27810f8fb244acacf371d6b23e8e3aa794d2fd02148a57459d9c79d570d1",
+      "baseline_kind": "pre-task snapshot"
+    },
+    {
+      "file": "apps/web/src/lib/i18n/guide-translations.json",
+      "sha256": "c49a4ff2fde3b9e3f10d90de0dca12c4fc9e4e4a869decc42d9cb5f2017eef92",
+      "before_sha256": "bb2acc0e10d0d3cf866b2a8d21d263af2a32f1863b24d53684005139b3887adc",
+      "baseline_kind": "pre-task snapshot"
+    },
+    {
+      "file": "apps/web/src/lib/i18n/trip-section-copy.ts",
+      "sha256": "7baa656dea3e9bf81106747738b58acef6cadb99b8379ef4a036e9ba9d96bd42",
+      "before_sha256": "82c26646961e19c56d81b2b2b5cf0cadc780b5a6c7b78930f8d77df3c8f09e8c",
+      "baseline_kind": "pre-task snapshot"
+    },
+    {
+      "file": "apps/web/src/lib/i18n/filter-copy.ts",
+      "sha256": "75f67b743d17365df0564b3b296cd31af127450ee1dca6dd9f900495722193e9",
+      "before_sha256": "52781650802ec3c6dd98460bd52e389d50370fbf230639ae5a894bd779f5841d",
+      "baseline_kind": "pre-task snapshot"
+    },
+    {
+      "file": "apps/web/tests/localization-review.test.mjs",
+      "sha256": "401c8813a6a583c7957dba9da1f4ab60065d05dea0b3b1b5fd6d9585b36df853",
+      "before_sha256": null,
+      "baseline_kind": "new file"
+    },
+    {
+      "file": "apps/web/tests/localization-review.spec.ts",
+      "sha256": "ca80503e1f0ea375d2d8faad1bc4b73a97865c18361b71f59db3e5a827314c09",
+      "before_sha256": null,
+      "baseline_kind": "new file"
+    },
+    {
+      "file": "apps/web/tests/localized-catalog.spec.ts",
+      "sha256": "49b8b28d208d746203bd38f3741881067db2a970adc106b72d939f437df0ab61",
+      "before_sha256": "19550292904720752564313c2bab4c6e7fad7a3d8e5e2a9e6868da3f31ddc18e",
+      "baseline_kind": "reconstructed before instrumentation (canonical/font edits reversed); not original byte snapshot"
+    }
+  ],
+  "limits": [
+    "Scoped Chromium desktop/mobile: not full application matrix, WebKit, physical devices or manual screen reader",
+    "No independent native-language editorial certification or supplier facts revalidation",
+    "No field CWV, conversion claim or usability participants",
+    "No separate pytest/PG run because API unchanged"
+  ],
+  "tracker_done": 9,
+  "tracker_total": 14,
+  "next_task": "V4-10",
+  "next_task_started": false
+}

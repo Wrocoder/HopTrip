@@ -83,7 +83,7 @@ test("six short trips retain nights and airport in the catalog",async({page},tes
  await expect(selection.locator(".deal-card")).toHaveCount(6);
  for(const card of await selection.locator(".deal-card").all()){
   await expect(card.locator(".deal-origin")).toContainText("WAW");
-  await expect(card.locator(".deal-note").first()).toHaveText(/^[234] noce$/);
+  await expect(card.locator(".deal-note").first()).toHaveText(/^Noce na miejscu: [234]$/);
   await expect(card.locator(".deal-price")).toContainText("za osobę · w obie strony");
  }
  await expect(selection).toContainText("Nocleg, bagaż dodatkowy i dojazdy nie są uwzględnione");

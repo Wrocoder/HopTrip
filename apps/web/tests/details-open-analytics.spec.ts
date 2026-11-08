@@ -6,10 +6,10 @@ import {shell} from '../src/lib/i18n/shell';
 
 type WireEvent={event_name:string;deal_slug?:string;metadata:Record<string,unknown>};
 test.setTimeout(60000);
-test.beforeAll(async({request})=>{
+test.beforeAll(async({request},info)=>{
  if(process.env.HOPTRIP_H3_PRODUCTION!=='1')return;
- const runner=readFileSync('playwright.config.ts','utf8');
- expect(runner).toContain('command:"npm run start --');expect(runner).toContain('NODE_ENV:"production"');expect(runner).not.toContain('reuseExistingServer:true');
+ const runner=readFileSync(info.config.configFile!,'utf8');
+ expect(runner).toContain('npm run start --');expect(runner).toContain("NODE_ENV:'production'");expect(runner).not.toContain('reuseExistingServer:true');
  expect(await (await request.get('/deals')).text()).toContain(readFileSync('.next/BUILD_ID','utf8').trim());
 });
 
@@ -31,7 +31,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: modal and na
  expect(opened()).toEqual([]);
  const accepted=page.waitForResponse(response=>response.url().endsWith('/api/v1/analytics/events')&&response.request().postDataJSON().event_name==='DEAL_DETAILS_OPEN');
  await trigger.focus();await page.keyboard.press('Enter');await expect(page.getByRole('dialog')).toBeVisible();expect((await accepted).status()).toBe(202);
- await expect.poll(()=>opened().length).toBe(1);expect(opened()[0].deal_slug).toBe(slug);expect(opened()[0].metadata).toEqual({page_type:'catalog',locale});
+ await expect.poll(()=>opened().length).toBe(1);expect(opened()[0].deal_slug).toBe(slug);expect(opened()[0].metadata).toEqual({page_type:'catalog',locale,viewport:expect.stringMatching(/^(small|medium|large)$/)});
  expect(Object.keys(opened()[0]).sort()).toEqual(['anonymous_session_id','deal_slug','event_id','event_name','metadata']);
  await page.getByRole('dialog').locator('.score-calculation > summary').click();await expect(page.getByRole('dialog').locator('.score-sum')).toBeVisible();
  await page.keyboard.press('Escape');await expect(trigger).toBeFocused();
@@ -44,7 +44,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: modal and na
  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await card.locator('.deal-card-link').click();await expect.poll(()=>events.filter(event=>event.event_name==='DEAL_VIEW'&&event.deal_slug===slug).length).toBe(1);
  expect(opened()).toHaveLength(2);await page.locator('.trip-details > summary').click();await expect.poll(()=>opened().length).toBe(3);
- expect(opened()[2].metadata).toEqual({page_type:'deal',locale});expect(errors).toEqual([]);
+ expect(opened()[2].metadata).toEqual({page_type:'deal',locale,viewport:expect.stringMatching(/^(small|medium|large)$/)});expect(errors).toEqual([]);
 });
 
 test('direct score calculation is a disclosure; visit and closure are separate',async({page})=>{

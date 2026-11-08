@@ -22,21 +22,24 @@ import {BudgetOrigin} from './budget-origin';
 import {BudgetProfiles} from './budget-profiles';
 import {BudgetProjection} from './budget-projection';
 import {budgetCompletionReady} from '../../lib/budget-completion';
+import {quickBudgetCosts} from '../../lib/budget-quick';
+import {budgetQuickCopy} from '../../lib/i18n/budget-quick-copy';
 
 
 
-type Props=TripDraftProps & {note?:string;destinationSlug?:string;shareOffer?:TripOffer};
+type Props=TripDraftProps & {note?:string;destinationSlug?:string;shareOffer?:TripOffer;separateActions?:boolean};
 export function TripBudgetCalculator(props:Props) {
  const shared=useTripDraft();
  return shared ? <BudgetCalculator {...props}/> : <TripDraftProvider {...props}><BudgetCalculator {...props}/></TripDraftProvider>;
 }
-function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
+function BudgetCalculator({note,destinationSlug,shareOffer,separateActions=false}:Props) {
  const {draft,save,saveIfCurrent,ready,context,storageMessage}=useTripDraft()!;
  const {locale}=useLocale();
  const planCopy=plannedEventsCopy[locale];
  const t=(text:string)=>budgetText(locale,text);
  const format=(grosz:number)=>money(String(grosz/100),locale);
  const input=draft.input;
+ const quick=quickBudgetCosts(input,draft.events),quickCopy=budgetQuickCopy[locale];
  const [extraOpen,setExtraOpen]=useState(false);
  const result=calculateBudget(input,draft.events);
  const extraFields=costFields.filter(cost=>!["flight","hotel","transfers","food"].includes(cost.key));
@@ -65,7 +68,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   {money && <BudgetOrigin input={input} field={key as BudgetMoneyKey} provenance={draft.provenance} locale={locale}/>}
   {result.errors[key] && <span id={`budget-${key}-error`} className={styles.error}>{t(result.errors[key]!)}</span>}
  </div>;
- return <section id="calculator" tabIndex={-1} aria-labelledby="budget-heading" className={styles.calculator}>
+ return <><section id="calculator" tabIndex={-1} aria-labelledby="budget-heading" className={styles.calculator}>
   <h2 id="budget-heading">{t("Kalkulator budżetu podróży")}</h2>
   <p>{t("Wpisz własne kwoty w PLN. Puste pole oznacza nieznany koszt; wpisz 0, jeśli wydatek nie występuje lub jest już uwzględniony w innej pozycji.")}</p>
   <p className={styles.hint}>{t("Znana cena lotu jest kopiowana z oferty na osobę i obejmuje tylko jej odcinki. Dodaj brakujący powrót do kwoty lotów, jeśli nie ma go w ofercie; nie licz go drugi raz, gdy jest już zawarty. To zaobserwowana cena, nie potwierdzenie rezerwacji. Pozostałe kwoty to twoje szacunki lub ceny wpisane ręcznie; nie weryfikujemy ich u sprzedawców.")}</p>
@@ -81,6 +84,13 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   <p aria-live="polite" aria-atomic="true">{storageMessage}</p>
   <fieldset disabled={!ready} className={styles.controls}>
   <legend>{t("Twój plan podróży")}</legend>
+  <div className={styles.quick} data-testid="budget-quick-start">
+   <h3>{quickCopy.title}</h3><p>{quickCopy.intro}</p>
+   <p>{quickCopy.progress.replace('{count}',String(quick.filter(cost=>cost.known).length))}</p>
+   {quick.every(cost=>cost.known)?<p>{quickCopy.ready}</p>:<div className={styles.modes}>{quick.filter(cost=>!cost.known).map(cost=><button type="button" className="button button-secondary" key={cost.key} onClick={()=>{
+    const target=document.getElementById(`budget-${cost.field}`);target?.focus();target?.scrollIntoView({block:'center'});
+   }}>{quickCopy.fill}: {t(cost.label)}</button>)}</div>}
+  </div>
   <div className={styles.grid}>
    <div className={styles.field}><label htmlFor="budget-start">{t("Początek pobytu (opcjonalnie)")}</label>
     <input id="budget-start" type="date" min="0001-01-01" max="9999-12-31" value={draft.start} aria-invalid={datesInvalid} aria-describedby={datesInvalid ? "budget-dates-error" : undefined} onChange={event=>changeDate("start",event.target.value)}/></div>
@@ -100,16 +110,6 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
    <p>{t("Zmieniono daty, długość pobytu, liczbę osób lub dane oferty. Sprawdź ponownie loty, nocleg, transfery i pozostałe wpisane kwoty. Przeliczenie sumy nie potwierdza cen u sprzedawców.")}</p>
    <button type="button" className="button button-secondary" onClick={()=>save({...draft,context,review:false})}>{t("Kwoty sprawdzone dla tego planu")}</button>
   </div>}
-  <BudgetProfiles/>
-  <ReferenceCosts destinationSlug={destinationSlug} filled={Boolean(input.local_transport.trim())}
-    onApply={(amount,origin)=>{
-     if(input.local_transport.trim())return false;
-     const nextInput={...input,local_transport:amount};
-     const provenance=cleanBudgetProvenance({version:'budget-provenance-v1',fields:{...draft.provenance?.fields,local_transport:origin}},nextInput);
-     if(!provenance?.fields.local_transport||!saveIfCurrent(draft,{...draft,input:nextInput,provenance}))return false;
-     track('BUDGET_USE');setExtraOpen(true);return true;
-    }}/>
-  {locale!=="pl" && destinationSlug && <p><a href={localizedHref('/info/trip-budget',locale)}>{guideUi(locale,'budgetGuide')}</a></p>}
   <h3>{t("Główne koszty")}</h3>
   <div className={styles.grid}>{costFields.filter(cost=>["flight","hotel","transfers","food"].includes(cost.key)).map(cost=>cost.key!=="hotel" ? field(cost.key,cost.label,cost.hint,true) :
    <div key="hotel" className={styles.field}>
@@ -130,13 +130,25 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   </fieldset>
   <PlannedEvents locale={locale}/>
   <div className={styles.result} role="status" aria-live="polite" aria-atomic="true">
-   <h3>{t("Szacowany budżet całej grupy (PLN)")}</h3>
+   <h3>{t(result.missing.length ? "Suma znanych kosztów" : "Budżet według wpisanych kosztów")} · PLN</h3>
    {!result.valid || datesInvalid ? <p>{t("Popraw zaznaczone pola i daty, aby obliczyć budżet.")}</p> : <>
-    <p>{t(result.missing.length ? "Suma znanych kosztów" : "Budżet według wpisanych kosztów")}: <strong data-testid="budget-total">{format(result.total!)}</strong></p>
+    <p><strong data-testid="budget-total">{format(result.total!)}</strong></p>
     <p>{t("Na osobę przy równym podziale (w zaokrągleniu):")}{" "}<strong data-testid="budget-person">{format(result.perPerson!)}</strong></p>
     {result.missing.length>0 && <p>{t("Budżet niepełny. Do uzupełnienia:")}{" "}{result.missing.map(lineLabel).join(", ")}.</p>}
    </>}
   </div>
+  <fieldset disabled={!ready} className={styles.controls} aria-label={quickCopy.compare}>
+  <BudgetProfiles/>
+  <ReferenceCosts destinationSlug={destinationSlug} filled={Boolean(input.local_transport.trim())}
+    onApply={(amount,origin)=>{
+     if(input.local_transport.trim())return false;
+     const nextInput={...input,local_transport:amount};
+     const provenance=cleanBudgetProvenance({version:'budget-provenance-v1',fields:{...draft.provenance?.fields,local_transport:origin}},nextInput);
+     if(!provenance?.fields.local_transport||!saveIfCurrent(draft,{...draft,input:nextInput,provenance}))return false;
+     track('BUDGET_USE');setExtraOpen(true);return true;
+    }}/>
+  {locale!=="pl" && destinationSlug && <p><a href={localizedHref('/info/trip-budget',locale)}>{guideUi(locale,'budgetGuide')}</a></p>}
+  </fieldset>
   <BudgetProjection draft={draft} locale={locale}/>
   {!extraOpen && hiddenErrors && <p className={styles.error}>{t("Błąd w dodatkowych kosztach.")}{" "}<button type="button" onClick={revealError}>{t("Szczegółowy budżet")}</button></p>}
   {result.valid && !datesInvalid && <details onToggle={event=>{
@@ -146,7 +158,7 @@ function BudgetCalculator({note,destinationSlug,shareOffer}:Props) {
   </dl></details>}
   <p className={styles.hint}>{t("To twój plan kosztów, nie oferta ani rezerwacja. Sprawdź końcowe ceny u sprzedawców. Szkic jest dostępny tylko w tej przeglądarce; usunięcie danych witryny usuwa też szkice.")}</p>
   <button type="button" disabled={!ready} className="button" onClick={()=>save({version:1,input:{...emptyBudget},start:"",end:"",context,review:false},'reset')}>{t("Wyczyść kalkulator")}</button>
-  {shareOffer && <TripActions offer={shareOffer} draft={draft} ready={ready}/>}
+  {shareOffer && !separateActions && <TripActions offer={shareOffer} draft={draft} ready={ready}/>}
   <noscript>{t("Włącz JavaScript, aby obliczać budżet. Poradnik poniżej wyjaśnia, jak policzyć go samodzielnie.")}</noscript>
- </section>;
+ </section>{shareOffer && separateActions && <TripActions offer={shareOffer} draft={draft} ready={ready} standalone/>}</>;
 }

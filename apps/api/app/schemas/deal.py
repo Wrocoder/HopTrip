@@ -3,8 +3,10 @@ from decimal import Decimal
 from typing import Literal
 
 from app.schemas.airport_context import AirportContext
+from app.schemas.connection import ConnectionAssessment
 from app.schemas.destination_time import DestinationTime
 from app.schemas.score import ScoreExplanation
+from app.schemas.trip_quality import TripQualityAssessment
 from app.schemas.weekend import WeekendAssessment
 from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator
 
@@ -119,6 +121,9 @@ class DealRead(BaseModel):
     price_basis: str = "FLIGHT_PER_PERSON"
     flight_facts: FlightFacts = Field(default_factory=FlightFacts)
     flight_quality: FlightQuality = Field(default_factory=FlightQuality)
+    trip_quality_score: int | None = Field(default=None, ge=0, le=100)
+    trip_quality: TripQualityAssessment = Field(default_factory=TripQualityAssessment)
+    connection_assessment: ConnectionAssessment = Field(default_factory=ConnectionAssessment)
     weekend_assessment: WeekendAssessment = Field(default_factory=WeekendAssessment)
     destination_time: DestinationTime = Field(default_factory=DestinationTime)
     airport_context: AirportContext = Field(default_factory=AirportContext)

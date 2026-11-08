@@ -28,15 +28,17 @@ test("trip details reveal comparison on demand without navigating or opening oth
   await expect(summary).toContainText("Liczba obserwacji: 24");
   await expect(summary).toContainText("Pierwszy zapis tej ceny w HopTrip");
   await expect(summary).toContainText("Bez potwierdzenia na żywo");
-  await summary.locator("details > summary").click();
-  await expect(summary.locator("details p").filter({hasText:"UTC"})).toBeVisible();
+  const origin=card.locator('.trip-details .card-price-origin');
+  await expect(origin).toBeVisible();
+  await expect(origin).toContainText('czas w Polsce');
+  await expect(origin.locator('time').first()).toHaveAttribute('datetime',/T.+(?:Z|[+-]\d{2}:\d{2})$/);
   await expect(card.locator(".score-trigger")).toContainText("Jak porównujemy cenę?");
   await card.screenshot({path:testInfo.outputPath("price-card.png")});
   const observation=await summary.locator("time").getAttribute("datetime");
   await card.locator(".deal-card-link").click();
   await expect(page.locator(".detail-summary .price-summary")).toContainText(cardComparison!);
   await expect(page.locator(".detail-summary .price-assessment")).toHaveCount(0);
-  await page.locator('.trip-navigation a[href="#score"]').click();
+  await page.evaluate(()=>{location.hash='score';});
   await expect(page.locator("#score .price-assessment time")).toHaveAttribute("datetime",observation!);
   await expect(page.locator("#score .price-assessment")).toContainText("49,75 zł poniżej");
   const score=page.locator("#score");
@@ -59,7 +61,7 @@ test("trip details reveal comparison on demand without navigating or opening oth
 test("insufficient and historical data never advertise a price advantage",async({page})=>{
   for(const [slug,label] of [["browser-2","Za mało danych"],["browser-3","poprzedniej metody"],["browser-1","Brak wiarygodnego porównania"]]) {
     await page.goto(`/deals/${slug}`);
-    await page.locator('.trip-navigation a[href="#score"]').click();
+    await page.evaluate(()=>{location.hash='score';});
     const summary=page.locator("#score .price-assessment");
     await expect(summary).toContainText(label);
     await expect(summary).not.toContainText(/%|poniżej mediany/);

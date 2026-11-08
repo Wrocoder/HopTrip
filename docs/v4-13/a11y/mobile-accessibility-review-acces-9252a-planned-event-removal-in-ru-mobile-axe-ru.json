@@ -1,0 +1,4559 @@
+[
+  {
+    "state": "initial-consent",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label><input type=\"checkbox\">Аналитика HopTrip — статистика использования предложений.</label>",
+            "target": [
+              ".consent-panel > label:nth-child(3)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label><input type=\"checkbox\">Travelpayouts Drive — партнёрский маркетинг.</label>",
+            "target": [
+              ".consent-panel > label:nth-child(4)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.8pt (13px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\">Отклонить необязательные</button>",
+            "target": [
+              ".consent-actions > button[type=\"button\"]:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-deal\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-deal\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-deal#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-1\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-1\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-1#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-2\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-2\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-2#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-3\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-3\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-3#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-4\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-4\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-4#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-5\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-5\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-5#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-6\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-6\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-6#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-7\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-7\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-7#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-8\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-8\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-8#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-9\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-9\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-9#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-10\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-10\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-10#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-11\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-11\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-11#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "home",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\"> →</span>",
+            "target": [
+              "section[data-collection=\"calendar-weekend\"] > ._5xHlkG_actions > a > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\"> →</span>",
+            "target": [
+              "section[data-collection=\"under-300\"] > ._5xHlkG_actions > a > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\"> →</span>",
+            "target": [
+              "section[data-collection=\"upcoming-short\"] > ._5xHlkG_actions > a > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\"> →</span>",
+            "target": [
+              "a[aria-label=\"Барселона\"] > .AF4sdG_label > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\"> →</span>",
+            "target": [
+              "a[aria-label=\"Милан\"] > .AF4sdG_label > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\"> →</span>",
+            "target": [
+              "a[aria-label=\"Рим\"] > .AF4sdG_label > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "modal",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "16.8pt (22.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<h2 id=\"_R_14aiqnpfivdb_\">Цена на фоне истории</h2>",
+            "target": [
+              "#_R_14aiqnpfivdb_"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" class=\"score-close\" autofocus=\"\" aria-label=\"Закрыть сравнение цены\">✕</button>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-dialog-header > .score-close[autofocus=\"\"][aria-label=\"Закрыть сравнение цены\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "bold",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>Цена на 49,75 PLN ниже медианы выборки.</strong>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > .price-assessment[aria-label=\"Цена на фоне истории\"][role=\"group\"] > .price-comparison > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"price-samples\">Наблюдений: 24. Порог сравнения: 5; выборка не охватывает весь рынок.</p>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > .price-assessment[aria-label=\"Цена на фоне истории\"][role=\"group\"] > .price-samples"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"price-observation\">Первая запись этой цены в HopTrip<!-- -->: <time datetime=\"2026-11-08T15:03:28.912844Z\">вс, 8 нояб. 2026 г., 16:03</time> (<!-- -->время в Польше<!-- -->).</p>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > .price-assessment[aria-label=\"Цена на фоне истории\"][role=\"group\"] > .price-observation"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"price-availability\">Наличие мест и окончательную цену уточняйте у партнёра. Проверки в реальном времени нет.</p>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > .price-assessment[aria-label=\"Цена на фоне истории\"][role=\"group\"] > .price-availability"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.3pt (15px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Мы оцениваем ценовое предложение по сохранённым данным. Результат не оценивает авиакомпанию, комфорт или вероятность покупки.</p>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.3pt (15px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Как устроен вспомогательный балл сортировки?</summary>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > .score-method.score-calculation > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "elmPartiallyObscuring",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element's background color could not be determined because it partially overlaps other elements"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<a class=\"text-link\" href=\"/ru/info/price-comparison\">Полная методика сравнения цен<!-- --> →</a>",
+            "target": [
+              "dialog[aria-labelledby=\"_R_14aiqnpfivdb_\"] > .score-details > .text-link[href$=\"price-comparison\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "filter-error",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-deal\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-deal\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-deal#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-1\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-1\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-1#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-2\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-2\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-2#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-3\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-3\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-3#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-4\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-4\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-4#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-5\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-5\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-5#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-6\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-6\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-6#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-7\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-7\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-7#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-8\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-8\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-8#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-9\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-9\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-9#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-10\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-10\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-10#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-11\"] > .deal-origin > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">→</span>",
+            "target": [
+              "a[href$=\"browser-11\"] > .deal-card-bottom > .card-cta > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span aria-hidden=\"true\">ⓘ</span>",
+            "target": [
+              "a[href$=\"browser-11#score\"] > span > span[aria-hidden=\"true\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "detail-planned",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "17.4pt (23.2px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<h2 id=\"trip-events-title\">События во время поездки</h2>",
+            "target": [
+              "#trip-events-title"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Концерты, спорт и культура в городе назначения. Билеты на события покупаются отдельно.</p>",
+            "target": [
+              ".MXbyZW_header > div > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span>Ваша поездка<!-- --> · <!-- -->Барселона</span>",
+            "target": [
+              ".MXbyZW_stay > span"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>8 дек. 2026 г.<!-- --> – <!-- -->10 дек. 2026 г.</strong>",
+            "target": [
+              ".MXbyZW_stay > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "bold",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>Даты поездки</strong>",
+            "target": [
+              ".MXbyZW_dateMode > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_modeHint\">Даты общие с жильём и бюджетом. Изменения автоматически обновляют события. Это даты плана — проверьте их соответствие расписанию перелёта.</p>",
+            "target": [
+              ".MXbyZW_modeHint:nth-child(4)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>С<input type=\"date\" min=\"0001-01-01\" max=\"9999-12-31\" required=\"\" aria-invalid=\"false\" value=\"2026-12-08\"></label>",
+            "target": [
+              "form > label:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>По<input type=\"date\" max=\"9999-12-31\" required=\"\" min=\"2026-12-08\" aria-invalid=\"false\" value=\"2026-12-10\"></label>",
+            "target": [
+              "form > label:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>Категория<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select></label>",
+            "target": [
+              "label:nth-child(3)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select>",
+                    "target": [
+                      "label:nth-child(3) > select"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select>",
+            "target": [
+              "label:nth-child(3) > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>Совместимость с перелётом<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select></label>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(6) > label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select>",
+                    "target": [
+                      "select[aria-describedby=\"event-fit-filter-hint\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select>",
+            "target": [
+              "select[aria-describedby=\"event-fit-filter-hint\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p id=\"event-fit-filter-hint\" class=\"MXbyZW_modeHint\">Этот режим скрывает только явные конфликты с перелётом. События с малым запасом или неполными данными остаются видимыми. Формальности в аэропорту и дорогу до места нужно проверить; посещение не гарантируется.</p>",
+            "target": [
+              "#event-fit-filter-hint"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>События по дням<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select></label>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(8) > label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select>",
+                    "target": [
+                      ".MXbyZW_dayNavigation:nth-child(8) > label > select"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(8) > label > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" class=\"MXbyZW_retry\" aria-label=\"Следующий день\">→</button>",
+            "target": [
+              "button[aria-label=\"Следующий день\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.4pt (15.2px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Показано событий: <strong>2</strong> · Все дни · Местное время</p>",
+            "target": [
+              ".MXbyZW_feedback > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.4pt (15.2px)",
+                  "fontWeight": "bold",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>2</strong>",
+            "target": [
+              ".MXbyZW_feedback > p > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Совместимость с расписанием перелёта</summary>",
+            "target": [
+              ".MXbyZW_fitPolicy > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"muted\">Источник: Ticketmaster · Время проверки неизвестно</p>",
+            "target": [
+              "#trip-events > .muted"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_hint\">Данные каталога, а не наличие в реальном времени. Статус продажи и цена от не гарантируют билетов; уточните у продавца. Неактивные или неизвестные продажи нельзя добавить из списка в план.</p>",
+            "target": [
+              ".MXbyZW_hint"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Перед покупкой</summary>",
+            "target": [
+              ".MXbyZW_details > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.6pt (12.8px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_disclosure\">Партнёрские ссылки: HopTrip может получить комиссию от покупки. Наличие билетов и правила входа уточняйте у продавца.</p>",
+            "target": [
+              ".MXbyZW_disclosure"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.</p>",
+            "target": [
+              "#trip-events > .partner-context-limitation"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select id=\"budget-hotel-basis\"><option value=\"night\" selected=\"\">За ночь — вся группа</option><option value=\"stay\">За всё пребывание — вся группа</option></select>",
+                    "target": [
+                      "#budget-hotel-basis"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select id=\"budget-hotel-basis\"><option value=\"night\" selected=\"\">За ночь — вся группа</option><option value=\"stay\">За всё пребывание — вся группа</option></select>",
+            "target": [
+              "#budget-hotel-basis"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "detail-errors",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "17.4pt (23.2px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<h2 id=\"trip-events-title\">События во время поездки</h2>",
+            "target": [
+              "#trip-events-title"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Концерты, спорт и культура в городе назначения. Билеты на события покупаются отдельно.</p>",
+            "target": [
+              ".MXbyZW_header > div > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span>Ваша поездка<!-- --> · <!-- -->Барселона</span>",
+            "target": [
+              ".MXbyZW_stay > span"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>8 дек. 2026 г.<!-- --> – <!-- -->10 дек. 2026 г.</strong>",
+            "target": [
+              ".MXbyZW_stay > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "bold",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>Даты поездки</strong>",
+            "target": [
+              ".MXbyZW_dateMode > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_modeHint\">Даты общие с жильём и бюджетом. Изменения автоматически обновляют события. Это даты плана — проверьте их соответствие расписанию перелёта.</p>",
+            "target": [
+              ".MXbyZW_modeHint:nth-child(4)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>С<input type=\"date\" min=\"0001-01-01\" max=\"9999-12-31\" required=\"\" aria-invalid=\"false\" value=\"2026-12-08\"></label>",
+            "target": [
+              "form > label:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>По<input type=\"date\" max=\"9999-12-31\" required=\"\" min=\"2026-12-08\" aria-invalid=\"false\" value=\"2026-12-10\"></label>",
+            "target": [
+              "form > label:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>Категория<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select></label>",
+            "target": [
+              "label:nth-child(3)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select>",
+                    "target": [
+                      "label:nth-child(3) > select"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select>",
+            "target": [
+              "label:nth-child(3) > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>Совместимость с перелётом<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select></label>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(6) > label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select>",
+                    "target": [
+                      "select[aria-describedby=\"event-fit-filter-hint\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select>",
+            "target": [
+              "select[aria-describedby=\"event-fit-filter-hint\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p id=\"event-fit-filter-hint\" class=\"MXbyZW_modeHint\">Этот режим скрывает только явные конфликты с перелётом. События с малым запасом или неполными данными остаются видимыми. Формальности в аэропорту и дорогу до места нужно проверить; посещение не гарантируется.</p>",
+            "target": [
+              "#event-fit-filter-hint"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>События по дням<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select></label>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(8) > label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select>",
+                    "target": [
+                      ".MXbyZW_dayNavigation:nth-child(8) > label > select"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(8) > label > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" class=\"MXbyZW_retry\" aria-label=\"Следующий день\">→</button>",
+            "target": [
+              "button[aria-label=\"Следующий день\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.4pt (15.2px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Показано событий: <strong>2</strong> · Все дни · Местное время</p>",
+            "target": [
+              ".MXbyZW_feedback > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.4pt (15.2px)",
+                  "fontWeight": "bold",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>2</strong>",
+            "target": [
+              ".MXbyZW_feedback > p > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Совместимость с расписанием перелёта</summary>",
+            "target": [
+              ".MXbyZW_fitPolicy > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"muted\">Источник: Ticketmaster · Время проверки неизвестно</p>",
+            "target": [
+              "#trip-events > .muted"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_hint\">Данные каталога, а не наличие в реальном времени. Статус продажи и цена от не гарантируют билетов; уточните у продавца. Неактивные или неизвестные продажи нельзя добавить из списка в план.</p>",
+            "target": [
+              ".MXbyZW_hint"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Перед покупкой</summary>",
+            "target": [
+              ".MXbyZW_details > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.6pt (12.8px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_disclosure\">Партнёрские ссылки: HopTrip может получить комиссию от покупки. Наличие билетов и правила входа уточняйте у продавца.</p>",
+            "target": [
+              ".MXbyZW_disclosure"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.</p>",
+            "target": [
+              "#trip-events > .partner-context-limitation"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select id=\"budget-hotel-basis\"><option value=\"night\" selected=\"\">За ночь — вся группа</option><option value=\"stay\">За всё пребывание — вся группа</option></select>",
+                    "target": [
+                      "#budget-hotel-basis"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select id=\"budget-hotel-basis\"><option value=\"night\" selected=\"\">За ночь — вся группа</option><option value=\"stay\">За всё пребывание — вся группа</option></select>",
+            "target": [
+              "#budget-hotel-basis"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "after-removal",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "tags": [
+          "cat.color",
+          "wcag2aa",
+          "wcag143",
+          "TTv5",
+          "TT13.c",
+          "EN-301-549",
+          "EN-9.1.4.3",
+          "ACT",
+          "RGAAv4",
+          "RGAA-3.2.1"
+        ],
+        "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.13/color-contrast?application=playwright",
+        "nodes": [
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "17.4pt (23.2px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<h2 id=\"trip-events-title\">События во время поездки</h2>",
+            "target": [
+              "#trip-events-title"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Концерты, спорт и культура в городе назначения. Билеты на события покупаются отдельно.</p>",
+            "target": [
+              ".MXbyZW_header > div > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<span>Ваша поездка<!-- --> · <!-- -->Барселона</span>",
+            "target": [
+              ".MXbyZW_stay > span"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>8 дек. 2026 г.<!-- --> – <!-- -->10 дек. 2026 г.</strong>",
+            "target": [
+              ".MXbyZW_stay > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "bold",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>Даты поездки</strong>",
+            "target": [
+              ".MXbyZW_dateMode > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_modeHint\">Даты общие с жильём и бюджетом. Изменения автоматически обновляют события. Это даты плана — проверьте их соответствие расписанию перелёта.</p>",
+            "target": [
+              ".MXbyZW_modeHint:nth-child(4)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>С<input type=\"date\" min=\"0001-01-01\" max=\"9999-12-31\" required=\"\" aria-invalid=\"false\" value=\"2026-12-08\"></label>",
+            "target": [
+              "form > label:nth-child(1)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>По<input type=\"date\" max=\"9999-12-31\" required=\"\" min=\"2026-12-08\" aria-invalid=\"false\" value=\"2026-12-10\"></label>",
+            "target": [
+              "form > label:nth-child(2)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<form class=\"MXbyZW_form\">",
+                    "target": [
+                      "form"
+                    ]
+                  },
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>Категория<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select></label>",
+            "target": [
+              "label:nth-child(3)"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select>",
+                    "target": [
+                      "label:nth-child(3) > select"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select><option value=\"ALL\" selected=\"\">Все</option><option value=\"MUSIC\">Музыка</option><option value=\"SPORTS\">Спорт</option><option value=\"CULTURE\">Культура</option><option value=\"OTHER\">Другое</option></select>",
+            "target": [
+              "label:nth-child(3) > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>Совместимость с перелётом<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select></label>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(6) > label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select>",
+                    "target": [
+                      "select[aria-describedby=\"event-fit-filter-hint\"]"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select aria-describedby=\"event-fit-filter-hint\"><option value=\"all\" selected=\"\">Все события</option><option value=\"possible\">Может подойти к перелёту</option></select>",
+            "target": [
+              "select[aria-describedby=\"event-fit-filter-hint\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p id=\"event-fit-filter-hint\" class=\"MXbyZW_modeHint\">Этот режим скрывает только явные конфликты с перелётом. События с малым запасом или неполными данными остаются видимыми. Формальности в аэропорту и дорогу до места нужно проверить; посещение не гарантируется.</p>",
+            "target": [
+              "#event-fit-filter-hint"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<label>События по дням<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select></label>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(8) > label"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select>",
+                    "target": [
+                      ".MXbyZW_dayNavigation:nth-child(8) > label > select"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select><option value=\"\">Все дни</option><option value=\"2026-12-08\">вт, 8 дек.</option><option value=\"2026-12-09\">ср, 9 дек.</option><option value=\"2026-12-10\">чт, 10 дек.</option></select>",
+            "target": [
+              ".MXbyZW_dayNavigation:nth-child(8) > label > select"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "messageKey": "nonBmp"
+                },
+                "relatedNodes": [],
+                "impact": "serious",
+                "message": "Element content contains only non-text characters"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<button type=\"button\" class=\"MXbyZW_retry\" aria-label=\"Следующий день\">→</button>",
+            "target": [
+              "button[aria-label=\"Следующий день\"]"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content contains only non-text characters"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.4pt (15.2px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p>Показано событий: <strong>2</strong> · Все дни · Местное время</p>",
+            "target": [
+              ".MXbyZW_feedback > p"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "11.4pt (15.2px)",
+                  "fontWeight": "bold",
+                  "messageKey": "shortTextContent",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element content is too short to determine if it is actual text content"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<strong>2</strong>",
+            "target": [
+              ".MXbyZW_feedback > p > strong"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element content is too short to determine if it is actual text content"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.2pt (13.6px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Совместимость с расписанием перелёта</summary>",
+            "target": [
+              ".MXbyZW_fitPolicy > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.5pt (14px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"muted\">Источник: Ticketmaster · Время проверки неизвестно</p>",
+            "target": [
+              "#trip-events > .muted"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_hint\">Данные каталога, а не наличие в реальном времени. Статус продажи и цена от не гарантируют билетов; уточните у продавца. Неактивные или неизвестные продажи нельзя добавить из списка в план.</p>",
+            "target": [
+              ".MXbyZW_hint"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "10.8pt (14.4px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<summary>Перед покупкой</summary>",
+            "target": [
+              ".MXbyZW_details > summary"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "9.6pt (12.8px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"MXbyZW_disclosure\">Партнёрские ссылки: HopTrip может получить комиссию от покупки. Наличие билетов и правила входа уточняйте у продавца.</p>",
+            "target": [
+              ".MXbyZW_disclosure"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgGradient",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<section id=\"trip-events\" tabindex=\"-1\" class=\"MXbyZW_section\" aria-labelledby=\"trip-events-title\">",
+                    "target": [
+                      "#trip-events"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background gradient"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<p class=\"partner-context-limitation\">Изменения дат и состава группы в плане автоматически не передаются по этой ссылке. Проверьте дату, участников и цену у партнёра.</p>",
+            "target": [
+              "#trip-events > .partner-context-limitation"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+          },
+          {
+            "any": [
+              {
+                "id": "color-contrast",
+                "data": {
+                  "contrastRatio": 0,
+                  "fontSize": "12.0pt (16px)",
+                  "fontWeight": "normal",
+                  "messageKey": "bgImage",
+                  "expectedContrastRatio": "4.5:1"
+                },
+                "relatedNodes": [
+                  {
+                    "html": "<select id=\"budget-hotel-basis\"><option value=\"night\" selected=\"\">За ночь — вся группа</option><option value=\"stay\">За всё пребывание — вся группа</option></select>",
+                    "target": [
+                      "#budget-hotel-basis"
+                    ]
+                  }
+                ],
+                "impact": "serious",
+                "message": "Element's background color could not be determined due to a background image"
+              }
+            ],
+            "all": [],
+            "none": [],
+            "impact": "serious",
+            "html": "<select id=\"budget-hotel-basis\"><option value=\"night\" selected=\"\">За ночь — вся группа</option><option value=\"stay\">За всё пребывание — вся группа</option></select>",
+            "target": [
+              "#budget-hotel-basis"
+            ],
+            "failureSummary": "Fix any of the following:\n  Element's background color could not be determined due to a background image"
+          }
+        ]
+      }
+    ],
+    "missing": []
+  },
+  {
+    "state": "saved",
+    "violations": [],
+    "incomplete": [],
+    "missing": []
+  }
+]

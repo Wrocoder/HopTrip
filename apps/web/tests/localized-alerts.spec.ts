@@ -56,6 +56,8 @@ test("localized signup, confirmation and management preserve contracts and priva
   await expect(page.getByLabel(t("Częstotliwość"))).toHaveValue("daily");
   await expect(page.getByLabel(t("Budżet na lot na osobę (PLN)"))).toHaveValue("220");
   expect((await new AxeBuilder({page}).include(".alert-panel").analyze()).violations).toEqual([]);
+  for(const width of [320,375,390,768,1440]){await page.setViewportSize({width,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);}
+  await page.setViewportSize({width:320,height:900});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.locator(".alert-panel").screenshot({path:testInfo.outputPath(`alerts-${locale}.png`)});
   await page.getByRole("button",{name:t("Wyłącz alert")}).click();

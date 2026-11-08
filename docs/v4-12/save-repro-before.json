@@ -1,0 +1,171 @@
+npm warn Unknown env config "min-release-age". This will stop working in the next major version of npm.
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.production.config.ts",
+      "tests/product-analytics.spec.ts",
+      "--project=desktop",
+      "--grep",
+      "payloads in pl",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.production.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "product-analytics.spec.ts",
+      "file": "product-analytics.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "product taxonomy follows real actions without private payloads in pl",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16745,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at flush (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts:47:145)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts:76:8",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts",
+                      "column": 145,
+                      "line": 47
+                    },
+                    "snippet": "  45 |   // Sample both counters together instead of freezing the expected request count.\n  46 |   // Save opens a new document; its keepalive response may not remain observable.\n> 47 |   await expect.poll(()=>events.length>0&&statuses.filter(s=>s.name!=='TRIP_SAVE').length===events.filter(e=>e.event_name!=='TRIP_SAVE').length).toBe(true);\n     |                                                                                                                                                 ^\n  48 |   expect(statuses.every(s=>s.status===202)).toBe(true);\n  49 |  };\n  50 |  await page.goto(localizedHref('/deals?origin=WRO&budget=300&sort=price',locale));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts",
+                        "column": 145,
+                        "line": 47
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  45 |   // Sample both counters together instead of freezing the expected request count.\n  46 |   // Save opens a new document; its keepalive response may not remain observable.\n> 47 |   await expect.poll(()=>events.length>0&&statuses.filter(s=>s.name!=='TRIP_SAVE').length===events.filter(e=>e.event_name!=='TRIP_SAVE').length).toBe(true);\n     |                                                                                                                                                 ^\n  48 |   expect(statuses.every(s=>s.status===202)).toBe(true);\n  49 |  };\n  50 |  await page.goto(localizedHref('/deals?origin=WRO&budget=300&sort=price',locale));\n    at flush (C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts:47:145)\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts:76:8"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:33:54.293Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\test-results\\product-analytics-product--35058-hout-private-payloads-in-pl-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\test-results\\product-analytics-product--35058-hout-private-payloads-in-pl-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\product-analytics.spec.ts",
+                    "column": 145,
+                    "line": 47
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2e6bd5f46920ebfd3647-2b174b2adae457aaf3b3",
+          "file": "product-analytics.spec.ts",
+          "line": 40,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T17:33:48.121Z",
+    "duration": 24951.186,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

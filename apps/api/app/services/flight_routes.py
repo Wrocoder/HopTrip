@@ -33,10 +33,24 @@ def instant(value: object) -> datetime | None:
 
 
 def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]] | None:
+    return _validated_segments(offer, evidence, allow_airport_changes=False)
+
+
+def connection_warning_segments(offer: TravelOffer, evidence: object) -> list[list[dict]] | None:
+    """Same-ticket schedule for warnings only; a surface transfer is NOT validated."""
+    if offer.source != "travelpayouts_data" or offer.product_type != "FLIGHT":
+        return None
+    return _validated_segments(offer, evidence, allow_airport_changes=True)
+
+
+def _validated_segments(offer: TravelOffer, evidence: object, *,
+                        allow_airport_changes: bool) -> list[list[dict]] | None:
     if (offer.departure_precision != "TIME" or not isinstance(evidence, dict)
             or evidence.get("source") != "travelpayouts_graphql"):
         return None
     payload = offer.raw_payload or {}
+    if not isinstance(payload, dict):
+        return None
     key = ticket_key(payload.get("link"))
     if not key or evidence.get("ticket_key") != key or offer.return_at is None:
         return None
@@ -81,7 +95,8 @@ def validated_segments(offer: TravelOffer, evidence: object) -> list[list[dict]]
                 return None
             # We have flight legs, not evidence of a surface transfer between airports.
             if (leg["origin"] == leg["destination"]
-                    or (last_airport is not None and leg["origin"] != last_airport)):
+                    or (not allow_airport_changes and last_airport is not None
+                        and leg["origin"] != last_airport)):
                 return None
             departure, arrival = instant(leg.get("departure_at")), instant(leg.get("arrival_at"))
             if (not departure or not arrival or arrival <= departure

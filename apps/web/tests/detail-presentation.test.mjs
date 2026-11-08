@@ -7,6 +7,7 @@ import ts from 'typescript';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {tripText} from '../src/lib/i18n/trip-copy.ts';
+import {tripSectionCopy} from '../src/lib/i18n/trip-section-copy.ts';
 import {qualityNotice} from '../src/lib/flight-quality.ts';
 import {qualityText,qualityReasonText} from '../src/lib/i18n/quality-copy.ts';
 
@@ -17,18 +18,17 @@ function component(file,imports){
  vm.runInThisContext(`(function(require,module,exports){${code}\n})`)(name=>imports[name]??require(name),loaded,loaded.exports);
  return loaded.exports;
 }
-const {TripNavigation}=component('../src/app/components/trip-navigation.tsx',{'../../lib/i18n/trip-copy':{tripText}});
+const {TripNavigation}=component('../src/app/components/trip-navigation.tsx',{'../../lib/i18n/trip-copy':{tripText},'../../lib/i18n/trip-section-copy':{tripSectionCopy}});
 const {FlightQualityNotice}=component('../src/app/components/flight-quality.tsx',{
  '../../lib/flight-quality':{qualityNotice},'../../lib/i18n/quality-copy':{qualityText,qualityReasonText},
 });
 const render=(type,props)=>renderToStaticMarkup(React.createElement(type,props));
 
-test('detail navigation adds only enabled destinations and keeps shared-plan defaults',()=>{
+test('detail and saved-plan navigation expose the same four localized sections',()=>{
  for(const locale of ['pl','en','ru','uk']){
-  const full=render(TripNavigation,{locale,hasBooking:true,hasActivities:true,hasEvents:true,hasMethodology:true});
-  assert.deepEqual([...full.matchAll(/href="([^"]+)"/g)].map(m=>m[1]),['#trip-flight','#trip-booking','#accommodation','#destination-activities','#trip-events','#calculator','#trip-save','#score']);
-  const shared=render(TripNavigation,{locale,hasAccommodation:false});
-  assert.deepEqual([...shared.matchAll(/href="([^"]+)"/g)].map(m=>m[1]),['#trip-flight','#calculator','#trip-save']);
+  const full=render(TripNavigation,{locale});
+  assert.deepEqual([...full.matchAll(/href="([^"]+)"/g)].map(m=>m[1]),['#trip-flight','#trip-stay','#calculator','#trip-save']);
+  for(const key of ['flight','stay','budget','save'])assert.ok(full.includes(tripSectionCopy[locale][key]));
  }
 });
 

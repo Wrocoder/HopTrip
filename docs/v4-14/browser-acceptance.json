@@ -1,0 +1,1922 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.production.config.ts",
+      "tests/usability-guidance.spec.ts",
+      "tests/weekend-recommendations.spec.ts",
+      "tests/trip-quality.spec.ts",
+      "tests/budget-quick.spec.ts",
+      "tests/plan-lifecycle.spec.ts",
+      "tests/trip-sections.spec.ts",
+      "--grep",
+      "empty saved guidance|real API collections|recommended order, pagination|quick input, honest totals|Save opens an ID editor|changed, missing|four sections retain",
+      "--output=../../.cache/v4-14-acceptance-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.production.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-14-acceptance-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-14-acceptance-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "budget-quick.spec.ts",
+      "file": "budget-quick.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12865,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:26:37.395Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-c99cf2e419c49058a9e7",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "en: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:26:50.585Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-cf44340188a2240a7f1c",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "ru: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12948,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:27:00.87Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-834e8d1a24bb65bfcafd",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "uk: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12263,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:27:13.83Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-d435103c63ba5a7fec86",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "pl: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11820,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:30:02.254Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-e323f0201765b3a8189e",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "en: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10773,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:30:14.381Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-03f8e9d984703b0c63e0",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "ru: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11857,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:30:25.168Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-26403082c2723ee22ee5",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        },
+        {
+          "title": "uk: quick input, honest totals and independent profile comparison preserve the plan",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11050,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:30:37.036Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "20e0d445767e5ae6b18d-43afac4671508b3321d2",
+          "file": "budget-quick.spec.ts",
+          "line": 12,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "plan-lifecycle.spec.ts",
+      "file": "plan-lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:27:26.181Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-aef9f219b403772c4247",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14353,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:27:41.563Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-d9070e9378b53c126388",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14775,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:27:55.94Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-ba83a7ee41cbeaaf5509",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13530,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:10.731Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-b0085ea0883c6edecce9",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "changed, missing, unavailable and expired offers retain amounts and can still be updated",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4001,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:24.277Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-1b95c4f3b56a8dfcd4f3",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "pl: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17593,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:30:48.144Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-b1153ed47deec8fb0700",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "en: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18613,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:31:05.755Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-ec84494f0e923fd068b8",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "ru: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18021,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:31:24.396Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-0341db77c9ae3c12d3ae",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "uk: Save opens an ID editor; Update, return, Duplicate, Delete, Undo and independent Share preserve the lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18781,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:31:42.439Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-5011d2e2db58ebe790e4",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 21,
+          "column": 56
+        },
+        {
+          "title": "changed, missing, unavailable and expired offers retain amounts and can still be updated",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3799,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:01.244Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b4721dcd123bdca3401-aa03cfe9271aad10f998",
+          "file": "plan-lifecycle.spec.ts",
+          "line": 63,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "trip-quality.spec.ts",
+      "file": "trip-quality.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5732,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:28.314Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-9d7a8dea8aa3a80ce5df",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "en: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3915,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:34.068Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-963b88b4f9e3a5b337c7",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "ru: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5418,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:38Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-c6a250848d8d4a281c68",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "uk: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:43.437Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-5c09574d2e1e2408995c",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "pl: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3905,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:05.072Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-0311b0b4b6b9d7b896dc",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "en: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3572,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:08.995Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-acd9370b7416c0bc2b51",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "ru: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3419,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:12.585Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-221c3ea36dd137d565ed",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "uk: recommended order, pagination, history and independent model",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3441,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:16.016Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "010a9436c9159fa7e540-0a22f3f5ce934ab81744",
+          "file": "trip-quality.spec.ts",
+          "line": 16,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "trip-sections.spec.ts",
+      "file": "trip-sections.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8544,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:48.805Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-917956740319f7930ef1",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "en: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10245,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:28:57.364Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-64e71ada05707e180f16",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "ru: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:07.626Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-14f188590cce75429f6b",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "uk: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10867,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:17.814Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-2a470a735d46bd4b2157",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "pl: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8323,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:19.482Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-504b0c50646b47822309",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "en: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7913,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:27.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-8c885b4a5d9da977aa3f",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "ru: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8021,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:35.742Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-a9fae62eb8ce64c361ae",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        },
+        {
+          "title": "uk: four sections retain anchors, shared state and usable unavailable plans",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7350,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:43.778Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fd222f64becf7c54c5d0-c07a40015dd23585d7ae",
+          "file": "trip-sections.spec.ts",
+          "line": 16,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "usability-guidance.spec.ts",
+      "file": "usability-guidance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6565,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:28.708Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-pl-empt-efa66--to-the-actual-save-section-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-pl-empt-efa66--to-the-actual-save-section-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-5b9b1254493ae402b89f",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "en: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6504,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:36.997Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-en-empt-829c2--to-the-actual-save-section-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-en-empt-829c2--to-the-actual-save-section-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-f5a200368d0a4c2cc023",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "ru: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6386,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:44.734Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-ru-empt-36fc9--to-the-actual-save-section-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-ru-empt-36fc9--to-the-actual-save-section-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-502a953993b2c4061b71",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "uk: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6388,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const section=page.locator('#trip-save');await expect(section.getByRole('heading',{name:tripSectionCopy[locale].save,exact:true})).toBeVisible();\n     |                                                                                                                                     ^\n  21 |  await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();\n  22 |  await expect(page).toHaveURL(/\\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);\n  23 |  const local=page.url();await page.goto(localizedHref('/saved',locale));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:52.363Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-uk-empt-8c2e8--to-the-actual-save-section-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-uk-empt-8c2e8--to-the-actual-save-section-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-0e96b2691d287dadf0b7",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "pl: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6126,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Zapisz i udostępnij', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:51.147Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-pl-empt-efa66--to-the-actual-save-section-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-pl-empt-efa66--to-the-actual-save-section-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-4f36121de809187a9140",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "en: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6579,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Save and share', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:32:58.898Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-en-empt-829c2--to-the-actual-save-section-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-en-empt-829c2--to-the-actual-save-section-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-7093b6ad79ab1402b059",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "ru: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6637,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Сохранить и поделиться', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:33:06.604Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-ru-empt-36fc9--to-the-actual-save-section-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-ru-empt-36fc9--to-the-actual-save-section-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-597c4fc291701740277c",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        },
+        {
+          "title": "uk: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6461,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 133,
+                      "line": 20
+                    },
+                    "snippet": "  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 133,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#trip-save').getByRole('heading', { name: 'Зберегти й поділитися', exact: true })\u001b[22m\n\n\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n  19 |  await page.locator('.deal-card-link').first().click();\n> 20 |  const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});\n     |                                                                                                                     ^\n  21 |  await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();\n  22 |  const section=page.locator('#trip-save');await expect(section).toBeFocused();\n  23 |  await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:20:133"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:33:14.465Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-uk-empt-8c2e8--to-the-actual-save-section-mobile\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-acceptance-results\\usability-guidance-uk-empt-8c2e8--to-the-actual-save-section-mobile\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 133,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-62d6bbe2ce435a3cde3e",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "weekend-recommendations.spec.ts",
+      "file": "weekend-recommendations.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real API collections exclude unsuitable stays and leave; general search retains every example",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1478,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:29:59.787Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a035363a3e6bdd3a4643-0ded07cde40fcd9f530e",
+          "file": "weekend-recommendations.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "real API collections exclude unsuitable stays and leave; general search retains every example",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1634,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:33:22.025Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a035363a3e6bdd3a4643-fa289adaf7c88e13f0c5",
+          "file": "weekend-recommendations.spec.ts",
+          "line": 13,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T18:26:32.903Z",
+    "duration": 412568.788,
+    "expected": 36,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

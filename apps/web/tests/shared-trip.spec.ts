@@ -66,8 +66,8 @@ test("sharing remains available when browser storage and clipboard are blocked",
  });
  await page.goto("/deals/browser-deal#calculator");
  await page.getByRole("button",{name:"Zapisz wyjazd",exact:true}).click();
- await expect(page.locator("#calculator")).toContainText("Nie udało się zapisać wyjazdu");
+ await expect(page.locator("#trip-save")).toContainText("Nie udało się zapisać wyjazdu");
  await page.getByRole("button",{name:"Udostępnij",exact:true}).click();
  await expect(page.locator("#trip-share-link")).toHaveValue(/\/trip#plan=/);
- await expect(page.locator("#calculator")).toContainText("Skopiuj link z pola");
+ await expect(page.locator("#trip-save")).toContainText("Skopiuj link z pola");
 });

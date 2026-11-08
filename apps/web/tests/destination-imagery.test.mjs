@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import sharp from 'sharp';
 import {destinationImage,destinationImages,imageryCopy} from '../src/lib/destination-imagery.ts';
+import {articlePhotoCaption} from '../src/lib/article-photo-captions.ts';
+import photos from '../src/lib/article-photo-data.json' with {type:'json'};
+import catalog from '../../api/app/data/destinations.json' with {type:'json'};
 
 test('editorial photo allowlist fails closed for unknown/prototype/path values and has complete localized descriptions',()=>{
  for(const slug of ['unknown-city','flight','luggage','__proto__','constructor','../../rome','ROME',''])assert.equal(destinationImage(slug),undefined);
@@ -23,6 +26,7 @@ test('shipped photographs decode with reserved aspect ratio, bounded bytes and c
   const file=readFileSync(new URL(`../public${image.src}`,import.meta.url));
   const meta=await sharp(file).metadata();
   assert.equal(meta.format,'webp');assert.equal(meta.width,reused?1200:960);assert.equal(meta.height,reused?750:600);
+  assert.equal(image.width,meta.width);assert.equal(image.height,meta.height);
   assert.ok(file.length<=(reused?360000:110000));bytes+=file.length;
   for(const value of [image.title,image.author,image.licenseUrl])assert.ok(credits.includes(value));
  }
@@ -37,4 +41,18 @@ test('collection destinations from the reported screenshot reuse the reviewed ci
   assert.equal(image.shareAlike,image.license.includes('BY-SA'));
  }
  assert.ok(destinationImage('paris').attribution.includes('Jorge Royan'));
+});
+
+test('every reviewed city photo is reachable from its exact catalog destination, including city-specific country article covers',()=>{
+ const aliases={bergen:'norway',reykjavik:'iceland'};
+ const known=new Set(catalog.destinations.map(destination=>destination.slug));
+ for(const key of ['wroclaw','warsaw','krakow','gdansk','katowice','poznan','bergen','reykjavik']){
+  assert.ok(known.has(key));
+  const photoKey=aliases[key]??key,image=destinationImage(key);
+  assert.ok(image,`${key}: reviewed city photo is missing from the registry`);
+  for(const field of ['src','author','source','license','licenseUrl','attribution','shareAlike'])assert.equal(image[field],photos[photoKey][field]);
+  for(const locale of ['pl','en','ru','uk'])assert.equal(image.alt[locale],articlePhotoCaption(photoKey,locale));
+ }
+ // Country-themed and glacier photographs must not silently illustrate arbitrary cities.
+ for(const slug of ['norway','iceland','tromso','aalesund','nigardsbreen','solheimajokull','berlin'])assert.equal(destinationImage(slug),undefined);
 });

@@ -19,6 +19,7 @@ import {stateText} from '../../lib/i18n/state-copy';
 import {AirportContext} from '../components/airport-context';
 import {weekendCopy} from '../../lib/weekend';
 import {destinationTimeCopy} from '../../lib/destination-time';
+import {tripQualityCopy} from '../../lib/trip-quality';
 export const dynamic="force-dynamic";
 type Props={searchParams:Promise<Record<string,string|string[]|undefined>>;path?:string;locale?:Locale};
 export async function generateMetadata({searchParams,path="/deals",locale="pl"}:Props) {
@@ -50,7 +51,9 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
   if(offers.status==="fulfilled"){deals=offers.value.items;total=offers.value.total;}
   else {
     const e=offers.reason;
-    error=e instanceof ApiError && e.code==='DESTINATION_TIME_QUERY_TOO_BROAD' ? destinationTimeCopy[locale].broad :
+    error=e instanceof ApiError && e.code==='TRIP_QUALITY_QUERY_TOO_BROAD' ? tripQualityCopy[locale].broad :
+      e instanceof ApiError && e.code==='TRIP_QUALITY_UNSUPPORTED' ? tripQualityCopy[locale].unsupported :
+      e instanceof ApiError && e.code==='DESTINATION_TIME_QUERY_TOO_BROAD' ? destinationTimeCopy[locale].broad :
       e instanceof ApiError && e.code==='DESTINATION_TIME_UNSUPPORTED' ? destinationTimeCopy[locale].unsupported :
       e instanceof ApiError && e.code==='WEEKEND_QUERY_TOO_BROAD' ? weekendCopy[locale].broad :
       e instanceof ApiError && ['CONFLICTING_WEEKEND_FILTERS','WORK_HOURS_REQUIRE_NO_LEAVE','INVALID_WORK_HOURS'].includes(e.code??'') ? weekendCopy[locale].invalid :
@@ -61,7 +64,7 @@ async function DealResultsPage({searchParams,path="/deals",locale="pl"}:Props) {
       e instanceof ApiError && [404,422].includes(e.status) ? pl.invalid : pl.error;
   }
   const searchError=offers.status==="rejected" && offers.reason instanceof ApiError && [404,422].includes(offers.reason.status) ? "invalid_filters" as const : "unavailable" as const;
-  const temporary=offers.status==='rejected' && offers.reason instanceof ApiError && [502,503,504].includes(offers.reason.status)&&offers.reason.code!=='DESTINATION_TIME_UNSUPPORTED';
+  const temporary=offers.status==='rejected' && offers.reason instanceof ApiError && [502,503,504].includes(offers.reason.status)&&!['DESTINATION_TIME_UNSUPPORTED','TRIP_QUALITY_UNSUPPORTED'].includes(offers.reason.code??'');
   const recovery=searchRecovery(filters).slice(0,3);
   const offset=Number(filters.offset ?? 0);
   function pageLink(next:number) {

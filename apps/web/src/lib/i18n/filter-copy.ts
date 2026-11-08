@@ -1,6 +1,8 @@
 import type {Locale} from "./config.ts";
 
 export const filterCopy:Record<string,readonly [string,string,string]>={
+ "Polecane":["Recommended","Рекомендуемые","Рекомендовані"],
+ "Według modelu wygody podróży, malejąco: dane, czas lotów i pobytu, przesiadki, lotniska i urlop. Nieznane dane nie dostają punktów. Bez oceny na końcu. Remis: cena, data, stała kolejność. Cena historyczna oceniana osobno.":["By modelled trip convenience, highest first: data, travel and stay time, connections, airports and leave. Unknown data earn no points. Unscored offers follow. Ties: price, date, stable order. Historical price is assessed separately.","По модели удобства поездки, по убыванию: данные, время в пути и на месте, пересадки, аэропорты и отпуск. Неизвестные данные не получают баллов. Без оценки — в конце. При равенстве: цена, дата, постоянный порядок. Историческая цена оценивается отдельно.","За моделлю зручності подорожі, за спаданням: дані, час у дорозі та на місці, пересадки, аеропорти й відпустка. Невідомі дані не отримують балів. Без оцінки — наприкінці. За рівності: ціна, дата, сталий порядок. Історична ціна оцінюється окремо."],
  "Rodzaj lotu":["Flight type","Тип перелёта","Тип перельоту"],
  "Najwięcej czasu na miejscu":["Most time at destination","Больше времени на месте","Більше часу на місці"],
  "Według znanego czasu między przylotem a odlotem powrotnym, malejąco. To nie czas w mieście. Remis: cena, data, stała kolejność. Nieznane i szacowane na końcu według ceny.":["Known time between arrival and return departure, longest first. City time is unknown. Ties: price, date, stable order. Unknown and estimated intervals follow, ordered by price.","По известному времени между прилётом и обратным вылетом, сначала больше. Время в городе неизвестно. При равенстве: цена, дата, постоянный порядок. Неизвестные и расчётные интервалы в конце по цене.","За відомим часом між прильотом і зворотним вильотом, спочатку більше. Час у місті невідомий. За рівності: ціна, дата, сталий порядок. Невідомі й розрахункові інтервали наприкінці за ціною."],
@@ -66,7 +68,7 @@ export const filterCopy:Record<string,readonly [string,string,string]>={
  "Dowolne lotnisko":["Any airport","Любой аэропорт","Будь-який аеропорт"],
  "Lotniska wylotu":["Departure airports","Аэропорты вылета","Аеропорти вильоту"],
  "Podpowiedzi są niedostępne. Wpisz kod lotniska, np. WRO.":["Suggestions are unavailable. Enter an airport code, e.g. WRO.","Подсказки недоступны. Введите код аэропорта, например WRO.","Підказки недоступні. Введіть код аеропорту, наприклад WRO."],
- "Miasto lub kod IATA. Puste pole: dowolne.":["City or IATA code. Leave empty for any.","Город или код IATA. Пустое поле: любой вариант.","Місто або код IATA. Порожнє поле: будь-який варіант."],
+ "Miasto lub kod IATA. Puste pole: dowolne.":["City or IATA code. Leave empty for any.","Город или код IATA. Пустое поле: любой вариант.","Місто чи код IATA. Порожньо — без обмежень."],
  "Mediolan lub MIL":["Milan or MIL","Милан или MIL","Мілан або MIL"],
  "Kierunki podróży":["Destinations","Направления поездок","Напрямки поїздок"],
  "Podpowiedzi są niedostępne. Wpisz nazwę lub identyfikator kierunku, np. milan.":["Suggestions are unavailable. Enter a destination name or ID, e.g. milan.","Подсказки недоступны. Введите название или идентификатор направления, например milan.","Підказки недоступні. Введіть назву або ідентифікатор напрямку, наприклад milan."],

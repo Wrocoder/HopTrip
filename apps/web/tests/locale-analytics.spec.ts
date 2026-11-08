@@ -6,8 +6,8 @@ import {shell} from '../src/lib/i18n/shell';
 type Event={event_name:string;anonymous_session_id:string;metadata:{locale:string;page_type:string;campaign?:string};source?:string};
 test.use({locale:'de-DE'});
 test.skip(process.env.HOPTRIP_H3_PRODUCTION!=='1','Requires an isolated production fixture');
-test.beforeAll(async({request})=>{
- const runner=readFileSync('playwright.config.ts','utf8');expect(runner).toContain('command:"npm run start --');expect(runner).toContain('NODE_ENV:"production"');expect(runner).not.toContain('reuseExistingServer:true');
+test.beforeAll(async({request},info)=>{
+ const runner=readFileSync(info.config.configFile!,'utf8');expect(runner).toContain('npm run start --');expect(runner).toContain("NODE_ENV:'production'");expect(runner).not.toContain('reuseExistingServer:true');
  expect(await (await request.get('/saved')).text()).toContain(readFileSync('.next/BUILD_ID','utf8').trim());
 });
 async function capture(page:Page,analytics=true){
@@ -23,7 +23,7 @@ test('wire language follows rendered routes and the language switcher, independe
  const {events,flush}=await capture(page);
  for(const [index,locale] of (['pl','en','ru','uk'] as const).entries()){
   await page.goto(localizedHref('/saved?utm_source=newsletter&utm_campaign=test&private=synthetic-secret',locale));await expect(page.locator('html')).toHaveAttribute('lang',locale);await expect.poll(()=>events.length).toBe(index+1);await flush();
-  expect(events[index].metadata).toEqual({page_type:'saved',campaign:'test',locale});expect(events[index].source).toBe('newsletter');
+  expect(events[index].metadata).toEqual({page_type:'saved',campaign:'test',locale,viewport:expect.stringMatching(/^(small|medium|large)$/)});expect(events[index].source).toBe('newsletter');
  }
  await page.locator('.language-switcher a[lang="en"]').click();await expect(page.locator('html')).toHaveAttribute('lang','en');await expect.poll(()=>events.length).toBe(5);await flush();
  expect(events[4].metadata.locale).toBe('en');expect(await page.evaluate(()=>navigator.language)).toBe('de-DE');

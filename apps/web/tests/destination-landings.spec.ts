@@ -35,9 +35,12 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`destination remains use
  // Native href navigation is verified without script in the separate test below.
  expect((await request.post(`${api}/__test__/catalog-state?unavailable=true`)).ok()).toBe(true);
  await page.goto(localizedHref('/destinations/milan',locale));
- await expect(page.locator('[data-state="error"] h1')).toHaveCount(1);
- await expect(page.locator('[data-state="empty"],[data-destination-attractions]')).toHaveCount(0);
- await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/^noindex/);
+ await expect(page.locator('[aria-labelledby="destination-flights-heading"] [data-state="error"]')).toBeVisible();
+ await expect(page.locator('main h1')).toHaveCount(1);
+ await expect(page.locator('[data-state="empty"]')).toHaveCount(0);
+ await expect(page.locator('[data-destination-attractions]')).toBeVisible();
+ await expect(page.locator('[data-destination-arrival]')).toHaveAttribute('href',localizedHref('/info/milan-airports',locale));
+ await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content','index, follow');
  expect((await request.post(`${api}/__test__/catalog-state?unavailable=false`)).ok()).toBe(true);
  await page.goto(localizedHref('/destinations/milan',locale));await expect(page.locator('[data-state="empty"]')).toBeVisible();
  expect(errors).toEqual([]);

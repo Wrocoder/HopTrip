@@ -1,0 +1,63 @@
+{
+  "task": "V4-01",
+  "date": "2026-11-07",
+  "status": "DONE",
+  "backend": {
+    "mypy": {
+      "source_files": 122,
+      "status": "PASS"
+    },
+    "final_targeted": {
+      "new_cases": 22,
+      "passed": 76
+    },
+    "ruff": "PASS",
+    "full": {
+      "skipped_postgres": 18,
+      "passed": 1258
+    }
+  },
+  "web": {
+    "production_build_and_types": "PASS",
+    "browser_short_final": {
+      "startTime": "2026-11-07T20:13:49.692Z",
+      "duration": 20816.458,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "unit_passed": 343,
+    "browser_initial": {
+      "total": 54,
+      "passed": 52,
+      "failed": 2,
+      "failure": "one-offer fixture selected a leave-requiring calendar offer"
+    },
+    "eslint": "PASS",
+    "accounting": "20 unchanged legacy weekend/catalog contract cases from initial run, plus 60 followup cases using latest short-trip rerun for its 2 formerly failing cases",
+    "browser": "Chrome desktop/mobile; 4 locales; 320px; scoped axe; no-JS home links",
+    "browser_followup": {
+      "startTime": "2026-11-07T20:07:17.763Z",
+      "duration": 353636.603,
+      "expected": 58,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "latest_distinct_cases_passed": 80
+  },
+  "scope": {
+    "production_changes": false,
+    "new_dependencies": false,
+    "migrations": false,
+    "notifications_sent": false
+  },
+  "limits": [
+    "No PostgreSQL run",
+    "No full browser inventory/WebKit",
+    "No field CWV/Lighthouse in V4-01",
+    "No live provider or delivery validation",
+    "Recommendations may be empty when reliable schedules are missing"
+  ]
+}

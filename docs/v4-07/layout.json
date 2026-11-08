@@ -1,0 +1,227 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "first-screen-layout.spec.ts",
+      "mobile-workflow.spec.ts",
+      "--project=desktop",
+      "--grep",
+      "pl: initial|320px.*ru:",
+      "--output=../../.cache/v4-07-layout-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-07-layout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-07-layout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "first-screen-layout.spec.ts",
+      "file": "first-screen-layout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: initial price and seller CTA stay usable across target widths with all filter explanations intact",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 58438,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T10:14:44.014Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb21tYW5kIjoibnBtIHJ1biBkZXYgLS0gLS1ob3N0bmFtZSAxMjcuMC4wLjEgLS1wb3J0IDMxMDAiLCJub2RlRW52IjpudWxsLCJwcm9kdWN0aW9uUmVxdWlyZWQiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ea7f9453204af6930eb9-a3343dd6cbb06bc85c0f",
+          "file": "first-screen-layout.spec.ts",
+          "line": 22,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "mobile-workflow.spec.ts",
+      "file": "mobile-workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "320px",
+          "file": "mobile-workflow.spec.ts",
+          "line": 21,
+          "column": 48,
+          "specs": [
+            {
+              "title": "ru: mobile discovery, planning and return context",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 22118,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/sort=price/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3100/ru/deals?origin=WRO&destination=barcelona&departure_from=2026-12-08&departure_to=2026-12-08&budget=500\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    11 × locator resolved to <html lang=\"ru\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__dmjvwW__variable headingfont_80a9613f-module__qB8mla__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3100/ru/deals?origin=WRO&destination=barcelona&departure_from=2026-12-08&departure_to=2026-12-08&budget=500\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/sort=price/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3100/ru/deals?origin=WRO&destination=barcelona&departure_from=2026-12-08&departure_to=2026-12-08&budget=500\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    11 × locator resolved to <html lang=\"ru\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__dmjvwW__variable headingfont_80a9613f-module__qB8mla__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3100/ru/deals?origin=WRO&destination=barcelona&departure_from=2026-12-08&departure_to=2026-12-08&budget=500\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts:56:103",
+                        "location": {
+                          "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts",
+                          "column": 103,
+                          "line": 56
+                        },
+                        "snippet": "  54 |   const selected={origin:'WRO',destination:'barcelona',departure_from:start,departure_to:start,budget:'500'};\n  55 |   for(const [key,value] of Object.entries(selected))expect(new URL(page.url()).searchParams.get(key)).toBe(value);\n> 56 |   const sort=page.locator('.sort-control select');await sort.selectOption('price');await expect(page).toHaveURL(/sort=price/);\n     |                                                                                                       ^\n  57 |   const applied=new URL(page.url());\n  58 |   for(const field of await page.locator('.filters input:not([type=\"hidden\"]),.filters select').all())if(await field.isVisible())await fit(field);\n  59 |   await overflow('catalog');"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts",
+                            "column": 103,
+                            "line": 56
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/sort=price/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3100/ru/deals?origin=WRO&destination=barcelona&departure_from=2026-12-08&departure_to=2026-12-08&budget=500\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    11 × locator resolved to <html lang=\"ru\" data-scroll-behavior=\"smooth\" class=\"bodyfont_b28f32cc-module__dmjvwW__variable headingfont_80a9613f-module__qB8mla__variable\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"http://127.0.0.1:3100/ru/deals?origin=WRO&destination=barcelona&departure_from=2026-12-08&departure_to=2026-12-08&budget=500\"\u001b[22m\n\n\n  54 |   const selected={origin:'WRO',destination:'barcelona',departure_from:start,departure_to:start,budget:'500'};\n  55 |   for(const [key,value] of Object.entries(selected))expect(new URL(page.url()).searchParams.get(key)).toBe(value);\n> 56 |   const sort=page.locator('.sort-control select');await sort.selectOption('price');await expect(page).toHaveURL(/sort=price/);\n     |                                                                                                       ^\n  57 |   const applied=new URL(page.url());\n  58 |   for(const field of await page.locator('.filters input:not([type=\"hidden\"]),.filters select').all())if(await field.isVisible())await fit(field);\n  59 |   await overflow('catalog');\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts:56:103"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-08T10:15:43.208Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-07-layout-results\\mobile-workflow-320px-ru-m-03260-planning-and-return-context-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-07-layout-results\\mobile-workflow-320px-ru-m-03260-planning-and-return-context-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts",
+                        "column": 103,
+                        "line": 56
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3a2bb2148a68a8e32722-97583d3e04bc23f7401b",
+              "file": "mobile-workflow.spec.ts",
+              "line": 23,
+              "column": 57
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T10:14:33.744Z",
+    "duration": 94970.605,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

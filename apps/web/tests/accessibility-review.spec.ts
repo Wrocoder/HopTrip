@@ -5,6 +5,7 @@ import {localizedHref} from '../src/lib/i18n/routing';
 import {scoreText} from '../src/lib/i18n/score-copy';
 import {plannedEventsCopy} from '../src/lib/i18n/planned-events-copy';
 import {catalogText} from '../src/lib/i18n/catalog-copy';
+import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
 
 async function namedControls(scope:Locator) {
  const targets=[];
@@ -112,7 +113,10 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`accessible core states 
  await page.emulateMedia({forcedColors:'active'});await page.locator('#budget-flight').focus();await expect(page.locator('#budget-flight')).toHaveCSS('outline-width','3px');await expect(page.locator('#budget-flight')).toHaveCSS('box-shadow','none');
  await page.emulateMedia({forcedColors:'none'});await scan('after-removal');
  if(locale==='pl')await page.screenshot({path:info.outputPath('removal-focus.png'),scale:'css',animations:'disabled'});
- await page.locator('#trip-save .trip-actions button').first().click();await page.goto(localizedHref('/saved',locale));await scan('saved');
+ await page.locator('#trip-save .trip-actions button').first().click();
+ await expect(page).toHaveURL(/\/trip#local=/);
+ await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);
+ await page.goto(localizedHref('/saved',locale));await scan('saved');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  writeFileSync(info.outputPath(`semantics-${locale}.json`),JSON.stringify(trees,null,2));
   writeFileSync(info.outputPath(`targets-${locale}.json`),JSON.stringify(targets,null,2));

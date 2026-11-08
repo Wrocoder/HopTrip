@@ -1,4 +1,7 @@
 import {DEFAULT_SORT} from "./catalog-order.ts";
+import type {WeekendStay} from './weekend-stay';
+import type {ConnectionAssessment} from './connections';
+import type {TripQuality} from './trip-quality';
 import type {DestinationTime} from './destination-time';
 import type {AirportContext} from './airport-context';
 import {isAirports,isAlertStatus,isDeal,isDealResults,isDeals,isDestinations} from './api-contract';
@@ -42,6 +45,9 @@ export type FlightQualityReason = "UNVERIFIED_SOURCE"|"MISSING_ORIGIN"|"MISSING_
 export type FlightQuality = {version:"flight-quality-v1";status:"COMPLETE"|"PARTIAL"|"CRITICAL_INCOMPLETE";
   reasons:FlightQualityReason[];recommendation_eligible:boolean};
 export type Deal = {
+  trip_quality_score?:number|null;
+  trip_quality?:TripQuality;
+  connection_assessment?:ConnectionAssessment;
   airport_context?:AirportContext;
   destination_time?:DestinationTime;
   weekend_assessment?:WeekendAssessment;
@@ -63,7 +69,7 @@ export type Airport = {id:number; iata_code:string; name:string; city:string; co
 export type PriceFreshness={observed_at:string|null;observation_basis:"SOURCE"|"FIRST_SEEN"|null;
   fetched_at:string|null;availability_checked_at:string|null;hidden_after:string|null;max_age_hours:number};
 export type Destination = {display_name?:string;aliases?:string[];iata_codes?:string[];id:number; city:string; country:string; country_code:string; slug:string; is_active:boolean};
-export type WeekendAssessment={version:'weekend-v1';work_hours:{start:string;end:string};work_timezone:string|null;actual_return_local_date:string|null;airport_arrival_day_offset:number|null;confidence:'KNOWN'|'ESTIMATED'|'UNKNOWN';calendar:'ELIGIBLE'|'INELIGIBLE'|'UNKNOWN';flexible:'ELIGIBLE'|'INELIGIBLE'|'UNKNOWN';no_leave:'ELIGIBLE'|'INELIGIBLE'|'UNKNOWN';might_require_leave:boolean|null;airport_times_only:true;reasons:string[]};
+export type WeekendAssessment={stay?:WeekendStay;version:'weekend-v1';work_hours:{start:string;end:string};work_timezone:string|null;actual_return_local_date:string|null;airport_arrival_day_offset:number|null;confidence:'KNOWN'|'ESTIMATED'|'UNKNOWN';calendar:'ELIGIBLE'|'INELIGIBLE'|'UNKNOWN';flexible:'ELIGIBLE'|'INELIGIBLE'|'UNKNOWN';no_leave:'ELIGIBLE'|'INELIGIBLE'|'UNKNOWN';might_require_leave:boolean|null;airport_times_only:true;reasons:string[]};
 export type Filters = Partial<Record<"origin"|"destination"|"departure_from"|"departure_to"|"budget"|"duration_min"|"duration_max"|"weekend"|"weekend_mode"|"work_start"|"work_end"|"offset"|"limit"|"sort"|"round_trip",string>>;
 export class ApiError extends Error { constructor(public status:number,public code?:string) {super("Catalog unavailable");} }
 function apiUrl(path:string) {
@@ -76,9 +82,10 @@ async function getJson<T>(path:string,valid:(value:unknown)=>value is T):Promise
     throw new ApiError(timeout?504:0,timeout?'TIMEOUT':'NETWORK_ERROR');}
   if (!response.ok) {
     const body=await response.json().catch(()=>null);
-    const unsupportedSort=response.status===422&&new URLSearchParams(path.split('?')[1]).get('sort')==='destination_time'&&
+    const requestedSort=new URLSearchParams(path.split('?')[1]).get('sort');
+    const unsupportedSort=response.status===422&&['destination_time','recommended'].includes(requestedSort??'')&&
       Array.isArray(body?.detail)&&body.detail.some((e:{loc?:unknown[]})=>Array.isArray(e.loc)&&e.loc[0]==='query'&&e.loc[1]==='sort');
-    throw new ApiError(response.status,unsupportedSort?'DESTINATION_TIME_UNSUPPORTED':typeof body?.detail?.code === "string" ? body.detail.code : undefined);
+    throw new ApiError(response.status,unsupportedSort?(requestedSort==='recommended'?'TRIP_QUALITY_UNSUPPORTED':'DESTINATION_TIME_UNSUPPORTED'):typeof body?.detail?.code === "string" ? body.detail.code : undefined);
   }
   let body:unknown;
   try {body=await response.json();}
@@ -101,6 +108,7 @@ export async function getDeals(filters:Filters = {}):Promise<Deal[]> {
   validateWeekendResults(items,filters);return items;
 }
 function validateWeekendResults(items:Deal[],filters:Filters){
+ if(filters.sort==='recommended'&&items.some(item=>!item.trip_quality||item.trip_quality_score===undefined))throw new ApiError(502,'TRIP_QUALITY_UNSUPPORTED');
  if(filters.sort==='destination_time'&&items.some(item=>!item.destination_time))throw new ApiError(502,'DESTINATION_TIME_UNSUPPORTED');
  if(!filters.weekend_mode)return;
  const key=({'calendar-v1':'calendar','flexible-v1':'flexible','no-leave-v1':'no_leave'} as const)[filters.weekend_mode as 'calendar-v1'|'flexible-v1'|'no-leave-v1'];

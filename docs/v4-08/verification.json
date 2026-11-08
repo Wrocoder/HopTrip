@@ -1,0 +1,783 @@
+{
+  "task": "V4-08",
+  "date": "2026-11-08",
+  "status": "DONE_LOCAL",
+  "checks": {
+    "node": {
+      "pass": 367,
+      "fail": 0,
+      "skipped": 0
+    },
+    "focused": {
+      "pass": 15,
+      "fail": 0
+    },
+    "eslint": "PASS",
+    "production_build": "PASS",
+    "final_tsc": "PASS",
+    "browser": {
+      "latest_unique_pass": 66,
+      "runs": [
+        {
+          "name": "initial",
+          "stats": {
+            "startTime": "2026-11-07T23:25:54.544Z",
+            "duration": 548776.971,
+            "expected": 65,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in pl",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in en",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in ru",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in uk",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > hidden invalid detailed costs can be reached and corrected from quick budget",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > legacy plan and new taxes/buffer survive save/share without reallocating old contingency",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in pl",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in en",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in ru",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > quick and detailed budgets retain all costs in uk",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > hidden invalid detailed costs can be reached and corrected from quick budget",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-modes.spec.ts",
+              "title": "budget-modes.spec.ts > legacy plan and new taxes/buffer survive save/share without reallocating old contingency",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > pl: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > en: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > ru: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > uk: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > stay/night basis, dates, corrected invalid ranges and exact-source transport retain honest totals",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > profiles persist in v1 snapshots and saved previews; recipient edits keep the original intact",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > legacy drafts remain exact and malformed profile metadata recovers amounts before explicit discard",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > pl: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > en: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > ru: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > uk: personal ranges, exact overrides, profile switching, reload and reset",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > stay/night basis, dates, corrected invalid ranges and exact-source transport retain honest totals",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > profiles persist in v1 snapshots and saved previews; recipient edits keep the original intact",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-profiles.spec.ts",
+              "title": "budget-profiles.spec.ts > legacy drafts remain exact and malformed profile metadata recovers amounts before explicit discard",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > late reference conversion cannot overwrite manual",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > late reference conversion cannot overwrite reset",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > pl: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > en: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > ru: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > uk: observed and reference amounts retain provenance; manual edits, zero and reset remain honest",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > late reference conversion cannot overwrite manual",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > late reference conversion cannot overwrite reset",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > legacy amounts and damaged source annotations remain readable and are never inferred to be live quotes",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-provenance.spec.ts",
+              "title": "budget-provenance.spec.ts > new v1 save/share preserves source snapshots; editing a copy never rewrites the saved original",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > pl: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > en: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > ru: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > uk: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > pl: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > en: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > ru: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > uk: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > budget calculates shared costs, validates input and resets accessibly",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > draft survives reload, stays separate per offer and reset persists",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > date and party edits flag prices and keep whole-stay costs unchanged",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > unavailable or corrupt storage never prevents calculation",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > invalid draft and changed offer metadata are handled explicitly",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > flight links to the budget calculator",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > reference fare fills only local transport and preserves manual amounts",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > lodging total survives mode changes and is counted only once",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > budget calculates shared costs, validates input and resets accessibly",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > draft survives reload, stays separate per offer and reset persists",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > date and party edits flag prices and keep whole-stay costs unchanged",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > unavailable or corrupt storage never prevents calculation",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > invalid draft and changed offer metadata are handled explicitly",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > flight links to the budget calculator",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > reference fare fills only local transport and preserves manual amounts",
+              "project": "mobile",
+              "status": "unexpected",
+              "results": [
+                "timedOut"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > lodging total survives mode changes and is counted only once",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "final",
+          "stats": {
+            "startTime": "2026-11-08T09:10:04.463Z",
+            "duration": 122374.437,
+            "expected": 10,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "cases": [
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > pl: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > en: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > ru: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > uk: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > pl: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > en: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > ru: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "budget-quick.spec.ts",
+              "title": "budget-quick.spec.ts > uk: quick input, honest totals and independent profile comparison preserve the plan",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > reference fare fills only local transport and preserves manual amounts",
+              "project": "desktop",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            },
+            {
+              "file": "trip-budget.spec.ts",
+              "title": "trip-budget.spec.ts > reference fare fills only local transport and preserves manual amounts",
+              "project": "mobile",
+              "status": "expected",
+              "results": [
+                "passed"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "widths": [
+      320,
+      375,
+      390,
+      768,
+      1440
+    ],
+    "locales": [
+      "pl",
+      "en",
+      "ru",
+      "uk"
+    ],
+    "axe": "PASS, scoped to calculator",
+    "manual_visual": [
+      "RU 320 px",
+      "RU 1440 px"
+    ]
+  },
+  "compatibility": {
+    "next_env_restored": true,
+    "new_dependencies": false,
+    "api_changes": false,
+    "schema_changes": false,
+    "migrations": false,
+    "deploy": false,
+    "real_notifications": false,
+    "reference_versions_preserved": true
+  },
+  "limits": [
+    "Scoped Chromium desktop/mobile; full suite not repeated after responsive CSS change",
+    "No WebKit, physical devices, manual screen reader or field CWV validation",
+    "No separate pytest/PG run: application API unchanged",
+    "Official fare checks do not guarantee future prices or availability"
+  ],
+  "source_hashes": {
+    "apps/web/src/lib/budget-quick.ts": "e8bf1246696ec1160b608c5ff7aa92d6ae3e8211d16a4e9e7b4279a004ef5e5c",
+    "apps/web/src/lib/i18n/budget-quick-copy.ts": "6aaa3728998eb6d85b1d9d528b412b50a2cff00f2aee49d02c110910dff33104",
+    "apps/web/src/lib/budget-estimates.ts": "465d74eb34c008fd9ac5e31c280f975a1eea45f19c993f26213e22479bb06cff",
+    "apps/web/src/lib/reference-costs.ts": "8e5696c19de634e5a514511ff376f7ef5b833c840f1745005c9a8a52de8a0cbb",
+    "apps/web/src/app/components/budget-profile-comparison.tsx": "280fe6edd735641e96aff5bbf5ad302e080bd51c4cd10eded7d012ecf67caca2",
+    "apps/web/src/app/components/budget-profiles.tsx": "c792bad677bb96a7ba927b969ad8b740a58f5a42277cbe70d8f4db9a1fc53996",
+    "apps/web/src/app/components/trip-budget-calculator.tsx": "fab90018aed2b65a4cc4d1aacc6d1c29be434b26242401bc9a3e94cbe0158ccf",
+    "apps/web/src/app/components/trip-budget-calculator.module.css": "49ffae9fa0636741e6effebd58746cc3560d4bdf1075aed422169d8089a5e275",
+    "apps/web/tests/budget-quick.test.mjs": "b8543814e154e3aca342b3d490dd3dae373ec5ee3d5a1af4bad4bd78630c4215",
+    "apps/web/tests/budget-quick.spec.ts": "1b182404a20b31d002ef2d50d880e6522f8d1a97b25ae4b847ace5e5e1cf78e2",
+    "apps/web/tests/trip-budget.spec.ts": "c92f84508b7ed6e9ed912dc4232181deb45f26c1f01c90728aa7cc6801294b44"
+  },
+  "next_task": "V4-07",
+  "next_task_started": false
+}

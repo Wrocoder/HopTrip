@@ -1,0 +1,171 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.production.config.ts",
+      "tests/usability-guidance.spec.ts",
+      "--project=desktop",
+      "--grep",
+      "pl:",
+      "--output=../../.cache/v4-14-before-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.production.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-14-before-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-14-before-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "usability-guidance.spec.ts",
+      "file": "usability-guidance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "pl: empty saved guidance leads to the actual save section",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5554,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main')\nExpected substring: \u001b[32m\"Zapis\u001b[7mz i udostępnij\u001b[27m\"\u001b[39m\nReceived string:    \u001b[31m\"Zapis\u001b[7mane wyjazdyPlany zapisane w tej przeglądarce. Usunięcie planu z listy nie unieważnia wcześniej udostępnionego linku.Zapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis otwiera plan z listy. Wybierz „Aktualizuj plan”, aby zachować w nim późniejsze zmiany. Udostępnianie tworzy niezależną kopię.Zapisane plany (0/20)Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.Znajdź wyjazd\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('main') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main')\u001b[22m\n\u001b[2m    14 × locator resolved to <main class=\"page-shell\">…</main>\u001b[22m\n\u001b[2m       - unexpected value \"Zapisane wyjazdyPlany zapisane w tej przeglądarce. Usunięcie planu z listy nie unieważnia wcześniej udostępnionego linku.Zapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis otwiera plan z listy. Wybierz „Aktualizuj plan”, aby zachować w nim późniejsze zmiany. Udostępnianie tworzy niezależną kopię.Zapisane plany (0/20)Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.Znajdź wyjazd\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main')\nExpected substring: \u001b[32m\"Zapis\u001b[7mz i udostępnij\u001b[27m\"\u001b[39m\nReceived string:    \u001b[31m\"Zapis\u001b[7mane wyjazdyPlany zapisane w tej przeglądarce. Usunięcie planu z listy nie unieważnia wcześniej udostępnionego linku.Zapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis otwiera plan z listy. Wybierz „Aktualizuj plan”, aby zachować w nim późniejsze zmiany. Udostępnianie tworzy niezależną kopię.Zapisane plany (0/20)Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.Znajdź wyjazd\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('main') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main')\u001b[22m\n\u001b[2m    14 × locator resolved to <main class=\"page-shell\">…</main>\u001b[22m\n\u001b[2m       - unexpected value \"Zapisane wyjazdyPlany zapisane w tej przeglądarce. Usunięcie planu z listy nie unieważnia wcześniej udostępnionego linku.Zapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis otwiera plan z listy. Wybierz „Aktualizuj plan”, aby zachować w nim późniejsze zmiany. Udostępnianie tworzy niezależną kopię.Zapisane plany (0/20)Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.Znajdź wyjazd\"\u001b[22m\n\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:15:21",
+                    "location": {
+                      "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                      "column": 21,
+                      "line": 15
+                    },
+                    "snippet": "  13 |  await page.goto(localizedHref('/saved',locale));\n  14 |  const main=page.getByRole('main');\n> 15 |  await expect(main).toContainText(tripSectionCopy[locale].save);\n     |                     ^\n  16 |  const hint=(await main.innerText()).split('\\n').find(line=>line.includes(tripSectionCopy[locale].save));\n  17 |  await main.getByRole('link',{name:tripText(locale,'Znajdź wyjazd'),exact:true}).click();\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                        "column": 21,
+                        "line": 15
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('main')\nExpected substring: \u001b[32m\"Zapis\u001b[7mz i udostępnij\u001b[27m\"\u001b[39m\nReceived string:    \u001b[31m\"Zapis\u001b[7mane wyjazdyPlany zapisane w tej przeglądarce. Usunięcie planu z listy nie unieważnia wcześniej udostępnionego linku.Zapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis otwiera plan z listy. Wybierz „Aktualizuj plan”, aby zachować w nim późniejsze zmiany. Udostępnianie tworzy niezależną kopię.Zapisane plany (0/20)Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.Znajdź wyjazd\u001b[27m\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" getByRole('main') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('main')\u001b[22m\n\u001b[2m    14 × locator resolved to <main class=\"page-shell\">…</main>\u001b[22m\n\u001b[2m       - unexpected value \"Zapisane wyjazdyPlany zapisane w tej przeglądarce. Usunięcie planu z listy nie unieważnia wcześniej udostępnionego linku.Zapis tylko w tym profilu przeglądarki na tym urządzeniu. Usunięcie danych witryny usuwa plany. Zachowaj link, aby otworzyć kopię gdzie indziej.Zapis otwiera plan z listy. Wybierz „Aktualizuj plan”, aby zachować w nim późniejsze zmiany. Udostępnianie tworzy niezależną kopię.Zapisane plany (0/20)Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.Znajdź wyjazd\"\u001b[22m\n\n\n  13 |  await page.goto(localizedHref('/saved',locale));\n  14 |  const main=page.getByRole('main');\n> 15 |  await expect(main).toContainText(tripSectionCopy[locale].save);\n     |                     ^\n  16 |  const hint=(await main.innerText()).split('\\n').find(line=>line.includes(tripSectionCopy[locale].save));\n  17 |  await main.getByRole('link',{name:tripText(locale,'Znajdź wyjazd'),exact:true}).click();\n  18 |  await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts:15:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:24:46.378Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-before-results\\usability-guidance-pl-empt-efa66--to-the-actual-save-section-desktop\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-14-before-results\\usability-guidance-pl-empt-efa66--to-the-actual-save-section-desktop\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\usability-guidance.spec.ts",
+                    "column": 21,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4be92fcd805580d91d6f-5b9b1254493ae402b89f",
+          "file": "usability-guidance.spec.ts",
+          "line": 9,
+          "column": 56
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T18:24:41.431Z",
+    "duration": 12127.991,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

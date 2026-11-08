@@ -20,6 +20,26 @@ class WorkHours(BaseModel):
         return self
 
 
+class WeekendStayPolicy(BaseModel):
+    """Product assumptions, not measured transfer times or city availability."""
+    min_airport_minutes: int = Field(default=1440, ge=0, le=10080)
+    min_usable_minutes: int = Field(default=720, ge=0, le=10080)
+    arrival_buffer_minutes: int = Field(default=120, ge=0, le=1440)
+    departure_buffer_minutes: int = Field(default=120, ge=0, le=1440)
+
+
+class WeekendStayAssessment(BaseModel):
+    version: Literal["weekend-stay-v1"] = "weekend-stay-v1"
+    eligibility: Eligibility = "UNKNOWN"
+    airport_interval_minutes: int | None = None
+    # Modelled 08:00–22:00 destination-local window, never actual sightseeing time.
+    usable_minutes: int | None = None
+    night_arrival: bool | None = None
+    early_return: bool | None = None
+    policy: WeekendStayPolicy = Field(default_factory=WeekendStayPolicy)
+    reasons: list[str] = Field(default_factory=list)
+
+
 class WeekendAssessment(BaseModel):
     version: Literal["weekend-v1"] = "weekend-v1"
     work_hours: WorkHours = Field(default_factory=WorkHours)
@@ -34,3 +54,4 @@ class WeekendAssessment(BaseModel):
     # This evaluates airport times only, never a door-to-door guarantee.
     airport_times_only: Literal[True] = True
     reasons: list[str] = Field(default_factory=list)
+    stay: WeekendStayAssessment = Field(default_factory=WeekendStayAssessment)

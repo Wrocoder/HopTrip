@@ -2,14 +2,17 @@ import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {writeFileSync} from 'node:fs';
 import {destinationImage,destinationImages,imageryCopy} from '../src/lib/destination-imagery';
+import {articlePhotoCopy} from '../src/lib/article-photo-captions';
 import {destinationLabel} from '../src/lib/destinations';
 import {localizedHref,pageLocales} from '../src/lib/i18n/routing';
 import type {Destination} from '../src/lib/api';
+const fixture='http://127.0.0.1:8100';
 
 test.setTimeout(90000);
 test.beforeEach(async({page})=>{
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
+test.afterEach(async({request})=>{expect((await request.post(`${fixture}/__test__/destination-images`)).ok()).toBe(true);});
 
 for(const locale of ['pl','en','ru','uk'] as const)test(`destination photographs preserve links, reserved layout and credits in ${locale}`,async({page,request},info)=>{
  const errors:string[]=[],external:string[]=[];page.on('pageerror',e=>errors.push(e.message));
@@ -73,4 +76,71 @@ test('all local WebP assets and credits ship with bounded responsive responses',
  }
  const credits=await request.get('/media/destinations/CREDITS.md');expect(credits.status()).toBe(200);expect(await credits.text()).toContain('Sebastian Straub');
  writeFileSync(info.outputPath('response-sizes.json'),JSON.stringify(sizes,null,2));
+});
+
+for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: mapped city photographs and unpictured destinations preserve navigation`,async({page,request},info)=>{
+ const section=page.locator('section:has(> #home-destinations)');
+ for(const slugs of [['wroclaw','warsaw','krakow'],['gdansk','katowice','poznan'],['bergen','reykjavik']]){
+  const query=new URLSearchParams(slugs.map(slug=>['slug',slug]));
+  expect((await request.post(`${fixture}/__test__/destination-images?${query}`)).ok()).toBe(true);
+  await page.goto(localizedHref('/',locale));
+  await expect(section.locator('li')).toHaveCount(slugs.length);
+  for(const slug of slugs){
+   const image=destinationImage(slug)!;
+   const card=section.locator('li').filter({has:page.getByAltText(image.alt[locale])});
+   const img=card.locator('img');await img.scrollIntoViewIfNeeded();
+   await expect.poll(()=>img.evaluate(node=>(node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+   await expect(img).toHaveAttribute('width',String(image.width));await expect(img).toHaveAttribute('height',String(image.height));
+   await expect(img).toHaveAttribute('loading','lazy');await expect(img).toHaveAttribute('sizes',/max-width/);
+   expect(new URL((await img.getAttribute('src'))!,page.url()).searchParams.get('url')).toBe(image.src);
+   const target=new URL((await card.locator('a').first().getAttribute('href'))!,page.url());
+   expect(target.origin).toBe(new URL(page.url()).origin);
+   expect(target.pathname===localizedHref(`/destinations/${slug}`,locale)||
+    target.pathname===localizedHref('/deals',locale)&&target.searchParams.get('destination')===slug).toBe(true);
+   await card.locator('summary').click();
+   await expect(card.getByRole('link',{name:image.license,exact:true})).toHaveAttribute('href',image.licenseUrl);
+   if(image.shareAlike)await expect(card.locator('details')).toContainText(articlePhotoCopy[locale].adapted);
+  }
+  if(slugs[0]==='bergen'&&locale==='ru')await section.screenshot({path:info.outputPath('mapped-cities-ru.png'),animations:'disabled'});
+ }
+ expect((await request.post(`${fixture}/__test__/destination-images?slug=berlin`)).ok()).toBe(true);
+ await page.goto(localizedHref('/',locale));await expect(section.locator('img')).toHaveCount(0);
+ await expect(section.getByText(imageryCopy[locale].unavailable,{exact:true})).toHaveCount(0);
+ await section.locator('a').click();await expect(page).toHaveURL(new RegExp(localizedHref('/destinations',locale)+'$'));
+ const berlin=page.locator('[data-destination-slug="berlin"]');await expect(berlin).toBeVisible();
+ const href=await berlin.getAttribute('href');await berlin.click();
+ await expect(page).toHaveURL(new URL(href!,page.url()).toString());await expect(page.locator('main h1')).toBeVisible();
+});
+
+for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: HTTP, network and decode errors retain the destination action and reserved frame`,async({page},info)=>{
+ const section=page.locator('section:has(> #home-destinations)');
+ for(const failure of ['404','network','decode']){
+  let release!:()=>void;const gate=new Promise<void>(resolve=>release=resolve);
+  const attempts:string[]=[];
+  await page.route('**/_next/image?*',async route=>{
+   attempts.push(route.request().url());await gate;
+   if(failure==='network')return route.abort('failed');
+   return route.fulfill({status:failure==='404'?404:200,contentType:'image/webp',body:'Not a decodable image'});
+  });
+  try{
+   await page.goto(localizedHref('/',locale),{waitUntil:'domcontentloaded'});
+   const card=section.locator('li').filter({hasText:'Sebastian Straub'}),action=card.locator('a').first();
+   const frame=action.locator(':scope > span').first();await card.scrollIntoViewIfNeeded();
+   const before=await frame.boundingBox();expect(before!.width/before!.height).toBeCloseTo(1.6,1);
+   release();await expect(card.getByText(imageryCopy[locale].unavailable,{exact:true})).toBeVisible();
+   await expect(card.locator('img')).toHaveCount(0);await expect(action).toBeVisible();
+   const after=await frame.boundingBox();expect(after!.width).toBeCloseTo(before!.width,1);expect(after!.height).toBeCloseTo(before!.height,1);
+   const romeAttempts=()=>attempts.filter(url=>new URL(url).searchParams.get('url')===destinationImages.rome.src).length;
+   // Next may reassign src during hydration to deliver an earlier native error.
+   // Once the fallback replaces img, layout changes must not start another request.
+   const settledAttempts=romeAttempts();expect(settledAttempts).toBeGreaterThan(0);
+   await action.focus();await expect(action).toHaveCSS('outline-width','3px');
+   for(const width of [320,375,390,768,1440]){
+    await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+   }
+   expect(romeAttempts()).toBe(settledAttempts);
+   if(failure==='decode'&&locale==='ru')await card.screenshot({path:info.outputPath('decode-fallback-ru.png'),animations:'disabled'});
+   await action.click();await expect(page).toHaveURL(locale==='pl'?/\/destinations\/rome$/:new RegExp(`/${locale}/deals\\?destination=rome$`));
+  }finally{release();await page.unroute('**/_next/image?*');}
+ }
 });

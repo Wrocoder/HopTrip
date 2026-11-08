@@ -1,0 +1,30 @@
+import {test,expect} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+import {writeFileSync} from 'node:fs';
+import {localizedHref} from '../src/lib/i18n/routing';
+import {tripSectionCopy} from '../src/lib/i18n/trip-section-copy';
+import {tripText} from '../src/lib/i18n/trip-copy';
+import {planEditorCopy} from '../src/lib/i18n/plan-editor-copy';
+
+for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: empty saved guidance leads to the actual save section`,async({page,context},info)=>{
+ test.setTimeout(60000);
+ await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
+ await context.route('**/*',route=>['127.0.0.1','localhost'].includes(new URL(route.request().url()).hostname)?route.continue():route.abort());
+ await page.goto(localizedHref('/saved',locale));
+ const main=page.getByRole('main');
+ await expect(main).toContainText(tripSectionCopy[locale].save);
+ const hint=(await main.innerText()).split('\n').find(line=>line.includes(tripSectionCopy[locale].save));
+ await main.getByRole('link',{name:tripText(locale,'Znajdź wyjazd'),exact:true}).click();
+ await expect(page).toHaveURL(new RegExp(localizedHref('/deals',locale)+'$'));
+ await page.locator('.deal-card-link').first().click();
+ const navigation=page.locator('.trip-navigation').getByRole('link',{name:tripSectionCopy[locale].save,exact:true});
+ await expect(navigation).toHaveAttribute('href','#trip-save');await navigation.click();
+ const section=page.locator('#trip-save');await expect(section).toBeFocused();
+ await expect(section.getByRole('heading')).toHaveText(tripText(locale,'Zachowaj plan podróży'));
+ await section.getByRole('button',{name:tripText(locale,'Zapisz wyjazd'),exact:true}).click();
+ await expect(page).toHaveURL(/\/trip#local=/);await expect(page.getByTestId('plan-edit-state')).toHaveText(planEditorCopy[locale].saved);
+ const local=page.url();await page.goto(localizedHref('/saved',locale));
+ const plan=page.locator('li[data-plan-id]');await expect(plan).toHaveCount(1);await plan.getByRole('link').click();await expect(page).toHaveURL(local);
+ expect((await new AxeBuilder({page}).include('main').analyze()).violations).toEqual([]);
+ writeFileSync(info.outputPath('guidance.json'),JSON.stringify({locale,hint,correctSection:true,saveAndRestore:true,source:'synthetic regression, not a participant session'},null,2));
+});

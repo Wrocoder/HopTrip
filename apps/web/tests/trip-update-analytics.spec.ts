@@ -12,10 +12,10 @@ const id='00000000-0000-4000-8000-000000000018';
 const token=encodeTrip({version:1,offer:{slug:'browser-deal',origin:'WRO',destination:'Barcelona',start:'2030-05-01',end:'2030-05-03',price:'100',observedAt:''},draft:{version:1,input:{...emptyBudget,flight:'100',food:'0'},start:'2030-05-01',end:'2030-05-03',context:'',review:true}})!;
 const records=(page:Page)=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).plans as {id:string;revision:number;token:string}[],savedPlansKey);
 
-test.beforeAll(async({request})=>{
+test.beforeAll(async({request},info)=>{
  if(process.env.HOPTRIP_H3_PRODUCTION!=='1')return;
- const runner=readFileSync('playwright.config.ts','utf8');
- expect(runner).toContain('command:"npm run start --');expect(runner).toContain('NODE_ENV:"production"');
+ const runner=readFileSync(info.config.configFile!,'utf8');
+ expect(runner).toContain('npm run start --');expect(runner).toContain("NODE_ENV:'production'");
  expect(runner).not.toContain('reuseExistingServer:true');
  expect(await (await request.get('/saved')).text()).toContain(readFileSync('.next/BUILD_ID','utf8').trim());
 });
@@ -46,7 +46,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: successful U
  await button.click();expect((await accepted).status()).toBe(202);
  await expect(button).toBeDisabled();expect(updates()).toHaveLength(1);
  expect((await records(page)).map(plan=>({id:plan.id,revision:plan.revision}))).toEqual([{id,revision:2}]);
- expect(updates()[0].metadata).toEqual({page_type:'saved_trip',locale});
+ expect(updates()[0].metadata).toEqual({page_type:'saved_trip',locale,viewport:expect.stringMatching(/^(small|medium|large)$/)});
  expect(Object.keys(updates()[0]).sort()).toEqual(['anonymous_session_id','event_id','event_name','metadata']);
  expect(JSON.stringify(updates())).not.toContain(id);expect(JSON.stringify(updates())).not.toContain(token);
  await page.reload();await expect(button).toBeDisabled();expect(updates()).toHaveLength(1);

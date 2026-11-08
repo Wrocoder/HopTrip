@@ -17,6 +17,7 @@ import {BudgetProjection} from './budget-projection';
 import {planStorageCopy} from '../../lib/i18n/plan-storage-copy';
 import type {SavedPlan} from '../../lib/saved-plans';
 import {localPlanPath} from '../../lib/plan-editor';
+import {tripSectionCopy} from '../../lib/i18n/trip-section-copy';
 export function SavedTrips(){
  const {locale}=useLocale();
  const t=(source:TripKey)=>tripText(locale,source);
@@ -61,7 +62,7 @@ export function SavedTrips(){
   {(store.requiresMigration||store.format==='v2'&&store.legacyChanged&&!store.legacyCorrupt)&&<div className={styles.actions}><button type="button" className="button" disabled={store.busy||store.corrupt||!store.lockingAvailable} aria-busy={store.busy} onClick={migrate}>{store.requiresMigration?storage.migrate:storage.import}</button></div>}
   <p role="status">{store.busy?storage.busy:message?('trip' in message?t(message.trip):'storage' in message?storage[message.storage]:copy[message.saved]):''}</p>
   {undo&&<div className={styles.actions}><button ref={undoButton} type="button" disabled={store.busy||store.corrupt||!store.lockingAvailable} onClick={restore}>{copy.undo}</button></div>}
-  {store.ready&&!store.readError&&!store.corrupt&&!store.tokens.length&&<p>{t("Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” przy kalkulatorze.")}</p>}
+  {store.ready&&!store.readError&&!store.corrupt&&!store.tokens.length&&<p>{t("Nie masz jeszcze zapisanych wyjazdów. Otwórz ofertę i wybierz „Zapisz wyjazd” w sekcji „{section}”.").replace('{section}',tripSectionCopy[locale].save)}</p>}
   <ul className={styles.list}>{store.items.map(plan=>{
    const {token}=plan;
    const trip=decodeTrip(token)!;

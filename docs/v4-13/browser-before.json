@@ -1,0 +1,449 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.production.config.ts",
+      "tests/h3-baseline.spec.ts",
+      "tests/h3-lighthouse.spec.ts",
+      "--project=desktop",
+      "--output=../../.cache/v4-13-before-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.production.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-13-before-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-13-before-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-baseline.spec.ts",
+      "file": "h3-baseline.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H3 baseline pages and widths: pl",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 46905,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:48:57.408Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb25maWdGaWxlIjoiQzpcXFVzZXJzXFxEbWl0cml5S2lzZWxldlxcUHljaGFybVByb2plY3RzXFxIb3BUcmlwXFxhcHBzXFx3ZWJcXHBsYXl3cmlnaHQucHJvZHVjdGlvbi5jb25maWcudHMiLCJjb25maWdTb3VyY2UiOiJpbXBvcnQge2RlZmluZUNvbmZpZ30gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7XG5pbXBvcnQgYmFzZSBmcm9tICcuL3BsYXl3cmlnaHQuY29uZmlnJztcblxuY29uc3Qgc2VydmVycz1iYXNlLndlYlNlcnZlcjtcbmlmKCFBcnJheS5pc0FycmF5KHNlcnZlcnMpfHxzZXJ2ZXJzLmxlbmd0aCE9PTIpdGhyb3cgbmV3IEVycm9yKCdJc29sYXRlZCBsb2NhbCBBUEkgYW5kIHdlYiBzZXJ2ZXJzIHJlcXVpcmVkJyk7XG4vLyBCdWlsZCBmaXJzdCB3aXRoIHRoZSBzYW1lIGxvb3BiYWNrIE5FWFRfUFVCTElDXyogdmFsdWVzOyBuZXZlciByZXVzZSBhIGxpdmUgc2VydmVyLlxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHsuLi5iYXNlLHdlYlNlcnZlcjpbc2VydmVyc1swXSx7Li4uc2VydmVyc1sxXSxcbiBjb21tYW5kOiducG0gcnVuIHN0YXJ0IC0tIC0taG9zdG5hbWUgMTI3LjAuMC4xIC0tcG9ydCAzMTAwJyxcbiBlbnY6ey4uLnNlcnZlcnNbMV0uZW52LE5PREVfRU5WOidwcm9kdWN0aW9uJ30sXG59XX0pO1xuIiwiYnVpbGQiOiJLM2JUYlJneVlZVzRwZXhUczY4NGsifQ=="
+                    },
+                    {
+                      "name": "baseline-pl",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-baseline-H3-baseline-pages-and-widths-pl-desktop\\attachments\\baseline-pl-b31cd635b5001deee447a53966006ad3d35be4cf.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-4c554cf1e4f6ed92cab1",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        },
+        {
+          "title": "H3 baseline pages and widths: en",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 39325,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:49:44.592Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb25maWdGaWxlIjoiQzpcXFVzZXJzXFxEbWl0cml5S2lzZWxldlxcUHljaGFybVByb2plY3RzXFxIb3BUcmlwXFxhcHBzXFx3ZWJcXHBsYXl3cmlnaHQucHJvZHVjdGlvbi5jb25maWcudHMiLCJjb25maWdTb3VyY2UiOiJpbXBvcnQge2RlZmluZUNvbmZpZ30gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7XG5pbXBvcnQgYmFzZSBmcm9tICcuL3BsYXl3cmlnaHQuY29uZmlnJztcblxuY29uc3Qgc2VydmVycz1iYXNlLndlYlNlcnZlcjtcbmlmKCFBcnJheS5pc0FycmF5KHNlcnZlcnMpfHxzZXJ2ZXJzLmxlbmd0aCE9PTIpdGhyb3cgbmV3IEVycm9yKCdJc29sYXRlZCBsb2NhbCBBUEkgYW5kIHdlYiBzZXJ2ZXJzIHJlcXVpcmVkJyk7XG4vLyBCdWlsZCBmaXJzdCB3aXRoIHRoZSBzYW1lIGxvb3BiYWNrIE5FWFRfUFVCTElDXyogdmFsdWVzOyBuZXZlciByZXVzZSBhIGxpdmUgc2VydmVyLlxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHsuLi5iYXNlLHdlYlNlcnZlcjpbc2VydmVyc1swXSx7Li4uc2VydmVyc1sxXSxcbiBjb21tYW5kOiducG0gcnVuIHN0YXJ0IC0tIC0taG9zdG5hbWUgMTI3LjAuMC4xIC0tcG9ydCAzMTAwJyxcbiBlbnY6ey4uLnNlcnZlcnNbMV0uZW52LE5PREVfRU5WOidwcm9kdWN0aW9uJ30sXG59XX0pO1xuIiwiYnVpbGQiOiJLM2JUYlJneVlZVzRwZXhUczY4NGsifQ=="
+                    },
+                    {
+                      "name": "baseline-en",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-baseline-H3-baseline-pages-and-widths-en-desktop\\attachments\\baseline-en-52cce10f31b16ea85b4cdc2e6a4473625a36f785.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-e317bd64a314343007ee",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        },
+        {
+          "title": "H3 baseline pages and widths: ru",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33548,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:50:23.956Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb25maWdGaWxlIjoiQzpcXFVzZXJzXFxEbWl0cml5S2lzZWxldlxcUHljaGFybVByb2plY3RzXFxIb3BUcmlwXFxhcHBzXFx3ZWJcXHBsYXl3cmlnaHQucHJvZHVjdGlvbi5jb25maWcudHMiLCJjb25maWdTb3VyY2UiOiJpbXBvcnQge2RlZmluZUNvbmZpZ30gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7XG5pbXBvcnQgYmFzZSBmcm9tICcuL3BsYXl3cmlnaHQuY29uZmlnJztcblxuY29uc3Qgc2VydmVycz1iYXNlLndlYlNlcnZlcjtcbmlmKCFBcnJheS5pc0FycmF5KHNlcnZlcnMpfHxzZXJ2ZXJzLmxlbmd0aCE9PTIpdGhyb3cgbmV3IEVycm9yKCdJc29sYXRlZCBsb2NhbCBBUEkgYW5kIHdlYiBzZXJ2ZXJzIHJlcXVpcmVkJyk7XG4vLyBCdWlsZCBmaXJzdCB3aXRoIHRoZSBzYW1lIGxvb3BiYWNrIE5FWFRfUFVCTElDXyogdmFsdWVzOyBuZXZlciByZXVzZSBhIGxpdmUgc2VydmVyLlxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHsuLi5iYXNlLHdlYlNlcnZlcjpbc2VydmVyc1swXSx7Li4uc2VydmVyc1sxXSxcbiBjb21tYW5kOiducG0gcnVuIHN0YXJ0IC0tIC0taG9zdG5hbWUgMTI3LjAuMC4xIC0tcG9ydCAzMTAwJyxcbiBlbnY6ey4uLnNlcnZlcnNbMV0uZW52LE5PREVfRU5WOidwcm9kdWN0aW9uJ30sXG59XX0pO1xuIiwiYnVpbGQiOiJLM2JUYlJneVlZVzRwZXhUczY4NGsifQ=="
+                    },
+                    {
+                      "name": "baseline-ru",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-baseline-H3-baseline-pages-and-widths-ru-desktop\\attachments\\baseline-ru-f01ee9d1a9d1d9e6e5c6a9bd26c4036acc6a72dc.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-02161aed6179eb408e50",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        },
+        {
+          "title": "H3 baseline pages and widths: uk",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28115,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:50:57.533Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "execution-mode",
+                      "contentType": "application/json",
+                      "body": "eyJjb25maWdGaWxlIjoiQzpcXFVzZXJzXFxEbWl0cml5S2lzZWxldlxcUHljaGFybVByb2plY3RzXFxIb3BUcmlwXFxhcHBzXFx3ZWJcXHBsYXl3cmlnaHQucHJvZHVjdGlvbi5jb25maWcudHMiLCJjb25maWdTb3VyY2UiOiJpbXBvcnQge2RlZmluZUNvbmZpZ30gZnJvbSAnQHBsYXl3cmlnaHQvdGVzdCc7XG5pbXBvcnQgYmFzZSBmcm9tICcuL3BsYXl3cmlnaHQuY29uZmlnJztcblxuY29uc3Qgc2VydmVycz1iYXNlLndlYlNlcnZlcjtcbmlmKCFBcnJheS5pc0FycmF5KHNlcnZlcnMpfHxzZXJ2ZXJzLmxlbmd0aCE9PTIpdGhyb3cgbmV3IEVycm9yKCdJc29sYXRlZCBsb2NhbCBBUEkgYW5kIHdlYiBzZXJ2ZXJzIHJlcXVpcmVkJyk7XG4vLyBCdWlsZCBmaXJzdCB3aXRoIHRoZSBzYW1lIGxvb3BiYWNrIE5FWFRfUFVCTElDXyogdmFsdWVzOyBuZXZlciByZXVzZSBhIGxpdmUgc2VydmVyLlxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHsuLi5iYXNlLHdlYlNlcnZlcjpbc2VydmVyc1swXSx7Li4uc2VydmVyc1sxXSxcbiBjb21tYW5kOiducG0gcnVuIHN0YXJ0IC0tIC0taG9zdG5hbWUgMTI3LjAuMC4xIC0tcG9ydCAzMTAwJyxcbiBlbnY6ey4uLnNlcnZlcnNbMV0uZW52LE5PREVfRU5WOidwcm9kdWN0aW9uJ30sXG59XX0pO1xuIiwiYnVpbGQiOiJLM2JUYlJneVlZVzRwZXhUczY4NGsifQ=="
+                    },
+                    {
+                      "name": "baseline-uk",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-baseline-H3-baseline-pages-and-widths-uk-desktop\\attachments\\baseline-uk-f486ae04462ca3efcce722d30f7b1d86fdc7f854.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ca3da13d7316bac267c4-ff873f36751b01151d50",
+          "file": "h3-baseline.spec.ts",
+          "line": 19,
+          "column": 56
+        }
+      ]
+    },
+    {
+      "title": "h3-lighthouse.spec.ts",
+      "file": "h3-lighthouse.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H3 Lighthouse / mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11643,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:51:25.678Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-lighthouse-H3-Lighthouse-mobile-desktop\\attachments\\lighthouse-308e560791d04804640541820572b6fc0c9b65b5.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-dc1b9b2a94c3dae80e25",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        },
+        {
+          "title": "H3 Lighthouse / desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:51:37.333Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-lighthouse-H3-Lighthouse-desktop-desktop\\attachments\\lighthouse-50b9f071dcb9c05fd4a93ea128938c226ef13327.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-14093c4b4bd1826ae6bf",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        },
+        {
+          "title": "H3 Lighthouse /deals mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12427,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:51:48.065Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-lighthouse-H3-Lighthouse-deals-mobile-desktop\\attachments\\lighthouse-4d8f9c18be624215f4b8b1d23edf476e62e3e7b6.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-e02d911c67b0f1242328",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        },
+        {
+          "title": "H3 Lighthouse /deals desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13032,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T17:52:00.502Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-before-results\\h3-lighthouse-H3-Lighthouse-deals-desktop-desktop\\attachments\\lighthouse-d02b2444a30c17d59a3c1b009511b7cf13a93869.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-3bc31936823e3cb1ea8a",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T17:48:53.216Z",
+    "duration": 202112.831,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

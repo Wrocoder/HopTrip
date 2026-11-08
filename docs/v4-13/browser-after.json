@@ -1,0 +1,260 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DmitriyKiselev\\AppData\\Local\\JetBrains\\PyCharm2026.2\\acp-agents\\.runtimes\\node\\24.13.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.production.config.ts",
+      "tests/h3-lighthouse.spec.ts",
+      "--project=desktop",
+      "--output=../../.cache/v4-13-after-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.production.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-13-after-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-13-after-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "h3-lighthouse.spec.ts",
+      "file": "h3-lighthouse.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H3 Lighthouse / mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:09:09.355Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-after-results\\h3-lighthouse-H3-Lighthouse-mobile-desktop\\attachments\\lighthouse-90f990e55f112fe729543b341f170511f7e5cd08.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-dc1b9b2a94c3dae80e25",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        },
+        {
+          "title": "H3 Lighthouse / desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11139,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:09:20.733Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-after-results\\h3-lighthouse-H3-Lighthouse-desktop-desktop\\attachments\\lighthouse-071d295689896a656611f5f74b07e7cc0e895077.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-14093c4b4bd1826ae6bf",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        },
+        {
+          "title": "H3 Lighthouse /deals mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:09:31.885Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-after-results\\h3-lighthouse-H3-Lighthouse-deals-mobile-desktop\\attachments\\lighthouse-90b31dc2d97af24d71f0375ce02e66163f2a1b00.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-e02d911c67b0f1242328",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        },
+        {
+          "title": "H3 Lighthouse /deals desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13864,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-08T18:09:42.34Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "lighthouse",
+                      "contentType": "application/json",
+                      "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-13-after-results\\h3-lighthouse-H3-Lighthouse-deals-desktop-desktop\\attachments\\lighthouse-3f42aa921859ce034315718d368344806108a4eb.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d2a451e1b2273dbc0b8a-3bc31936823e3cb1ea8a",
+          "file": "h3-lighthouse.spec.ts",
+          "line": 6,
+          "column": 79
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T18:08:59.399Z",
+    "duration": 58030.297,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

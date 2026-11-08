@@ -5,6 +5,7 @@ import {useLocale} from './locale-provider';
 import {useTripDraft} from './trip-draft';
 import {track} from '../../lib/session';
 import styles from './trip-budget-calculator.module.css';
+import {BudgetProfileComparison} from './budget-profile-comparison';
 
 export function BudgetProfiles(){
  const {draft,save}=useTripDraft()!,{locale}=useLocale(),copy=budgetProfileCopy[locale];
@@ -22,6 +23,7 @@ export function BudgetProfiles(){
    <button type="button" className="button button-secondary" disabled={!!draft.estimatesRecovery} aria-pressed={!id} onClick={()=>select(null)}>{copy.none}</button>
   </div>
   {invalid.length>0&&<p role="alert" className={styles.error}>{copy.fix} {invalid.map(key=>copy.names[key]).join(', ')}.</p>}
+  {draft.estimates&&<BudgetProfileComparison draft={draft} locale={locale}/>}
   {profile&&id&&<details key={id} open><summary>{copy.edit}: {copy.names[id]}</summary>
    <div className={styles.field}><label htmlFor="profile-hotel-basis">{copy.basis}</label><select id="profile-hotel-basis" value={profile.hotel_basis} onChange={event=>update({...profile,hotel_basis:event.target.value==='stay'?'stay':'night'})}>
     <option value="night">{copy.night}</option><option value="stay">{copy.stay}</option>

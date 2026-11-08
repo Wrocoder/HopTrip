@@ -34,6 +34,7 @@ import {searchReturnPath} from "../../../lib/search-context";
 import {cache} from 'react';
 import {OfferState} from '../../components/offer-state';
 import {stateText} from '../../../lib/i18n/state-copy';
+import {tripSectionCopy} from '../../../lib/i18n/trip-section-copy';
 export const dynamic="force-dynamic";
 // Metadata and body share one outcome within a request, never across requests.
 const loadDeal=cache(async(slug:string)=>{
@@ -66,28 +67,32 @@ export default async function DealPage({params,searchParams,locale="pl"}:Props) 
     <DealViewTracker dealSlug={deal.slug}/>
     <header className="page-heading"><p className="eyebrow">{deal.trip_type === "ROUND_TRIP" ? pl.roundTrip : pl.oneWay}</p><h1>{originLabel(deal.origin_city,deal.origin_code,locale)} ({deal.origin_code}) → {cityLabel(deal.destination_city,deal.destination_slug,locale)}<CountryFlag code={deal.destination_country_code} locale={locale}/></h1>
     <p className="lead">{timelineCopy[locale].departures+":"} {date(deal.trip_start,locale)}{deal.trip_type === "ROUND_TRIP" && ` – ${date(deal.trip_end,locale)}`}</p>{timelineView(deal,locale).nights && <p>{timelineView(deal,locale).nights} {t("planowanego pobytu — daty noclegu sprawdź osobno.")}</p>}</header>
-    <TripNavigation locale={locale} hasEvents={Boolean(deal.events_supported)} hasActivities={Boolean(activitiesForDestination(deal.destination_slug))} hasBooking hasMethodology/>
-    <div id="trip-flight" tabIndex={-1} className="detail-layout"><section className="detail-panel detail-summary" aria-label={t("Cena lotu")}><p className="eyebrow">{pl.perPerson} · PLN</p>
+    <TripNavigation locale={locale}/>
+    <section id="trip-flight" tabIndex={-1} aria-label={tripSectionCopy[locale].flight}>
+    <div className="detail-layout"><section className="detail-panel detail-summary" aria-label={t("Cena lotu")}><p className="eyebrow">{pl.perPerson} · PLN</p>
     <p className="deal-price"><Price value={deal.price_per_person_pln} locale={locale}/> <span>{flightPriceBasis(deal,locale)}</span></p>
     <PriceFreshness deal={deal} locale={locale} id="flight-price-freshness"/>
     <PriceSummary deal={deal} locale={locale}/>
     <h2>{t('Szczegóły lotu')}</h2>
     <FlightSchedule deal={deal} compact detail locale={locale}/>
-    <p className="detail-cost-scope flight-cost-scope">{t('Cena dotyczy lotu. Nocleg nie jest wliczony.')}</p>
-    <p className="flight-baggage-scope">{t('Bagaż do sprawdzenia')}</p>
+    <p className="detail-cost-scope"><span className="flight-cost-scope">{t('Cena dotyczy lotu. Nocleg nie jest wliczony.')}</span> <span className="flight-baggage-scope">{t('Bagaż do sprawdzenia')}</span></p>
     <TripDetails deal={deal} locale={locale} includePrice={false}/>
 
     </section><section id="trip-booking" tabIndex={-1} className="booking-card" aria-labelledby="trip-booking-title"><h2 id="trip-booking-title">{t("Przejście do partnera")}</h2><span className="badge">{pl.partners}</span>
     {deal.components.length ? deal.components.map(c=><section className="booking-component" key={c.id}><p className="booking-price"><Price value={c.price_pln} locale={locale}/>{c.component_type==="FLIGHT" && <span className="flight-price-basis">{flightPriceBasis(deal,locale)}</span>}</p><Outbound component={c} dealSlug={deal.slug} hiddenAfter={offerDeadline(deal)}/></section>) : <p>{pl.noLink}</p>}
     <p className="muted">{pl.disclosure}</p></section></div>
+    <section className="rationale" id="score" tabIndex={-1}><h2>{t("Cena na tle historii")}</h2>
+    <ScoreDetails deal={deal} locale={locale}/></section>
+    </section>
+    <section id="trip-stay" tabIndex={-1} aria-labelledby="trip-stay-heading">
+    <h2 id="trip-stay-heading">{tripSectionCopy[locale].stay}</h2>
     <TripAccommodation key={deal.slug} deal={deal}/>
     <DestinationActivities slug={deal.destination_slug} inTrip locale={locale}/>
     <TripEvents key={`events-${deal.slug}`} deal={deal} locale={locale} activitiesHref={activitiesForDestination(deal.destination_slug)?'#destination-activities':undefined}/>
     <DestinationGuides slug={deal.destination_slug} locale={locale}/>
-    <TripBudgetCalculator key={deal.slug} tripId={deal.slug} shareOffer={{slug:deal.slug,origin:originLabel(deal.origin_city,deal.origin_code),destination:cityLabel(deal.destination_city,deal.destination_slug),start:deal.trip_start,end:deal.trip_type==="ROUND_TRIP" ? deal.trip_end : "",price:deal.flight_price_pln ?? "",observedAt:deal.last_verified_at ?? ""}} start={deal.trip_start} end={deal.trip_type==="ROUND_TRIP" ? deal.trip_end : ""} destinationSlug={deal.destination_slug} initialInput={budgetForTrip(deal)} note={deal.trip_type==="ONE_WAY"
+    </section>
+    <TripBudgetCalculator separateActions key={deal.slug} tripId={deal.slug} shareOffer={{slug:deal.slug,origin:originLabel(deal.origin_city,deal.origin_code),destination:cityLabel(deal.destination_city,deal.destination_slug),start:deal.trip_start,end:deal.trip_type==="ROUND_TRIP" ? deal.trip_end : "",price:deal.flight_price_pln ?? "",observedAt:deal.last_verified_at ?? ""}} start={deal.trip_start} end={deal.trip_type==="ROUND_TRIP" ? deal.trip_end : ""} destinationSlug={deal.destination_slug} initialInput={budgetForTrip(deal)} note={deal.trip_type==="ONE_WAY"
       ? t("To lot w jedną stronę. Uzupełnij koszt powrotu, jeśli go planujesz. Liczba nocy i dni to wartości przykładowe — dopasuj je do swojego pobytu.")
       : t("Cena lotu pochodzi z tej oferty, a liczba nocy i dni z dat podróży. Sprawdź ceny u sprzedawcy i dopasuj liczbę osób oraz pozostałe koszty.")}/>
-    <section className="rationale" id="score" tabIndex={-1}><div className="section-heading"><h2>{t("Cena na tle historii")}</h2></div>
-    <ScoreDetails deal={deal} locale={locale}/></section>
   </article></TripDraftProvider></main>;
 }

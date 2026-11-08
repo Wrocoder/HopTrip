@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {readFileSync,writeFileSync} from 'node:fs';
-import config from '../playwright.config';
+
 import {availableHref} from '../src/lib/i18n/routing';
 
 function conservativeContrast(el:Element){
@@ -57,10 +57,10 @@ test.skip(process.env.HOPTRIP_H3_PRODUCTION!=='1','Contrast review requires the 
 const paths=['/','/deals','/tanie-loty-na-weekend','/city-break','/destinations/barcelona','/destinations/milan','/deals/browser-deal','/saved','/info/trip-budget','/alerts'];
 
 test.beforeEach(async({page,request},info)=>{
- const servers=config.webServer;if(!Array.isArray(servers))throw Error('Expected fixture servers');
- expect(servers[1].command).toContain('npm run start --');expect(servers[1].env?.NODE_ENV).toBe('production');
+ const config=readFileSync(info.config.configFile!,'utf8');expect(config).toContain('npm run start --');expect(config).toContain("NODE_ENV:'production'");
+
  const build=readFileSync('.next/BUILD_ID','utf8').trim();expect(await(await request.get('/deals')).text()).toContain(build);
- await info.attach('execution-mode',{body:JSON.stringify({command:servers[1].command,nodeEnv:servers[1].env?.NODE_ENV,build}),contentType:'application/json'});
+ await info.attach('execution-mode',{body:JSON.stringify({configFile:info.config.configFile,configSource:config,build}),contentType:'application/json'});
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
  await page.route('**/*',route=>['localhost','127.0.0.1'].includes(new URL(route.request().url()).hostname)?route.continue():route.abort());
 });

@@ -12,7 +12,7 @@ from app.models.location import Airport, Destination
 from app.models.offer import TravelOffer
 from app.schemas.alert import AlertFilters
 from app.services import alert_digests as digests
-from app.services.alerts import capability
+from app.services.alerts import CONSENT_VERSION, capability
 from pydantic import ValidationError
 from sqlalchemy import func, select
 
@@ -29,7 +29,7 @@ def settings():
 def subscription(db, **filters):
     alert = DealAlert(id=uuid4().hex, email=uuid4().hex + '@example.test', status='ACTIVE',
                       confirmed_at=NOW - timedelta(days=1), requested_at=NOW - timedelta(days=2),
-                      consent_version='test', filters=AlertFilters(
+                      consent_version=CONSENT_VERSION, filters=AlertFilters(
                           **{'origin': 'WRO', 'budget': '250', 'duration_min': 1,
                              'duration_max': 4, **filters}).model_dump(mode='json'))
     db.add(alert)

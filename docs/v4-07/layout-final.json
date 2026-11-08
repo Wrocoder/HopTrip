@@ -1,0 +1,178 @@
+{
+  "config": {
+    "argv": [
+      "C:\\JetBrainsProfiles\\PyCharm-mrdmitriy\\system\\acp-agents\\.runtimes\\node\\24.19.0\\node.exe",
+      "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "mobile-workflow.spec.ts",
+      "--project=desktop",
+      "--grep",
+      "320px.*ru:",
+      "--output=../../.cache/v4-07-layout-final-results",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-07-layout-final-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/.cache/v4-07-layout-final-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "C:/Users/DmitriyKiselev/PycharmProjects/HopTrip/apps/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "mobile-workflow.spec.ts",
+      "file": "mobile-workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "320px",
+          "file": "mobile-workflow.spec.ts",
+          "line": 22,
+          "column": 48,
+          "specs": [
+            {
+              "title": "ru: mobile discovery, planning and return context",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop",
+                  "projectName": "desktop",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 34915,
+                      "error": {
+                        "message": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation",
+                        "stack": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts:90:30\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts:90:3",
+                        "location": {
+                          "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts",
+                          "column": 30,
+                          "line": 90
+                        },
+                        "snippet": "  88 |   await page.setViewportSize({width,height:844});\n  89 |   const actions=page.locator('#trip-save .trip-actions button');await activate(actions.nth(0));\n> 90 |   await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'null')?.plans.length??0,savedPlansKey)).toBe(1);\n     |                              ^\n  91 |   await expect(page).toHaveURL(/#local=/);await activate(page.getByRole('button',{name:tripText(locale,'Udostępnij'),exact:true}));const shared=page.locator('#trip-share-link');await expect(shared).toHaveValue(/\\/trip#plan=/);await fit(shared);\n  92 |   if(width===320||width===1440)expect((await new AxeBuilder({page}).include('.site-header').include('#calculator').include('#accommodation').include('#trip-events').analyze()).violations).toEqual([]);\n  93 |   if(locale==='pl')await page.locator('#calculator').screenshot({path:info.outputPath(`calculator-${width}.png`),scale:'css',animations:'disabled'});"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts",
+                            "column": 30,
+                            "line": 90
+                          },
+                          "message": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation\n\n  88 |   await page.setViewportSize({width,height:844});\n  89 |   const actions=page.locator('#trip-save .trip-actions button');await activate(actions.nth(0));\n> 90 |   await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)??'null')?.plans.length??0,savedPlansKey)).toBe(1);\n     |                              ^\n  91 |   await expect(page).toHaveURL(/#local=/);await activate(page.getByRole('button',{name:tripText(locale,'Udostępnij'),exact:true}));const shared=page.locator('#trip-share-link');await expect(shared).toHaveValue(/\\/trip#plan=/);await fit(shared);\n  92 |   if(width===320||width===1440)expect((await new AxeBuilder({page}).include('.site-header').include('#calculator').include('#accommodation').include('#trip-events').analyze()).violations).toEqual([]);\n  93 |   if(locale==='pl')await page.locator('#calculator').screenshot({path:info.outputPath(`calculator-${width}.png`),scale:'css',animations:'disabled'});\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts:90:30\n    at C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts:90:3"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-08T10:17:57.732Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-07-layout-final-results\\mobile-workflow-320px-ru-m-03260-planning-and-return-context-desktop\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\.cache\\v4-07-layout-final-results\\mobile-workflow-320px-ru-m-03260-planning-and-return-context-desktop\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\DmitriyKiselev\\PycharmProjects\\HopTrip\\apps\\web\\tests\\mobile-workflow.spec.ts",
+                        "column": 30,
+                        "line": 90
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3a2bb2148a68a8e32722-97583d3e04bc23f7401b",
+              "file": "mobile-workflow.spec.ts",
+              "line": 24,
+              "column": 57
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-08T10:17:45.533Z",
+    "duration": 52378.018,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

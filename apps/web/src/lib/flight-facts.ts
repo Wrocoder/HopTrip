@@ -40,6 +40,12 @@ function instantDate(value:string|null|undefined):Date|null {
   const instant=new Date(value);
   return Number.isFinite(instant.getTime()) ? instant : null;
 }
+// Elapsed journey time, including connections; never subtract local wall clocks.
+export function flightElapsedMinutes(departure:string|null|undefined,arrival:string|null|undefined):number|null {
+ const start=instantDate(departure),end=instantDate(arrival);
+ if(!start||!end||end.getTime()<=start.getTime())return null;
+ return Math.ceil((end.getTime()-start.getTime())/60000);
+}
 export function validFlightZone(zone:string|null|undefined):zone is string {
   if(!zone)return false;
   try {new Intl.DateTimeFormat("en-GB",{timeZone:zone});return true;}catch{return false;}

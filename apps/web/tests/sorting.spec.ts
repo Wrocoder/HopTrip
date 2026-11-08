@@ -24,7 +24,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: applied sort
  const select=page.locator('select[name="sort"]'),rule=page.locator('.sort-explanation');
  await expect(page.locator('.deal-card')).toHaveCount(2);
  await expect(rule).toContainText(t(labels.score));
- await expect(select.locator('option')).toHaveCount(4);
+ await expect(select.locator('option')).toHaveCount(5);
  for(const [key,label] of Object.entries(labels))await expect(select.locator(`option[value="${key}"]`)).toHaveText(t(label));
  expect(await select.getAttribute('aria-describedby')).toBe(await rule.getAttribute('id'));
  await page.locator('.preset-rules > summary').click();

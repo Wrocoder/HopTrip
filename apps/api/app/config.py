@@ -6,8 +6,15 @@ from urllib.parse import urlsplit
 from pydantic import Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from app.schemas.connection import ConnectionPolicy
+from app.schemas.trip_quality import TripQualityPolicy
+from app.schemas.weekend import WeekendStayPolicy
+
 
 class Settings(BaseSettings):
+    trip_quality_policy: TripQualityPolicy = Field(default_factory=TripQualityPolicy)
+    connection_policy: ConnectionPolicy = Field(default_factory=ConnectionPolicy)
+    weekend_stay_policy: WeekendStayPolicy = Field(default_factory=WeekendStayPolicy)
     app_name: str = "HopTrip API"
     app_env: str = "development"
     log_level: str = "INFO"

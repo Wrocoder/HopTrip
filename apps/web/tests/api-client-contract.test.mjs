@@ -18,6 +18,16 @@ const api=load(path.resolve('src/lib/api.ts'));
 async function withFetch(request,run){const original=globalThis.fetch;globalThis.fetch=request;try{await run();}finally{globalThis.fetch=original;}}
 const failure=(status,code)=>error=>error instanceof api.ApiError&&error.status===status&&error.code===code;
 
+test('recommended unsupported/cap errors stay explicit and valid empty results are not fabricated',async()=>{
+ await withFetch(async()=>Response.json({detail:[{loc:['query','sort'],type:'literal_error'}]},{status:422}),async()=>{
+  await assert.rejects(api.getDeals({sort:'recommended'}),failure(422,'TRIP_QUALITY_UNSUPPORTED'));
+ });
+ await withFetch(async()=>Response.json({detail:{code:'TRIP_QUALITY_QUERY_TOO_BROAD'}},{status:422}),async()=>{
+  await assert.rejects(api.getDeals({sort:'recommended'}),failure(422,'TRIP_QUALITY_QUERY_TOO_BROAD'));
+ });
+ await withFetch(async()=>Response.json([]),async()=>assert.deepEqual(await api.getDeals({sort:'recommended'}),[]));
+});
+
 test('malformed 200 catalog page is an unavailable response, never an empty result',()=>withFetch(async()=>Response.json({items:null,total:0,offset:0,limit:12}),async()=>{
  await assert.rejects(api.getDealResults(),failure(502,'INVALID_RESPONSE'));
 }));
@@ -36,6 +46,9 @@ test('an older or inconsistent API cannot silently ignore an exact weekend mode'
   historical_baseline_pln:null,discount_percent:null,deal_score:0,confidence:'0',explanation_codes:[],score_version:'synthetic',score_components:{},last_verified_at:'2030-10-01T00:00:00Z',expires_at:null};
  const assessment={version:'weekend-v1',work_hours:{start:'09:00:00',end:'17:00:00'},work_timezone:'Europe/Warsaw',actual_return_local_date:'2030-11-03',airport_arrival_day_offset:0,confidence:'KNOWN',calendar:'ELIGIBLE',flexible:'ELIGIBLE',no_leave:'ELIGIBLE',might_require_leave:false,airport_times_only:true,reasons:[]};
  const interval={version:'destination-time-v1',scope:'AIRPORT_ARRIVAL_TO_RETURN_DEPARTURE',status:'KNOWN',airport_interval_minutes:1200,arrival_airport:'BCN',departure_airport:'BCN',airport_change:false,reason:null,usable_city_minutes:null,city_time_status:'UNKNOWN',buffers_applied:false,sort_eligible:true};
+ await withFetch(async()=>Response.json([deal]),async()=>{
+  await assert.rejects(api.getDeals({sort:'recommended'}),failure(502,'TRIP_QUALITY_UNSUPPORTED'));
+ });
  const relation={airport:'BGY',destination_slug:'london',target_city:'London',status:'KNOWN',distance_km:45,distance_basis:'PUBLISHER_UNSPECIFIED',source:'https://example.com/source',last_verified_at:'2026-11-03',remote:true,travel_minutes:null,travel_estimate_status:'UNKNOWN'};
  const airportContext={version:'airport-context-v1',itinerary_verified:true,arrival:relation,return_departure:null,different_destination_airports:null,different_home_airports:null,arrival_local_time:null,return_departure_local_time:null,arrival_time_estimated:false,warnings:['TRANSFER_TIME_UNKNOWN'],remote_from_km:40,metadata_max_age_days:180,late_arrival_from:'22:00',early_arrival_before:'06:00',early_return_departure_before:'08:00',limitations:[]};
  await withFetch(async()=>Response.json([{...deal,airport_context:airportContext}]),async()=>assert.equal((await api.getDeals()).length,1));

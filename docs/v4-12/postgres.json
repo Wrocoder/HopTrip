@@ -1,0 +1,23 @@
+{
+  "id": "a020c4c1f461276b9f26a65c48a4b20dc82e20efa82a07ad058c7c4c8798ec09",
+  "name": "/hoptrip-v4-12-pg-20261108",
+  "labels": {
+    "hoptrip.owner": "codex",
+    "hoptrip.task": "V4-12"
+  },
+  "image": "sha256:16bc17c64a573ef34162af9298258d1aec548232985b33ed7b1eac33ba35c229",
+  "ports": {
+    "5432/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "54967"
+      }
+    ]
+  },
+  "tmpfs": {
+    "/var/lib/postgresql/data": "rw"
+  },
+  "database": "hoptrip_test",
+  "created": "2026-11-08T16:24:42.034181388Z",
+  "scope": "Disposable local PG16, cached image, tmpfs, no production mounts"
+}

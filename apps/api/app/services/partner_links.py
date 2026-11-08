@@ -12,6 +12,7 @@ from app.models.offer import TravelOffer
 from app.providers.base import ProviderNotConfigured, ProviderPermanentError, ProviderTransientError
 from app.providers.travelpayouts import _retry_after
 from app.services.availability import available_deals_query
+from app.services.booking_context import flight_link_context_valid
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -125,8 +126,10 @@ async def sync_partner_links(
         # Explicit manual binding to another program takes precedence.
         if component.affiliate_program_id not in (None, program.id):
             continue
-        metadata = dict(component.metadata_json or {})
+        metadata = dict(component.metadata_json) if isinstance(component.metadata_json, dict) else {}
         try:
+            if not flight_link_context_valid(db, component, offer):
+                raise ValueError("Invalid itinerary context")
             direct = source_url(offer.raw_payload.get("link"))
         except ValueError:
             metadata.pop("outbound_url", None)

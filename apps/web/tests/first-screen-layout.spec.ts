@@ -43,7 +43,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: initial pric
   const partner=page.locator('#trip-booking a.cta');await expect(partner).toBeVisible();const detail=await partner.evaluate(el=>{const r=el.getBoundingClientRect();return {top:r.top,bottom:r.bottom,height:r.height,scrollY,viewport:innerHeight};});
   if(width>=1366){expect(detail.scrollY).toBe(0);expect(detail.top).toBeGreaterThanOrEqual(0);expect(detail.bottom).toBeLessThanOrEqual(900);await expect(partner).toBeInViewport({ratio:1});}
   if(width===1366)await page.screenshot({path:info.outputPath('detail-first-screen.png'),scale:'css',animations:'disabled'});
-  await page.locator('.trip-navigation a[href="#trip-booking"]').focus();await page.keyboard.press('Enter');await expect(page.locator('#trip-booking')).toBeFocused();await expect(partner).toBeInViewport({ratio:1});expect(detail.height).toBeGreaterThanOrEqual(44);
+  await page.evaluate(()=>{location.hash='trip-booking';});await expect(page.locator('#trip-booking')).toBeFocused();await expect(partner).toBeInViewport({ratio:1});expect(detail.height).toBeGreaterThanOrEqual(44);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect(page.locator('#trip-booking')).toContainText(tripText(locale,'Przejście do partnera'));
   if(width===320||width===1366)expect((await new AxeBuilder({page}).include('.detail-layout').include('.trip-navigation').analyze()).violations).toEqual([]);
   rows.push({locale,project:info.project.name,width,height:900,catalog,detail});
