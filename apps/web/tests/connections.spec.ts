@@ -5,6 +5,12 @@ import {connectionWarnings} from '../src/lib/connections';
 import type {Deal} from '../src/lib/api';
 
 const fixture='http://127.0.0.1:8100';
+test.beforeAll(async({request})=>{
+ // Consume a complete SSR catalogue before mutating the shared fixture database.
+ // A streamed HTTP 200 from the homepage is not a catalogue/API readiness check.
+ const response=await request.get('/deals?sort=price');expect(response.ok()).toBe(true);
+ expect(await response.text()).toContain('deal-card-link');
+});
 test.beforeEach(async({page,request})=>{
  expect((await request.post(`${fixture}/__test__/connection-fixtures?enabled=true`)).ok()).toBe(true);
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
