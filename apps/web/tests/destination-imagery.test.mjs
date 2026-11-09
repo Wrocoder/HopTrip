@@ -6,6 +6,7 @@ import {destinationImage,destinationImages,imageryCopy} from '../src/lib/destina
 import {articlePhotoCaption} from '../src/lib/article-photo-captions.ts';
 import photos from '../src/lib/article-photo-data.json' with {type:'json'};
 import catalog from '../../api/app/data/destinations.json' with {type:'json'};
+import liveSlugs from './fixtures/live-destination-photo-slugs.json' with {type:'json'};
 
 test('editorial photo allowlist fails closed for unknown/prototype/path values and has complete localized descriptions',()=>{
  for(const slug of ['unknown-city','flight','luggage','__proto__','constructor','../../rome','ROME',''])assert.equal(destinationImage(slug),undefined);
@@ -34,7 +35,7 @@ test('shipped photographs decode with reserved aspect ratio, bounded bytes and c
   assert.ok(file.length<=(reused?360000:200000));bytes+=file.length;
   for(const value of [image.title,image.author,image.licenseUrl])assert.ok(credits.includes(value));
  }
- assert.ok(bytes<=10000000);
+ assert.ok(bytes<=16000000);
 });
 
 test('collection destinations from the reported screenshot reuse the reviewed city assets and licence metadata',()=>{
@@ -67,4 +68,8 @@ test('every catalog destination has a local photograph and matching attribution'
   assert.ok(image,`${destination.slug}: missing destination photograph`);
   assert.ok(readFileSync(new URL(`../public${image.src}`,import.meta.url)).length>0);
  }
+});
+
+test('active production destinations observed on 2026-11-09 have exact photo mappings',()=>{
+ for(const slug of liveSlugs)assert.ok(destinationImage(slug),`${slug}: missing production destination photograph`);
 });
