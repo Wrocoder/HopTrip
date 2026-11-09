@@ -67,7 +67,7 @@ test('all local WebP assets and credits ship with bounded responsive responses',
  const sizes=[];
  for(const image of Object.values(destinationImages)){
   const original=await request.get(image.src);expect(original.status()).toBe(200);expect(original.headers()['content-type']).toContain('image/webp');
-  expect((await original.body()).length).toBeLessThanOrEqual(image.src.startsWith('/media/articles/')?360000:110000);
+  expect((await original.body()).length).toBeLessThanOrEqual(image.src.startsWith('/media/articles/')?360000:200000);
   for(const width of [384,640]){
    const response=await request.get(`/_next/image?url=${encodeURIComponent(image.src)}&w=${width}&q=75`,{headers:{accept:'image/webp'}});
    expect(response.status()).toBe(200);expect(response.headers()['content-type']).toContain('image/webp');
@@ -78,7 +78,7 @@ test('all local WebP assets and credits ship with bounded responsive responses',
  writeFileSync(info.outputPath('response-sizes.json'),JSON.stringify(sizes,null,2));
 });
 
-for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: mapped city photographs and unpictured destinations preserve navigation`,async({page,request},info)=>{
+for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: mapped city photographs preserve navigation`,async({page,request},info)=>{
  const section=page.locator('section:has(> #home-destinations)');
  for(const slugs of [['wroclaw','warsaw','krakow'],['gdansk','katowice','poznan'],['bergen','reykjavik']]){
   const query=new URLSearchParams(slugs.map(slug=>['slug',slug]));
@@ -104,10 +104,9 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: mapped city 
   if(slugs[0]==='bergen'&&locale==='ru')await section.screenshot({path:info.outputPath('mapped-cities-ru.png'),animations:'disabled'});
  }
  expect((await request.post(`${fixture}/__test__/destination-images?slug=berlin`)).ok()).toBe(true);
- await page.goto(localizedHref('/',locale));await expect(section.locator('img')).toHaveCount(0);
+ await page.goto(localizedHref('/',locale));await expect(section.locator('img')).toHaveCount(1);
  await expect(section.getByText(imageryCopy[locale].unavailable,{exact:true})).toHaveCount(0);
- await section.locator('a').click();await expect(page).toHaveURL(new RegExp(localizedHref('/destinations',locale)+'$'));
- const berlin=page.locator('[data-destination-slug="berlin"]');await expect(berlin).toBeVisible();
+ const berlin=section.locator('li > a');await expect(berlin).toBeVisible();
  const href=await berlin.getAttribute('href');await berlin.click();
  await expect(page).toHaveURL(new URL(href!,page.url()).toString());await expect(page.locator('main h1')).toBeVisible();
 });

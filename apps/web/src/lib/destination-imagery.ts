@@ -1,5 +1,6 @@
 import type {Locale} from './i18n/config.ts';
 import photos from './article-photo-data.json' with {type:'json'};
+import routePhotos from './destination-photo-data.json' with {type:'json'};
 import {articlePhotoCaption} from './article-photo-captions.ts';
 
 type DestinationImage={src:string;width:number;height:number;title:string;author:string;source:string;license:string;licenseUrl:string;alt:Record<Locale,string>;authorUrl?:string;attribution?:string;shareAlike?:boolean};
@@ -17,6 +18,7 @@ const cityImages:Record<string,DestinationImage>=Object.fromEntries(Object.entri
 }]));
 // Editorial images only: this allowlist never changes catalog eligibility or ranking.
 export const destinationImages:Readonly<Record<string,DestinationImage>>={
+ ...routePhotos,
  ...cityImages,
  barcelona:{src:'/media/destinations/barcelona.webp',width:960,height:600,title:'Parc guell - panoramio.jpg',author:'essetefano',
   source:'https://commons.wikimedia.org/wiki/File:Parc_guell_-_panoramio.jpg',license:'CC BY 3.0',licenseUrl:'https://creativecommons.org/licenses/by/3.0/',
