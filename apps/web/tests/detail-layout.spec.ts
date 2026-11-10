@@ -27,15 +27,21 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
   await page.goto(localizedHref('/deals/browser-13?returnTo='+encodeURIComponent('/deals?origin=WRO&sort=price&offset=12'),locale));
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(summary.locator('.deal-price')).toBeVisible();
-  await expect(summary.locator('h2')).toHaveText(t('Szczegóły lotu'));
+  await expect(summary.locator('.home-arrival')).toBeVisible();
   await expect(booking.getByRole('heading',{level:2})).toHaveText(t('Przejście do partnera'));
-  await expect(summary.locator('.trip-details')).not.toHaveAttribute('open','');
+  await expect(page.locator('.decision-information .trip-details')).not.toHaveAttribute('open','');
   await expect(summary.locator('.price-assessment')).toHaveCount(0);
-  await expect(summary.locator('.price-freshness')).toHaveCount(1);
+  await expect(summary.locator('.price-freshness')).toHaveCount(0);
+  await expect(page.locator('.decision-information .price-freshness')).toHaveCount(1);
   await expect(page.locator('.price-assessment')).toHaveCount(1);
   const warning=summary.locator('.flight-quality');
-  if(scenario==='complete')await expect(warning).toHaveCount(0);
-  else await expect(warning).toHaveAttribute('data-quality',quality.status);
+  if(scenario==='critical')await expect(warning).toHaveAttribute('data-quality',quality.status);
+  else await expect(warning).toHaveCount(0);
+  if(scenario==='partial'){
+   await page.locator('.decision-information .trip-details > summary').click();
+   for(const reason of quality.reasons)await expect(page.locator('.card-quality-details').getByText(qualityReasonText(locale,reason),{exact:true})).toBeVisible();
+   await page.locator('.decision-information .trip-details > summary').click();
+  }
   if(scenario==='critical'){
    await expect(warning.locator('details')).toHaveCount(0);
    for(const reason of quality.reasons)await expect(warning.getByText(qualityReasonText(locale,reason),{exact:true})).toBeVisible();
@@ -77,8 +83,8 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: flight decis
  // Native anchor focus and existing detail disclosure are still usable by keyboard.
  await nav.locator('a[href="#trip-flight"]').focus();await page.keyboard.press('Enter');
  await expect(page.locator('#trip-flight')).toBeFocused();
- await summary.locator('.trip-details > summary').focus();await page.keyboard.press('Enter');
- await expect(summary.locator('.flight-facts')).toBeVisible();
+ await page.locator('.decision-information .trip-details > summary').focus();await page.keyboard.press('Enter');
+ await expect(page.locator('.decision-information .flight-facts')).toBeVisible();
  await page.evaluate(()=>{location.hash='score';});
  await expect(page.locator('#score')).toBeFocused();
  await expect(page.locator('#score .score-sum')).not.toBeVisible();

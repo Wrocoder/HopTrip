@@ -5,17 +5,15 @@ test('structured return shows the actual airports, clocks and connecting flights
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
  try{
   await page.goto('/deals/browser-13');
-  const summary=page.locator('.detail-summary'),schedule=summary.locator('.flight-schedule-compact');
-  await expect(schedule.locator('.outbound-leg')).toContainText(/WRO .*→ STN/);
-  await expect(schedule.locator('.return-leg')).toContainText(/LTN .*→ WRO/);
-  await expect(schedule.locator('.return-leg')).not.toContainText('szac.');
-  await expect(schedule.locator('.flight-route-warning')).toContainText('Powrót z innego lotniska: LTN (przylot: STN)');
-  await expect(schedule.locator('.schedule-airline')).toContainText('FR 8406');
-  await expect(schedule.locator('.schedule-airline')).toContainText('W6 1234');
-  await expect(schedule.locator('.schedule-airline')).toContainText('LO 999');
-  await summary.locator('.trip-details > summary').click();
-  await expect(summary.locator('.flight-connections')).toContainText('LTN → BER');
-  await expect(summary.locator('.flight-connections')).toContainText('BER → WRO');
+  const summary=page.locator('.detail-summary'),information=page.locator('.decision-information');
+  await expect(summary.locator('.home-arrival')).not.toContainText('szac.');
+  await expect(summary.locator('[data-decision-risks]')).toContainText('Powrót z innego lotniska: LTN (przylot: STN)');
+  await information.locator('.trip-details > summary').click();
+  const legs=information.locator('.flight-connections');
+  await expect(legs).toContainText('WRO → STN');
+  await expect(legs).toContainText('LTN → BER');
+  await expect(legs).toContainText('BER → WRO');
+  for(const flight of ['FR 8406','W6 1234','LO 999'])await expect(legs).toContainText(flight);
   const body=await(await request.get('http://127.0.0.1:8100/api/v1/deals/browser-13')).json();
   expect(body.flight_facts.return_legs).toHaveLength(2);
   expect((Date.parse(body.flight_facts.return_arrival)-Date.parse(body.flight_facts.return_departure))/60000).toBe(180);
@@ -43,10 +41,10 @@ test("unknown flight details remain explicit before the partner click",async({pa
   await card.locator(".deal-card-link").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("h1 .country-flag")).toHaveAttribute("title","Hiszpania");
-  await page.locator(".detail-summary .trip-details > summary").click();
-  await expect(page.locator(".detail-summary .flight-facts")).toContainText("Bagaż do sprawdzenia u partnera");
-  await expect(page.locator(".detail-summary .flight-facts")).toContainText("Przewoźnik do sprawdzenia u partnera");
-  await expect(page.locator(".booking-price")).toContainText("za osobę · w jedną stronę");
+  await page.locator(".decision-information .trip-details > summary").click();
+  await expect(page.locator(".decision-information .flight-facts")).toContainText("Bagaż do sprawdzenia u partnera");
+  await expect(page.locator(".decision-information .flight-facts")).toContainText("Przewoźnik do sprawdzenia u partnera");
+  await expect(page.locator(".detail-summary .deal-price")).toContainText("za osobę · w jedną stronę");
 });
 
 test("round trip facts agree between card and detail without mobile overflow",async({page},testInfo)=>{
@@ -66,8 +64,8 @@ test("round trip facts agree between card and detail without mobile overflow",as
   await expect(card.locator(".destination-time")).toContainText("70 godz. 0 min");
   await card.screenshot({path:testInfo.outputPath("flight-card.png")});
   await card.locator(".deal-card-link").click();
-  const facts=page.locator(".detail-summary .flight-facts");
-  await page.locator(".detail-summary .trip-details > summary").click();
+  const facts=page.locator(".decision-information .flight-facts");
+  await page.locator(".decision-information .trip-details > summary").click();
   await expect(facts).toContainText("Lotnisko docelowe: BCN");
   await expect(facts).toContainText("Godziny lokalne");
   await expect(facts).toContainText("obliczony z czasu lotu");
@@ -93,10 +91,9 @@ test("different return airports stay independent on cards and details",async({pa
     await expect(card.locator(".return-leg .flight-stops")).toHaveText("Liczba przesiadek: 1");
     await card.screenshot({path:testInfo.outputPath("open-jaw-card.png")});
     await card.locator(".deal-card-link").click();
-    const schedule=page.locator(".detail-summary .flight-schedule-compact");
-    await expect(schedule.locator(".return-leg")).toContainText(/LTN .*→ WRO/);
-    await page.locator(".detail-summary .trip-details > summary").click();
-    await expect(page.locator(".detail-summary .flight-facts")).toContainText("Powrót: Lotnisko wylotu: LTN · Lotnisko docelowe: WRO");
+    await expect(page.locator('.detail-summary [data-decision-risks]')).toContainText('Powrót z innego lotniska: LTN');
+    await page.locator(".decision-information .trip-details > summary").click();
+    await expect(page.locator(".decision-information .flight-facts")).toContainText("Powrót: Lotnisko wylotu: LTN · Lotnisko docelowe: WRO");
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
   } finally {await request.post("http://127.0.0.1:8100/__test__/compact-card?scenario=normal");}
 });
@@ -107,14 +104,22 @@ test("missing return airports use explicit unknowns and UTC without copying outb
     for(const scenario of ["unknown-return","unknown-airports"]){
       await request.post(`http://127.0.0.1:8100/__test__/compact-card?scenario=${scenario}`);
       await page.goto("/deals/browser-13");
-      const schedule=page.locator(".detail-summary .flight-schedule-compact");
-      await expect(schedule.locator(".return-leg")).toContainText("lotnisko do sprawdzenia");
-      await expect(schedule.locator(".return-leg")).toContainText("UTC");
-      await expect(schedule.locator(".return-leg")).not.toContainText(/WRO|BCN/);
-      await expect(schedule.locator(".return-leg .flight-stops")).toBeVisible();
+      await expect(page.locator('.detail-summary .home-arrival')).toContainText('do potwierdzenia');
+      await expect(page.locator('.detail-summary [data-decision-risks]')).toContainText('Sprawdź lotniska powrotu u partnera');
+      await page.locator('.decision-information .trip-details > summary').click();
+      const facts=page.locator('.decision-information .flight-facts');
+      const airports=facts.locator('p').filter({hasText:'Powrót: Lotnisko wylotu:'});
+      await expect(airports).toContainText('do sprawdzenia u partnera');
+      await expect(airports).not.toContainText(/WRO|BCN/);
+      await expect(facts.locator('p').filter({hasText:'Powrót — odlot:'})).toContainText('UTC');
+      await expect(facts.locator('.flight-stop-counts')).toBeVisible();
       await page.locator("#stay-schedule > summary").click();
       await expect(page.locator("#stay-schedule p").filter({hasText:"Zapisany wylot powrotny:"})).toContainText("UTC");
-      if(scenario==="unknown-airports")await expect(schedule.locator(".outbound-leg")).not.toContainText(/WRO|BCN/);
+      if(scenario==="unknown-airports"){
+       const outbound=facts.locator('p').filter({hasText:/^Lotnisko wylotu:/});
+       await expect(outbound).toContainText('Lotnisko wylotu: do sprawdzenia u partnera · Lotnisko docelowe: do sprawdzenia u partnera');
+       await expect(outbound).toContainText('kod kierunku: BCN; nie potwierdza lotniska');
+      }
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
     }
   } finally {await request.post("http://127.0.0.1:8100/__test__/compact-card?scenario=normal");}

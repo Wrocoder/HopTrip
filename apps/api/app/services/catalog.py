@@ -94,12 +94,13 @@ def serialize_deal(db: Session, deal: Deal) -> DealRead:
     result.destination_time = destination_time(
         result.flight_facts, itinerary_eligible=result.flight_quality.recommendation_eligible,
     )
-    result.trip_quality = trip_quality(result.flight_facts, result.flight_quality,
-        result.weekend_assessment, result.connection_assessment, policy=settings.trip_quality_policy)
-    result.trip_quality_score = result.trip_quality.score
-    result.is_featured = deal.is_featured and result.flight_quality.recommendation_eligible
     result.airport_context = airport_context(
         result.flight_facts, destination_slug=result.destination_slug, round_trip=result.trip_type == "ROUND_TRIP",
         itinerary_eligible=result.flight_quality.recommendation_eligible,
     )
+    result.trip_quality = trip_quality(result.flight_facts, result.flight_quality,
+        result.weekend_assessment, result.connection_assessment, policy=settings.trip_quality_policy,
+        airport=result.airport_context)
+    result.trip_quality_score = result.trip_quality.score
+    result.is_featured = deal.is_featured and result.flight_quality.recommendation_eligible
     return result

@@ -30,6 +30,7 @@ export function landingMetadata(metadata:Metadata,path:string,locale:Locale):Met
 }
 
 const ui={
+ "Loty Kraków — Rzym":["Kraków — Rome flights","Перелёты Краков — Рим","Перельоти Краків — Рим"],
  "Podgląd obejmuje do 12 ofert. Otwórz pełne wyszukiwanie, aby ustawić daty i przejrzeć kolejne wyniki.":["This preview shows up to 12 offers. Open the full search to set dates and browse further results.","В этом обзоре до 12 предложений. Откройте полный поиск, чтобы задать даты и посмотреть остальные результаты.","У цьому огляді до 12 пропозицій. Відкрийте повний пошук, щоб задати дати й переглянути решту результатів."],
  "Wszystkie wyniki z KRK — ustaw daty i budżet":["All results from KRK — set dates and budget","Все результаты из KRK — задать даты и бюджет","Усі результати з KRK — задати дати й бюджет"],
  "Zaplanuj podróż":["Plan your trip","Спланируйте поездку","Сплануйте подорож"],

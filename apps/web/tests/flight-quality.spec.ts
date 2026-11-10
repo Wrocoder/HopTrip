@@ -14,8 +14,12 @@ test('complete, partial and critical source data have distinct presentation and 
    expect((await response.json()).quality.status).toBe(status);
    await page.goto('/deals/browser-13');
    const warning=page.locator('.detail-summary .flight-quality');
-   if(scenario==='complete')await expect(warning).toHaveCount(0);
-   else await expect(warning).toHaveAttribute('data-quality',status);
+   if(scenario==='critical')await expect(warning).toHaveAttribute('data-quality',status);
+   else await expect(warning).toHaveCount(0);
+   if(scenario==='partial'){
+    await page.locator('.decision-information .trip-details > summary').click();
+    await expect(page.locator('.card-quality-details')).toBeVisible();
+   }
    expect((await new AxeBuilder({page}).include('.detail-summary').analyze()).violations).toEqual([]);
    await page.goto('/');
    const recommended=page.locator('.catalog-section a.deal-card-link[href="/deals/browser-13"]');

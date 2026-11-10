@@ -29,7 +29,7 @@ test('directory has explicit canonical-language routes and preserves existing ci
   assert.ok(pageLocales('/destinations').includes(locale));assert.equal(pathLocale(locale==='pl'?'/destinations':`/${locale}/destinations`),locale);
   assert.equal(destinationBrowseHref(milan,locale),`${locale==='pl'?'':`/${locale}`}/destinations/milan`);
   const rome={...milan,slug:'rome'};
-  assert.equal(destinationBrowseHref(rome,locale),locale==='pl'?'/destinations/rome':`/${locale}/deals?destination=rome`);
+  assert.equal(destinationBrowseHref(rome,locale),locale==='pl'?'/destinations/rome':`/${locale}/destinations/rome`);
  }
 });
 test('directory query is bounded, single-valued and treats empty input as the full list',()=>{

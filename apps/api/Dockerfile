@@ -1,7 +1,10 @@
 FROM python:3.12-slim
 WORKDIR /app
 COPY pyproject.toml requirements.lock ./
-RUN pip install --no-cache-dir -r requirements.lock
+RUN --mount=type=secret,id=pip_ca \
+    if [ -f /run/secrets/pip_ca ]; then \
+      PIP_CERT=/run/secrets/pip_ca pip install --no-cache-dir -r requirements.lock; \
+    else pip install --no-cache-dir -r requirements.lock; fi
 COPY apps/api ./apps/api
 COPY apps/api/entrypoint.sh ./entrypoint.sh
 # Dependencies are installed from the lockfile; run the copied source directly.

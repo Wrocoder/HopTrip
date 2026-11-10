@@ -6,10 +6,10 @@ test("audit midnight arrival is visible while seven hotel nights and manual mone
  const home=page.locator(".detail-summary .home-arrival");
  await expect(home).toBeVisible();
  await expect(home).toContainText("25 paź");
- await expect(page.locator(".detail-summary .flight-schedule-compact")).toContainText("00:40");
+ await expect(home).toContainText("00:40");
  await expect(home).toContainText("+1 dzień");
- await expect(page.locator(".detail-summary .flight-schedule-compact")).toContainText("Przylot szacowany");
- await expect(page.locator(".detail-summary .trip-details")).not.toHaveAttribute("open","");
+ await expect(home).toContainText("szac.");
+ await expect(page.locator(".decision-information .trip-details")).not.toHaveAttribute("open","");
  await expect(page.locator("#stay-checkout")).toHaveValue("2026-10-24");
  await expect(page.locator("#budget-nights")).toHaveValue("7");
  await expect(page.locator("#budget-days")).toHaveValue("8");

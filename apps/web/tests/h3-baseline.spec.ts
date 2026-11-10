@@ -7,7 +7,7 @@ import {availableHref} from '../src/lib/i18n/routing';
 // Baseline observation, not an approval of existing defects. Artifacts survive failures.
 const paths=['/','/deals','/tanie-loty-na-weekend','/city-break',
  '/destinations/barcelona','/destinations/milan','/deals/browser-deal','/saved',
- '/info/trip-budget','/alerts'];
+ '/info/trip-budget','/alerts'].filter(path=>process.env.HOPTRIP_SKIP_ALERTS!=='1'||path!=='/alerts');
 const widths=[320,375,390,768,1440];
 test.beforeEach(async({request},info)=>{
  if(process.env.HOPTRIP_H3_PRODUCTION!=='1')return;

@@ -21,7 +21,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: search, offe
  await expect(page.locator('.home-collections [data-collection="under-300"] .deal-card')).toHaveCount(2);
  await expect(page.locator('.home-collections [data-collection="upcoming-short"] .deal-card')).toHaveCount(2);
  const weekendRows=await(await request.get('http://127.0.0.1:8100/api/v1/deals?origin=KTW&round_trip=true&weekend_mode=calendar-v1&limit=100')).json();
- const weekendCount=Math.min(3,weekendRows.filter((row:Deal)=>row.flight_quality?.recommendation_eligible&&stayRecommendationEligible(row,true)).length);
+ const weekendCount=Math.min(3,weekendRows.filter((row:Deal)=>row.flight_quality?.recommendation_eligible&&row.trip_quality?.recommendation?.planning_eligible===true&&stayRecommendationEligible(row,true)).length);
  await expect(page.locator('.home-collections [data-collection="calendar-weekend"] .deal-card')).toHaveCount(weekendCount);
  await expect(page.locator('main .deal-card')).toHaveCount(6+weekendCount);
  const order=['.hero','.catalog-section','section:has(> #home-collections)','section:has(> #home-destinations)','section:has(> #home-planning)','section:has(> #home-how)','section:has(> #home-guides)'];

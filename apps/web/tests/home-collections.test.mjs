@@ -5,6 +5,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import {createRequire} from 'node:module';
 import ts from 'typescript';
+import {planningQuality} from './fixtures/planning-quality.mjs';
 import {searchFilters,searchSeo,searchUrl} from '../src/lib/search-policy.ts';
 const require=createRequire(import.meta.url),modules=new Map();
 function load(file){
@@ -17,6 +18,7 @@ function load(file){
 const {loadHomeCollections,homeCollectionDefinitions,collectionsMatchOrigin}=load(path.resolve('src/lib/home-collections.ts'));
 const now=Date.parse('2030-04-01T00:00:00Z');
 function deal(id=1,patch={}){
+ patch={trip_quality:planningQuality(),...patch};
  return {id,slug:`synthetic-${id}`,trip_start:'2030-05-03',trip_end:'2030-05-05',origin_airport_id:1,destination_id:1,origin_code:'WRO',origin_city:'Wrocław',destination_city:'London',destination_slug:'london',trip_type:'ROUND_TRIP',price_basis:'FLIGHT_PER_PERSON',components:[],flight_price_pln:'200.25',hotel_price_pln:null,total_estimated_pln:'200.25',price_per_person_pln:'200.25',historical_baseline_pln:null,discount_percent:null,deal_score:0,confidence:'0',explanation_codes:[],score_version:'synthetic',score_components:{},last_verified_at:'2030-04-01T00:00:00Z',expires_at:'2030-04-01T02:00:00Z',flight_quality:{version:'flight-quality-v1',status:'PARTIAL',reasons:['UNKNOWN_CARRIER'],recommendation_eligible:true},weekend_assessment:{version:'weekend-v1',work_hours:{start:'09:00:00',end:'17:00:00'},work_timezone:'Europe/Warsaw',actual_return_local_date:'2030-05-05',airport_arrival_day_offset:0,confidence:'KNOWN',calendar:'ELIGIBLE',flexible:'ELIGIBLE',stay:{version:'weekend-stay-v1',eligibility:'ELIGIBLE',airport_interval_minutes:2820,usable_minutes:1380,night_arrival:false,early_return:false,policy:{min_airport_minutes:1440,min_usable_minutes:720,arrival_buffer_minutes:120,departure_buffer_minutes:120},reasons:[]},no_leave:'ELIGIBLE',might_require_leave:false,airport_times_only:true,reasons:[]},...patch};
 }
 async function withFetch(fetcher,run){const original=globalThis.fetch;globalThis.fetch=fetcher;try{await run();}finally{globalThis.fetch=original;}}
@@ -46,6 +48,21 @@ test('zero and one offer never fabricate content or total market counts',async()
   for(const c of collections){assert.equal(c.status,rows.length?'READY':'EMPTY');assert.equal(c.offers.length,rows.length);assert.equal(c.more_in_preview,false);assert.equal('total' in c,false);}
  });
 });
+test('every home collection excludes overnight/long connections, insufficient and legacy decisions without backfill',()=>withFetch(async()=>Response.json([
+ deal(1,{trip_quality:planningQuality({planning_eligible:false,warnings_severity:'CRITICAL',reasons:['OVERNIGHT_CONNECTION','LONG_CONNECTION']})}),
+ deal(2,{trip_quality:planningQuality({planning_eligible:false,data_confidence:'INSUFFICIENT'})}),
+ deal(3,{trip_quality:undefined}),deal(4),
+]),async()=>{
+ for(const c of await loadHomeCollections('WRO',now))assert.deepEqual(c.offers.map(d=>d.id),[4]);
+}));
+test('only unsafe candidates yield honest EMPTY previews, preserving general-catalog links',()=>withFetch(async()=>Response.json([
+ deal(1,{trip_quality:planningQuality({planning_eligible:false,warnings_severity:'CRITICAL'})}),
+]),async()=>{
+ for(const c of await loadHomeCollections('WRO',now)){
+  assert.equal(c.status,'EMPTY');assert.equal(c.offers.length,0);
+  assert.match(c.href,/^\/deals\?/);assert.equal(c.more_in_preview,false);
+ }
+}));
 test('budget is inclusive to the grosz and concerns flight per person, not a whole trip',()=>withFetch(async()=>Response.json([deal(1,{price_per_person_pln:'299.99'}),deal(2,{price_per_person_pln:'300.00'}),deal(3,{price_per_person_pln:'300.01'})]),async()=>{
  const collections=await loadHomeCollections('WRO',now);
  assert.deepEqual(collections.find(c=>c.id==='under-300').offers.map(d=>d.id),[1,2]);

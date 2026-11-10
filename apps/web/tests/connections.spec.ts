@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {connectionWarnings} from '../src/lib/connections';
 import type {Deal} from '../src/lib/api';
+import {tripDecisionRisks} from '../src/lib/trip-decision';
 
 const fixture='http://127.0.0.1:8100';
 test.beforeAll(async({request})=>{
@@ -42,8 +43,17 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: connection w
  expect((await new AxeBuilder({page}).include('.deal-grid').analyze()).violations).toEqual([]);
  await airport.locator('.deal-card-link').click();
  await expect(page).toHaveURL(/\/deals\/connection-fixture-airport(?:\?|$)/);
- await expect(page.locator('.flight-schedule-compact [data-connection-warnings]')).toBeVisible();
- await expect(page.locator('.flight-schedule-compact .connection-warning strong')).toContainText('LHR → LGW');
+ const decision=page.locator('.detail-summary [data-decision-risks]');
+ const airportDeal=deals.find(deal=>deal.slug==='connection-fixture-airport')!;
+ await expect(decision).toContainText('LHR → LGW');
+ for(const risk of tripDecisionRisks(airportDeal,locale))await expect(decision.getByText(risk,{exact:true})).toBeVisible();
+ await expect(page.locator('.decision-information .trip-details')).not.toHaveAttribute('open','');
+ await page.locator('.decision-information .trip-details > summary').click();
+ const full=page.locator('.decision-information [data-connection-warnings]');
+ for(const warning of connectionWarnings(airportDeal,locale)){
+  await expect(full).toContainText(warning.title);
+  for(const detail of warning.details)await expect(full).toContainText(detail);
+ }
  await page.screenshot({path:info.outputPath(`connection-${locale}-320.png`),fullPage:true});
 });
 
@@ -55,5 +65,10 @@ test('server rendered warnings remain readable without JavaScript',async({browse
   await expect(visible).toHaveCount(6);
   await expect(visible.locator('.connection-warning').filter({hasText:'LHR → LGW'})).toContainText('Ground transfer between airports is not confirmed.');
   await expect(visible.locator('.connection-warning').filter({hasText:'360 min'})).toContainText('Long layover.');
+  await page.goto('/en/deals/connection-fixture-airport');
+  await expect(page.locator('.detail-summary [data-decision-risks]')).toContainText('LHR → LGW: 180 min');
+  await expect(page.locator('.detail-summary [data-decision-risks]')).toContainText('risky transfer');
+  await page.locator('.decision-information .trip-details > summary').click();
+  await expect(page.locator('.decision-information [data-connection-warnings]')).toContainText('Ground transfer between airports is not confirmed.');
  }finally{await context.close();}
 });

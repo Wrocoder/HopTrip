@@ -47,6 +47,19 @@ class TripQualityComponent(BaseModel):
     known: bool
 
 
+class TripRecommendation(BaseModel):
+    """Convenient-collection gate, independent of score and flight data quality."""
+
+    version: Literal["trip-recommendation-v1"] = "trip-recommendation-v1"
+    recommendation_eligible: bool = False
+    # Factual price/date previews may include clearly labelled planning options.
+    planning_eligible: bool = False
+    label: Literal["CONVENIENT", "REQUIRES_PLANNING", "INSUFFICIENT_DATA"] = "INSUFFICIENT_DATA"
+    data_confidence: Literal["COMPLETE", "LIMITED", "INSUFFICIENT"] = "INSUFFICIENT"
+    warnings_severity: Literal["NONE", "WARNING", "CRITICAL"] = "WARNING"
+    reasons: list[str] = Field(default_factory=list)
+
+
 class TripQualityAssessment(BaseModel):
     version: Literal["trip-quality-v1"] = "trip-quality-v1"
     status: Literal["KNOWN", "PARTIAL", "UNKNOWN"] = "UNKNOWN"
@@ -54,3 +67,4 @@ class TripQualityAssessment(BaseModel):
     policy: TripQualityPolicy = Field(default_factory=TripQualityPolicy)
     components: list[TripQualityComponent] = Field(default_factory=list)
     reasons: list[str] = Field(default_factory=list)
+    recommendation: TripRecommendation = Field(default_factory=TripRecommendation)

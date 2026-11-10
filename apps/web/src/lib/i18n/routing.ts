@@ -6,7 +6,8 @@ export function pageLocales(path:string):readonly Locale[] {
  const base=localizedHref(path,"pl").split(/[?#]/)[0];
  // Private plans and temporary offers support languages but stay out of sitemap.
  return (translatedPaths as readonly string[]).includes(base) || (base.startsWith("/info/")&&hasGuideTranslation(base.slice(6))) ||
-  ["/saved","/trip","/alerts","/alerts/confirm","/alerts/manage","/info/contact","/info/privacy","/info/terms"].includes(base) || /^\/deals\/[a-zA-Z0-9_-]{1,180}$/.test(base) ? locales : publishedLocales;
+  ["/saved","/trip","/alerts","/alerts/confirm","/alerts/manage","/info/contact","/info/privacy","/info/terms"].includes(base) || /^\/deals\/[a-zA-Z0-9_-]{1,180}$/.test(base) ||
+  /^\/destinations\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(base) ? locales : publishedLocales;
 }
 export function availableHref(href:string,locale:Locale):string {
  return localizedHref(href,pageLocales(href).includes(locale) ? locale : "pl");

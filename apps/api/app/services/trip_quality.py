@@ -1,4 +1,5 @@
 """Convenience model only. No price/history, live inventory or invented city time."""
+from app.schemas.airport_context import AirportContext
 from app.schemas.connection import ConnectionAssessment
 from app.schemas.deal import FlightFacts, FlightQuality
 from app.schemas.trip_quality import (
@@ -6,17 +7,95 @@ from app.schemas.trip_quality import (
     TripQualityAssessment,
     TripQualityComponent,
     TripQualityPolicy,
+    TripRecommendation,
 )
 from app.schemas.weekend import WeekendAssessment
 from app.services.trip_timeline import trip_timeline
 from app.services.weekend import local
 
 
+def assess_recommendation(facts: FlightFacts, quality: FlightQuality, weekend: WeekendAssessment,
+                          connections: ConnectionAssessment,
+                          airport: AirportContext | None = None) -> TripRecommendation:
+    """No price inputs. Current airport context cannot confirm city-transfer time.
+
+    Fail closed for promises of convenience; do not remove offers from search.
+    Thresholds come from the existing stay/connection/airport assessments.
+    """
+    result = TripRecommendation()
+    missing: list[str] = []
+    risks: list[str] = []
+    if not quality.recommendation_eligible:
+        missing.append("UNVERIFIED_ITINERARY")
+    elif quality.status != "COMPLETE":
+        missing.append("PARTIAL_SOURCE_DATA")
+    if (weekend.confidence != "KNOWN" or facts.outbound_arrival_calculated
+            or facts.return_arrival_calculated):
+        missing.append("UNCONFIRMED_SCHEDULE")
+    stay = weekend.stay
+    if stay.eligibility == "UNKNOWN":
+        missing.append("UNKNOWN_USABLE_TIME")
+    elif stay.eligibility == "INELIGIBLE":
+        risks.append("INSUFFICIENT_STAY")
+    if connections.status != "KNOWN":
+        missing.append("UNKNOWN_CONNECTIONS")
+    for connection in connections.connections:
+        if connection.overnight:
+            risks.append("OVERNIGHT_CONNECTION")
+        elif connection.overnight is None:
+            missing.append("UNKNOWN_CONNECTION_NIGHT")
+        if connection.long_layover:
+            risks.append("LONG_CONNECTION")
+        if connection.risky_transfer:
+            risks.append("RISKY_CONNECTION")
+        if connection.airport_change:
+            risks.append("AIRPORT_CHANGE")
+    if (facts.destination_airport and facts.return_origin_airport
+            and facts.destination_airport != facts.return_origin_airport
+            or facts.origin_airport and facts.return_destination_airport
+            and facts.origin_airport != facts.return_destination_airport):
+        risks.append("AIRPORT_CHANGE")
+    if stay.night_arrival:
+        risks.append("NIGHT_ARRIVAL")
+    if stay.early_return:
+        risks.append("EARLY_RETURN")
+    home = local(facts.return_arrival, facts.return_destination_timezone)
+    if home is not None and home.hour < 6:
+        risks.append("NIGHT_HOME_ARRIVAL")
+    if airport is not None:
+        for warning in airport.warnings:
+            if warning in {"LATE_ARRIVAL", "REMOTE_ARRIVAL_AIRPORT", "REMOTE_RETURN_AIRPORT"}:
+                risks.append(warning)
+    # The current contract only supports UNKNOWN transfer estimates. Never infer
+    # operating hours, travel time or fare from distance or a high model score.
+    missing.append("TRANSFER_TIME_UNKNOWN")
+    result.reasons = list(dict.fromkeys(risks + missing))
+    flight_missing = any(reason != "TRANSFER_TIME_UNKNOWN" for reason in missing)
+    result.data_confidence = "INSUFFICIENT" if flight_missing else "LIMITED"
+    result.label = "INSUFFICIENT_DATA" if flight_missing else "REQUIRES_PLANNING"
+    severe = {"INSUFFICIENT_STAY", "OVERNIGHT_CONNECTION", "LONG_CONNECTION",
+              "RISKY_CONNECTION", "AIRPORT_CHANGE"}
+    result.warnings_severity = "CRITICAL" if severe.intersection(risks) else "WARNING"
+    result.planning_eligible = (not severe.intersection(risks)
+        and set(missing) <= {"PARTIAL_SOURCE_DATA", "TRANSFER_TIME_UNKNOWN"})
+    return result
+
+
+def recommendation_order(result: TripQualityAssessment) -> tuple[bool, bool, bool, bool]:
+    """Apply the independent gate before the numeric model; retain all search rows."""
+    recommendation = result.recommendation
+    return (not recommendation.recommendation_eligible, not recommendation.planning_eligible,
+            recommendation.data_confidence == "INSUFFICIENT",
+            recommendation.warnings_severity == "CRITICAL")
+
+
 def trip_quality(facts: FlightFacts, quality: FlightQuality, weekend: WeekendAssessment,
-                 connections: ConnectionAssessment, *, policy: TripQualityPolicy | None = None
+                 connections: ConnectionAssessment, *, policy: TripQualityPolicy | None = None,
+                 airport: AirportContext | None = None
                  ) -> TripQualityAssessment:
     policy = policy or TripQualityPolicy()
     result = TripQualityAssessment(policy=policy)
+    result.recommendation = assess_recommendation(facts, quality, weekend, connections, airport)
     if not quality.recommendation_eligible:
         result.reasons.append("UNVERIFIED_ITINERARY")
         return result

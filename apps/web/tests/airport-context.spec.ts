@@ -20,8 +20,8 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: airport warn
  await expect(remote.locator('.airport-context-notice')).toContainText('≈45 km');
  await expect(remote.locator('.airport-context-notice')).toContainText(c.late);
  await expect(remote.locator('.airport-context-notice')).toContainText(c.earlyReturn);
- await expect(remote.locator('.flight-route-warning')).toHaveCount(1);
- await expect(remote.locator('.flight-route-warning')).toHaveText(flightRouteCopy[locale].departure.replace('{back}','MXP').replace('{out}','BGY'));
+ await expect(remote.locator('.flight-route-warning:not(.stay-warning)')).toHaveCount(1);
+ await expect(remote.locator('.flight-route-warning:not(.stay-warning)')).toHaveText(flightRouteCopy[locale].departure.replace('{back}','MXP').replace('{out}','BGY'));
  await expect(remote.locator('.airport-context-notice')).not.toContainText(flightRouteCopy[locale].departure.split(':')[0]);
  await expect(card('paris').locator('.airport-context-notice')).toContainText('≈80 km');
  await expect(card('near').locator('.airport-context-notice')).not.toContainText(c.remote);
@@ -40,10 +40,10 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: airport warn
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await remote.screenshot({path:test.info().outputPath(`${locale}-airport-320.png`)});
  await remote.locator('.deal-card-link').click();
- await expect(page.locator('.detail-summary .airport-context-notice')).toContainText(c.remote);
- await expect(page.locator('.detail-summary .flight-route-warning')).toHaveCount(1);
- await page.locator('.detail-summary .trip-details > summary').click();
- await expect(page.locator('.detail-summary .airport-context-details')).toContainText(c.basis);
+ await expect(page.locator('.detail-summary [data-decision-risks]')).toContainText(c.remote);
+ await expect(page.locator('.detail-summary [data-decision-risks] li').filter({hasText:flightRouteCopy[locale].departure.split(':')[0]})).toHaveCount(1);
+ await page.locator('.decision-information .trip-details > summary').click();
+ await expect(page.locator('.decision-information .airport-context-details')).toContainText(c.basis);
  const response=await request.get(`${fixture}/api/v1/deals/airport-context-fixture-remote`);
  expect(response.ok()).toBe(true);
  expect((await response.json()).destination_time.usable_city_minutes).toBeNull();

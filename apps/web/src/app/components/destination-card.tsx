@@ -8,12 +8,17 @@ import type {Locale} from '../../lib/i18n/config';
 import styles from './destination-card.module.css';
 
 export function DestinationPhoto({slug,locale}:{slug:string;locale:Locale}) {
- const image=destinationImage(slug),copy=imageryCopy[locale];
- const [failed,setFailed]=useState(false);
+ const image=destinationImage(slug);
+ const [failedSource,setFailedSource]=useState<string|null>(null);
  return <span className={styles.frame}>
-    {image&&!failed?<Image src={image.src} alt={image.alt[locale]} width={image.width} height={image.height}
+    {image&&failedSource!==image.src?<Image src={image.src} alt={image.alt[locale]} width={image.width} height={image.height}
      sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 60px) / 2), (max-width: 1224px) calc((100vw - 104px) / 3), 374px"
-     loading="lazy" onError={()=>setFailed(true)}/>:<span className={styles.fallback}>{copy.unavailable}</span>}
+     loading="lazy" onError={()=>setFailedSource(image.src)}/>:<span className={styles.fallback} data-destination-fallback aria-hidden="true">
+      <svg viewBox="0 0 120 120" fill="none" focusable="false">
+       <circle cx="60" cy="60" r="42"/><ellipse cx="60" cy="60" rx="20" ry="42"/>
+       <path d="M18 60h84M25 36h70M25 84h70"/>
+      </svg>
+     </span>}
    </span>;
 }
 

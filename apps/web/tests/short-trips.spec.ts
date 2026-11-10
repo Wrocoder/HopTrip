@@ -1,6 +1,7 @@
 import {test,expect} from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import {chooseOrigin} from "./origin-helpers";
+import {collectionCopy} from '../src/lib/i18n/collection-copy';
 
 test.beforeEach(async({page,request})=>{
  await request.post("http://127.0.0.1:8100/__test__/short-trips?enabled=true");
@@ -117,7 +118,7 @@ test("airport choice persists with two or zero matches and never fills gaps with
  await chooseOrigin(page,"GDN");
 
  await expect(selection.locator(".deal-card")).toHaveCount(0);
- await expect(selection).toContainText("Brak aktualnych lotów na 2–4 noce z tego lotniska");
+ await expect(selection).toContainText(collectionCopy.pl.empty);
  await expect(selection.getByRole("link",{name:/Zobacz wszystkie loty/})).toHaveAttribute("href","/deals?origin=GDN&duration_min=2&duration_max=4");
  await page.goBack();
  await expect(page.locator("#home-origin")).toHaveValue(/KTW/);

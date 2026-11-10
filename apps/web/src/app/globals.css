@@ -373,6 +373,29 @@ main.page-shell { padding-block: 38px 72px; min-height: 52vh; }
 .sort-explanation { grid-column: 1 / -1; margin: 0; max-width: 76ch; }
 
 /* TRIP-01: flight decision first, planning and methodology follow. */
+main.trip-detail-page { padding-top: 12px; }
+.trip-detail-page .back-link { margin-bottom: 8px; }
+.trip-detail-page .offer-detail > .page-heading { margin: 0 0 12px; }
+.trip-detail-page .offer-detail > .page-heading h1 { margin: 0 0 8px; }
+.trip-detail-page .offer-detail > .page-heading .lead { font-size: var(--text-sm); margin-bottom: 0; }
+.trip-detail-page .trip-decision-summary p { margin-block: 4px; }
+.trip-detail-page .trip-decision-risks { padding-left: 18px; margin: 8px 0; font-size: var(--text-sm); }
+.trip-detail-page .trip-decision-risks li { margin-block: 4px; }
+.trip-detail-page .trip-decision-summary .flight-quality { padding: 8px; margin-block: 6px; }
+.trip-detail-page .offer-detail .booking-component { padding: 0; margin-bottom: 8px; }
+.trip-detail-page .booking-component .partner-limitation { padding: 8px; margin: 0 0 8px; font-size: var(--text-sm); }
+.trip-detail-page .booking-card > .muted { font-size: var(--text-xs); margin-bottom: 0; }
+.trip-detail-page .decision-information { margin-top: 12px; }
+@media(max-width:900px) {
+ body:has(.trip-detail-page) .site-header { padding-block: 8px; gap: 4px; }
+ .trip-detail-page .offer-detail > .page-heading h1 { font-size: 1.65rem; line-height: 1.15; }
+ .trip-detail-page .offer-detail .detail-layout { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 14px; gap: 6px; line-height: 1.5; }
+ .trip-detail-page .detail-layout .detail-panel, .trip-detail-page .detail-layout .booking-card { padding: 0; border: 0; background: transparent; }
+ .trip-detail-page .offer-detail .detail-summary .deal-price { margin: 0 0 8px; font-size: 2rem; }
+ .trip-detail-page .offer-detail .detail-summary .price-freshness { font-size: var(--text-xs); margin: 8px 0; }
+ .trip-detail-page .price-freshness p { margin-block: 4px; }
+ .trip-detail-page .detail-cost-scope { margin: 6px 0; }
+}
 .offer-detail > .page-heading { margin-bottom: 16px; }
 .offer-detail > .page-heading h1 { font-size: clamp(2rem, 4vw, 3.2rem); margin-block: 10px 14px; }
 .offer-detail > .page-heading .eyebrow { margin-bottom: 8px; }

@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {getMessages} from '../src/lib/i18n/messages';
 import {filterText} from '../src/lib/i18n/filter-copy';
-import {tripQualityCopy,tripQualitySummary} from '../src/lib/trip-quality';
+import {tripQualityCopy,tripQualitySummary,recommendationCopy} from '../src/lib/trip-quality';
 import type {DealResults} from '../src/lib/api';
 const fixture='http://127.0.0.1:8100';
 const slugs=(page:Page)=>page.locator('.deal-card-link').evaluateAll(links=>links.map(link=>new URL((link as HTMLAnchorElement).href).pathname.split('/').at(-1)));
@@ -62,7 +62,9 @@ test('recommended order and convenience labels render without JavaScript',async(
  try{
   const page=await context.newPage();await page.goto('/en/deals?destination=weekend-fixture&sort=recommended');
   await expect(page.locator('select[name="sort"]')).toHaveValue('recommended');
-  await expect(page.locator('.trip-quality-summary').first()).toContainText(tripQualityCopy.en.label);
+  await expect(page.locator('.trip-quality-summary').first()).toContainText(recommendationCopy.en.REQUIRES_PLANNING);
+  await expect(page.locator('.trip-quality-model').first()).not.toHaveAttribute('open');
+  await expect(page.locator('.trip-recommendation-reasons').first()).toContainText('City transfer time is unconfirmed.');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content',/^noindex,/);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',/sort=recommended/);
  }finally{await context.close();}

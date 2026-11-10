@@ -1,16 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {tripQualitySummary} from '../src/lib/trip-quality.ts';
+import {tripQualitySummary,tripQualityModelSummary,tripRecommendationReasons,recommendationCopy} from '../src/lib/trip-quality.ts';
 import {searchFilters,searchUrl,searchSeo} from '../src/lib/search-policy.ts';
 import {filterText} from '../src/lib/i18n/filter-copy.ts';
 
 for(const locale of ['pl','en','ru','uk'])test(`${locale}: convenience model distinguishes unknown, partial and zero scores`,()=>{
  const q={version:'trip-quality-v1',status:'KNOWN',score:0};
- assert.match(tripQualitySummary({trip_quality:q},locale),/0\/100/);
- assert.match(tripQualitySummary({trip_quality:{...q,score:75,status:'PARTIAL'}},locale),/75\/100 · /);
+ assert.match(tripQualityModelSummary({trip_quality:q},locale),/0\/100/);
+ assert.match(tripQualityModelSummary({trip_quality:{...q,score:75,status:'PARTIAL'}},locale),/75\/100 · /);
  assert.ok(!tripQualitySummary({trip_quality:{...q,score:null,status:'UNKNOWN'}},locale).includes('0/100'));
  assert.equal(tripQualitySummary({},locale),null);
  assert.ok(filterText(locale,'Polecane').length>4);
+});
+for(const locale of ['pl','en','ru','uk'])test(`${locale}: a high score cannot imply convenience without an independent assessment`,()=>{
+ const q={version:'trip-quality-v1',status:'KNOWN',score:97};
+ assert.equal(tripQualitySummary({trip_quality:q},locale),recommendationCopy[locale].INSUFFICIENT_DATA);
+ const recommendation={version:'trip-recommendation-v1',recommendation_eligible:false,label:'REQUIRES_PLANNING',
+  data_confidence:'LIMITED',warnings_severity:'WARNING',reasons:['EARLY_RETURN','TRANSFER_TIME_UNKNOWN']};
+ assert.equal(tripQualitySummary({trip_quality:{...q,recommendation}},locale),recommendationCopy[locale].REQUIRES_PLANNING);
+ assert.equal(tripRecommendationReasons({trip_quality:{...q,recommendation}},locale).length,2);
+ assert.ok(!tripQualitySummary({trip_quality:{...q,recommendation}},locale).includes('/100'));
 });
 test('recommended survives search/pagination with noindex and existing price default unchanged',()=>{
  const filters={sort:'recommended',offset:'12',origin:'WRO',weekend_mode:'no-leave-v1'};

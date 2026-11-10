@@ -61,11 +61,12 @@ export function HomeOrigin({airports,destinations,initialOrigin,initialFilters,c
   <section className="catalog-section" aria-labelledby="current-deals" aria-busy={!current}>
    <div className="section-heading"><div><p className="eyebrow">{t('Wylot:')} {origin || t('dowolne lotnisko')}</p><h2 id="current-deals">{t('Krótkie wyjazdy · 2–4 noce')}</h2></div><span className="badge">{pl.perPerson} · PLN</span></div>
    <p className="catalog-note">{qualityText(locale,'selection')}</p>
+   <p className="catalog-note">{collectionCopy[locale].preview}</p>
    <button type="button" className="button button-secondary" onClick={()=>document.getElementById('home-origin')?.focus()}>{t('Zmień lotnisko')}</button>
    <p className="field-hint">{t('Lotnisko wybierasz w wyszukiwarce. Ten sam wybór stosujemy do propozycji poniżej i zapamiętujemy na tym urządzeniu.')}</p>
    {!current ? <OfferState kind="loading" heading="h3" title={pl.loading}><p>{stateText(locale,'Pobieramy oferty. Warunki wyszukiwania pozostają w adresie strony.')}</p></OfferState> : initialFailed ? <OfferState kind="error" heading="h3" title={pl.error} actions={<><button type="button" onClick={()=>router.refresh()}>{pl.retry}</button><Link prefetch={false} href={catalogHref}>{stateText(locale,'Wróć do katalogu lotów')}</Link></>}/> : <>
     {count>0 && children}
-    {count ? <p role="status">{t('Liczba propozycji na 2–4 noce: {count}.',{count})}</p> : <OfferState kind="empty" heading="h3" title={pl.empty} actions={<><button type="button" onClick={()=>document.getElementById('home-origin')?.focus()}>{stateText(locale,'Wybierz inne lotnisko')}</button><Link prefetch={false} href={localizedHref(searchUrl('/deals',{origin}),locale)}>{stateText(locale,'Sprawdź inne długości pobytu')}</Link></>}><p>{origin ? t('Brak aktualnych lotów na 2–4 noce z tego lotniska. Wybierz inne lotnisko lub sprawdź katalog z inną długością pobytu.') : t('Brak aktualnych lotów na 2–4 noce. Sprawdź katalog z inną długością pobytu.')}</p></OfferState>}
+    {count ? <p role="status">{t('Liczba propozycji na 2–4 noce: {count}.',{count})}</p> : <OfferState kind="empty" heading="h3" title={pl.empty} actions={<><button type="button" onClick={()=>document.getElementById('home-origin')?.focus()}>{stateText(locale,'Wybierz inne lotnisko')}</button><Link prefetch={false} href={localizedHref(searchUrl('/deals',{origin}),locale)}>{stateText(locale,'Sprawdź inne długości pobytu')}</Link></>}><p>{collectionCopy[locale].empty}</p></OfferState>}
     {count>0 && count<6 && <p>{t('Obecnie pokazujemy mniej propozycji spełniających te warunki. Sprawdź ponownie później lub zmień lotnisko.')}</p>}
    </>}
    <p>{pl.flightOnly} {t('Sprawdź godziny lotów i potrzebne dni urlopu.')}</p>

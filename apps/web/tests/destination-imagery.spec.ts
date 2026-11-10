@@ -9,7 +9,8 @@ import type {Destination} from '../src/lib/api';
 const fixture='http://127.0.0.1:8100';
 
 test.setTimeout(90000);
-test.beforeEach(async({page})=>{
+test.beforeEach(async({page,request})=>{
+ expect((await request.post(`${fixture}/__test__/destination-images?slug=barcelona&slug=rome&slug=budapest`)).ok()).toBe(true);
  await page.addInitScript(()=>localStorage.setItem('hoptrip.consent.v1',JSON.stringify({version:1,analytics:false,marketing:false,at:Date.now()})));
 });
 test.afterEach(async({request})=>{expect((await request.post(`${fixture}/__test__/destination-images`)).ok()).toBe(true);});
@@ -47,7 +48,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`destination photographs
   writeFileSync(info.outputPath(`image-${locale}.json`),JSON.stringify({before,after,currentSrc:await img.evaluate(el=>(el as HTMLImageElement).currentSrc),external,errors},null,2));
   const rome=destinations.find(d=>d.slug==='rome')!;
   const link=card.getByRole('link',{name:destinationLabel(rome,locale),exact:true});await link.focus();await expect(link).toHaveCSS('outline-width','3px');await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(locale==='pl'?/\/destinations\/rome$/:new RegExp(`/${locale}/deals\\?destination=rome$`));
+  await expect(page).toHaveURL(new RegExp(localizedHref('/destinations/rome',locale)+'$'));
   await expect(page.locator('.deal-card img:not(.country-flag)')).toHaveCount(0);expect(errors).toEqual([]);expect(external).toEqual([]);
  }finally{release();}
 });
@@ -56,7 +57,7 @@ test('failed local image retains destination action and layout without retry or 
  await page.route('**/_next/image?*',route=>route.abort('failed'));
  await page.goto('/');const section=page.locator('section:has(> #home-destinations)');
  const card=section.locator('li').filter({hasText:'Sebastian Straub'});
- await card.scrollIntoViewIfNeeded();await expect(card.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();
+ await card.scrollIntoViewIfNeeded();await expect(card.locator('[data-destination-fallback]')).toBeVisible();
  await expect(card.locator('img')).toHaveCount(0);await expect(card.locator('a[href="/destinations/rome"]')).toBeVisible();
  const frame=await card.locator('a[href="/destinations/rome"] > span').first().boundingBox();expect(frame!.width/frame!.height).toBeCloseTo(1.6,1);
  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -126,7 +127,9 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: HTTP, networ
    const card=section.locator('li').filter({hasText:'Sebastian Straub'}),action=card.locator('a').first();
    const frame=action.locator(':scope > span').first();await card.scrollIntoViewIfNeeded();
    const before=await frame.boundingBox();expect(before!.width/before!.height).toBeCloseTo(1.6,1);
-   release();await expect(card.getByText(imageryCopy[locale].unavailable,{exact:true})).toBeVisible();
+   release();await expect(card.locator('[data-destination-fallback]')).toBeVisible();
+   await expect(card.locator('[data-destination-fallback]')).toHaveAttribute('aria-hidden','true');
+   await expect(card.getByText(imageryCopy[locale].unavailable,{exact:true})).toHaveCount(0);
    await expect(card.locator('img')).toHaveCount(0);await expect(action).toBeVisible();
    const after=await frame.boundingBox();expect(after!.width).toBeCloseTo(before!.width,1);expect(after!.height).toBeCloseTo(before!.height,1);
    const romeAttempts=()=>attempts.filter(url=>new URL(url).searchParams.get('url')===destinationImages.rome.src).length;
@@ -139,7 +142,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: HTTP, networ
    }
    expect(romeAttempts()).toBe(settledAttempts);
    if(failure==='decode'&&locale==='ru')await card.screenshot({path:info.outputPath('decode-fallback-ru.png'),animations:'disabled'});
-   await action.click();await expect(page).toHaveURL(locale==='pl'?/\/destinations\/rome$/:new RegExp(`/${locale}/deals\\?destination=rome$`));
+   await action.click();await expect(page).toHaveURL(new RegExp(localizedHref('/destinations/rome',locale)+'$'));
   }finally{release();await page.unroute('**/_next/image?*');}
  }
 });

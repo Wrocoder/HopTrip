@@ -18,12 +18,16 @@ const copy={
  uk:{night:'Нічний приліт (00:00–06:00 за місцевим часом).',early:'Ранній зворотний виліт (до 08:00 за місцевим часом).',short:'Недостатньо часу для перебування за правилами рекомендацій.',basis:'Оцінка перебування використовує вікно 08:00–22:00 та умовні резерви на дорогу й реєстрацію. Це модель, а не підтверджений час для прогулянок.'},
 };
 export function stayModelBasis(locale:Locale):string{return copy[locale].basis;}
-export function stayWarnings(deal:Deal,locale:Locale,includeBasis=true):string[]{
+export function stayWarningEntries(deal:Deal,locale:Locale):{key:string;text:string}[]{
  const stay=deal.weekend_assessment?.stay;
  if(stay?.version!=='weekend-stay-v1')return [];
- const c=copy[locale],warnings:string[]=[];
- if(stay.night_arrival)warnings.push(c.night);
- if(stay.early_return)warnings.push(c.early);
- if(stay.reasons.includes('INSUFFICIENT_STAY'))warnings.push(c.short);
- return warnings.length&&includeBasis?[...warnings,c.basis]:warnings;
+ const c=copy[locale],warnings:{key:string;text:string}[]=[];
+ if(stay.night_arrival)warnings.push({key:'NIGHT_ARRIVAL',text:c.night});
+ if(stay.early_return)warnings.push({key:'EARLY_RETURN',text:c.early});
+ if(stay.reasons.includes('INSUFFICIENT_STAY'))warnings.push({key:'INSUFFICIENT_STAY',text:c.short});
+ return warnings;
+}
+export function stayWarnings(deal:Deal,locale:Locale,includeBasis=true):string[]{
+ const warnings=stayWarningEntries(deal,locale).map(warning=>warning.text);
+ return warnings.length&&includeBasis?[...warnings,copy[locale].basis]:warnings;
 }

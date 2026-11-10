@@ -397,6 +397,25 @@ def hydration_events():
     return EventResults(status="EMPTY")
 
 
+@app.get("/api/v1/deals/partner-airport-check-fixture")
+def partner_airport_check_fixture():
+    """Display-only synthetic booking context, never a real affiliate offer."""
+    from app.services.airport_context import airport_context
+
+    view = hydration_fixture()
+    view.slug = "partner-airport-check-fixture"
+    view.airport_context = airport_context(view.flight_facts, destination_slug=view.destination_slug,
+        round_trip=True, itinerary_eligible=True)
+    for component in view.components:
+        if component.component_type == "FLIGHT":
+            component.available = True
+            component.redirect_path = f"/go/{view.slug}/flight"
+    return view
+
+
+app.router.routes.insert(0, app.router.routes.pop())
+
+
 app.router.routes.insert(0, app.router.routes.pop())
 
 

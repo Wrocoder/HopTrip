@@ -100,7 +100,7 @@ test("flight detail languages expose local times, metadata, accessible controls 
  for(const locale of ["en","ru","uk"] as const){
   await page.goto(`/${locale}/deals/htr01-fixture`);
   await expect(page.locator("html")).toHaveAttribute("lang",locale);
-  await expect(page.locator(".detail-summary .flight-schedule")).toContainText("00:40");
+  await expect(page.locator(".detail-summary .home-arrival")).toContainText("00:40");
   await expect(page.locator(".detail-summary .home-arrival")).toContainText("25");
   await expect(page.locator(".detail-summary .home-arrival")).toContainText("+1");
   await expect(page.locator("#budget-nights")).toHaveValue("7");

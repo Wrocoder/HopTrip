@@ -1,5 +1,5 @@
 import {ApiError,getDeals,type Deal,type Filters} from './api';
-import {recommendationEligible} from './flight-quality.ts';
+import {tripSelectionEligible} from './trip-selection.ts';
 import {normalizedOrigin} from './origin-preference.ts';
 import {offerDeadline} from './offer-expiry.ts';
 import {searchUrl} from './search-policy.ts';
@@ -33,7 +33,7 @@ export function homeCollectionDefinitions(origin:string):HomeCollectionDefinitio
 function preview(items:Deal[],definition:HomeCollectionDefinition,now:number):Deal[]{
  const ids=new Set<number>(),slugs=new Set<string>();
  return items.slice(0,collectionCandidateLimit).filter(deal=>{
-  if(!recommendationEligible(deal)||definition.origin&&deal.origin_code!==definition.origin||deal.trip_type!=='ROUND_TRIP')return false;
+  if(!tripSelectionEligible(deal)||definition.origin&&deal.origin_code!==definition.origin||deal.trip_type!=='ROUND_TRIP')return false;
   if(!stayRecommendationEligible(deal,definition.id==='calendar-weekend'))return false;
   const deadline=offerDeadline(deal);
   const departure=Date.parse(deal.flight_facts?.outbound_departure??`${deal.trip_start}T00:00:00Z`);

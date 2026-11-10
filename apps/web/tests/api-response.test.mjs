@@ -15,6 +15,13 @@ test('trip quality contract enforces separate score, missing parts and reproduci
   inconvenient_stay_percent:50,night_home_travel_percent:50,connection_penalty_percent:20,long_connection_penalty_percent:40,night_connection_penalty_percent:25,risky_connection_penalty_percent:50,airport_change_penalty_percent:50};
  const q={version:'trip-quality-v1',status:'KNOWN',score:100,policy,reasons:[],components:Object.entries(weights).map(([key,max])=>({key,points:max,max_points:max,known:true}))};
  assert.equal(isDeal({...deal,trip_quality:q,trip_quality_score:100}),true);
+ const recommendation={version:'trip-recommendation-v1',recommendation_eligible:false,label:'REQUIRES_PLANNING',
+  data_confidence:'LIMITED',warnings_severity:'WARNING',reasons:['TRANSFER_TIME_UNKNOWN']};
+ assert.equal(isDeal({...deal,trip_quality:{...q,recommendation}}),true);
+ for(const patch of [{label:'GREAT'},{data_confidence:'CERTAIN'},{recommendation_eligible:'false'},
+  {warnings_severity:'LOW'},{reasons:null},{version:'unsupported'},{planning_eligible:'true'}]){
+  assert.equal(isDeal({...deal,trip_quality:{...q,recommendation:{...recommendation,...patch}}}),false);
+ }
  assert.equal(isDeal({...deal,trip_quality:{...q,status:'UNKNOWN',score:null,components:[]},trip_quality_score:null}),true);
  for(const patch of [{trip_quality_score:99},{trip_quality_score:101},{trip_quality:{...q,score:99}},
   {trip_quality:{...q,components:q.components.slice(1)}},

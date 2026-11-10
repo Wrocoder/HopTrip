@@ -21,6 +21,7 @@ import {AirportSelect} from "./airport-select";
 import {searchWithOrigin} from "../actions/origin-preference";
 import type {OriginSelection} from "../../lib/origin-preference";
 import {stateText} from '../../lib/i18n/state-copy';
+import {collectionCopy} from '../../lib/i18n/collection-copy';
 type FilterKey="origin"|"destination"|"budget"|"departure_from"|"departure_to"|"duration_min"|"duration_max"|"weekend"|"weekend_mode"|"work_start"|"work_end"|"round_trip";
 const filterKeys:FilterKey[]=["origin","destination","budget","departure_from","departure_to","duration_min","duration_max","weekend","weekend_mode","work_start","work_end","round_trip"];
 const advancedKeys=["departure_from","departure_to","duration_min","duration_max"] as const;
@@ -195,7 +196,7 @@ export function FilterForm({filters,airports=[],destinations=[],hero=false,path=
       </div>)}
     </div>}
     {!hero && <details className="preset-rules"><summary>{t("Jak działają filtry")}</summary><p className="sort-explanation field-hint" id={sortRuleId}>
-      {appliedSort ? <>{t('Zastosowane sortowanie:')} <strong>{t(appliedSort.label)}</strong>. {t(appliedSort.rule)}{' '}
+      {appliedSort ? <>{t('Zastosowane sortowanie:')} <strong>{t(appliedSort.label)}</strong>. {appliedSort.value==='recommended'?collectionCopy[locale].ranking:t(appliedSort.rule)}{' '}
         {appliedSort.value==='score' && <>{scoreText(locale,'rankingPolicy')}{' '}</>}
         {appliedSort.value==='score' && <Link prefetch={false} href={localizedHref('/info/price-comparison',locale)}>{t('Jak działa wynik pomocniczy?')}</Link>}
       </> : t('Wybierz poprawne sortowanie, aby uporządkować wyniki.')}

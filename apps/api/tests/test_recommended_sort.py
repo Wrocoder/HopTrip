@@ -53,6 +53,35 @@ def test_price_changes_only_tie_breaks_and_never_rescores_historical_data(api_cl
     assert [(d.deal_score, d.score_components, d.score_version) for d in (first, second)] == before
 
 
+def test_independent_suitability_precedes_a_high_numeric_score_without_hiding_catalog_rows(
+        api_client, isolated_db, catalog, monkeypatch):
+    from copy import deepcopy
+
+    from app.config import get_settings
+    from app.schemas.trip_quality import TripQualityPolicy, TripQualityWeights
+
+    planning = catalog(300, start='2030-11-01T08:00:00+01:00')
+    early_return = catalog(100, back='2030-11-03T06:00:00Z')
+    for deal in (planning, early_return):
+        offer = source(isolated_db, deal)
+        offer.raw_payload = {**offer.raw_payload, 'return_origin_airport': 'STN'}
+        details = deepcopy(offer.route_details)
+        details['segments'][1]['flight_legs'][0]['origin'] = 'STN'
+        offer.route_details = details
+    monkeypatch.setattr(get_settings(), 'trip_quality_policy', TripQualityPolicy(
+        weights=TripQualityWeights(completeness=0, travel=0, usable_time=0,
+            connections=0, airports=0, leave=100)))
+    isolated_db.commit()
+    result = page(api_client, limit=1)
+    assert result['total'] == 2 and result['items'][0]['id'] == planning.id
+    assert result['items'][0]['trip_quality_score'] == 0
+    assert result['items'][0]['trip_quality']['recommendation']['planning_eligible']
+    second = page(api_client, limit=1, offset=1)['items'][0]
+    assert second['id'] == early_return.id and second['trip_quality_score'] == 100
+    assert not second['trip_quality']['recommendation']['planning_eligible']
+    assert api_client.get('/api/v1/deals?sort=price').json()[0]['id'] == early_return.id
+
+
 @pytest.mark.parametrize('mode', [None, 'calendar-v1', 'no-leave-v1'])
 def test_filters_intersect_and_custom_work_hours_reach_model(api_client, catalog, mode):
     normal = catalog(200)

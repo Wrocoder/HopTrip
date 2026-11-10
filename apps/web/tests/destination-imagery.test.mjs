@@ -27,13 +27,13 @@ test('shipped photographs decode with reserved aspect ratio, bounded bytes and c
  let bytes=0;
  for(const image of Object.values(destinationImages)){
   const reused=image.src.startsWith('/media/articles/');
-  const credits=readFileSync(new URL(`../public/media/${reused?'articles':'destinations'}/CREDITS.md`,import.meta.url),'utf8');
+  const credits=readFileSync(new URL(`../public/media/${reused?'articles':'destinations'}/CREDITS.md`,import.meta.url),'utf8').replaceAll('\r\n','\n');
   const file=readFileSync(new URL(`../public${image.src}`,import.meta.url));
   const meta=await sharp(file).metadata();
   assert.equal(meta.format,'webp');assert.equal(meta.width,reused?1200:960);assert.equal(meta.height,reused?750:600);
   assert.equal(image.width,meta.width);assert.equal(image.height,meta.height);
   assert.ok(file.length<=(reused?360000:200000));bytes+=file.length;
-  for(const value of [image.title,image.author,image.licenseUrl])assert.ok(credits.includes(value));
+  for(const value of [image.title,image.author,image.licenseUrl])assert.ok(credits.includes(value.replaceAll('\r\n','\n')));
  }
  assert.ok(bytes<=16000000);
 });

@@ -9,6 +9,7 @@ from app.schemas.deal import FlightFacts
 from app.schemas.destination_time import DestinationTime
 from app.schemas.trip_quality import TripQualityAssessment
 from app.schemas.weekend import WeekendAssessment, WeekendMode, WorkHours
+from app.services.airport_context import airport_context
 from app.services.connections import assess_connections
 from app.services.destination_time import destination_time
 from app.services.flight_facts import flight_facts
@@ -99,6 +100,11 @@ def ranked_itinerary_matches(db: Session, query: Select[tuple[Deal]], mode: Week
             settings = get_settings()
             connections = assess_connections(offer, policy=settings.connection_policy,
                 itinerary_context_valid=not conflicting and "AIRPORT_MISMATCH" not in quality.reasons)
-            ranking = trip_quality(facts, quality, assessment, connections, policy=settings.trip_quality_policy)
+            airport = airport_context(facts,
+                destination_slug=context.destination.slug if context.destination else "",
+                round_trip=bool(offer and offer.return_at),
+                itinerary_eligible=quality.recommendation_eligible)
+            ranking = trip_quality(facts, quality, assessment, connections,
+                policy=settings.trip_quality_policy, airport=airport)
             matches.append((context.deal, assessment, interval, ranking))
     return matches

@@ -54,7 +54,7 @@ function conservativeContrast(el:Element){
 }
 
 test.skip(process.env.HOPTRIP_H3_PRODUCTION!=='1','Contrast review requires the isolated production runner.');
-const paths=['/','/deals','/tanie-loty-na-weekend','/city-break','/destinations/barcelona','/destinations/milan','/deals/browser-deal','/saved','/info/trip-budget','/alerts'];
+const paths=['/','/deals','/tanie-loty-na-weekend','/city-break','/destinations/barcelona','/destinations/milan','/deals/browser-deal','/saved','/info/trip-budget','/alerts'].filter(path=>process.env.HOPTRIP_SKIP_ALERTS!=='1'||path!=='/alerts');
 
 test.beforeEach(async({page,request},info)=>{
  const config=readFileSync(info.config.configFile!,'utf8');expect(config).toContain('npm run start --');expect(config).toContain("NODE_ENV:'production'");

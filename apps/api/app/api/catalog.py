@@ -18,6 +18,7 @@ from app.services.airports import matching_airports
 from app.services.availability import available_deals_query
 from app.services.catalog import serialize_deal
 from app.services.destination_search import destination_search_fields, matching_destinations
+from app.services.trip_quality import recommendation_order
 from app.services.weekend_catalog import (
     WeekendQueryTooBroad,
     ranked_itinerary_matches,
@@ -31,7 +32,7 @@ def list_deals(
     limit: int = Query(50, ge=1, le=100),
     offset: int = Query(0, ge=0, le=10000),
     sort: Literal["score", "price", "departure", "destination_time", "recommended"] = Query(
-        "price", description="recommended: modelled convenience descending, unscored last; destination_time: reliable airport interval descending, unknown/estimated last. Both use price/date/id tie-breaks and at most 500 filtered candidates."
+        "price", description="recommended: assessed itineraries first, independent suitability before model score; unscored last. destination_time: reliable airport interval descending, unknown/estimated last. Both use price/date/id tie-breaks and at most 500 filtered candidates."
     ),
     include_total: bool = Query(False),
     origin: str | None = Query(
@@ -105,7 +106,7 @@ def list_deals(
         # The metadata join groups by ID; restore the public deterministic order.
         if sort == "recommended":
             # Full filtered snapshot before pagination; price/history never enter the model.
-            matches.sort(key=lambda row: (row[3].score is None,
+            matches.sort(key=lambda row: (row[3].score is None, *recommendation_order(row[3]),
                 -(row[3].score if row[3].score is not None else 0),
                 row[0].price_per_person_pln, row[0].trip_start, row[0].id))
         elif sort == "destination_time":

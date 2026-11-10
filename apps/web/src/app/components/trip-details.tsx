@@ -7,17 +7,20 @@ import {PriceAssessment} from "./price-assessment";
 import {qualityNotice} from '../../lib/flight-quality';
 import {qualityText,qualityReasonText} from '../../lib/i18n/quality-copy';
 import {weekendCopy} from '../../lib/weekend';
-import {PriceMetadata} from './price-freshness';
+import {PriceMetadata,PriceFreshness} from './price-freshness';
 import {AirportContextDetails} from './airport-warnings';
 import {OfferDetailsDisclosure} from './offer-details-disclosure';
 import {DestinationTimeSummary} from './destination-time';
 import {stayWarnings,stayModelBasis} from '../../lib/weekend-stay';
+import {ConnectionWarnings} from './connection-warnings';
+import {tripQualityCopy,tripQualityModelSummary,tripRecommendationReasons} from '../../lib/trip-quality';
+import {timelineView} from '../../lib/trip-timeline';
 
 export function TripDetails({deal,locale="pl",qualityDetails=false,includePrice=true}:{deal:Deal;locale?:Locale;qualityDetails?:boolean;includePrice?:boolean}) {
   const pl=getMessages(locale),t=(source:CatalogKey)=>catalogText(locale,source);
   const notice=qualityDetails ? qualityNotice(deal) : null;
   return <OfferDetailsDisclosure slug={deal.slug} className="trip-details">
-    <summary>{t(includePrice ? "Szczegóły lotu i ceny" : "Pełne dane lotu i bagaż")}</summary>
+    <summary>{t(includePrice||qualityDetails ? "Szczegóły lotu i ceny" : "Pełne dane lotu i bagaż")}</summary>
     <div className="trip-details-content">
       {includePrice && <section role="group" aria-label={t("Cena i aktualność")}>
         <h3>{t("Cena i aktualność")}</h3>
@@ -29,6 +32,7 @@ export function TripDetails({deal,locale="pl",qualityDetails=false,includePrice=
         <h3>{t("Lot i bagaż")}</h3>
         {notice?.status==='PARTIAL' && <div className="card-quality-details"><strong>{qualityText(locale,'partial')}</strong><ul>{notice.reasons.map(reason=><li key={reason}>{qualityReasonText(locale,reason)}</li>)}</ul></div>}
         <FlightFacts deal={deal} locale={locale}/>
+        {qualityDetails&&<><p>{timelineView(deal,locale).nights}</p><ConnectionWarnings deal={deal} locale={locale}/></>}
         {qualityDetails&&<DestinationTimeSummary deal={deal} locale={locale}/>}
         {qualityDetails&&stayWarnings(deal,locale,false).length>0&&<p className="stay-model-basis">{stayModelBasis(locale)}</p>}
         {qualityDetails&&deal.weekend_assessment?.might_require_leave!=null&&<p className="card-work-hours">
@@ -36,6 +40,10 @@ export function TripDetails({deal,locale="pl",qualityDetails=false,includePrice=
         </p>}
       </section>
       <AirportContextDetails deal={deal} locale={locale}/>
+      {qualityDetails&&!includePrice&&<PriceFreshness deal={deal} locale={locale} id="flight-price-freshness"/>}
+      {qualityDetails&&deal.trip_quality&&<section className="trip-quality-model"><h3>{tripQualityCopy[locale].label}</h3>
+       <p>{tripQualityModelSummary(deal,locale)}</p><ul>{tripRecommendationReasons(deal,locale).map(reason=><li key={reason}>{reason}</li>)}</ul>
+      </section>}
     </div>
   </OfferDetailsDisclosure>;
 }

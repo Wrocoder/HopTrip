@@ -32,7 +32,10 @@ const tripQuality:Check=v=>{
    inconvenient_stay_percent:qualityScore,night_home_travel_percent:qualityScore,connection_penalty_percent:qualityScore,long_connection_penalty_percent:qualityScore,
    night_connection_penalty_percent:qualityScore,risky_connection_penalty_percent:qualityScore,airport_change_penalty_percent:qualityScore}),
   components:array(c=>shape(c,{key:oneOf(...tripQualityKeys),points:integer,max_points:qualityScore,known:bool})),
- }))return false;
+ },{recommendation:r=>shape(r,{version:oneOf('trip-recommendation-v1'),recommendation_eligible:bool,
+  label:oneOf('CONVENIENT','REQUIRES_PLANNING','INSUFFICIENT_DATA'),
+  data_confidence:oneOf('COMPLETE','LIMITED','INSUFFICIENT'),warnings_severity:oneOf('NONE','WARNING','CRITICAL'),reasons:array(text)},
+  {planning_eligible:bool})}))return false;
  const q=v as unknown as TripQuality,total=Object.values(q.policy.weights).reduce((a,b)=>a+b,0);
  if(total<=0||q.policy.bad_travel_minutes<=q.policy.good_travel_minutes||q.policy.target_usable_minutes<=0)return false;
  if(q.status==='UNKNOWN')return q.score===null&&q.components.length===0;

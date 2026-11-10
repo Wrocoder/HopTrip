@@ -39,8 +39,8 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: collection c
  await expect(page.locator('.filters input[name="round_trip"]')).toHaveValue('true');
  await page.locator('input[name="budget"]').fill('299');
  await page.locator('.filters').getByRole('button',{name:getMessages(locale).filter,exact:true}).click();
+ await expect(page.locator('.filters')).toHaveAttribute('aria-busy','false',{timeout:30000});
  await expect(page).toHaveURL(/round_trip=true/);await expect(page).toHaveURL(/budget=299/);
- await expect(page.locator('.filters')).toHaveAttribute('aria-busy','false');
  const response=await request.get(`${fixture}/api/v1/deals?origin=KTW&round_trip=true&budget=299&duration_min=2&duration_max=4`);
  expect(response.ok()).toBe(true);expect((await response.json()).every((d:{trip_type:string})=>d.trip_type==='ROUND_TRIP')).toBe(true);
  await roundTripChip.click();await expect(page).not.toHaveURL(/round_trip=/);

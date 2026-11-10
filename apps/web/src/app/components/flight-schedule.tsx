@@ -11,14 +11,21 @@ import {stayWarnings} from '../../lib/weekend-stay';
 import {DestinationTimeSummary} from './destination-time';
 import {AirportContextNotice} from './airport-warnings';
 import {ConnectionWarnings} from './connection-warnings';
-import {tripQualitySummary} from '../../lib/trip-quality';
+import {tripQualityCopy,tripQualityModelSummary,tripQualitySummary,tripRecommendationReasons} from '../../lib/trip-quality';
 
 export function FlightSchedule({deal,compact=false,card=false,detail=false,locale="pl"}:{deal:Deal;compact?:boolean;card?:boolean;detail?:boolean;locale?:Locale}) {
  const t=(source:CatalogKey)=>catalogText(locale,source);
  const f=deal.flight_facts;
  const timeline=timelineView(deal,locale);
  const ranking=tripQualitySummary(deal,locale);
- const rankingSummary=ranking?<p className="trip-quality-summary">{ranking}</p>:null;
+ const rankingReasons=tripRecommendationReasons(deal,locale);
+ const rankingSummary=ranking?<>
+  <p className="trip-quality-summary"><strong>{ranking}</strong></p>
+  {rankingReasons.length>0&&<ul className="trip-recommendation-reasons">{rankingReasons.map(reason=><li key={reason}>{reason}</li>)}</ul>}
+  <details className="trip-quality-model"><summary>{tripQualityCopy[locale].label}</summary>
+   <p>{tripQualityModelSummary(deal,locale)}</p>
+  </details>
+ </>:null;
  const assessment=deal.weekend_assessment,wc=weekendCopy[locale];
  const stayNotice=deal.trip_type==='ROUND_TRIP'?stayWarnings(deal,locale,!card).map(message=><p className="flight-route-warning stay-warning" key={message}>{message}</p>):null;
  const leaveNotice=deal.trip_type==='ROUND_TRIP'?<p className="weekend-assessment">{assessment?.might_require_leave===true?wc.leave:assessment?.might_require_leave===false?wc.compatible:wc.unknown}{!card&&assessment?.might_require_leave!==null&&assessment?.might_require_leave!==undefined&&` · ${assessment.work_hours.start}–${assessment.work_hours.end} · ${assessment.work_timezone??''}`}</p>:null;

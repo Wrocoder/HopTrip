@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {collectionCopy} from '../src/lib/i18n/collection-copy';
-import {imageryCopy,destinationImages} from '../src/lib/destination-imagery';
+import {destinationImages} from '../src/lib/destination-imagery';
 import {homeCollectionDefinitions,homeCollectionIds} from '../src/lib/home-collections';
 import {localizedHref} from '../src/lib/i18n/routing';
 import {chooseOrigin} from './origin-helpers';
@@ -37,7 +37,7 @@ for(const locale of ['pl','en','ru','uk'] as const)test(`${locale}: real preview
   await expect(collection.getByRole('link',{name:new RegExp(copy.search)})).toHaveAttribute('href',localizedHref(definition.href,locale));
   const response=await request.get(`${fixture}/api/v1/deals?${new URLSearchParams({...definition.filters,limit:'100'})}`);
   expect(response.ok()).toBe(true);
-  const eligible=(await response.json()).filter((row:Deal)=>row.flight_quality?.recommendation_eligible&&stayRecommendationEligible(row,definition.id==='calendar-weekend'));
+  const eligible=(await response.json()).filter((row:Deal)=>row.flight_quality?.recommendation_eligible&&row.trip_quality?.recommendation?.planning_eligible===true&&stayRecommendationEligible(row,definition.id==='calendar-weekend'));
   await expect(collection).toHaveAttribute('data-state',eligible.length?'ready':'empty');
   await expect(collection.locator('.deal-card')).toHaveCount(Math.min(3,eligible.length));
  }
@@ -98,7 +98,7 @@ test('one real offer per preview needs no filler and missing licensed image keep
   await expect(collection).toHaveAttribute('data-state','ready');await expect(collection.locator('.deal-card')).toHaveCount(1);
  }
  const weekend=page.locator('[data-collection="calendar-weekend"]');
- await expect(weekend.getByText(imageryCopy.pl.unavailable,{exact:true})).toBeVisible();await expect(weekend.locator('img:not(.country-flag)')).toHaveCount(0);
+ await expect(weekend.locator('[data-destination-fallback]')).toBeVisible();await expect(weekend.locator('img:not(.country-flag)')).toHaveCount(0);
  await weekend.locator('.deal-card-link').click();await expect(page).toHaveURL(/\/deals\/weekend-fixture-/);
 });
 
@@ -114,7 +114,7 @@ for(const scenario of ['weekend-error','weekend-broad'] as const)test(`${scenari
 test('failed photo preserves frame, credit, conditions and the real offer action',async({page},info)=>{
  await page.route('**/_next/image?*',route=>route.abort('failed'));await page.goto('/?origin=KTW');
  const collection=page.locator('[data-collection="under-300"]');await collection.scrollIntoViewIfNeeded();
- await expect(collection.getByText(imageryCopy.pl.unavailable,{exact:true})).toHaveCount(2);await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);
+ await expect(collection.locator('[data-destination-fallback]')).toHaveCount(2);await expect(collection.locator('img:not(.country-flag)')).toHaveCount(0);
  await expect(collection.locator('summary').filter({hasText:'essetefano'})).toHaveCount(2);
  await page.setViewportSize({width:320,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await collection.screenshot({path:info.outputPath('failed-photo-320.png'),animations:'disabled'});
